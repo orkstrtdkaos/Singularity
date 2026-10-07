@@ -6421,7 +6421,11 @@ await (async () => {
   // mechanism was how that truth happened to be spelled when all three tiers were SVG.
   // ⛔ THE WORLD TIER IS STILL ASSERTED, just against what it actually is — dropping the gate because my
   // change broke it would be exactly the move this suite exists to prevent.
-  for (const [fn, label] of [["renderMapLocation", "location"], ["renderMap(selectedId", "region"]]) {
+  // ⚠️ SNG-678 L1 MOVED THE LOCATION TIER ONTO A CANVAS, so the SVG viewport this pinned lives on in
+  // `renderMapLocationRing` — the ring the order keeps for interiors until L5. The location CANVAS is asserted
+  // navigable by its own means (drag, wheel, pinch through `bindGesture`) in the SNG-678 block below, which is
+  // the same re-pointing the world tier got when it became a globe: the invariant, not the mechanism.
+  for (const [fn, label] of [["renderMapLocationRing", "location"], ["renderMap(selectedId", "region"]]) {
     const body = bodyOf(fn);
     check(`168: the ${label} tier has a viewport group`, /class="graph-vp"/.test(body));
     check(`168: the ${label} tier wires pan/zoom`, /wireSkillGraphViewport\(\)/.test(body));
@@ -23782,6 +23786,138 @@ await (async () => {
     ? (app192.match(/n\.kind === "death" \? "([a-z]+)" : "([a-z]+)"/) || []).slice(1) : []);
   check(`CCODE-192: the news renderer emits more than one openable kind (${[...emitted].join(", ") || "none found"})`,
     emitted.size >= 2, "if this is 1, the rule above is guarding a case that cannot happen");
+}
+
+// --- SNG-678 L1/L2: the local map — the third tier, drawn as ground ---
+/* ✅ ERIK: *"We need the local maps done. Then we can finally retire that geometric view."* ✅ AEVI's done-when:
+ * *"Millbrook reads like `po/img/local_mock_millbrook.png` … the well in the village and not in the water, the
+ * River Dock and the wheels on the waterfront, the Long Fields across the water, and the ford upstream. The
+ * style needn't match the mock; the facts must."* ⛔ SO THE FACTS ARE MEASURED ON THE DRAWN MODEL, through the
+ * same `localLayoutFor` → `localModel` → `paintLocalMap` the tier and the films run, with a counting stand-in
+ * for the canvas — never asserted from the authored numbers, which is how a well 184 px from the water and a
+ * well drawn in it would both have passed. ⚠️ The river branch (`aevi-mbriver`) has not landed: on today's
+ * data the Echo is 2 miles off and the facts below hold on that; when it lands they hold on the new ground
+ * or redden, which is the point. */
+{
+  const LM = await import("../engine/localmap.js");
+  const { loadContentHeadless: lch678 } = await import("./headless_content.mjs");
+  const C678 = await lch678();
+  const src678 = readFileSync(join(root, "app.js"), "utf8");
+  const bodyOf678 = (fn) => { const a = src678.indexOf("function " + fn); const b = src678.indexOf("\nfunction ", a + 10); return a < 0 ? "" : src678.slice(a, b < 0 ? a + 12000 : b); };
+  const stub678 = () => {
+    const counts = {};
+    return new Proxy({}, { get(_, k) {
+      if (k === "counts") return counts;
+      if (k === "measureText") return (s) => ({ width: String(s).length * 6 });
+      return typeof k === "string" ? () => { counts[k] = (counts[k] || 0) + 1; } : undefined;
+    }, set() { return true; } });
+  };
+  const layouts678 = C678.rules?.localLayouts || {};
+  const authored678 = Object.keys(layouts678).filter((k) => !k.startsWith("_"));
+  const modelOf = (id, { w = 800, h = 500, children = [] } = {}) => {
+    const layout = LM.localLayoutFor(id, { content: C678, character: null, children });
+    const frame = LM.localFrame(layout, { w, h });
+    const model = LM.localModel(layout, frame, { placeName: C678.locations[id]?.name || id, placeId: id, nameOf: (p) => C678.locations[p]?.name || p });
+    return { layout, frame, model };
+  };
+  const mb = modelOf("millbrook");
+  const water = mb.model.water;
+  const distToWater = (s) => water ? Math.min(...water.channel.pts.map(([x, y]) => Math.hypot(x - s.x, y - s.y))) : Infinity;
+  const well = mb.model.sites.find((s) => s.kind === "well");
+  check("678/L1: Millbrook's well is in the village and NOT in the water — Erik's August review, measured on the drawn channel",
+    !!well && !!water && distToWater(well) > water.channel.widthPx / 2 + 4, well && water ? `well ${distToWater(well).toFixed(0)}px from the channel, half-width ${water.channel.widthPx.toFixed(1)}` : "no well or no water");
+  const site = (id) => mb.model.sites.find((s) => s.id === id);
+  check("678/L1: …and the wheels, the landing and the ford sit ON the Echo — a river site snaps to the channel, not to the bearing written before the river had bends",
+    ["millbrook_wheels", "millbrook_landing", "millbrook_ford"].every((id) => !!site(id)?.onWater));
+  const along = (s) => water ? (s.x - water.channel.p0.x) * water.channel.dir[0] + (s.y - water.channel.p0.y) * water.channel.dir[1] : 0;
+  check("678/L1: …and the ford is UPSTREAM of the wheels, against the authored flow",
+    !!site("millbrook_ford") && !!site("millbrook_wheels") && along(site("millbrook_ford")) < along(site("millbrook_wheels")));
+  const inFrame678 = (s) => s.x >= 0 && s.y >= 0 && s.x <= 800 && s.y <= 500;
+  check("678/L1: the frame fits every site and the near edge of every extent feature — Millbrook frames the wheels and the ford 3 km out, not only its 900 m",
+    mb.frame.fitMetres >= 3230 && mb.model.sites.every(inFrame678), `fit ${mb.frame.fitMetres} m`);
+  check("678/L1: a frame that fits 3 km puts the village under 150 px, so its centre gets an ENLARGEMENT — and a place that fills its frame gets none",
+    !!LM.enlargementFor(mb.model) && !LM.enlargementFor(modelOf("the_crossing").model));
+  check("678/L1: the scale legend speaks metres under a mile and miles over, with the walk — \"500 m · about six minutes' walk\"",
+    LM.scaleLegend({ pxPerMetre: 0.2 }).text === "500 m · about six minutes' walk" && /^\d+ mi · about .* walk$/.test(LM.scaleLegend({ pxPerMetre: 0.04 }).text),
+    `${LM.scaleLegend({ pxPerMetre: 0.2 }).text} | ${LM.scaleLegend({ pxPerMetre: 0.04 }).text}`);
+  const drawn678 = authored678.map((id) => {
+    try { const m = modelOf(id); const r = LM.paintLocalMap(stub678(), m.model, { reveal: true });
+      return { id, ok: r.labelled.length > 0 && m.model.sites.length === (m.layout.sites || []).length }; }
+    catch (e) { return { id, ok: false, err: e.message }; }
+  });
+  check(`678/L1: all ${authored678.length} authored layouts model and paint — every site placed, at least one name on the ground, nothing thrown`,
+    authored678.length >= 18 && drawn678.every((d) => d.ok), drawn678.filter((d) => !d.ok).map((d) => d.id + (d.err ? ": " + d.err : "")).join(", "));
+  const cnt678 = (() => { const c = stub678(); LM.paintLocalMap(c, mb.model, { reveal: true }); return c.counts; })();
+  check("678/L1: the extent is drawn as what it is — a channel with sandbars (ellipses), tree crowns (arcs), roofs along the ways (rotated blocks) — not as soft blobs with names",
+    (cnt678.ellipse || 0) > 0 && (cnt678.arc || 0) > 20 && (cnt678.rotate || 0) > 10, JSON.stringify(cnt678));
+  const r678 = LM.paintLocalMap(stub678(), mb.model, { reveal: true });
+  check("678/L1: the roads out leave the frame with exit labels that name the destination and its miles",
+    r678.exits.length === 3 && r678.exits.some((e) => /Echo River Crossing/.test(e.name)) && mb.model.roads.every((rd) => Number.isFinite(Number(rd.mi))));
+  const ML678 = await import("../engine/maplabel.js");
+  const sp678 = ML678.labelSpace(), ex678 = ML678.labelSpace();
+  const placed678 = LM.paintLocalMap(stub678(), mb.model, { reveal: true, space: sp678, exitSpace: ex678 });
+  // ⛑ the exits CLAIM a copy of their box in the main space so names avoid them — compare against the names only
+  const exitHitsName = ex678.boxes.some((e) => sp678.boxes.filter((b) => b.kind !== "exit").some((b) => e.x0 < b.x1 && e.x1 > b.x0 && e.y0 < b.y1 && e.y1 > b.y0));
+  check("678/L1: no two names on the drawn map overlap — every label went through one space (D1/§0), and the exits' own band stays clear of the names",
+    sp678.overlaps().length === 0 && !exitHitsName && placed678.labelled.length >= 6, `${sp678.boxes.length} boxes, ${sp678.overlaps().length} overlaps, exits over names: ${exitHitsName}`);
+  // L2 · ground for every place
+  const genId = Object.keys(C678.locations).find((id) => !layouts678[id] && C678.locations[id]?.worldPos && (C678.locations[id].connections || []).length >= 1);
+  const kids678 = [{ id: "sub-mill", name: "The Old Mill", kind: "subplace" }, { id: "sub-shrine", name: "The Hill Shrine", kind: "subplace" }, { id: "sub-x", name: "Orrin's", kind: "subplace" }];
+  const g1 = LM.localLayoutFor(genId, { content: C678, character: null, children: kids678 });
+  const g2 = LM.localLayoutFor(genId, { content: C678, character: null, children: kids678 });
+  check(`678/L2: a place with no authored layout (${genId}) gets ground from the measured land, marked generated, and the SAME ground twice`,
+    !!g1?.generated && JSON.stringify(g1) === JSON.stringify(g2) && g1.extent.length > 0 && g1.sites.length === 3);
+  check("678/L2: …and every generated site carries its reason — a placement that cannot cite its basis is not shipped",
+    g1.sites.every((s) => s.placedBecause && s.basis));
+  check("678/L2: …and a sub-place's basis is read off its NAME and said so — a mill wants water, a shrine wants height, a name that says nothing takes a road out",
+    g1.sites.find((s) => s.id === "sub-mill")?.basis === "river" && g1.sites.find((s) => s.id === "sub-shrine")?.basis === "uphill" && g1.sites.find((s) => s.id === "sub-x")?.basis === "road"
+      && /name says/.test(g1.sites[0].placedBecause));
+  const every678 = Object.keys(C678.locations).filter((id) => !layouts678[id]);
+  let thrown678 = 0, blank678 = 0;
+  for (const id of every678) {
+    try { const l = LM.localLayoutFor(id, { content: C678, character: null, children: [] }); if (!l.extent.length) blank678++;
+      const f = LM.localFrame(l, { w: 390, h: 360 }); LM.paintLocalMap(stub678(), LM.localModel(l, f, { placeId: id }), { reveal: true }); }
+    catch { thrown678++; }
+  }
+  check(`678/L2: every one of the ${every678.length} places without an authored layout opens a local map at 390 px — none throws, none is blank ground`,
+    every678.length >= 100 && thrown678 === 0 && blank678 === 0, `thrown ${thrown678}, blank ${blank678}`);
+  const ch678 = { placeMemory: {}, localLayouts: {} };
+  const c1 = LM.localLayoutFor(genId, { content: C678, character: ch678, children: kids678.slice(0, 2) });
+  const c2 = LM.localLayoutFor(genId, { content: C678, character: ch678, children: kids678 });
+  check("678/L2+L3: the layout is cached on the save and GROWS when a new sub-place is named — the sites already placed keep their seats, the extent does not re-roll",
+    !!ch678.localLayouts[genId] && c2.sites.length === 3 && JSON.stringify(c2.sites.slice(0, 2)) === JSON.stringify(c1.sites) && JSON.stringify(c2.extent) === JSON.stringify(c1.extent));
+  const a1 = LM.localLayoutFor("millbrook", { content: C678, character: null, children: [{ id: "sub-new", name: "The Tithe Barn", kind: "subplace" }] });
+  const mbAuth = layouts678.millbrook.sites;
+  check("678/L2 (R28): an authored layout is canon — the generator adds only the sub-place the file does not name, marks it, and moves nothing authored",
+    !!a1.authored && a1.sites.length === mbAuth.length + 1 && a1.sites.slice(0, mbAuth.length).every((s, i) => s.id === mbAuth[i].id && s.localMap.bearing === mbAuth[i].localMap.bearing && s.localMap.metres === mbAuth[i].localMap.metres) && !!a1.sites[mbAuth.length].generated);
+  // L6 · what you know
+  const chNever = { currentLocationId: "elsewhere", placeMemory: {} };
+  check("678/L6: a place never visited and never told of withholds its sites — nothing is drawn that nobody has mentioned",
+    mb.model.sites.every((s) => LM.siteKnowledge(s, { character: chNever, placeId: "millbrook", layout: mb.layout }) === "unknown"));
+  const chHere = { currentLocationId: "millbrook", placeMemory: { millbrook: { visits: 1, subPlaces: { millbrook_ford: { name: "The Old Ford", visited: false } } } } };
+  const kv678 = Object.fromEntries(mb.model.sites.map((s) => [s.id, LM.siteKnowledge(s, { character: chHere, placeId: "millbrook", layout: mb.layout })]));
+  check("678/L6: standing in a place shows its built ground in full, what lies further out as heard-of, and a sub-place the GM named but you have not reached as heard-of",
+    kv678.millbrook_well === "seen" && kv678.millbrook_green === "seen" && kv678.millbrook_wheels === "heard" && kv678.millbrook_ford === "heard", JSON.stringify(kv678));
+  const withheld = LM.paintLocalMap(stub678(), mb.model, { character: chNever });
+  check("678/L6: …and the painter draws the ground, the roads and the host for an unknown place, with every site withheld and reported",
+    withheld.sites.length === 0 && withheld.withheld.length === mb.model.sites.length && withheld.exits.length === 3);
+  // the tier itself
+  const tier678 = bodyOf678("renderMapLocation");
+  check("678/L1: 'Look inside' opens the local CANVAS — and the ring survives only for interiors, which the order says to leave on it until L5 (\"Don't fake a floor plan\")",
+    /id="local-map"/.test(tier678) && /localTierIsInterior\(layout\)/.test(tier678) && /renderMapLocationRing\(/.test(tier678) && /class="graph-vp"/.test(bodyOf678("renderMapLocationRing")));
+  const paintT = bodyOf678("paintLocalCanvas");
+  check("678/L1: the tier's labels go through the shared space and queue and are flushed once — nothing in this tier draws a label any other way",
+    /_labelSpace = labelSpace\(\)/.test(paintT) && /queue: queueLabel/.test(paintT) && /flushLabels\(\)/.test(paintT) && !/\.fillText\(|\.strokeText\(/.test(paintT));
+  check("678/L1: …and the enlargement CLAIMS its panel in the space before the main frame's names are placed, so no name lands across it",
+    /_labelSpace\.claim\(\{ x0: inset\.x/.test(paintT) && paintT.indexOf("_labelSpace.claim(") < paintT.indexOf("paintLocalMap(ctx, model"));
+  const wireT = bodyOf678("wireLocalCanvas");
+  check("678/L1: the local tier is navigable — drag pans, wheel and pinch zoom, through the same gesture binder the globe uses",
+    /bindGesture\(cv/.test(wireT) && /onZoom/.test(wireT) && /_localView\.dx/.test(wireT));
+  check("678/L7: a site that is a place of its own opens the one place card, and its own Look inside nests",
+    /openPlaceCard\(\{ canvas: cv, id: hit\.id/.test(wireT) && /data-lmc-inside/.test(wireT));
+  check("678/H1 (SNG-679): a hold kept at this place is drawn on the local tier through the one hold painter", /paintHoldRow\(/.test(paintT));
+  check("678/film: a place shot ends on the place's local map — the same painter with everything revealed, painted once per frame size (Erik: 'those should probably be local maps instead of the regional ones zoomed in')",
+    /filmLocalMap\(shot\.place/.test(bodyOf678("paintFilmShot")) && /paintLocalMap\(c2, model, \{ space, reveal: true/.test(bodyOf678("filmLocalMap")) && /character: null/.test(bodyOf678("filmLocalMap")));
 }
 
 check("smoke: no checks are stranded after process.exit (dead tests report green forever)", (() => {

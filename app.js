@@ -68,6 +68,7 @@ import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from 
 import { cityPlan, blockPath, blockRoofs, faubourgs, beltRoofs, leanOf } from "./engine/cityplan.js";
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";
+import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement } from "./engine/localmap.js";   // SNG-678 L1/L2
 import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -207,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.21.6";
+const APP_VERSION = "2.21.7";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7774,6 +7775,39 @@ function paintNameCard(ctx, { name, kicker = null, title = null, w = 900, h = 56
   ctx.restore();
 }
 
+/** ⛔ THE FILM'S LOCAL MAP, PAINTED ONCE PER PLACE AND FRAME SIZE. The same `localLayoutFor` → `localModel` →
+ *  `paintLocalMap` the map tier runs, with everything revealed (a film is not a memory), labels drawn in one
+ *  pass, and the enlargement when the built ground is small. ⚠️ No character is read: the opening plays before
+ *  one exists, and a layout generated for the film is not cached on anyone's save. */
+let _filmLocal = { key: null, cv: null };
+function filmLocalMap(placeId, loc, w, h) {
+  const key = `${placeId}|${w}x${h}`;
+  if (_filmLocal.key === key) return _filmLocal.cv;
+  try {
+    const dpr = dprOf();
+    const cv = Object.assign(document.createElement("canvas"), { width: Math.round(w * dpr), height: Math.round(h * dpr) });
+    const c2 = cv.getContext("2d");
+    c2.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const { children } = locationTierNodes(character, CONTENT, placeId);
+    const nameOf = (pid) => CONTENT.locations?.[pid]?.name || pid;
+    const roadsMiles = (a, b) => { const la = CONTENT.locations?.[a], lb = CONTENT.locations?.[b]; const d = la && lb ? walkingDays(la, lb) : null; return d == null ? null : milesFor(d, WORLD_SCALE); };
+    const layout = localLayoutFor(placeId, { content: CONTENT, character: null, children, roadsMiles });
+    const frame = localFrame(layout, { w, h, pad: Math.round(Math.min(w, h) * 0.1) });
+    const model = localModel(layout, frame, { placeName: loc?.name || placeId, placeId, nameOf });
+    const inset = enlargementFor(model);
+    const space = labelSpace();
+    if (inset) space.claim({ x0: inset.x - 4, x1: inset.x + inset.w + 4, y0: inset.y - 4, y1: inset.y + inset.h + 4, rank: -2, kind: "inset" });
+    paintLocalMap(c2, model, { space, reveal: true, inset, labelMinPx: inset ? inset.builtRadiusPx * 1.6 + 12 : 0 });
+    if (inset) paintEnlargement(c2, layout, inset, { placeName: loc?.name || placeId, placeId, reveal: true });
+    _filmLocal = { key, cv };
+    return cv;
+  } catch (err) {
+    console.warn("[film] local map:", err?.message);
+    _filmLocal = { key, cv: null };
+    return null;
+  }
+}
+
 /** The camera on one place, at a given span — the world map's own arithmetic, shared by the coda and by
  *  `place`, `region` and `figure`. ⛑ `pitch` IS the latitude: see the gate, and the day it cost me. */
 function openingPlaceView(loc, { w = 900, h = 560, span = 26 } = {}) {
@@ -8232,8 +8266,30 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
   }
 
   if (V === "place" || V === "region" || V === "figure") {
+    /* ⛔ A PLACE SHOT ENDS ON ITS LOCAL MAP. ✅ ERIK: *"the poles films show zoomed in locations that have no or
+     * little detail. those should probably be local maps instead of the regional ones zoomed in."* He is right
+     * about why: at 9° the terrain is below its own information floor, so the close-in was a blur with a glyph
+     * on it. The globe still closes in over the first third of the shot — the film is still about WHERE — and
+     * then the place's own ground (SNG-678 L1/L2, the same painter the map tier uses) comes up through it and
+     * settles, slightly larger to smaller, so it arrives rather than switches on. ⛑ Painted once per place per
+     * frame size and kept, so the film pays a drawImage a frame and not a repaint. */
+    let localA = 0;
+    if (V === "place" && subject?.loc && shot?.place) {
+      localA = ease(Math.max(0, Math.min(1, (u - 0.3) / 0.28)));
+      if (localA > 0) {
+        const lm = filmLocalMap(shot.place, subject.loc, w, h);
+        if (lm) {
+          const z = 1.06 - 0.06 * Math.min(1, u);
+          ctx.save(); ctx.globalAlpha = localA;
+          ctx.translate(w / 2, h / 2); ctx.scale(z, z);
+          ctx.drawImage(lm, 0, 0, lm.width, lm.height, -w / 2, -h / 2, w, h);
+          ctx.restore();
+        }
+      }
+    }
     /* ⛔ THE MARK IS THE MAP'S OWN GLYPH, so the place a film names is the mark the player will click. */
-    if (subject?.loc) {
+    if (subject?.loc && localA < 1) {
+      ctx.save(); ctx.globalAlpha = 1 - localA;
       const colat = Number(subject.loc.worldPos?.colatitude), lon0 = Number(subject.loc.worldPos?.longitude);
       const p = P(colat - 90, ((lon0 + 540) % 360) - 180, 1.002);
       if (inFrame(p)) {
@@ -8241,6 +8297,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
         try { drawGlyph(ctx, glyphFor({ kind: subject.loc.kind, t: subject.loc.tier }) || "town", p.x, p.y, 13, { ink: "#fdf6e6" }); }
         catch { ctx.fillStyle = "#fdf6e6"; ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI * 2); ctx.fill(); }
       }
+      ctx.restore();
     }
     // ⛑ the card's words: a place's name with the movement as kicker; a person's name with their title,
     // and the title only where the save may see it (the seal lives in films.js, measured against her sample)
@@ -17698,10 +17755,246 @@ function localSourcesPanel(locationId) {
   return `<aside class="field-sources">${ambient}${yours}${authored}</aside>`;
 }
 
-function renderMapLocation(locationId) {
+/* ═════ SNG-678 L1/L2 · THE LOCAL CANVAS — THE THIRD TIER, DRAWN AS GROUND ═════
+ * ✅ ERIK: *"We need the local maps done. Then we can finally retire that geometric view."* And: *"we need to
+ * keep the local map level that the geometric one was supposed to represent."* The ring below (`renderMapLocationRing`)
+ * was that level's stand-in; this is the level. ✅ AEVI (L1): *"'Look inside' opens a canvas tier in the region
+ * map's style, centred on the place"* — paper ground, contours across the measured uphill, the extent drawn as
+ * what it is, roads out with exit labels, sites by kind through the shared label table.
+ * ⛔ THE GEOMETRY LIVES IN `engine/localmap.js` AND THIS FUNCTION ONLY HOLDS THE DOM: the same model the film
+ * draws and the gates measure, so "the well is in the village and not in the water" is one computation.
+ * ⚠️ L5 IS NOT BUILT, AND THE ORDER SAYS WHAT TO DO: *"If this is the long pole, ship L1–L4 first and leave
+ * interiors on the ring until L5 lands. Say so in the commit. Don't fake a floor plan."* A place whose sites
+ * are all BELOW ground, and an underplace with no authored layout, keep the ring — `localTierIsInterior`. */
+let _localView = { k: 1, dx: 0, dy: 0 };     // the tier's own pan and zoom, in CSS map pixels of the unzoomed frame
+let _localViewFor = null;
+let _localHits = { sites: [], exits: [], inset: null };
+let _localDragged = false;
+const LOCAL_ASPECT = 0.62;
+
+function localTierIsInterior(layout) {
+  const sites = layout?.sites || [];
+  const below = sites.length > 0 && sites.every((s) => (Number(s.localMap?.level) || 0) < 0);
+  return below || (layout?.kind === "underplace" && !layout?.authored);
+}
+
+/** The layout for a place, with the sub-places the ring used to draw handed in as children (L2: *"its sub-places
+ *  from `locationTierNodes`, the same list the ring draws today"*), and the miles of each road out. */
+function localLayoutHere(locationId) {
   const { host, children } = locationTierNodes(character, CONTENT, locationId);
-  const laid = interiorLayout(children);
+  const kids = children.map((c) => c.kind === "location"
+    ? { ...c, worldPos: CONTENT.locations[c.id]?.worldPos || null, placeKind: CONTENT.locationKinds?.kinds?.[c.id]?.kind || CONTENT.locations[c.id]?.kind || null }
+    : c);
+  const roadsMiles = (a, b) => { const la = CONTENT.locations[a], lb = CONTENT.locations[b]; const d = la && lb ? walkingDays(la, lb) : null; return d == null ? null : milesFor(d, WORLD_SCALE); };
+  const layout = localLayoutFor(locationId, { content: CONTENT, character, children: kids, roadsMiles });
+  return { host, children, layout };
+}
+
+function renderMapLocation(locationId) {
+  const id = locationId || character.currentLocationId;
+  const { host, children, layout } = localLayoutHere(id);
+  const name = host?.name || CONTENT.locations[id]?.name || id;
+  if (localTierIsInterior(layout)) return renderMapLocationRing(id, { host, children, name });
+  const here = character.currentLocationId === id;
+  const nSites = (layout.sites || []).length;
+  chrome(`<div class="screen screen-ground">
+    <h2>${esc(name)}</h2>
+    <p class="hint" style="margin-bottom:8px">${layout.authored ? "Authored ground" : "Ground laid out from the measured land"} — ${nSites} named ${nSites === 1 ? "site" : "sites"}${here ? ". You are here." : "."}${layout.generated ? " Drawn from the roads, the water and the slope the world measures here, and it draws the same way every time." : ""} Drag to pan, scroll or pinch to zoom; tap a site for its card.</p>
+    ${mapTierBar()}
+    ${fieldPanel(null)}
+    <div class="field-split">
+    <div class="rm-wrap lm-wrap" style="position:relative;flex:1 1 460px;min-width:280px;max-width:1600px">
+      <canvas id="local-map" width="800" height="496" style="width:100%;border-radius:8px;display:block;background:#efe8d6" aria-label="${esc(name)}, a local map. Drag to pan, scroll to zoom, tap a site for its card."></canvas>
+      <div id="local-map-chip" class="rm-chip" hidden></div>
+      <div id="place-card" class="place-card" hidden></div>
+    </div>
+    ${localSourcesPanel(id)}
+    </div>
+    <div id="local-map-readout" class="hint" style="min-height:14px;margin:2px 0 6px"></div>
+    <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
+  </div>`);
+  if (_localViewFor !== id) { _localView = { k: 1, dx: 0, dy: 0 }; _localViewFor = id; }
+  paintLocalCanvas(id);
+  wireLocalCanvas(id);
+  wireFieldPanel(() => renderMap());   // CCODE-472: one wiring, three tiers
+  wireMapTierBar();
+  document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+}
+
+/** ⛔ PAINT THE LOCAL CANVAS. The backing store follows the pane (M1: CSS map pixels under a dpr transform);
+ *  every label goes through the shared space and queue and is flushed once in rank order (D1/§0); the
+ *  enlargement claims its panel in the space FIRST so no main-frame name can land across it. */
+function paintLocalCanvas(locationId) {
+  const cv = document.getElementById("local-map");
+  if (!cv) return null;
+  const want = Math.max(300, Math.min(1600, Math.round(cv.getBoundingClientRect().width || 800)));
+  const dpr = dprOf();
+  // ⛑ a phone gets a taller frame: there is no width to spend, and the enlargement needs a corner to sit in
+  const aspect = want < 520 ? 0.92 : LOCAL_ASPECT;
+  const bw = Math.round(want * dpr), bh = Math.round(want * aspect * dpr);
+  if (cv.width !== bw || cv.height !== bh) { cv.width = bw; cv.height = bh; }
+  const W = Math.round(cv.width / dpr), H = Math.round(cv.height / dpr);
+  const { host, layout } = localLayoutHere(locationId);
   const name = host?.name || CONTENT.locations[locationId]?.name || locationId;
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, W, H);
+  _labelSpace = labelSpace(); _exitSpace = labelSpace(); _labelQueue = [];
+  const frame = localFrame(layout, { w: W, h: H, view: _localView });
+  const nameOf = (pid) => CONTENT.locations[pid]?.name || pid;
+  const model = localModel(layout, frame, { placeName: name, placeId: locationId, nameOf });
+  const known = (pid) => isPlaceKnown(character, pid, CONTENT.locations);
+  const here = character.currentLocationId === locationId;
+  const hereSite = here ? (lastEnteredSubPlace(character, locationId)?.slug || null) : null;
+  const inset = _localView.k <= 1.01 ? enlargementFor(model) : null;
+  if (inset) _labelSpace.claim({ x0: inset.x - 4, x1: inset.x + inset.w + 4, y0: inset.y - 4, y1: inset.y + inset.h + 4, rank: -2, kind: "inset" });
+  const res = paintLocalMap(ctx, model, { space: _labelSpace, queue: queueLabel, exitSpace: _exitSpace, character, known, hereSite, inset,
+    labelMinPx: inset ? inset.builtRadiusPx * 1.6 + 12 : 0 });
+  // ⛑ you are here, at the place's own centre when no sub-place has been entered — the gold ring every tier uses
+  if (here && !hereSite) {
+    ctx.save(); ctx.strokeStyle = "#b8860b"; ctx.lineWidth = 1.8;
+    ctx.beginPath(); ctx.arc(model.built.x, model.built.y, Math.max(10, Math.min(model.built.r, 26)), 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+  }
+  // ⛔ SNG-679 H1: *"All three tiers read it."* A hold kept at this place sits beside its centre.
+  try {
+    const held = mapHolds(character, { sharedStore: sharedHolds, locations: CONTENT.locations,
+      worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
+      routes: _worldRoutes?.byPair || null, content: CONTENT,
+      nameOf: (nid) => character?.npcRegistry?.[nid]?.name || CONTENT.npcs?.[nid]?.name || null });
+    let k = 0;
+    for (const row of held.rows || []) {
+      if (row.placeId !== locationId) continue;
+      const at = { x: model.built.x + 14 + k * 18, y: model.built.y - Math.min(model.built.r, 26) - 10 };
+      paintHoldRow(ctx, row, () => at, {
+        labelOf: (r, p, m) => {
+          const kind = r.own !== false ? "holdOwn" : "holdOther";
+          const nm = String(r.name || r.id);
+          const w = (drawLabel(ctx, nm, -9999, -9999, kind, {})?.w) || 0;
+          const box = _labelSpace.place(p.x, p.y - m.r - 7, w, 12, { kind, clampTo: { w: W, h: H }, offsets: [[0, 0], [0, m.r * 2 + 16]] });
+          if (box) { ctx.textAlign = "center"; queueLabel(ctx, nm, box, kind, {}); }
+        },
+      });
+      k++;
+    }
+  } catch (err) { console.warn("[local] holds skipped:", err?.message); }
+  let insetRes = null;
+  if (inset) insetRes = paintEnlargement(ctx, layout, inset, { placeName: name, placeId: locationId, character, known, hereSite });
+  flushLabels();
+  _localHits = { sites: [...res.sites, ...(insetRes?.sites || [])], exits: res.exits, inset };
+  const ro = document.getElementById("local-map-readout");
+  if (ro) {
+    const all = res.sites.length + res.withheld.length;
+    ro.textContent = all === 0 ? "Nothing named here yet — the places you visit and the GM names will appear on this ground."
+      : res.sites.length === 0 ? "You have not been told of anything here yet. The ground, the roads and the way in are drawn; the rest is found by looking."
+      : `${res.sites.length} of ${all} sites drawn${res.dimmed.length ? ` · ${res.dimmed.length} heard of, not yet seen` : ""}${res.withheld.length ? ` · ${res.withheld.length} not yet found` : ""}${inset ? " · the centre is enlarged in the panel" : ""}${_localView.k > 1.01 ? ` · ×${_localView.k.toFixed(1)}` : ""}`;
+  }
+  return res;
+}
+
+/** The pointer: drag pans, wheel and pinch zoom, a tap or click selects — a site opens its card when it is a
+ *  place of its own (L7 nests), otherwise the chip says what it is and why it sits where it sits. */
+function wireLocalCanvas(locationId) {
+  const cv = document.getElementById("local-map");
+  if (!cv) return;
+  const chip = document.getElementById("local-map-chip");
+  const toMap = (x, y) => { const r = cv.getBoundingClientRect(); const mw = cv.width / dprOf(), mh = cv.height / dprOf(); return { x: x * (mw / r.width), y: y * (mh / r.height) }; };
+  const pick = (x, y) => {
+    for (const b of _localHits.exits) if (x >= b.x0 && x <= b.x1 && y >= b.y0 && y <= b.y1) return { kind: "exit", id: b.id, name: b.name, x: (b.x0 + b.x1) / 2, y: b.y1 };
+    let best = null, bd = Infinity;
+    for (const s of _localHits.sites) { const d = Math.hypot(s.x - x, s.y - y); if (d <= s.r + 4 && d < bd) { bd = d; best = s; } }
+    return best ? { kind: "site", ...best } : null;
+  };
+  const hideChip = () => { if (chip) { chip.hidden = true; chip.innerHTML = ""; } };
+  const placeChip = (mx, my) => {
+    const r = cv.getBoundingClientRect();
+    const sx = r.width / (cv.width / dprOf()), sy = r.height / (cv.height / dprOf());
+    const w = chip.offsetWidth || 160, h = chip.offsetHeight || 60;
+    chip.style.left = `${Math.max(2, Math.min(r.width - w - 2, mx * sx - w / 2))}px`;
+    chip.style.top = `${Math.max(2, Math.min(r.height - h - 2, my * sy + 12))}px`;
+  };
+  const showChip = (hit) => {
+    if (!chip) return;
+    chip.hidden = false;
+    if (hit.kind === "exit") {
+      const l = CONTENT.locations[hit.id];
+      chip.innerHTML = `<div class="rmc-what"><strong>${esc(l?.name || hit.name || hit.id)}</strong> <span class="hint">${esc(String(l?.tier || "place"))}</span></div>`
+        + `<div class="hint rmc-far">The road out of here leads there.</div>`
+        + `<div class="rmc-acts"><button class="opt" data-lmc-inside="${esc(hit.id)}">Look inside</button><button class="opt" data-lmc-travel="${esc(hit.id)}">Travel</button></div>`;
+    } else {
+      const s = hit.site;
+      const vocab = CONTENT.locationKinds?._siteVocabulary?.[s.kind] || CONTENT.locationKinds?._vocabulary?.[s.kind] || "";
+      // ⛑ an author's marker (⛔ ⚠️ ✅ ⛑) is for the reader of the file, not the player reading the chip
+      const why = String(s.why || s.placedBecause || "").replace(/^[\s⛔⚠️✅⛑⚑⬜⭐]+/u, "");
+      const pm = character.placeMemory?.[locationId] || {};
+      const sub = pm.subPlaces?.[s.id] || null;
+      const lv = Number(s.localMap?.level);
+      chip.innerHTML = `<div class="rmc-what"><strong>${esc(s.name || s.id)}</strong> <span class="hint">${esc(String(s.kind || ""))}${Number.isFinite(lv) && lv !== 0 ? ` · level ${lv > 0 ? "+" : ""}${lv}` : ""}</span></div>`
+        + (typeof vocab === "string" && vocab ? `<div class="hint rmc-far">${esc(vocab)}</div>` : "")
+        + (why ? `<div class="hint rmc-whose">${esc(String(why))}</div>` : "")
+        + (sub && !sub.visited ? `<div class="hint">Heard of, not yet seen.</div>` : "")
+        + (sub && character.currentLocationId === locationId ? `<div class="rmc-acts"><button class="opt" data-lmc-go="${esc(s.id)}">Head there</button></div>` : "");
+    }
+    placeChip(hit.x, hit.y);
+    const ib = chip.querySelector("[data-lmc-inside]");
+    if (ib) ib.onclick = (e) => { e.stopPropagation(); mapTier = "location"; mapFocus = ib.dataset.lmcInside; renderMap(); };
+    const tb = chip.querySelector("[data-lmc-travel]");
+    if (tb) tb.onclick = (e) => { e.stopPropagation(); if (!planJourneyTo(tb.dataset.lmcTravel)) travelTo(tb.dataset.lmcTravel); };
+    const gb = chip.querySelector("[data-lmc-go]");
+    if (gb) gb.onclick = (e) => {
+      e.stopPropagation();
+      const sp = character.placeMemory?.[locationId]?.subPlaces?.[gb.dataset.lmcGo];
+      if (!sp) return;
+      renderPlay(character.activeScene?.lastTurn || null, {});
+      onFreeform(`Head to the ${sp.name}`);
+    };
+  };
+  const select = (x, y) => {
+    const hit = pick(x, y);
+    hideChip();
+    if (!hit) { closePlaceCard(); return; }
+    if (hit.kind === "exit" || (hit.kind === "site" && hit.site?.location && CONTENT.locations[hit.id])) {
+      // ⛔ L7: a site that is a place of its own gets the one card, and its own "Look inside" nests
+      if (!openPlaceCard({ canvas: cv, id: hit.id, glyph: { x: hit.x, y: hit.y, r: hit.r || 8 } })) showChip(hit);
+      return;
+    }
+    closePlaceCard();
+    showChip(hit);
+  };
+  bindGesture(cv, {
+    onMove: (x, y, dx, dy) => {
+      const r = cv.getBoundingClientRect();
+      const ratio = (cv.width / dprOf()) / r.width;
+      _localView.dx -= (dx * ratio) / _localView.k; _localView.dy -= (dy * ratio) / _localView.k;
+      hideChip(); paintLocalCanvas(locationId);
+    },
+    onUp: (moved) => { _localDragged = !!moved; },
+    onZoom: (f) => {
+      _localView.k = Math.max(1, Math.min(6, _localView.k * f));
+      if (_localView.k <= 1.001) { _localView.dx = 0; _localView.dy = 0; }
+      hideChip(); paintLocalCanvas(locationId);
+    },
+    onTap: (x, y) => { const p = toMap(x, y); select(p.x, p.y); },
+  });
+  cv.onclick = (e) => {
+    if (_localDragged) { _localDragged = false; return; }
+    const r = cv.getBoundingClientRect();
+    const p = toMap(e.clientX - r.left, e.clientY - r.top);
+    select(p.x, p.y);
+  };
+  const ro = document.getElementById("local-map-readout");
+  cv.onmousemove = (e) => {
+    const r = cv.getBoundingClientRect();
+    const p = toMap(e.clientX - r.left, e.clientY - r.top);
+    const hit = pick(p.x, p.y);
+    cv.style.cursor = hit ? "pointer" : "grab";
+    if (ro && hit) ro.textContent = hit.kind === "exit" ? `→ ${hit.name}` : `${hit.site?.name || hit.id} — ${hit.site?.kind || ""}`;
+  };
+}
+
+/** ⚠️ THE RING, KEPT FOR INTERIORS UNTIL L5. The order: *"leave interiors on the ring until L5 lands … Don't
+ *  fake a floor plan."* Unchanged from the tier it was. */
+function renderMapLocationRing(locationId, { host, children, name }) {
+  const laid = interiorLayout(children);
   const nodes = laid.map((c, i) => `<g class="map-node ${c.visited ? "" : "unvisited"} ${c.promoted ? "reachable" : ""}" data-mapinner="${esc(c.id)}" data-innerkind="${esc(c.kind)}">
       <title>${esc(c.name)}${c.promoted ? " — a place of its own now, still inside " + esc(name) : ""}${c.note ? " — " + esc(c.note) : ""}${c.visited ? "" : " (heard of, not seen)"}</title>
       <circle class="hit" cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="22"/>
@@ -17713,7 +18006,7 @@ function renderMapLocation(locationId) {
     </g>`).join("");
   chrome(`<div class="screen screen-ground">
     <h2>${esc(name)} — inside</h2>
-    <p class="hint" style="margin-bottom:8px">${children.length ? `${children.length} place${children.length === 1 ? "" : "s"} within.` : "Nothing recorded inside here yet — the places you visit and the GM names will appear here."} A ringed node is somewhere that grew into a place of its own.</p>
+    <p class="hint" style="margin-bottom:8px">${children.length ? `${children.length} place${children.length === 1 ? "" : "s"} within.` : "Nothing recorded inside here yet — the places you visit and the GM names will appear here."} A ringed node is somewhere that grew into a place of its own. This is a place with depth — its levels are drawn as a ring until the local map learns to stack them.</p>
     ${mapTierBar()}
     ${fieldPanel(null)}
     <div class="field-split">

@@ -24322,6 +24322,57 @@ await (async () => {
     /Day \$\{readClock\(character\.clock\)\.day\}/.test(mapR) && /crisisAnswered354 \? "Water Crisis answered" : `Water Crisis stage \$\{stage\}`/.test(mapR));
   check("678/parity: 'Show what you know' keeps its empty state, written by the painter that knows how many it drew — not by a chrome built before the marks exist",
     /id="map-kg-hint"/.test(mapR) && /getElementById\("map-kg-hint"\)/.test(paintR) && /kgHint\.textContent = people\.length \?/.test(paintR));
+  /* ── Aevi's rulings 2 and 3 on the retirement (2026-10-07), on the ground ── */
+  const LMr = await import("../engine/localmap.js");
+  check("678/rulings: ⛔ the deliberately-wrong regions are ONE table — the Pattern Reach unsteady, the Mirrorlands lying, the Numinous Reach fading — with her hint lines, and the four spreading places are named",
+    LMr.regionLook("the_pattern_reach")?.look === "unsteady" && LMr.regionLook("the_pattern_reach").hint === "The lines here will not hold still."
+    && LMr.regionLook("the_veiled_reach")?.look === "lying" && LMr.regionLook("the_veiled_reach").hint === "Not everything drawn here is so."
+    && LMr.regionLook("the_numinous_reach")?.look === "fading" && LMr.regionLook("the_numinous_reach").hint === "The survey gives out here."
+    && LMr.regionLook("valley") === null && ["the_blaze", "the_churn_edge", "the_scouring", "the_ceaseless"].every(LMr.isSpreading) && !LMr.isSpreading("millbrook")
+    && (() => { const a = LMr.lookRand(7, 3), b = LMr.lookRand(7, 3), c = LMr.lookRand(8, 3); return a === b && a !== c && a >= 0 && a < 1; })());
+  check("678/rulings: ⛔ …and the painter draws them — the fade past the middle, the drift of the DRAWN road only (the route, the marks and the clicks untouched), one fake road by the per-open seed, the hatched edge — and the hint under the title says so",
+    /if \(regionLook\(regionId\)\?\.look === "fading"\) \{/.test(paintR) && /ctx\.scale\(1, H \/ W\);\s*\n\s*const fg = ctx\.createRadialGradient\(0, 0, W \* 0\.30, 0, 0, W \* 0\.52\);/.test(paintR)
+    && /const drift = \(pts, k\) => unsteady \? pts\.map/.test(paintR) && /const lines = routed\.roads\.map\(\(r, k\) => \(\{ r, pts: drift\(smoothRoad\(r\.points\), k\) \}\)\);/.test(paintR)
+    && /if \(regionLook\(regionId\)\?\.look === "lying" && marks416\.length >= 1\) \{/.test(paintR) && /const joined = new Set\(net\.roads\.map\(\(r\) => `\$\{r\.a\}\|\$\{r\.b\}`\)\);/.test(paintR) && /ctx\.quadraticCurveTo\(mid\.x, mid\.y, B\.x, B\.y\)/.test(paintR)
+    && /if \(isSpreading\(m\.id\)\) \{/.test(paintR) && /function reseedRegionMap\(\) \{ _regionOpenSeed = Date\.now\(\) % 100000; \}/.test(srcR)
+    && /reseedRegionMap\(\);\s*\/\/[^\n]*change of region/.test(paintR) && /if \(mapBtn\) mapBtn\.onclick = \(\) => \{ reseedRegionMap\(\); renderMap\(\); \};/.test(srcR)
+    && /regionLook\(focusRegion\)\?\.hint/.test(mapR) && !/Math\.random\(\)/.test(paintR));
+  check("678/rulings: ⛔ the roads draw for EVERY region — the routed roads, the exits and their labels are no longer nested under the authored-map guard that only 8 of 39 regions pass; only the named ground still reads the authored map",
+    !/if \(authoredMap\) \{/.test(paintR) && /for \(const g of authoredMap\?\.namedGround \|\| \[\]\) \{/.test(paintR)
+    && paintR.indexOf("const net = roadNetwork(CONTENT.locations, { k: 1.1 });") > paintR.indexOf("authoredMap?.namedGround")
+    && (() => { const open = paintR.indexOf("\n  {\n    const R2 = Math.PI / 180;"); const roads = paintR.indexOf("const net = roadNetwork("); return open > 0 && roads > open; })());
+  {
+    // ⛔ CCODE-655: a region's frame and its places share one longitude convention, and the base wraps a stray one in
+    const { regionExtent: rx655, makeRegionBase: mb655 } = await import("../engine/worldglobe.js");
+    const { loadContentHeadless: lch655 } = await import("./headless_content.mjs");
+    const C655 = await lch655();
+    const rids655 = [...new Set(Object.values(C655.locations).map((l) => l.regionId || l.region).filter(Boolean))];
+    const outside655 = [];
+    for (const rid of rids655) {
+      const ext = rx655(rid, C655.locations); if (!ext || ext.polar) continue;
+      for (const l of Object.values(C655.locations)) {
+        if ((l.regionId || l.region) !== rid || !l.worldPos || l.supersededBy) continue;
+        const mid = (ext.lo0 + ext.lo1) / 2; let v = l.worldPos.longitude;
+        while (v - mid > 180) v -= 360; while (mid - v > 180) v += 360;
+        if (v < ext.lo0 - 0.01 || v > ext.lo1 + 0.01) outside655.push(`${rid}:${l.id}`);
+        // (the Umbral Depths straddle the seam — 357° beside 0° — and the base's wrap is what carries them in)
+      }
+    }
+    check("678/rulings: ⛔ every placed member of every region lies inside its region's frame in the frame's own longitude convention — the Making's 236–246° places against a −121° centre put 42 places in 14 regions a full turn off their own map",
+      outside655.length === 0 && rids655.length > 30);
+    const stub655 = mb655({ }, () => ({ raw: 1, type: 1 }), { lo0: 229, lo1: 247, la0: -15, la1: 2 });
+    const a655 = stub655.toScreen(238, -6, 365, 192), b655 = stub655.toScreen(238 - 360, -6, 365, 192), c655 = stub655.toScreen(357, 0, 100, 100);
+    check("678/rulings: ⛔ …and the base wraps a longitude into its frame before projecting or sampling — 238° and −122° land on the same pixel; 357° in a frame that runs −20…18 is −3°",
+      Math.abs(a655.x - b655.x) < 1e-6 && Math.abs(a655.y - b655.y) < 1e-6 && a655.x > 0 && a655.x < 365
+      && Math.abs(mb655({ }, () => ({ raw: 1, type: 1 }), { lo0: -20, lo1: 18, la0: -5, la1: 5 }).toScreen(357, 0, 100, 100).x - (17 / 38) * 100) < 1e-6
+      && typeof stub655.wrapLon === "function" && stub655.wrapLon(-122) === 238);
+  }
+  check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
+    /name: heard416 \? labelText\(face416\[id\]\?\.name \|\| l\.name \|\| id, "place", 24\) : "\?"/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
+    && (() => { const card = srcR.slice(srcR.indexOf("function placeCardHTML("), srcR.indexOf("\nfunction ", srcR.indexOf("function placeCardHTML(") + 10));
+      return /esc\(known \? l\.name : "\?"\)/.test(card) && /you have not heard of it/.test(card)
+        && /const routePlan = \(!reachable && l\.id !== here\) \? journeyPlanFor\(l\.id\) : null;/.test(card) && !/l\.id !== here && known\)/.test(card)
+        && /Nothing is known of this place/.test(card); })());
   check("678/parity: the two field toggles that read nothing on the ground are gone with the diagram — ◈ Field and its source kinds are the one control (386 gates them)",
     !/map-field-lat|map-field-nan|\bmapField\b/.test(srcR) && /fieldPanel\(regionExtent\(focusRegion/.test(mapR) && /wireFieldPanel\(\(\) => renderMap\(\)\)/.test(mapR));
 }

@@ -68,7 +68,7 @@ import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from 
 import { cityPlan, blockPath, blockRoofs, faubourgs, beltRoofs, leanOf } from "./engine/cityplan.js";
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";
-import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf, siteLevel } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
+import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf, siteLevel, regionLook, isSpreading, lookRand } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
 import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, coordForGenerated, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.10";
+const APP_VERSION = "2.22.11";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -16032,6 +16032,10 @@ let _regionView = { k: 1, cx: 0.5, cy: 0.5, sx: 0, sy: 0, sw: 0, sh: 0 };
 // ⛔ M3 — WHICH REGION THE OPENING FRAME HAS ALREADY BEEN SET FOR. Without this the frame would be recomputed
 // on every repaint and snap the view back the instant the player panned, which is worse than not framing at all.
 let _framedFor = null;
+let _regionOpenSeed = 1;   // ✅ ruling 2: one seed per OPEN of a region map — the Pattern Reach drifts and the Mirrorlands lie by it
+/** ✅ AEVI (ruling 2): *"each time you open the map"* — the Open Map button and a change of region both reseed; a pan, a pick
+ *  or a toggle repaints the SAME picture, so the lines a player is looking at do not jump under a tap. */
+function reseedRegionMap() { _regionOpenSeed = Date.now() % 100000; }
 // ⛔ M11 · the ring labels' own boxes, so a road's far end can be hovered for the yard it actually arrives in
 let _exitBoxes = [];
 let _regionPeople = [];   // ✅ SNG-678: the people and threads drawn on the ground, for the pointer
@@ -16227,6 +16231,19 @@ function paintRegionMap(regionId) {
     _rasterOff.getContext("2d").putImageData(img, 0, 0);
     ctx.imageSmoothingEnabled = true;
     ctx.drawImage(_rasterOff, 0, 0, rw, rh, 0, 0, W, H);
+    /* ✅ AEVI (ruling 2): THE NUMINOUS REACH — *"the map fades out past its settled middle. 'The survey gives out here.'"*
+     * The ground goes to the stage's dark beyond the middle; the marks and the roads drawn after this stay exactly where they are. */
+    if (regionLook(regionId)?.look === "fading") {
+      // ⚠️ an ELLIPSE in the canvas's own aspect, not a circle: a circle wide enough to reach the corners of a 2:1 canvas
+      // left its top and bottom edges untouched (measured: corners 44–63 against a centre of 103). Scaled, the middle
+      // 60% is the survey and the mid-edges are already the full dark.
+      ctx.save();
+      ctx.translate(W / 2, H / 2); ctx.scale(1, H / W);
+      const fg = ctx.createRadialGradient(0, 0, W * 0.30, 0, 0, W * 0.52);
+      fg.addColorStop(0, "rgba(10,12,16,0)"); fg.addColorStop(0.55, "rgba(10,12,16,0.55)"); fg.addColorStop(1, "rgba(10,12,16,0.97)");
+      ctx.fillStyle = fg; ctx.fillRect(-W / 2, -W / 2, W, W);
+      ctx.restore();
+    }
   }
 
   // ⛔ B5 · WHOSE GROUND — under the field's own marks, because the ground is what the field sits ON.
@@ -16271,7 +16288,9 @@ function paintRegionMap(regionId) {
     // ⛔ M7's REAL CAUSE. Aevi reported *"The Disputed Zone — Fr +3"* as a label drawn twice; the location is
     // named "The Disputed Zone — Fringe" (26 chars) and `.slice(0, 22)` cuts it to exactly that string — a
     // HARD CUT MID-WORD, which `smartClamp` has existed to prevent since SNG-152. `labelText` breaks on a word.
-    marks416.push({ id, l, p, name: labelText(face416[id]?.name || l.name || id, "place", 24), regionKind: face416[id]?.kind || null });
+    // ✅ ERIK (ruling 3, 2026-10-07): a place the character has not heard of shows as a "?" — still a mark, still tappable
+    const heard416 = isPlaceKnown(character, id, CONTENT.locations);
+    marks416.push({ id, l, p, name: heard416 ? labelText(face416[id]?.name || l.name || id, "place", 24) : "?", regionKind: face416[id]?.kind || null, heard: heard416 });
   }
   // ✅ M2 — *"place | serif, bold, 12–13px, 3px dark halo"*, from the table rather than from a local const.
   // ⛑ IT SETS THE STATE; IT DOES NOT RETURN A STRING. My first cut returned `ctx.font` and a caller below did
@@ -16288,6 +16307,7 @@ function paintRegionMap(regionId) {
   // ⚠️ ONCE PER REGION, not per paint: recomputing it would snap the view back the moment anyone panned.
   if (_framedFor !== regionId) {
     _framedFor = regionId;
+    reseedRegionMap();   // ✅ ruling 2: a change of region is an open
     const known416 = new Set([...(character?.knownPlaces || []), ...Object.keys(character?.placeMemory || {})]);
     const mine416 = new Set((character?.holdings || []).map((h) => h?.locationId).filter(Boolean));
     const pts416 = marks416
@@ -16613,7 +16633,11 @@ function paintRegionMap(regionId) {
 
   // ⛔ HER LAYER, OVER THE GROUND. bearing + km from the region centre — the same frame localMap uses
   // one tier down, which is why it needed no new machinery.
-  if (authoredMap) {
+  /* ⛔ ROADS FOR EVERY REGION, NOT THE EIGHT WITH AN AUTHORED MAP. ⚠️ This block opened with `if (authoredMap)`, and the
+   * routed roads, the exits and their labels were nested inside it with the named ground — so 31 regions drew no road at
+   * all (measured on the Mirrorlands: 2 road-coloured pixels). The roads come from the connection graph and need no
+   * authoring; only the named ground reads the authored map, and only it keeps the guard. */
+  {
     const R2 = Math.PI / 180;
     const fromCentre = (bearing, km) => {
       const dLat = (km * Math.cos(bearing * R2)) / 111.32;
@@ -16621,7 +16645,7 @@ function paintRegionMap(regionId) {
       return base.toScreen(ext.centre.lon + dLon, ext.centre.lat + dLat, W, H);
     };
     // named ground first, underneath everything
-    for (const g of authoredMap.namedGround || []) {
+    for (const g of authoredMap?.namedGround || []) {
       const p = fromCentre(g.bearing, g.km);
       if (g.kind === "area" && g.radiusKm) {
         const edge = fromCentre(g.bearing, g.km + g.radiusKm);
@@ -16667,7 +16691,12 @@ function paintRegionMap(regionId) {
     const routed = city ? null : routedRoadsFor(regionId, net.roads, ext, base, W, H);
     const exits = [];
     if (routed) {
-      const lines = routed.roads.map((r) => ({ r, pts: smoothRoad(r.points) }));
+      /* ✅ AEVI (ruling 2): THE PATTERN REACH — *"its lines redraw a little differently each time you open the map. 'The lines here
+       * will not hold still.'"* Only the drawn line drifts (up to 2.4 px, by the per-open seed); the route underneath, the exits,
+       * the marks and the clicks are untouched. */
+      const unsteady = regionLook(regionId)?.look === "unsteady";
+      const drift = (pts, k) => unsteady ? pts.map((p, i) => ({ x: p.x + (lookRand(_regionOpenSeed + k, i) - 0.5) * 4.8, y: p.y + (lookRand(_regionOpenSeed + k * 7, i + 31) - 0.5) * 4.8 })) : pts;
+      const lines = routed.roads.map((r, k) => ({ r, pts: drift(smoothRoad(r.points), k) }));
       // ⚠️ EVERY CASING FIRST, THEN EVERY FILL. Cased road by cased road, a later road's dark edge cuts a
       // notch straight across an earlier road's cream fill at each crossing, and a junction reads as a break
       // in the road rather than a join.
@@ -16699,6 +16728,33 @@ function paintRegionMap(regionId) {
       }
       ctx.setLineDash([]);
       ctx.restore();
+      /* ✅ AEVI (ruling 2): THE MIRRORLANDS — *"one fake road appears each time. 'Not everything drawn here is so.'"* One road
+       * between two places that have none, in the road's own cased style, chosen by the per-open seed and curved a little so it
+       * reads as a road; the real routes, the exits and the marks stay exactly true. */
+      if (regionLook(regionId)?.look === "lying" && marks416.length >= 1) {
+        // ⛑ between two places the road network does NOT join — a fake road beside a real one reads as the real one drawn
+        // twice — and a region with one placed place (the Mirrorlands today) gets a road from it into the ground, to nowhere.
+        const joined = new Set(net.roads.map((r) => `${r.a}|${r.b}`));
+        const pairs = [];
+        for (let i = 0; i < marks416.length; i++) for (let j = i + 1; j < marks416.length; j++) {
+          const ida = marks416[i].id, idb = marks416[j].id;
+          if (!joined.has(`${ida}|${idb}`) && !joined.has(`${idb}|${ida}`)) pairs.push([i, j]);
+        }
+        let A, B;
+        if (pairs.length) { const [i0, i1] = pairs[Math.floor(lookRand(_regionOpenSeed, 1) * pairs.length)]; A = marks416[i0].p; B = marks416[i1].p; }
+        else {
+          A = marks416[Math.floor(lookRand(_regionOpenSeed, 1) * marks416.length)].p;
+          const ang = lookRand(_regionOpenSeed, 2) * Math.PI * 2, len = Math.min(W, H) * (0.22 + 0.16 * lookRand(_regionOpenSeed, 5));
+          B = { x: A.x + Math.cos(ang) * len, y: A.y + Math.sin(ang) * len };
+        }
+        const mid = { x: (A.x + B.x) / 2 + (lookRand(_regionOpenSeed, 3) - 0.5) * 60, y: (A.y + B.y) / 2 + (lookRand(_regionOpenSeed, 4) - 0.5) * 60 };
+        ctx.save(); ctx.lineJoin = "round"; ctx.lineCap = "round";
+        for (const [style, wdt] of [["rgba(24,20,14,0.55)", 4.6], ["rgba(226,206,158,0.92)", 2.2]]) {
+          ctx.strokeStyle = style; ctx.lineWidth = wdt;
+          ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.quadraticCurveTo(mid.x, mid.y, B.x, B.y); ctx.stroke();
+        }
+        ctx.restore();
+      }
       // ⚠️ ONE LABEL PER EXIT POINT, NAMING EVERY DESTINATION. Roads that leave toward the same far country
       // leave through nearly the same spot, and a label apiece stacked them into an illegible pile — which is
       // the same complaint Erik made about the lines themselves arriving in near-parallel bundles.
@@ -16788,7 +16844,7 @@ function paintRegionMap(regionId) {
     // ⚠️ Drawn anyway they put a tangle across the whole region. A road that is not there is worse than
     // no road, so this waits on Aevi rather than guessing which of three readings she meant.
     // `waysReady` is the flag she sets when the two halves agree.
-    if (authoredMap.waysReady) {
+    if (authoredMap?.waysReady) {
       ctx.save();
       ctx.strokeStyle = "rgba(214,188,138,0.85)"; ctx.lineWidth = 1.8;
       ctx.lineJoin = "round"; ctx.lineCap = "round";
@@ -16810,6 +16866,15 @@ function paintRegionMap(regionId) {
     // ⛑ L0: the region-scale kind wins over the stamped one — "Echo River Crossing" is a bridge at this scale
     const g = glyphFor({ ...meta, k: m.regionKind || meta.k });
     if (g) drawGlyph(ctx, g, m.p.x, m.p.y, m.id === here ? 9 : 7, {});
+    /* ✅ AEVI (ruling 2): THE FOUR SPREADING PLACES — *"the Blaze, the Churn Edge, the Scouring, the Ceaseless get a dashed,
+     * outward-hatched edge."* The mark itself is where it is; the edge is the spreading. */
+    if (isSpreading(m.id)) {
+      ctx.save(); ctx.strokeStyle = "rgb(226,160,96)"; ctx.lineWidth = 1.6; ctx.setLineDash([3, 3]);
+      ctx.beginPath(); ctx.arc(m.p.x, m.p.y, 14, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+      ctx.beginPath();
+      for (let t = 0; t < 12; t++) { const ang = (t / 12) * Math.PI * 2; ctx.moveTo(m.p.x + 14 * Math.cos(ang), m.p.y + 14 * Math.sin(ang)); ctx.lineTo(m.p.x + 21 * Math.cos(ang), m.p.y + 21 * Math.sin(ang)); }
+      ctx.stroke(); ctx.restore();
+    }
   }
   setPlaceFont(false);
   ctx.textAlign = "center";
@@ -18682,18 +18747,19 @@ function placeCardHTML(selectedId) {
     // answers for 33–40 of 40 sampled destinations for every character. The planner was gated behind the
     // one-hop check, so it could only be offered for journeys the player could already walk in a single step.
     // ⛑ A route the planner can lay is a way there. Only a place nothing can reach is refused.
-    const routePlan = (!reachable && l.id !== here && known) ? journeyPlanFor(l.id) : null;
+    // ✅ ERIK (ruling 3): a journey can be planned to ANY place, a "?" included — the plan no longer waits on having heard of it
+    const routePlan = (!reachable && l.id !== here) ? journeyPlanFor(l.id) : null;
     // ⛔ AND A NULL PLAN IS TWO DIFFERENT ANSWERS. `planJourney` returns null when there is no route AND when
     // the trip is TOO SHORT TO BE A JOURNEY (`isJourneyRoute` — rightly: you do not mount an expedition for a
     // seven-hour walk). The map read both as "no way there" and refused places three hours down the road:
     // measured on the live screen, the Made Gate at 0.3 days and the Whistling Woman Post at 0.4 were told
     // there was no road and no route. ⛑ `routeBetween` answers the other question on its own.
-    const routeShort = (!reachable && !routePlan && l.id !== here && known)
+    const routeShort = (!reachable && !routePlan && l.id !== here)
       ? (() => { try { const r = routeBetween(here, l.id, CONTENT.locations, { traveller: character, rules: CONTENT.rules, character, content: CONTENT }); return (r?.options || []).length ? r : null; } catch { return null; } })()
       : null;
     return `<div class="map-details">
       <div class="map-details-head">
-        <h3>${esc(known ? l.name : "An unknown place")}${!visited && known ? ` <span class="hint">— known of, not yet been</span>` : ""}</h3>
+        <h3>${esc(known ? l.name : "?")}${!visited && known ? ` <span class="hint">— known of, not yet been</span>` : !known ? ` <span class="hint">— you have not heard of it</span>` : ""}</h3>
         ${(l.dangerLevel | 0) >= 1 ? `<span class="rep-band danger-chip dl${Math.min(5, l.dangerLevel | 0)}">${esc(dangerLabel(Math.min(5, l.dangerLevel | 0)))}</span>${infoDot("world.danger")}` : `<span class="rep-band trusted">safe</span>`}
         ${visited ? (() => { const d = locationDensity(l, CONTENT.substrateModel); if (d == null) return ""; const lab = d < 0.34 ? "thin lattice" : d > 0.66 ? "dense lattice" : "even lattice"; return `<span class="rep-band" title="Substrate density here: ${Math.round(d * 100)}%. Continuous craft thrives dense, starves thin; Returned craft the reverse.">${lab}</span>`; })() : ""}
         ${l.id === here ? `<span class="rep-band trusted">you are here</span>` : ""}
@@ -18726,7 +18792,8 @@ function placeCardHTML(selectedId) {
            ${pm?.visits ? `<div class="hint">${pm.visits} visit${pm.visits > 1 ? "s" : ""}${pm.lastVisit != null ? ` · last on day ${pm.lastVisit}` : ""}</div>` : ""}
            ${pm?.notes?.length ? `<div class="map-details-notes">${pm.notes.slice(-3).map(n => `<div class="codex-fact">${esc(n)}</div>`).join("")}</div>` : ""}
            ${Object.keys(pm?.subPlaces || {}).length ? `<div class="sub-places"><span class="hint">Places within: </span>${Object.entries(pm.subPlaces).map(([slug, sp]) => `<button class="codex-link ${sp.visited ? "" : "dead"}" data-subgo="${esc(slug)}" data-subloc="${esc(l.id)}" title="${esc(sp.note || (sp.visited ? "you have been here" : "heard of only"))}">${esc(sp.name)}</button>`).join(" ")}</div>` : ""}`
-        : `<p class="map-details-desc">You've heard travelers mention it, nothing more. Someone would have to go and see.</p>`}
+        : known ? `<p class="map-details-desc">You've heard travelers mention it, nothing more. Someone would have to go and see.</p>`
+        : `<p class="map-details-desc">Nothing is known of this place — a mark on the map, and a way there if the roads allow.</p>`}
       ${l.id !== here ? ((reachable || routePlan || routeShort)
         ? `<button class="btn" id="map-travel" data-dest="${esc(l.id)}" style="margin-top:8px">${(() => {
             /* ⛔ THE TRAVEL BUTTON HAS NEVER ONCE SHOWN ITS LABEL, AND A `//` COMMENT IS WHY.
@@ -18816,6 +18883,8 @@ function renderMap(selectedId = null) {
           can't drift the way the old hardcoded "92 places across 24 regions" line silently did. */""}
     ${/* ⛑ the diagram's corner line, kept: the day, and — on the Valley, whose authored event it is — the crisis stage */""}
     <p class="hint" style="margin-bottom:8px">${locs.length} place${locs.length === 1 ? "" : "s"} in this region, on real ground · Day ${readClock(character.clock).day}${focusRegion === "valley" ? ` · ${crisisAnswered354 ? "Water Crisis answered" : `Water Crisis stage ${stage}`}` : ""}. Gold ring: you are here.</p>
+    ${/* ✅ AEVI (ruling 2): the deliberately-wrong regions each say so, in her words */""}
+    ${regionLook(focusRegion)?.hint ? `<p class="hint" style="margin:-4px 0 8px;font-style:italic">${esc(regionLook(focusRegion).hint)}</p>` : ""}
     ${mapTierBar()}
     ${/* ✅ AEVI §1.3 — "let the canvas use the window, filling the available width up to about 1600px". The backing
           store is sized to the pane on open (`sizeRegionCanvas`), so the marks, the hit test and the labels are all
@@ -28451,7 +28520,7 @@ function renderPlay(turn, opts = {}) {
   const speakBtn = document.getElementById("do-speak"); if (speakBtn) speakBtn.onclick = () => toggleSpeakTurn(turn); // SNG-155: speaks the DISPLAYED beat
   const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = () => rest("sleep");
   const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");
-  const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();
+  const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => { reseedRegionMap(); renderMap(); };   // ✅ ruling 2: an open reseeds the wrong regions' drawing
   const arriveBtn = document.getElementById("do-arrive"); if (arriveBtn) arriveBtn.onclick = () => arriveAtPending(); // SNG-122
   const journeyGo = document.getElementById("journey-go"); if (journeyGo) journeyGo.onclick = () => setOutOnJourney();   // CCODE-387
   const journeyStay = document.getElementById("journey-cancel"); if (journeyStay) journeyStay.onclick = () => cancelJourney();

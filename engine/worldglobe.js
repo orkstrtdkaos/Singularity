@@ -810,7 +810,17 @@ export function makeRegionBase(t, gen, extent, opts) {
       raw[j * nx + i] = g.raw; typ[j * nx + i] = g.type;
     }
   }
-  const at = (arr, lon, lat) => {
+  /** a longitude brought into the frame's own turn: 357° in a frame that runs −20…18 is −3°, and 238° in one that runs
+   *  229…247 stays 238°. The frame is unwrapped on purpose (the Echo Vale runs 1.2 → 36.2); the WORLD is not. */
+  const wrapLon = (lon) => {
+    const mid = (extent.lo0 + extent.lo1) / 2;
+    let v = Number(lon);
+    while (v - mid > 180) v -= 360;
+    while (mid - v > 180) v += 360;
+    return v;
+  };
+  const at = (arr, lon0, lat) => {
+    const lon = wrapLon(lon0);
     const fx = Math.max(0, Math.min(nx - 1, ((lon - extent.lo0) / (extent.lo1 - extent.lo0)) * (nx - 1)));
     const fy = Math.max(0, Math.min(ny - 1, ((lat - extent.la0) / (extent.la1 - extent.la0)) * (ny - 1)));
     const x0 = Math.floor(fx), y0 = Math.floor(fy);
@@ -820,11 +830,12 @@ export function makeRegionBase(t, gen, extent, opts) {
     return (a * (1 - tx) + b * tx) * (1 - ty) + (c * (1 - tx) + d * tx) * ty;
   };
   const base = {
-    extent, nx, ny, conv,
+    extent, nx, ny, conv, wrapLon,
     /** ⚠️ sign(raw) IS the shoreline (100.000% against the generator over 20,000 samples), so the
      *  interpolated field crosses zero exactly where the coast runs and the shore is finer than the
      *  samples that drew it — the same trick that fixed the globe's staircase. */
-    sample(lon, lat) {
+    sample(lon0, lat) {
+      const lon = wrapLon(lon0);
       const r = at(raw, lon, lat);
       const fx = Math.round(Math.max(0, Math.min(nx - 1, ((lon - extent.lo0) / (extent.lo1 - extent.lo0)) * (nx - 1))));
       const fy = Math.round(Math.max(0, Math.min(ny - 1, ((lat - extent.la0) / (extent.la1 - extent.la0)) * (ny - 1))));
@@ -832,7 +843,8 @@ export function makeRegionBase(t, gen, extent, opts) {
       return { type: r > 0 ? (near === 0 ? 1 : near) : 0, raw: r, elevation: elevFromRaw(t, r, r > 0 ? 1 : 0) };
     },
     /** screen ↔ world, for a canvas showing the whole extent */
-    toScreen(lon, lat, w, h) {
+    toScreen(lon0, lat, w, h) {
+      const lon = wrapLon(lon0);
       return { x: ((lon - extent.lo0) / (extent.lo1 - extent.lo0)) * w,
                y: (1 - (lat - extent.la0) / (extent.la1 - extent.la0)) * h };
     },
@@ -888,7 +900,14 @@ export function regionExtent(regionId, locations, { padFrac = 0.18, authored = n
       z += Math.sin(la * R2);
     }
     const m = Math.hypot(x, y, z) || 1;
-    centre = { lat: Math.asin(Math.max(-1, Math.min(1, z / m))) / R2, lon: Math.atan2(y, x) / R2 };
+    // ⚠️ atan2 answers in ±180 while the places are stored 0–360 — so the Making's centre came out at −121° with its
+    // five places at 236–246°, and a wrap-blind projection put all five a full turn off the canvas (42 places in 14
+    // regions, measured headlessly). The centre takes the MEMBERS' convention: the representation within 180° of them.
+    let lonC = Math.atan2(y, x) / R2;
+    const lonRef = pts[0][1];
+    while (lonC - lonRef > 180) lonC -= 360;
+    while (lonRef - lonC > 180) lonC += 360;
+    centre = { lat: Math.asin(Math.max(-1, Math.min(1, z / m))) / R2, lon: lonC };
     radiusDeg = pts.reduce((mx, q) => Math.max(mx, gc([centre.lat, centre.lon], q)), 0);
   }
   // ⚠️ a one-member region has radius 0, and Erik's Foothills split produced NINE of them. A map of one

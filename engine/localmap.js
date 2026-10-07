@@ -92,6 +92,24 @@ export function regionFaceOf(id, content, { locations = null } = {}) {
 }
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────
+// ✅ AEVI (2026-10-07, ruling 2 on the diagrams' retirement): *"The deliberately-wrong regions stay, now drawn on the real
+// ground maps. Each gets a line in the map's hint … Place markers and routes always stay accurate; only the drawing
+// around them misbehaves."* ⛑ ONE table, which the painter and the gate both read; her words are the hint lines. The
+// day she authors this on the region record in `regions.json`, this reads that instead of the table.
+const REGION_LOOKS = Object.freeze({
+  the_pattern_reach:  Object.freeze({ look: "unsteady", hint: "The lines here will not hold still." }),
+  the_veiled_reach:   Object.freeze({ look: "lying",    hint: "Not everything drawn here is so." }),
+  the_numinous_reach: Object.freeze({ look: "fading",   hint: "The survey gives out here." }),
+});
+/** the four spreading places: the Blaze, the Churn Edge, the Scouring, the Ceaseless — a dashed, outward-hatched edge */
+const SPREADING_PLACES = Object.freeze(["the_blaze", "the_churn_edge", "the_scouring", "the_ceaseless"]);
+export function regionLook(regionId) { return REGION_LOOKS[String(regionId || "")] || null; }
+export function isSpreading(placeId) { return SPREADING_PLACES.includes(String(placeId || "")); }
+/** a stable pseudo-random in [0, 1) from a seed and an index — "a little differently each time you open the map" is a
+ *  per-open seed, never Math.random, so one open draws one picture however often it repaints */
+export function lookRand(seed, i) { const x = Math.sin((Number(seed) || 0) * 12.9898 + (Number(i) || 0) * 78.233) * 43758.5453; return x - Math.floor(x); }
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────
 // ⛔ L5 · DEPTH. ✅ AEVI: *"SNG-403 §4a: interiors need a vertical axis. The pocket halls, the delves and the deep
 // places are stacked, not spread. v1: a place whose sub-places carry `depth` draws one level at a time, with a
 // level switch (surface, −1, −2…). Each level is laid out like L1. The shafts and stairs that join two levels

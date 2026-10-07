@@ -16,6 +16,27 @@
   "next": [],
   "releases": [
     {
+      "version": "2.22.11",
+      "date": "2026-10-07",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "Three regions that lie, and four places that spread",
+          "summary": "On the region map the Pattern Reach's roads will not hold still from one opening to the next, the Mirrorlands show one road that is not there, and the Numinous Reach's survey gives out past its settled middle — each says so under its title. The Blaze, the Churn Edge, the Scouring and the Ceaseless wear a dashed, spreading edge. The marks and the routes are always true."
+        },
+        {
+          "kind": "fix",
+          "title": "Roads on every region map",
+          "summary": "The roads, the ways out of a region and their labels drew only in the eight regions with an authored map; the other thirty-one showed places on bare ground. They draw everywhere now."
+        },
+        {
+          "kind": "change",
+          "title": "Places you have not heard of show as a ?",
+          "summary": "On the region map and on its card a place the character has never heard of is a ? — still there, still tappable — and a journey can be planned to any place, ? included."
+        }
+      ]
+    },
+    {
       "version": "2.22.10",
       "date": "2026-10-07",
       "entries": [

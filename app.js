@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.5";
+const APP_VERSION = "2.22.6";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2967,7 +2967,6 @@ function worldField() {
 let fieldCtl = {
   on: true,
   kinds: new Set(FIELD_KINDS.filter(k => k !== "body")),
-  mode: "mix",
   wells: true, sinks: true, gates: true,
   // ✅ B6 default is *Both*, so the territory lens starts on
   territory: true,
@@ -3056,14 +3055,9 @@ function fieldPanel(ext) {
   const mark = (key, label, title) => `<button class="opt field-mark${fieldCtl[key] ? " selected" : ""}" data-fieldmark="${key}" title="${esc(title)}">${fieldCtl[key] ? "✓ " : ""}${label}</button>`;
   return `<div class="field-ctl" data-field-panel="1" style="margin-bottom:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
     ${mark("on", "◈ Field", "The evaluated power field, washed over the ground. Turning a SOURCE KIND off re-renders it; these marker buttons only hide markers.")}
-    ${/* ⛔ THE SECOND MODE, WHICH HAS EXISTED SINCE `texture()` WAS WRITTEN AND HAD NO CONTROL. Its own comment:
-          "mix sums and normalises (HOW MUCH FIELD IS HERE); max gives the texel to the strongest source (WHICH
-          SOURCE OWNS THIS GROUND)." ⚠️ Measured over six regions: chroma ×3.44 — the mixed wash averages five hues
-          into one grey-blue, and this is the toggle that stops it. `mix` stays the default. */""}
-    <button class="opt field-mark${fieldCtl.mode === "max" ? " selected" : ""}" data-fieldmode="1"
-      title="${esc(fieldCtl.mode === "max"
-        ? "Strongest source wins each point — the colour says WHICH source is here. Click for the blend."
-        : "The registers are blended — the colour says HOW MUCH field is here. Click to let the strongest source take each point.")}">${fieldCtl.mode === "max" ? "✓ Strongest" : "Mix"}</button>
+    ${/* ✅ AEVI (2026-10-07): the Mix/Strongest button is GONE. It flipped the panel's mode flag, and nothing on any tier read it —
+          `texture()`, the only consumer of a mode, has no caller in play — so it was a control that did nothing (found at
+          CCODE-647 while re-pointing §386). The engine keeps both modes for the day a lens reads them; §334 drives them. */""}
     ${[...FIELD_KINDS].map(kindBtn).join("")}
     <span class="hint" style="margin:0 4px">│</span>
     ${mark("territory", "⬟ ground", "Whose ground this is — fill to whoever holds it, and every power's own border, as things stand on YOUR save")}
@@ -3100,12 +3094,6 @@ function wireFieldPanel(repaint) {
   for (const b of app.querySelectorAll("[data-fieldkind]")) b.onclick = () => {
     const k = b.dataset.fieldkind;
     if (fieldCtl.kinds.has(k)) fieldCtl.kinds.delete(k); else fieldCtl.kinds.add(k);
-    repaint();
-  };
-  // ✅ ERIK'S "more obvious" — the mode flips and the tier repaints through its own `repaint`, exactly as a kind
-  // toggle does. ⚠️ The texture cache is keyed on the mode already, so both modes stay warm after the first look.
-  for (const b of app.querySelectorAll("[data-fieldmode]")) b.onclick = () => {
-    fieldCtl.mode = fieldCtl.mode === "max" ? "mix" : "max";
     repaint();
   };
   for (const b of app.querySelectorAll("[data-fieldmark]")) b.onclick = () => {

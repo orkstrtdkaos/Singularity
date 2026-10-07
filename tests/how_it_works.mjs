@@ -858,11 +858,13 @@ console.log("\n── §10 · the known gaps — these go RED when FIXED ──"
     deltaAxis > 0 && mechAxis === 0, `rankDeltas ${deltaAxis} · mechanic ${mechAxis}`);
 
   const layouts = Object.keys(rj("content/packs/core/world/local_layouts.json")).filter(k => !k.startsWith("_"));
-  const wmSrc = rd("engine/worldmap.js");
-  // ⚠️ NARROWER SINCE R28. The authored ground is now READ — `places.groundForGM` puts it in front of the
-  // narrator — but nothing DRAWS it: the app has a world globe and a region map and no place tier.
-  gap("§10: the authored ground is read but never drawn — there is no place-level map",
-    !/local_layouts/.test(wmSrc) && !/local_layouts/.test(rd("app.js")), `${layouts.length} authored`);
+  // ✅ CLOSED 2026-10-07 (SNG-678 L1, CCODE-639): the authored ground is DRAWN — `engine/localmap.js` paints the 18
+  // layouts as canon and generates the rest, and the region map hands off to it. ⚠️ The gap had pinned two files
+  // that never held the literal, so it read "still open" for a week after the local map shipped: a gap's condition
+  // must name the thing that would close it, or it never closes.
+  check("§10: the authored ground is read AND drawn — the place tier is the local map (closed 2026-10-07)",
+    /export function paintLocalMap\(/.test(rd("engine/localmap.js")) && /rules\.localLayouts = localLayoutsDoc/.test(rd("engine/state.js"))
+    && /localLayoutFor\(/.test(rd("app.js")) && /id="local-map"/.test(rd("app.js")), `${layouts.length} authored`);
 
   // ⛔ THE FOUR GAPS THIS SESSION OPENED. Each is a claim §10 makes about being unfinished, so each goes
   // RED when it is fixed — which is the signal to edit the table rather than let it quietly rot.
@@ -35779,17 +35781,16 @@ console.log("\n── §411 · the ground map answers the pointer ──");
   check("§411: ⚠️ …and while it is open only its pills answer the pointer",
     /if \(_regionFan\?\.pills\) \{[\s\S]{0,600}?return null;/.test(wire411));
 
-  /* ---- 4 · ⛔ THE MODE THAT EXISTED AND COULD NOT BE REACHED ---- */
+  /* ---- 4 · ⛔ THE MODE THAT EXISTED AND COULD NOT BE REACHED — AND THE CONTROL THAT READ TO NOTHING ---- */
   // ⛔ ERIK: "I want the power sources to be more obvious." `texture()` has had the answer since it was written —
-  // its own comment names both modes — and `fieldCtl.mode` was set to "mix" at birth and never written again.
-  // ⚠️ Measured over six regions at the painter's own window and alpha rule: chroma ×3.44, mean texel ×1.87.
-  check("§411: ⛔ THE FIELD'S SECOND MODE HAS A CONTROL — it was built, plumbed, cached, and unreachable",
-    /data-fieldmode="1"/.test(A411)
-    && /fieldCtl\.mode = fieldCtl\.mode === "max" \? "mix" : "max";/.test(A411)
-    // ⛑ and the engine really does answer differently, so the control is not a label on nothing
+  // its own comment names both modes — and a Mix/Strongest button was given `fieldCtl.mode` to flip. ⚠️ CCODE-647
+  // found, re-pointing the §386 gates, that `texture()` is called by NOTHING in play on any tier: the button set a
+  // mode no painter read. The gate above it asked its question in the terms of the bug — "has a control" — and never
+  // whether anything READ the control. ✅ AEVI (2026-10-07): *"The Mix/Strongest button goes. Nothing reads it, so it
+  // was a control that did nothing."* The engine keeps both modes for the day a lens reads them; §334 drives them.
+  check("§411: ⛔ THE CONTROL THAT READ TO NOTHING IS GONE — no Mix/Strongest button, no `fieldCtl.mode`, and nothing in play calls `texture()`",
+    !/data-fieldmode/.test(A411) && !/fieldCtl\.mode/.test(A411) && !/\.texture\(/.test(A411)
     && /mode = "mix"/.test(rd("engine/field.js")));
-  check("§411: ⚠️ …and `mix` is still what the map opens on — a control, not a new default",
-    /^\s*mode: "mix",\s*$/m.test(A411));
   // ⛔ THE TWO MODES REALLY DIFFER, driven on the engine rather than asserted from the source.
   check("§411: ⛔ …and the two modes answer differently — `max` is further from grey than `mix`",
     (() => {

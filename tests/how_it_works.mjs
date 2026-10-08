@@ -2094,7 +2094,7 @@ console.log("\n── §171 · the repair note measures the state ──");
   // it is on the list because the list is every family app.js applies, and a family nobody listed is the thing this catches.
   // ⚠️ CCODE-388 adds `holdTrades` on the same terms: a sale is made in a turn, never from a question (`ASK_FORBIDDEN`).
   check("§171: …and the fingerprint covers what the op families write — every family app.js applies is one this gate knows",
-    fams171.length >= 16 && fams171.every(f => ["bandOps", "codexUpdates", "deathOps", "debtOps", "encounterOps", "exchangeOps", "factUpdates", "holdingOps", "newEncounter", "npcUpdates", "partyOps", "placeUpdates", "projectOps", "questUpdates", "questDeadlines", "refusalSignal", "relationshipDeltas", "strikeOps", "holdTrades"].includes(f)), fams171.join(","));
+    fams171.length >= 16 && fams171.every(f => ["bandOps", "codexUpdates", "deathOps", "debtOps", "encounterOps", "exchangeOps", "factUpdates", "holdingOps", "mapOps", "newEncounter", "npcUpdates", "partyOps", "placeUpdates", "projectOps", "questUpdates", "questDeadlines", "refusalSignal", "relationshipDeltas", "strikeOps", "holdTrades"].includes(f)), fams171.join(","));
 }
 
 /* ══════════ §172 — A BEAT'S BOOKKEEPING THAT DID NOT LAND IS RESTATED, NOT LOST (Erik 2026-09-12: "make sure I don't lose anything") ══════════ */

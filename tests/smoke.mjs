@@ -24531,6 +24531,40 @@ await (async () => {
       /<span id="map-count">\$\{locs\.length\} place/.test(mapR) && /cnt416\.textContent = `\$\{marks416\.length\} place/.test(paintR)
       && !/\bnearMap\b/.test(readFileSync(join(root, "engine/generate.js"), "utf8")));
   }
+  /* ── ✅ SNG-679 S3 (CCODE-667): the GM's `mapOps` — what the scene can see, through the one door ── */
+  {
+    const MS = await import("../engine/mapstate.js");
+    const { loadContentHeadless: lchS3 } = await import("./headless_content.mjs");
+    const CS3 = await lchS3();
+    const LMS3 = await import("../engine/localmap.js");
+    const chS3 = { id: "s3", currentLocationId: "millbrook", holdings: [{ id: "mill-post", name: "The Mill Post", kind: "post", locationId: "millbrook", state: "whole", features: [{ id: "wall", kind: "wall", name: "the wall" }] }], mapEvents: [], mapState: {} };
+    let layS3 = null; try { layS3 = LMS3.localLayoutFor("millbrook", { content: CS3, character: chS3 }); } catch { layS3 = null; }
+    const seenS3 = MS.visibleMapKeys(chS3, CS3, { hereId: "millbrook", layout: layS3 });
+    const keysS3 = seenS3.map((k) => k.key);
+    check("679/S3: ⛔ WHAT THE SCENE CAN SEE is one list — the place, its sites, ground and water, the roads out, the holds there and their features — each with its folded state, and nothing from anywhere else",
+      keysS3.includes("place:millbrook") && keysS3.some((k) => k.startsWith("site:millbrook/")) && keysS3.some((k) => k.startsWith("road:")) && keysS3.includes("hold:mill-post") && keysS3.includes("feature:mill-post/wall")
+      && keysS3.every((k) => /^(place|site|ground|water|road|gate):millbrook\b|^road:|^hold:mill-post$|^feature:mill-post\//.test(k)) && seenS3.every((k) => k.state === "whole"));
+    const blockS3 = MS.mapOpsForGM(chS3, CS3, { hereId: "millbrook", layout: layS3 });
+    check("679/S3: ⛔ …and the GM's block prints exactly those keys, with the world's word beside a thing that is no longer whole",
+      /^## WHAT STANDS HERE AND CAN CHANGE/.test(blockS3) && keysS3.every((k) => blockS3.includes(k)) && !/ — /.test(blockS3.split("\n")[1] || "x — "));
+    const refused = MS.applyMapOp(chS3, { op: "ruined", key: "place:the_crossing", cause: "a test" }, { content: CS3, worldDay: 10, hereId: "millbrook", layout: layS3 });
+    const noKey = MS.applyMapOp(chS3, { op: "ruined" }, { content: CS3, worldDay: 10, hereId: "millbrook", layout: layS3 });
+    const did = MS.applyMapOp(chS3, { op: "ruined", key: "place:millbrook", cause: "fired in the raid", by: "the_gralloch_band", seen: "named" }, { content: CS3, worldDay: 10, hereId: "millbrook", layout: layS3 });
+    const again = MS.applyMapOp(chS3, { op: "ruined", key: "place:millbrook", cause: "fired in the raid", by: "the_gralloch_band" }, { content: CS3, worldDay: 10, hereId: "millbrook", layout: layS3 });
+    const hold = MS.applyMapOp(chS3, { op: "damaged", key: "feature:mill-post/wall", cause: "the flood" }, { content: CS3, worldDay: 11, hereId: "millbrook", layout: layS3, recordOf: (cls, id, sub) => cls === "feature" ? chS3.holdings[0].features.find((f) => f.id === sub) : chS3.holdings[0] });
+    check("679/S3: ⛔ an op the scene cannot see is REFUSED with the reason, an op with no key too; one it can see writes through the one door (the state folds, the revision bumps, the same event twice is one), by \"the world\" and unseen when nobody is named, and a hold's feature on its own record",
+      !refused.ok && /not something the scene can see/.test(refused.why) && !noKey.ok
+      && did.ok && did.state === "ruined" && did.event.by === "the_gralloch_band" && did.event.seen === "named" && MS.mapStateOf(chS3, "place:millbrook", { content: CS3 }).state === "ruined"
+      && again.ok && again.duplicate === true && chS3.mapEvents.length === 1
+      && hold.ok && hold.onRecord === true && chS3.holdings[0].features[0].state === "damaged" && hold.event.by === "the world" && hold.event.seen === "unseen");
+    const gmS3 = readFileSync(join(root, "engine/gm.js"), "utf8"), regS3 = readFileSync(join(root, "engine/gm_registry.js"), "utf8"), appS3 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");
+    check("679/S3: ⛔ the channel has the shape of the others — in the response schema, the doctrine, the salvageable and claim-backed lists; the block is a registered section the GM reads; the app applies it through `applyMapOp` after the hold ops and says the world's word",
+      /"mapOps": \[\{"op": "damaged\|ruined\|destroyed\|repaired\|moved\|renamed\|added\|revealed\|hidden"/.test(gmS3) && /"mapOps": THE MAP IS STATE, AND IT CHANGES ONLY HERE/.test(gmS3)
+      && /SALVAGEABLE_OPS = \["strikeOps", "holdingOps", "mapOps",/.test(gmS3) && /"debtOps", "mapOps", "deeds"/.test(gmS3)
+      && /key: "mapHere", builder: "mapstate\.mapOpsForGM \(SNG-679 S3\)"/.test(regS3) && /if \(mapHere\) world\.push\(mapHere\);/.test(gmS3)
+      && /applyStep\("mapOps", \(\) => \{/.test(appS3) && /const res = applyMapOp\(character, op, \{ content: CONTENT, worldDay: absoluteWorldDay\(\), hereId: location\?\.id, layout, visible, recordOf,/.test(appS3)
+      && appS3.indexOf('applyStep("holdingOps"') < appS3.indexOf('applyStep("mapOps"') && appS3.indexOf('applyStep("mapOps"') < appS3.indexOf('applyStep("holdTrades"'));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(face416\[id\]\?\.name \|\| l\.name \|\| id, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

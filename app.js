@@ -49,7 +49,7 @@ import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnab
 import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
 import { openingFrame, placeCardBox } from "./engine/worldmap.js";
 // ⛔ SNG-679 S2: ONE READER for what state anything on a map is in, and the word a player reads for it.
-import { mapStateOf, mapStateWord, placeAllows } from "./engine/mapstate.js";
+import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey } from "./engine/mapstate.js";
 // ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
 import { mapHolds, holdMarker } from "./engine/mapholds.js";
 // ⛔ SNG-680: the film is DATA. Not one of its words is written in this file.
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.21";
+const APP_VERSION = "2.23.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -11805,6 +11805,35 @@ function applyTurn(turn, resolution, playerWords = null) {
   // ✅ Q5-B: a debt the fiction leaves — recorded to a HOLDER, settled by the purse, forgiven by a deed.
   // ⛔ CCODE-388 — THE KEEPER SOLD SOMETHING. Only a hold standing here, only what its card lists, only what is left once what is
   // already bought is counted, and only what the purse can pay — checked by `buyFromHold` before a crystal moves.
+  /* ═════ SNG-679 S3 · THE GM'S MAP OPS, THROUGH THE ONE DOOR ═════
+   * ✅ AEVI: *"It writes through S1 and nothing else. An op the scene could not see is refused, the way a `holdingOp` on a
+   * hold you don't own is refused today."* The visible keys are computed once from where the party stands and the place's
+   * local layout — the same list the prompt printed — and `applyMapOp` refuses anything else with the reason. */
+  applyStep("mapOps", () => {
+    const ops = (turn.mapOps || []).slice(0, 4);
+    if (!ops.length) return;
+    const said = (line) => { character._stepAsides = [...(character._stepAsides || []), line].slice(-4); };   // the same aside the hold ops use
+    let layout = null; try { layout = localLayoutFor(location?.id, { content: CONTENT, character }); } catch { layout = null; }
+    const visible = visibleMapKeys(character, CONTENT, { hereId: location?.id, layout });
+    const recordOf = (cls, id, sub) => {
+      if (cls === "hold") return (character.holdings || []).find((h) => h && h.id === id) || null;
+      if (cls === "feature") { const h = (character.holdings || []).find((x) => x && x.id === id); return (h?.features || []).find((f) => f && f.id === sub) || null; }
+      if (cls === "caravan") return (character.caravans || []).find((c) => c && c.id === id) || null;
+      return null;
+    };
+    for (const op of ops) {
+      const res = applyMapOp(character, op, { content: CONTENT, worldDay: absoluteWorldDay(), hereId: location?.id, layout, visible, recordOf,
+        exists: (cls, id) => cls === "place" ? !!CONTENT.locations?.[id] : true, regionId: location?.regionId || location?.region || "valley" });
+      if (!res.ok) {
+        console.warn("[mapOps] REFUSED —", res.why, JSON.stringify(op).slice(0, 160));   // prose-cap-ok: a console diagnostic
+        character._applyFailures = [...(character._applyFailures || []), { op: "mapOps", at: new Date().toISOString(), message: res.why, key: String(op?.key || ""), change: String(op?.op || op?.change || "") }].slice(-20);
+        continue;
+      }
+      const seenKey = visible.find((k) => k.key === res.key);
+      const word = mapStateWord(CONTENT, seenKey?.cls || parseMapKey(res.key)?.cls, res.state, { name: seenKey?.label || res.key }) || `${seenKey?.label || res.key} is ${res.state}`;
+      if (!res.duplicate) said(word);
+    }
+  });
   applyStep("holdTrades", () => {
     const ops = (Array.isArray(turn.holdTrades) ? turn.holdTrades : []).slice(0, 3);
     if (!ops.length) return;

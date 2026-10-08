@@ -38,6 +38,8 @@ import { rosterForGM } from "./fellowship.js";   // SNG-541: the GM is told the 
 import { armorySaid, armoryTable } from "./armory.js";   // CCODE-445: a hold's armory, and what its forge is making
 import { workSaid } from "./holdwork.js";   // CCODE-450: who is at standing work there
 import { bearingsToKnown } from "./worldmap.js";   // SNG-386 §4.3: which way the road runs
+import { mapOpsForGM } from "./mapstate.js";   // SNG-679 S3: what stands here and can change, with the world's state words
+import { localLayoutFor } from "./localmap.js";
 import { holdingsForGM, debtsForGM } from "./holdings.js";
 import { purseLine } from "./purse.js";     // ⛔ CCODE-441: the GM is shown the purse —
 import { moneyLine } from "./money.js";     // — and the money of the place it stands in
@@ -118,6 +120,12 @@ export const GM_CONTEXT = [
   // ⚠️ 18 of 135 places have a layout; the other 117 send nothing, which is the dominant case and must
   // read as deliberate rather than broken. ⛔ THE FILE WAS AUTHORED IN AUGUST AND READ ONLY BY A TEST —
   // this is the reader that makes the ground load-bearing in play.
+  // ✅ SNG-679 S3 (CCODE-667): the keys the GM may change — ONLY what the scene can see — each with the world's word for its
+  // state, so a ruined mill reads ruined in the prose and on the map alike. The same list the door checks.
+  { key: "mapHere", builder: "mapstate.mapOpsForGM (SNG-679 S3)", carries: ["what stands here and can change: the place, its sites, ground and water, the roads out, the holds — keyed, with their state"],
+    reachedBy: "standing anywhere with a place record", spec: "SNG-679 S3", views: ALL,
+    build: (env) => { let layout = null; try { layout = localLayoutFor(env.location?.id, { content: env.CONTENT, character: env.character }); } catch { layout = null; }
+      return mapOpsForGM(env.character, env.CONTENT, { hereId: env.location?.id, layout }); } },
   { key: "groundDetail", builder: "places.groundForGM (R28)", carries: ["the authored ground of this place — what stands where"],
     reachedBy: "standing in one of the 18 places with an authored local layout", spec: "§9 / R28", views: ALL,
     build: (env) => groundForGM(env.location?.id, env.rules?.localLayouts) },

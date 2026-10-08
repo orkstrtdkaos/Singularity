@@ -23,6 +23,7 @@
 // ⚠️ PURE. Every reading of content, the day and the world is injected; the IO lives with the sync layer,
 // exactly as `fates.js` keeps `foldFates` pure and lets `sync.js` carry it.
 
+import { smartClamp } from "./namematch.js";   // model prose is clamped on a word, never sliced
 import { fnvHex } from "./fates.js";   // ⛔ ONE HASH. A second id rule is a second identity for one event.
 
 /* ═════ S0 · THE INVENTORY, AS A TABLE ═════
@@ -448,6 +449,69 @@ export function featureScale(character, { hold = null, feature = null, content =
 }
 
 /** What it costs to bring a thing back, as a fraction of building it. Destroyed is a full rebuild (1). */
+/* ═════ S3 · THE GM CHANNEL: `mapOps` ═════
+ * ✅ AEVI: *"It has the same shape as the other op channels, and its prompt section lists only what the scene can see:
+ * the place the party is in and its sites, ground and water; the roads out of it; the holds there. It writes through S1
+ * and nothing else. An op the scene could not see is refused, the way a `holdingOp` on a hold you don't own is refused
+ * today. The GM's lore section describes damaged and ruined things using `mapStates.words`, so the prose and the map say
+ * the same thing."* */
+
+/** every key the scene can see from `hereId`, with its label and its folded state — ONE list the prompt prints and the
+ *  door checks, so the GM is refused exactly what it was never shown. PURE given `layout` (the place's local layout). */
+export function visibleMapKeys(character, content, { hereId = null, layout = null } = {}) {
+  const locs = content?.locations || {};
+  const here = hereId || character?.currentLocationId || null;
+  const loc = here ? locs[here] : null;
+  if (!loc) return [];
+  const out = [];
+  const stateOf = (key, recordOf = null) => (mapStateOf(character, key, { content, recordOf })?.state) || ladderOf(content)[0];
+  const push = (key, label, cls, recordOf = null) => out.push({ key, label, cls, state: stateOf(key, recordOf) });
+  push(`place:${here}`, loc.name || here, "place");
+  for (const s of (layout?.sites || [])) if (s?.id) push(`site:${here}/${s.id}`, s.name || s.id, "site");
+  (layout?.extent || []).forEach((f, n) => {
+    if (!f) return;
+    if (f.kind === "water") push(`water:${here}/${n}`, f.name || "the water", "water");
+    else if (["cleared", "planted", "drained", "ground", "field", "fields", "grove", "orchard", "pasture", "quarry", "marsh"].includes(String(f.kind || ""))) push(`ground:${here}/${n}`, f.name || f.kind, "ground");
+  });
+  for (const other of (loc.connections || [])) if (locs[other]) push(roadKey(here, other), `the road to ${locs[other].name || other}`, "road");
+  if (loc.waygate || loc.role === "gate") push(`gate:${here}`, `the gate at ${loc.name || here}`, "gate");
+  for (const h of (character?.holdings || [])) {
+    if (!h || h.locationId !== here) continue;
+    push(`hold:${h.id}`, h.name || h.id, "hold", () => h);
+    for (const f of (h.features || [])) if (f?.id) push(`feature:${h.id}/${f.id}`, `${h.name || h.id}'s ${f.name || f.kind || f.id}`, "feature", () => f);
+  }
+  return out;
+}
+
+/** the prompt block: what stands here and can change, each with the world's word for its state */
+export function mapOpsForGM(character, content, { hereId = null, layout = null } = {}) {
+  const keys = visibleMapKeys(character, content, { hereId, layout });
+  if (!keys.length) return "";
+  const line = (k) => {
+    const w = k.state && k.state !== ladderOf(content)[0] ? ` — ${mapStateWord(content, k.cls, k.state, { name: k.label }) || k.state}` : "";
+    return `- ${k.key} · ${k.label}${w}`;
+  };
+  return `## WHAT STANDS HERE AND CAN CHANGE (mapOps keys — use them EXACTLY; a thing not listed cannot be changed from here)
+${keys.map(line).join("\n")}`;
+}
+
+/** the GM's op, through the one door: the key must be one the scene was shown; the change is one of the world's; `by`
+ *  defaults to the world and `seen` to unseen (damage by a flood has no culprit). Returns the door's answer. */
+export function applyMapOp(character, op, { content = null, worldDay = null, hereId = null, layout = null, visible = null, beat = null, recordOf = null, exists = null, regionId = "valley" } = {}) {
+  const o = op || {};
+  const key = String(o.key || "").trim();
+  const change = String(o.change || o.op || "").trim().toLowerCase();
+  const seen = visible || visibleMapKeys(character, content, { hereId, layout });
+  if (!key) return { ok: false, why: "a map op has to name a key" };
+  if (!seen.some((k) => k.key === key)) return { ok: false, why: `"${key}" is not something the scene can see — the keys it can are listed in the prompt` };
+  const by = o.by != null && String(o.by).trim() ? String(o.by).trim() : "the world";
+  const seenHow = ["named", "described", "unseen"].includes(String(o.seen || "")) ? String(o.seen) : (by === "the world" ? "unseen" : "described");
+  return applyMapChange(character, {
+    key, change, by, seen: seenHow, cause: o.cause ? smartClamp(String(o.cause), 120) : null, beat: beat ?? o.beat ?? null, day: worldDay,
+    ...(o.name ? { name: smartClamp(String(o.name), 80) } : {}), ...(o.pos ? { pos: o.pos } : {}), ...(o.kind ? { kind: String(o.kind) } : {}),
+  }, { content, worldDay, recordOf, exists, regionId });
+}
+
 export function repairFraction(content, state) {
   const c = content?.mapStates?.repairCost || {};
   const v = Number(c[state]);

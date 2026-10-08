@@ -27,7 +27,7 @@
 // every device; a texture that moved between visits would read as the world having changed.
 
 import { measureGradients, usableGradients, placeSite, roadsOut as roadBearings } from "./localdetail.mjs";
-import { glyphFor, drawGlyph } from "./mapicons.mjs";
+import { glyphFor, drawGlyph, drawStateMark } from "./mapicons.mjs";
 import { drawLabel, labelSpace } from "./maplabel.js";
 
 const R = Math.PI / 180;
@@ -1046,7 +1046,7 @@ export function siteKnowledge(site, { character = null, placeId = null, layout =
 export function paintLocalMap(ctx, model, {
   space = null, queue = null, exitSpace = null, character = null, known = null, reveal = false,
   hereSite = null, inset = null, labelMinPx = 0, title = true, legend = true, compass = true, exits = true, legendShort = false, clip = null,
-  spreading = false,
+  spreading = false, stateOf = null,
 } = {}) {
   const { frame, rnd } = model;
   const w = frame.w, h = frame.h;
@@ -1055,7 +1055,7 @@ export function paintLocalMap(ctx, model, {
   // ⛑ a painter with no queue draws its labels at once — a test, or a film frame drawn in one pass
   const q = queue || ((c, text, box, kind, opts) => { if (box) { c.textAlign = opts?.align || "center"; drawLabel(c, text, box.x, box.y, kind, opts || {}); } });
   const R2 = rngOf(seedOf("paint:" + model.id));
-  const out = { sites: [], exits: [], labelled: [], dimmed: [], withheld: [], inset: null };
+  const out = { sites: [], exits: [], labelled: [], dimmed: [], withheld: [], inset: null, stated: [] };
   ctx.save();
   if (clip) { ctx.beginPath(); ctx.rect(clip.x, clip.y, clip.w, clip.h); ctx.clip(); }
   // paper
@@ -1133,16 +1133,28 @@ export function paintLocalMap(ctx, model, {
     if (kn === "unknown") { out.withheld.push(s.id); continue; }
     if (s.x < -20 || s.y < -20 || s.x > w + 20 || s.y > h + 20) continue;
     if (kn === "heard") out.dimmed.push(s.id);
-    const hit = paintSite(ctx, s, { here: hereSite === s.id, know: kn, scale: clamp(Math.sqrt(frame.k), 1, 1.6), level: model.level });
+    // ✅ SNG-679 S5 (CCODE-672): the site's state — cracked, a ruin, or only a trace where it stood ("where the mill stood")
+    const sv = typeof stateOf === "function" ? stateOf(s) : null;
+    if (sv && sv.state && sv.state !== "whole") out.stated.push({ id: s.id, state: sv.state });
+    const sScale = clamp(Math.sqrt(frame.k), 1, 1.6), sSz = (s.location ? 9 : 7.5) * sScale;
+    let hit;
+    if (sv?.glyph === false) { hit = { id: s.id, x: s.x, y: s.y, r: sSz + 4, location: s.location || null }; drawStateMark(ctx, "trace", s.x, s.y, sSz); }
+    else {
+      if (sv && sv.alpha < 1) { ctx.save(); ctx.globalAlpha *= sv.alpha; }
+      hit = paintSite(ctx, s, { here: hereSite === s.id, know: kn, scale: sScale, level: model.level });
+      if (sv && sv.alpha < 1) ctx.restore();
+      if (sv?.mark) drawStateMark(ctx, sv.mark, s.x, s.y, sSz);
+      if (sv?.state === "damaged") { ctx.save(); ctx.fillStyle = "rgba(40,30,24,0.18)"; ctx.beginPath(); ctx.ellipse(s.x + sSz * 0.6, s.y + sSz * 0.7, sSz * 1.4, sSz * 0.8, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }   // a scorch on the ground
+    }
     out.sites.push(hit);
     // ⛑ a site close to the centre is labelled in the ENLARGEMENT when there is one (SNG-677 §0 at this scale)
     const dC = Math.hypot(s.x - model.built.x, s.y - model.built.y);
     if (inset && dC < labelMinPx) continue;
     const kind = s.location ? "landmark" : "landmarkUnder";
-    const text = String(s.name || s.id);
+    const text = String(sv?.label || s.name || s.id);
     const tw = (drawLabel(ctx, text, -9999, -9999, kind, {})?.w) || 0;
     const box = sp.place(s.x, s.y - 11, tw, 12, { kind, clampTo: { w, h }, offsets: [[0, 0], [0, 22], [tw / 2 + 10, 5], [-tw / 2 - 10, 5]] });
-    if (box) { q(ctx, text, box, kind, { align: "center" }); out.labelled.push(s.id); }
+    if (box) { q(ctx, text, box, kind, { align: "center", ...(sv && sv.labelAlpha < 1 ? { alpha: sv.labelAlpha } : {}) }); out.labelled.push(s.id); }
   }
   // the extent's names, italic, in the ground's own style
   for (const f of model.features) {

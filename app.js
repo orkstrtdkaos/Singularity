@@ -49,7 +49,7 @@ import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnab
 import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
 import { openingFrame, placeCardBox } from "./engine/worldmap.js";
 // ⛔ SNG-679 S2: ONE READER for what state anything on a map is in, and the word a player reads for it.
-import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange } from "./engine/mapstate.js";
+import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange, mapView, roadKey } from "./engine/mapstate.js";
 // ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
 import { mapHolds, holdMarker } from "./engine/mapholds.js";
 // ⛔ SNG-680: the film is DATA. Not one of its words is written in this file.
@@ -67,7 +67,7 @@ import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from 
 // ⛔ ✅ ERIK: *"Can we make it look like a big city with these places laid out?"*
 import { cityPlan, blockPath, blockRoofs, faubourgs, beltRoofs, leanOf } from "./engine/cityplan.js";
 import { makeInfluence } from "./engine/influence.js";
-import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";
+import { glyphFor, drawGlyph, drawStateMark } from "./engine/mapicons.mjs";
 import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf, siteLevel, regionLook, isSpreading, spreadingSay, lookRand, placeKindOf } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
 import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, placeLabels } from "./engine/worldmap.js";
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.23.4";
+const APP_VERSION = "2.23.5";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -16377,7 +16377,9 @@ function paintRegionMap(regionId) {
     const heard416 = isPlaceKnown(character, id, CONTENT.locations);
     // ✅ AEVI: *"the region map withholds the name … It shows a '?' mark at the true spot, in place of the glyph."* The label is
     // withheld (a tally it hides others into still shows); the mark is the "?" glyph below.
-    marks416.push({ id, l, p, name: heard416 ? labelText(face416[id]?.name || l.name || id, "place", 24) : "", regionKind: face416[id]?.kind || null, heard: heard416 });
+    // ✅ SNG-679 S5 (CCODE-672): what has happened to it — the new name, a ruin's grey, a razed place's trace — rides on the mark
+    const view416 = mapView(character, `place:${id}`, { content: CONTENT, name: face416[id]?.name || l.name || id, worldDay: absoluteWorldDay() });
+    marks416.push({ id, l, p, name: heard416 ? labelText(view416.label, "place", 24) : "", regionKind: face416[id]?.kind || null, heard: heard416, view: view416 });
   }
   // ✅ M2 — *"place | serif, bold, 12–13px, 3px dark halo"*, from the table rather than from a local const.
   // ⛑ IT SETS THE STATE; IT DOES NOT RETURN A STRING. My first cut returned `ctx.font` and a caller below did
@@ -16798,15 +16800,19 @@ function paintRegionMap(regionId) {
       const widthOf = (r) => (r.primary ? (r.shared > 0.25 ? 3.2 : 2.2) : 1.3);
       ctx.save();
       ctx.lineJoin = "round"; ctx.lineCap = "round";
+      // ✅ SNG-679 S5 (CCODE-672): a road that is not whole is drawn by its state — damaged dashed, ruined dashed and barred,
+      // destroyed only as the line of an old road — so the whole-road passes below leave it out
+      const roadState416 = new Map(lines.map(({ r }) => [r, mapView(character, roadKey(r.a, r.b), { content: CONTENT }).state]));
+      const isWhole416 = (r) => (roadState416.get(r) || "whole") === "whole";
       const strokeRoads = () => {
         ctx.strokeStyle = "rgba(24,20,14,0.55)";
         for (const { r, pts } of lines) {
-          if (!r.primary || pts.length < 2) continue;
+          if (!r.primary || pts.length < 2 || !isWhole416(r)) continue;
           ctx.lineWidth = widthOf(r) + 2.4; trace(pts); ctx.stroke();
         }
         ctx.strokeStyle = "rgba(226,206,158,0.92)";
         for (const { r, pts } of lines) {
-          if (!r.primary || pts.length < 2) continue;
+          if (!r.primary || pts.length < 2 || !isWhole416(r)) continue;
           ctx.lineWidth = widthOf(r); trace(pts); ctx.stroke();
         }
       };
@@ -16825,10 +16831,27 @@ function paintRegionMap(regionId) {
       ctx.setLineDash([3.5, 3.5]);
       ctx.strokeStyle = "rgba(198,176,132,0.72)";
       for (const { r, pts } of lines) {
-        if (r.primary || pts.length < 2) continue;
+        if (r.primary || pts.length < 2 || !isWhole416(r)) continue;
         ctx.lineWidth = widthOf(r); trace(pts); ctx.stroke();
       }
       ctx.setLineDash([]);
+      for (const { r, pts } of lines) {
+        const st = roadState416.get(r) || "whole";
+        if (st === "whole" || pts.length < 2) continue;
+        if (st === "destroyed") { ctx.save(); ctx.globalAlpha = 0.35; ctx.strokeStyle = "rgba(198,176,132,0.8)"; ctx.lineWidth = 1; ctx.setLineDash([1.5, 4]); trace(pts); ctx.stroke(); ctx.restore(); continue; }
+        ctx.save(); ctx.setLineDash(st === "ruined" ? [4, 5] : [7, 4]);
+        ctx.strokeStyle = "rgba(24,20,14,0.5)"; ctx.lineWidth = widthOf(r) + 2.2; trace(pts); ctx.stroke();
+        ctx.strokeStyle = "rgba(226,206,158,0.85)"; ctx.lineWidth = widthOf(r); trace(pts); ctx.stroke();
+        ctx.setLineDash([]);
+        if (st === "ruined") {   // blocked: a bar across the road at its middle
+          const mid = pts[Math.floor(pts.length / 2)], nb = pts[Math.min(pts.length - 1, Math.floor(pts.length / 2) + 1)];
+          const ang = Math.atan2(nb.y - mid.y, nb.x - mid.x) + Math.PI / 2;
+          const bar = () => { ctx.beginPath(); ctx.moveTo(mid.x - Math.cos(ang) * 8, mid.y - Math.sin(ang) * 8); ctx.lineTo(mid.x + Math.cos(ang) * 8, mid.y + Math.sin(ang) * 8); };
+          ctx.strokeStyle = "rgba(255,240,220,0.9)"; ctx.lineWidth = 5.4; bar(); ctx.stroke();   // a light casing, so the bar reads on any ground
+          ctx.strokeStyle = "rgba(150,40,28,1)"; ctx.lineWidth = 3; bar(); ctx.stroke();
+        }
+        ctx.restore();
+      }
       ctx.restore();
       /* ✅ AEVI (ruling 2): THE MIRRORLANDS — *"one fake road appears each time. 'Not everything drawn here is so.'"* One road
        * between two places that have none, in the road's own cased style, chosen by the per-open seed and curved a little so it
@@ -16970,7 +16993,12 @@ function paintRegionMap(regionId) {
     const g = glyphFor({ ...meta, k: m.regionKind || meta.k });
     // ✅ ERIK's "?": the mark in place of the glyph for a place not heard of; it is in `marks416`, so it takes the tap
     if (!m.heard) drawGlyph(ctx, "unknown", m.p.x, m.p.y, 7, {});
-    else if (g) drawGlyph(ctx, g, m.p.x, m.p.y, m.id === here ? 9 : 7, {});
+    else if (g && m.view?.glyph !== false) {
+      // ✅ S5: a ruin is drawn faded with broken walls, a damaged place cracked, a razed one only as the trace where it stood
+      if (m.view && m.view.alpha < 1) { ctx.save(); ctx.globalAlpha *= m.view.alpha; drawGlyph(ctx, g, m.p.x, m.p.y, m.id === here ? 9 : 7, {}); ctx.restore(); }
+      else drawGlyph(ctx, g, m.p.x, m.p.y, m.id === here ? 9 : 7, {});
+    }
+    if (m.heard && m.view?.mark) drawStateMark(ctx, m.view.mark, m.p.x, m.p.y, m.id === here ? 9 : 7);
     /* ✅ AEVI (ruling 2): THE FOUR SPREADING PLACES — *"the Blaze, the Churn Edge, the Scouring, the Ceaseless get a dashed,
      * outward-hatched edge."* The mark itself is where it is; the edge is the spreading. */
     if (isSpreading(m.id, CONTENT)) {
@@ -17000,7 +17028,7 @@ function paintRegionMap(regionId) {
     // above, and the ink waits until the whole frame has had its say.
     const kindM = city ? "landmark" : "place";
     queueLabel(ctx, m.name + (more ? ` +${more}` : ""), placeBox.get(m.id), kindM,
-      { here: m.id === here, raw: true, align: "center", italic: pastSettled416(placeBox.get(m.id)) });   // ✅ italic past the settled middle (the Numinous Reach)
+      { here: m.id === here, raw: true, align: "center", italic: pastSettled416(placeBox.get(m.id)), ...(m.view && m.view.labelAlpha < 1 ? { alpha: m.view.labelAlpha } : {}) });   // ✅ S5: a ruin's name greyed   // ✅ italic past the settled middle (the Numinous Reach)
     // ⛑ M10's OTHER HALF — THE ITALIC LINE UNDER A LANDMARK, read and not invented. ⚠️ Aevi's mock lines
     // ("a bench from every reach" for the Coliseum) are HERS, written for the mock: nothing in content
     // carries them, and deriving a caption from `descriptionSeed` is the regex-over-prose she forbade in
@@ -18008,20 +18036,31 @@ function wireWorldGlobe() {
         for (const r of net.roads) { if (r.kind !== "buried" || r.run.length < 2) continue; trace(r.run); ctx.stroke(); }
       }
       ctx.setLineDash([]);
+      // ✅ SNG-679 S5: the globe's roads by state — a road not whole leaves the whole-road passes and is drawn after them
+      const gRoadState = new Map(net.roads.map((r) => [r, r.key ? mapView(character, `road:${r.key}`, { content: CONTENT }).state : "whole"]));
+      const gWhole = (r) => (gRoadState.get(r) || "whole") === "whole";
       ctx.globalAlpha = 0.55 * net.trunkFade; ctx.strokeStyle = "rgba(24,20,14,0.62)";
       for (const r of net.roads) {
-        if (!r.primary || r.run.length < 2 || (r.kind && r.kind !== "road")) continue;
+        if (!r.primary || r.run.length < 2 || (r.kind && r.kind !== "road") || !gWhole(r)) continue;
         ctx.lineWidth = 2.4; trace(r.run); ctx.stroke();
       }
       ctx.globalAlpha = 0.72 * net.trunkFade; ctx.strokeStyle = "#dfc89a";
       for (const r of net.roads) {
-        if (!r.primary || r.run.length < 2 || (r.kind && r.kind !== "road")) continue;
+        if (!r.primary || r.run.length < 2 || (r.kind && r.kind !== "road") || !gWhole(r)) continue;
         ctx.lineWidth = 1.3; trace(r.run); ctx.stroke();
       }
       ctx.globalAlpha = 0.46 * net.fade; ctx.strokeStyle = "rgba(198,176,132,0.78)";
       ctx.setLineDash([3, 3.5]); ctx.lineWidth = 0.9;
       for (const r of net.roads) {
-        if (r.primary || r.run.length < 2 || (r.kind && r.kind !== "road")) continue;
+        if (r.primary || r.run.length < 2 || (r.kind && r.kind !== "road") || !gWhole(r)) continue;
+        trace(r.run); ctx.stroke();
+      }
+      ctx.setLineDash([]);
+      for (const r of net.roads) {
+        const st = gRoadState.get(r) || "whole";
+        if (st === "whole" || r.run.length < 2 || (r.kind && r.kind !== "road")) continue;
+        ctx.globalAlpha = (st === "destroyed" ? 0.3 : 0.7) * net.trunkFade; ctx.strokeStyle = "#dfc89a";
+        ctx.lineWidth = st === "destroyed" ? 0.8 : 1.3; ctx.setLineDash(st === "destroyed" ? [1, 3] : [5, 3.5]);
         trace(r.run); ctx.stroke();
       }
       ctx.setLineDash([]);
@@ -18084,8 +18123,16 @@ function wireWorldGlobe() {
       // see from orbit, so they appear once the view is regional. Everything else always draws.
       if (p.kind === "site" && glyphSpan > 40) continue;
       const glyph = useGlyphs ? glyphFor(p) : null;
-      if (glyph) drawGlyph(ctx, glyph, p.x, p.y - 1, isHere ? 7.5 : 6, {});
-      else drawMarker(p.x, p.y, MARKER_STYLE[p.kind] || MARKER_STYLE.settlement);
+      // ✅ SNG-679 S5 (CCODE-672): on the globe too — a crack, a ruin pin, or a faint trace dot where a razed place stood
+      const pv = mapView(character, `place:${p.id}`, { content: CONTENT });
+      if (pv.glyph === false) drawStateMark(ctx, "trace", p.x, p.y - 1, isHere ? 7.5 : 6);
+      else {
+        if (pv.alpha < 1) { ctx.save(); ctx.globalAlpha *= pv.alpha; }
+        if (glyph) drawGlyph(ctx, glyph, p.x, p.y - 1, isHere ? 7.5 : 6, {});
+        else drawMarker(p.x, p.y, MARKER_STYLE[p.kind] || MARKER_STYLE.settlement);
+        if (pv.alpha < 1) ctx.restore();
+        if (pv.mark) drawStateMark(ctx, pv.mark, p.x, p.y - 1, isHere ? 7.5 : 6);
+      }
       const crowd = occupied.get(p.id);
       if (crowd && crowd.length) {
         // travellers stand BESIDE the place, not on it, so a marker never hides the ground it names
@@ -18650,7 +18697,9 @@ function paintLocalCanvas(locationId) {
   const nearCentre = model.sites.some((s) => Math.hypot(s.x - model.built.x, s.y - model.built.y) <= model.built.r * 1.3);
   const inset = _localView.k <= 1.01 && nearCentre ? enlargementFor(model) : null;
   if (inset) _labelSpace.claim({ x0: inset.x - 4, x1: inset.x + inset.w + 4, y0: inset.y - 4, y1: inset.y + inset.h + 4, rank: -2, kind: "inset" });
-  const res = paintLocalMap(ctx, model, { spreading: isSpreading(model?.id, CONTENT), space: _labelSpace, queue: queueLabel, exitSpace: _exitSpace, character, known, hereSite, inset,
+  const res = paintLocalMap(ctx, model, { spreading: isSpreading(model?.id, CONTENT),
+    stateOf: (s) => mapView(character, `site:${model?.id}/${s.id}`, { content: CONTENT, name: String(s.name || s.id), worldDay: absoluteWorldDay() }),   // ✅ S5: each site's state
+    space: _labelSpace, queue: queueLabel, exitSpace: _exitSpace, character, known, hereSite, inset,
     labelMinPx: inset ? inset.builtRadiusPx * 1.6 + 12 : 0 });
   // ⛑ you are here, at the place's own centre when no sub-place has been entered — the gold ring every tier uses
   if (here && !hereSite) {
@@ -18994,11 +19043,15 @@ function placeCardHTML(selectedId) {
         ${(() => {
           try {
             const st = mapStateOf(character, `place:${l.id}`, { content: CONTENT });
-            if (!st || st.state === "whole") return "";
+            // ✅ S5 (CCODE-672): a rename says "once called {old}", a founding says "newly founded" for thirty days
+            const pv = mapView(character, `place:${l.id}`, { content: CONTENT, name: l.name || l.id, worldDay: absoluteWorldDay() });
+            const extra = [pv.renamed ? mapStateWord(CONTENT, "place", "renamed", { old: pv.once || l.name || l.id }) : null, pv.isNew ? mapStateWord(CONTENT, "place", "added", {}) : null]
+              .filter(Boolean).map((w) => `<span class="rep-band">${esc(w)}</span>`).join("");
+            if (!st || st.state === "whole") return extra;
             const word = mapStateWord(CONTENT, "place", st.state, { name: l.name || l.id });
-            if (!word) return "";
+            if (!word) return extra;
             const since = st.since != null ? ` title="since day ${Math.round(Number(st.since))}${st.cause ? " — " + esc(String(st.cause)) : ""}"` : "";
-            return `<span class="rep-band danger-chip dl3"${since}>${esc(word)}</span>`;
+            return `<span class="rep-band danger-chip dl3"${since}>${esc(word)}</span>${extra}`;
           } catch { return ""; }
         })()}
         ${(() => { const s = l.communityId ? standingWith(character, l.communityId, CONTENT.rules) : null; return s?.score ? `<span class="rep-band ${s.band}" title="Your standing here — ${s.band} (${s.score})">${esc(s.band)}</span>` : ""; })()}

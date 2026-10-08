@@ -6557,7 +6557,8 @@ await (async () => {
     check("675/M7: ⛔ a long place name breaks on a WORD — a hard slice cut 'The Disputed Zone — Fringe' mid-word",
       !/String\(l\.name \|\| id\)\.slice\(0, 22\)/.test(src)
       // ⛑ SNG-678 L0: the name may be the region-scale one (`regionFaceOf`), still through `labelText` at 24
-      && /labelText\(face416\[id\]\?\.name \|\| l\.name \|\| id, "place", 24\)/.test(src),
+      // ✅ SNG-679 S5: the name is the place's name NOW (`mapView` — a rename, a razed place's trace words), still at 24
+      && /labelText\(view416\.label, "place", 24\)/.test(src) && /name: face416\[id\]\?\.name \|\| l\.name \|\| id, worldDay/.test(src),
       "Aevi reported the resulting \"The Disputed Zone — Fr\" as a label drawn twice");
 
     /* ═════ M4 + M5 (SNG-675) · THE FIELD STOPS DROWNING THE LAND, AND THE POWERS STOP SHARING A HUE ═════
@@ -24479,7 +24480,7 @@ await (async () => {
       /roadKind: \(key\) => _worldRoutes\?\.kinds\?\.get\(key\)\?\.kind \|\| null,/.test(srcW4) && /r\.kinds = roadKinds\(_terrain, CONTENT\.locations, r\.byPair\);/.test(srcW4)
       && /if \(r\.kind !== "sea" \|\| r\.run\.length < 2\) continue; trace\(r\.run\); ctx\.stroke\(\);/.test(srcW4) && /ctx\.strokeStyle = "#3f86bd"; ctx\.lineWidth = 1\.2; ctx\.setLineDash\(\[1\.5, 4\]\);/.test(srcW4)
       && /if \(layer === "biome" \|\| layer === "lattice"\) \{\s*\n\s*ctx\.globalAlpha = 0\.55 \* net\.fade; ctx\.strokeStyle = "#7a6ab8"/.test(srcW4)
-      && (srcW4.match(/\|\| \(r\.kind && r\.kind !== "road"\)\) continue;/g) || []).length === 3);
+      && (srcW4.match(/\|\| \(r\.kind && r\.kind !== "road"\)( \|\| !gWhole\(r\))?\) continue;/g) || []).length >= 3);
     // ✅ Aevi's road rulings 3 and 4 (CCODE-670)
     const G670 = WG660.makeGroundCost(t660, { ...WG660.GROUND_COST.road, extent: { lo0: -180, lo1: 180, la0: -90, la1: 90, polar: false } });
     const rules670 = WG660.roadRules(t660, G670, C660);
@@ -24658,8 +24659,45 @@ await (async () => {
       && /else if \(\["damage", "ruin", "destroy", "repair", "move"\]\.includes\(kind\)\) \{/.test(app4) && /const key = feat \? `feature:\$\{h\.id\}\/\$\{feat\.id \|\| feat\.kind\}` : `hold:\$\{h\.id\}`;/.test(app4)
       && /const r = applyMapChange\(character, \{ key, change, by: op\.by \|\| "the world"/.test(app4) && /said\(r\.ok \? \(mapStateWord\(CONTENT, feat \? "feature" : "hold", r\.state/.test(app4));
   }
+  /* ── ✅ SNG-679 S5 (CCODE-672): every tier draws state ── */
+  {
+    const MS5 = await import("../engine/mapstate.js");
+    const MI5 = await import("../engine/mapicons.mjs");
+    const ML5 = await import("../engine/maplabel.js");
+    const LM5 = await import("../engine/localmap.js");
+    const { loadContentHeadless: lch5 } = await import("./headless_content.mjs");
+    const C5 = await lch5();
+    const ch5 = { id: "s5", currentLocationId: "millbrook", mapEvents: [], mapState: {}, holdings: [] };
+    const door = (key, change, extra = {}) => MS5.applyMapChange(ch5, { key, change, by: "the world", day: 10, ...extra }, { content: C5, worldDay: 10, exists: () => true });
+    door("place:millbrook", "damaged"); door("place:archive_hollow", "ruined"); door("place:waystone", "destroyed"); door("place:echo_river_crossing", "renamed", { name: "Echo Bridge" });
+    const v = (k, name) => MS5.mapView(ch5, k, { content: C5, name, worldDay: 12 });
+    const vm = v("place:millbrook", "Millbrook"), va = v("place:archive_hollow", "Archive Hollow"), vw = v("place:waystone", "The Waystone"), ve = v("place:echo_river_crossing", "Echo River Crossing"), vg = v("place:greywater_stilts", "Greywater Stilts");
+    check("679/S5: ⛔ ONE reader for every tier — damaged is a crack, ruined a ruin with its name greyed, destroyed no glyph and only the world's trace words for a label (\"where The Waystone stood\"), a rename is the new name and \"once called\" the old, an untouched place draws as it always did",
+      vm.mark === "crack" && vm.glyph && vm.alpha === 1 && va.mark === "ruin" && va.alpha < 1 && va.labelAlpha < 1
+      && vw.mark === "trace" && vw.glyph === false && vw.label === MS5.mapStateWord(C5, "place", "trace", { name: "The Waystone" }) && /The Waystone/.test(vw.label)
+      && ve.label === "Echo Bridge" && ve.renamed && ve.once === "Echo River Crossing" && vg.mark === null && vg.glyph && vg.label === "Greywater Stilts");
+    const ops5 = []; const ctx5 = new Proxy({ globalAlpha: 1 }, { get: (t, k) => k in t ? t[k] : (...a) => { ops5.push(k); }, set: (t, k, val) => { t[k] = val; return true; } });
+    MI5.drawStateMark(ctx5, "crack", 10, 10, 7); const nCrack = ops5.filter((k) => k === "stroke").length; ops5.length = 0;
+    MI5.drawStateMark(ctx5, "ruin", 10, 10, 7); const nRuin = ops5.filter((k) => k === "stroke").length; ops5.length = 0;
+    MI5.drawStateMark(ctx5, "trace", 10, 10, 7); const nTrace = ops5.filter((k) => k === "fill").length; ops5.length = 0;
+    const alphas5 = []; const lctx5 = new Proxy({ globalAlpha: 1 }, { get: (t, k) => k in t ? t[k] : (k === "measureText" ? () => ({ width: 20 }) : () => { if (k === "fillText") alphas5.push(t.globalAlpha); }), set: (t, k, val) => { t[k] = val; return true; } });
+    ML5.drawLabel(lctx5, "Archive Hollow", 0, 0, "place", { alpha: 0.6 });
+    check("679/S5: ⛔ the marks are one painter — a crack (two strokes, light under dark), broken walls (five arcs and a slash), a trace (a faint dot in a dashed ring) — and a label takes a fade on the shared painter, restored after",
+      nCrack === 2 && nRuin === 6 && nTrace === 1 && Math.abs(alphas5[0] - 0.6) < 1e-9 && lctx5.globalAlpha === 1);
+    const mb5 = LM5.localLayoutFor("millbrook", { content: C5 }); const md5 = LM5.localModel(mb5, LM5.localFrame(mb5, { w: 800, h: 500 }), { placeId: "millbrook", placeName: "Millbrook" });
+    const siteId5 = md5.sites[0]?.id;
+    const stub5 = () => new Proxy({ globalAlpha: 1, canvas: { width: 800, height: 500 } }, { get: (t, k) => k in t ? t[k] : (k === "measureText" ? () => ({ width: 30 }) : k === "createRadialGradient" || k === "createLinearGradient" ? () => ({ addColorStop() {} }) : k === "getImageData" ? () => ({ data: new Uint8ClampedArray(4) }) : () => {}), set: (t, k, val) => { t[k] = val; return true; } });
+    let res5 = null; try { res5 = LM5.paintLocalMap(stub5(), md5, { reveal: true, stateOf: (s) => s.id === siteId5 ? { state: "destroyed", glyph: false, mark: "trace", label: "where it stood", alpha: 0.4, labelAlpha: 0.55 } : null }); } catch (e) { res5 = { err: e.message }; }
+    const src5 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");
+    check("679/S5: ⛔ …and every tier asks it — the local map draws a razed site as its trace and reports it, the region map's marks and labels, its roads (dashed, barred, a trace) and the globe's pins and roads read the same view, and the card says the rename and the founding",
+      !!res5 && !res5.err && (res5.stated || []).some((x) => x.id === siteId5 && x.state === "destroyed") && res5.sites.some((x) => x.id === siteId5)
+      && /const view416 = mapView\(character, `place:\$\{id\}`/.test(src5) && /if \(m\.heard && m\.view\?\.mark\) drawStateMark\(ctx, m\.view\.mark/.test(src5)
+      && /const roadState416 = new Map\(lines\.map\(\(\{ r \}\) => \[r, mapView\(character, roadKey\(r\.a, r\.b\)/.test(src5) && /if \(st === "ruined"\) \{   \/\/ blocked: a bar across the road/.test(src5)
+      && /const pv = mapView\(character, `place:\$\{p\.id\}`/.test(src5) && /const gRoadState = new Map\(net\.roads\.map/.test(src5)
+      && /stateOf: \(s\) => mapView\(character, `site:\$\{model\?\.id\}\/\$\{s\.id\}`/.test(src5) && /pv\.renamed \? mapStateWord\(CONTENT, "place", "renamed"/.test(src5), res5?.err || "");
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
-    /name: heard416 \? labelText\(face416\[id\]\?\.name \|\| l\.name \|\| id, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
+    /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)
     && (() => { const MI = readFileSync(join(root, "engine/mapicons.mjs"), "utf8"); return /case "unknown": \{/.test(MI) && /ctx\.fillText\("\?", x, y \+ s \* 0\.05\);/.test(MI); })()
     && (() => { const LMs = readFileSync(join(root, "engine/localmap.js"), "utf8"); return /spreading = false,/.test(LMs) && /if \(spreading && model\.built\?\.r > 0\) \{/.test(LMs) && /spreading: isSpreading\(model\?\.id, CONTENT\)/.test(srcR); })()

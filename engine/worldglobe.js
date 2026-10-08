@@ -1607,7 +1607,7 @@ export function networkPaths(t, view, { locations, precursor, showPrecursor = fa
       let runPx = 0;
       for (const run of runs) for (let k = 1; k < run.length; k++) runPx += Math.hypot(run[k][0] - run[k - 1][0], run[k][1] - run[k - 1][1]);
       if (runPx < 3) continue;
-      for (const run of runs) out.roads.push({ run, primary, kind });
+      for (const run of runs) out.roads.push({ run, primary, kind, key });   // ⛑ S5: the key, so the painter can ask the road's state
       // ✅ ERIK (2026-10-08): the long road AND a boat — a sea lane between the same two ends, beside the road (W4's style)
       if (seaLaneToo && seaLaneToo(key)) for (const run of arc(a, b, 1.0)) out.roads.push({ run, primary, kind: "sea" });
     }

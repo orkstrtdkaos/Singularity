@@ -275,8 +275,12 @@ export function drawLabel(ctx, text, x, y, kind = "place", opts = {}) {
   if (opts.align) ctx.textAlign = opts.align;
   const t = opts.raw ? String(text) : labelText(text, kind, opts.max || 0);
   if (!t) return null;
+  // ✅ SNG-679 S5: a ruined thing's name is greyed, a razed one's fainter still — one flag per label, the same table
+  const ga = ctx.globalAlpha;
+  if (opts.alpha != null && opts.alpha < 1) ctx.globalAlpha = ga * Math.max(0, Number(opts.alpha));
   ctx.strokeText(t, x, y);
   ctx.fillText(t, x, y);
+  ctx.globalAlpha = ga;
   // ⛔ MEASURE BEFORE RESETTING THE SPACING. ✅ AEVI found this in the browser: *"drawLabel sets
   // letterSpacing to 0px and THEN calls measureText, so the `w` it returns for `power` (0.14em) and
   // `powerUnder` (0.22em) is the UNSPACED width. The power pass sizes its box from that, so every power's

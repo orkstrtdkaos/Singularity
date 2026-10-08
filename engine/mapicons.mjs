@@ -93,6 +93,30 @@ export function glyphFor(meta) {
 /** Draw a glyph centred at (x, y) on a 2D context. `s` is the nominal half-size in pixels.
  *  ⚠️ Every glyph is built from strokes on the SAME baseline so a row of them reads as one alphabet
  *  rather than a ransom note — the eye compares silhouettes, and inconsistent weight breaks that. */
+/** ✅ SNG-679 S5 (CCODE-672): a state, drawn over (or, for a trace, instead of) a glyph. `crack` — a dark jagged line across it;
+ *  `ruin` — broken walls: a gapped ring and a fallen slash; `trace` — a faint dot in a dashed ring where it stood. `s` is the
+ *  glyph's half-size, so the mark scales with whatever it marks. */
+export function drawStateMark(ctx, mark, x, y, s) {
+  if (!mark) return;
+  ctx.save();
+  ctx.lineJoin = "round"; ctx.lineCap = "round";
+  if (mark === "crack") {
+    ctx.strokeStyle = "rgba(255,240,220,0.9)"; ctx.lineWidth = Math.max(2, s * 0.32);
+    const crack = () => { ctx.beginPath(); ctx.moveTo(x - s * 0.55, y - s * 0.95); ctx.lineTo(x - s * 0.05, y - s * 0.25); ctx.lineTo(x - s * 0.4, y + s * 0.15); ctx.lineTo(x + s * 0.35, y + s * 0.95); };
+    crack(); ctx.stroke();
+    ctx.strokeStyle = "rgba(122,28,18,0.95)"; ctx.lineWidth = Math.max(1, s * 0.16); crack(); ctx.stroke();
+  } else if (mark === "ruin") {
+    ctx.strokeStyle = "rgba(150,138,124,0.95)"; ctx.lineWidth = Math.max(1, s * 0.18);
+    for (let k = 0; k < 5; k++) { const a0 = (k / 5) * Math.PI * 2 + 0.2, a1 = a0 + (Math.PI * 2) / 5 * 0.55; ctx.beginPath(); ctx.arc(x, y, s * 1.35, a0, a1); ctx.stroke(); }
+    ctx.beginPath(); ctx.moveTo(x - s * 0.9, y + s * 0.9); ctx.lineTo(x + s * 0.9, y - s * 0.9); ctx.stroke();
+  } else if (mark === "trace") {
+    ctx.fillStyle = "rgba(214,202,180,0.5)"; ctx.beginPath(); ctx.arc(x, y, Math.max(1.5, s * 0.32), 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = "rgba(214,202,180,0.45)"; ctx.lineWidth = 1; ctx.setLineDash([2, 2.5]);
+    ctx.beginPath(); ctx.arc(x, y, s * 0.95, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+  }
+  ctx.restore();
+}
+
 export function drawGlyph(ctx, glyph, x, y, s, style) {
   const ink = (style && style.ink) || "rgba(240,238,228,0.92)";
   const accent = (style && style.accent) || "#8fd0e8";

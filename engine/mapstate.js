@@ -355,6 +355,26 @@ export function mapStateOf(character, key, { content = null, recordOf = null } =
 /* ⛑ THE WORD A PLAYER READS, from `mapStates.words` — never composed here. ✅ Her content carries a word per
  * class per change ("razed" for a place, "torn down" for a site), with `{name}`, `{old}` and `{from}` filled
  * in when shown. A class with no word for a state is a content gap and says so rather than inventing one. */
+/* ═════ S5 · EVERY TIER DRAWS STATE — the one reader every painter asks ═════
+ * ✅ AEVI's table: damaged — the glyph cracked; ruined — a ruin glyph, the label greyed; destroyed — a faint trace, the label
+ * `trace`; renamed — the new name; added — normal, "new" on the card for 30 days. ⛑ The answer is what a painter needs and
+ * nothing it has to work out again, so the globe, the region map, the local map and the card cannot disagree about a state.
+ * `name` is the thing's own name (what a rename replaced); `worldDay` decides "new". PURE. */
+export function mapView(character, key, { content = null, name = "", worldDay = null, recordOf = null } = {}) {
+  const st = mapStateOf(character, key, { content, recordOf }) || { state: ladderOf(content)[0] };
+  const cls = parseMapKey(key)?.cls || "place";
+  const state = String(st.state || ladderOf(content)[0]);
+  const now = st.name || name;
+  const mark = state === "damaged" ? "crack" : state === "ruined" ? "ruin" : state === "destroyed" ? "trace" : null;
+  const label = state === "destroyed" ? (mapStateWord(content, cls, "trace", { name: now }) || now) : now;
+  const isNew = !!st.added && worldDay != null && st.added.day != null && Number(worldDay) - Number(st.added.day) < 30;
+  return { key, cls, state, mark, glyph: state !== "destroyed", label, isNew,
+    alpha: state === "ruined" ? 0.55 : state === "destroyed" ? 0.4 : 1,
+    labelAlpha: state === "ruined" ? 0.6 : state === "destroyed" ? 0.55 : 1,
+    renamed: !!st.name && st.name !== name, once: st.name ? (typeof st.was === "string" ? st.was : name) : null,
+    since: st.since ?? null, cause: st.cause ?? null };
+}
+
 export function mapStateWord(content, cls, state, { name = "", old = "", from = "" } = {}) {
   const w = content?.mapStates?.words?.[cls]?.[state];
   if (!w) return null;

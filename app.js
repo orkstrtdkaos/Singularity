@@ -49,7 +49,7 @@ import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnab
 import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
 import { openingFrame, placeCardBox } from "./engine/worldmap.js";
 // ⛔ SNG-679 S2: ONE READER for what state anything on a map is in, and the word a player reads for it.
-import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange, mapView, roadKey, knownStateOf } from "./engine/mapstate.js";
+import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange, mapView, roadKey, knownStateOf, liveLocations } from "./engine/mapstate.js";
 // ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
 import { mapHolds, holdMarker, ensureHoldSite, placeHoldSite, holdSiteOf, holdView } from "./engine/mapholds.js";
 import { brokenAt } from "./engine/mending.js";   // ✅ SNG-679 Part R · R4: what is broken at a place, on its card
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.0";
+const APP_VERSION = "2.26.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14349,7 +14349,7 @@ function journeyPlanFor(destId) {
   try {
     const reg = character?.npcRegistry || {};
     const nameOf = (id) => reg[id]?.name || CONTENT.npcs?.[id]?.name || null;
-    return planJourney({ character, destId, content: CONTENT, locations: CONTENT.locations, rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog(),
+    return planJourney({ character, destId, content: CONTENT, locations: liveLocations(character, CONTENT.locations, { content: CONTENT, worldDay: absoluteWorldDay() }), rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog(),
       worldDay: absoluteWorldDay(), companyNames: activeCompany(character).map(m => nameOf(m?.npcId)).filter(Boolean) });
   } catch (err) { console.warn("[journey] plan skipped:", err?.message); return null; }
 }
@@ -14609,7 +14609,7 @@ async function goAroundDanger() {
   if (busy || roadWalking) return;
   const plan = character?.journey, g = plan?.underway?.pending;
   if (!g?.around) return;
-  const next = planJourney({ character, destId: plan.destId, content: CONTENT, locations: CONTENT.locations, rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog(),
+  const next = planJourney({ character, destId: plan.destId, content: CONTENT, locations: liveLocations(character, CONTENT.locations, { content: CONTENT, worldDay: absoluteWorldDay() }), rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog(),
     worldDay: absoluteWorldDay(), route: { options: [g.around.option] }, companyNames: plan.company || [] });
   if (!next) { renderPlay(character.activeScene?.lastTurn || null, { aside: `There is no way round ${g.toName} from here.` }); return; }
   logJourney(next);
@@ -17690,7 +17690,10 @@ function wireWorldGlobe() {
   let _capPaths = new Map(), _capTerrain = null, _capQueue = null, _capDone = null, _capStamp = 0;
   const capPathsFor = () => _capPaths;
   const routeWorld = () => {
-    const r = worldRoadRoutes(_terrain, CONTENT.locations, { tierOf: (l) => l?.tier, regionPaths: regionPathsFor, regionStamp: _regionPathsCache.size, capPaths: capPathsFor, capStamp: _capStamp, content: CONTENT });
+    // ✅ S8: *"It is routed by CCODE-626's router like any other road"* — the routes are made over the live locations, and made again
+    // when the roads this character knows of change (`_liveRoadsSig`)
+    const liveR = (() => { try { return liveLocations(character, CONTENT.locations, { content: CONTENT }); } catch { return CONTENT.locations; } })();
+    const r = worldRoadRoutes(_terrain, liveR, { tierOf: (l) => l?.tier, regionPaths: regionPathsFor, regionStamp: _regionPathsCache.size, capPaths: capPathsFor, capStamp: _capStamp, content: CONTENT });
     // ✅ W4/W5: every road's kind, from the ground and its ends, once per set of routes (a merge makes a new set)
     if (r && !r.kinds) { try { r.kinds = roadKinds(_terrain, CONTENT.locations, r.byPair); } catch { r.kinds = new Map(); } }
     return r;
@@ -17760,6 +17763,9 @@ function wireWorldGlobe() {
   };
   let _worldRoutesTried = null;
   const ensureWorldRoutes = () => {
+    // ✅ S8: a road opened (or a place moved) changes what is routed — the signature of the live roads re-runs the router once
+    const sig687 = (() => { try { const L = liveLocations(character, CONTENT.locations, { content: CONTENT }); return L === CONTENT.locations ? "" : Object.values(L).filter((l) => l?.opened || l?.movedFrom).map((l) => `${l.id}:${(l.opened || []).join(",")}:${l.movedFrom ? "m" : ""}`).join(";"); } catch { return ""; } })();
+    if (sig687 !== _liveRoadsSig) { _liveRoadsSig = sig687; _worldRoutesTried = null; }
     if (!_terrain || _worldRoutesTried === _terrain) return;
     _worldRoutesTried = _terrain;
     setTimeout(() => {
@@ -17921,7 +17927,9 @@ function wireWorldGlobe() {
   const bandFor = () => CONTENT.substrateModel?.sourceBands?.sources?.[source]?.band || null;
   // ✅ SNG-679 H5: a moving place's pin is where it is TODAY — the same live point routing and `whereOf` read
   const wd684 = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
-  const worldPosOf = (id) => { const l = CONTENT.locations?.[id]; if (l?.carriage?.circuit && wd684 != null) return positionedPlace(CONTENT.locations, id, { worldDay: wd684 })?.worldPos || l.worldPos || null; return l?.worldPos || null; };
+  // ✅ S8: and a place this character knows was moved is drawn where it stands now (its trace is drawn where it stood)
+  const live687 = (() => { try { return liveLocations(character, CONTENT.locations, { content: CONTENT, worldDay: wd684 }); } catch { return CONTENT.locations; } })();
+  const worldPosOf = (id) => { const l = live687?.[id] || CONTENT.locations?.[id]; return l?.worldPos || null; };
 
   // ⚠️ HALF RESOLUTION WHILE DRAGGING. A 700px globe is ~150k pixels and each one costs an unproject plus
   // five array reads; at full res that stutters under the mouse. Coarse while it moves, sharp when it stops
@@ -18017,7 +18025,7 @@ function wireWorldGlobe() {
     // each road; doing that on every drag frame would cost what the region map's walk costs and buy nothing,
     // so it is memoised exactly as `_roadsByTerrain` memoises the region map's routes.
     ensureWorldRoutes();
-    const net = networkPaths(_terrain, view, { locations: CONTENT.locations, precursor: _precursorLines,
+    const net = networkPaths(_terrain, view, { locations: live687 || CONTENT.locations, precursor: _precursorLines,   // ✅ S8: a road opened is drawn
       showPrecursor: hasOldRoads, canvasPx: Math.min(GW(), GH()),
       tierOf: (l) => l?.tier,
       roadKind: (key) => _worldRoutes?.kinds?.get(key)?.kind || null,   // ✅ W4/W5: sea lanes and buried roads draw as what they are
@@ -18137,6 +18145,12 @@ function wireWorldGlobe() {
     // little buildings at hemisphere scale is a texture, not information.
     const glyphSpan = spanDeg(view, Math.min(GW(), GH()));
     const useGlyphs = glyphSpan <= 70;
+    // ✅ SNG-679 S8: *"leaves a trace at the old one"* — where a place this character knows was moved used to stand
+    for (const l of Object.values(live687 && live687 !== CONTENT.locations ? live687 : {})) {
+      if (!l?.movedFrom || !Number.isFinite(Number(l.movedFrom.colatitude))) continue;
+      const pr = project(Number(l.movedFrom.longitude), Number(l.movedFrom.colatitude) - 90, view);
+      if (pr) drawStateMark(ctx, "trace", pr.x, pr.y - 1, 6);
+    }
     for (const p of pins) {
       const isHere = p.id === here;
       // ⚠️ a site is an INTERIOR — drawing all fourteen at world scale is clutter for places you cannot
@@ -18607,6 +18621,7 @@ let _localView = { k: 1, dx: 0, dy: 0 };     // the tier's own pan and zoom, in 
 let _localViewFor = null;
 let _localLevel = 0;                           // ✅ L5: the level the tier is showing — the surface, or −1, −2 …
 let _localHits = { sites: [], exits: [], inset: null };
+let _liveRoadsSig = "";   // ✅ SNG-679 S8: the roads opened and places moved this character knows of, as the routes last saw them
 let _localDragged = false;
 const LOCAL_ASPECT = 0.62;
 

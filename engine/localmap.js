@@ -30,7 +30,7 @@ import { measureGradients, usableGradients, placeSite, roadsOut as roadBearings 
 import { glyphFor, drawGlyph, drawStateMark } from "./mapicons.mjs";
 import { drawLabel, labelSpace } from "./maplabel.js";
 import { placeGround, finishGround, inPoly } from "./localground.js";
-import { overlayAdded } from "./mapstate.js";   // ✅ SNG-679 S8: what has been added to a place joins its layout as an overlay
+import { overlayAdded, liveLocations } from "./mapstate.js";   // ✅ SNG-679 S8: what has been added to a place joins its layout as an overlay
 
 const R = Math.PI / 180;
 const norm180 = (d) => ((d + 540) % 360) - 180;
@@ -486,6 +486,18 @@ export function localLayoutFor(placeId, { content = null, character = null, chil
 function withGround(layout, placeId, content, character = null) {
   // ✅ S8: the additions this character knows of, laid over the layout on the way out (never cached: they are the world's, and move)
   if (character) layout = overlayAdded(layout, placeId, character, { content });
+  // ✅ S8: *"Its layout keeps its sites, drops its water and ground, re-derives them by L3 at the new point"* — a place this character
+  // knows was moved stands on the ground of where it stands now
+  if (character && content?.locations?.[placeId]) {
+    const live = liveLocations(character, content.locations, { content });
+    const moved = live?.[placeId]?.movedFrom ? live[placeId] : null;
+    if (moved) {
+      const kind = placeKindOf(placeId, { content, loc: moved });
+      const gen = generateLayout(placeId, { loc: moved, kind, gradients: measureGradients(moved, { locations: live }), children: [], locations: live });
+      layout = { ...layout, extent: [...(layout.extent || []).filter((f) => f?.kind === "built"), ...(gen.extent || []).filter((f) => f?.kind !== "built")],
+        _measured: { ...(layout._measured || {}), ...(gen._measured || {}) }, movedFrom: moved.movedFrom };
+    }
+  }
   const g = content?.rules?.localGround || null;
   const entry = g?.places?.[placeId] || null;
   return entry ? { ...layout, ground: entry, groundRules: g._rules || null, groundKinds: g._kinds || null } : layout;

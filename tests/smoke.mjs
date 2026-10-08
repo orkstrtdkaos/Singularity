@@ -25216,7 +25216,9 @@ await (async () => {
     check("679/H5: ⛔ …`positionedPlace` ANSWERS THE LIVE POINT when it is told the day (a caller with no day gets the authored point, so nothing reads the wall clock), a fixed place is untouched; the globe's pin, the GM's sense of where, a hold there and the card all read it; arriving where it is not finds its trace",
       JSON.stringify(live684.worldPos) !== JSON.stringify(C684.locations.the_long_span.worldPos) && !!live684.circuitAt
       && WT684.positionedPlace(C684.locations, "the_long_span") === C684.locations.the_long_span && WT684.positionedPlace(C684.locations, "millbrook", { worldDay: 40 }) === C684.locations.millbrook
-      && /const worldPosOf = \(id\) => \{ const l = CONTENT\.locations\?\.\[id\]; if \(l\?\.carriage\?\.circuit && wd684 != null\)/.test(app684)
+      // ⛑ CCODE-687 (S8): the globe reads the character's live locations, where the moving places ride with the moved and the opened
+      && app684.includes("const live687 = (() => { try { return liveLocations(character, CONTENT.locations, { content: CONTENT, worldDay: wd684 }); }")
+      && app684.includes("const worldPosOf = (id) => { const l = live687?.[id] || CONTENT.locations?.[id]; return l?.worldPos || null; };")
       && /if \(live684 && live684\.at !== locId\) \{/.test(app684) && /mapStateWord\(CONTENT, "place", "trace"/.test(app684)
       && /const mv684 = l\.carriage\?\.circuit \? circuitWords\(l, absoluteWorldDay\(\)/.test(app684)
       && /positionedPlace\(locations, h\.locationId, \{ worldDay \}\)/.test(readFileSync(join(root, "engine/mapholds.js"), "utf8"))
@@ -25288,6 +25290,42 @@ await (async () => {
     const gmOut = MS686.applyMapOp(ch686, { key: "site:the_blaze/x", change: "added", name: "x", kind: "well", pos: { bearing: 1, fromMetres: 1 } }, { content: C686, worldDay: 52, visible: vis686, exists: ex686 });
     check("S8: ⛔ …AN ADDITION SAYS WHERE, or the door refuses it in words (and ground says which of cleared, planted, drained); the GM may add to a place in the scene's view, never to one out of it",
       !rBad.ok && /has to say where/.test(rBad.why) && !rGbad.ok && /cleared, planted, drained/.test(rGbad.why) && gmIn.ok && !gmOut.ok);
+  }
+  /* ── ✅ SNG-679 S8, second half (CCODE-687): a place moved, a road opened ── */
+  {
+    const MS687 = await import("../engine/mapstate.js");
+    const LM687 = await import("../engine/localmap.js");
+    const WM687 = await import("../engine/worldmap.js");
+    const { loadContentHeadless: lch687 } = await import("./headless_content.mjs");
+    const C687 = await lch687();
+    const mb687 = { ...C687.locations.millbrook.worldPos };
+    const ch687 = { id: "player-me", currentLocationId: "millbrook", mapEvents: [], holdings: [] };
+    const mv687 = (key, pos) => MS687.applyMapChange(ch687, { key, change: "moved", by: "player-me", pos }, { content: C687, worldDay: 60 });
+    const far687 = mv687("place:millbrook", { colatitude: mb687.colatitude + 5, longitude: mb687.longitude });
+    const circ687 = mv687("place:the_unlanded", { colatitude: 80, longitude: 130 });
+    const near687 = { colatitude: mb687.colatitude + 0.15, longitude: mb687.longitude + 0.1 };
+    const ok687 = mv687("place:millbrook", near687);
+    const L687 = MS687.liveLocations(ch687, C687.locations, { content: C687 });
+    const lay687 = LM687.localLayoutFor("millbrook", { content: C687, character: ch687 });
+    check("S8: ⛔ A PLACE MOVED — it writes `pos`, capped at half a day (further is refused in words: a new place founded), never a place that moves by its own circuit; the character's live locations put it where it stands now and remember where it stood; its layout keeps its sites and takes the ground of its new point; content is never edited",
+      !far687.ok && /half a day is a new place founded/.test(far687.why) && !circ687.ok && /moves by its own circuit/.test(circ687.why) && ok687.ok
+      && L687.millbrook.worldPos.colatitude === near687.colatitude && L687.millbrook.movedFrom.colatitude === mb687.colatitude && C687.locations.millbrook.worldPos.colatitude === mb687.colatitude
+      && lay687.sites.length === (C687.rules.localLayouts.millbrook.sites || []).length && !!lay687.movedFrom && !lay687.extent.some((f) => f.kind === "water"),
+      `${far687.why} · ${circ687.why}`);
+    const other687 = Object.keys(C687.locations).find((id) => id !== "millbrook" && C687.locations[id].worldPos && !(C687.locations.millbrook.connections || []).includes(id) && WM687.walkingDays(C687.locations.millbrook, C687.locations[id]) < 3);
+    const road687 = MS687.applyMapChange(ch687, { key: MS687.roadKey("millbrook", other687), change: "added", by: "player-me" }, { content: C687, worldDay: 61 });
+    const nowhere687 = MS687.applyMapChange(ch687, { key: MS687.roadKey("millbrook", "nowhere_at_all"), change: "added", by: "x" }, { content: C687, worldDay: 61 });
+    const L2687 = MS687.liveLocations(ch687, C687.locations, { content: C687 });
+    const stranger687 = { id: "player-x", currentLocationId: "the_blaze", mapEvents: [], holdings: [], worldMapStore: MS687.mergeMapEvents({ keys: {} }, ch687.mapEvents).store };
+    const app687 = readFileSync(join(root, "app.js"), "utf8");
+    check("S8: ⛔ A ROAD OPENED — a live connection both ways between two places that exist (a road to nowhere is refused); journeys, the network and the router read the live locations, the router runs again when the roads change, a moved place's trace is drawn where it stood; a character who has not learned of either sees the world as it was; the moving places ride the same live locations",
+      road687.ok && !nowhere687.ok && L2687.millbrook.connections.includes(other687) && L2687[other687].connections.includes("millbrook") && !(C687.locations.millbrook.connections || []).includes(other687)
+      && MS687.liveLocations(stranger687, C687.locations, { content: C687 }) === C687.locations
+      && JSON.stringify(MS687.liveLocations(null, C687.locations, { content: C687, worldDay: 40 }).the_long_span.worldPos) !== JSON.stringify(C687.locations.the_long_span.worldPos)
+      && (app687.match(/locations: liveLocations\(character, CONTENT\.locations, \{ content: CONTENT, worldDay: absoluteWorldDay\(\) \}\)/g) || []).length === 2
+      && app687.includes("networkPaths(_terrain, view, { locations: live687 || CONTENT.locations") && app687.includes("const r = worldRoadRoutes(_terrain, liveR,")
+      && app687.includes("if (sig687 !== _liveRoadsSig) { _liveRoadsSig = sig687; _worldRoutesTried = null; }") && app687.includes("if (pr) drawStateMark(ctx, \"trace\", pr.x, pr.y - 1, 6);"),
+      `${other687} · ${nowhere687.why}`);
   }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)

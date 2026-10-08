@@ -25,7 +25,8 @@
 
 import { smartClamp } from "./namematch.js";   // model prose is clamped on a word, never sliced
 import { fnvHex } from "./fates.js";
-import { walkingDays } from "./worldmap.js";   // ✅ S7: word of a ruin travels at a walk   // ⛔ ONE HASH. A second id rule is a second identity for one event.
+import { walkingDays } from "./worldmap.js";   // ✅ S7: word of a ruin travels at a walk
+import { positionedPlace } from "./worldtime.js";   // ✅ S8: the live locations carry H5's moving places too   // ⛔ ONE HASH. A second id rule is a second identity for one event.
 
 /* ═════ S0 · THE INVENTORY, AS A TABLE ═════
  * ✅ AEVI: *"This table is the scope. A gate (G1) keeps it complete … A new class drawn on a map without a
@@ -169,6 +170,24 @@ export function validateMapChange(change, { content = null, state = null, exists
     }
   }
   if (c.change === "moved" && !c.pos) return { ok: false, why: `a move has to say where to` };
+  // ✅ SNG-679 S8: *"Moving a fixed place is rare and is a story act … It writes `pos`. … Cap it at 0.5 days from the old point. Further
+  // than that is a new place founded (M1) and the old one ruined or razed."* A moving place moves by its circuit (H5), never by this.
+  if (c.change === "moved" && parsed.cls === "place") {
+    const loc = content?.locations?.[parsed.id] || null;
+    const p = c.pos || {};
+    if (!Number.isFinite(Number(p.colatitude)) || !Number.isFinite(Number(p.longitude))) return { ok: false, why: "a place is moved to a point — { colatitude, longitude }" };
+    if (loc?.carriage?.circuit) return { ok: false, why: `${loc.name || parsed.id} moves by its own circuit, not by being moved` };
+    if (loc?.worldPos) {
+      const d = walkingDays(loc, { worldPos: { colatitude: Number(p.colatitude), longitude: Number(p.longitude) } });
+      if (Number.isFinite(d) && d > MOVE_CAP_DAYS) return { ok: false, why: `that is ${d.toFixed(1)} days from where it stands — further than half a day is a new place founded, and the old one left behind` };
+    }
+  }
+  // ✅ S8: *"Adding a road between two places adds a live connection (M3's 'road opened')."* Both ends must be places that exist.
+  if (c.change === "added" && parsed.cls === "road") {
+    const [a, b] = String(parsed.rest || "").split("|");
+    if (!a || !b || a === b) return { ok: false, why: "a road runs between two places" };
+    if (content?.locations && (!content.locations[a] || !content.locations[b])) return { ok: false, why: `there is no ${!content.locations[a] ? a : b} for a road to reach` };
+  }
   if (c.change === "renamed" && !String(c.name || "").trim()) return { ok: false, why: `a rename has to say what to` };
   return { ok: true, cls: parsed.cls, parsed };
 }
@@ -650,6 +669,8 @@ export function mapThingOf(key, content, { siteName = null, from = null } = {}) 
  * ⚠️ "Word of it" is DERIVED from the shared events, not posted to `world/feed.json`: the feed is the players' scrapbook, and its own
  * guard is that it is "never an auto-log". The word walks: learned once the days a walk from the place would take have passed. */
 export const WORD_WITHIN_DAYS = 3;
+/** ✅ S8: *"Cap it at 0.5 days from the old point."* */
+export const MOVE_CAP_DAYS = 0.5;
 const WORD_OF = new Set(["ruined", "destroyed"]);
 /** The places a key is at (a road has two ends; a hold, a feature and a region are nobody's place). */
 export function placesOfKey(key) {
@@ -782,4 +803,50 @@ export function overlayAdded(layout, placeId, character, { content = null } = {}
     return t ? { ...f, ...(Number.isFinite(Number(t.pos.bearing)) ? { bearing: Number(t.pos.bearing) } : {}), ...(Number.isFinite(Number(t.pos.fromMetres)) ? { fromMetres: Number(t.pos.fromMetres) } : {}), flowBearing: Number(t.pos.flowBearing), turned: true } : f;
   });
   return { ...layout, extent: [...base, ...extent], sites: [...(layout.sites || []), ...sites] };
+}
+
+/* ═════ SNG-679 S8 · THE SECOND HALF: A PLACE MOVED, A ROAD OPENED ═════
+ * ✅ AEVI: *"Moving a fixed place … writes `pos`. Its layout keeps its sites, drops its water and ground, re-derives them by L3 at the new
+ * point, and leaves a trace at the old one. Its roads re-measure live. … Adding a road between two places adds a live connection (M3's
+ * 'road opened'). It is routed by CCODE-626's router like any other road."*
+ * ⛔ THE LIVE LOCATIONS, AND THEY ARE THE CHARACTER'S: the content's locations with every move and every road opened that this character
+ * KNOWS of (S7) laid over them — and the moving places (H5) where they are today. Journeys, the network and the globe read these, so a
+ * road opened is walked and drawn, and a village moved above the flood line is reached where it now stands. Content is never edited.
+ * ⛑ Memoised by what can change them (the save's world revision, what it has learned, the day), because the globe asks every frame. */
+let _live = { loc: null, ch: null, key: null, out: null };
+export function liveLocations(character, locations, { content = null, worldDay = null } = {}) {
+  if (!locations) return locations;
+  const key = `${character?.id || ""}|${character?.worldRevision || 0}|${Object.keys(character?.mapLearned || {}).length}|${(character?.mapEvents || []).length}|${Object.keys(character?.worldMapStore?.keys || {}).length}|${worldDay == null ? "-" : Math.floor(Number(worldDay))}`;
+  if (_live.loc === locations && _live.ch === character && _live.key === key) return _live.out;
+  let out = null;
+  const copy = (id) => { out = out || { ...locations }; if (out[id] === locations[id]) out[id] = { ...locations[id] }; return out[id]; };
+  if (character) {
+    const keys = new Set([...(character.mapEvents || []).map((e) => e?.key), ...Object.keys(character.worldMapStore?.keys || {})]
+      .filter((k) => typeof k === "string" && (k.startsWith("place:") || k.startsWith("road:"))));
+    for (const k of keys) {
+      const p = parseMapKey(k);
+      if (!p) continue;
+      const st = knownStateOf(character, k, { content });
+      if (p.cls === "place" && st.pos && Number.isFinite(Number(st.pos.colatitude)) && locations[p.id] && !locations[p.id].carriage?.circuit) {
+        const l = copy(p.id);
+        l.movedFrom = { ...(locations[p.id].worldPos || {}) };
+        l.worldPos = { ...(locations[p.id].worldPos || {}), colatitude: Number(st.pos.colatitude), longitude: Number(st.pos.longitude) };
+      }
+      if (p.cls === "road" && st.added && st.state !== "destroyed") {
+        const [a, b] = p.rest.split("|");
+        if (!locations[a] || !locations[b]) continue;
+        const la = copy(a), lb = copy(b);
+        la.connections = [...new Set([...(la.connections || []), b])];
+        lb.connections = [...new Set([...(lb.connections || []), a])];
+        (la.opened = la.opened || []).push(b); (lb.opened = lb.opened || []).push(a);
+      }
+    }
+  }
+  if (worldDay != null) for (const [id, l] of Object.entries(locations)) {
+    if (!l?.carriage?.circuit) continue;
+    const live = positionedPlace(locations, id, { worldDay });
+    if (live?.circuitAt) { const c = copy(id); c.worldPos = { ...live.worldPos }; c.circuitAt = live.circuitAt; }
+  }
+  _live = { loc: locations, ch: character, key, out: out || locations };
+  return _live.out;
 }

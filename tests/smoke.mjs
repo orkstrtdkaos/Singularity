@@ -25002,6 +25002,51 @@ await (async () => {
       && /\? \(\) => \{ mapTier = "location"; mapFocus = host\.hold\.locationId; renderMap\(\); \}/.test(app679)
       && /mapView\(character, `feature:\$\{s\.feature\.holdId\}\/\$\{s\.feature\.id\}`/.test(app679));
   }
+  /* ── ✅ SNG-679 Part R, R1 + R2 (CCODE-680): nothing mends itself; the locals mend what they can, at a pace ── */
+  {
+    const MS680 = await import("../engine/mapstate.js");
+    const LM680 = await import("../engine/localmap.js");
+    const { loadContentHeadless: lch680 } = await import("./headless_content.mjs");
+    const C680 = await lch680();
+    const key680 = "site:millbrook/mb_wheels";
+    const game = () => { const c = { id: "c680", mapEvents: [] }; MS680.applyMapChange(c, { key: key680, change: "ruined", by: "player-x", seen: "named" }, { content: C680, worldDay: 100 }); return c; };
+    // R1: no timer — a thing the locals will not mend stays as it is, a thousand days on
+    const razed680 = { id: "r", mapEvents: [] };
+    MS680.applyMapChange(razed680, { key: "place:millbrook", change: "destroyed", by: "p" }, { content: C680, worldDay: 10 });
+    MS680.localsMendPass(razed680, { content: C680, worldDay: 1010 });
+    check("Part R · R1: ⛔ NOTHING MENDS ITSELF — the fold has no clock, and what the locals will not mend (a razed place, a broken gate, a river run dry, a hold, a feature) is exactly as it was a thousand days on",
+      MS680.mapStateOf(razed680, "place:millbrook", { content: C680 }).state === "destroyed" && razed680.mapEvents.length === 1
+      && !MS680.localsWillMend("gate:the_axis_gate", "destroyed", C680) && !MS680.localsWillMend("water:millbrook/1", "destroyed", C680)
+      && !MS680.localsWillMend("hold:h1", "damaged", C680) && !MS680.localsWillMend("feature:h1/f1", "ruined", C680)
+      && MS680.localsWillMend("road:millbrook|the_crossing", "destroyed", C680) && MS680.localsWillMend("place:millbrook", "ruined", C680));
+    const a680 = game(), b680 = game();
+    const steps680 = [];
+    for (const d of [102, 103, 135, 136, 147, 148]) for (const r of MS680.localsMendPass(a680, { content: C680, worldDay: d })) steps680.push(`${r.from}>${r.to}@${r.day}`);
+    MS680.localsMendPass(b680, { content: C680, worldDay: 400 });
+    const merged680 = MS680.mergeMapEvents({ keys: {} }, [...a680.mapEvents, ...b680.mapEvents]).store.keys[key680].events;
+    const e680 = { id: "e", mapEvents: [] };
+    MS680.applyMapChange(e680, { key: key680, change: "damaged", by: "p" }, { content: C680, worldDay: 100 });
+    MS680.applyMapChange(e680, { key: key680, change: "ruined", by: "q" }, { content: C680, worldDay: 110 });
+    const nx680 = MS680.nextLocalRepair(MS680.mapStateOf(e680, key680, { content: C680 }), key680, C680);
+    check("Part R · R2: ⛔ THE LOCALS MEND AT A PACE — begun 3 days after, a ruined thing is damaged at 33 days of work and whole at 45, each step a `repaired` change by \"locals\" through the one door on the day it finished; a second game that jumps ahead writes the SAME events (one world), and a fresh burning starts the clock again",
+      steps680.join(" ") === "ruined>damaged@136 damaged>whole@148" && MS680.mapStateOf(a680, key680, { content: C680 }).state === "whole"
+      && a680.mapEvents.filter((x) => x.by === "locals").length === 2 && a680.mapEvents.map((x) => x.id).join() === b680.mapEvents.map((x) => x.id).join()
+      && merged680.length === 3 && nx680?.start === 113 && nx680?.day === 146, steps680.join(" "));
+    const c680 = game();
+    const v104 = MS680.mapView(c680, key680, { content: C680, worldDay: 104 }), v101 = MS680.mapView(c680, key680, { content: C680, worldDay: 101 });
+    const lay680 = LM680.localLayoutFor("millbrook", { content: C680 });
+    const md680 = LM680.localModel(lay680, LM680.localFrame(lay680, { w: 800, h: 500 }), { placeId: "millbrook" });
+    const site680 = md680.sites[0];
+    const stub680 = () => new Proxy({ globalAlpha: 1, lineWidth: 1 }, { get: (t, k) => k in t ? t[k] : (k === "measureText" ? () => ({ width: 30 }) : k === "createRadialGradient" || k === "createLinearGradient" ? () => ({ addColorStop() {} }) : k === "getImageData" ? () => ({ data: new Uint8ClampedArray(4) }) : () => {}), set: (t, k, v) => { t[k] = v; return true; } });
+    const o680 = LM680.paintLocalMap(stub680(), md680, { reveal: true, stateOf: (x) => x.id === site680.id ? { ...v104 } : null });
+    const tick680 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+    check("Part R · R2: ⛔ …AND THE MAP SHOWS THE WORK — while the locals are at it the view says so (progress toward whole), the local map draws the scaffold and reports it, the region map too; the world tick runs their pass and a thing made whole is news in the content's own words (`mended`)",
+      !v101.mending && v104.mending?.by === "locals" && v104.mending.progress > 0 && v104.mending.progress < 0.05
+      && (o680.stated || []).some((x) => x.id === site680.id && x.mending)
+      && /if \(m\.heard && m\.view\?\.mending\) drawStateMark\(ctx, "mending"/.test(readFileSync(join(root, "app.js"), "utf8"))
+      && /localsMendPass\(character, \{ content, worldDay: wd680 \}\)/.test(tick680) && /const extraNews = \[\.\.\.mendNews680,/.test(tick680)
+      && /String\(words\.mended\)\.replace\("\{thing\}", t\.thing\)/.test(tick680));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

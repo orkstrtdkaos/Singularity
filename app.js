@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.24.4";
+const APP_VERSION = "2.24.5";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -16999,6 +16999,7 @@ function paintRegionMap(regionId) {
       else drawGlyph(ctx, g, m.p.x, m.p.y, m.id === here ? 9 : 7, {});
     }
     if (m.heard && m.view?.mark) drawStateMark(ctx, m.view.mark, m.p.x, m.p.y, m.id === here ? 9 : 7);
+    if (m.heard && m.view?.mending) drawStateMark(ctx, "mending", m.p.x, m.p.y, m.id === here ? 9 : 7);   // ✅ Part R · R2: under repair
     /* ✅ AEVI (ruling 2): THE FOUR SPREADING PLACES — *"the Blaze, the Churn Edge, the Scouring, the Ceaseless get a dashed,
      * outward-hatched edge."* The mark itself is where it is; the edge is the spreading. */
     if (isSpreading(m.id, CONTENT)) {

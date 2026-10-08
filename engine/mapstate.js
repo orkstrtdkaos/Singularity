@@ -362,6 +362,8 @@ export function mapStateOf(character, key, { content = null, recordOf = null } =
  * `name` is the thing's own name (what a rename replaced); `worldDay` decides "new". PURE. */
 export function mapView(character, key, { content = null, name = "", worldDay = null, recordOf = null } = {}) {
   const st = mapStateOf(character, key, { content, recordOf }) || { state: ladderOf(content)[0] };
+  // ✅ Part R · R2: *"While they work, the local map shows the thing under repair"* — derived from the record and the day
+  const rep = worldDay != null ? localRepairAt(st, key, worldDay, content) : null;
   const cls = parseMapKey(key)?.cls || "place";
   const state = String(st.state || ladderOf(content)[0]);
   const now = st.name || name;
@@ -372,7 +374,8 @@ export function mapView(character, key, { content = null, name = "", worldDay = 
     alpha: state === "ruined" ? 0.55 : state === "destroyed" ? 0.4 : 1,
     labelAlpha: state === "ruined" ? 0.6 : state === "destroyed" ? 0.55 : 1,
     renamed: !!st.name && st.name !== name, once: st.name ? (typeof st.was === "string" ? st.was : name) : null,
-    since: st.since ?? null, cause: st.cause ?? null };
+    since: st.since ?? null, cause: st.cause ?? null,
+    mending: rep?.mending ? { progress: rep.progress, wholeDay: rep.wholeDay, by: "locals" } : null };
 }
 
 export function mapStateWord(content, cls, state, { name = "", old = "", from = "" } = {}) {
@@ -536,4 +539,87 @@ export function repairFraction(content, state) {
   const c = content?.mapStates?.repairCost || {};
   const v = Number(c[state]);
   return Number.isFinite(v) ? v : (state === "destroyed" ? 1 : 0);
+}
+
+/* ═════ SNG-679 PART R · R1 + R2: NOTHING MENDS ITSELF, AND THE LOCALS MEND WHAT THEY CAN, AT A PACE ═════
+ * ✅ ERIK: *"One world. If you burn a bridge someone must repair or rebuild it. Either the locals — and they'll try to track
+ * you down — or a player (who may be rewarded)."* ✅ AEVI (R1): *"There is no timer that restores it."* (R2): *"They start
+ * `repair.localsBeginAfterDays` after the change, and take `repair.localDays[state]` to bring it to whole."*
+ * ⛔ THE WORK IS A CHANGE, NOT A TIMER. The fold has no clock in it and never will (R1); the locals' work is a `repaired`
+ * event written through the one door, by `"locals"`, on the day the work finishes. ⛑ DERIVED, SO IT IS ONE WORLD: the day
+ * comes from the record's own `since` and the content's pace, and the event id from `{key, change, worldDay, by}` — so every
+ * game that reaches that day writes the SAME event, and the fold takes it once.
+ * ⚑ A REPAIR CLIMBS ONE RUNG, so a ruined bridge (45 days) is damaged after 33 and whole after 45: each rung is reached at
+ * `localDays[from] − localDays[to]` days of work, and only the first step waits `localsBeginAfterDays` to begin. */
+function willNotMatch(entry, cls, state) {
+  const [c0, s] = String(entry || "").split(":");
+  // ⚠️ content says `waygate:destroyed`; the class a map key carries is `gate` — the same thing, two words
+  const c = c0 === "waygate" ? "gate" : c0;
+  return c === cls && (!s || s === state);
+}
+/** Whether the locals will mend this key in this state (`repair.localsWillNot`, and a hold's or a feature's is its keeper's). */
+export function localsWillMend(key, state, content) {
+  const parsed = parseMapKey(key);
+  if (!parsed || parsed.row.onRecord || parsed.row.noRepair) return false;
+  if (!parsed.row.allows.includes("repaired")) return false;
+  const not = content?.mapStates?.repair?.localsWillNot || [];
+  return !not.some((n) => willNotMatch(n, parsed.cls, state));
+}
+/** When the locals' next step of work lands on a key, or null: `{ day, from, to, start, wholeDay }`. Pure. */
+export function nextLocalRepair(record, key, content) {
+  const R = content?.mapStates?.repair;
+  if (!R || !record) return null;
+  const l = ladderOf(content), st = String(record.state || l[0]);
+  if (rungOf(content, st) === 0) return null;
+  if (!localsWillMend(key, st, content)) return null;
+  const days = R.localDays || {};
+  const total = Number(days[st]);
+  if (!Number.isFinite(total) || total <= 0) return null;
+  const to = l[Math.max(0, rungOf(content, st) - 1)];
+  const rest = rungOf(content, to) === 0 ? 0 : (Number(days[to]) || 0);
+  // the locals' own step does not wait again; anything else (a fresh burning, a player's half-mend) does
+  const start = (Number(record.since) || 0) + (record.by === "locals" ? 0 : (Number(R.localsBeginAfterDays) || 0));
+  return { day: Math.floor(start + Math.max(1, total - rest)), from: st, to, start, wholeDay: Math.floor(start + total) };
+}
+/** Where the locals' work stands on a key at a day: `{ mending, progress (toward whole, 0–1), wholeDay }`, or null. */
+export function localRepairAt(record, key, worldDay, content) {
+  const nx = nextLocalRepair(record, key, content);
+  if (!nx || worldDay == null || !Number.isFinite(Number(worldDay))) return null;
+  const d = Number(worldDay);
+  if (d < nx.start) return { mending: false, progress: 0, beginsDay: Math.ceil(nx.start), wholeDay: nx.wholeDay };
+  return { mending: true, progress: Math.max(0, Math.min(1, (d - nx.start) / Math.max(1, nx.wholeDay - nx.start))), wholeDay: nx.wholeDay };
+}
+/** ⛔ THE LOCALS' PASS — the world tick's. Every step of work due by `worldDay`, on every world key this save holds, written
+ *  through the one door by "locals" on the day it finished. Returns `[{ key, from, to, day, whole }]`. */
+export function localsMendPass(character, { content = null, worldDay = null } = {}) {
+  if (!character || worldDay == null || !Number.isFinite(Number(worldDay)) || !content?.mapStates?.repair) return [];
+  const keys = new Set([...(character.mapEvents || []).map((e) => e?.key), ...Object.keys(character.worldMapStore?.keys || {})].filter(Boolean));
+  const out = [];
+  for (const key of keys) {
+    for (let k = 0; k < 4; k++) {
+      const nx = nextLocalRepair(mapStateOf(character, key, { content }), key, content);
+      if (!nx || nx.day > Number(worldDay)) break;
+      const r = applyMapChange(character, { key, change: "repaired", by: "locals", cause: "the locals' work" }, { content, worldDay: nx.day });
+      if (!r.ok) break;
+      out.push({ key, from: nx.from, to: r.state, day: nx.day, whole: rungOf(content, r.state) === 0 });
+    }
+  }
+  return out;
+}
+/** The words for a key: `{ place, thing }` — the place it is at and the thing itself, for `reckoning.words`. */
+export function mapThingOf(key, content, { siteName = null } = {}) {
+  const p = parseMapKey(key);
+  if (!p) return null;
+  const L = content?.locations || {};
+  const nm = (id) => L[id]?.name || String(id || "").replace(/^gen-/, "").replace(/[-_]+/g, " ");
+  const plain = (s) => String(s || "").replace(/^the\s+/i, "");
+  if (p.cls === "site") {
+    const authored = (content?.rules?.localLayouts?.[p.id]?.sites || []).find((s) => s.id === p.sub)?.name;
+    return { place: nm(p.id), thing: plain(siteName || authored || String(p.sub).replace(/[-_]+/g, " ")) };
+  }
+  if (p.cls === "road") { const [a, b] = p.rest.split("|"); return { place: nm(a), thing: `road to ${nm(b)}` }; }
+  if (p.cls === "gate") return { place: nm(p.id), thing: "gate" };
+  if (p.cls === "water") return { place: nm(p.id), thing: "water" };
+  if (p.cls === "ground") return { place: nm(p.id), thing: "ground" };
+  return null;   // a place, a hold, a feature, a region — no "the {thing} at {place}" form in the words
 }

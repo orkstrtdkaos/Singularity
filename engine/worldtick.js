@@ -60,6 +60,7 @@ import { HOLDS_PATH, holdCardsOf, holdCardsChanged, mergeHoldCards } from "./sha
 import { TRADES_PATH, settleOrders, refundOrders, mergeOrders } from "./holdtrade.js";   // CCODE-388: trading with another player's hold
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval, rollRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
+import { localsMendPass, mapThingOf } from "./mapstate.js";   // ✅ SNG-679 Part R · R2
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
 import { rollErrands, workCraftsOf, workDayChance, workHeads, bandMissionOutcome } from "./jobs.js";   // ⛔ CCODE-428: …by the job's own dice · CCODE-450: standing work
@@ -917,7 +918,21 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // ⚠️ THE POWERS’ NEWS IS CAPPED AT TWO A PASS. Eleven forces each doing something every day would bury
   // everything else a player needs to read — and only the rows that CHANGED something are emitted at all
   // (a toll gang tolling is already felt through the danger and the raid; saying it every pass is noise).
-  const extraNews = [...debtsPass.news.map(t => ({ text: t, section: "yours" })), ...grown.slice(0, 3), ...woke.slice(0, 3), ...powersPass.slice(0, 2), ...noticedPass.slice(0, 2)];   // ⛑ a power NOTICING you is always worth a line — it is about you
+  /* ✅ SNG-679 Part R · R2 — THE LOCALS MEND WHAT THEY CAN, AT A PACE. Every step of their work due by today is written through
+   * the one door (by "locals", on the day it finished — the same event in every game), and a thing brought back to whole is
+   * news: `reckoning.words.mended`. ⛑ S7 is not built, so "everyone who knew it was broken" is everyone (Aevi: "ship with
+   * learned = everything"). A failure here is never a reason the world stops turning. */
+  const mendNews680 = (() => {
+    try {
+      const wd680 = absoluteWorldDay();
+      const words = content?.mapStates?.reckoning?.words || {};
+      return localsMendPass(character, { content, worldDay: wd680 }).filter((m) => m.whole).map((m) => {
+        const t = mapThingOf(m.key, content);
+        return t && words.mended ? { text: String(words.mended).replace("{thing}", t.thing).replace("{place}", t.place), section: "world" } : null;
+      }).filter(Boolean).slice(0, 4);
+    } catch { return []; }
+  })();
+  const extraNews = [...mendNews680, ...debtsPass.news.map(t => ({ text: t, section: "yours" })), ...grown.slice(0, 3), ...woke.slice(0, 3), ...powersPass.slice(0, 2), ...noticedPass.slice(0, 2)];   // ⛑ a power NOTICING you is always worth a line — it is about you
 
   // ⚠️ SNG-368: the RETURN is stamped too, on BOTH paths. The early return handed back raw entries
   // while the normal path handed back stamped ones, so a caller reading `.news[0].section` got a section on

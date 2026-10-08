@@ -1669,6 +1669,8 @@ export function paintLocalMap(ctx, model, {
       hit = paintSite(ctx, s, { here: hereSite === s.id, know: kn, scale: sScale, level: model.level });
       if (sv && sv.alpha < 1) ctx.restore();
       if (sv?.mark) drawStateMark(ctx, sv.mark, s.x, s.y, sSz);
+      // ✅ Part R · R2: *"While they work, the local map shows the thing under repair"*
+      if (sv?.mending) { drawStateMark(ctx, "mending", s.x, s.y, sSz); out.stated.push({ id: s.id, state: sv.state, mending: true }); }
       if (sv?.state === "damaged") { ctx.save(); ctx.fillStyle = "rgba(40,30,24,0.18)"; ctx.beginPath(); ctx.ellipse(s.x + sSz * 0.6, s.y + sSz * 0.7, sSz * 1.4, sSz * 0.8, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }   // a scorch on the ground
     }
     out.sites.push(hit);

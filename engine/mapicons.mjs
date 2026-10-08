@@ -109,6 +109,15 @@ export function drawStateMark(ctx, mark, x, y, s) {
     ctx.strokeStyle = "rgba(150,138,124,0.95)"; ctx.lineWidth = Math.max(1, s * 0.18);
     for (let k = 0; k < 5; k++) { const a0 = (k / 5) * Math.PI * 2 + 0.2, a1 = a0 + (Math.PI * 2) / 5 * 0.55; ctx.beginPath(); ctx.arc(x, y, s * 1.35, a0, a1); ctx.stroke(); }
     ctx.beginPath(); ctx.moveTo(x - s * 0.9, y + s * 0.9); ctx.lineTo(x + s * 0.9, y - s * 0.9); ctx.stroke();
+  } else if (mark === "mending") {
+    // ✅ Part R · R2: under repair — a scaffold standing against it, two poles, a ledger and a brace, upper right of the mark
+    ctx.strokeStyle = "rgba(150,108,56,0.95)"; ctx.lineWidth = Math.max(1, s * 0.14);
+    const ox = x + s * 0.55, oy = y - s * 0.2;
+    ctx.beginPath();
+    ctx.moveTo(ox, oy - s * 0.9); ctx.lineTo(ox, oy + s * 0.9); ctx.moveTo(ox + s * 0.7, oy - s * 0.9); ctx.lineTo(ox + s * 0.7, oy + s * 0.9);
+    ctx.moveTo(ox - s * 0.1, oy - s * 0.35); ctx.lineTo(ox + s * 0.8, oy - s * 0.35); ctx.moveTo(ox - s * 0.1, oy + s * 0.35); ctx.lineTo(ox + s * 0.8, oy + s * 0.35);
+    ctx.moveTo(ox, oy + s * 0.35); ctx.lineTo(ox + s * 0.7, oy - s * 0.35);
+    ctx.stroke();
   } else if (mark === "trace") {
     ctx.fillStyle = "rgba(214,202,180,0.5)"; ctx.beginPath(); ctx.arc(x, y, Math.max(1.5, s * 0.32), 0, Math.PI * 2); ctx.fill();
     ctx.strokeStyle = "rgba(214,202,180,0.45)"; ctx.lineWidth = 1; ctx.setLineDash([2, 2.5]);

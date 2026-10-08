@@ -24696,6 +24696,24 @@ await (async () => {
       && /const pv = mapView\(character, `place:\$\{p\.id\}`/.test(src5) && /const gRoadState = new Map\(net\.roads\.map/.test(src5)
       && /stateOf: \(s\) => mapView\(character, `site:\$\{model\?\.id\}\/\$\{s\.id\}`/.test(src5) && /pv\.renamed \? mapStateWord\(CONTENT, "place", "renamed"/.test(src5), res5?.err || "");
   }
+  /* ── ✅ SNG-679 S5 water (CCODE-673): the place's own water, narrowed, low, or a dry bed ── */
+  {
+    const LM673 = await import("../engine/localmap.js");
+    const { loadContentHeadless: lch673 } = await import("./headless_content.mjs");
+    const C673 = await lch673();
+    const lay673 = LM673.localLayoutFor("millbrook", { content: C673 });
+    const md673 = LM673.localModel(lay673, LM673.localFrame(lay673, { w: 800, h: 500 }), { placeId: "millbrook", placeName: "Millbrook" });
+    const n673 = md673.features.findIndex((f) => f.kind === "water");
+    const strokes673 = []; const widths673 = [];
+    const stub673 = () => new Proxy({ globalAlpha: 1, lineWidth: 1, strokeStyle: "" }, { get: (t, k) => k in t ? t[k] : (k === "measureText" ? () => ({ width: 30 }) : k === "createRadialGradient" || k === "createLinearGradient" ? () => ({ addColorStop() {} }) : k === "getImageData" ? () => ({ data: new Uint8ClampedArray(4) }) : k === "stroke" ? () => { strokes673.push(t.strokeStyle); widths673.push(t.lineWidth); } : () => {}), set: (t, k, v) => { t[k] = v; return true; } });
+    const paintWith = (state) => { strokes673.length = 0; widths673.length = 0; const r = LM673.paintLocalMap(stub673(), md673, { reveal: true, waterStateOf: (n, f) => n === n673 ? { state, label: state === "destroyed" ? "a dry bed" : f.name } : null }); return { r, strokes: [...strokes673], widths: [...widths673] }; };
+    const whole = paintWith("whole"), low = paintWith("ruined"), dry = paintWith("destroyed");
+    const chW = md673.features[n673]?.channel?.widthPx;
+    check("679/S5 water: ⛔ a place's own water (`water:<place>/<n>`) draws by its state on the local map — running low narrows the channel to a third, run dry draws no water at all but a bed of sand between dashed banks, and the state is reported",
+      n673 >= 0 && chW > 0 && whole.widths.includes(chW) && low.widths.some((x) => Math.abs(x - chW * 0.35) < 1e-6) && !low.widths.includes(chW)
+      && (dry.r.stated || []).some((x) => x.water && x.state === "destroyed") && !dry.strokes.includes("#6f9fc2") && (low.r.stated || []).some((x) => x.water && x.state === "ruined")
+      && /waterStateOf: \(n, f\) => mapView\(character, `water:\$\{model\?\.id\}\/\$\{n\}`/.test(readFileSync(join(root, "app.js"), "utf8")));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

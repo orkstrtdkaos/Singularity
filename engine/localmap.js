@@ -741,18 +741,34 @@ function smoothPath(ctx, pts, close = false) {
   const last = pts[pts.length - 1]; ctx.lineTo(last[0], last[1]);
 }
 
-function paintFeature(ctx, f, model, rnd) {
+function paintFeature(ctx, f, model, rnd, wv = null) {
   const { frame } = model;
   const s = frame.pxPerMetre;
   if (f.kind === "water") {
     const ch = f.channel;
     ctx.save();
-    // the channel
     ctx.lineCap = "round"; ctx.lineJoin = "round";
-    ctx.strokeStyle = INK.water; ctx.lineWidth = ch.widthPx;
+    /* ✅ AEVI's S5 table: *"water damaged / ruined / destroyed — channel narrowed, then dry"*. Fouled narrows it and muddies it,
+     * running low narrows it further and pales it, run dry leaves a bed of sand between its two banks, dashed. */
+    const ws = wv?.state || "whole";
+    if (ws === "destroyed") {
+      ctx.strokeStyle = INK.sand; ctx.lineWidth = ch.widthPx; smoothPath(ctx, ch.pts); ctx.stroke();
+      ctx.strokeStyle = INK.bank; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
+      for (const side of [1, -1]) {
+        ctx.beginPath();
+        ch.pts.forEach(([x, y], k) => { const a = ch.pts[Math.max(0, k - 1)], b = ch.pts[Math.min(ch.pts.length - 1, k + 1)]; const tx = b[0] - a[0], ty = b[1] - a[1], L = Math.hypot(tx, ty) || 1;
+          ctx[k ? "lineTo" : "moveTo"](x + (-ty / L) * side * ch.widthPx / 2, y + (tx / L) * side * ch.widthPx / 2); });
+        ctx.stroke();
+      }
+      ctx.setLineDash([]); ctx.restore();
+      return;
+    }
+    const narrow = ws === "damaged" ? 0.65 : ws === "ruined" ? 0.35 : 1;
+    // the channel
+    ctx.strokeStyle = ws === "damaged" ? "#7f8f86" : ws === "ruined" ? "#a9bfcc" : INK.water; ctx.lineWidth = ch.widthPx * narrow;
     smoothPath(ctx, ch.pts); ctx.stroke();
     // a darker thread down the middle reads as depth
-    ctx.strokeStyle = INK.waterDeep; ctx.lineWidth = Math.max(1, ch.widthPx * 0.35); ctx.globalAlpha = 0.5;
+    ctx.strokeStyle = INK.waterDeep; ctx.lineWidth = Math.max(1, ch.widthPx * 0.35 * narrow); ctx.globalAlpha = ws === "ruined" ? 0.25 : 0.5;
     smoothPath(ctx, ch.pts); ctx.stroke();
     ctx.globalAlpha = 1;
     // the narrows: where a ford sits, the channel pinches just upstream and runs white over the stones
@@ -1046,7 +1062,7 @@ export function siteKnowledge(site, { character = null, placeId = null, layout =
 export function paintLocalMap(ctx, model, {
   space = null, queue = null, exitSpace = null, character = null, known = null, reveal = false,
   hereSite = null, inset = null, labelMinPx = 0, title = true, legend = true, compass = true, exits = true, legendShort = false, clip = null,
-  spreading = false, stateOf = null,
+  spreading = false, stateOf = null, waterStateOf = null,
 } = {}) {
   const { frame, rnd } = model;
   const w = frame.w, h = frame.h;
@@ -1070,7 +1086,14 @@ export function paintLocalMap(ctx, model, {
   ctx.globalAlpha = 1;
   // the ground: fields, woods, rock, marsh, waste first; built ground over them; water last so it cuts them
   const order = { field: 0, marsh: 0, waste: 0, rock: 1, wood: 2, built: 3, water: 4 };
-  for (const f of [...model.features].sort((a, b) => (order[a.kind] ?? 1) - (order[b.kind] ?? 1))) paintFeature(ctx, f, model, rnd);
+  // ✅ SNG-679 S5 (CCODE-673): the place's own water by its state — keyed by the feature's index, `water:<place>/<n>`, the key
+  // the GM's map ops can name. The index is the feature's place in the model's own list, which is the layout's extent order.
+  const waterView = (f) => (f.kind === "water" && typeof waterStateOf === "function") ? waterStateOf(model.features.indexOf(f), f) : null;
+  for (const f of [...model.features].sort((a, b) => (order[a.kind] ?? 1) - (order[b.kind] ?? 1))) {
+    const wv = waterView(f);
+    if (wv && wv.state && wv.state !== "whole") out.stated.push({ id: f.id, state: wv.state, water: true });
+    paintFeature(ctx, f, model, rnd, wv);
+  }
   // the ways
   ctx.save(); ctx.lineCap = "round"; ctx.lineJoin = "round";
   const roadW = Math.max(2.2, Math.min(7, 5 * frame.pxPerMetre * 1.6 + 1.6));
@@ -1175,7 +1198,9 @@ export function paintLocalMap(ctx, model, {
     }
     const x = clamp(at[0], 30, w - 30), y = clamp(at[1], 16, h - 8);
     if (f.kind !== "water" && (f.x < -f.rPx || f.y < -f.rPx || f.x > w + f.rPx || f.y > h + f.rPx)) continue;
-    const text = String(f.name);
+    // ✅ S5: run dry, the water's name is the world's trace words ("a dry bed")
+    const fv = f.kind === "water" ? waterView(f) : null;
+    const text = String(fv?.state === "destroyed" ? (fv.label || f.name) : f.name);
     const tw = (drawLabel(ctx, text, -9999, -9999, "landmarkUnder", {})?.w) || 0;
     const box = sp.place(x, y, tw, 12, { kind: "landmarkUnder", clampTo: { w, h } });
     if (box) { q(ctx, text, box, "landmarkUnder", { align: "center" }); out.labelled.push(f.id); }

@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.23.5";
+const APP_VERSION = "2.23.6";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -18699,6 +18699,7 @@ function paintLocalCanvas(locationId) {
   if (inset) _labelSpace.claim({ x0: inset.x - 4, x1: inset.x + inset.w + 4, y0: inset.y - 4, y1: inset.y + inset.h + 4, rank: -2, kind: "inset" });
   const res = paintLocalMap(ctx, model, { spreading: isSpreading(model?.id, CONTENT),
     stateOf: (s) => mapView(character, `site:${model?.id}/${s.id}`, { content: CONTENT, name: String(s.name || s.id), worldDay: absoluteWorldDay() }),   // ✅ S5: each site's state
+    waterStateOf: (n, f) => mapView(character, `water:${model?.id}/${n}`, { content: CONTENT, name: String(f?.name || "the water") }),   // ✅ S5: the place's own water
     space: _labelSpace, queue: queueLabel, exitSpace: _exitSpace, character, known, hereSite, inset,
     labelMinPx: inset ? inset.builtRadiusPx * 1.6 + 12 : 0 });
   // ⛑ you are here, at the place's own centre when no sub-place has been entered — the gold ring every tier uses

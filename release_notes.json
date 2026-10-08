@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.23.3",
+      "date": "2026-10-08",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Roads cross at the crossing",
+          "summary": "A road into a crossing now fords the river there instead of walking round it, so Millbrook's road to the Echo River Crossing runs straight to the bridge. A short road that wandered far out of its way takes the straight line when that line stays dry; where it would cross water with no ford, it still goes round. Leviathan Road's road to the Blaze, which was missing from the world map, is drawn, and the tiniest stubs no longer clutter the world view."
+        }
+      ]
+    },
+    {
       "version": "2.23.2",
       "date": "2026-10-08",
       "entries": [

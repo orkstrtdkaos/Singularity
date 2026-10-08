@@ -24480,6 +24480,35 @@ await (async () => {
       && /if \(r\.kind !== "sea" \|\| r\.run\.length < 2\) continue; trace\(r\.run\); ctx\.stroke\(\);/.test(srcW4) && /ctx\.strokeStyle = "#3f86bd"; ctx\.lineWidth = 1\.2; ctx\.setLineDash\(\[1\.5, 4\]\);/.test(srcW4)
       && /if \(layer === "biome" \|\| layer === "lattice"\) \{\s*\n\s*ctx\.globalAlpha = 0\.55 \* net\.fade; ctx\.strokeStyle = "#7a6ab8"/.test(srcW4)
       && (srcW4.match(/\|\| \(r\.kind && r\.kind !== "road"\)\) continue;/g) || []).length === 3);
+    // ✅ Aevi's road rulings 3 and 4 (CCODE-670)
+    const G670 = WG660.makeGroundCost(t660, { ...WG660.GROUND_COST.road, extent: { lo0: -180, lo1: 180, la0: -90, la1: 90, polar: false } });
+    const rules670 = WG660.roadRules(t660, G670, C660);
+    check("SNG-682 ruling 3.1: ⛔ a crossing is known by its kind or its region-scale face — the Echo River Crossing (a bridge at region scale) and the Waystone (a bridge) ford, Millbrook does not — and the ford radius is one cell of the world raster the wetness is read from",
+      WG660.isCrossingPlace("echo_river_crossing", C660) && WG660.isCrossingPlace("waystone", C660) && !WG660.isCrossingPlace("millbrook", C660)
+      && Math.abs(rules670.fordDeg - 360 / t660.w) < 1e-9 && typeof rules670.stepDry === "function" && typeof rules670.fordAt === "function"
+      && G670.stepDry(-70, 251, -70, 251.5) < G670.step(-70, 251, -70, 251.5) + 1e-9);
+    const valley670 = WG660.regionRoadPaths(t660, C660.locations, "valley", { gen: (win) => mkT661(gp661, win), tierOf: (l) => l?.tier, content: C660 });
+    const ratio670 = (k) => { const p = valley670.byPair.get(k); return p ? walk661(p) / walk661([p[0], p[p.length - 1]]) : null; };
+    check("SNG-682 ruling 3: ⛔ with the crossing's ford and the dry shortcut, Millbrook → Echo River Crossing walks under ×1.6 on its region's own route (it went round the river it was going to, ×3.3), and Kindly Rest → Painter's Shelf, whose straight line is dry, no longer walks ×5.7",
+      ratio670("echo_river_crossing|millbrook") != null && ratio670("echo_river_crossing|millbrook") < 1.6
+      && ratio670("the_kindly_rest|the_painters_shelf") != null && ratio670("the_kindly_rest|the_painters_shelf") < 1.6,
+      `Millbrook x${ratio670("echo_river_crossing|millbrook")?.toFixed(2)} · Kindly Rest x${ratio670("the_kindly_rest|the_painters_shelf")?.toFixed(2)}`);
+    // ⛑ the dry condition is not decoration: a short road whose straight line crosses water keeps its detour
+    const wetLocs670 = { a: { id: "a", tier: "settlement", worldPos: { colatitude: 20, longitude: 250 }, connections: ["b"] }, b: { id: "b", tier: "settlement", worldPos: { colatitude: 20.6, longitude: 250 }, connections: ["a"] } };
+    const wetG670 = { step: (aLat, aLon, bLat, bLon) => Math.hypot(bLat - aLat, bLon - aLon) * (Math.abs(bLon - 250) < 0.05 ? 50 : 1), wetAt: (lat, lon) => Math.abs((((lon % 360) + 360) % 360) - 250) < 0.05 && lat > -70 && lat < -69.5 };
+    const proj670 = { toScreen: (lon, lat) => ({ x: (lon - 248) * 100, y: (-68 - lat) * 100 }), toWorld: (x, y) => ({ lon: 248 + x / 100, lat: -68 - y / 100 }) };
+    const wetOut670 = WG660.routeRoads([{ a: "a", b: "b", d: 0.6 }], wetLocs670, { W: 400, H: 400, step: wetG670.step, toScreen: proj670.toScreen, toWorld: proj670.toWorld, extent: { lo0: 248, lo1: 252, la0: -72, la1: -68 }, cell: 2,
+      shortcut: { maxDeg: 1, over: 1.6, wetAt: wetG670.wetAt, bend: null } });
+    check("SNG-682 ruling 3.2: ⛔ …and ONLY if that line stays dry — a short road whose straight line crosses water keeps the detour (there is no ford, so you go round)",
+      wetOut670?.roads?.length === 1 && !wetOut670.roads[0].straightened && wetOut670.roads[0].points.length > 2);
+    const grid670 = WG660.worldRoadRoutes(t660, C660.locations, { tierOf: (l) => l?.tier, content: C660 });
+    check("SNG-682: ⛔ THE FAR EDGE IS IN THE FRAME — the Blaze sits at exactly 180°, which the −180…180 grid projected one cell past its edge, so Leviathan Road → the Blaze was dropped uncounted; it routes now",
+      grid670.gridByPair.has("leviathan_road|the_blaze") || grid670.gridByPair.has("the_blaze|leviathan_road"));
+    const near670 = WG660.networkPaths(t660, { ...WG660.DEFAULT_VIEW, r: 300, cx: 350, cy: 270 }, { locations: C660.locations, canvasPx: 700, tierOf: (l) => l?.tier, bend: null });
+    const runLen670 = (r) => { let n = 0; for (let k = 1; k < r.run.length; k++) n += Math.hypot(r.run[k][0] - r.run[k - 1][0], r.run[k][1] - r.run[k - 1][1]); return n; };
+    check("SNG-682 ruling 4: ⛔ a road shorter than the frame can show (under 3 px of projected run) does not draw at world scale — measured on the projection, so the same stub draws when the globe is zoomed in, and the region and local maps draw it always",
+      near670.roads.length > 50 && near670.roads.every((r) => runLen670(r) >= 3 || r.run.length < 2 || near670.roads.filter((q) => q.run === r.run).length === 0)
+      && /if \(runPx < 3\) continue;/.test(wgW1));
     check("SNG-682: ⛔ Aevi's road measurement runs in CI with her ratchets (tests/world_roads_measure.mjs in the runner, a baseline that may only go DOWN)",
       existsSync(join(root, "tests/world_roads_measure.mjs")) && existsSync(join(root, "tests/world_roads_baseline.json"))
       && /\["world_roads_measure", "node", \["tests\/world_roads_measure\.mjs"\]\]/.test(readFileSync(join(root, "scripts/run_tests.mjs"), "utf8")));

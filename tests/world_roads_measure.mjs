@@ -21,10 +21,10 @@ const { makeTerrain } = await import(asUrl(join(root, "scripts/world/terrain.mjs
 const gp = JSON.parse(readFileSync(join(root, "content/packs/core/world/genparams.json"), "utf8"));
 let regionMaps = {}; try { regionMaps = JSON.parse(readFileSync(join(root, "content/packs/core/world/region_maps.json"), "utf8")); } catch { regionMaps = {}; }
 const regionCache = new Map();
-const regionPaths = (rid) => { if (!regionCache.has(rid)) regionCache.set(rid, WG.regionRoadPaths(t, C.locations, rid, { gen: (win) => makeTerrain(gp, win), authored: regionMaps[rid] || null, tierOf: (l) => l?.tier })); return regionCache.get(rid)?.byPair || null; };
+const regionPaths = (rid) => { if (!regionCache.has(rid)) regionCache.set(rid, WG.regionRoadPaths(t, C.locations, rid, { gen: (win) => makeTerrain(gp, win), authored: regionMaps[rid] || null, tierOf: (l) => l?.tier, content: C })); return regionCache.get(rid)?.byPair || null; };
 // ✅ W3: the cap on the polar grid, whole, before the regions
-const cap = WG.capRoadRoutes(t, C.locations, { tierOf: (l) => l?.tier });
-const routes = WG.worldRoadRoutes(t, C.locations, { tierOf: (l) => l?.tier, regionPaths, regionStamp: 1, capPaths: cap.byPair, capStamp: 1 });
+const cap = WG.capRoadRoutes(t, C.locations, { tierOf: (l) => l?.tier, content: C });
+const routes = WG.worldRoadRoutes(t, C.locations, { tierOf: (l) => l?.tier, regionPaths, regionStamp: 1, capPaths: cap.byPair, capStamp: 1, content: C });
 const net = WG.roadNetwork(C.locations, { tierOf: (l) => l?.tier });
 const kinds = WG.roadKinds(t, C.locations, routes.byPair);   // ✅ W4/W5: what each road is
 const R = Math.PI / 180;
@@ -38,6 +38,7 @@ const slerp = (a, b, n) => {
 };
 const P = (id) => { const w = C.locations[id]?.worldPos; return w ? [w.colatitude - 90, w.longitude] : null; };
 const rows = [];
+const STUB_DEG = 3 * WG.WORLD_TIER_FLOOR_DEG / 700;   // ✅ ruling 4: 3 px at the closest world zoom
 for (const e of net.roads) {
   const a = P(e.a), b = P(e.b); if (!a || !b) continue;
   const key = e.a < e.b ? `${e.a}|${e.b}` : `${e.b}|${e.a}`;
@@ -64,7 +65,9 @@ const measured = {
   roads: rows.length,
   routed: routedRows.length,
   // ✅ W4/W5: a straight ARC is a road drawn straight; a sea lane is a lane and a buried arc is under the ground
-  unroutedStraightArcs: arcs.filter((r) => r.kind === "road").length,
+  // ✅ ruling 4: under 3 px at the world tier's closest zoom (10° across 700 px) a stub never draws at world scale
+  unroutedStraightArcs: arcs.filter((r) => r.kind === "road" && r.straightDeg >= STUB_DEG).length,
+  stubsNotDrawn: arcs.filter((r) => r.kind === "road" && r.straightDeg < STUB_DEG).length,
   seaLanes: rows.filter((r) => r.kind === "sea").length, hiddenAtWorld: rows.filter((r) => r.kind === "hidden").length, buriedRoads: rows.filter((r) => r.kind === "buried").length,
   seamDropped: routes.seamDropped,
   // ⛑ two routers, two numbers: Aevi's "over ×2, down from 25" is the world GRID's; a region's own route is the region
@@ -117,8 +120,8 @@ if (!baseline) {
   // takes the region's own route, and the region router walks it x3.3 (x2.5 on the region map's own canvas) — the Echo's
   // water cost sends it round the river. That is the region map's picture of the road and a ruling on the cost model,
   // not a world-map defect, so the target is reported until the ruling, and ratcheted downward meanwhile.
-  if (measured.millbrookCrossingRatio != null && measured.millbrookCrossingRatio < 1.6) check("SNG-682 W2: Millbrook → Echo River Crossing walks under ×1.6 on the world map", true);
-  else console.log(`pend  SNG-682 W2 target: Millbrook → Echo River Crossing walks under ×1.6 on the world map — x${measured.millbrookCrossingRatio} today, the region's own route`);
+  // ✅ AEVI (ruling 3): with the crossing's ford and the dry shortcut, the gate is HARD
+  check("SNG-682 W2: Millbrook → Echo River Crossing walks under ×1.6 on the world map", measured.millbrookCrossingRatio != null && measured.millbrookCrossingRatio < 1.6, `x${measured.millbrookCrossingRatio}`);
   check("SNG-682 W2: no road under 1° is drawn as a straight stub when its region map has a route for it", measured.shortStubsWithRegionRoute === 0, `${measured.shortStubsWithRegionRoute} today`);
   const pending = Number(baseline.unroutedStraightArcs) > 0 || Number(baseline.wetStraightArcs) > 0 || Number(baseline.capRoutedOver2xWithin10) > 0;
   // ✅ AEVI W3's gate: *"no road with an end within 10° of the Crossing walks over ×2 unless the ground forces it"* — pending while any remain

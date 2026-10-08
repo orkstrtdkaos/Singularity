@@ -56,7 +56,7 @@ import { mapHolds, holdMarker } from "./engine/mapholds.js";
 import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
   filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase, filmFrame, filmLandings } from "./engine/films.js";
 import { arcReachesRegion } from "./engine/arceffects.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
-import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, regionRoadPaths, capRoadRoutes, WORLD_CAP_DEG, roadKinds, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST, fineWindowBox } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, regionRoadPaths, capRoadRoutes, WORLD_CAP_DEG, roadKinds, roadRules as groundRoadRules, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST, fineWindowBox } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
 import { groundHolders, resolvedPowers, stateStamp, powerRelation } from "./engine/realms.js";
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.23.2";
+const APP_VERSION = "2.23.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14894,6 +14894,7 @@ function routedRoadsFor(regionId, netRoads, ext, base, W, H) {
     // walk's grid holds its cell count on any device for free — the `2 * dprOf()` I wrote first was correcting
     // for a device-pixel frame that no longer exists.
     W, H, step: G.step, toScreen: base.toScreen, toWorld: base.toWorld, extent: ext, cell: 2,
+    ...groundRoadRules(_terrain, G, CONTENT),   // ✅ Aevi's rulings 3.1/3.2 (aliased: `roadRules` is the journey road's): the same rules the world map's copy of this road uses
   });
   by.set(key, out);
   return out;
@@ -17640,7 +17641,7 @@ function wireWorldGlobe() {
   let _capPaths = new Map(), _capTerrain = null, _capQueue = null, _capDone = null, _capStamp = 0;
   const capPathsFor = () => _capPaths;
   const routeWorld = () => {
-    const r = worldRoadRoutes(_terrain, CONTENT.locations, { tierOf: (l) => l?.tier, regionPaths: regionPathsFor, regionStamp: _regionPathsCache.size, capPaths: capPathsFor, capStamp: _capStamp });
+    const r = worldRoadRoutes(_terrain, CONTENT.locations, { tierOf: (l) => l?.tier, regionPaths: regionPathsFor, regionStamp: _regionPathsCache.size, capPaths: capPathsFor, capStamp: _capStamp, content: CONTENT });
     // ✅ W4/W5: every road's kind, from the ground and its ends, once per set of routes (a merge makes a new set)
     if (r && !r.kinds) { try { r.kinds = roadKinds(_terrain, CONTENT.locations, r.byPair); } catch { r.kinds = new Map(); } }
     return r;
@@ -17665,7 +17666,7 @@ function wireWorldGlobe() {
       const chunk = _capQueue && _capQueue.shift();
       if (!chunk) { _capQueue = null; return; }
       try {
-        const out = capRoadRoutes(_terrain, CONTENT.locations, { tierOf: (l) => l?.tier, roads: chunk });
+        const out = capRoadRoutes(_terrain, CONTENT.locations, { tierOf: (l) => l?.tier, roads: chunk, content: CONTENT });
         for (const [k, p] of out?.byPair || []) _capPaths.set(k, p);
       } catch (err) { console.warn("[globe roads] a cap slice could not route:", err?.message); }
       _capStamp++;
@@ -17696,7 +17697,7 @@ function wireWorldGlobe() {
       const rid = _regionPathsQueue && _regionPathsQueue.shift();
       if (!rid) { _regionPathsQueue = null; return; }
       try {
-        _regionPathsCache.set(rid, regionRoadPaths(_terrain, CONTENT.locations, rid, { gen: (win) => _fineGenShared.make(_fineGenShared.gp, win), authored: _regionMaps?.[rid] || null, tierOf: (l) => l?.tier }));
+        _regionPathsCache.set(rid, regionRoadPaths(_terrain, CONTENT.locations, rid, { gen: (win) => _fineGenShared.make(_fineGenShared.gp, win), authored: _regionMaps?.[rid] || null, tierOf: (l) => l?.tier, content: CONTENT }));
       } catch (err) { _regionPathsCache.set(rid, null); console.warn(`[globe roads] region ${rid} could not route its own roads:`, err?.message); }
       _worldRoutes = routeWorld();
       if (_regionPathsQueue.length) { if (++since >= 4) { since = 0; if (document.getElementById("world-globe")) paint(false); } idle(tick); }

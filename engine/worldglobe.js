@@ -1077,8 +1077,26 @@ function frameCellToward(here, away, gw, gh) {
   return (i === here.y * gw + here.x) ? null : { x, y, i };
 }
 
+/** ✅ AEVI (ruling 3.1): a place a road may ford at — a crossing, by its kind or by its region-scale face (`bridge`, `ford`). */
+export function isCrossingPlace(id, content) {
+  const k = content?.locationKinds?.kinds?.[id]?.kind;
+  const rk = content?.locationKinds?.regionDisplay?.[id]?.regionKind;
+  return ["bridge", "ford"].includes(k) || ["bridge", "ford"].includes(rk);
+}
+/** ✅ AEVI, rulings 3.1 and 3.2, as ONE set every caller of `routeRoads` passes, so the region map and the world map route a
+ *  road by the same rules and draw one road. `G` is the caller's `makeGroundCost`. The ford radius is one cell of the world
+ *  raster the wetness is read from — derived, not picked: within it the water is the crossing's own. */
+export function roadRules(t, G, content = null) {
+  if (!t || !G) return {};
+  const fordDeg = t.w ? 360 / t.w : 0.75;
+  return {
+    fordAt: content ? (id) => isCrossingPlace(id, content) : null, fordDeg, stepDry: G.stepDry || null,
+    shortcut: { maxDeg: 1, over: 1.6, wetAt: G.wetAt, bend: (a, b) => { try { return bendRoad(t, a, b)?.points || null; } catch { return null; } } },
+  };
+}
+
 export function routeRoads(roads, locations, { W, H, step, toScreen, toWorld, extent = null,
-  cell = 2, reuse = 0.32, rim = 4, budgetMs = 0 } = {}) {
+  cell = 2, reuse = 0.32, rim = 4, budgetMs = 0, fordAt = null, fordDeg = 0.75, stepDry = null, shortcut = null } = {}) {
   if (!W || !H || typeof step !== "function" || typeof toScreen !== "function" || typeof toWorld !== "function") return null;
   const gw = Math.ceil(W / cell), gh = Math.ceil(H / cell), N = gw * gh;
   // ⚠️ ONE LONGITUDE CONVENTION. A region extent runs UNWRAPPED while a stored longitude is ±180; comparing them
@@ -1095,7 +1113,11 @@ export function routeRoads(roads, locations, { W, H, step, toScreen, toWorld, ex
     const l = locations[id];
     if (!l?.worldPos) return null;
     const s = toScreen(inF(Number(l.worldPos.longitude)), Number(l.worldPos.colatitude) - 90, W, H);
-    const x = Math.floor(s.x / cell), y = Math.floor(s.y / cell);
+    // ⚠️ THE FAR EDGE IS IN THE FRAME. The Blaze sits at exactly 180°, which a frame running −180…180 projects to x = W —
+    // one cell past the last, so Leviathan Road → the Blaze was taken for a road leaving the map and dropped uncounted.
+    let x = Math.floor(s.x / cell), y = Math.floor(s.y / cell);
+    if (x === gw && s.x <= W + 1e-6) x = gw - 1;
+    if (y === gh && s.y <= H + 1e-6) y = gh - 1;
     return { x, y, i: y * gw + x, onFrame: x >= 0 && y >= 0 && x < gw && y < gh, s };
   };
   const world = new Array(N);
@@ -1149,6 +1171,11 @@ export function routeRoads(roads, locations, { W, H, step, toScreen, toWorld, ex
       from = here; to = edge;
       leaving = { from: A.onFrame ? e.a : e.b, to: A.onFrame ? e.b : e.a };
     }
+    // ✅ ruling 3.1: the ends that are crossings, in the frame's own longitude — within `fordDeg` of one the water is free
+    const fords = (fordAt && stepDry) ? [e.a, e.b].filter((id) => fordAt(id) && locations[id]?.worldPos)
+      .map((id) => ({ lat: Number(locations[id].worldPos.colatitude) - 90, lon: Number(locations[id].worldPos.longitude) })) : [];
+    const nearFord = fords.length ? (p) => fords.some((f) => { const dl = ((p.lon - f.lon) % 360 + 540) % 360 - 180;
+      return Math.hypot(p.lat - f.lat, dl * Math.cos(((p.lat + f.lat) / 2) * Math.PI / 180)) < fordDeg; }) : null;
     cost.fill(Infinity); prev.fill(-1);
     const h = mkHeap();
     cost[from.i] = 0; h.push(0, from.i);
@@ -1163,7 +1190,8 @@ export function routeRoads(roads, locations, { W, H, step, toScreen, toWorld, ex
         const X = x + dx, Y = y + dy;
         if (X < 0 || Y < 0 || X >= gw || Y >= gh) continue;
         const j = Y * gw + X;
-        let w = step(a.lat, a.lon, world[j].lat, world[j].lon);   // the one ground rule
+        let w = (nearFord && nearFord(world[j])) ? stepDry(a.lat, a.lon, world[j].lat, world[j].lon)   // ✅ 3.1: the crossing's own water
+          : step(a.lat, a.lon, world[j].lat, world[j].lon);   // the one ground rule
         if (used[j]) w *= reuse;                                   // cheaper where a road already runs
         if (atRim[j]) w *= rim;                                    // dearer along the frame
         const c2 = c + w;
@@ -1177,10 +1205,42 @@ export function routeRoads(roads, locations, { W, H, step, toScreen, toWorld, ex
     // ⚠️ SHARED IS READ BEFORE THE PATH IS MARKED. Marked first, every cell is used and every road reports 1.0.
     const shared = path.length ? path.reduce((n, i) => n + (used[i] ? 1 : 0), 0) / path.length : 0;
     for (const i of path) used[i] = 1;
-    const pts = path.map((i) => ({ x: (i % gw) * cell + cell / 2, y: ((i / gw) | 0) * cell + cell / 2 }));
+    let pts = path.map((i) => ({ x: (i % gw) * cell + cell / 2, y: ((i / gw) | 0) * cell + cell / 2 }));
+    /* ✅ AEVI (ruling 3.2): *"A short road over ×1.6 takes the straight line with the ground's bend, but only if that line stays
+     * dry. If the straight line crosses water, the detour is the truth: there is no ford, so you go round."* The ground's bend
+     * first, then the plain straight line; a line counts as dry when every sample on it is land or a crossing's own water. */
+    let straightened = false;
+    if (shortcut && !leaving && path.length > 1) {
+      const la = locations[e.a].worldPos, lb = locations[e.b].worldPos;
+      const pa = [Number(la.colatitude) - 90, Number(la.longitude)], pb = [Number(lb.colatitude) - 90, Number(lb.longitude)];
+      const R2s = Math.PI / 180;
+      const gcs = (u, v) => Math.acos(Math.max(-1, Math.min(1, Math.sin(u[0] * R2s) * Math.sin(v[0] * R2s) + Math.cos(u[0] * R2s) * Math.cos(v[0] * R2s) * Math.cos((u[1] - v[1]) * R2s)))) / R2s;
+      const straightDeg = gcs(pa, pb);
+      let walkedDeg = 0;
+      for (let k = 1; k < path.length; k++) { const u = world[path[k - 1]], v = world[path[k]]; walkedDeg += gcs([u.lat, u.lon], [v.lat, v.lon]); }
+      if (straightDeg > 1e-6 && straightDeg < shortcut.maxDeg && walkedDeg / straightDeg > shortcut.over) {
+        const dry = (line) => {
+          for (let k = 1; k < line.length; k++) {
+            const u = line[k - 1], v = line[k], n = Math.max(2, Math.ceil(gcs(u, v) / (fordDeg / 6)));
+            for (let s = 0; s <= n; s++) {
+              const f = s / n, dl = ((v[1] - u[1]) % 360 + 540) % 360 - 180;
+              const p = { lat: u[0] + (v[0] - u[0]) * f, lon: u[1] + dl * f };
+              if (shortcut.wetAt(p.lat, ((p.lon + 540) % 360) - 180) && !(nearFord && nearFord(p))) return false;
+            }
+          }
+          return true;
+        };
+        const bent = shortcut.bend ? shortcut.bend(pa, pb) : null;
+        const line = (bent && bent.length > 1 && dry(bent)) ? bent : (dry([pa, pb]) ? [pa, pb] : null);
+        if (line) {
+          pts = line.map(([lat, lon]) => { const s = toScreen(inF(lon), lat, W, H); return { x: s.x, y: s.y }; });
+          straightened = true;
+        }
+      }
+    }
     out.push({
       a: e.a, b: e.b, d: e.d, primary: primary(e), track: !primary(e), shared, points: pts,
-      leaves: !!leaving,
+      leaves: !!leaving, ...(straightened ? { straightened: true } : {}), ...(fords.length ? { fords: fords.length } : {}),
     });
     // ⛑ and it says where it is going, which is the only true thing about its far end on this map
     if (leaving) exits.push({ ...leaving, at: pts[pts.length - 1], primary: primary(e) });
@@ -1293,7 +1353,15 @@ export function makeGroundCost(t, { climb = 7, water = 30, extent = null, sample
     const rise = Math.abs(elevAt(bLat, bLon) - elevAt(aLat, aLon));
     return d * at(bLat, bLon, d > 1e-12 ? rise / d : 0);
   };
-  return { at, step, slopeRef, typical, elevAt, wetAt };
+  /** ✅ AEVI (ruling 3.1): the same step with the water term left out — what a road pays where it may ford */
+  const stepDry = (aLat, aLon, bLat, bLon) => {
+    const cl = Math.cos(((aLat + bLat) / 2) * RAD);
+    const d = Math.hypot(bLat - aLat, (bLon - aLon) * cl);
+    const rise = Math.abs(elevAt(bLat, bLon) - elevAt(aLat, aLon));
+    const slope = d > 1e-12 ? rise / d : 0;
+    return d * (1 + climb * Math.min(1.5, slope / slopeRef) ** 2) / typical;
+  };
+  return { at, step, stepDry, slopeRef, typical, elevAt, wetAt };
 }
 
 export function bendRoad(t, a, b, { samples = 9, offsets = 7, maxOffsetFrac = 0.28, cost = null } = {}) {
@@ -1534,6 +1602,11 @@ export function networkPaths(t, view, { locations, precursor, showPrecursor = fa
       } else {
         for (const run of arc(a, b, 1.0)) runs.push(run);
       }
+      // ✅ AEVI (ruling 4): *"A gate-yard stub doesn't draw at world scale when it's shorter than the frame can show (under ~3
+      // px). It still draws on the region and local maps."* Measured on the projection, so the same stub draws when zoomed in.
+      let runPx = 0;
+      for (const run of runs) for (let k = 1; k < run.length; k++) runPx += Math.hypot(run[k][0] - run[k - 1][0], run[k][1] - run[k - 1][1]);
+      if (runPx < 3) continue;
       for (const run of runs) out.roads.push({ run, primary, kind });
     }
   }
@@ -1638,7 +1711,7 @@ const _worldRoutes = new WeakMap();
  *  frame (the authored centre when there is one), `makeRegionBase` over the fine generator, `routeRoads` on a 2px cell
  *  of an 800px frame — and returned as lat/lon paths keyed by pair. ⚠️ A polar region (the Crossing) is W3's, not this:
  *  its lon/lat box is a fabrication. `gen(window)` is the fine generator for a window (the app's `_fineGenShared`). */
-export function regionRoadPaths(t, locations, regionId, { gen, authored = null, W = 800, H = 800, cell = 2, tierOf = null } = {}) {
+export function regionRoadPaths(t, locations, regionId, { gen, authored = null, W = 800, H = 800, cell = 2, tierOf = null, content = null } = {}) {
   if (!t || !locations || typeof gen !== "function") return null;
   const ext = regionExtent(regionId, locations, { authored });
   if (!ext || ext.polar) return null;
@@ -1649,7 +1722,7 @@ export function regionRoadPaths(t, locations, regionId, { gen, authored = null, 
   const pad = 2;
   const base = makeRegionBase(t, gen({ la0: ext.la0 - pad, la1: ext.la1 + pad, lo0: ext.lo0 - pad, lo1: ext.lo1 + pad }), ext);
   const G = makeGroundCost(t, { ...GROUND_COST.road, extent: ext });
-  const out = routeRoads(roads, locations, { W, H, step: G.step, toScreen: base.toScreen, toWorld: base.toWorld, extent: ext, cell });
+  const out = routeRoads(roads, locations, { W, H, step: G.step, toScreen: base.toScreen, toWorld: base.toWorld, extent: ext, cell, ...roadRules(t, G, content) });
   const byPair = new Map();
   for (const r of (out?.roads || [])) {
     const pts = r.points || [];
@@ -1683,7 +1756,7 @@ export const WORLD_CAP_DEG = 60;
  *  21 such roads, 9 of them over ×2 — so every road with an end in the cap routes here: both ends in the cap on a 60° disc,
  *  one end on a disc wide enough for the far end (the plane distorts toward its rim, and still beats cells that collapse).
  *  `roads` narrows the work to a chunk (the app routes the cap in idle slices); the whole cap when omitted. PURE. */
-export function capRoadRoutes(t, locations, { tierOf = null, roads = null, cell = 2, px = 720 } = {}) {
+export function capRoadRoutes(t, locations, { tierOf = null, roads = null, cell = 2, px = 720, content = null } = {}) {
   if (!t || !locations) return null;
   const colat = (id) => { const w = locations[id]?.worldPos; return w ? Number(w.colatitude) : null; };
   const all = roads || roadNetwork(locations, { tierOf }).roads;
@@ -1697,7 +1770,7 @@ export function capRoadRoutes(t, locations, { tierOf = null, roads = null, cell 
     const ext = { polar: true, pole: -1, poleRadiusDeg: Rr, centre: { lat: -90, lon: 0 }, la0: -90, la1: -90 + Rr, lo0: -180, lo1: 180 };
     const proj = polarProjection(Rr, -1);
     const G = makeGroundCost(t, { ...GROUND_COST.road, extent: ext });
-    const out = routeRoads(set, locations, { W: px, H: px, step: G.step, toScreen: proj.toScreen, toWorld: proj.toWorld, extent: ext, cell });
+    const out = routeRoads(set, locations, { W: px, H: px, step: G.step, toScreen: proj.toScreen, toWorld: proj.toWorld, extent: ext, cell, ...roadRules(t, G, content) });
     for (const r of (out?.roads || [])) {
       const pts = r.points || [];
       if (pts.length < 2) continue;
@@ -1746,7 +1819,7 @@ export function roadKinds(t, locations, byPair, { wetAbove = 20, coastDeg = 1.2 
   return out;
 }
 
-export function worldRoadRoutes(t, locations, { tierOf = null, gridW = 360, regionPaths = null, regionStamp = 0, capPaths = null, capStamp = 0 } = {}) {
+export function worldRoadRoutes(t, locations, { tierOf = null, gridW = 360, regionPaths = null, regionStamp = 0, capPaths = null, capStamp = 0, content = null } = {}) {
   if (!t || !locations) return null;
   let hit = _worldRoutes.get(t);
   // ⛑ W2: the grid routing is cached by itself; the region paths are MERGED over it per `regionStamp`, so a region
@@ -1763,7 +1836,7 @@ export function worldRoadRoutes(t, locations, { tierOf = null, gridW = 360, regi
   const G = makeGroundCost(t, { ...GROUND_COST.road, extent });
   const t0 = Date.now();
   const out = routeRoads(net.roads, locations, {
-    W: gw, H: gh, step: G.step, toScreen, toWorld, extent, cell: 2,
+    W: gw, H: gh, step: G.step, toScreen, toWorld, extent, cell: 2, ...roadRules(t, G, content),
   });
   const byPair = new Map();
   let seamDropped = 0, kept = 0;

@@ -4,13 +4,12 @@
 //   • world positions and distances (`worldPosForGenerated`, `geodesic`, `walkingDays`, `milesFor`, the bearings);
 //   • label and card placement (`placeLabels`, `openingFrame`, `placeCardBox`) and the paths a journey draws.
 // ✅ SNG-678 (CCODE-647): the SVG diagram this file was written for (SNG-046) is retired — its auto-positioning,
-// hull, tint, icon and field-wash helpers went with it. `coordForGenerated` remains: a minted place still gets a
-// stable `map` coord because the location schema asks for one, though nothing draws from it now; retiring the
-// field is content's call.
+// hull, tint, icon and field-wash helpers went with it. ✅ AEVI, ruling 4 (CCODE-656): the layout coordinate the
+// diagram drew from is retired too — nothing mints one, nothing reads one; a place is where its `worldPos` says.
+// The field leaves the authored records, and the schema, with her commit.
 
 /** Stable integer hash of a string (deterministic — same id always lands the same place). */
 function hashN(s) { let h = 0; for (const ch of String(s || "")) h = ((h << 5) - h + ch.charCodeAt(0)) | 0; return Math.abs(h); }
-function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
 // ---------- SNG-154 stage 6: THREE TIERS ----------
 // Zoom is NAVIGATION BETWEEN TIERS, not a scale slider. 95 locations on one 800×440 canvas is the
@@ -102,23 +101,6 @@ export function locationTierNodes(character, CONTENT, locationId) {
   return { host, children: [...promoted, ...subs] };
 }
 
-
-/** Assign a stable coord to a freshly-generated location near its parent, avoiding existing
- *  points. Deterministic from the new id (no rng). Returns {x,y}. */
-export function coordForGenerated(newId, parentMap, existing = {}, { width = 800, height = 440, margin = 40 } = {}) {
-  const px = Number.isFinite(parentMap?.x) ? parentMap.x : width / 2;
-  const py = Number.isFinite(parentMap?.y) ? parentMap.y : height / 2;
-  const taken = Object.values(existing);
-  const h = hashN(newId);
-  for (let k = 0; k < 12; k++) {
-    const ang = ((h + k * 47) % 360) * Math.PI / 180;
-    const dist = 45 + ((h + k * 13) % 55);
-    const x = clamp(px + Math.cos(ang) * dist, margin, width - margin);
-    const y = clamp(py + Math.sin(ang) * dist, margin, height - margin);
-    if (!taken.some(t => Math.abs(t.x - x) < 24 && Math.abs(t.y - y) < 24)) return { x, y };
-  }
-  return { x: clamp(px + 30, margin, width - margin), y: clamp(py + 20, margin, height - margin) };
-}
 
 /** SNG-117: a place is KNOWN — its name surfaces + it becomes a travel target — by ANY means, not just by
  *  having been visited: you are there, you have visited, it is ADJACENT to where you stand (one travel away),
@@ -254,7 +236,7 @@ export function geodesic(a, b, { depthScale = DEPTH_RADII_PER_LEVEL,
  *  RIGHT answer to a missing position; this supplies the position instead of teaching it to guess.
  *
  *  ⚑ DERIVED FROM THE PARENT IT WAS MADE OFF, which is what `connections[0]` records — the same shape
- *  `coordForGenerated` uses for the 2D map, one dimension up. The chain is walked because a generated place
+ *  the retired layout minter used for the diagram, one dimension up. The chain is walked because a generated place
  *  can hang off another generated place (the post off the gate clearing off the plateau edge).
  *
  *  ⚠️ THE OFFSET IS DETERMINISTIC, FROM THE ID. The same place lands in the same spot every time — a

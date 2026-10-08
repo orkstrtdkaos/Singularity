@@ -385,6 +385,10 @@ The damage families did not, which is why they were dark.**
   `local_layouts.json` as ground (`engine/localmap.js`), the ring and the region SVG diagram are deleted with their parity
   list in the commits, and **`map.x/y` now has no reader in play** — `coordForGenerated` still mints one for a new place
   because the location schema asks for it. Retiring the field is content's call.
+- ✅ **2026-10-07 (Aevi's ruling 4, CCODE-656): `map.x/y` is retired from the code.** Nothing mints one (the minter left
+  `worldmap.js`, the three mint sites in `app.js` write none, the reconcile step no longer invalidates one) and nothing reads
+  one; the schema no longer requires it. The field leaves the 163 authored records, and the schema property with them, in
+  Aevi's commit. The world-space audit of July, which measured the field as positions, is deleted with its subject.
 - ✅ **2026-09-12 (`§183`, SNG-537 B6a): `scale.json` has its reader** — `milesFor` in `worldmap.js`, shown on the travel card as *(about N
   miles)*, with `scaleAgrees` holding the file's `walkingDaysPerDegree` to canon `300/π` within 1%. The finding as it stood:
 - ⚠️ **`scale.json` was an unbuilt feature, not a wrong constant.** I checked for the hardcoded Earth radius

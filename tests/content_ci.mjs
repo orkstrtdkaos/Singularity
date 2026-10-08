@@ -581,21 +581,17 @@ for (const pack of PACKS) {
       .flatMap(d => (d.locations ? Object.values(d.locations) : [d])).filter(l => l && l.id);
   } catch { }
 
-  // ⛔ ONE CONSUMER ONLY. `coordForGenerated` mints a layout coord for a new place (the diagram that drew from
-  // it retired at CCODE-647); anything else reading `map.x` is treating a schematic as a map of the world, which
-  // is the whole defect.
+  // ⛔ NO CONSUMER AT ALL. ✅ AEVI, ruling 4 (CCODE-656): the minter that was the one allowed consumer is gone with
+  // the field; anything reading `map.x` now is treating a retired schematic as a map of the world.
   const readers = [];
   for (const f of [...readdirSync(join(root, "engine")).filter(x => x.endsWith(".js")).map(x => `engine/${x}`), "app.js"]) {
-    if (f === "engine/worldmap.js") continue;                       // the renderer's own layout function
     const src = readFileSync(join(root, f), "utf8");   // content_ci has no read() helper; rj() is JSON-only
     const code = src.split(String.fromCharCode(10))
       .map(l => { const i = l.search(/(^|[^:"'`])\/\//); return i === -1 ? l : l.slice(0, i); }).join(String.fromCharCode(10));
-    // ⚠️ MINTING A LAYOUT POSITION FOR A NEW PLACE IS NOT READING ONE FOR GEOGRAPHY. app.js assigns
-    // `map` to generated locations so they can be drawn; that is renderer work wearing app.js's clothes.
-    if (/\bmap\.[xy]\b/.test(code) && !/coordForGenerated|existingMaps|existing\[/.test(code)) readers.push(f);
+    if (/\bmap\.[xy]\b/.test(code)) readers.push(f);
   }
-  check("SNG-387: `map.x/y` is read only by the renderer — worldPos is the sole positioning authority",
-    readers.length === 0, `${readers.join(", ")} read the render layout for position`);
+  check("SNG-387: `map.x/y` is read by nothing — worldPos is the sole positioning authority, and the layout coordinate is retired (ruling 4)",
+    readers.length === 0, `${readers.join(", ")} read the retired layout for position`);
 
   // ⛔ THE COHERENCE GATE, AND ITS FIRST TWO FORMS COULD NOT DISCRIMINATE. Aevi asked for map-space
   // nearest-neighbour rank order to agree with geodesic rank order; measured, mean overlap is 0.257 with

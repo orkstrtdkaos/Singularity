@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.22.12",
+      "date": "2026-10-08",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "The old map coordinates retire",
+          "summary": "A newly named place no longer gets a coordinate on the retired diagram; every place is where its world position says. The authored records lose the field in a content commit."
+        }
+      ]
+    },
+    {
       "version": "2.22.11",
       "date": "2026-10-07",
       "entries": [

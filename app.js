@@ -70,7 +70,7 @@ import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";
 import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf, siteLevel, regionLook, isSpreading, lookRand } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
 import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
-import { walkingDays, milesFor, worldPosForGenerated, coordForGenerated, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, placeLabels } from "./engine/worldmap.js";
+import { walkingDays, milesFor, worldPosForGenerated, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
 import { sheetFor as personSheetFor, personRecordFor, battleSkillsFor, playerSheetFor } from "./engine/npcsheet.js";  // the person-keyed sheet, and SNG-571's player-facing one
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.11";
+const APP_VERSION = "2.22.12";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5822,16 +5822,11 @@ async function handleGenerateRequests(turn) {
       if (type === "location") {
         // SNG-154: THIS is the promotion path that lost the Inn (a generateRequest, not
         // mintTransitLocation). If the generated place was already a sub-place of somewhere, keep
-        // that containment — and anchor its coords to the PARENT rather than to wherever the
-        // character happens to be standing.
+        // that containment. ✅ AEVI, ruling 4 (CCODE-656): no layout coordinate is minted any more —
+        // on the ground a place is where its `worldPos` says, and a promoted one folds into its parent.
         const promotedFrom = findSubPlaceParent(character, rec.name) || findSubPlaceParent(character, rec.id);
         if (promotedFrom && !rec.parentId) { rec.parentId = promotedFrom.parentId; rec._promotedFromSubPlace = true; }
         if (!rec.parentId && hereNow()?.id) rec.parentId = hereNow().id; // born inside where we stand
-        if (!rec.map || !Number.isFinite(rec.map.x)) {
-          const existing = {}; for (const l of Object.values(CONTENT.locations)) if (l.map) existing[l.id] = l.map;
-          const anchor = (rec.parentId && CONTENT.locations[rec.parentId]?.map) || hereNow().map;
-          rec.map = coordForGenerated(rec.id, anchor, existing);
-        }
       }
       if (type === "location") CONTENT.locations[rec.id] = rec;
       else if (type === "npc") CONTENT.npcs[rec.id] = rec;
@@ -14144,7 +14139,6 @@ function mintTransitLocation(moveRef) {
   const id = "gen-" + slugify(ref);
   if (CONTENT.locations[id]) { addKnownPlace(id); return id; } // already a real place — reuse, never dup
   const here = CONTENT.locations[character.currentLocationId];
-  const existing = {}; for (const l of Object.values(CONTENT.locations)) if (l.map) existing[l.id] = l.map;
   const name = String(moveRef).replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase()).slice(0, 60);
   // SNG-154: if this name was already a sub-place somewhere, promotion PRESERVES that containment —
   // the new location remembers what it is inside of, and the map anchors it there instead of
@@ -14164,8 +14158,7 @@ function mintTransitLocation(moveRef) {
     // SNG-225 §4a: a real dangerLevel, never null — a null danger reads as 0 (safest possible) and STARVES the
     // encounter pool (every minDanger>0 encounter becomes ineligible). Inherit the neighbourhood's danger.
     dangerLevel: deriveDangerLevel({ tags: ["transitional"] }, { baseDanger: here?.dangerLevel }),
-    _gen: mintedLocationGen({ locationId: here?.id || null, day: null, hint: "transit" }),
-    map: coordForGenerated(id, here?.map, existing)
+    _gen: mintedLocationGen({ locationId: here?.id || null, day: null, hint: "transit" })
   };
   // CCODE-15 observability: a mint means the GM named a place that matched NOTHING existing (resolveLocationId
   // already ran and missed). Log it so the coin-rate is measurable — a coined synonym for an existing place
@@ -14230,7 +14223,6 @@ function mintWaygate({ id, gateId, name, description, connectsTo, connects, at, 
   }
 
   const anchor = CONTENT.locations[targets[0]] || null;
-  const existingMaps = {}; for (const l of Object.values(CONTENT.locations)) if (l.map) existingMaps[l.id] = l.map;
   const rec = {
     id: gid, name: smartClamp(String(name || "The Made Gate"), 60),
     regionId: anchor?.regionId || anchor?.region || null,
@@ -14242,8 +14234,7 @@ function mintWaygate({ id, gateId, name, description, connectsTo, connects, at, 
     ...(defaultTo ? { waygateDefaultTo: defaultTo } : {}),
     dangerLevel: deriveDangerLevel({ tags: ["waygate"] }, { baseDanger: anchor?.dangerLevel }),
     _gen: mintedLocationGen({ hint: "made-waygate", questMade: true }),
-    _mintedAs: "made_waygate",
-    map: coordForGenerated(gid, anchor?.map, existingMaps)
+    _mintedAs: "made_waygate"
   };
   if (!commitGeneratedLocation(gid, rec)) return null;   // SNG-329b: one door for every minted place
   for (const a of targets) linkBack(a);

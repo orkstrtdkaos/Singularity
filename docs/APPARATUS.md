@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 116 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 115 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-26 · v2.10.1 · 116 files.** (`scripts/freeze_save_fixtures.mjs` — CCODE-527: a gate may not read a save somebody is playing.)
+**Last measured: 2026-10-07 · v2.22.12 · 115 files.** (`scripts/worldspace_audit.mjs` is gone — CCODE-656, Aevi's ruling 4: it measured the retired `map.x/y` as positions. Before it: 2026-09-26 · v2.10.1 · 116 files, `scripts/freeze_save_fixtures.mjs` — CCODE-527: a gate may not read a save somebody is playing.)
 
 ---
 
@@ -243,6 +243,5 @@ worthless.
 | `scripts/version_rule` | 🔧 TOOL | — | — |
 | `scripts/vocab_sweep` | 🔧 TOOL | — | NEAR-DUPLICATE TERMS |
 | `scripts/world_projection` | 🔧 TOOL | — | project the authored 12D disposition space onto the plane |
-| `scripts/worldspace_audit` | 🔧 TOOL | — | — |
 | `tests/headless_content` | · LIBRARY | — | CCODE-96: run the app's REAL content assembly from node |
 <!-- APPARATUS:END -->

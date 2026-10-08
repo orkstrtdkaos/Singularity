@@ -48,7 +48,7 @@ import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, re
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM, repairPanelForGM } from "../engine/corrections.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacing.js";
 import { revokeAdultGate } from "../engine/playerprofile.js";
-import { coordForGenerated, knownOverlay, isPlaceKnown } from "../engine/worldmap.js";
+import { knownOverlay, isPlaceKnown } from "../engine/worldmap.js";
 import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT, legendsForGM } from "../engine/legends.js";
 import { buildTraditionIndex, traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "../engine/traditions.js";
 
@@ -595,13 +595,6 @@ check("static mode falls back to the location banner", sceneImage(testLoc, { set
 globalThis.localStorage.setItem("singularity.artMode", "off");
 check("off mode shows nothing", sceneImage(testLoc, { setting: "anywhere" }) === null);
 globalThis.localStorage.setItem("singularity.artMode", "static");
-
-// --- map data ---
-for (const id of ["millbrook", "echo_river_crossing", "archive_hollow", "disputed_zone_fringe", "harmonic_heights_terrace", "radiant_plateau_edge"]) {
-  const l = JSON.parse(readFileSync(join(root, `content/packs/valley/locations/${id}.json`), "utf8"));
-  if (!(l.map && typeof l.map.x === "number" && typeof l.map.y === "number")) { check(`map coords present for ${id}`, false); }
-}
-check("all locations carry map coordinates", true);
 
 // --- v0.8.1 bug regressions ---
 // 1) NaN can never reach the dice
@@ -3165,13 +3158,22 @@ check("SNG-126/355: parting stops the benefits (trainerFor/liaison empty) AND KE
   store.clear();
 })();
 
-// --- SNG-046: a minted place's stable layout coord. ✅ CCODE-647 (SNG-678): the diagram this foundation drew —
-// auto-position, icons, the KG overlay — retired with its helpers; `coordForGenerated` remains because a new place
-// still writes `map` (the location schema asks for one), though nothing draws from it now ---
+// --- ✅ AEVI, ruling 4 (CCODE-656): the layout coordinate is retired from the code — nothing mints one, nothing reads
+// one; the field and its schema property leave with her content commit ---
 (() => {
-  const c1 = coordForGenerated("new-hollow", { x: 300, y: 300 }, { a: { x: 300, y: 300 } });
-  check("SNG-046: a generated location gets stable coords near its parent, not on top of it", Math.hypot(c1.x - 300, c1.y - 300) > 20 && Math.hypot(c1.x - 300, c1.y - 300) < 110);
-  check("SNG-046: coordForGenerated is deterministic", JSON.stringify(coordForGenerated("new-hollow", { x: 300, y: 300 }, {})) === JSON.stringify(coordForGenerated("new-hollow", { x: 300, y: 300 }, {})));
+  const strip = (src) => src.split("\n").map((l) => { const i = l.search(/(^|[^:"'`])\/\//); return i === -1 ? l : l.slice(0, i); }).join("\n").replace(/\/\*[\s\S]*?\*\//g, "");
+  const files = [...readdirSync(join(root, "engine")).filter((x) => x.endsWith(".js")).map((x) => `engine/${x}`), "app.js"];
+  const minters = [], readers = [];
+  for (const f of files) {
+    const code = strip(readFileSync(join(root, f), "utf8"));
+    if (/\bcoordFor[A-Z]\w*\s*\(/.test(code)) minters.push(f);
+    if (/\bmap\.[xy]\b/.test(code) || /\bmap:\s*\{\s*x\b/.test(code)) readers.push(f);
+  }
+  const req = JSON.parse(readFileSync(join(root, "schemas/location.schema.json"), "utf8")).required || [];
+  check("CCODE-656: nothing in the engine or the app mints a layout coordinate for a place, and nothing reads one — a place is where its worldPos says",
+    minters.length === 0 && readers.length === 0, `mint: ${minters.join(", ")} · read: ${readers.join(", ")}`);
+  check("CCODE-656: the location schema no longer requires the layout coordinate (the property waits for the content commit that strips the records), and the world-space audit of July — which measured it as positions — is gone with it",
+    !req.includes("map") && !existsSync(join(root, "scripts/worldspace_audit.mjs")));
 })();
 
 // --- SNG-044: item relevance + bonus-count cap (best tool, not a pile) ---
@@ -5313,13 +5315,13 @@ await (async () => {
   const c4 = { placeMemory: {
       edge: { subPlaces: { "the-low-lamp-inn": { name: "The Low Lamp Inn" } } },
       millbrook: { subPlaces: { "upper-meadow": { name: "Upper Meadow" }, "upper-meadow-north-of-mill": { name: "Upper Meadow (north of Millbrook)" } } } },
-    // a stale hash-gridded coord, exactly as it sits on the real save
+    // a stale hash-gridded coord, exactly as it sits on the real save (retired with ruling 4; it stays as data)
     generated: { location: { "the-low-lamp-inn": { id: "the-low-lamp-inn", name: "The Low Lamp Inn", map: { x: 545, y: 175 }, _gen: { type: "location" } } } } };
   const out = step.apply(c4, {});
   check("154: repair relinks a promoted location to its parent (the Inn → the Edge District)",
     c4.generated.location["the-low-lamp-inn"].parentId === "edge");
-  check("154: repair INVALIDATES the stale coord — parentId alone can't move it, since a stored map wins",
-    c4.generated.location["the-low-lamp-inn"].map === undefined);
+  // (ruling 4, CCODE-656: the stale layout coordinate on that record is left where it lies — nothing reads it, and the
+  // content commit that strips the field from the records is Aevi's; the parent link is what the ground reads)
   check("154: and the repaired record then folds into its parent on the ground — the container it regained is what the region map reads", (() => {
     const inn = c4.generated.location["the-low-lamp-inn"];
     const view = { locations: { edge: edge154, [inn.id]: { ...inn, worldPos: { ...edge154.worldPos } } } };   // a room is at its building (SNG-396)

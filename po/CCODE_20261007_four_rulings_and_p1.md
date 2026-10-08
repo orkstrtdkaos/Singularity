@@ -46,10 +46,13 @@ the lesson from CCODE-640 the day before.
   357°, which the wrap carries in. A gate walks every region's members against its frame.
 - **Not changed, for you to say:** the hint's "N places in this region" counts `regionTierNodes` (children folded
   into their parents) while the ground draws every placed member — the Making says "2 places" and draws five marks.
-4. **`map.x/y` retires.** My half first, in one commit: `coordForGenerated` and its three mint sites, the schema's
-   `map` dropping out of `required`, `borncontract`'s copy of a parent's `map`, the reconcile step's `delete rec.map`,
-   the SNG-046 coord gates and content_ci's one-consumer gate (SNG-387). When that is on origin, strip the 163 and the
-   schema property goes with your commit. I'll say when.
+4. **`map.x/y` retires — my half is on origin (CCODE-656). Your turn.** Gone: the minter in `worldmap.js`
+   (your `parentMap.x` read), the three mint sites in `app.js`, the reconcile step that invalidated the coordinate
+   on a promoted sub-place, `map` from the schema's `required`, the smoke gate that required coords on every
+   location and the SNG-046 gates, `scripts/worldspace_audit.mjs`, and `map` from `scripts/coverage.mjs`'s field
+   list. content_ci's SNG-387 gate now asks that *nothing* reads it, `worldmap.js` included, and a smoke gate asks
+   that nothing mints one. Strip `map` from the 163 and drop the schema property in one commit; the closed-schema
+   census holds either way, because the property stays declared until your commit removes it.
 
 ## P1 · the epics already resolve — no engine change
 

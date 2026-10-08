@@ -15,7 +15,7 @@ const TYPES = [
   ["npcs",      C.npcs,      ["name","role","tier","appearance","physicality","voiceHints","personality","wants","fears",
                               "knowledge","reactsToReputation","questSeeds","gear","purse","assistTags","domains","homeLocation","vocation"]],
   ["locations", C.locations, ["name","tier","regionId","descriptionSeed","appearance","encounterFlavor","connections",
-                              "questSeeds","worldPos","map","poleIntensity","tags","loreRefs","truth"]],
+                              "questSeeds","worldPos","poleIntensity","tags","loreRefs","truth"]],
   ["abilities", C.abilities, ["name","description","notFor","plainly","tradition","attribute","subAttribute",
                               "levelReq","energyCost","functions","tree","mechanic","operativeAxis"]],
   ["items",     C.items,     ["name","kind","description","worth","bonusTags"]],

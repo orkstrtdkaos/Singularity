@@ -9126,7 +9126,7 @@ await (async () => {
       check("FL2: ⛔ …and the painter draws what the resolver says — an `opArc` from the station down to the ground in the people's colour, the glyph and glow and one expanding ring and the name at the landing, the last stretch dashed below ground, a chevron at the limb behind the world, and the thread's clock is the film's",
         /filmLandings\(shot, pl\.id, \{ ringSeats: CONTENT\.opening\?\.ringSeats \|\| null, locations: CONTENT\.locations \|\| null, whole \}\)/.test(shot35)
         && /opArc\(P, \{ lat: pl\.lat, lon: pl\.lon \}, \{ lat: L\.lat, lon: L\.lon \}, \{ lift: 0\.03, steps: 18, rA: RING_UP, rB: 1\.0 \}\)/.test(shot35)
-        && /ctx\.arc\(q\.x, q\.y, 6 \+ 26 \* f, 0, Math\.PI \* 2\)/.test(shot35) && /drawGlyph\(ctx, glyphFor\(\{ kind: L\.kind, t: L\.tier \}\)/.test(shot35)
+        && /ctx\.arc\(q\.x, q\.y, 6 \+ 26 \* f, 0, Math\.PI \* 2\)/.test(shot35) && /drawGlyph\(ctx, glyphFor\(\{ kind: placeKindOf\(L\.id, \{ content: CONTENT, loc: L \}\), t: L\.tier \}\)/.test(shot35)
         && /if \(L\.depth < 0 && q\) \{/.test(shot35) && /ctx\.setLineDash\(\[4, 5\]\); opStroke\(ctx, pts\.slice\(cutAt - 1, n\)/.test(shot35)
         && /behind the world: the thread ends at the limb/.test(shot35) && /if \(!_filmLandSince\.has\(key\)\) _filmLandSince\.set\(key, elapsed\);/.test(shot35)
         && /_filmLandSince\.clear\(\);/.test(film35) && /if \(!lands\.length\) \{/.test(shot35));
@@ -24434,6 +24434,26 @@ await (async () => {
     check("SNG-682: ⛔ Aevi's road measurement runs in CI with her ratchets (tests/world_roads_measure.mjs in the runner, a baseline that may only go DOWN)",
       existsSync(join(root, "tests/world_roads_measure.mjs")) && existsSync(join(root, "tests/world_roads_baseline.json"))
       && /\["world_roads_measure", "node", \["tests\/world_roads_measure\.mjs"\]\]/.test(readFileSync(join(root, "scripts/run_tests.mjs"), "utf8")));
+  }
+  /* ── ✅ AEVI, the films watched (CCODE-662): the three asks ── */
+  {
+    const src662 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");
+    const { loadContentHeadless: lch662 } = await import("./headless_content.mjs");
+    const { placeKindOf: pk662 } = await import("../engine/localmap.js");
+    const C662 = await lch662();
+    const kinds662 = { gearsflat: "underplace", hardline: "hold", thinwater: "shrine", greenmarch: "market", the_harborward: "harbour", plainstead: "hall" };
+    check("films watched 1: ⛔ a landing's glyph reads the place's KIND from location_kinds.json through `placeKindOf` (records carry none, so every landing was a house) — and so do the place and figure shots' home glyphs; Aevi's table holds: Gearsflat an underplace, Hardline a hold, Thinwater a shrine, Greenmarch a market, the Harborward a harbour, Plainstead a hall",
+      (src662.match(/glyphFor\(\{ kind: placeKindOf\((L|subject\.loc|loc)\.id, \{ content: CONTENT, loc(: (L|subject\.loc))? \}\), t: /g) || []).length === 3
+      && !/glyphFor\(\{ kind: (L|loc|subject\.loc)\.kind,/.test(src662)
+      && Object.entries(kinds662).every(([id, k]) => pk662(id, { content: C662 }) === k && C662.locations[id] && !C662.locations[id].kind));
+    check("films watched 2: ⛔ an epic's name card prints its title ONCE — the part before the title large, the title small — and stops short of the portrait inset, wrapping a long name rather than running under the picture",
+      /if \(small && big\.length > small\.length && big\.endsWith\(small\)\) big = big\.slice\(0, big\.length - small\.length\)/.test(src662)
+      && /const lines = wrapCanvasText\(ctx, big, limit\);/.test(src662) && /function wrapCanvasText\(ctx, text, limit\) \{/.test(src662)
+      && /maxWidth: \(w - Math\.round\(h \* 0\.22 \* 0\.8\) - 28\) - 40 - 16 \}\);/.test(src662)
+      && (() => { const card = src662.slice(src662.indexOf("function paintNameCard("), src662.indexOf("\nfunction ", src662.indexOf("function paintNameCard(") + 10)); return !/ctx\.fillText\(String\(name\), x, y\);/.test(card) && /let y = y0 - 34 \* \(lines\.length - 1\);/.test(card); })());
+    check("films watched 3: ⛔ two landings on one bearing — the frame keeps the labels it has placed and a second label whose box is taken goes to the other side of its mark",
+      /const placedLand = \[\];/.test(src662) && /const taken = \(x0, y0\) => placedLand\.some\(/.test(src662)
+      && /if \(taken\(lx, ly\)\) \{ align = "right"; lx = q\.x - 11; ly = q\.y \+ 11;/.test(src662) && /placedLand\.push\(\{ x: align === "left" \? lx : lx - tw, y: ly - 7, w: tw, h: 14 \}\);/.test(src662));
   }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(face416\[id\]\?\.name \|\| l\.name \|\| id, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)

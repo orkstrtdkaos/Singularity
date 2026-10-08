@@ -68,7 +68,7 @@ import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from 
 import { cityPlan, blockPath, blockRoofs, faubourgs, beltRoofs, leanOf } from "./engine/cityplan.js";
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";
-import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf, siteLevel, regionLook, isSpreading, spreadingSay, lookRand } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
+import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf, siteLevel, regionLook, isSpreading, spreadingSay, lookRand, placeKindOf } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
 import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.16";
+const APP_VERSION = "2.22.17";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7852,17 +7852,40 @@ function filmCardTitle(npc) {
   });
 }
 
-function paintNameCard(ctx, { name, kicker = null, title = null, w = 900, h = 560, u = 1 } = {}) {
+/** the words of a line, greedily packed to a width the canvas measures — a name that outruns its room wraps, never clips */
+function wrapCanvasText(ctx, text, limit) {
+  const words = String(text || "").split(/\s+/).filter(Boolean);
+  const lines = []; let cur = "";
+  for (const wd of words) {
+    const next = cur ? `${cur} ${wd}` : wd;
+    if (cur && ctx.measureText(next).width > limit) { lines.push(cur); cur = wd; } else cur = next;
+  }
+  if (cur) lines.push(cur);
+  return lines.length ? lines : [String(text || "")];
+}
+/** ✅ AEVI (the films watched, 2): *"An epic's `name` already contains its `title` … and the card then prints `title` again
+ *  underneath. When `name` ends with `title`: print the part before it large and the title small … stop the card short of
+ *  the portrait inset, wrapping if it must."* `maxWidth` is the room before the inset; the card grows UP so its base stays
+ *  above the captions. */
+function paintNameCard(ctx, { name, kicker = null, title = null, w = 900, h = 560, u = 1, maxWidth = null } = {}) {
   if (!name) return;
   const on = Math.max(0, Math.min(1, u * 3));           // it arrives with the shot, not after it
   /* ⚠️ ABOVE THE CAPTION BAND, MEASURED. The captions sit 74px off the bottom (O4) and run to three lines
    * on these films, so their top edge is around y=396 — and a card at h−168 put the place's name underneath
    * the first line of the sentence that names it. 320 clears a four-line caption with room over. */
-  const x = 40, y = h - 240;
+  const x = 40, y0 = h - 240;
+  let big = String(name), small = title ? String(title) : null;
+  if (small && big.length > small.length && big.endsWith(small)) big = big.slice(0, big.length - small.length).replace(/[\s,;:—–-]+$/, "") || big;
+  const limit = Math.max(120, Math.min(w - x * 2, Number(maxWidth) || (w - x * 2)));
   ctx.save();
   ctx.globalAlpha = on;
   ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
   ctx.shadowColor = "rgba(0,0,0,0.9)"; ctx.shadowBlur = 16;
+  ctx.font = opFont(30);
+  const lines = wrapCanvasText(ctx, big, limit);
+  ctx.font = opFont(16, "400");
+  const smallLines = small ? wrapCanvasText(ctx, small, limit) : [];
+  let y = y0 - 34 * (lines.length - 1);
   if (kicker) {
     ctx.font = '600 11px system-ui, "Segoe UI", sans-serif';   // the UI face: a canvas takes no var()
     ctx.fillStyle = "rgba(214,222,238,0.72)";
@@ -7870,17 +7893,19 @@ function paintNameCard(ctx, { name, kicker = null, title = null, w = 900, h = 56
   }
   ctx.font = opFont(30);
   ctx.fillStyle = "rgba(246,242,232,0.97)";
-  ctx.fillText(String(name), x, y);
-  if (title) {
+  let wide = 0;
+  for (const ln of lines) { ctx.fillText(ln, x, y); wide = Math.max(wide, ctx.measureText(ln).width); y += 34; }
+  y -= 34;                                               // the last line's baseline
+  if (smallLines.length) {
     ctx.font = opFont(16, "400");
     ctx.fillStyle = "rgba(216,208,190,0.86)";
-    ctx.fillText(String(title), x, y + 24);
+    smallLines.forEach((ln, i) => { ctx.fillText(ln, x, y + 24 + i * 20); wide = Math.max(wide, ctx.measureText(ln).width); });
   }
   // one hairline under it, the width of the longest line
-  const wide = Math.max(ctx.measureText(String(title || "")).width, (ctx.font = opFont(30), ctx.measureText(String(name)).width));
+  const under = y + (smallLines.length ? 38 + (smallLines.length - 1) * 20 : 14);
   ctx.globalAlpha = on * 0.5;
   ctx.strokeStyle = "rgba(226,232,246,0.5)"; ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(x, y + (title ? 38 : 14)); ctx.lineTo(x + Math.min(w - x * 2, wide), y + (title ? 38 : 14)); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x, under); ctx.lineTo(x + Math.min(limit, wide), under); ctx.stroke();
   ctx.restore();
 }
 
@@ -8382,6 +8407,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
      * 1.065r — exactly on the edge, which is what she saw. The multiplier is now derived FROM the screen
      * radius she asked for, so the ring is where it is meant to be whatever latitude the ring sits at. */
     const RING_UP = OPENING_RING_UP, LABEL_UP = OPENING_LABEL_UP;
+    const placedLand = [];   // ✅ AEVI (the films watched, 3): the landing labels this frame has placed, so a second on the same bearing goes to the other side
     poles.forEach((pl) => {
       const p = P(pl.lat, pl.lon, RING_UP);
       if (!p) return;
@@ -8443,11 +8469,22 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
               ctx.beginPath(); ctx.arc(q.x, q.y, 6 + 26 * f, 0, Math.PI * 2); ctx.stroke();
             }
             ctx.restore();
-            try { drawGlyph(ctx, glyphFor({ kind: L.kind, t: L.tier }) || "town", q.x, q.y, 12, { ink: "#fdf6e6" }); }
+            // ✅ AEVI (the films watched, 1): location records carry no `kind` — kinds live in location_kinds.json, read through
+            // `placeKindOf` as the local map reads them — so every landing was a house. Gearsflat is an underplace now: a cave.
+            try { drawGlyph(ctx, glyphFor({ kind: placeKindOf(L.id, { content: CONTENT, loc: L }), t: L.tier }) || "town", q.x, q.y, 12, { ink: "#fdf6e6" }); }
             catch { ctx.fillStyle = "#fdf6e6"; ctx.beginPath(); ctx.arc(q.x, q.y, 3, 0, Math.PI * 2); ctx.fill(); }
-            ctx.save(); ctx.font = opFont(12, "600"); ctx.textAlign = "left"; ctx.textBaseline = "middle";
+            ctx.save(); ctx.font = opFont(12, "600"); ctx.textBaseline = "middle";
             ctx.shadowColor = "rgba(0,0,0,0.9)"; ctx.shadowBlur = 8; ctx.fillStyle = "rgba(240,238,230,0.92)";
-            ctx.globalAlpha = q.y > h - 190 ? 0.35 : 1; ctx.fillText(String(L.name), q.x + 11, q.y - 9); ctx.restore();
+            ctx.globalAlpha = q.y > h - 190 ? 0.35 : 1;
+            // ✅ AEVI (the films watched, 3): *"Greyhearth (43° from the Crossing) and Cairnsend (87°) share a longitude, so pole-on
+            // they sit one behind the other and Cairnsend prints over Greyhearth. When two landing labels overlap, put the second
+            // on the other side of its mark."* Above-right first; below-left when that box is taken; a step lower if that is too.
+            const txt = String(L.name), tw = ctx.measureText(txt).width;
+            const taken = (x0, y0) => placedLand.some((b) => x0 < b.x + b.w && x0 + tw > b.x && y0 - 7 < b.y + b.h && y0 + 7 > b.y);
+            let align = "left", lx = q.x + 11, ly = q.y - 9;
+            if (taken(lx, ly)) { align = "right"; lx = q.x - 11; ly = q.y + 11; if (taken(lx - tw, ly)) ly = q.y + 25; }
+            placedLand.push({ x: align === "left" ? lx : lx - tw, y: ly - 7, w: tw, h: 14 });
+            ctx.textAlign = align; ctx.fillText(txt, lx, ly); ctx.restore();
           }
         }
       }
@@ -8522,7 +8559,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       const p = P(colat - 90, ((lon0 + 540) % 360) - 180, 1.002);
       if (inFrame(p)) {
         opGlow(ctx, p.x, p.y, 34, "rgba(255,236,186,0.42)", "rgba(255,210,120,0)");
-        try { drawGlyph(ctx, glyphFor({ kind: subject.loc.kind, t: subject.loc.tier }) || "town", p.x, p.y, 13, { ink: "#fdf6e6" }); }
+        try { drawGlyph(ctx, glyphFor({ kind: placeKindOf(subject.loc.id, { content: CONTENT, loc: subject.loc }), t: subject.loc.tier }) || "town", p.x, p.y, 13, { ink: "#fdf6e6" }); }   // ✅ the kind, from location_kinds.json
         catch { ctx.fillStyle = "#fdf6e6"; ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI * 2); ctx.fill(); }
       }
       ctx.restore();
@@ -8531,7 +8568,9 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     // and the title only where the save may see it (the seal lives in films.js, measured against her sample)
     if (subject?.kind === "place") paintNameCard(ctx, { name: subject.loc?.name || null, kicker: shot?.movementName || null, w, h, u });
     if (subject?.kind === "figure" && subject.who) {
-      paintNameCard(ctx, { name: subject.who.name || null, kicker: shot?.movementName || null, title: filmCardTitle(subject.who), w, h, u });
+      // ✅ AEVI (the films watched, 2): the card stops short of the portrait inset (22% of the height, 0.8 wide, 28 in from the right)
+      paintNameCard(ctx, { name: subject.who.name || null, kicker: shot?.movementName || null, title: filmCardTitle(subject.who), w, h, u,
+        maxWidth: (w - Math.round(h * 0.22 * 0.8) - 28) - 40 - 16 });
       /* ✅ FL1 (Aevi): THE FACE THE PLAYER HAS ALREADY SEEN — the whois card's own picture through the one helper, the life
        * portrait always, never a new mint of a new subject. A framed inset beside the name card, on the side away from the
        * captions, about 22% of the frame's height, with a thin rule in the people's colour; it fades in after the globe has
@@ -9003,7 +9042,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       const p = P(colat - 90, ((lon0 + 540) % 360) - 180, 1.002);
       if (inFrame(p)) {
         opGlow(ctx, p.x, p.y, 40, "rgba(255,236,186,0.5)", "rgba(255,210,120,0)");
-        try { drawGlyph(ctx, glyphFor({ kind: loc.kind, t: loc.tier }) || "town", p.x, p.y, 13, { ink: "#fdf6e6" }); }
+        try { drawGlyph(ctx, glyphFor({ kind: placeKindOf(loc.id, { content: CONTENT, loc }), t: loc.tier }) || "town", p.x, p.y, 13, { ink: "#fdf6e6" }); }   // ✅ the kind, from location_kinds.json
         catch { ctx.fillStyle = "#fdf6e6"; ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI * 2); ctx.fill(); }
       }
     }

@@ -25134,6 +25134,60 @@ await (async () => {
       && /"debtOps": \[\{"op": "record\|settle\|forgive\|refuse\|flee\|work"/.test(gmText682) && /const reck = reckoningsForGM\(env\.character, \{ content: env\.CONTENT \}\)/.test(reg682),
       JSON.stringify(o682));
   }
+  /* ── ✅ SNG-679 Part R, R5 + R7 (CCODE-683): a hold is its keeper's to mend; the hunt and the investigation are local jobs ── */
+  {
+    const MS683 = await import("../engine/mapstate.js");
+    const MD683 = await import("../engine/mending.js");
+    const JB683 = await import("../engine/jobs.js");
+    const H683 = await import("../engine/holdings.js");
+    const { loadContentHeadless: lch683 } = await import("./headless_content.mjs");
+    const C683 = await lch683();
+    const wheels683 = (C683.rules.localLayouts.millbrook.sites || []).find((x) => x.kind === "mill");
+    const key683 = `site:millbrook/${wheels683.id}`;
+    const stoneKind683 = Object.keys(C683.rules.economy.holdFeatures.kinds).find((k) => C683.rules.economy.holdFeatures.kinds[k].build?.goods?.cut_stone);
+    const cfg683 = { ...C683.rules.economy.holdStore, features: C683.rules.economy.holdFeatures };
+    const hold683 = { id: "h683", name: "Stillwater", store: { cut_stone: 2 }, features: [{ id: "w1", kind: stoneKind683, name: "the wall", count: 1, state: "ruined" }] };
+    const ruinedCost683 = H683.holdRepairCost(hold683, hold683.features[0], "ruined", { cfg: cfg683, repairCost: C683.mapStates.repairCost });
+    const damagedCost683 = H683.holdRepairCost(hold683, hold683.features[0], "damaged", { cfg: cfg683, repairCost: C683.mapStates.repairCost });
+    const app683 = readFileSync(join(root, "app.js"), "utf8");
+    check("Part R · R5: ⛔ A HOLD IS ITS KEEPER'S TO MEND — `holdingOps` repair costs one rung's share of what it took to build, in goods from the hold's own store (a ruined wall more than a damaged one), refused in words when the store is short and taken only when the mending took; no locals, no job board",
+      ruinedCost683.goods.cut_stone > damagedCost683.goods.cut_stone && damagedCost683.goods.cut_stone > 0 && ruinedCost683.short.length === 1
+      && app683.includes("else if (cost683?.short?.length) said(`${h.name}'s store cannot mend it yet") && app683.includes("if (r.ok && cost683) { h.store")
+      && !MS683.localsWillMend("hold:h683", "ruined", C683) && !MD683.mendingJobsFor({ id: "me", currentLocationId: "millbrook", holdings: [hold683], mapEvents: [] }, { content: C683 }).length,
+      `${JSON.stringify(ruinedCost683)} ${JSON.stringify(damagedCost683)}`);
+    const culprit683 = { id: "player-culprit", name: "C", currentLocationId: "millbrook", mapEvents: [], holdings: [], npcRegistry: {} };
+    MS683.applyMapChange(culprit683, { key: key683, change: "ruined", by: "player-culprit", seen: "named" }, { content: C683, worldDay: 100 });
+    MS683.localsMendPass(culprit683, { content: C683, worldDay: 137 });
+    const hunter683 = { id: "player-hunter", name: "H", currentLocationId: "millbrook", mapEvents: [...culprit683.mapEvents], holdings: [], purse: {} };
+    const hunts683 = MD683.huntJobsFor(hunter683, { content: C683 });
+    MD683.postHuntJobs(hunter683, { content: C683, day: 5 });
+    const job683 = hunter683.jobs.board.find((j) => j.id.startsWith("hunt:"));
+    JB683.applyJobEffects(hunter683, { team: ["player"], job: job683, names: {} }, JB683.jobEffects(job683, "success", C683.rules), { content: C683 });
+    culprit683.mapEvents.push(...hunter683.mapEvents.filter((e) => !culprit683.mapEvents.some((x) => x.id === e.id)));
+    const spent683 = MD683.localsSpentOn(culprit683, key683, { content: C683 });
+    MD683.reckoningPass(culprit683, { content: C683, worldDay: 138 });
+    check("Part R · R7: ⛔ THE HUNT IS A LOCAL JOB — posted to anyone but the culprit, with a bounty that is a share of the repair value; a success is ONE SHARED CHANGE (`revealed`, by the hunter, cause hunted) that the culprit's game reads as being found, the bounty added to what they owe",
+      hunts683.length === 1 && hunts683[0].label === "Find whoever wrecked the Water Wheels at Millbrook" && hunts683[0].stakes.crystal > 0 && MD683.huntJobsFor(culprit683, { content: C683 }).length === 0
+      && hunter683.mapEvents.some((e) => e.change === "revealed" && e.by === "player-hunter" && e.cause === "hunted")
+      && culprit683.reckonings[key683].state === "found" && culprit683.reckonings[key683].huntedBy === "player-hunter"
+      && Object.values(culprit683.worldState.debts)[0]?.valueOwed === spent683.spent + spent683.bounty && MD683.huntJobsFor(hunter683, { content: C683 }).length === 0,
+      `${hunts683.map((x) => x.label).join()} · owed ${Object.values(culprit683.worldState.debts)[0]?.valueOwed}`);
+    const u683 = { id: "player-u", currentLocationId: "millbrook", mapEvents: [], holdings: [], npcRegistry: {} };
+    MS683.applyMapChange(u683, { key: key683, change: "ruined", by: "player-u", seen: "unseen" }, { content: C683, worldDay: 100 });
+    MS683.localsMendPass(u683, { content: C683, worldDay: 137 });
+    MD683.reckoningPass(u683, { content: C683, worldDay: 138 });
+    const before683 = Object.keys(u683.worldState?.debts || {}).length;
+    const inv683 = { id: "player-i", currentLocationId: "millbrook", mapEvents: [...u683.mapEvents], holdings: [], purse: {} };
+    const ispec683 = MD683.huntJobsFor(inv683, { content: C683 })[0];
+    MD683.applyHunt(inv683, ispec683.stakes.hunt, { content: C683, worldDay: 140 });
+    u683.mapEvents.push(...inv683.mapEvents.filter((e) => !u683.mapEvents.some((x) => x.id === e.id)));
+    MD683.reckoningPass(u683, { content: C683, worldDay: 141 });
+    check("Part R · R7: ⛔ …AND UNSEEN DAMAGE POSTS AN INVESTIGATION — whoever learns who did it names them (a shared `revealed`), the culprit's reckoning starts from there, and the investigation becomes a hunt",
+      before683 === 0 && ispec683?.stakes.hunt.kind === "investigate" && ispec683.label === "Learn who wrecked the Water Wheels at Millbrook"
+      && Object.keys(u683.worldState?.debts || {}).length === 1 && ["asking", "sent", "found"].includes(u683.reckonings?.[key683]?.state)
+      && MD683.huntJobsFor(inv683, { content: C683 })[0]?.stakes.hunt.kind === "hunt"
+      && readFileSync(join(root, "engine/worldtick.js"), "utf8").includes("postHuntJobs(character, { content, day: currentDay })"));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

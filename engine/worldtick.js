@@ -61,7 +61,7 @@ import { TRADES_PATH, settleOrders, refundOrders, mergeOrders } from "./holdtrad
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval, rollRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
 import { localsMendPass, mapThingOf } from "./mapstate.js";   // ✅ SNG-679 Part R · R2
-import { postMendingJobs, reckoningPass } from "./mending.js";   // ✅ SNG-679 Part R · R6: mending is a job on the job list · R3: the reckoning
+import { postMendingJobs, reckoningPass, postHuntJobs } from "./mending.js";   // ✅ SNG-679 Part R · R6: mending is a job on the job list · R3: the reckoning
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
 import { rollErrands, workCraftsOf, workDayChance, workHeads, bandMissionOutcome } from "./jobs.js";   // ⛔ CCODE-428: …by the job's own dice · CCODE-450: standing work
@@ -936,6 +936,7 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // ✅ SNG-679 Part R · R6 — and what is still broken near you is on your board, nearest first (the locals' pass ran first, so a
   // thing they just finished comes off it)
   try { postMendingJobs(character, { content, day: currentDay }); } catch { /* a board is never a reason the world stops turning */ }
+  try { postHuntJobs(character, { content, day: currentDay }); } catch { /* …nor is a hunt */ }   // ✅ SNG-679 Part R · R7
   // ✅ SNG-679 Part R · R3 — and if this character broke it, the people who mended it go after them: the damages owed, recomputed;
   // `asking`, then `sent`, then `found` — the last is a scene the GM plays (see the debts block)
   const reckon682 = (() => { try { return reckoningPass(character, { content, worldDay: absoluteWorldDay() }).news; } catch { return []; } })();

@@ -2311,6 +2311,28 @@ export function featureKinds(cfg) {
   const all = (cfg?.features?.kinds) || {};
   return Object.fromEntries(Object.entries(all).filter(([k]) => !String(k).startsWith("_")));
 }
+/** ✅ SNG-679 R5: *"Damage to a hold or a feature is mended by its keeper through `holdingOps` (`repair`), at `repairCost` from the hold's
+ *  store. No locals and no job board are involved."* One rung's share of what it took to build — the feature's build goods × its count ×
+ *  the rung's slice of `mapStates.repairCost` (destroyed is a full rebuild); for the hold itself, every feature's. Pure.
+ *  → `{ goods, short }` — `short` says what the store lacks, in words. */
+export function holdRepairCost(holding, feature, state, { cfg = null, repairCost = null } = {}) {
+  const ladder = ["whole", "damaged", "ruined", "destroyed"];
+  const i = ladder.indexOf(String(state || "whole"));
+  if (i <= 0) return { goods: {}, short: [] };
+  const frac = (s) => (s === "destroyed" ? 1 : Number(repairCost?.[s]) || 0);
+  const slice = Math.max(0, frac(ladder[i]) - (i > 1 ? frac(ladder[i - 1]) : 0));
+  const goods = {};
+  for (const f of (feature ? [feature] : (holding?.features || []))) {
+    const def = featureDef(f?.kind, cfg);
+    for (const [g, q] of Object.entries(def?.build?.goods || {})) {
+      const n = Math.ceil((Number(q) || 0) * Math.max(1, Number(f?.count) || 1) * slice);
+      if (n > 0) goods[g] = (goods[g] || 0) + n;
+    }
+  }
+  const short = Object.entries(goods).filter(([g, q]) => (Number(holding?.store?.[g]) || 0) < q)
+    .map(([g, q]) => `${q - (Number(holding?.store?.[g]) || 0)} more ${g.replace(/_/g, " ")}`);
+  return { goods, short };
+}
 export function featureDef(kind, cfg) { const k = featureKinds(cfg)[String(kind || "")]; return k ? { kind: String(kind), ...k } : null; }
 /** ⛔ A BUILD IN PROGRESS IS NOT A FEATURE YET — every reader (defence, watch, yields, hands, aura, service) sees only what
  *  stands. `allFeatures` is for the record and the tab. (SPEC_hold_costs §3 / Q2: a build IS a project.) */

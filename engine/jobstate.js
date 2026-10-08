@@ -98,6 +98,9 @@ export function normalizeJob(spec = {}, { day = null } = {}) {
   // ✅ SNG-679 Part R · R6: a mend — the key, the state it is brought up from, and whether its doer is the one who broke it
   const md = s.mend && typeof s.mend === "object" ? s.mend : null;
   if (md && text(md.key, 120)) stakes.mend = { key: text(md.key, 120), from: text(md.from, 20) || null, culprit: md.culprit === true };
+  // ✅ SNG-679 Part R · R7: a hunt or an investigation — the thing, the breaking it is about, which of the two
+  const hn = s.hunt && typeof s.hunt === "object" ? s.hunt : null;
+  if (hn && text(hn.key, 120)) stakes.hunt = { key: text(hn.key, 120), damageId: text(hn.damageId, 80) || null, kind: hn.kind === "investigate" ? "investigate" : "hunt" };
   const job = {
     id: text(spec.id, 80) || `job-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 48)}-${day ?? "x"}`,
     label, where, level,

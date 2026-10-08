@@ -92,7 +92,7 @@ import { enterDeathState, rollRetrieval, pledgeFrom } from "./engine/death.js";
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
-import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources, sellPlanFor, stockPolicyFor, clearingQuote, startClearing, clearingHands, setClearingHands, payArrears, arrearsSaid } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
+import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources, sellPlanFor, stockPolicyFor, clearingQuote, startClearing, clearingHands, setClearingHands, payArrears, arrearsSaid, holdRepairCost } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { raidRisk, watchReadout, watchOdds, craftPlacementCost, defenceOf, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP, loadSources } from "./engine/field.js";
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.25.1";
+const APP_VERSION = "2.25.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -11769,13 +11769,19 @@ function applyTurn(turn, resolution, playerWords = null) {
           const change = { damage: "damaged", ruin: "ruined", destroy: "destroyed", repair: "repaired", move: "moved" }[kind];
           const fid = op.featureId ? String(op.featureId) : null;
           const feat = fid ? (h.features || []).find(f => f && (String(f.id) === fid || String(f.kind) === fid || String(f.name || "").toLowerCase() === fid.toLowerCase())) : null;
+          // ✅ SNG-679 R5: a keeper mends from the hold's own store — one rung's share of what it took to build, or it waits
+          const stNow681 = String((feat ? feat.state : h.state) || "whole");
+          const cost683 = kind === "repair" ? holdRepairCost(h, feat || null, stNow681, { cfg: holdCfgNow(), repairCost: CONTENT.mapStates?.repairCost || null }) : null;
           if (fid && !feat) said(`${h.name} has no ${fid} to ${kind}.`);
+          else if (cost683?.short?.length) said(`${h.name}'s store cannot mend it yet — it needs ${cost683.short.join(" and ")}.`);
           else {
             const key = feat ? `feature:${h.id}/${feat.id || feat.kind}` : `hold:${h.id}`;
             const pos = op.pos && typeof op.pos === "object" ? op.pos : (op.siteId ? { siteId: String(op.siteId) } : null);
             const r = applyMapChange(character, { key, change, by: op.by || "the world", seen: op.seen || (op.by ? "described" : "unseen"),
               cause: op.cause ? smartClamp(String(op.cause), 120) : null, day: absoluteWorldDay(), ...(pos ? { pos } : {}) },
               { content: CONTENT, worldDay: absoluteWorldDay(), recordOf: (cls, hid, sub) => cls === "feature" ? ((h.features || []).find(f => f && String(f.id || f.kind) === String(sub)) || null) : h });
+            // R5: the goods leave the store only when the mending took
+            if (r.ok && cost683) { h.store = h.store && typeof h.store === "object" ? h.store : {}; for (const [g, n] of Object.entries(cost683.goods)) h.store[g] = (Number(h.store[g]) || 0) - n; }
             said(r.ok ? (mapStateWord(CONTENT, feat ? "feature" : "hold", r.state, { name: feat ? `${h.name}'s ${feat.name || feat.kind}` : h.name }) || `${h.name} is ${r.state}.`) : `${h.name} stays as it is — ${r.why}`);
           }
         }

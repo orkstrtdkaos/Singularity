@@ -37,7 +37,7 @@ import { MISSION_KINDS, addAssignment, canSendOn } from "./assignments.js";   //
 import { familiesFromEvidence } from "./combatants.js"; // …and a standing charge's own words name its family
 import { workAt, workTable, postedAt } from "./holdwork.js";   // ⛔ CCODE-450: whoever is at standing work is nobody else's
 import { applyRaise, returnRaiseGoods } from "./holdings.js";
-import { applyMend } from "./mending.js";   // ✅ SNG-679 Part R · R6: a mend done goes through the one door
+import { applyMend, applyHunt } from "./mending.js";   // ✅ SNG-679 Part R · R6: a mend done goes through the one door · R7: a hunt
 import { absoluteWorldDay } from "./worldtime.js";   // ⛔ CCODE-452: a raise done, or its materials back
 
 /** The five ways a roll lands, in the resolver's own words, best first. */
@@ -311,7 +311,7 @@ export function jobEffects(job, degree, rules = {}) {
   const R = jobRules(rules);
   const e = R.effect[degree] || R.effect.failure;
   const s = job?.stakes || {};
-  const out = { degree, crystal: 0, xp: 0, recruits: 0, items: [], deed: null, standing: 0, hold: null, harmEach: 0, losses: 0, raise: null, refund: null, mend: null };
+  const out = { degree, crystal: 0, xp: 0, recruits: 0, items: [], deed: null, standing: 0, hold: null, harmEach: 0, losses: 0, raise: null, refund: null, mend: null, hunt: null };
   // ⚠️ an overrun rounds AWAY from zero — `Math.round(-7.5)` is −7, which would quietly shave the half a cost is owed
   if (num(s.crystal, 0)) out.crystal = s.crystal < 0 ? (degree === "crit_failure" ? -Math.round(-s.crystal * 0.5) : 0) : Math.round(s.crystal * e.gain);
   if (num(s.xp, 0) > 0) out.xp = Math.round(s.xp * Math.max(e.gain, degree === "failure" ? 0.25 : 0));
@@ -321,6 +321,7 @@ export function jobEffects(job, degree, rules = {}) {
   // ⛔ CCODE-452: a success raises it; anything short of a critical failure gives the materials back; a critical failure spends them
   if (s.raise) { if (e.gain >= 1) out.raise = s.raise; else if (degree !== "crit_failure") out.refund = s.raise; }
   if (s.mend && e.gain >= 1) out.mend = s.mend;   // ✅ Part R · R6: a success brings it up one rung; anything less leaves it as it was
+  if (s.hunt && e.gain >= 1) out.hunt = s.hunt;   // ✅ Part R · R7: only a success finds them
   if (s.deed && e.deed) out.deed = s.deed;
   out.standing = (num(s.standing, 0) ? Math.round(s.standing * Math.max(0, e.gain)) : 0) + num(e.standing, 0);
   if (num(s.harm, 0) > 0 && e.harm) out.harmEach = Math.round(s.harm * e.harm);
@@ -676,6 +677,12 @@ export function applyJobEffects(character, entry, fx, { content = {}, itemCatalo
     // ✅ SNG-679 Part R · R4: one rung, through the one door, by the character — on the world's own day
     const wd = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
     const r = applyMend(character, fx.mend, { content, worldDay: wd });
+    if (r.said) lines.push(r.said);
+  }
+  if (fx.hunt) {
+    // ✅ SNG-679 Part R · R7: found, or learned — one shared change, by the character, that every game folds
+    const wd = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
+    const r = applyHunt(character, fx.hunt, { content, worldDay: wd });
     if (r.said) lines.push(r.said);
   }
   for (const it of fx.items || []) {

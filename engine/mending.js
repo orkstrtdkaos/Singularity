@@ -230,16 +230,25 @@ export function localsSpentOn(character, key, { content = null } = {}) {
   const place = keyPlaces(key)[0];
   const site = siteOfKey(key, { content, character });
   const value = mendValue(key, { content, regionId: content?.locations?.[place]?.regionId || null, siteKind: site?.kind || null });
-  let spent = 0, workedOff = 0;
+  let spent = 0, workedOff = 0, worst = 0, hunted = null, revealed = null;
   const rungs = { locals: 0, players: 0, culprit: 0 };
   for (const s of cycle) {
+    worst = Math.max(worst, rungOf(content, s.after));
+    // ✅ R7: a `revealed` change after the damage is someone finding out — by investigation, or by the hunt (its cause says which)
+    if (s.e?.change === "revealed" && Number(s.e.day) >= Number(damage.day)) { revealed = revealed || { by: s.e.by, day: s.e.day, seen: s.e.seen || "named" }; if (s.e.cause === "hunted" && !hunted) hunted = { by: s.e.by, day: s.e.day }; }
     if (s.e?.change !== "repaired") continue;
     const v = rungPay(s.before, value, content);
     if (s.e.by === "locals") { spent += v; rungs.locals++; }
     else if (culprit && s.e.by === culprit) { workedOff += v; rungs.culprit++; }
     else { spent += v; rungs.players++; }
   }
-  return { damage, culprit, seen: damage.seen || null, value, spent: Math.round(spent), workedOff: Math.round(workedOff), rungs };
+  // ⛑ the bounty the locals pay a hunter is theirs to recover too: *"a share of the repair value, paid by the locals, so it adds to what the culprit owes"*
+  const ladder = ladderOf(content);
+  const full = value != null ? repairFraction(content, ladder[worst]) * value : 4 + 6 * worst;
+  const bounty = Math.round(Number(content?.mapStates?.jobs?.hunt?.bountyShare ?? 0.25) * full);
+  // an `unseen` breaking that someone has since found out is `named` from then on
+  const seen = revealed && damage.seen === "unseen" ? (revealed.seen || "named") : (damage.seen || null);
+  return { damage, culprit, seen, value, spent: Math.round(spent), workedOff: Math.round(workedOff), rungs, revealed, hunted, bounty };
 }
 function seededRng(text) {
   let h = 2166136261; for (const ch of String(text)) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); }
@@ -286,7 +295,7 @@ export function reckoningPass(character, { content = null, worldDay = null } = {
     let rk = RK[key];
     if (!rk || rk.damageId !== s.damage.id) rk = RK[key] = { damageId: s.damage.id, since: Math.floor(Number(s.damage.day) || 0), seen: s.seen, state: "owed", paidValue: 0 };
     if (rk.state === "forgiven" || rk.state === "settled") continue;
-    const owed = Math.max(0, s.spent - (Number(rk.paidValue) || 0) - s.workedOff);
+    const owed = Math.max(0, s.spent + (s.hunted ? s.bounty : 0) - (Number(rk.paidValue) || 0) - s.workedOff);
     const holder = damagesHolder(key, s.damage, { content, character });
     const site = siteOfKey(key, { content, character });
     const t = mapThingOf(key, content, { siteName: site?.name || null, from: holder.placeId }) || { thing: "it", place: "there" };
@@ -319,6 +328,8 @@ export function reckoningPass(character, { content = null, worldDay = null } = {
       if (W.sent) news.push(fill(W.sent, vals));
     }
     if (rk.state === "sent" && wd >= rk.arriveDay) { rk.state = "found"; rk.foundDay = Math.floor(wd); if (W.found) news.push(fill(W.found, vals)); }
+    // ✅ R7: a player took the hunt and found them — the holder comes with what the hunter learned, whatever the search had reached
+    if (s.hunted && ["owed", "asking", "sent"].includes(rk.state)) { rk.state = "found"; rk.foundDay = Math.floor(wd); rk.huntedBy = s.hunted.by; if (W.found) news.push(fill(W.found, vals)); }
   }
   return { news };
 }
@@ -335,4 +346,70 @@ export function reckoningsForGM(character, { content = null } = {}) {
       + `or flee (debtOps "flee" — the search starts again from where they went).`);
   }
   return out;
+}
+
+/* ═════ PART R · R7: THE HUNT IS A LOCAL JOB TOO ═════
+ * ✅ ERIK: *"The hunt for the culprit is a local quest/job."* ✅ `mapStates.jobs._hunt`: *"The locals post it to nearby boards; anyone
+ * but the culprit may take it. The bounty is a share of the repair value, paid by the locals, so it adds to what the culprit owes.
+ * … Unseen damage posts an investigation instead; finding the culprit turns it into a hunt."*
+ * ⛔ A SUCCESS IS A SHARED CHANGE, so it reaches the culprit's game without a channel of its own: the hunter (or the investigator) writes
+ * `revealed` on the broken thing, by themselves — `cause` "hunted" or "investigated". Every game folds it; the culprit's reads a hunt
+ * as being FOUND (and the bounty as owed), and an investigation turns an `unseen` breaking into a named one, so the reckoning starts. */
+export function huntJobsFor(character, { content = null, max = 2 } = {}) {
+  const J = jobsOf(content), W = wordsOf(content), L = content?.locations || {};
+  const within = Number(J.withinDays ?? 2);
+  const anchors = [...new Set([character?.currentLocationId, ...(character?.holdings || []).map((h) => h?.locationId)].filter((id) => id && L[id]))];
+  const found = [];
+  for (const key of heldKeys(character)) {
+    const s = localsSpentOn(character, key, { content });
+    if (!s || !s.culprit || s.culprit === character?.id) continue;   // anyone but the culprit
+    if (["locals", "the world"].includes(String(s.culprit))) continue;
+    if (s.hunted) continue;                                            // already found
+    const investigate = s.seen === "unseen";
+    if (!investigate && !(s.spent > 0)) continue;                      // nobody has spent anything yet: nothing to recover
+    const places = keyPlaces(key).filter((id) => L[id]);
+    if (!places.length) continue;
+    let near = Infinity;
+    for (const a of anchors) for (const b of places) { const d = a === b ? 0 : walkingDays(L[a], L[b]); if (Number.isFinite(d) && d < near) near = d; }
+    if (!(near <= within)) continue;
+    const where = places.find((id) => anchors.includes(id)) || places[0];
+    const site = siteOfKey(key, { content, character });
+    const t = mapThingOf(key, content, { siteName: site?.name || null, from: where });
+    if (!t) continue;
+    const did = (W.did || {})[s.damage.change] || s.damage.change;
+    const label = fill(investigate ? (J.labels?.investigate || "Learn who {did} the {thing} at {place}") : (J.labels?.hunt || "Find whoever {did} the {thing} at {place}"), { did, thing: t.thing, place: t.place });
+    const level = 6 + 6 * rungOf(content, s.damage.change);
+    found.push({ near, spec: {
+      id: `hunt:${key}`.slice(0, 80),   // prose-cap-ok: an identifier
+      label: smartClamp(label, 120), where, level,
+      effort: investigate ? Number(J.hunt?.investigateEffortDays) || 5 : Number(J.hunt?.effortDays?.[s.seen]) || 4,
+      needs: (J.needs?.[investigate ? "investigate" : "hunt"] || [{ family: "KNOW", weight: 2 }]).map((n) => ({ family: n.family, weight: n.weight })),
+      from: smartClamp(fill(J.from || "the people of {place}", { place: t.place }), 60),
+      stakes: { hunt: { key, damageId: s.damage.id, kind: investigate ? "investigate" : "hunt" },
+        ...(!investigate && s.bounty > 0 ? { crystal: Math.min(s.bounty, 4 * level) } : {}) },
+    } });
+  }
+  return found.sort((a, b) => a.near - b.near).slice(0, max).map((x) => x.spec);
+}
+/** Put the hunts on the board beside the mends (their own cap), and take off any whose thing is found or whole. Mutates. */
+export function postHuntJobs(character, { content = null, day = null } = {}) {
+  const specs = huntJobsFor(character, { content });
+  const B = ensureJobs(character).board;
+  const want = new Map(specs.map((s) => [s.id, s]));
+  for (const j of [...B]) if (String(j?.id || "").startsWith("hunt:") && (!want.has(j.id) || want.get(j.id).stakes.hunt.kind !== j.stakes?.hunt?.kind)) dropJob(character, j.id);
+  const posted = [];
+  for (const s of specs) { if (ensureJobs(character).board.some((j) => j?.id === s.id)) continue; const r = postJob(character, s, { day }); if (r.ok) posted.push(r.job); }
+  return { posted };
+}
+/** ⛔ A HUNT OR AN INVESTIGATION DONE — the one shared change that carries it to every game. Mutates. → `{ ok, said }` */
+export function applyHunt(character, hunt, { content = null, worldDay = null } = {}) {
+  if (!character || !hunt?.key) return { ok: false, said: null };
+  const s = localsSpentOn(character, hunt.key, { content });
+  const site = siteOfKey(hunt.key, { content, character });
+  const t = mapThingOf(hunt.key, content, { siteName: site?.name || null }) || { thing: "it", place: "there" };
+  if (!s || !s.culprit || ["locals", "the world"].includes(String(s.culprit))) return { ok: false, said: `nobody could say who broke the ${t.thing} at ${t.place} — no one did; it fell` };
+  const investigate = hunt.kind === "investigate";
+  const r = applyMapChange(character, { key: hunt.key, change: "revealed", by: character.id || "player", seen: "named", cause: investigate ? "investigated" : "hunted" }, { content, worldDay });
+  if (!r.ok) return { ok: false, said: `what was learned about the ${t.thing} at ${t.place} could not be told — ${r.why}` };
+  return { ok: true, said: investigate ? `whoever broke the ${t.thing} at ${t.place} is known now, and named to its people` : `whoever broke the ${t.thing} at ${t.place} has been found, and its people are told where` };
 }

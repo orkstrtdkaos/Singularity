@@ -1,4 +1,4 @@
-<!-- status: OPEN for CCode. Erik: fewer place names that start with "The". 62 of 64 renames are on origin with this order; two wait on test literals. -->
+<!-- status: DONE. CCode built N1–N4 (CCODE-689, reply po/CCODE_20261008_place_names_built.md) and fixed the CRLF gate (CCODE-688). Aevi applied the two held renames (Painter's Shelf, Weighgate) and the Low Lamp Inn site name in local_layouts. All 64 are on origin. -->
 # WORK ORDER: Aevi → CCode · Fewer names that start with "The"
 
 **Aevi (PO) · 2026-10-08.** Erik:

@@ -1003,7 +1003,10 @@ for (const pack of PACKS) {
   const twin = JSON.parse(JSON.stringify(pnDisk));
   const [ra, rb] = twin.rivers.filter((r) => res.placeNames.rivers.some((x) => x.id === r.id && x.via === "signature"));
   rb.head = [...ra.head]; rb.mouth = [...ra.mouth];
-  const resTwin = RA.resolvePlaceNames(twin, built.hydrology, { seedPos: seedPos393 });
+  // ✅ AEVI (NOTE_aevi_ccode_twin_reads_the_rebuild, 2026-10-06): the twin takes its two rivers from the SHIPPED world, so it
+  // resolves there too — against the rebuild, the Echo's new signature (river 89 of the shipped world) fell to the town
+  // fallback and the detector collided nothing. One word, measured both ways in her note.
+  const resTwin = RA.resolvePlaceNames(twin, shipped.hydrology, { seedPos: seedPos393 });
   const twinCollide = collisions(resTwin.placeNames.rivers, "pathIndex");
   /* ⛑ AND THIS IS WHY THE DETECTOR IS PROVED ON A TWIN RATHER THAN ON THE LIVE CENSUS: the moment her
    * re-anchor lands, the real collision list is EMPTY — and a detector whose only evidence is "I found the

@@ -165,7 +165,10 @@ export function legsOfWay(o, locations = {}, { march = 0 } = {}) {
   for (let k = 1; k < path.length; k++) {
     const a = path[k - 1], b = path[k], la = locations?.[a], lb = locations?.[b];
     const gate = o.kind === "gate" && o.gate && a === o.gate.from && b === o.gate.to;
-    const days = gate ? (Number(o.gate.hours) || 0) / 24 : (Number(walkingDays(la, lb)) || 0) * (1 - (Number(march) || 0));
+    // ✅ ERIK (2026-10-08): a passage by water is the road's distance at the water speed, and a marcher's pace does not row the boat
+    const days = gate ? (Number(o.gate.hours) || 0) / 24
+      : o.kind === "water" ? (Number(walkingDays(la, lb)) || 0) / (Number(o.speed) || 3)
+      : (Number(walkingDays(la, lb)) || 0) * (1 - (Number(march) || 0));
     legs.push({ i: k - 1, fromId: a, toId: b, fromName: la?.name || a, toName: lb?.name || b, days, danger: Number(lb?.dangerLevel) || 0,
       roof: !!lb?.communityId, gate: gate ? { hours: Number(o.gate.hours) || 0, energy: Number(o.energy) || 0 } : null });
   }
@@ -185,7 +188,7 @@ function wayOf(o, i, locations, march = 0) {
   const nights = Math.max(0, Math.floor(Number(o.days) || 0));
   const stops = path.slice(1, -1).filter(id => !!locations?.[id]?.communityId).length;
   const roofs = Math.min(nights, stops);
-  return { key: `${o.kind}-${i}`, kind: o.kind, label: o.label, days: round1(o.days), energy: Number(o.energy) || 0, path, gate: o.gate || null,
+  return { key: `${o.kind}-${i}`, kind: o.kind, label: o.label, days: round1(o.days), energy: Number(o.energy) || 0, path, gate: o.gate || null, ...(o.speed ? { speed: Number(o.speed) } : {}),
     worst, nights, roofs, camps: nights - roofs, legs: legsOfWay(o, locations, { march }) };
 }
 
@@ -202,6 +205,11 @@ export function journeyDestName(character, destId, locations = {}, fromId = null
   const b = from ? bearingBetween(from, dest) : null;
   return b?.phrase ? `a place you have not heard of, ${b.phrase} from here` : "a place you have not heard of";
 }
+
+/** ✅ AEVI's words for the two ways (world words, hers — po/REPLY_aevi_ccode_rulings_roads_and_films.md); content may carry its
+ *  own under `rules.journey.byWater` the day she moves them, and these are the fallback. */
+export const SEA_WAY_WORDS = Object.freeze({ road: "By road, the long way round", water: "By water, if a boat will take you", taken: "You find a boat going your way." });
+export function seaWayWords(rules = {}) { return { ...SEA_WAY_WORDS, ...(rules?.journey?.byWater || {}) }; }
 
 export function planJourney({ character, destId, content = null, locations = {}, rules = {}, catalog = {}, worldDay = null, route = null, companyNames = [], abilities = {} } = {}) {
   const fromId = character?.currentLocationId;
@@ -233,6 +241,18 @@ export function planJourney({ character, destId, content = null, locations = {},
   const options = r.options.map((o, i) => wayOf(march ? { ...o, days: o.kind === "gate"
     ? (Number(o.walkIn || 0) + Number(o.walkOut || 0)) * (1 - march) + (Number(o.gate?.hours) || 0) / 24
     : Number(o.days) * (1 - march) } : o, i, locations, march));
+  /* ✅ ERIK (2026-10-08, via Aevi): *"A plan between two ends joined by a sea lane offers two ways: the road, as now; by water,
+   * a passage taken at the coastal end. It moves at the 'by water' speed already in Erik's lever-C table (3×,
+   * `trade.waterSpeed`), so there is one number for water and not two."* The lanes are `content.seaLanes` — the derived list
+   * the map draws from — so the boat is offered exactly where the map shows one. */
+  const laneKey = fromId < destId ? `${fromId}|${destId}` : `${destId}|${fromId}`;
+  if ((content?.seaLanes || []).includes(laneKey)) {
+    const words = seaWayWords(rules);
+    const speed = Number(rules?.economy?.holdStore?.trade?.waterSpeed) || 3;
+    for (const o of options) if (o.kind !== "gate" && !o.choice) o.choice = words.road;
+    const by = { kind: "water", label: "by water", days: (Number(walkingDays(locations[fromId], locations[destId])) || 0) / speed, path: [fromId, destId], speed };
+    options.push({ ...wayOf(by, options.length, locations, 0), choice: words.water, speed });
+  }
   const chosen = options[0];
   return {
     id: `journey-${destId}-${worldDay ?? "x"}`, destId, destName: journeyDestName(character, destId, locations, fromId), fromId, fromName: locations[fromId]?.name || fromId,

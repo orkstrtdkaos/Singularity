@@ -128,7 +128,7 @@ import { noteWorldMovedOnShown } from "./engine/worldevents.js";
 import { holdsNear, holdNearLine } from "./engine/sharedholds.js";   // CCODE-383: a hold nearby is known
 import { buyFromHold } from "./engine/holdtrade.js";   // CCODE-388: trading with another player's hold
 import { scopeLegacyMintedIds } from "./engine/fates.js";   // CCODE-384: the people the world makes are shared
-import { planJourney, journeyLine, chosenWay, chooseWay, journeyArrivalPrompt, provisionsCarried, logJourneyOn, refreshJourneyOn, dropJourneyOn, completeJourneyOn, journeyCraftsOf } from "./engine/journeyplan.js";   // CCODE-387: a journey is agreed, readied, then walked
+import { planJourney, seaWayWords, journeyLine, chosenWay, chooseWay, journeyArrivalPrompt, provisionsCarried, logJourneyOn, refreshJourneyOn, dropJourneyOn, completeJourneyOn, journeyCraftsOf } from "./engine/journeyplan.js";   // CCODE-387: a journey is agreed, readied, then walked
 import { ensureLegsOn, beginRoadOn, currentLeg, roadStandsAt, legEarnsGambit, energyAfterLeg, walkLegOn, spendRoadOn, legGambitFor, aroundLeg, noteLegGambitOn, stopRoadOn,
   roadLine, perilousLegsOf, noteRoadOn, endJourneyOn, roadOutcome, legFailurePrompt, roadRules, dangerWord as roadDangerWord } from "./engine/journeyroad.js";   // CCODE-390: the road, walked leg by leg
 import { travelersHere, travelerHereLine, whereOf, ledgerPeopleFor } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.23.3";
+const APP_VERSION = "2.23.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14439,7 +14439,10 @@ async function setOutOnJourney() {
     return;
   }
   ensureLegsOn(plan, { locations: CONTENT.locations, character, rules: CONTENT.rules, abilities: fullCatalog() });
+  const fresh671 = !plan.underway;
   beginRoadOn(plan, { worldDay: absoluteWorldDay() });
+  // ✅ AEVI's words (Erik's ruling 2): the passage is taken at the coastal end — said once, on the road's own record
+  if (fresh671 && chosenWay(plan)?.kind === "water") noteRoadOn(character, plan, seaWayWords(CONTENT.rules).taken, roadNoteOpts());
   roadWalking = true;
   try { await walkRoad(plan); } finally { roadWalking = false; }
 }
@@ -17970,6 +17973,7 @@ function wireWorldGlobe() {
       showPrecursor: hasOldRoads, canvasPx: Math.min(GW(), GH()),
       tierOf: (l) => l?.tier,
       roadKind: (key) => _worldRoutes?.kinds?.get(key)?.kind || null,   // ✅ W4/W5: sea lanes and buried roads draw as what they are
+      seaLaneToo: (key) => (CONTENT.seaLanes || []).includes(key),      // ✅ ERIK: the long road AND a boat — the lane beside the road
       bend: coarse ? cachedBend : globeBend });   // ✅ W1: a moving frame draws the cached routes, never the arcs
     if (net.fade > 0 || net.trunkFade > 0) {
       ctx.save();
@@ -28393,7 +28397,7 @@ function renderPlay(turn, opts = {}) {
       <div class="jc-head">🧭 <strong>Journey to ${esc(j.destName)}</strong> <span class="hint">— planned; you have not left ${esc(j.fromName)}</span></div>
       <div class="jc-line">${esc(journeyLine(j, { carried: carried387 }))}</div>
       ${peril390.length ? `<div class="jc-line hint">⚠ ${peril390.length === 1 ? "One leg runs" : `${peril390.length} legs run`} into perilous country (${esc(peril390.map(p => p.toName).join(", "))}) — each is looked over when you reach it, and taken as a plan.</div>` : ""}
-      ${(j.options || []).length > 1 ? `<div class="jc-ways">${j.options.map(o => `<button class="opt${o.key === j.chosenKey ? " on" : ""}" data-journey-way="${esc(o.key)}">${esc(`${o.days} days ${o.label}`)}</button>`).join("")}</div>` : ""}
+      ${(j.options || []).length > 1 ? `<div class="jc-ways">${j.options.map(o => `<button class="opt${o.key === j.chosenKey ? " on" : ""}" data-journey-way="${esc(o.key)}">${esc(o.choice ? `${o.choice} — ${o.days} days` : `${o.days} days ${o.label}`)}</button>`).join("")}</div>` : ""}
       <div class="jc-actions"><button class="btn" id="journey-go">Set out for ${esc(j.destName)}</button> <button class="btn secondary" id="journey-cancel">Stay</button></div>
     </div>`;
   }

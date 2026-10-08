@@ -1508,7 +1508,7 @@ export function areaMembers(area, locations) {
  * change, and nobody could see what it bought. `bendRoad` is the world-scale answer: a handful of samples per
  * road, bent toward the cheaper ground, computed once per terrain and cached by the caller. */
 export function networkPaths(t, view, { locations, precursor, showPrecursor = false, canvasPx = 700,
-  bend = null, tierOf = null, roadKind = null } = {}) {
+  bend = null, tierOf = null, roadKind = null, seaLaneToo = null } = {}) {
   const arc = (a, b, radius, steps) => {
     // spherical interpolation between two [lat, lon] points, projected per step
     const R2 = Math.PI / 180;
@@ -1608,6 +1608,8 @@ export function networkPaths(t, view, { locations, precursor, showPrecursor = fa
       for (const run of runs) for (let k = 1; k < run.length; k++) runPx += Math.hypot(run[k][0] - run[k - 1][0], run[k][1] - run[k - 1][1]);
       if (runPx < 3) continue;
       for (const run of runs) out.roads.push({ run, primary, kind });
+      // ✅ ERIK (2026-10-08): the long road AND a boat — a sea lane between the same two ends, beside the road (W4's style)
+      if (seaLaneToo && seaLaneToo(key)) for (const run of arc(a, b, 1.0)) out.roads.push({ run, primary, kind: "sea" });
     }
   }
 
@@ -1817,6 +1819,49 @@ export function roadKinds(t, locations, byPair, { wetAbove = 20, coastDeg = 1.2 
     }
   }
   return out;
+}
+
+/** ✅ ERIK (2026-10-08, via Aevi): *"Both a longer road AND some ability to take a boat."* Aevi's rule, so it is not two
+ *  hard-coded pairs: *"a pair gets both when its ends are coastal, its straight line is more than 20% wet, and its land route
+ *  walks over ×3."* ⚠️ MEASURED: on the world raster the four ends Erik named sit 1.3°–4.0° from the sea (Thinwater 1.5°,
+ *  the Numen 3.2°, Kindlerow 1.3°, the Blaze 4.0°), so "water within a cell or two" names none of them. Coastal is therefore
+ *  `shoreDays` — the sea within a week's walk of each end, in `walkingDays`' own scale — which names exactly those two and
+ *  leaves out the Crossing ↔ Thinwater (34% wet, ×3.09, and no water within 15° of the Crossing). A buried end has no boat.
+ *  `byPair` is the merged routes (the land route each pair actually walks). PURE; the road measurement derives the list. */
+export function seaLanePairs(t, locations, byPair, { shoreDays = 7, wetAbove = 20, landOver = 3 } = {}) {
+  if (!t || !locations || !byPair) return [];
+  const R2 = Math.PI / 180, DAYS_PER_DEG = 300 / 180;
+  const shoreDeg = shoreDays / DAYS_PER_DEG;
+  const wet = (lat, lon) => { let lo = lon; while (lo > 180) lo -= 360; while (lo < -180) lo += 360; const s = sampleAt(t, lo, lat); return s ? (s.type & 3) === 0 : false; };
+  const gc = (a, b) => Math.acos(Math.max(-1, Math.min(1, Math.sin(a[0] * R2) * Math.sin(b[0] * R2) + Math.cos(a[0] * R2) * Math.cos(b[0] * R2) * Math.cos((a[1] - b[1]) * R2)))) / R2;
+  const slerp = (a, b, n) => {
+    const v = (p) => [Math.cos(p[0] * R2) * Math.cos(p[1] * R2), Math.cos(p[0] * R2) * Math.sin(p[1] * R2), Math.sin(p[0] * R2)];
+    const A = v(a), B = v(b), pts = [];
+    for (let i = 0; i <= n; i++) { const f = i / n; const x = A.map((c, k) => c + (B[k] - c) * f); const m = Math.hypot(...x) || 1; pts.push([Math.asin(x[2] / m) / R2, Math.atan2(x[1], x[0]) / R2]); }
+    return pts;
+  };
+  /** how far the sea is from a point, in degrees of ground — rings of 0.1°, 36 bearings — or null past `limit` */
+  const shoreOf = (p, limit) => { for (let d = 0.1; d <= limit + 1e-9; d += 0.1) for (let k = 0; k < 36; k++) { const a = (k / 36) * Math.PI * 2; if (wet(p[0] + d * Math.sin(a), p[1] + d * Math.cos(a) / Math.max(0.12, Math.cos(p[0] * R2)))) return Math.round(d * 10) / 10; } return null; };
+  const P = (id) => { const w = locations[id]?.worldPos; return w ? [Number(w.colatitude) - 90, Number(w.longitude)] : null; };
+  const out = [];
+  for (const [key, path] of byPair) {
+    const [a, b] = key.split("|");
+    const pa = P(a), pb = P(b);
+    if (!pa || !pb || !path || path.length < 2) continue;
+    if ((Number(locations[a]?.worldPos?.depth) || 0) < 0 || (Number(locations[b]?.worldPos?.depth) || 0) < 0) continue;
+    const straight = gc(pa, pb);
+    if (!(straight > 0.2)) continue;
+    let walked = 0; for (let k = 1; k < path.length; k++) walked += gc(path[k - 1], path[k]);
+    const landRatio = walked / straight;
+    if (!(landRatio > landOver)) continue;
+    const line = slerp(pa, pb, 60);
+    const wetPct = Math.round(100 * line.filter((p) => wet(p[0], p[1])).length / line.length);
+    if (!(wetPct > wetAbove)) continue;
+    const sa = shoreOf(pa, shoreDeg), sb = shoreOf(pb, shoreDeg);
+    if (sa == null || sb == null) continue;
+    out.push({ key, a, b, wetPct, landRatio: Math.round(landRatio * 100) / 100, shoreDeg: [sa, sb] });
+  }
+  return out.sort((x, y) => x.key.localeCompare(y.key));
 }
 
 export function worldRoadRoutes(t, locations, { tierOf = null, gridW = 360, regionPaths = null, regionStamp = 0, capPaths = null, capStamp = 0, content = null } = {}) {

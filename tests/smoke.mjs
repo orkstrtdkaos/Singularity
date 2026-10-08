@@ -24509,6 +24509,29 @@ await (async () => {
     check("SNG-682 ruling 4: ⛔ a road shorter than the frame can show (under 3 px of projected run) does not draw at world scale — measured on the projection, so the same stub draws when the globe is zoomed in, and the region and local maps draw it always",
       near670.roads.length > 50 && near670.roads.every((r) => runLen670(r) >= 3 || r.run.length < 2 || near670.roads.filter((q) => q.run === r.run).length === 0)
       && /if \(runPx < 3\) continue;/.test(wgW1));
+    // ✅ ERIK's boat (CCODE-671)
+    const JP671 = await import("../engine/journeyplan.js");
+    const WM671 = await import("../engine/worldmap.js");
+    const chT671 = { id: "c671", currentLocationId: "thinwater", knownPlaces: ["the_numen"], maxHealth: 60, health: 60, maxEnergy: 120, energy: 120, inventory: [], abilities: [] };
+    const plan671 = JP671.planJourney({ character: chT671, destId: "the_numen", content: C660, locations: C660.locations, rules: C660.rules, catalog: C660.items || {}, abilities: C660.abilities || {} });
+    const water671 = (plan671?.options || []).find((o) => o.kind === "water");
+    const road671 = (plan671?.options || []).find((o) => o.kind !== "water" && o.kind !== "gate");
+    const speed671 = Number(C660.rules?.economy?.holdStore?.trade?.waterSpeed);
+    const lanes671 = C660.seaLanes || [];
+    check("ERIK's boat: ⛔ the derived sea lanes reach the content through the loader — exactly the Numen ↔ Thinwater and Kindlerow ↔ the Blaze — and a plan from Thinwater to the Numen offers BOTH ways: the road, \"By road, the long way round\", and \"By water, if a boat will take you\" at the road's distance at the trade's one water speed",
+      JSON.stringify(lanes671) === JSON.stringify(["kindlerow|the_blaze", "the_numen|thinwater"])
+      && !!plan671 && !!water671 && !!road671 && road671.choice === "By road, the long way round" && water671.choice === "By water, if a boat will take you"
+      && speed671 === 3 && Math.abs(water671.days - Math.round((WM671.walkingDays(C660.locations.thinwater, C660.locations.the_numen) / speed671) * 10) / 10) < 0.051
+      && water671.days < road671.days && JSON.stringify(water671.path) === JSON.stringify(["thinwater", "the_numen"])
+      && (() => { const p = { ...plan671, options: plan671.options.map((o) => ({ ...o, legs: undefined })) }; JP671.chooseWay(p, water671.key, C660.rules); return JP671.chosenWay(p).kind === "water"; })());
+    const plainPlan671 = JP671.planJourney({ character: { ...chT671, currentLocationId: "millbrook", knownPlaces: ["archive_hollow"] }, destId: "archive_hollow", content: C660, locations: C660.locations, rules: C660.rules, catalog: C660.items || {}, abilities: C660.abilities || {} });
+    const lane671 = WG660.networkPaths(t660, { ...WG660.DEFAULT_VIEW, r: 300, cx: 350, cy: 270 }, { locations: C660.locations, canvasPx: 700, tierOf: (l) => l?.tier, bend: null, seaLaneToo: (k) => lanes671.includes(k) });
+    check("ERIK's boat: ⛔ …no other pair gets a boat (Millbrook → Archive Hollow offers no water way), the world map draws the lane BESIDE the road for each lane pair, and setting out by water says Aevi's words once on the road's record",
+      !!plainPlan671 && !(plainPlan671.options || []).some((o) => o.kind === "water")
+      && lane671.roads.some((r) => r.kind === "sea")
+      && /seaLaneToo: \(key\) => \(CONTENT\.seaLanes \|\| \[\]\)\.includes\(key\),/.test(readFileSync(join(root, "app.js"), "utf8"))
+      && /if \(fresh671 && chosenWay\(plan\)\?\.kind === "water"\) noteRoadOn\(character, plan, seaWayWords\(CONTENT\.rules\)\.taken, roadNoteOpts\(\)\);/.test(readFileSync(join(root, "app.js"), "utf8"))
+      && JP671.seaWayWords({}).taken === "You find a boat going your way.");
     check("SNG-682: ⛔ Aevi's road measurement runs in CI with her ratchets (tests/world_roads_measure.mjs in the runner, a baseline that may only go DOWN)",
       existsSync(join(root, "tests/world_roads_measure.mjs")) && existsSync(join(root, "tests/world_roads_baseline.json"))
       && /\["world_roads_measure", "node", \["tests\/world_roads_measure\.mjs"\]\]/.test(readFileSync(join(root, "scripts/run_tests.mjs"), "utf8")));

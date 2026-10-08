@@ -1,0 +1,28 @@
+{
+  "_what": "DERIVED — the pairs that get both a road and a sea lane (Erik, 2026-10-08). Written by tests/world_roads_measure.mjs --write from engine/worldglobe.js seaLanePairs; the push fails when this file and the rule disagree. Do not edit by hand.",
+  "_rule": "both ends within a week's walk of the sea, the straight line more than 20% wet, the land route over x3 (Aevi's rule; the coast measured in days, see seaLanePairs)",
+  "lanes": [
+    {
+      "key": "kindlerow|the_blaze",
+      "a": "kindlerow",
+      "b": "the_blaze",
+      "wetPct": 61,
+      "landRatio": 3.53,
+      "shoreDeg": [
+        1.3,
+        4
+      ]
+    },
+    {
+      "key": "the_numen|thinwater",
+      "a": "the_numen",
+      "b": "thinwater",
+      "wetPct": 69,
+      "landRatio": 4.37,
+      "shoreDeg": [
+        3.2,
+        1.5
+      ]
+    }
+  ]
+}

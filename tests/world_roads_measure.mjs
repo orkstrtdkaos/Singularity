@@ -27,6 +27,9 @@ const cap = WG.capRoadRoutes(t, C.locations, { tierOf: (l) => l?.tier, content: 
 const routes = WG.worldRoadRoutes(t, C.locations, { tierOf: (l) => l?.tier, regionPaths, regionStamp: 1, capPaths: cap.byPair, capStamp: 1, content: C });
 const net = WG.roadNetwork(C.locations, { tierOf: (l) => l?.tier });
 const kinds = WG.roadKinds(t, C.locations, routes.byPair);   // ✅ W4/W5: what each road is
+// ✅ ERIK (2026-10-08): the long road AND a boat — the lanes derived by the rule, written on --write, checked always
+const lanes = WG.seaLanePairs(t, C.locations, routes.byPair);
+const LANES = join(root, "content/packs/core/world/sea_lanes.json");
 const R = Math.PI / 180;
 const gc = (a, b) => Math.acos(Math.max(-1, Math.min(1, Math.sin(a[0] * R) * Math.sin(b[0] * R) + Math.cos(a[0] * R) * Math.cos(b[0] * R) * Math.cos((a[1] - b[1]) * R)))) / R;
 const wet = (lat, lon) => { let lo = lon; while (lo > 180) lo -= 360; while (lo < -180) lo += 360; const s = WG.sampleAt(t, lo, lat); return s ? (s.type & 3) === 0 : false; };
@@ -93,6 +96,7 @@ console.log(`world roads: ${measured.roads} · routed ${measured.routed} · stra
 console.log(`W2: ${measured.fromRegions} roads take their region's own route · Millbrook → Echo River Crossing walks x${measured.millbrookCrossingRatio} · short stubs with a region route: ${measured.shortStubsWithRegionRoute}`);
 console.log(`W3: ${measured.fromCap} of ${measured.capRoads} cap roads on the polar grid (over x2 among them: ${measured.capOver2x}) · cap walked/straight median ${measured.capMedianRatio} · p90 ${measured.capP90Ratio} · the Crossing → Thinwater x${measured.crossingThinwaterRatio} · over x2 within 10° of the Crossing: ${measured.capRoutedOver2xWithin10}`);
 console.log(`W4/W5: sea lanes ${measured.seaLanes} · not drawn at world scale ${measured.hiddenAtWorld} · buried ${measured.buriedRoads}`);
+console.log(`Erik's boat: ${lanes.length} pair(s) with a road AND a sea lane — ${lanes.map((l) => `${l.key} (${l.wetPct}% wet, land x${l.landRatio}, shore ${l.shoreDeg.join("°/")}°)`).join(" · ")}`);
 console.log(`routed: walked/straight median ${measured.medianRatio} · p90 ${measured.p90Ratio} · over ×2: ${measured.routedOver2x} (within 10° of the Crossing: ${measured.capRoutedOver2xWithin10})`);
 console.log("worst routed by detour:"); routedRows.filter((r) => r.ratio).sort((x, y) => y.ratio - x.ratio).slice(0, 5).forEach((r) => console.log("   ", r.key, "x" + r.ratio, r.straightDeg + "°", "colat " + r.minColat));
 console.log("straight arcs drawn (unrouted), wettest first:"); arcs.sort((x, y) => y.wetPct - x.wetPct).slice(0, 8).forEach((r) => console.log("   ", r.key, r.wetPct + "% wet", r.straightDeg + "°", r.buried ? "buried" : ""));
@@ -137,6 +141,20 @@ if (!baseline) {
     writeFileSync(BASE, JSON.stringify({ ...baseline, written: new Date().toISOString().slice(0, 10), ...lowered }, null, 2) + "\n");
     console.log(`baseline rewritten — ${fell} ratchet(s) fell`);
   } else if (fell) console.log(`⚠️ ${fell} ratchet(s) went DOWN — rewrite the baseline with --write so the gain is kept`);
+}
+// ✅ the derived list: written on --write, and every push asks that the file IS the rule's answer, and that the answer is the two
+// pairs Erik ruled — a third pair is a red line here, never a silent new boat
+{
+  let filed = null; try { filed = JSON.parse(readFileSync(LANES, "utf8")); } catch { filed = null; }
+  if (WRITE) {
+    writeFileSync(LANES, JSON.stringify({ _what: "DERIVED — the pairs that get both a road and a sea lane (Erik, 2026-10-08). Written by tests/world_roads_measure.mjs --write from engine/worldglobe.js seaLanePairs; the push fails when this file and the rule disagree. Do not edit by hand.", _rule: "both ends within a week's walk of the sea, the straight line more than 20% wet, the land route over x3 (Aevi's rule; the coast measured in days, see seaLanePairs)", lanes }, null, 2) + "\n");
+    filed = { lanes };
+    console.log(`sea lanes written: ${lanes.length}`);
+  }
+  const same = !!filed && JSON.stringify((filed.lanes || []).map((l) => l.key)) === JSON.stringify(lanes.map((l) => l.key));
+  check("Erik's boat: content/packs/core/world/sea_lanes.json IS the rule's answer (rewrite with --write when the world moves)", same, `file ${(filed?.lanes || []).map((l) => l.key).join(", ")} · rule ${lanes.map((l) => l.key).join(", ")}`);
+  check("Erik's boat: the pairs with both a road and a sea lane are exactly the two Erik ruled — the Numen ↔ Thinwater and Kindlerow ↔ the Blaze; a third is a ruling, not a quiet addition",
+    JSON.stringify(lanes.map((l) => l.key)) === JSON.stringify(["kindlerow|the_blaze", "the_numen|thinwater"]));
 }
 console.log(failures ? `${failures} FAILURE(S)` : "world roads: every ratchet holds");
 process.exit(failures ? 1 : 0);

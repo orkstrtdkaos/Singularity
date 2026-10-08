@@ -39,7 +39,7 @@ The frames are in `po/ref/local_maps_before_20261008.jpg`.
 There is one entry per place, all 158, each read off the place's own appearance and description lines; `_why` quotes
 the line. Each entry says:
 - **`dwellings`:** who lives here and roughly how many. `none`, `few` (`n` exactly), `hamlet`, `village`, `town` or
-  `city`, with roof ranges in `_rules`. 83 places are `none`.
+  `city`, with roof ranges in `_rules`. 87 places are `none`.
 - **`layout`:** how the houses sit. The default is `cluster`, organic. `street` is only where the words say *along*.
   The others are `rows`, `grid`, `rings`, `tiers`, `stilts`, `rock`, `dug`, `canopy`, `scatter`, `yard`, `court`,
   `camp`, `hulls`, `floating`, `underwater` and `interior`, each defined in `_rules.layout`.

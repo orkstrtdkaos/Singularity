@@ -24,7 +24,8 @@
 // exactly as `fates.js` keeps `foldFates` pure and lets `sync.js` carry it.
 
 import { smartClamp } from "./namematch.js";   // model prose is clamped on a word, never sliced
-import { fnvHex } from "./fates.js";   // ⛔ ONE HASH. A second id rule is a second identity for one event.
+import { fnvHex } from "./fates.js";
+import { walkingDays } from "./worldmap.js";   // ✅ S7: word of a ruin travels at a walk   // ⛔ ONE HASH. A second id rule is a second identity for one event.
 
 /* ═════ S0 · THE INVENTORY, AS A TABLE ═════
  * ✅ AEVI: *"This table is the scope. A gate (G1) keeps it complete … A new class drawn on a map without a
@@ -361,7 +362,8 @@ export function mapStateOf(character, key, { content = null, recordOf = null } =
  * nothing it has to work out again, so the globe, the region map, the local map and the card cannot disagree about a state.
  * `name` is the thing's own name (what a rename replaced); `worldDay` decides "new". PURE. */
 export function mapView(character, key, { content = null, name = "", worldDay = null, recordOf = null } = {}) {
-  const st = mapStateOf(character, key, { content, recordOf }) || { state: ladderOf(content)[0] };
+  // ✅ SNG-679 S7: *"The map shows the state the character HAS LEARNED, not the state the world holds."*
+  const st = knownStateOf(character, key, { content, recordOf }) || { state: ladderOf(content)[0] };
   // ✅ Part R · R2: *"While they work, the local map shows the thing under repair"* — derived from the record and the day
   const rep = worldDay != null ? localRepairAt(st, key, worldDay, content) : null;
   const cls = parseMapKey(key)?.cls || "place";
@@ -375,7 +377,9 @@ export function mapView(character, key, { content = null, name = "", worldDay = 
     labelAlpha: state === "ruined" ? 0.6 : state === "destroyed" ? 0.55 : 1,
     renamed: !!st.name && st.name !== name, once: st.name ? (typeof st.was === "string" ? st.was : name) : null,
     since: st.since ?? null, cause: st.cause ?? null,
-    mending: rep?.mending ? { progress: rep.progress, wholeDay: rep.wholeDay, by: "locals" } : null };
+    mending: rep?.mending ? { progress: rep.progress, wholeDay: rep.wholeDay, by: "locals" } : null,
+    // ✅ S7: *"Until then their map shows the old state, and the card says `knowledge.lastKnown`."*
+    lastKnown: hasUnlearned(character, key) };
 }
 
 export function mapStateWord(content, cls, state, { name = "", old = "", from = "" } = {}) {
@@ -623,4 +627,81 @@ export function mapThingOf(key, content, { siteName = null, from = null } = {}) 
   if (p.cls === "water") return { place: nm(p.id), thing: "water" };
   if (p.cls === "ground") return { place: nm(p.id), thing: "ground" };
   return null;   // a place, a hold, a feature, a region — no "the {thing} at {place}" form in the words
+}
+
+/* ═════ SNG-679 S7 · WHAT THE CHARACTER KNOWS ═════
+ * ✅ AEVI: *"The world is shared, but knowledge isn't. The map shows the state the character has learned, not the state the world
+ * holds. A change carries `beat`, and the character learns of it by: being there; being told (a GM line naming it); a relay or hold
+ * report; word of it … for anything at `ruined` or worse, which reaches characters within a few days' travel of it. Until then their
+ * map shows the old state, and the card says `knowledge.lastKnown`."*
+ * ⛔ THE TRUTH STILL RULES THE WORLD. Only what is DRAWN is the learned state: a road ruined in another game still costs the journey
+ * that walks it (S6 reads `mapStateOf`, the truth), and the character finds out by walking it.
+ * ⛑ WHAT THIS GAME WROTE IS KNOWN: its own events — the character's deeds, the GM's lines in its scenes, its jobs. Only what another
+ * game wrote, adopted through the shared store, waits to be learned.
+ * ⚠️ "Word of it" is DERIVED from the shared events, not posted to `world/feed.json`: the feed is the players' scrapbook, and its own
+ * guard is that it is "never an auto-log". The word walks: learned once the days a walk from the place would take have passed. */
+export const WORD_WITHIN_DAYS = 3;
+const WORD_OF = new Set(["ruined", "destroyed"]);
+/** The places a key is at (a road has two ends; a hold, a feature and a region are nobody's place). */
+export function placesOfKey(key) {
+  const p = parseMapKey(key);
+  if (!p || p.row.onRecord || p.cls === "region") return [];
+  return p.cls === "road" ? p.rest.split("|") : [p.id];
+}
+/** Whether this character knows of an event: their own game wrote it, it is theirs, or they learned it. */
+export function eventKnown(character, e) {
+  if (!e?.id) return false;
+  // ⚠️ THE LOCALS' WORK IS WRITTEN BY EVERY GAME'S TICK, so "this game wrote it" would hand every character every mending in the world.
+  // It is the world's, and learned like the world's.
+  if (e.by === "locals") return !!character?.mapLearned?.[e.id];
+  if ((character?.mapEvents || []).some((x) => x?.id === e.id)) return true;
+  if (e.by && character?.id && e.by === character.id) return true;
+  return !!character?.mapLearned?.[e.id];
+}
+/** The state the character has LEARNED a key to be in — the fold of the events they know. A thing on its owner's record (a hold) is
+ *  the owner's to know, and reads as it is. */
+export function knownStateOf(character, key, { content = null, recordOf = null } = {}) {
+  const parsed = parseMapKey(key);
+  if (!parsed || parsed.row.onRecord || !character) return mapStateOf(character, key, { content, recordOf });
+  const ev = eventsFor(character, key).filter((e) => eventKnown(character, e));
+  if (!ev.length) return { state: ladderOf(content)[0], since: null, by: null, seen: null, cause: null, beat: null, history: [] };
+  return foldKey(ev, content);
+}
+/** Whether the world holds a change at this key the character has not learned. */
+export function hasUnlearned(character, key) {
+  const parsed = parseMapKey(key);
+  if (!parsed || parsed.row.onRecord || !character) return false;
+  return eventsFor(character, key).some((e) => !eventKnown(character, e));
+}
+/** ⛔ THE LEARNING PASS — the world tick's. Each change another game wrote that this character has not learned is learned: by being
+ *  THERE (a key at the place they stand), by a hold's REPORT (a key at a place they keep a hold), or by WORD of it (ruined or worse,
+ *  within `WORD_WITHIN_DAYS` of where they are, once the walk from there has had time). Mutates `character.mapLearned`.
+ *  → `[{ key, id, how }]` */
+export function learnMapEvents(character, { content = null, worldDay = null, locations = null } = {}) {
+  const out = [];
+  if (!character) return out;
+  const L = locations || content?.locations || {};
+  const here = character.currentLocationId || null;
+  const holds = new Set((character.holdings || []).map((h) => h?.locationId).filter(Boolean));
+  const keys = new Set([...(character.mapEvents || []).map((e) => e?.key), ...Object.keys(character.worldMapStore?.keys || {})].filter(Boolean));
+  for (const key of keys) {
+    const places = placesOfKey(key);
+    if (!places.length) continue;
+    for (const e of eventsFor(character, key)) {
+      if (eventKnown(character, e)) continue;
+      let how = null;
+      if (here && places.includes(here)) how = "there";
+      else if (places.some((p) => holds.has(p))) how = "report";
+      else if (WORD_OF.has(String(e.change)) && worldDay != null && here && L[here]) {
+        let d = Infinity;
+        for (const p of places) if (L[p]) { const w = walkingDays(L[p], L[here]); if (Number.isFinite(w) && w < d) d = w; }
+        if (d <= WORD_WITHIN_DAYS && Number(worldDay) >= Number(e.day || 0) + d) how = "word";
+      }
+      if (!how) continue;
+      character.mapLearned = character.mapLearned && typeof character.mapLearned === "object" ? character.mapLearned : {};
+      character.mapLearned[e.id] = { day: worldDay != null ? Math.floor(Number(worldDay)) : null, how };
+      out.push({ key, id: e.id, how });
+    }
+  }
+  return out;
 }

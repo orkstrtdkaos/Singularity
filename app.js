@@ -49,7 +49,7 @@ import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnab
 import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
 import { openingFrame, placeCardBox } from "./engine/worldmap.js";
 // ⛔ SNG-679 S2: ONE READER for what state anything on a map is in, and the word a player reads for it.
-import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange, mapView, roadKey } from "./engine/mapstate.js";
+import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange, mapView, roadKey, knownStateOf } from "./engine/mapstate.js";
 // ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
 import { mapHolds, holdMarker, ensureHoldSite, placeHoldSite, holdSiteOf, holdView } from "./engine/mapholds.js";
 import { brokenAt } from "./engine/mending.js";   // ✅ SNG-679 Part R · R4: what is broken at a place, on its card
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.25.3";
+const APP_VERSION = "2.25.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -19131,10 +19131,11 @@ function placeCardHTML(selectedId) {
              `mapStateWord` as an export whose docstring claimed renderers read it while nothing did. */""}
         ${(() => {
           try {
-            const st = mapStateOf(character, `place:${l.id}`, { content: CONTENT });
+            const st = knownStateOf(character, `place:${l.id}`, { content: CONTENT });   // ✅ S7: what the character has learned
             // ✅ S5 (CCODE-672): a rename says "once called {old}", a founding says "newly founded" for thirty days
             const pv = mapView(character, `place:${l.id}`, { content: CONTENT, name: l.name || l.id, worldDay: absoluteWorldDay() });
-            const extra = [pv.renamed ? mapStateWord(CONTENT, "place", "renamed", { old: pv.once || l.name || l.id }) : null, pv.isNew ? mapStateWord(CONTENT, "place", "added", {}) : null]
+            const extra = [pv.renamed ? mapStateWord(CONTENT, "place", "renamed", { old: pv.once || l.name || l.id }) : null, pv.isNew ? mapStateWord(CONTENT, "place", "added", {}) : null,
+              pv.lastKnown ? (CONTENT.mapStates?.knowledge?.lastKnown || null) : null]   // ✅ S7: *"the card says `knowledge.lastKnown`"*
               .filter(Boolean).map((w) => `<span class="rep-band">${esc(w)}</span>`).join("");
             if (!st || st.state === "whole") return extra;
             const word = mapStateWord(CONTENT, "place", st.state, { name: l.name || l.id });

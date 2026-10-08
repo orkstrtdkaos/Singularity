@@ -60,7 +60,7 @@ import { HOLDS_PATH, holdCardsOf, holdCardsChanged, mergeHoldCards } from "./sha
 import { TRADES_PATH, settleOrders, refundOrders, mergeOrders } from "./holdtrade.js";   // CCODE-388: trading with another player's hold
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval, rollRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
-import { localsMendPass, mapThingOf } from "./mapstate.js";   // ✅ SNG-679 Part R · R2
+import { localsMendPass, mapThingOf, learnMapEvents } from "./mapstate.js";   // ✅ SNG-679 Part R · R2 · S7: what the character learns
 import { postMendingJobs, reckoningPass, postHuntJobs } from "./mending.js";   // ✅ SNG-679 Part R · R6: mending is a job on the job list · R3: the reckoning
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
@@ -923,6 +923,8 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
    * the one door (by "locals", on the day it finished — the same event in every game), and a thing brought back to whole is
    * news: `reckoning.words.mended`. ⛑ S7 is not built, so "everyone who knew it was broken" is everyone (Aevi: "ship with
    * learned = everything"). A failure here is never a reason the world stops turning. */
+  // ✅ SNG-679 S7 — what the character LEARNS this tick: being there, a hold's report, or word of a ruin walking in
+  try { learnMapEvents(character, { content, worldDay: absoluteWorldDay() }); } catch { /* knowing is never a reason the world stops */ }
   const mendNews680 = (() => {
     try {
       const wd680 = absoluteWorldDay();

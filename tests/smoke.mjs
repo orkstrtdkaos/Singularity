@@ -25222,6 +25222,41 @@ await (async () => {
       && /positionedPlace\(locations, h\.locationId, \{ worldDay \}\)/.test(readFileSync(join(root, "engine/mapholds.js"), "utf8"))
       && /positionedPlace\(env\.CONTENT\?\.locations \|\| \{\}, env\.location\?\.id \|\| env\.character\?\.currentLocationId, \{ worldDay:/.test(readFileSync(join(root, "engine/gm_registry.js"), "utf8")));
   }
+  /* ── ✅ SNG-679 S7 (CCODE-685): what the character knows ── */
+  {
+    const MS685 = await import("../engine/mapstate.js");
+    const WM685 = await import("../engine/worldmap.js");
+    const { loadContentHeadless: lch685 } = await import("./headless_content.mjs");
+    const C685 = await lch685();
+    const wheels685 = (C685.rules.localLayouts.millbrook.sites || []).find((x) => x.kind === "mill");
+    const key685 = `site:millbrook/${wheels685.id}`;
+    const other685 = { id: "player-other", mapEvents: [] };
+    MS685.applyMapChange(other685, { key: key685, change: "ruined", by: "player-other", seen: "named" }, { content: C685, worldDay: 100 });
+    const store685 = MS685.mergeMapEvents({ keys: {} }, other685.mapEvents).store;
+    const near685 = Object.entries(C685.locations).filter(([i, l]) => i !== "millbrook" && l.worldPos && l.tier !== "region").map(([i, l]) => [i, WM685.walkingDays(C685.locations.millbrook, l)]).filter(([, d]) => d > 0.5 && d <= 3).sort((a, b) => a[1] - b[1])[0];
+    const far685 = Object.entries(C685.locations).filter(([, l]) => l.worldPos && l.tier !== "region").map(([i, l]) => [i, WM685.walkingDays(C685.locations.millbrook, l)]).filter(([, d]) => d > 10)[0];
+    const me685 = (at, holds = []) => ({ id: "player-me", currentLocationId: at, holdings: holds, mapEvents: [], worldMapStore: store685 });
+    const seen685 = (c, d) => { MS685.learnMapEvents(c, { content: C685, worldDay: d }); return MS685.mapView(c, key685, { content: C685, worldDay: d }); };
+    const a685 = me685(near685[0]);
+    const before685 = seen685(a685, 100), after685 = seen685(a685, Math.ceil(100 + near685[1]));
+    const b685 = me685(far685[0]), farView685 = seen685(b685, 400);
+    const there685 = seen685(me685("millbrook"), 100);
+    const report685 = seen685(me685(far685[0], [{ id: "h", locationId: "millbrook" }]), 100);
+    check("S7: ⛔ WHAT THE CHARACTER KNOWS — another game's ruin is drawn as it was until it is learned (the card says `knowledge.lastKnown`): by WORD of it once the walk from there has had time (within a few days' travel), by being THERE, by a hold's REPORT; too far away, never by word",
+      before685.state === "whole" && before685.lastKnown === true && after685.state === "ruined" && !after685.lastKnown && a685.mapLearned && Object.values(a685.mapLearned)[0].how === "word"
+      && farView685.state === "whole" && farView685.lastKnown && MS685.mapStateOf(b685, key685, { content: C685 }).state === "ruined"
+      && there685.state === "ruined" && report685.state === "ruined",
+      `near ${near685[0]} ${near685[1].toFixed(2)}d · far ${far685[0]}`);
+    const e685 = me685(near685[0]); MS685.learnMapEvents(e685, { content: C685, worldDay: 110 }); MS685.localsMendPass(e685, { content: C685, worldDay: 200 }); MS685.learnMapEvents(e685, { content: C685, worldDay: 200 });
+    const own685 = { id: "player-me", currentLocationId: far685[0], holdings: [], mapEvents: [] };
+    MS685.applyMapChange(own685, { key: key685, change: "damaged", by: "player-me" }, { content: C685, worldDay: 100 });
+    const app685 = readFileSync(join(root, "app.js"), "utf8"), tick685 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+    check("S7: ⛔ …WHAT THIS GAME WROTE IS KNOWN, but the locals' mending is the world's and is learned like it (a near character still sees it ruined after they finish, until they go and look); the TRUTH still rules the world (S6 reads it); the tick learns, the card shows what was learned",
+      MS685.mapView(e685, key685, { content: C685, worldDay: 200 }).state === "ruined" && MS685.mapStateOf(e685, key685, { content: C685 }).state === "whole"
+      && MS685.mapView(own685, key685, { content: C685, worldDay: 100 }).state === "damaged"
+      && tick685.includes("learnMapEvents(character, { content, worldDay: absoluteWorldDay() })")
+      && app685.includes("const st = knownStateOf(character, `place:${l.id}`, { content: CONTENT });") && app685.includes("pv.lastKnown ? (CONTENT.mapStates?.knowledge?.lastKnown || null) : null"));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

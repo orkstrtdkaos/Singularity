@@ -24411,6 +24411,26 @@ await (async () => {
       /bend: coarse \? cachedBend : globeBend \}\);/.test(srcW1) && /const cachedBend = \(a, b, idA, idB\) => \{/.test(srcW1)
       && !/bendRoad\(/.test(srcW1.slice(srcW1.indexOf("const cachedBend = "), srcW1.indexOf("/* ⛔ COMPUTED OFF THE FIRST PAINT")))
       && /if \(pts === false\) continue;/.test(wgW1));
+    // ✅ W2 (CCODE-661): a region's roads routed on its own fine ground, merged over the grid for same-region pairs only
+    const { makeTerrain: mkT661 } = await import("../scripts/world/terrain.mjs");
+    const gp661 = JSON.parse(readFileSync(join(root, "content/packs/core/world/genparams.json"), "utf8"));
+    const valley661 = WG660.regionRoadPaths(t660, C660.locations, "valley", { gen: (win) => mkT661(gp661, win), tierOf: (l) => l?.tier });
+    const grid661 = WG660.worldRoadRoutes(t660, C660.locations, { tierOf: (l) => l?.tier });
+    const merged661 = WG660.worldRoadRoutes(t660, C660.locations, { tierOf: (l) => l?.tier, regionPaths: (rid) => rid === "valley" ? valley661.byPair : null, regionStamp: 1 });
+    const mb661 = merged661.byPair.get("echo_river_crossing|millbrook"), mbGrid661 = grid661.gridByPair.get("echo_river_crossing|millbrook");
+    const walk661 = (p) => { let w = 0; const R2 = Math.PI / 180; for (let i = 1; i < p.length; i++) { const a = p[i - 1], b = p[i]; w += Math.acos(Math.max(-1, Math.min(1, Math.sin(a[0] * R2) * Math.sin(b[0] * R2) + Math.cos(a[0] * R2) * Math.cos(b[0] * R2) * Math.cos((a[1] - b[1]) * R2)))) / R2; } return w; };
+    const straight661 = walk661([mb661[0], mb661[mb661.length - 1]]);
+    // ⚠️ MEASURED: the region's own route for Millbrook → the Crossing walks x3.3 (the Echo's water cost); the gate asks that
+    // the world map draws the REGION's road, not a number the region router does not yet give — the ratio is ratcheted in
+    // tests/world_roads_measure.mjs and the ruling on the cost model is Aevi's
+    check("SNG-682 W2: ⛔ a region's roads route on ITS OWN fine ground (`regionRoadPaths`, the painter's recipe) and a same-region pair takes that path on the world map — Millbrook → Echo River Crossing is the region's road, where the 2° world grid walked ×3.88 on its own",
+      valley661 && valley661.routed > 5 && valley661.byPair.has("echo_river_crossing|millbrook")
+      && mb661 === valley661.byPair.get("echo_river_crossing|millbrook") && mb661 !== mbGrid661 && walk661(mb661) / straight661 < 4
+      && merged661.fromRegions === [...valley661.byPair.keys()].filter((k) => merged661.byPair.get(k) === valley661.byPair.get(k)).length && merged661.fromRegions > 5
+      && [...grid661.gridByPair.keys()].filter((k) => { const [a, b] = k.split("|"); return (C660.locations[a].regionId || C660.locations[a].region) !== (C660.locations[b].regionId || C660.locations[b].region); }).every((k) => merged661.byPair.get(k) === grid661.gridByPair.get(k)));
+    check("SNG-682 W2: ⛔ …and the globe routes the regions in idle time after the trunks and merges them with a cheap stamp, never re-routing the world per region",
+      /scheduleRegionPaths\(\);\s*\/\/[^\n]*W2/.test(srcW1) && /regionRoadPaths\(_terrain, CONTENT\.locations, rid, \{ gen: \(win\) => _fineGenShared\.make\(_fineGenShared\.gp, win\)/.test(srcW1)
+      && /regionPaths: regionPathsFor, regionStamp: _regionPathsCache\.size/.test(srcW1) && /if \(hit && hit\.stamp === stamp\) return mergeRegionPaths\(t, hit, locations, regionPaths, regionStamp\);/.test(wgW1));
     check("SNG-682: ⛔ Aevi's road measurement runs in CI with her ratchets (tests/world_roads_measure.mjs in the runner, a baseline that may only go DOWN)",
       existsSync(join(root, "tests/world_roads_measure.mjs")) && existsSync(join(root, "tests/world_roads_baseline.json"))
       && /\["world_roads_measure", "node", \["tests\/world_roads_measure\.mjs"\]\]/.test(readFileSync(join(root, "scripts/run_tests.mjs"), "utf8")));

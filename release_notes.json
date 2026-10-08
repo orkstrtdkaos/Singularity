@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.22.16",
+      "date": "2026-10-08",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The world map's short roads follow the ground",
+          "summary": "A road between two places in the same region now takes the route the region map draws for it, on the region's own fine ground, so Millbrook's road to the Echo River Crossing no longer zigzags across the world map. The long roads between regions keep the world's routing."
+        }
+      ]
+    },
+    {
       "version": "2.22.15",
       "date": "2026-10-08",
       "entries": [

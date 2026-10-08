@@ -1629,11 +1629,42 @@ export function visiblePins(t, view, worldPosOf) {
  * great-circle distance between its ends is DISCARDED rather than drawn, and the count is returned.
  */
 const _worldRoutes = new WeakMap();
-export function worldRoadRoutes(t, locations, { tierOf = null, gridW = 360 } = {}) {
+/** ✅ AEVI W2 (SNG-682): *"Short roads come from the region maps … A road whose two ends share a region … takes its path
+ *  from that region's routed roads, converted to lat/lon. The world grid routes only the long inter-region trunks."*
+ *  A region's roads, routed on ITS OWN fine ground exactly as the region painter routes them — `regionExtent` for the
+ *  frame (the authored centre when there is one), `makeRegionBase` over the fine generator, `routeRoads` on a 2px cell
+ *  of an 800px frame — and returned as lat/lon paths keyed by pair. ⚠️ A polar region (the Crossing) is W3's, not this:
+ *  its lon/lat box is a fabrication. `gen(window)` is the fine generator for a window (the app's `_fineGenShared`). */
+export function regionRoadPaths(t, locations, regionId, { gen, authored = null, W = 800, H = 800, cell = 2, tierOf = null } = {}) {
+  if (!t || !locations || typeof gen !== "function") return null;
+  const ext = regionExtent(regionId, locations, { authored });
+  if (!ext || ext.polar) return null;
+  const inR = (id) => (locations[id]?.regionId || locations[id]?.region) === regionId;
+  const net = roadNetwork(locations, { tierOf });
+  const roads = net.roads.filter((r) => inR(r.a) && inR(r.b));
+  if (!roads.length) return { byPair: new Map(), roads: 0, routed: 0 };
+  const pad = 2;
+  const base = makeRegionBase(t, gen({ la0: ext.la0 - pad, la1: ext.la1 + pad, lo0: ext.lo0 - pad, lo1: ext.lo1 + pad }), ext);
+  const G = makeGroundCost(t, { ...GROUND_COST.road, extent: ext });
+  const out = routeRoads(roads, locations, { W, H, step: G.step, toScreen: base.toScreen, toWorld: base.toWorld, extent: ext, cell });
+  const byPair = new Map();
+  for (const r of (out?.roads || [])) {
+    const pts = r.points || [];
+    if (pts.length < 2) continue;
+    const key = r.a < r.b ? `${r.a}|${r.b}` : `${r.b}|${r.a}`;
+    byPair.set(key, pts.map((p) => { const w = base.toWorld(p.x, p.y, W, H); return [w.lat, w.lon]; }));
+  }
+  return { byPair, roads: roads.length, routed: byPair.size };
+}
+
+export function worldRoadRoutes(t, locations, { tierOf = null, gridW = 360, regionPaths = null, regionStamp = 0 } = {}) {
   if (!t || !locations) return null;
   let hit = _worldRoutes.get(t);
+  // ⛑ W2: the grid routing is cached by itself; the region paths are MERGED over it per `regionStamp`, so a region
+  // landing in idle time costs a merge and not a 580ms re-route of the world
   const stamp = `${gridW}|${Object.keys(locations).length}`;
-  if (hit && hit.stamp === stamp) return hit;
+  if (hit && hit.stamp === stamp && hit.regionStamp === regionStamp) return hit;
+  if (hit && hit.stamp === stamp) return mergeRegionPaths(t, hit, locations, regionPaths, regionStamp);
 
   const gw = gridW, gh = Math.round(gridW / 2);
   const toScreen = (lon, lat) => ({ x: ((lon + 180) / 360) * gw, y: ((90 - lat) / 180) * gh });
@@ -1664,7 +1695,29 @@ export function worldRoadRoutes(t, locations, { tierOf = null, gridW = 360 } = {
     byPair.set(key, path);
     kept++;
   }
-  hit = { stamp, byPair, kept, seamDropped, input: net.roads.length, ms: Date.now() - t0, gw, gh };
+  hit = { stamp, byPair, gridByPair: byPair, kept, seamDropped, input: net.roads.length, ms: Date.now() - t0, gw, gh, regionStamp: 0, fromRegions: 0 };
   _worldRoutes.set(t, hit);
-  return hit;
+  return regionPaths ? mergeRegionPaths(t, hit, locations, regionPaths, regionStamp) : hit;
+}
+
+/** W2's merge: for every road whose two ends share a region, the region's own path replaces the grid's (or supplies one
+ *  the grid never found); the trunks between regions keep the world grid's. Pure over `hit.gridByPair`. */
+function mergeRegionPaths(t, hit, locations, regionPaths, regionStamp) {
+  const byPair = new Map(hit.gridByPair);
+  let fromRegions = 0;
+  if (typeof regionPaths === "function") {
+    const regionOf = (id) => locations[id]?.regionId || locations[id]?.region || null;
+    const seen = new Map();
+    for (const key of new Set([...hit.gridByPair.keys(), ...Object.keys(locations).flatMap((id) => (locations[id]?.connections || []).map((o) => id < o ? `${id}|${o}` : `${o}|${id}`))])) {
+      const [a, b] = key.split("|");
+      const ra = regionOf(a); if (!ra || ra !== regionOf(b)) continue;
+      if (!seen.has(ra)) seen.set(ra, regionPaths(ra) || null);
+      const paths = seen.get(ra);
+      const p = paths && paths.get(key);
+      if (p && p.length > 1) { byPair.set(key, p); fromRegions++; }
+    }
+  }
+  const merged = { ...hit, byPair, kept: byPair.size, regionStamp, fromRegions };
+  _worldRoutes.set(t, merged);
+  return merged;
 }

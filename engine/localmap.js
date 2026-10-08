@@ -796,8 +796,13 @@ export function localModel(layout, frame, { placeName = "", placeId = "", nameOf
     const pts = roadPath(r.bearing, frame, rngOf(seedOf(`road:${id}:${r.to || i}`)), { through });
     return { ...r, name: (typeof nameOf === "function" ? nameOf(r.to) : null) || r.name || r.to, pts, exit: exitPoint(pts, frame.w, frame.h) };
   });
+  /* ✅ G6 (CCODE-676): *"The kind's fills stop inventing farmland. Keep the measured terrain (the river within a walk, rock
+   * uphill, wood in the widest gap between roads). Fields come only from the farms rule or the entry's areas, so a gate yard
+   * stops growing two fields."* With a ground entry a GENERATED field is not drawn — read at the model, so a layout already
+   * cached on a save loses it too. An authored field (Millbrook's) is canon and stays. */
+  const extentDrawn = layout?.ground ? extentAtLevel.filter((f) => !(f.generated && f.kind === "field")) : extentAtLevel;
   // the extent, each as what it is
-  const features = extentAtLevel.map((f) => {
+  const features = extentDrawn.map((f) => {
     const frnd = rngOf(seedOf(`extent:${id}:${f.id}`));
     const at = frame.toXY(f.bearing, f.fromMetres);
     const rPx = (Number(f.radiusMetres) || 150) * frame.pxPerMetre;
@@ -884,7 +889,7 @@ export function localModel(layout, frame, { placeName = "", placeId = "", nameOf
   /* ✅ G4/G5 (CCODE-675): what stands on the ground, placed BEFORE the houses so they keep clear of it; what is `among`
    * the houses after them. Only on the surface, and only where there is an entry. */
   const ground = (layout?.ground && onSurface)
-    ? placeGround({ ground: layout.ground, kinds: layout.groundKinds, frame, built: { ...builtAt, r: builtR }, roads, lanes, sites, water, uphill: uphillB, rnd: rngOf(seedOf("ground:" + id)) })
+    ? placeGround({ ground: layout.ground, kinds: layout.groundKinds, frame, built: { ...builtAt, r: builtR }, roads, lanes, sites, water, uphill: uphillB, fields: features.filter((f) => f.kind === "field"), rnd: rngOf(seedOf("ground:" + id)) })
     : null;
   const houses = (layout?.ground && onSurface)
     ? groundHouses({ ground: layout.ground, frame, built: { ...builtAt, r: builtR }, roads, lanes, sites, water, features, id, uphill: uphillB, blocked: ground?.blocked || null, streamLine: ground?.streamLine || null, pools: (ground?.areas || []).filter((a) => a.k === "water") })
@@ -973,7 +978,11 @@ function paintFeature(ctx, f, model, rnd, wv = null) {
     const ford = model.sites.find((q) => q.kind === "ford" && q.onWater);
     if (ford) {
       const i0 = ford.onWater.i;
-      const up = ch.pts.slice(Math.max(0, i0 - 7), Math.max(1, i0 - 1));
+      /* ⚠️ `up[k]` is `ch.pts[s0 + k]`, and the neighbours were indexed as `i0 - 7 + k` — the same only when the ford is at
+       * least seven points into the channel. In Millbrook's enlargement the ford sits at the channel's start, the index went
+       * negative and the whole local tier threw (CCODE-676, found painting the panel). Indexed from where the slice starts. */
+      const s0 = Math.max(0, i0 - 7);
+      const up = ch.pts.slice(s0, Math.max(1, i0 - 1));
       if (up.length > 1) {
         ctx.strokeStyle = INK.paper; ctx.lineWidth = ch.widthPx * 0.42; ctx.globalAlpha = 0.9;
         // two paper strokes along the banks pinch the water between them
@@ -981,7 +990,7 @@ function paintFeature(ctx, f, model, rnd, wv = null) {
           ctx.beginPath();
           for (let k = 0; k < up.length; k++) {
             const [x, y] = up[k];
-            const a = ch.pts[Math.max(0, i0 - 7 + k - 1)], b = ch.pts[Math.min(ch.pts.length - 1, i0 - 7 + k + 1)];
+            const a = ch.pts[Math.max(0, s0 + k - 1)], b = ch.pts[Math.min(ch.pts.length - 1, s0 + k + 1)];
             const tx = b[0] - a[0], ty = b[1] - a[1], L = Math.hypot(tx, ty) || 1;
             const pinch = Math.sin((k / Math.max(1, up.length - 1)) * Math.PI) * ch.widthPx * 0.3;
             ctx[k ? "lineTo" : "moveTo"](x + (-ty / L) * side * (ch.widthPx / 2 + ch.widthPx * 0.2 - pinch), y + (tx / L) * side * (ch.widthPx / 2 + ch.widthPx * 0.2 - pinch));
@@ -1356,6 +1365,11 @@ function paintGroundLine(ctx, l, model) {
       ctx.strokeStyle = GINK.wallEdge; ctx.lineWidth = 3.4 * w; smoothPath(ctx, l.pts); ctx.stroke();
       ctx.strokeStyle = GINK.wall; ctx.lineWidth = 2 * w; smoothPath(ctx, l.pts); ctx.stroke();
       break;
+    case "track":
+      // a farm track: a lane's colours, thinner, solid
+      ctx.strokeStyle = INK.laneEdge; ctx.lineWidth = 2; smoothPath(ctx, l.pts); ctx.stroke();
+      ctx.strokeStyle = INK.lane; ctx.lineWidth = 1; smoothPath(ctx, l.pts); ctx.stroke();
+      break;
     default:
       // a path or track
       ctx.setLineDash(l.state === "unfinished" ? [2, 4] : [4, 3]); ctx.strokeStyle = GINK.path; ctx.lineWidth = 1.3 * w; smoothPath(ctx, l.pts); ctx.stroke();
@@ -1506,11 +1520,13 @@ export function paintLocalMap(ctx, model, {
     if (wv && wv.state && wv.state !== "whole") out.stated.push({ id: f.id, state: wv.state, water: true });
     paintFeature(ctx, f, model, rnd, wv);
   };
-  for (const f of sortedFeatures) if (f.kind !== "water") paintExtent(f);
-  // ✅ G4 (CCODE-675): the ground's own fills, over the measured ground and under its water; its lines over the water
   const G = model.ground || null;
   const groundRnd = rngOf(seedOf("groundpaint:" + model.id));
-  if (G) for (const a of G.areas) paintGroundArea(ctx, a, model, groundRnd);
+  // ✅ G3 (CCODE-676): the farmland ring under everything, so the village's built ground sits over its fields
+  if (G) for (const a of G.areas) if (a.farm) paintGroundArea(ctx, a, model, groundRnd);
+  for (const f of sortedFeatures) if (f.kind !== "water") paintExtent(f);
+  // ✅ G4 (CCODE-675): the ground's own fills, over the measured ground and under its water; its lines over the water
+  if (G) for (const a of G.areas) if (!a.farm) paintGroundArea(ctx, a, model, groundRnd);
   for (const f of sortedFeatures) if (f.kind === "water") paintExtent(f);
   if (G) for (const l of G.lines) paintGroundLine(ctx, l, model);
   // the ways

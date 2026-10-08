@@ -1582,7 +1582,8 @@ export function networkPaths(t, view, { locations, precursor, showPrecursor = fa
       // no terrain in hand still gets a map, which is what `fade` already promises at a wide span.
       // ⛑ THE IDS RIDE ALONG. A routed path is stored per PAIR, and keying a lookup on rounded coordinates
       // instead would be a second identity for a thing that already has one.
-      const pts = bend ? bend(a, b, id, other) : null;
+      // ⛑ a sea lane is the arc across the water, never the land route the router found between the same two ends
+      const pts = bend && kind !== "sea" ? bend(a, b, id, other) : null;
       // ✅ AEVI W1 (SNG-682): a bend that answers `false` has NOTHING cached for this road on a moving frame — the road is
       // not drawn, rather than drawn straight. `null` still means "no route": the arc, as on a settled frame.
       if (pts === false && kind === "road") continue;   // a sea lane or a buried arc is the arc by design, moving or still
@@ -1788,6 +1789,12 @@ export function capRoadRoutes(t, locations, { tierOf = null, roads = null, cell 
  *  unrouted crossing more than `wetAbove`% wet between two coastal ends: a sea lane), `hidden` (such a crossing with an end
  *  inland: not drawn at world scale at all), `buried` (an end under the ground: dashed in the buried style). A routed path's
  *  wetness is the path's; an unrouted road's is its straight arc's. Coastal: water within `coastDeg` of the end. PURE. */
+/** ✅ AEVI (2026-10-08): *"The Leviathan Road is a sea road … 'the migration road of the great leviathans across the world
+ *  ocean … riders who live on the backs of beasts the size of towns'. Its 4.3° to the Blaze isn't an unrouted road. Draw it
+ *  as a sea lane."* ⚠️ The raster cannot say it: no place stands on water anywhere on it (places are placed on land), and
+ *  the Leviathan Road's straight line to the Blaze is 12% wet. So the place is NAMED, with her reason, and every road
+ *  touching it is a sea lane whatever the router found for it. */
+export const SEA_ROAD_PLACES = Object.freeze(["leviathan_road"]);
 export function roadKinds(t, locations, byPair, { wetAbove = 20, coastDeg = 1.2 } = {}) {
   const out = new Map();
   if (!t || !locations) return out;
@@ -1814,6 +1821,7 @@ export function roadKinds(t, locations, byPair, { wetAbove = 20, coastDeg = 1.2 
       const wetPct = Math.round(100 * w / Math.max(1, n));
       let kind = "road";
       if (buried) kind = "buried";
+      else if (SEA_ROAD_PLACES.includes(id) || SEA_ROAD_PLACES.includes(other)) kind = "sea";
       else if (!path && wetPct > wetAbove) kind = (coastal(a) && coastal(b)) ? "sea" : "hidden";
       out.set(key, { kind, wet: wetPct, routed: !!path, buried });
     }

@@ -2,7 +2,7 @@
   "_what": "SNG-682 ratchets for the world map's roads — each may only go DOWN; rewrite with --write when one falls",
   "written": "2026-10-08",
   "unroutedStraightArcs": 1,
-  "routedOver2x": 5,
+  "routedOver2x": 4,
   "wetStraightArcs": 0,
   "seamDropped": 4,
   "capRoutedOver2xWithin10": 8,
@@ -11,5 +11,5 @@
   "millbrookCrossingRatio": 1,
   "crossingThinwaterRatio": 3.09,
   "capOver2x": 16,
-  "_raised_20261008": "routedOver2x 4 → 5 by hand (CCODE-670): Leviathan Road → the Blaze was DROPPED uncounted at the ±180 seam (the Blaze sits at exactly 180°); routed now, it walks x2.7 — a road that exists is counted, not a regression"
+  "_raised_20261008": "routedOver2x 4 → 5 by hand (CCODE-670): Leviathan Road → the Blaze was DROPPED uncounted at the ±180 seam (the Blaze sits at exactly 180°); routed now, it walks x2.7 — a road that exists is counted, not a regression. Back to 4 (CCODE-676): Aevi ruled it a sea road, drawn as the arc across the water, so its land route is no longer a road on the map"
 }

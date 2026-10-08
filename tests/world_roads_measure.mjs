@@ -75,7 +75,8 @@ const measured = {
   seamDropped: routes.seamDropped,
   // ⛑ two routers, two numbers: Aevi's "over ×2, down from 25" is the world GRID's; a region's own route is the region
   // map's picture of that road, and its detours (the Echo's water cost takes Millbrook → the Crossing x3.3) are ruled there
-  routedOver2x: routedRows.filter((r) => !r.fromRegion && !r.fromCap && r.ratio != null && r.ratio > 2).length,
+  // ⛑ a sea lane is drawn as the arc across the water, so the land route the router walked for it is not a road on the map
+  routedOver2x: routedRows.filter((r) => r.kind !== "sea" && !r.fromRegion && !r.fromCap && r.ratio != null && r.ratio > 2).length,
   regionOver2x: routedRows.filter((r) => r.fromRegion && r.ratio != null && r.ratio > 2).length,
   capOver2x: routedRows.filter((r) => r.fromCap && r.ratio != null && r.ratio > 2).length,
   wetStraightArcs: arcs.filter((r) => r.kind === "road" && r.wetPct > 20).length,

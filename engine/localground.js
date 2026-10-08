@@ -100,10 +100,27 @@ function nearestArc(pts, acc, x, y) {
   return best;
 }
 
+/* ═════ G3 · FARMS (CCODE-676) ═════
+ * ✅ AEVI (`_rules.farms`): *"A surface village, town or city (layout cluster, street, rows, grid or court) is ringed by its
+ * farmland, with farmsteads scattered in it — a farmhouse with its barn and yard, each on a short track off the nearest
+ * road, never in a row: village 4–8, town 8–14, city 12–20, unless the entry says `farms: false` (its own words rule
+ * farmland out) or gives `outlying` itself. Hamlets and everything else farm only where the entry says so."* */
+export const FARMSTEADS = Object.freeze({ village: [4, 8], town: [8, 14], city: [12, 20] });
+const FARM_LAYOUTS = new Set(["cluster", "street", "rows", "grid", "court"]);
+/** `{ n }` from the entry's own `outlying`, `{ range }` from the rule, or null where the place does not farm */
+export function farmsOf(ground) {
+  const own = (Array.isArray(ground?.outlying) ? ground.outlying : []).filter((o) => o?.k === "farmstead");
+  if (own.length) return { n: own.reduce((a, o) => a + Math.max(1, Math.round(Number(o.n) || 1)), 0), why: "outlying" };
+  if (ground?.farms === false) return null;
+  const d = String(ground?.dwellings || ""), lay = String(ground?.layout || "cluster");
+  if (!FARMSTEADS[d] || !FARM_LAYOUTS.has(lay)) return null;
+  return { range: FARMSTEADS[d], why: "rule" };
+}
+
 /** ⛔ PHASE ONE: everything but `among`. Returns `{ marks, lines, areas, kept, short, fallbacks, streamLine, blocked }`.
  *  `blocked(x, y, pad)` is what the houses keep clear of: every mark and site, the water lines and the water and drop
  *  fills. `streamLine` is the entry's own water line, which a `street` layout lines its houses along. */
-export function placeGround({ ground, kinds = null, frame, built, roads = [], lanes = [], sites = [], water = null, uphill = null, rnd }) {
+export function placeGround({ ground, kinds = null, frame, built, roads = [], lanes = [], sites = [], water = null, uphill = null, fields = [], rnd }) {
   const out = { marks: [], lines: [], areas: [], kept: [], short: [], fallbacks: [], streamLine: null };
   const feats = Array.isArray(ground?.features) ? ground.features : [];
   const S = groundSections(kinds);
@@ -168,6 +185,28 @@ export function placeGround({ ground, kinds = null, frame, built, roads = [], la
   };
   const occ = sites.map((st) => ({ x: st.x, y: st.y, r: 8 * clamp(Math.sqrt(frame.k || 1), 1, 1.6) }));
 
+  // ════ G3 · THE FARMLAND ════ — the fields the place already draws (Millbrook's Open and Long Fields and Wet Meadows), or
+  // where it draws none, a ring of them round the built ground, each laid to the road nearest its bearing
+  const farm = farmsOf(ground);
+  const farmland = [];
+  if (farm) {
+    const drawn = (fields || []).filter((f) => Array.isArray(f.poly) && f.poly.length > 2);
+    // ⛑ an entry that names its OWN fields (Sunfold's four) farms those — they are placed with the other fills, below
+    const ownFields = feats.some((f) => f.k === "field" || f.k === "pasture");
+    if (drawn.length) for (const f of drawn) farmland.push({ x: f.x, y: f.y, rPx: f.rPx, poly: f.poly, named: true });
+    else if (!ownFields) {
+      const nF = { village: 5, town: 7, city: 9 }[String(ground?.dwellings)] || 5, ph = rnd() * 360;
+      for (let j = 0; j < nF; j++) {
+        const b = ph + (j / nF) * 360 + (rnd() - 0.5) * (240 / nF), d = dirOf(b);
+        const dist = R0 * (1.5 + rnd() * 0.5), r = R0 * (0.42 + rnd() * 0.2);
+        const p = keepIn({ x: C.x + d[0] * dist, y: C.y + d[1] * dist }, r * 0.35);
+        const near = roads.length ? roads.reduce((q, rd2) => (Math.abs(((((Number(rd2.bearing) || 0) - b) % 360) + 540) % 360 - 180) < Math.abs(((((Number(q.bearing) || 0) - b) % 360) + 540) % 360 - 180) ? rd2 : q)) : null;
+        const a = { k: "field", entry: null, at: "farms", own: false, state: null, farm: true, x: p.x, y: p.y, rPx: r, poly: blob(p.x, p.y, r, rnd, 0.18), stripAngle: near ? (Number(near.bearing) || 0) * DEG : b * DEG };
+        out.areas.push(a); farmland.push(a);
+      }
+    }
+  }
+
   // ════ LINES ════
   const lineEntries = feats.map((f, i) => ({ f, i })).filter(({ f }) => S.lines.has(f.k) || isWallLine(f));
   let acrossCount = 0;
@@ -179,7 +218,14 @@ export function placeGround({ ground, kinds = null, frame, built, roads = [], la
     const meander = ["stream", "path", "hedgerow", "trench"].includes(f.k) ? R0 * 0.07 : 0;
     const runs = [];
     const at = f.at;
-    if (at === "across" || (at === "along" && !roads.length)) {
+    if (f.k === "hedgerow" && farmland.length) {
+      // ✅ G3: *"the hedgerows Millbrook's entry names run along some field edges"* — a stretch of a field's own boundary each
+      for (let j = 0; j < n; j++) {
+        const P = farmland[j % farmland.length].poly, m = P.length, start = Math.floor(rnd() * m), len = Math.max(4, Math.floor(m * (0.3 + rnd() * 0.2)));
+        const pts = []; for (let q = 0; q <= len; q++) pts.push(P[(start + q) % m]);
+        runs.push(pts);
+      }
+    } else if (at === "across" || (at === "along" && !roads.length)) {
       // ⛑ the first runs a little off the centre — the centre is the place's own mark, and a stream through it drowned it
       for (let j = 0; j < n; j++) { const k = acrossCount + j; runs.push(acrossPts(R0 * (0.2 + 0.42 * k) * (k % 2 ? -1 : 1), meander)); }
       acrossCount++;
@@ -378,6 +424,39 @@ export function placeGround({ ground, kinds = null, frame, built, roads = [], la
     }
     return null;
   };
+  // ════ G3 · THE FARMSTEADS ════ — scattered in the farmland, irregular, outside the built ground, each on a track off the
+  // nearest road; the count from the entry's `outlying`, else the rule's range
+  if (farm && !farmland.length) for (const a of out.areas) if (a.k === "field" || a.k === "pasture") { a.farm = true; a.named = true; farmland.push(a); }
+  if (farm && farmland.length) {
+    const want = farm.n ?? (farm.range[0] + Math.floor(rnd() * (farm.range[1] - farm.range[0] + 1)));
+    const sz = base * 1.05, minSep = Math.max(sz * 3.2, R0 * 0.3);
+    let placedF = 0;
+    for (let j = 0; j < want; j++) {
+      let p = null;
+      for (let q = 0; q < 80 && !p; q++) {
+        const f = farmland[(j + q) % farmland.length], a = rnd() * TAU, d = f.rPx * 0.8 * Math.sqrt(rnd());
+        const x = f.x + Math.cos(a) * d, y = f.y + Math.sin(a) * d;
+        if (!inPoly(x, y, f.poly) || Math.hypot(x - C.x, y - C.y) < R0 * 1.12) continue;
+        if (out.marks.some((m) => m.farm && Math.hypot(m.x - x, m.y - y) < minSep)) continue;
+        // ⛔ *"never in a row"*: no spot that would stand third in a line at one spacing with two already placed
+        const fsHere = out.marks.filter((m) => m.farm);
+        if (fsHere.some((a) => fsHere.some((b) => { if (a === b) return false; const tol = Math.max(4, Math.hypot(b.x - a.x, b.y - a.y) * 0.12);
+          return Math.hypot(2 * b.x - a.x - x, 2 * b.y - a.y - y) < tol || Math.hypot((a.x + b.x) / 2 - x, (a.y + b.y) / 2 - y) < tol; }))) continue;
+        p = put(x, y, sz, "farmstead", false, 0);
+      }
+      if (!p) continue;
+      // the track: off the nearest road, with a bend in it
+      let from = null, bd = Infinity;
+      for (const r of roads) { const acc = arcOf(r.pts), q = atArc(r.pts, acc, nearestArc(r.pts, acc, p.x, p.y)); const dd = Math.hypot(q.x - p.x, q.y - p.y); if (dd < bd) { bd = dd; from = q; } }
+      if (!from) { from = { x: C.x, y: C.y }; bd = Math.hypot(C.x - p.x, C.y - p.y); }
+      const mid = [(from.x + p.x) / 2 + (rnd() - 0.5) * bd * 0.25, (from.y + p.y) / 2 + (rnd() - 0.5) * bd * 0.25];
+      out.lines.push({ k: "track", entry: null, at: "farms", own: false, state: null, farm: true, pts: [[from.x, from.y], mid, [p.x, p.y]], half: 1 });
+      out.marks.push({ k: "farmstead", glyph: "farmstead", x: p.x, y: p.y, sz, ang: 0, own: false, state: null, entry: null, at: "farms", farm: true, onWater: false, half: 0 });
+      placedF++;
+    }
+    out.farms = { want, placed: placedF, why: farm.why, fields: farmland.length, named: farmland.some((f) => f.named) };
+    if (placedF < want) out.short.push({ k: "farmstead", entry: null, want, placed: placedF, why: "no room in the farmland at this scale" });
+  }
   const markEntries = feats.map((f, i) => ({ f, i })).filter(({ f }) => S.marks.has(f.k) && !isWallLine(f));
   const usedSite = new Set();
   const entries = [];
@@ -599,6 +678,6 @@ export function finishGround(g, houses = []) {
 }
 
 /** Every kind the painter can draw, by section — the gate reads these against `_kinds`. */
-export const GROUND_LINE_KINDS = Object.freeze(["path", "stream", "channel", "pipe_run", "trench", "hedgerow", "chain", "beam", "drive_shaft", "wall"]);
+export const GROUND_LINE_KINDS = Object.freeze(["path", "stream", "channel", "pipe_run", "trench", "hedgerow", "chain", "beam", "drive_shaft", "wall", "track"]);
 export const GROUND_AREA_KINDS = Object.freeze(["field", "pasture", "orchard", "garden", "wood", "marsh", "rock", "waste", "ash", "glass", "water",
   "grass", "heath", "mud", "burnt", "salt_pans", "blocks", "clearing", "drop"]);

@@ -24832,6 +24832,59 @@ await (async () => {
     check("ground G4: ⛔ the painter draws every mark, line and fill the model placed, and every `state` the entries use changes the drawing (abandoned dimmed and fallen, unfinished outlined in scaffold, dead grey, sealed capped, razed and former as footprints)",
       painted675.every((p) => p.ok) && statesUsed.length >= 8 && undrawnStates.length === 0,
       `${painted675.filter((p) => !p.ok).map((p) => p.id).join(", ")} undrawn states: ${undrawnStates.join(", ")}`);
+    /* ── ✅ AEVI, the local ground (CCODE-676): G3 farms and G6 no invented farmland ── */
+    const farmIds676 = ids675.filter((id) => LG675.farmsOf(P675[id]));
+    const farmBad676 = [], lined676 = [];
+    for (const id of farmIds676) {
+      const md = model675(id), g = md.ground, rule = LG675.farmsOf(P675[id]);
+      const min = rule.n ?? rule.range[0];
+      const fs = g.marks.filter((m) => m.farm && m.k === "farmstead");
+      const land = [...g.areas.filter((a) => a.farm), ...md.features.filter((f) => f.kind === "field" && f.poly)];
+      const tracks = g.lines.filter((l) => l.k === "track");
+      const roadD = (x, y) => Math.min(Infinity, ...md.roads.map((r) => LG675.lineDist(x, y, r.pts)));
+      const bad = fs.filter((m) => !land.some((f) => LG675.inPoly(m.x, m.y, f.poly)) || Math.hypot(m.x - md.built.x, m.y - md.built.y) <= md.built.r * 1.05
+        || !tracks.some((t) => Math.hypot(t.pts[t.pts.length - 1][0] - m.x, t.pts[t.pts.length - 1][1] - m.y) < 0.5 && (roadD(t.pts[0][0], t.pts[0][1]) < 0.5 || Math.hypot(t.pts[0][0] - md.built.x, t.pts[0][1] - md.built.y) < 0.5)));
+      if (fs.length < min || bad.length) farmBad676.push(`${id}: ${fs.length}/${min}${bad.length ? `, ${bad.length} off their land or track` : ""}`);
+      // never in a line: three farmsteads on one line at one spacing
+      for (const a of fs) for (const b of fs) { if (a === b) continue; const c = fs.find((q) => q !== a && q !== b && Math.hypot(q.x - (2 * b.x - a.x), q.y - (2 * b.y - a.y)) < Math.max(3, Math.hypot(b.x - a.x, b.y - a.y) * 0.08)); if (c) { lined676.push(id); break; } }
+    }
+    check("ground G3: ⛔ FARMS — every place under the farms rule or with its own `outlying` has at least its minimum farmsteads, each INSIDE a field, outside the built ground, on a track off the nearest road; and nowhere three in a line at one spacing",
+      farmIds676.length >= 10 && farmBad676.length === 0 && lined676.length === 0, `${farmIds676.length} farming places · ${farmBad676.slice(0, 5).join(" | ")} ${[...new Set(lined676)].join(", ")}`);
+    const mbF = model675("millbrook"), mbFs = mbF.ground.marks.filter((m) => m.farm), mbFields = mbF.features.filter((f) => f.kind === "field");
+    const hedges676 = mbF.ground.lines.filter((l) => l.k === "hedgerow");
+    check("ground G3: ⛔ by name — Millbrook: at least 8 farmsteads in its Open Fields, Long Fields and Wet Meadows, and its six hedgerows run ALONG those fields' edges",
+      mbFs.length >= 8 && mbFs.every((m) => mbFields.some((f) => LG675.inPoly(m.x, m.y, f.poly))) && mbFields.length >= 3
+      && hedges676.length === 6 && hedges676.every((l) => l.pts.every(([x, y]) => mbFields.some((f) => f.poly.some(([px, py]) => Math.hypot(px - x, py - y) < 0.01)))),
+      `${mbFs.length} farmsteads, ${hedges676.length} hedgerows`);
+    const inventedBad = [], keptBad = [];
+    for (const id of ids675) {
+      const md = model675(id), lay = md.layout;
+      if (md.features.some((f) => f.kind === "field" && f.generated)) inventedBad.push(id);
+      for (const f of lay.extent || []) if (f.generated && ["water", "rock", "wood"].includes(f.kind) && !md.features.some((x) => x.id === f.id)) keptBad.push(`${id}: ${f.kind}`);
+    }
+    const yards676 = ids675.filter((id) => /_gate_yard$/.test(id)).filter((id) => { const md = model675(id); return md.features.some((f) => f.kind === "field") || md.ground.areas.some((a) => a.k === "field"); });
+    const threw676 = [];
+    for (const id of Object.keys(C675.rules.localLayouts || {}).filter((i) => !i.startsWith("_") && C675.locations[i])) for (const [w, h] of [[800, 500], [600, 420], [400, 400]]) {
+      try { const lay = LM675.localLayoutFor(id, { content: C675 }); const md = LM675.localModel(lay, LM675.localFrame(lay, { w, h }), { placeId: id }); LM675.paintLocalMap(stub675(), md, { reveal: true }); const ins = LM675.enlargementFor(md); if (ins) LM675.paintEnlargement(stub675(), lay, ins, { placeId: id, reveal: true }); }
+      catch (e) { threw676.push(`${id} ${w}x${h}: ${e.message}`); }
+    }
+    check("local map: ⛔ every authored layout paints, WITH its enlargement, at three sizes — the ford's rapids indexed the river from seven points before it, and a ford at the channel's start (Millbrook's panel) threw the whole tier",
+      threw676.length === 0, threw676.slice(0, 3).join(" | "));
+    check("ground G6: ⛔ THE KIND'S FILLS STOP INVENTING FARMLAND — no place with a ground entry draws a generated field (a gate yard draws none at all), and the measured terrain stays: every generated river, rock and wood is still drawn",
+      inventedBad.length === 0 && keptBad.length === 0 && yards676.length === 0, `${inventedBad.slice(0, 5).join(", ")} ${keptBad.slice(0, 5).join(" | ")} ${yards676.join(", ")}`);
+  }
+  /* ── ✅ AEVI (2026-10-08): the Leviathan Road is a sea road — drawn as a sea lane, the arc across the water (CCODE-676) ── */
+  {
+    const WG676 = await import("../engine/worldglobe.js");
+    const { loadContentHeadless: lch676 } = await import("./headless_content.mjs");
+    const C676 = await lch676();
+    const t676 = WG676.decodeTerrain(JSON.parse(readFileSync(join(root, "content/packs/core/world/terrain.json"), "utf8")));
+    const k676 = WG676.roadKinds(t676, C676.locations, new Map([["leviathan_road|the_blaze", [[4.25, 179.25], [0, 170], [-1, 180]]]]));
+    const src676 = readFileSync(join(root, "engine/worldglobe.js"), "utf8");
+    check("W5/Leviathan: ⛔ the Leviathan Road's road to the Blaze is a SEA LANE even with a land route in hand — named with Aevi's reason, since the raster cannot say it — and a sea lane is drawn as the arc across the water, never bent along the land route",
+      k676.get("leviathan_road|the_blaze")?.kind === "sea" && WG676.SEA_ROAD_PLACES.includes("leviathan_road")
+      && /const pts = bend && kind !== "sea" \? bend\(a, b, id, other\) : null;/.test(src676)
+      && [...k676.entries()].filter(([, v]) => v.kind === "sea").every(([key]) => key.includes("leviathan_road") || !k676.get(key).routed));
   }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)

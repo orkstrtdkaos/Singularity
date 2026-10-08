@@ -23921,10 +23921,15 @@ await (async () => {
   check("678/L1: …and the ford is UPSTREAM of the wheels, against the authored flow",
     !!site("millbrook_ford") && !!site("millbrook_wheels") && along(site("millbrook_ford")) < along(site("millbrook_wheels")));
   const inFrame678 = (s) => s.x >= 0 && s.y >= 0 && s.x <= 800 && s.y <= 500;
-  check("678/L1: the frame fits every site and the near edge of every extent feature — Millbrook frames the wheels and the ford 3 km out, not only its 900 m",
-    mb.frame.fitMetres >= 3230 && mb.model.sites.every(inFrame678), `fit ${mb.frame.fitMetres} m`);
-  check("678/L1: a frame that fits 3 km puts the village under 150 px, so its centre gets an ENLARGEMENT — and a place that fills its frame gets none",
-    !!LM.enlargementFor(mb.model) && !LM.enlargementFor(modelOf("the_crossing").model));
+  // ✅ AEVI (NOTE_aevi_ccode_millbrook_three_pins, 2026-10-07): *"L1 asserts what it means, 'the frame fits every site and the
+  // near edge of every extent', without the 3 km figure"* — the river layout fits in 1214 m, and the old pin held her branch red
+  const needs678 = (lay) => Math.max(
+    ...(lay?.sites || []).map((x) => Number(x?.localMap?.metres) || 0),
+    ...(lay?.extent || []).map((f) => Math.max(0, (Number(f?.fromMetres) || 0) - Number(f?.kind === "water" ? (f.widthMetres || 0) / 2 : (f.radiusMetres || 0)))));
+  check("678/L1: the frame fits every site and the near edge of every extent feature — whatever Millbrook's layout reaches, the frame reaches it",
+    mb.frame.fitMetres >= needs678(mb.layout) && needs678(mb.layout) > 0 && mb.model.sites.every(inFrame678), `fit ${mb.frame.fitMetres} m for ${Math.round(needs678(mb.layout))} m needed`);
+  check("678/L1: a village under 150 px across gets an ENLARGEMENT and a place that fills its frame gets none — the rule, not Millbrook's size on any one day",
+    (!!LM.enlargementFor(mb.model)) === (mb.model.built.r * 2 < 150) && !LM.enlargementFor(modelOf("the_crossing").model) && modelOf("the_crossing").model.built.r * 2 >= 150);
   check("678/L1: the scale legend speaks metres under a mile and miles over, with the walk — \"500 m · about six minutes' walk\"",
     LM.scaleLegend({ pxPerMetre: 0.2 }).text === "500 m · about six minutes' walk" && /^\d+ mi · about .* walk$/.test(LM.scaleLegend({ pxPerMetre: 0.04 }).text),
     `${LM.scaleLegend({ pxPerMetre: 0.2 }).text} | ${LM.scaleLegend({ pxPerMetre: 0.04 }).text}`);
@@ -23986,8 +23991,13 @@ await (async () => {
     mb.model.sites.every((s) => LM.siteKnowledge(s, { character: chNever, placeId: "millbrook", layout: mb.layout }) === "unknown"));
   const chHere = { currentLocationId: "millbrook", placeMemory: { millbrook: { visits: 1, subPlaces: { millbrook_ford: { name: "The Old Ford", visited: false } } } } };
   const kv678 = Object.fromEntries(mb.model.sites.map((s) => [s.id, LM.siteKnowledge(s, { character: chHere, placeId: "millbrook", layout: mb.layout })]));
-  check("678/L6: standing in a place shows its built ground in full, what lies further out as heard-of, and a sub-place the GM named but you have not reached as heard-of",
-    kv678.millbrook_well === "seen" && kv678.millbrook_green === "seen" && kv678.millbrook_wheels === "heard" && kv678.millbrook_ford === "heard", JSON.stringify(kv678));
+  // ✅ AEVI: *"L6 measures its rule rather than naming its sites: a site past the built ground reads heard, inside it reads seen"* —
+  // and the sub-place the GM named but you have not reached reads heard wherever it lies
+  const builtR678 = Number((mb.layout?.extent || []).find((f) => f.kind === "built")?.radiusMetres) || (Number(mb.layout?.radiusMetres) || 300) * 0.4;
+  const expect678 = (s) => s.id === "millbrook_ford" ? "heard" : ((Number(s.localMap?.metres) || 0) <= builtR678 * 1.15 ? "seen" : "heard");
+  check("678/L6: standing in a place shows its built ground in full (inside reads seen), what lies further out as heard-of, and a sub-place the GM named but you have not reached as heard-of — measured against the layout's own built ground, site by site",
+    mb.model.sites.length > 2 && mb.model.sites.every((s) => kv678[s.id] === expect678(s))
+    && mb.model.sites.some((s) => kv678[s.id] === "seen") && mb.model.sites.some((s) => kv678[s.id] === "heard"), JSON.stringify(kv678));
   const withheld = LM.paintLocalMap(stub678(), mb.model, { character: chNever });
   check("678/L6: …and the painter draws the ground, the roads and the host for an unknown place, with every site withheld and reported",
     withheld.sites.length === 0 && withheld.withheld.length === mb.model.sites.length && withheld.exits.length === 3);

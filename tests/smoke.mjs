@@ -24870,6 +24870,28 @@ await (async () => {
     }
     check("local map: ⛔ every authored layout paints, WITH its enlargement, at three sizes — the ford's rapids indexed the river from seven points before it, and a ford at the channel's start (Millbrook's panel) threw the whole tier",
       threw676.length === 0, threw676.slice(0, 3).join(" | "));
+    /* ── ✅ AEVI, the local ground (CCODE-677): G7 labels that overlap move ── */
+    const ML677 = await import("../engine/maplabel.js");
+    const stubW677 = () => new Proxy({ globalAlpha: 1, lineWidth: 1 }, { get: (t, k) => k in t ? t[k] : (k === "measureText" ? (x) => ({ width: String(x).length * 5.6 }) : k === "createRadialGradient" || k === "createLinearGradient" ? () => ({ addColorStop() {} }) : k === "getImageData" ? () => ({ data: new Uint8ClampedArray(4) }) : () => {}), set: (t, k, v) => { t[k] = v; return true; } });
+    let covers677 = 0, labelled677 = 0, droppedSaid677 = true; const coverAt677 = [];
+    for (const id of Object.keys(C675.rules.localLayouts || {}).filter((i) => !i.startsWith("_") && C675.locations[i])) {
+      const lay = LM675.localLayoutFor(id, { content: C675 }), fr = LM675.localFrame(lay, { w: 900, h: 560, pad: 56 });
+      const md = LM675.localModel(lay, fr, { placeId: id, placeName: C675.locations[id]?.name || id });
+      const sp = ML677.labelSpace();
+      const o = LM675.paintLocalMap(stubW677(), md, { reveal: true, space: sp, inset: null, labelMinPx: 0 });   // as the film paints it: no panel
+      labelled677 += o.labelled.length;
+      if (!Array.isArray(o.labelsDropped)) droppedSaid677 = false;
+      const sc = Math.max(1, Math.min(1.6, Math.sqrt(fr.k)));
+      for (const b of sp.boxes.filter((b) => b.kind === "landmark" || b.kind === "landmarkUnder")) for (const st of md.sites) {
+        const r = (st.location ? 9 : 7.5) * sc * 0.85;
+        if (Math.abs(b.x - st.x) < 1 && Math.abs(b.y - (st.y - 11)) < 40) continue;   // its own label, above or below it
+        if (b.x0 < st.x + r && b.x1 > st.x - r && b.y0 < st.y + r && b.y1 > st.y - r) { covers677++; coverAt677.push(`${id}: over ${st.name}`); }
+      }
+    }
+    check("ground G7: ⛔ LABELS THAT OVERLAP MOVE — on every authored layout, painted as the film paints it, no name (a site's, the ground's, the place's own) is written across another site's MARK; a label goes above, the other side, a step lower, then beside; and the names drawn did not fall (measured before: 99 drawn, 11 of them across a neighbour's mark)",
+      covers677 === 0 && labelled677 >= 103 && droppedSaid677
+      && /\[\[0, 0\], \[0, 22\], \[0, 35\], \[side7, 15\], \[-side7, 15\], \[side7, 28\], \[-side7, 28\]\]/.test(readFileSync(join(root, "engine/localmap.js"), "utf8")),
+      `${covers677} covers (${coverAt677.slice(0, 3).join(" | ")}), ${labelled677} names drawn`);
     check("ground G6: ⛔ THE KIND'S FILLS STOP INVENTING FARMLAND — no place with a ground entry draws a generated field (a gate yard draws none at all), and the measured terrain stays: every generated river, rock and wood is still drawn",
       inventedBad.length === 0 && keptBad.length === 0 && yards676.length === 0, `${inventedBad.slice(0, 5).join(", ")} ${keptBad.slice(0, 5).join(" | ")} ${yards676.join(", ")}`);
   }

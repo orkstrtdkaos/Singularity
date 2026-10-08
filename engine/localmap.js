@@ -1590,6 +1590,21 @@ export function paintLocalMap(ctx, model, {
       out.exits.push({ id: r.to, x0: box.x - tw / 2 - 6, x1: box.x + tw / 2 + 6, y0: box.y - 13, y1: box.y + 5, name });
     }
   }
+  /* ✅ G7 (CCODE-677): *"When two site labels overlap, the second goes to the other side of its mark, then a step lower."*
+   * ⚠️ MEASURED on Aevi's frames: the labels never overlapped EACH OTHER — the label space kept their boxes apart — but
+   * nothing kept a label off the next site's MARK, so Millbrook's store, well, green and smithy each wrote its name across
+   * a neighbour and read as one pile. ⛑ The marks are kept OUT of the label space (its own gate holds that no two reserved
+   * boxes intersect, and two marks may touch); each candidate spot is tested against them before the space is asked. */
+  const markScale7 = clamp(Math.sqrt(frame.k), 1, 1.6);
+  const marks7 = [];
+  for (const s of model.sites) {
+    if (s.x < -20 || s.y < -20 || s.x > w + 20 || s.y > h + 20) continue;
+    if (siteKnowledge(s, { character, placeId: model.id, layout: model.layout, known, reveal }) === "unknown") continue;
+    const r = (s.location ? 9 : 7.5) * markScale7 * 0.85;
+    marks7.push({ id: s.id, x0: s.x - r, x1: s.x + r, y0: s.y - r, y1: s.y + r });
+  }
+  for (const m of G?.marks || []) if (m.own) marks7.push({ id: null, x0: m.x - m.sz * 1.3, x1: m.x + m.sz * 1.3, y0: m.y - m.sz * 1.3, y1: m.y + m.sz * 1.3 });
+  out.labelsDropped = [];
   // the sites, by what is known of them
   const fit = model.frame.fitMetres;
   for (const s of model.sites) {
@@ -1617,8 +1632,16 @@ export function paintLocalMap(ctx, model, {
     const kind = s.location ? "landmark" : "landmarkUnder";
     const text = String(sv?.label || s.name || s.id);
     const tw = (drawLabel(ctx, text, -9999, -9999, kind, {})?.w) || 0;
-    const box = sp.place(s.x, s.y - 11, tw, 12, { kind, clampTo: { w, h }, offsets: [[0, 0], [0, 22], [tw / 2 + 10, 5], [-tw / 2 - 10, 5]] });
+    // ✅ G7: above; the other side of its mark; a step lower; then beside it, either side, and a step lower there — each
+    // spot first tested against every OTHER mark (a label may sit on its own mark's ground, as it always has)
+    const side7 = tw / 2 + sSz + 4, half7 = tw / 2 + 2;
+    const clear7 = [[0, 0], [0, 22], [0, 35], [side7, 15], [-side7, 15], [side7, 28], [-side7, 28]].filter(([dx, dy]) => {
+      const cx = clamp(s.x + dx, half7 + 2, w - half7 - 2), cy = clamp(s.y - 11 + dy, 14, h - 4);
+      return !marks7.some((mb) => mb.id !== s.id && cx - half7 < mb.x1 && cx + half7 > mb.x0 && cy - 12 < mb.y1 && cy + 4 > mb.y0);
+    });
+    const box = clear7.length ? sp.place(s.x, s.y - 11, tw, 12, { kind, clampTo: { w, h }, offsets: clear7 }) : null;
     if (box) { q(ctx, text, box, kind, { align: "center", ...(sv && sv.labelAlpha < 1 ? { alpha: sv.labelAlpha } : {}) }); out.labelled.push(s.id); }
+    else out.labelsDropped.push(s.id);   // ⛑ dropped, not shrunk (A3) — and said, so a caller can take the enlargement
   }
   // the extent's names, italic, in the ground's own style
   for (const f of model.features) {
@@ -1643,7 +1666,15 @@ export function paintLocalMap(ctx, model, {
     const fv = f.kind === "water" ? waterView(f) : null;
     const text = String(fv?.state === "destroyed" ? (fv.label || f.name) : f.name);
     const tw = (drawLabel(ctx, text, -9999, -9999, "landmarkUnder", {})?.w) || 0;
-    const box = sp.place(x, y, tw, 12, { kind: "landmarkUnder", clampTo: { w, h } });
+    // ✅ G7: the ground's own names keep off the marks too (Millbrook's "The Village" sat across the store)
+    const halfF = tw / 2 + 2;
+    // ⛑ and when its middle is taken, anywhere else inside its own ground — a field is named in the field, not on the farm
+    const ringF = f.kind !== "water" && f.rPx > 24 ? [0.45, 0.7].flatMap((k) => [0, 1, 2, 3, 4, 5, 6, 7].map((i) => [Math.cos(i * Math.PI / 4) * f.rPx * k, Math.sin(i * Math.PI / 4) * f.rPx * k * 0.8])) : [];
+    const clearF = [[0, 0], [0, -18], [0, 18], [-halfF - 8, 0], [halfF + 8, 0], ...ringF].filter(([dx, dy]) => {
+      const cx = clamp(x + dx, halfF + 2, w - halfF - 2), cy = clamp(y + dy, 14, h - 4);
+      return !marks7.some((mb) => cx - halfF < mb.x1 && cx + halfF > mb.x0 && cy - 12 < mb.y1 && cy + 4 > mb.y0);
+    });
+    const box = clearF.length ? sp.place(x, y, tw, 12, { kind: "landmarkUnder", clampTo: { w, h }, offsets: clearF }) : null;
     if (box) { q(ctx, text, box, "landmarkUnder", { align: "center" }); out.labelled.push(f.id); }
   }
   // the place's own name, over the built ground — the one label nothing may evict when you stand here
@@ -1660,7 +1691,11 @@ export function paintLocalMap(ctx, model, {
       ctx.stroke(); ctx.restore();
       out.spreading = true;
     }
-    const box = sp.place(model.built.x, model.built.y - model.built.r - 8, tw, 14, { kind: "landmark", opts: { here: true }, clampTo: { w, h }, offsets: [[0, 0], [0, model.built.r * 2 + 30], [tw / 2 + model.built.r + 10, 0], [-tw / 2 - model.built.r - 10, 0]] });
+    // ✅ G7: the title too keeps off the marks where it can — but it is ALWAYS drawn: the spots clear of marks first, then the rest
+    const offT = [[0, 0], [0, model.built.r * 2 + 30], [tw / 2 + model.built.r + 10, 0], [-tw / 2 - model.built.r - 10, 0]], halfT = tw / 2 + 2;
+    const clearT = (dx, dy) => { const cx = clamp(model.built.x + dx, halfT + 2, w - halfT - 2), cy = clamp(model.built.y - model.built.r - 8 + dy, 16, h - 4);
+      return !marks7.some((mb) => cx - halfT < mb.x1 && cx + halfT > mb.x0 && cy - 14 < mb.y1 && cy + 4 > mb.y0); };
+    const box = sp.place(model.built.x, model.built.y - model.built.r - 8, tw, 14, { kind: "landmark", opts: { here: true }, clampTo: { w, h }, offsets: [...offT.filter(([dx, dy]) => clearT(dx, dy)), ...offT.filter(([dx, dy]) => !clearT(dx, dy))] });
     if (box) q(ctx, text, box, "landmark", { here: true, align: "center" });
   }
   // the furniture: scale, compass

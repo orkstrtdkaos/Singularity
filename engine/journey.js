@@ -145,7 +145,14 @@ const round1 = (n) => Math.round(n * 10) / 10;
  *  label that prefixes its own article has to take the name's off first. */
 const bare = (name) => String(name || "").replace(/^the\s+/i, "");
 // ⚑ CCODE-418: "through the Made Gate gate" — a gate whose name already says gate is not called a gate twice
-const gateName = (name) => { const b = bare(name); return /\bgate$/i.test(b) ? `the ${b}` : `the ${b} gate`; };
+// ⛑ CCODE-689 (Erik's renames): AND A NAME THAT IS ONE WORD ENDING IN "gate" IS A PROPER NAME, NOT "the X gate". "The Made
+// Gate" became Madegate and the label read "through the Madegate gate"; it reads "through Madegate", as "through Palegate".
+const gateName = (name) => {
+  const b = bare(name);
+  if (/\bgate$/i.test(b)) return `the ${b}`;
+  if (/^\S+gate$/i.test(b)) return b;
+  return `the ${b} gate`;
+};
 
 /** ⚑ THE ROUTE, AS A DECISION. Returns `{ from, to, options, soleOption, note }` — never a single "best" with
  *  the alternatives hidden, and never a fabricated second.

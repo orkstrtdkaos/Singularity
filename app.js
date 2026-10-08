@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.2";
+const APP_VERSION = "2.26.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14321,9 +14321,9 @@ function mintWaygate({ id, gateId, name, description, connectsTo, connects, at, 
 
   const anchor = CONTENT.locations[targets[0]] || null;
   const rec = {
-    id: gid, name: smartClamp(String(name || "The Made Gate"), 60),
+    id: gid, name: smartClamp(String(name || "Madegate"), 60),   // ⛑ CCODE-689 N2: Erik's rename (was "The Made Gate")
     regionId: anchor?.regionId || anchor?.region || null,
-    descriptionSeed: smartClamp(String(description || `A waygate — made, not reached-for. ${name || "The Made Gate"}.`), 400),
+    descriptionSeed: smartClamp(String(description || `A waygate — made, not reached-for. ${name || "Madegate"}.`), 400),
     tags: ["waygate", "made"], waygate: true, waygateTier: Math.max(1, Math.min(4, Number(waygateTier) || 2)),
     connections: targets.slice(),
     ...(richConns.length ? { waygateConnections: richConns } : {}),

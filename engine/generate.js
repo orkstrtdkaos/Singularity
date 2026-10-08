@@ -68,6 +68,9 @@ export function resolveExisting(type, name, known = {}) {
     for (const [id, rec] of Object.entries(pool || {})) {
       const label = rec?.name || rec?.label || id.replace(/-/g, " ");
       if (namesMatch(raw, label) || namesMatch(raw, id.replace(/-/g, " "))) return id;
+      // ⛑ CCODE-689 (place names, N4): a PLACE said by an old name is reused, never minted again beside itself.
+      // "The Pale March Waygate" matched neither Palegate nor `gen-waygate`, and would have grown a second gate.
+      if (type === "location" && Array.isArray(rec?.aliases) && rec.aliases.some(a => namesMatch(raw, a))) return id;
     }
     return null;
   };

@@ -36,7 +36,7 @@ import { dedupeInventory } from "./inventory.js";
 import { inferDomains } from "./traditions.js";
 import { fallbackPersonalArc, repairArcNameOn } from "./personalArc.js";
 import { seedStandingAtCreation } from "./standing.js";
-import { namesMatch } from "./namematch.js";
+import { namesMatch, normName } from "./namematch.js";   // ⛑ CCODE-689 N3: the same rule that finds a place by name
 import { affiliationOf, regionHomeTradition, buildPeopleVocab, affiliationAt } from "./affiliation.js";   // CCODE-413: step 66 runs the whole chain
 import { defaultSchoolsForDomains } from "./substrate.js"; // SNG-193b §3.2: seed a school per practised domain on old saves
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidTreeFor } from "./braids.js"; // SNG-196: mint the braids a character already earned · ✅ 2026-09-12: braidTreeFor for the template-rank repair
@@ -90,12 +90,69 @@ function renameTargets(spec, entry, character, known) {
   if (!out.length || out.some(t => !t.id || !known[t.id])) return null;   // ⛔ no target, no rewrite
   return out;
 }
+/** ⛑ CCODE-689 (Aevi's place-names order, N2): A NOTE A PLAYER READS NAMES A PLACE BY THE NAME ITS RECORD HAS NOW.
+ *  Four steps wrote "The Made Gate", "The Pale March Waygate" and "the Ent Grove" as literals, and one of them wrote
+ *  the name ONTO THE SAVE'S COPY, which overrode Erik's rename on every save it touched. The record leads; the save's
+ *  own copy is next; the literal is only for a load with neither. */
+function placeNameNow(ctx, c, id, fallback) {
+  return ctx?.content?.locations?.[id]?.name || c?.generated?.location?.[id]?.name || fallback;
+}
 // ---------- character migration steps (extensible registry) ----------
 // Each step: { version, id, playerFacing, apply(entity, ctx) → { notes?, offers?, warnings? } }.
 // Steps self-check preconditions and are order-independent; version numbers only gate
 // "has this entity seen this step yet" via entity.reconcileVersion.
 
 export const CHARACTER_STEPS = [
+  {
+    version: 96, id: "content-names-on-saved-places", playerFacing: true,
+    // ✅ ERIK 2026-10-08 (through Aevi, place names N3): *"significantly reduce the number of times a name starts with
+    // 'The'"*. 62 records took new names and kept the old ones in `aliases`. ⛔ BUT A SAVE HOLDS ITS OWN COPY of a place
+    // that came out of play (`generated.location`), and four of the app's readers spread that copy OVER the record, so
+    // the copy's old name wins there and the rename never shows.
+    // ⛑ THE RECORD'S NAME GOES ONTO THE COPY, AND THE COPY'S OLD NAME INTO THE COPY'S `aliases` — the records' own rule:
+    // nothing is lost, and the new name is the one shown.
+    // ⛔ ONLY WHEN THEY ARE THE SAME PLACE BY THE RULE THAT FINDS ONE — `namesMatch` against the record's name or an alias.
+    // A record another game grew (it shares no object with this save, and may share a slug id) or a shared `_canon` one
+    // is never a reason to rename this save's place.
+    // ⚡ MEASURED on the seven fixture saves: Silas's holds 14 copies and 9 differ from their record. Eight match and are
+    // carried — four of Aevi's renames and four spelling fixes ("Stillwater'S Trouble"). One does not match its record
+    // ("North Gate Registry Ossian Office" against "North Gate Registry — Ossian's Office") and is left as it is.
+    // ⛑ A HOLD NAMED AFTER ITS PLACE'S OLD NAME takes the new one ("The Made Gate", which step 44 named). A hold has no
+    // `aliases` (its schema is closed) and nothing finds a hold by name, so nothing is lost there either.
+    // ⚠️ THE NOTE SPEAKS ONLY OF RENAMES. A spelling fix is not news to the player.
+    apply(character, ctx = {}) {
+      const locs = ctx.content?.locations;
+      if (!locs || typeof locs !== "object") return {};
+      const sameNorm = (a, b) => !!normName(a) && normName(a) === normName(b);
+      const said = new Map();   // old → new, once each, for the note
+      const isRename = (rec, was) => !sameNorm(rec.name, was) && (rec.aliases || []).some(a => sameNorm(a, was));
+      for (const [id, copy] of Object.entries(character?.generated?.location || {})) {
+        const rec = locs[id];
+        if (!copy || typeof copy !== "object" || !rec || rec === copy || rec._canon || !rec.name || copy.name === rec.name) continue;
+        const was = String(copy.name || "");
+        const same = !was || namesMatch(rec.name, was) || (Array.isArray(rec.aliases) && rec.aliases.some(a => namesMatch(a, was)));
+        if (!same) continue;
+        copy.name = rec.name;
+        if (was) {
+          const ca = Array.isArray(copy.aliases) ? copy.aliases : [];
+          if (!ca.includes(was)) copy.aliases = [...ca, was];
+          if (isRename(rec, was)) said.set(was, rec.name);
+        }
+      }
+      for (const h of character?.holdings || []) {
+        const rec = h && locs[h.locationId];
+        if (!rec || rec._canon || !rec.name || !h.name || h.name === rec.name) continue;
+        if (!isRename(rec, h.name)) continue;
+        said.set(h.name, rec.name);
+        h.name = rec.name;
+      }
+      if (!said.size) return {};
+      const pairs = [...said].map(([was, now]) => `${was} is ${now}`);
+      return { notes: [said.size === 1
+        ? `A place you know goes by a new name now: ${pairs[0]}. The old name still finds it.`
+        : `Places you know go by new names now: ${pairs.slice(0, -1).join(", ")} and ${pairs[pairs.length - 1]}. The old names still find them.`] };
+    }
+  },
   {
     version: 94, id: "patrolling-is-the-watch", playerFacing: true,
     // ✅ ERIK 2026-10-01 (through Aevi): *"Patrolling merges like Guarding: yes. One watch, the stance is the
@@ -2610,10 +2667,11 @@ export const CHARACTER_STEPS = [
         "the-fell-pell": [{ kind: "forge" }, { kind: "smithy" }, { kind: "workshop", yields: "arms" }],
       };
       // §3 — the Made Gate, a hold: "he built the Whistling Woman to watch over it and raised Logana to guard it"
+      const mgName = placeNameNow(ctx, c, "gen-the-made-gate", "Madegate");   // ⛑ CCODE-689 N2: the record's name, never a literal
       if (!(c.holdings || []).some(h => h && h.id === "hold-made-gate")) {
-        addHolding(c, { id: "hold-made-gate", kind: "post", name: "The Made Gate", locationId: "gen-the-made-gate", steward: null, day: 16 });
+        addHolding(c, { id: "hold-made-gate", kind: "post", name: mgName, locationId: "gen-the-made-gate", steward: null, day: 16 });
         const mg = (c.holdings || []).find(h => h && h.id === "hold-made-gate");
-        if (mg) { mg.describedAs = "a gate that was made rather than found"; if (!mg.condition) mg.condition = "holding"; notes.push("The Made Gate is yours on the record now — kept by your name, guarded by Logana, watched from the Whistling Woman."); }
+        if (mg) { mg.describedAs = "a gate that was made rather than found"; if (!mg.condition) mg.condition = "holding"; notes.push(`${mgName} is yours on the record now — kept by your name, guarded by Logana, watched from the Whistling Woman.`); }
       }
       const mg = (c.holdings || []).find(h => h && h.id === "hold-made-gate");
       if (mg) {
@@ -2627,7 +2685,7 @@ export const CHARACTER_STEPS = [
         for (const f of feats) if (!has(h, f.kind)) { const r = addFeature(c, id, { ...f, by: "you", day: 16, cfg }); if (r.ok) built++; }
       }
       const ww = (c.holdings || []).find(h => h && h.id === "whistling-woman-post");
-      if (ww && mg && ww.watches !== "hold-made-gate") { ww.watches = "hold-made-gate"; notes.push("The Whistling Woman Post watches over the Made Gate — while it stands, the gate is raided less; lose it and the gate is exposed."); }
+      if (ww && mg && ww.watches !== "hold-made-gate") { ww.watches = "hold-made-gate"; notes.push(`The Whistling Woman Post watches over ${mgName} — while it stands, the gate is raided less; lose it and the gate is exposed.`); }
       if (built) notes.push(`${built} feature${built === 1 ? "" : "s"} the fiction already built are on your holds now — the record kept the picture and dropped the buildings.`);
       return notes.length ? { notes } : {};
     }
@@ -2654,7 +2712,8 @@ export const CHARACTER_STEPS = [
         return true;
       };
       const moved = [];
-      if (place("gen-the-made-gate", { colatitude: 20.40, longitude: 251.95 }, ["gen-left-branch-gate-clearing", "gen-stillwater-s-trouble"], "gen-stillwater-s-trouble")) moved.push("the Made Gate");
+      const mgName = placeNameNow(ctx, c, "gen-the-made-gate", "Madegate");   // ⛑ CCODE-689 N2
+      if (place("gen-the-made-gate", { colatitude: 20.40, longitude: 251.95 }, ["gen-left-branch-gate-clearing", "gen-stillwater-s-trouble"], "gen-stillwater-s-trouble")) moved.push(mgName);
       if (place("gen-left-branch-gate-clearing", { colatitude: 20.44, longitude: 251.90 }, ["gen-the-made-gate", "gen-whistling-woman-post", "gen-stillwater-s-trouble"], "gen-the-made-gate")) moved.push("the gate clearing");
       if (place("gen-whistling-woman-post", { colatitude: 20.36, longitude: 252.10 }, ["gen-left-branch-gate-clearing", "gen-the-made-gate"], "gen-the-made-gate")) moved.push("the Whistling Woman Post");
       // (the ridge post was moved here once and moved back by step 47 — Erik: the Crossing IS the Hub; the road north is the gate)
@@ -2679,7 +2738,7 @@ export const CHARACTER_STEPS = [
       if (mg && cfg?.features && !(mg.features || []).some(f => f && f.kind === "waygate")) { const r = addFeature(c, "hold-made-gate", { kind: "waygate", by: "you", day: 14, cfg }); gateFeat = !!r.ok; }
       const notes = [];
       if (moved.length) notes.push(`On your word: ${moved.join(", ")} stand on the March now — the gate's mouth at the Left Branch approach by Stillwater's Trouble, the Whistling Woman beside it as its watch.`);
-      if (gateFeat) notes.push("The Made Gate carries what it is: a waygate, made rather than found — one of a few in the world, and it leads to the Crossing.");
+      if (gateFeat) notes.push(`${mgName} carries what it is: a waygate, made rather than found — one of a few in the world, and it leads to the Crossing.`);
       if (joined) notes.push("And the gate you made is in the network now — it can be aimed at, and aimed from. It never was before.");
       return notes.length ? { notes } : {};
     }
@@ -2715,7 +2774,7 @@ export const CHARACTER_STEPS = [
     // So: Center folds into the Hub; the Pale March waygate becomes the gate Erik walked out of, two hours from the fork,
     // the fork two hours from Stillwater's Trouble; the ridge post goes back north of the Hub's gate, where its deeds
     // were stamped, and its road to the Whistling Woman is withdrawn — that road is the gate Silas made. Silas only.
-    apply: (c) => {
+    apply: (c, ctx = {}) => {
       if (c?.id !== "char-mrhs8286") return {};
       const gl = c.generated?.location;
       if (!gl) return {};
@@ -2736,7 +2795,9 @@ export const CHARACTER_STEPS = [
       // (b) the Pale March waygate is a gate, two hours from the fork; the fork two hours from Stillwater's Trouble
       const wg = gl["gen-waygate"];
       if (wg && wg._placedBy !== MARK) {
-        Object.assign(wg, { name: "The Pale March Waygate", waygate: true, waygateTier: 2, networkCapable: true, waygateDefaultTo: "the_crossing",
+        // ⛑ CCODE-689 N2: THE RECORD'S NAME, NOT A LITERAL. This wrote "The Pale March Waygate" onto the save's own copy
+        // and so overrode Erik's rename (Palegate) on every save it touched. A load without the record keeps the copy's own.
+        Object.assign(wg, { name: ctx?.content?.locations?.["gen-waygate"]?.name || wg.name || "Palegate", waygate: true, waygateTier: 2, networkCapable: true, waygateDefaultTo: "the_crossing",
           tags: [...new Set([...(wg.tags || []), "waygate"])],
           descriptionSeed: "The waygate the Hub's crossroads opens onto the Pale March. A couple of hours' walk to the fork in the road, and Stillwater's Trouble beyond it.",
           worldPos: { colatitude: 20.20, longitude: 251.63, depth: 0 }, connections: ["gen-ashwarden-march-road", "millbrook"], _placedBy: MARK });
@@ -2991,7 +3052,7 @@ export const CHARACTER_STEPS = [
     //     mill floor and the Ashwarden March road. A generic minted id conflated the Crossing's own gate
     //     with the one beside Millbrook. Re-filing ONE of fifteen makes that data less consistent, not
     //     more, and which nine move is a ruling. Reported in po/, untouched here.
-    apply: (c) => {
+    apply: (c, ctx = {}) => {
       const gen = c?.generated?.location?.["gen-the-ent-grove"];
       if (!gen) return {};
       if (gen.regionId === "the_center" && Number(gen.worldPos?.colatitude) <= 1) return {};
@@ -3002,7 +3063,9 @@ export const CHARACTER_STEPS = [
       gen.connections = ["the_crossing", "the_hundred_markets", "the_great_coliseum"];
       gen._placedBy = "ccode-474";
       console.log("[reconcile] ccode-474: the Ent Grove's own copy moved from the valley to the Crossing");
-      return { notes: ["The Ent Grove stands where your own story put it — inside the Crossing, a short walk from the Hundred Markets and the Great Coliseum. Your record of it had it out in the valley beside the Pale March Waygate, which was never where you found it."] };
+      // ⛑ CCODE-689 N2: the names the records have now
+      const grove = placeNameNow(ctx, c, "gen-the-ent-grove", "Entgrove"), pale = placeNameNow(ctx, c, "gen-waygate", "Palegate");
+      return { notes: [`${grove} stands where your own story put it — inside the Crossing, a short walk from the Hundred Markets and the Great Coliseum. Your record of it had it out in the valley beside ${pale}, which was never where you found it.`] };
     }
   },
   {

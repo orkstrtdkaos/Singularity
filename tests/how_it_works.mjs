@@ -12258,7 +12258,8 @@ console.log("\n── §121 · the record kept the picture and dropped the build
   check("§121: ⛔ THE MADE GATE IS A HOLD — kept by no one but the name, guarded by Logana, a gate and a ward-line, and the Whistling Woman watches it",
     !!mg && mg.kind === "post" && mg.steward === null && (mg.garrison || []).includes("logana") && kinds("hold-made-gate") === "gate,ward_line" && mg.locationId === "gen-the-made-gate"
     && byId("whistling-woman-post").watches === "hold-made-gate" && /Logana/.test(mg.history.map(x => x.note).join(" ")), JSON.stringify({ mg: !!mg, g: mg?.garrison, w: byId("whistling-woman-post").watches }));
-  check("§121: …and it is SAID — the notes name the gate, the watch, and the buildings", Array.isArray(out.notes) && out.notes.length === 3 && /Made Gate is yours/.test(out.notes[0]));
+  // ⛑ CCODE-689 (place names, N2): the note names the gate by its record's name now (Madegate), so the check reads the record too
+  check("§121: …and it is SAID — the notes name the gate, the watch, and the buildings", Array.isArray(out.notes) && out.notes.length === 3 && out.notes[0].startsWith(`${C.locations["gen-the-made-gate"].name} is yours`), out.notes?.[0]);
   const snap = JSON.stringify(c.holdings); const again = step.apply(c, { content: C });
   check("§121: …idempotent — twice builds nothing and says nothing", JSON.stringify(c.holdings) === snap && !again.notes);
   const o = fx(); o.id = "someone-else"; step.apply(o, { content: C });
@@ -20585,19 +20586,21 @@ console.log("\n── §256 · a home is a place that is yours ──");
   const { loadContentHeadless: lch256 } = await import("./headless_content.mjs");
   const C256 = await lch256();
   const L = C256.locations;
+  // ⛑ CCODE-689 (Aevi's place-names order, N1): the record's own name, not a literal — so a rename is a content change, never a red here
+  const shelf256 = L.the_painters_shelf.name;
   const ch = { name: "Adelheid", currentLocationId: "the_painters_shelf" };
   const r1 = H256.makeHome(ch, "the_painters_shelf", { locations: L, worldDay: 90 });
   check("§256: ⛔ a place becomes home by the player's choice — once, with the day it happened",
-    r1.ok && H256.isHome(ch) && JSON.stringify(H256.homeOf(ch, L)) === JSON.stringify({ locationId: "the_painters_shelf", name: "The Painter's Shelf", sinceWorldDay: 90, exists: true })
+    r1.ok && H256.isHome(ch) && JSON.stringify(H256.homeOf(ch, L)) === JSON.stringify({ locationId: "the_painters_shelf", name: shelf256, sinceWorldDay: 90, exists: true })
     && H256.makeHome(ch, "the_painters_shelf", { locations: L }).ok === false && H256.makeHome(ch, "nowhere_at_all", { locations: L }).ok === false);
   const gmHome = H256.homeForGM(ch, L);
   ch.currentLocationId = "the_kindly_rest";
   const gmAway = H256.homeForGM(ch, L);
   const r2 = H256.makeHome(ch, "the_kindly_rest", { locations: L, worldDay: 95 });
   check("§256: …the GM hears where they live, and that they are home when they are — and moving home says where from",
-    gmHome === "- Adelheid's home is The Painter's Shelf (since world-day 90) — their own place, chosen by them. Adelheid is home now: let it feel like home — their things where they left them, the quiet they came back for."
-    && gmAway === "- Adelheid's home is The Painter's Shelf (since world-day 90) — their own place, chosen by them."
-    && r2.ok && r2.was === "The Painter's Shelf" && H256.homeForGM({ name: "Nobody" }, L) === null, gmAway);
+    gmHome === `- Adelheid's home is ${shelf256} (since world-day 90) — their own place, chosen by them. Adelheid is home now: let it feel like home — their things where they left them, the quiet they came back for.`
+    && gmAway === `- Adelheid's home is ${shelf256} (since world-day 90) — their own place, chosen by them.`
+    && r2.ok && r2.was === shelf256 && H256.homeForGM({ name: "Nobody" }, L) === null, gmAway);
   const REG256 = await import("../engine/gm_registry.js");
   const GM256 = await import("../engine/gm.js");
   const bare256 = { character: { id: "t", name: "T", origin: "valley", background: "smith", level: 1, attributes: { physical: 3, mental: 3, social: 3, practical: 3 }, health: 10, maxHealth: 10, energy: 5, maxEnergy: 5, abilities: [], alignment: {}, inventory: [], quests: [] },
@@ -31845,8 +31848,11 @@ console.log("\n── §383 · a gate at a settlement opens into a yard outside 
     && W383.walkPhrase(3) === "about 3 days off" && W383.walkPhrase(1) === "about 1 day off"
     && W383.walkPhrase(0) === "right here" && W383.walkPhrase(null) === "right here",
     [1.5 / 24, 1 / 24, 3, 1].map(W383.walkPhrase).join(" · "));
+  // ⛑ CCODE-689 (N1): the gate yard's own name, escaped for the patterns below
+  const yard383 = String(L383.bedrock_gate_yard?.name || "");
+  const yardRe383 = yard383.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   check("§383: ⛔ …and the sentence a GM actually reads uses it — standing in a moved town, the gate is hours off, not a day",
-    /the nearest they know is the Weighed Arch \(the gate yard outside Bedrock\), about 1\.5 hours off\./
+    new RegExp(`the nearest they know is ${yardRe383} \\(the gate yard outside Bedrock\\), about 1\\.5 hours off\\.`)
       .test(W383.waygateTruthForGM({ currentLocationId: "bedrock", knownPlaces: ["bedrock"] }, L383) || ""),
     String(W383.waygateTruthForGM({ currentLocationId: "bedrock", knownPlaces: ["bedrock"] }, L383)).match(/the nearest[^.]*\./)?.[0]);
 
@@ -31894,10 +31900,10 @@ console.log("\n── §383 · a gate at a settlement opens into a yard outside 
     return { label, r, news: H383.storeNews(h, { raid: r }) };
   });
   check("§383: ⛔ …and WHERE THEY LANDED rides every ending `resolveRaid` has, not just one — four returns, and a fact on one of them is a fact the news can only sometimes read",
-    endings383.every(e => e.r.byGate?.at === "bedrock_gate_yard" && e.r.byGate.yard === "the Weighed Arch" && e.r.byGate.town === "Bedrock"),
+    endings383.every(e => e.r.byGate?.at === "bedrock_gate_yard" && e.r.byGate.yard === yard383 && e.r.byGate.town === "Bedrock"),
     endings383.filter(e => !e.r.byGate).map(e => e.label).join(", ") || "all carried it");
   check("§383: ⛑ …and the news says it AFTER what they did, as the explanation — led with, \"they crossed the open ground\" sat above \"nobody saw them\" and read as the news arguing with itself",
-    endings383.every(e => e.news.some(l => /came out of the arch at the Weighed Arch, outside Bedrock/.test(l)))
+    endings383.every(e => e.news.some(l => new RegExp(`came out of the arch at ${yardRe383}, outside Bedrock`).test(l)))
     && endings383.every(e => e.news.findIndex(l => /came out of the arch/.test(l)) === e.news.length - 1),
     endings383.map(e => e.news[e.news.length - 1]).join(" | ").slice(0, 150));
   check("§383: ⚠️ …and a raid that walked up the road says nothing about a gate — the common case, and every case until a power takes one",

@@ -190,7 +190,8 @@ export function recallPlaces(character, text, { locations = {}, limit = 3, isKno
   };
 
   for (const [locId, loc] of Object.entries(locations)) {
-    if (!loc?.name || seen.has(locId) || !mentions(loc.name)) continue;
+    // ⛑ CCODE-689 (place names, N4): a place the player names by an old name is still that place
+    if (!loc?.name || seen.has(locId) || ![loc.name, ...(Array.isArray(loc.aliases) ? loc.aliases : [])].some(mentions)) continue;
     seen.add(locId);
     const mem = character?.placeMemory?.[locId];
     if (mem || known(locId)) {

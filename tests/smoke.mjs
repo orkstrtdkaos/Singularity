@@ -25327,6 +25327,93 @@ await (async () => {
       && app687.includes("if (sig687 !== _liveRoadsSig) { _liveRoadsSig = sig687; _worldRoutesTried = null; }") && app687.includes("if (pr) drawStateMark(ctx, \"trace\", pr.x, pr.y - 1, 6);"),
       `${other687} · ${nowhere687.why}`);
   }
+  /* ── ✅ Aevi's place-names order (CCODE-689): the engine stops writing old names, and a save's own copy takes the record's ── */
+  {
+    const RC689 = await import("../engine/reconcile.js");
+    const step689 = RC689.CHARACTER_STEPS.filter((st) => st.version === 96);
+    const own689 = { id: "gen-own", name: "A Place Of My Own" };
+    const loc689 = {
+      "gen-old": { id: "gen-old", name: "Madegate", aliases: ["The Made Gate"] },
+      "gen-spell": { id: "gen-spell", name: "Stillwater's Trouble" },
+      "gen-other": { id: "gen-other", name: "North Gate Registry — Ossian's Office" },
+      "gen-shared": { id: "gen-shared", name: "The Shared Place, Renamed Elsewhere", _canon: { entityId: "gen-shared" } },
+      "gen-article": { id: "gen-article", name: "Low Lamp Inn", aliases: ["The Low Lamp Inn"] },
+      "gen-own": own689,
+    };
+    const ch689 = { id: "char-x", reconcileVersion: 95,
+      generated: { location: {
+        "gen-old": { id: "gen-old", name: "The Made Gate" },
+        "gen-spell": { id: "gen-spell", name: "Stillwater'S Trouble" },
+        "gen-other": { id: "gen-other", name: "North Gate Registry Ossian Office" },
+        "gen-shared": { id: "gen-shared", name: "The Shared Place" },
+        "gen-article": { id: "gen-article", name: "The Low Lamp Inn" },
+        "gen-own": own689 } },
+      holdings: [{ id: "hold-made-gate", name: "The Made Gate", locationId: "gen-old" }, { id: "hold-mine", name: "My Keep", locationId: "gen-old" }] };
+    const r689 = RC689.reconcile(ch689, "character", { content: { locations: loc689 } }, step689);
+    const g689 = ch689.generated.location;
+    const again689 = RC689.reconcile(ch689, "character", { content: { locations: loc689 } }, step689.map((st) => ({ ...st, version: 97 })));
+    check("names/N3: ⛔ A SAVE'S OWN COPY OF A PLACE TAKES ITS RECORD'S NAME — the old name goes into the copy's `aliases` (nothing is lost); only when they are the same place by `namesMatch` on the record's name or an alias (a copy that does not match is left, and a shared `_canon` record never renames this save's place); a hold named after its place's old name takes the new one, a hold with its own name keeps it; the note speaks only of a real rename (an article dropped or a spelling fixed is not news); running again changes nothing",
+      r689.applied.includes("content-names-on-saved-places")
+      && g689["gen-old"].name === "Madegate" && JSON.stringify(g689["gen-old"].aliases) === '["The Made Gate"]'
+      && g689["gen-spell"].name === "Stillwater's Trouble" && JSON.stringify(g689["gen-spell"].aliases) === `["Stillwater'S Trouble"]`
+      && g689["gen-article"].name === "Low Lamp Inn"
+      && g689["gen-other"].name === "North Gate Registry Ossian Office" && !g689["gen-other"].aliases
+      && g689["gen-shared"].name === "The Shared Place" && own689.name === "A Place Of My Own" && !own689.aliases
+      && ch689.holdings[0].name === "Madegate" && ch689.holdings[1].name === "My Keep"
+      && r689.notes.length === 1 && r689.notes[0] === "A place you know goes by a new name now: The Made Gate is Madegate. The old name still finds it."
+      && !again689.notes.length && JSON.stringify(g689["gen-old"].aliases) === '["The Made Gate"]',
+      JSON.stringify(r689.notes));
+    const step47 = RC689.CHARACTER_STEPS.filter((st) => st.id === "hub-is-the-crossing");
+    const step78 = RC689.CHARACTER_STEPS.filter((st) => st.id === "the-ent-grove-is-at-the-crossing");
+    const mk689 = () => ({ id: "char-mrhs8286", reconcileVersion: 0, generated: { location: {
+      "gen-waygate": { id: "gen-waygate", name: "Waygate", connections: [] },
+      "gen-the-ent-grove": { id: "gen-the-ent-grove", name: "The Ent Grove", regionId: "valley", worldPos: { colatitude: 20, longitude: 252 } } } } });
+    const named689 = { content: { locations: { "gen-waygate": { name: "Palegate" }, "gen-the-ent-grove": { name: "Entgrove" } } } };
+    const a689 = mk689(); RC689.reconcile(a689, "character", named689, step47);
+    const b689 = mk689(); RC689.reconcile(b689, "character", {}, step47);
+    const e689 = RC689.reconcile(mk689(), "character", named689, step78);
+    const rcSrc689 = readFileSync(join(root, "engine/reconcile.js"), "utf8");
+    const appSrc689 = readFileSync(join(root, "app.js"), "utf8");
+    check("names/N2: ⛔ THE ENGINE NEVER WRITES AN OLD NAME ONTO A SAVE — step 47 names the save's waygate by its record (Palegate), and a load without the record keeps the copy's own name rather than a literal; the notes a player reads name places by their records (\"Entgrove stands where your own story put it … beside Palegate\"); the made gate's hold, its notes, and a new made gate's default carry none of the old literals",
+      a689.generated.location["gen-waygate"].name === "Palegate" && b689.generated.location["gen-waygate"].name === "Waygate"
+      && e689.notes.length === 1 && e689.notes[0].startsWith("Entgrove stands where your own story put it") && e689.notes[0].includes("beside Palegate, which was never")
+      && !rcSrc689.includes('name: "The Made Gate"') && !rcSrc689.includes('name: "The Pale March Waygate"') && !rcSrc689.includes('"The Made Gate is yours')
+      && !rcSrc689.includes("watches over the Made Gate") && !rcSrc689.includes('moved.push("the Made Gate")') && !rcSrc689.includes('"The Made Gate carries') && !rcSrc689.includes('"The Ent Grove stands')
+      && appSrc689.includes('String(name || "Madegate")') && !appSrc689.includes('name || "The Made Gate"'),
+      `${a689.generated.location["gen-waygate"].name} · ${e689.notes[0] || "no note"}`);
+    const { loadContentHeadless: lch689 } = await import("./headless_content.mjs");
+    const C689 = await lch689();
+    const JN689 = await import("../engine/journey.js");
+    const IN689 = await import("../engine/intent.js");
+    const PL689 = await import("../engine/places.js");
+    const GN689 = await import("../engine/generate.js");
+    const LM689 = await import("../engine/localmap.js");
+    const P689 = (c, l) => ({ colatitude: c, longitude: l, depth: 0 });
+    const net689 = {
+      a: { id: "a", name: "Here", worldPos: P689(20, 10), connections: ["g1"] },
+      g1: { id: "g1", name: "Madegate", waygate: true, networkCapable: true, worldPos: P689(20, 10.05), connections: ["a"] },
+      g2: { id: "g2", name: "The Axis Gate", waygate: true, worldPos: P689(80, 120.05), connections: ["b"] },
+      g3: { id: "g3", name: "The Crossing", waygate: true, worldPos: P689(80, 121), connections: [] },
+      b: { id: "b", name: "There", worldPos: P689(80, 120), connections: ["g2"] },
+    };
+    const there689 = JN689.routeBetween("a", "b", net689, {})?.options?.map((o) => o.label) || [];
+    const back689 = JN689.routeBetween("b", "a", net689, {})?.options?.map((o) => o.label) || [];
+    const person689 = IN689.personDestination("Logana", { label: "find Logana" }, { npcRegistry: { l: { id: "l", name: "Logana", statusNote: "Last seen at The Made Gate, on watch." } }, locations: C689.locations });
+    const recall689 = PL689.recallPlaces({ knownPlaces: ["gen-the-made-gate"] }, "I remember the Made Gate", { locations: C689.locations });
+    const recallIds689 = (recall689?.hits || recall689 || []).map?.((h) => h.locationId) || [];
+    const wordsWend689 = IN689.guessedDestination("the river wends past the mill", { w: { id: "w", name: "Wend", regionId: "r" }, h: { id: "h", name: "Home", regionId: "r" } }, "h");
+    check("names/N4: ⛔ A PLACE SAID BY AN OLD NAME IS STILL THAT PLACE, and a joined-up name reads as a name — the route says \"through Madegate\" (never \"the Madegate gate\") and still \"through the Axis Gate\"; a person's whereabouts, a guessed destination, a recalled place and the reuse-before-mint check all find a place by its `aliases` (\"The Pale March Waygate\" is Palegate, never a second gate — and only for places: a person's aliases are not read there); a short name is found as a whole word (\"Wend\" is not inside \"wends\"); the local map reads a joined-up name's old name for its kind (Madegate is a gate), never a word ending (Saltmarch is no arch)",
+      there689.includes("through Madegate") && !there689.some((l) => /Madegate gate/.test(l)) && back689.includes("through the Axis Gate")
+      && person689.destId === "gen-the-made-gate"
+      && IN689.guessedDestination("we head for the pale march waygate", C689.locations, "gen-ashwarden-march-road") === C689.locations["gen-waygate"].name
+      && wordsWend689 === null
+      && recallIds689.includes("gen-the-made-gate")
+      && GN689.resolveExisting("location", "The Pale March Waygate", { authored: C689.locations, generated: {} }) === "gen-waygate"
+      && GN689.resolveExisting("npc", "The Pale March Waygate", { authored: C689.locations, generated: {} }) === null
+      && LM689.basisFromName("Madegate", ["The Made Gate"]).kind === "gate" && LM689.basisFromName("Saltmarch", []).kind === null
+      && Object.values(C689.locations).filter((l) => Array.isArray(l.aliases) && l.aliases.some((a) => LM689.basisFromName(a).kind) && !LM689.basisFromName(l.name, l.aliases).kind).length === 0,
+      JSON.stringify({ there689, back689, person: person689.destId, recallIds689, wordsWend689 }));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

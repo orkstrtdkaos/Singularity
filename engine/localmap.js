@@ -338,8 +338,13 @@ const NAME_BASIS = [
   [/\b(cave|delve|hollow|cellar|undercroft|tunnel|mine|shaft)s?\b/i, "anti-road", "underplace"],
   [/\b(ruin|rubble|wreck)s?\b/i, "anti-road", "ruin"],
 ];
-export function basisFromName(name) {
+export function basisFromName(name, aliases = []) {
   for (const [re, basis, kind] of NAME_BASIS) if (re.test(String(name || ""))) return { basis, kind, why: `its name says "${String(name).match(re)[0]}"` };
+  // ⛑ CCODE-689 (Erik's renames): A JOINED-UP NAME HIDES ITS WORD. "The Made Gate" said gate and Madegate does not, and
+  // twelve records lost their kind that way (Cairngate, Entgrove, Lowmarket, Longdelve…). The old name still says it. A
+  // word ENDING is not read instead: Saltmarch would be an arch.
+  for (const a of Array.isArray(aliases) ? aliases : [])
+    for (const [re, basis, kind] of NAME_BASIS) if (re.test(String(a || ""))) return { basis, kind, why: `its older name, ${a}, says "${String(a).match(re)[0]}"` };
   return { basis: "road", kind: null, why: "its name says nothing about where it sits — placed on a road out, in turn" };
 }
 
@@ -410,7 +415,7 @@ export function generateLayout(placeId, { loc = null, kind = "village", gradient
   const placed = [];
   for (const c of children || []) {
     if (!c) continue;
-    const nb = basisFromName(c.name);
+    const nb = basisFromName(c.name, c.aliases);
     let at = null, why = "";
     // ⛑ A PROMOTED PLACE HAS A POSITION OF ITS OWN, and its bearing from the parent is a fact, not a guess
     if (c.worldPos && loc?.worldPos) {

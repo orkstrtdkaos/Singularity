@@ -126,7 +126,9 @@ export function personDestination(ref, action = {}, ctx = {}) {
   // §3c: recover WHERE a registered person is, from their status prose (best-effort) — travel to the PLACE.
   if (npc && npc.statusNote) {
     const sn = String(npc.statusNote).toLowerCase();
-    const at = Object.values(ctx.locations || {}).find(l => String(l.name || "").length > 3 && sn.includes(String(l.name).toLowerCase()));
+    // ⛑ CCODE-689 (place names, N4): a place's old names find it too, and a name is found as a whole word — "Wend" lost its
+    // article in the renames, and a bare substring would find it inside "wending"
+    const at = Object.values(ctx.locations || {}).find(l => placeNamesOf(l).some(n => n.length > 3 && wholeWordIn(sn, n)));
     if (at) return { isPerson: true, destId: at.id };
   }
   return { isPerson: true, destId: null };
@@ -205,21 +207,31 @@ export function isConsequentialMove(fromId, toId, locations) {
  *  so, and the two trusted paths carry that. A weak guess is not a licence to begin a journey of months —
  *  and when the words name only places elsewhere, the honest answer is that there is no travel intent here,
  *  not that there is one to the first row that matched. PURE. */
+/** ⛑ CCODE-689: every name a place answers to, lowercased — its name, then its old names (`aliases`). */
+function placeNamesOf(l) {
+  return [l?.name, ...(Array.isArray(l?.aliases) ? l.aliases : [])].map(n => String(n || "").toLowerCase().trim()).filter(Boolean);
+}
+/** ⛑ CCODE-689: `n` stands in `hay` as a whole word or phrase, not inside a longer word. */
+function wholeWordIn(hay, n) {
+  const esc = n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`(^|[^\\p{L}\\p{N}])${esc}($|[^\\p{L}\\p{N}])`, "u").test(hay);
+}
 export function guessedDestination(text, locations = {}, hereId = null) {
   const hay = String(text || "").toLowerCase();
   if (!hay) return null;
   const here = locations?.[hereId] || null;
   const hereRegion = here?.regionId || here?.region || null;
   const hits = [];
+  // ⛑ CCODE-689 (place names, N4): a place's old names find it too, as whole words; the place is named by its name now
   for (const l of Object.values(locations || {})) {
-    const n = String(l?.name || "").toLowerCase();
-    if (n && n.length > 2 && hay.includes(n)) hits.push(l);
+    const len = Math.max(0, ...placeNamesOf(l).filter(n => n.length > 2 && wholeWordIn(hay, n)).map(n => n.length));
+    if (len) hits.push({ l, len });
   }
   if (!hits.length) return null;
   // the longest name that matched, so "The Kindly Rest" beats a shorter name inside it
-  const local = hits.filter(l => (l.regionId || l.region) && hereRegion && (l.regionId || l.region) === hereRegion)
-    .sort((a, b) => String(b.name).length - String(a.name).length)[0];
-  return local ? local.name : null;   // named a place, but not one around here: no departure on a guess
+  const local = hits.filter(({ l }) => (l.regionId || l.region) && hereRegion && (l.regionId || l.region) === hereRegion)
+    .sort((a, b) => b.len - a.len)[0];
+  return local ? local.l.name : null;   // named a place, but not one around here: no departure on a guess
 }
 
 export function departureGateFor(travelIntent, character, locations) {

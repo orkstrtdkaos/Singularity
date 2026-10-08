@@ -166,7 +166,10 @@ export const LABEL_STYLES = {
  *  until somebody asks why one map's labels are green." */
 export function applyStyle(ctx, kind, opts = {}) {
   const s = LABEL_STYLES[kind] || LABEL_STYLES.place;
-  ctx.font = typeof s.font === "function" ? s.font(opts) : s.font;
+  const fnt = typeof s.font === "function" ? s.font(opts) : s.font;
+  // ✅ AEVI (the Numinous Reach): *"italic labels past the settled ellipse I'd still like, if the shared label painter can take a
+  // flag per label"* — it can: one flag, the same table, the same halo
+  ctx.font = opts?.italic && !/\bitalic\b/.test(fnt) ? `italic ${fnt}` : fnt;
   ctx.lineJoin = "round";
   ctx.lineWidth = s.haloWidth;
   ctx.strokeStyle = s.halo;

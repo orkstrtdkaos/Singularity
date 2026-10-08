@@ -123,8 +123,8 @@ export function stubEntity(type, context = {}, schema = {}) {
       // the fields empty and the ask below fills them.
       tags: [], connections: loc.id ? [loc.id] : [], descriptionSeed: "", appearance: "",
       loreRefs: loc.loreRefs ? [...loc.loreRefs] : [], encounterFlavor: "",
-      questSeeds: [], map: nearMap(loc.map)
-    });
+      questSeeds: []
+    });   // ✅ AEVI, ruling 4 (CCODE-663): no layout coordinate is minted for a stub either — the field is gone from every record
   } else if (type === "creature") {
     // SNG-250 §3: even the STUB must be born whole — a stubbed monster still has to be fightable, or
     // the fallback path quietly reintroduces exactly the hollow creature the contract exists to ban.
@@ -262,14 +262,6 @@ export function resolveRegionFor(entity = {}, context = {}, traditionIndex = nul
   if (valid(anchor)) return { regionId: anchor, regionSource: "anchor" };
 
   return { regionId: null, regionSource: "unresolved" };
-}
-
-/** deterministic near-by map coords for a generated place (offset from its parent). */
-function nearMap(parent) {
-  const x = Number.isFinite(parent?.x) ? parent.x : 200;
-  const y = Number.isFinite(parent?.y) ? parent.y : 200;
-  // small fixed offset — no RNG so tests reproduce; the map just needs a distinct pin
-  return { x: x + 12, y: y + 8 };
 }
 
 /** Validate raw model output; fill missing required fields from context; if still invalid,

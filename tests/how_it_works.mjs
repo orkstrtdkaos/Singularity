@@ -21627,7 +21627,9 @@ console.log("\n── §272 · a journey is agreed, then readied, then walked �
   const { loadContentHeadless: lch272 } = await import("./headless_content.mjs");
   const C272 = await lch272();
   const L = C272.locations;
-  const walker = (extra = {}) => ({ id: "c272", currentLocationId: "millbrook", maxHealth: 60, health: 60, maxEnergy: 120, energy: 120,
+  // ✅ CCODE-663 (Aevi: laying a plan is not hearing of a place): the walker has HEARD of the Hollow — the scenario is a player
+  // who chose it from its card, and a plan to a place not heard of would name it "a place you have not heard of"
+  const walker = (extra = {}) => ({ id: "c272", currentLocationId: "millbrook", knownPlaces: ["archive_hollow", "echo_river_crossing", "cairnhold"], maxHealth: 60, health: 60, maxEnergy: 120, energy: 120,
     subAttributes: { wits: 4 }, inventory: [], abilities: [], ...extra });
   const plan = JP.planJourney({ character: walker(), destId: "archive_hollow", locations: L, rules: C272.rules, catalog: C272.items, abilities: C272.abilities,
     worldDay: 80, companyNames: ["Pell Ran Marsh", "Calvar"] });
@@ -21801,7 +21803,7 @@ console.log("\n── §274 · the road, walked leg by leg: a perilous leg is a 
   const { loadContentHeadless: lch274 } = await import("./headless_content.mjs");
   const C = await lch274();
   const L = C.locations, AB = C.abilities, RU = C.rules;
-  const walker = (extra = {}) => ({ id: "c274", level: 5, attunement: 0, currentLocationId: "millbrook", maxHealth: 60, health: 60, maxEnergy: 120, energy: 120,
+  const walker = (extra = {}) => ({ id: "c274", level: 5, attunement: 0, currentLocationId: "millbrook", knownPlaces: ["archive_hollow", "echo_river_crossing", "cairnhold"], maxHealth: 60, health: 60, maxEnergy: 120, energy: 120,
     attributes: { physical: 3, mental: 3, social: 3, practical: 3 }, subAttributes: { strength: 3, agility: 3, reason: 3, insight: 1, presence: 3, rapport: 3, craft: 3, wits: 4 },
     inventory: [], abilities: [], quests: [], ...extra });
   const planTo = (c, dest) => JP.planJourney({ character: c, destId: dest, locations: L, rules: RU, catalog: C.items, abilities: AB, worldDay: 80 });

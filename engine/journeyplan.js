@@ -25,7 +25,7 @@
 // yourself") and SNG-331's rule that hunger is attrition.
 
 import { routeBetween } from "./journey.js";
-import { walkingDays } from "./worldmap.js";
+import { walkingDays, isPlaceKnown, bearingBetween } from "./worldmap.js";
 import { removeItem } from "./inventory.js";
 import { mountsAt } from "./holdings.js";   // ⛔ CCODE-432: set out from where you keep mounts, and you ride
 
@@ -190,6 +190,19 @@ function wayOf(o, i, locations, march = 0) {
 }
 
 /** ⛔ AGREEING TO A JOURNEY: the plan it logs. Null when the way cannot be measured, or the trip is a step rather than a journey. Pure. */
+/** ✅ AEVI (REPLY_aevi_ccode_the_ground_reads_the_record, 2026-10-07): *"Is laying the plan how one hears of it? No. Erik's
+ *  ruling has the name come from hearing of a place or arriving at it, and choosing a road is neither."* So a plan to a
+ *  place the character has not heard of names it *"a place you have not heard of"* — with the world's own bearing when
+ *  there is one — in the plan, the quest line and the aside, until the name comes the way it comes for any place. PURE. */
+export function journeyDestName(character, destId, locations = {}, fromId = null) {
+  const dest = locations[destId];
+  if (!dest) return String(destId);
+  if (isPlaceKnown(character, destId, locations)) return dest.name || String(destId);
+  const from = locations[fromId || character?.currentLocationId] || null;
+  const b = from ? bearingBetween(from, dest) : null;
+  return b?.phrase ? `a place you have not heard of, ${b.phrase} from here` : "a place you have not heard of";
+}
+
 export function planJourney({ character, destId, content = null, locations = {}, rules = {}, catalog = {}, worldDay = null, route = null, companyNames = [], abilities = {} } = {}) {
   const fromId = character?.currentLocationId;
   if (!fromId || !destId || fromId === destId || !locations[fromId] || !locations[destId]) return null;
@@ -222,7 +235,7 @@ export function planJourney({ character, destId, content = null, locations = {},
     : Number(o.days) * (1 - march) } : o, i, locations, march));
   const chosen = options[0];
   return {
-    id: `journey-${destId}-${worldDay ?? "x"}`, destId, destName: locations[destId]?.name || destId, fromId, fromName: locations[fromId]?.name || fromId,
+    id: `journey-${destId}-${worldDay ?? "x"}`, destId, destName: journeyDestName(character, destId, locations, fromId), fromId, fromName: locations[fromId]?.name || fromId,
     createdWorldDay: worldDay, options, chosenKey: chosen.key, soleWay: !!r.soleOption,
     rations: { needed: rationsFor(chosen.days, rules), carried: provisionsCarried(character, rules, catalog) },
     company: (companyNames || []).filter(Boolean),
@@ -307,9 +320,14 @@ export function logJourneyOn(character, plan, { nowISO = null, day = null, carri
 }
 
 /** The quest's line follows the plan — a way chosen, rations bought. Mutates. */
-export function refreshJourneyOn(character, { carried = null } = {}) {
+export function refreshJourneyOn(character, { carried = null, locations = null } = {}) {
   const plan = character?.journey;
   const q = plan && (character.quests || []).find(x => x && x.id === plan.id);
+  // ✅ AEVI: *"If the character hears of it on the way, the plan's line takes the name from then on, the same as the map does."*
+  if (plan && locations && locations[plan.destId]) {
+    const nm = journeyDestName(character, plan.destId, locations, plan.fromId);
+    if (nm !== plan.destName) { plan.destName = nm; if (q) q.title = `Journey to ${nm}`; }
+  }
   if (q) q.summary = journeyQuest(plan, { carried }).summary;
   return q || null;
 }

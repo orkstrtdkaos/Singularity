@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.17";
+const APP_VERSION = "2.22.18";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14304,7 +14304,7 @@ function logJourney(plan) {
 
 /** The quest's line follows the plan: a way chosen, rations bought. */
 function refreshJourneyQuest() {
-  refreshJourneyOn(character, { carried: provisionsCarried(character, CONTENT.rules, CONTENT.items || {}) });
+  refreshJourneyOn(character, { carried: provisionsCarried(character, CONTENT.rules, CONTENT.items || {}), locations: CONTENT.locations });   // ✅ the plan takes the name once the place is heard of
 }
 
 /** Agree to a journey: logged, shown, and nobody moves. False when the trip is a step. */
@@ -16359,6 +16359,9 @@ function paintRegionMap(regionId) {
   // pass 2 never resurrects what pass 1 dropped. ⚠️ AND A SURVIVOR DROPPED IN PASS 2 HANDS ITS TALLY ON, through
   // `hiddenInto` — the pairing the engine always had — so no place vanishes off the screen uncounted.
   const text416 = (m, by) => (m.name + (by[m.id] ? ` +${by[m.id]}` : "")).trim();
+  // ✅ AEVI (the Numinous Reach): a label past the settled middle — the 0.30 ellipse the fade and the roads share — sets in italic
+  const fading416 = regionLook(regionId, CONTENT)?.look === "fading";
+  const pastSettled416 = (b) => fading416 && !!b && Math.hypot((b.x - W / 2) / W, (b.y - H / 2) / H) > 0.30;
   const boxes416 = (ms, by) => ms.map(m => ({ id: m.id, x: m.p.x, y: m.p.y + 18, w: ctx.measureText(text416(m, by)).width, h: 10, rank: rank416(m) }));
   const pass1 = placeLabels(boxes416(marks416, {}));
   const kept1 = marks416.filter(m => pass1.shown.has(m.id));
@@ -16942,7 +16945,7 @@ function paintRegionMap(regionId) {
     // above, and the ink waits until the whole frame has had its say.
     const kindM = city ? "landmark" : "place";
     queueLabel(ctx, m.name + (more ? ` +${more}` : ""), placeBox.get(m.id), kindM,
-      { here: m.id === here, raw: true, align: "center" });
+      { here: m.id === here, raw: true, align: "center", italic: pastSettled416(placeBox.get(m.id)) });   // ✅ italic past the settled middle (the Numinous Reach)
     // ⛑ M10's OTHER HALF — THE ITALIC LINE UNDER A LANDMARK, read and not invented. ⚠️ Aevi's mock lines
     // ("a bench from every reach" for the Coliseum) are HERS, written for the mock: nothing in content
     // carries them, and deriving a caption from `descriptionSeed` is the regex-over-prose she forbade in
@@ -17064,6 +17067,9 @@ function paintRegionMap(regionId) {
   /* ══ ⛔ AEVI §1.1/§1.2 — THE GROUND MAP IS CLICKABLE, AND A STACK OPENS ══ */
   // ⛑ KEPT, NOT RECOMPUTED. These are the marks this function just drew, so the pointer and the picture are the
   // same arithmetic. Recomputing them for the hit test would be two callers answering "where is this place".
+  // ✅ AEVI: *"The hint counts the marks the player can see: every placed member the region map draws, '?' marks included.
+  // The Making draws five, so it says five."* The painter knows; the chrome above it was counting the schematic's list.
+  { const cnt416 = document.getElementById("map-count"); if (cnt416) cnt416.textContent = `${marks416.length} place${marks416.length === 1 ? "" : "s"}`; }
   _regionPick = {
     regionId,
     marks: marks416.map(m => ({ id: m.id, name: m.name, x: m.p.x, y: m.p.y })),
@@ -18863,7 +18869,7 @@ function placeCardHTML(selectedId) {
       : null;
     return `<div class="map-details">
       <div class="map-details-head">
-        <h3>${esc(known ? l.name : "?")}${!visited && known ? ` <span class="hint">— known of, not yet been</span>` : !known ? ` <span class="hint">— you have not heard of it</span>` : ""}</h3>
+        <h3>${esc(known ? l.name : "Somewhere you have not heard of")}${!visited && known ? ` <span class="hint">— known of, not yet been</span>` : ""}</h3>
         ${(l.dangerLevel | 0) >= 1 ? `<span class="rep-band danger-chip dl${Math.min(5, l.dangerLevel | 0)}">${esc(dangerLabel(Math.min(5, l.dangerLevel | 0)))}</span>${infoDot("world.danger")}` : `<span class="rep-band trusted">safe</span>`}
         ${visited ? (() => { const d = locationDensity(l, CONTENT.substrateModel); if (d == null) return ""; const lab = d < 0.34 ? "thin lattice" : d > 0.66 ? "dense lattice" : "even lattice"; return `<span class="rep-band" title="Substrate density here: ${Math.round(d * 100)}%. Continuous craft thrives dense, starves thin; Returned craft the reverse.">${lab}</span>`; })() : ""}
         ${l.id === here ? `<span class="rep-band trusted">you are here</span>` : ""}
@@ -18897,7 +18903,7 @@ function placeCardHTML(selectedId) {
            ${pm?.notes?.length ? `<div class="map-details-notes">${pm.notes.slice(-3).map(n => `<div class="codex-fact">${esc(n)}</div>`).join("")}</div>` : ""}
            ${Object.keys(pm?.subPlaces || {}).length ? `<div class="sub-places"><span class="hint">Places within: </span>${Object.entries(pm.subPlaces).map(([slug, sp]) => `<button class="codex-link ${sp.visited ? "" : "dead"}" data-subgo="${esc(slug)}" data-subloc="${esc(l.id)}" title="${esc(sp.note || (sp.visited ? "you have been here" : "heard of only"))}">${esc(sp.name)}</button>`).join(" ")}</div>` : ""}`
         : known ? `<p class="map-details-desc">You've heard travelers mention it, nothing more. Someone would have to go and see.</p>`
-        : `<p class="map-details-desc">Nothing is known of this place — a mark on the map, and a way there if the roads allow.</p>`}
+        : `<p class="map-details-desc">No one has told you of this place. The roads reach it; what it is, you will learn by going.</p>`}
       ${l.id !== here ? ((reachable || routePlan || routeShort)
         ? `<button class="btn" id="map-travel" data-dest="${esc(l.id)}" style="margin-top:8px">${(() => {
             /* ⛔ THE TRAVEL BUTTON HAS NEVER ONCE SHOWN ITS LABEL, AND A `//` COMMENT IS WHY.
@@ -18986,7 +18992,7 @@ function renderMap(selectedId = null) {
     ${/* SNG-154 stage 6: this count is now the REGION's, not the world's — and it is derived, so it
           can't drift the way the old hardcoded "92 places across 24 regions" line silently did. */""}
     ${/* ⛑ the diagram's corner line, kept: the day, and — on the Valley, whose authored event it is — the crisis stage */""}
-    <p class="hint" style="margin-bottom:8px">${locs.length} place${locs.length === 1 ? "" : "s"} in this region, on real ground · Day ${readClock(character.clock).day}${focusRegion === "valley" ? ` · ${crisisAnswered354 ? "Water Crisis answered" : `Water Crisis stage ${stage}`}` : ""}. Gold ring: you are here.</p>
+    <p class="hint" style="margin-bottom:8px"><span id="map-count">${locs.length} place${locs.length === 1 ? "" : "s"}</span> in this region, on real ground · Day ${readClock(character.clock).day}${focusRegion === "valley" ? ` · ${crisisAnswered354 ? "Water Crisis answered" : `Water Crisis stage ${stage}`}` : ""}. Gold ring: you are here.</p>
     ${/* ✅ AEVI (ruling 2): the deliberately-wrong regions each say so, in her words */""}
     ${(() => {
       // ✅ AEVI: her `say` lines — the region's, and "{name} is spreading." for each spreading place drawn here (named only

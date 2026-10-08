@@ -3166,7 +3166,7 @@ check("SNG-126/355: parting stops the benefits (trainerFor/liaison empty) AND KE
   const minters = [], readers = [];
   for (const f of files) {
     const code = strip(readFileSync(join(root, f), "utf8"));
-    if (/\bcoordFor[A-Z]\w*\s*\(/.test(code)) minters.push(f);
+    if (/\bcoordFor[A-Z]\w*\s*\(/.test(code) || /\bnearMap\s*\(/.test(code)) minters.push(f);   // ✅ CCODE-663: the stub's minter too
     if (/\bmap\.[xy]\b/.test(code) || /\bmap:\s*\{\s*x\b/.test(code)) readers.push(f);
   }
   const req = JSON.parse(readFileSync(join(root, "schemas/location.schema.json"), "utf8")).required || [];
@@ -24455,15 +24455,47 @@ await (async () => {
       /const placedLand = \[\];/.test(src662) && /const taken = \(x0, y0\) => placedLand\.some\(/.test(src662)
       && /if \(taken\(lx, ly\)\) \{ align = "right"; lx = q\.x - 11; ly = q\.y \+ 11;/.test(src662) && /placedLand\.push\(\{ x: align === "left" \? lx : lx - tw, y: ly - 7, w: tw, h: 14 \}\);/.test(src662));
   }
+  /* ── ✅ AEVI's reply on the record (CCODE-663): the plan's name waits on hearing; the count follows the marks; italics past the middle ── */
+  {
+    const JP663 = await import("../engine/journeyplan.js");
+    // ⚠️ not adjacent: a place one travel away counts as heard of (SNG-117), so the two are a journey apart with nothing between
+    const locs663 = { home: { id: "home", name: "Home", worldPos: { colatitude: 20, longitude: 250 }, connections: [] }, far: { id: "far", name: "The Far Hall", worldPos: { colatitude: 40, longitude: 262 }, connections: [] } };
+    const ch663 = { currentLocationId: "home", knownPlaces: [], placeMemory: { home: { visits: 1 } } };
+    const withheld = JP663.journeyDestName(ch663, "far", locs663, "home");
+    const heard = JP663.journeyDestName({ ...ch663, knownPlaces: ["far"] }, "far", locs663, "home");
+    const plan663 = { id: "journey-far-1", destId: "far", fromId: "home", destName: withheld, options: [{ key: "walk", days: 3, kind: "walk" }], chosenKey: "walk" };
+    const ch663b = { ...ch663, journey: plan663, quests: [{ id: "journey-far-1", kind: "journey", status: "active", title: `Journey to ${withheld}` }] };
+    JP663.refreshJourneyOn(ch663b, { locations: locs663 });
+    const stillWithheld = ch663b.journey.destName === withheld && ch663b.quests[0].title === `Journey to ${withheld}`;
+    ch663b.knownPlaces = ["far"];
+    JP663.refreshJourneyOn(ch663b, { locations: locs663 });
+    check("record 663: ⛔ LAYING A PLAN IS NOT HEARING OF A PLACE — a plan to a place not heard of names it \"a place you have not heard of\" with the world's own bearing, in the plan and the quest line; the moment the place is heard of, the refresh takes the name",
+      /^a place you have not heard of, (hubward|outward)( and (spinward|widdershins))? from here$/.test(withheld) && heard === "The Far Hall"
+      && stillWithheld && ch663b.journey.destName === "The Far Hall" && ch663b.quests[0].title === "Journey to The Far Hall"
+      && /destName: journeyDestName\(character, destId, locations, fromId\)/.test(readFileSync(join(root, "engine/journeyplan.js"), "utf8"))
+      && /locations: CONTENT\.locations \}\);\s*\/\/[^\n]*heard of/.test(srcR));
+    const ML663 = await import("../engine/maplabel.js");
+    const fonts663 = []; const fake663 = { save() {}, restore() {}, measureText: (t) => ({ width: String(t).length * 7 }), fillText() {}, strokeText() {}, beginPath() {}, arc() {}, fill() {}, stroke() {}, rect() {}, set font(v) { fonts663.push(v); }, get font() { return fonts663[fonts663.length - 1] || ""; } };
+    ML663.drawLabel(fake663, "The Thinning", 10, 10, "place", { italic: true });
+    const italicFont = fonts663.some((f) => /^italic /.test(f));
+    fonts663.length = 0; ML663.drawLabel(fake663, "The Thinning", 10, 10, "place", {});
+    check("record 663: ⛔ the shared label painter takes a flag per label — `italic` on the same table and halo — and the region painter sets it for a label past the settled middle of the fading region only",
+      italicFont && !fonts663.some((f) => /^italic /.test(f))
+      && /const pastSettled416 = \(b\) => fading416 && !!b && Math\.hypot\(\(b\.x - W \/ 2\) \/ W, \(b\.y - H \/ 2\) \/ H\) > 0\.30;/.test(paintR)
+      && /italic: pastSettled416\(placeBox\.get\(m\.id\)\)/.test(paintR) && !/pastSettled416/.test(srcR.slice(srcR.indexOf("function wireWorldGlobe("))));
+    check("record 663: ⛔ the region's count follows the marks the painter drew, \"?\" marks included — the painter fills the span, the chrome no longer counts the schematic's list",
+      /<span id="map-count">\$\{locs\.length\} place/.test(mapR) && /cnt416\.textContent = `\$\{marks416\.length\} place/.test(paintR)
+      && !/\bnearMap\b/.test(readFileSync(join(root, "engine/generate.js"), "utf8")));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(face416\[id\]\?\.name \|\| l\.name \|\| id, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)
     && (() => { const MI = readFileSync(join(root, "engine/mapicons.mjs"), "utf8"); return /case "unknown": \{/.test(MI) && /ctx\.fillText\("\?", x, y \+ s \* 0\.05\);/.test(MI); })()
     && (() => { const LMs = readFileSync(join(root, "engine/localmap.js"), "utf8"); return /spreading = false,/.test(LMs) && /if \(spreading && model\.built\?\.r > 0\) \{/.test(LMs) && /spreading: isSpreading\(model\?\.id, CONTENT\)/.test(srcR); })()
     && (() => { const card = srcR.slice(srcR.indexOf("function placeCardHTML("), srcR.indexOf("\nfunction ", srcR.indexOf("function placeCardHTML(") + 10));
-      return /esc\(known \? l\.name : "\?"\)/.test(card) && /you have not heard of it/.test(card)
+      return /esc\(known \? l\.name : "Somewhere you have not heard of"\)/.test(card) && /No one has told you of this place\. The roads reach it; what it is, you will learn by going\./.test(card)
         && /const routePlan = \(!reachable && l\.id !== here\) \? journeyPlanFor\(l\.id\) : null;/.test(card) && !/l\.id !== here && known\)/.test(card)
-        && /Nothing is known of this place/.test(card); })());
+        && !/Nothing is known of this place/.test(card); })());
   check("678/parity: the two field toggles that read nothing on the ground are gone with the diagram — ◈ Field and its source kinds are the one control (386 gates them)",
     !/map-field-lat|map-field-nan|\bmapField\b/.test(srcR) && /fieldPanel\(regionExtent\(focusRegion/.test(mapR) && /wireFieldPanel\(\(\) => renderMap\(\)\)/.test(mapR));
 }

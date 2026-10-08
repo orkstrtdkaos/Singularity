@@ -41,6 +41,7 @@ import { bearingsToKnown } from "./worldmap.js";   // SNG-386 §4.3: which way t
 import { mapOpsForGM } from "./mapstate.js";   // SNG-679 S3: what stands here and can change, with the world's state words
 import { localLayoutFor } from "./localmap.js";
 import { holdingsForGM, debtsForGM } from "./holdings.js";
+import { reckoningsForGM } from "./mending.js";   // ✅ SNG-679 Part R · R3: the one sent about damage has come
 import { purseLine } from "./purse.js";     // ⛔ CCODE-441: the GM is shown the purse —
 import { moneyLine } from "./money.js";     // — and the money of the place it stands in
 import { caravansForGM } from "./caravan.js";   // R49: loads on the road
@@ -425,7 +426,9 @@ export const GM_CONTEXT = [
       // community's people refuses the character here — no trade, hire or shelter, narrated at every door — until it is settled.
       const here = debtRefusalAt(env.character, env.location?.communityId ?? null);
       const refusal = here ? `⛔ REFUSED HERE: ${env.location?.name || "this place"} will not trade with, hire or shelter ${env.character?.name || "the character"} — ${nameOf(here.holder)} holds the debt (${here.why}). Narrate the refusal at every door until it is settled; never a welcome.` : null;
-      return [rows, refusal].filter(Boolean).join("\n") || null;
+      // ✅ SNG-679 R3: and the one sent about damage the character did has ARRIVED — a reckoning, played as a scene
+      const reck = reckoningsForGM(env.character, { content: env.CONTENT }).join("\n");
+      return [rows, refusal, reck].filter(Boolean).join("\n") || null;
     } },
   // ✅ R45c (2026-09-05): what OTHER PEOPLE carry of yours — a lent blade is a fact the narrator must hold, or the next
   // scene hands it back to a character who never had it.

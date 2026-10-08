@@ -591,7 +591,8 @@ export function advanceDebts(character, { npcs = {}, cfg = null, day = null } = 
       continue;
     }
     const react = def?.reactsToReputation || reg?.reactsToReputation || {};
-    if (!Object.keys(react).some(k => tags.has(String(k)))) continue;   // they remember; they do not act
+    // ✅ SNG-679 R3: *"this holder always acts: damages are not a matter of temperament"*
+    if (!d.alwaysActs && !Object.keys(react).some(k => tags.has(String(k)))) continue;   // they remember; they do not act
     if ((d.escalation || 0) >= max) continue;
     if (day === null || day === undefined) continue;
     if (day - (d.lastMovedDay ?? d.sinceDay ?? day) < after) continue;
@@ -612,6 +613,8 @@ export function debtsForGM(character, { nameOf = null } = {}) {
   const word = (e) => e >= 2 ? "REFUSED there — no trade, hire or shelter" : e === 1 ? "spoken of — received colder there" : "owed, and remembered";
   return rows.map(([key, d]) => {
     const who = d.heldBy ? (nameOf ? nameOf(d.heldBy) : d.heldBy) : "nobody in particular (the place was walked away from)";
+    // ✅ SNG-679 R3: the one sent about it has ARRIVED — the reckoning is a scene
+    if (d.mapKey && character?.reckonings?.[d.mapKey]?.state === "found") return `- ⚑ ${who} HAS COME about ${d.reason}: ${d.amount} ${d.currency} owed for it — see RECKONING.`;
     const what = Number.isFinite(d.amount) && d.amount !== null ? `${d.amount} ${d.currency}` : d.kind;
     return `- you owe ${who}: ${what}${d.reason ? ` — ${d.reason}` : ""}${d.sinceDay != null ? ` · since day ${d.sinceDay}` : ""} · ${word(d.escalation || 0)}${d.communityId ? ` (${d.communityId})` : ""}`;
   }).join("\n");
@@ -637,9 +640,22 @@ export function applyDebtOps(character, ops = [], { day = null, regionId = null,
         if (!paid.ok) { out.push({ op: kind, ok: false, key, why: paid.why }); continue; }
       }
       settleDebt(character, key, { how: "paid", day });
+      // ✅ SNG-679 R3: the damages paid are paid — the reckoning is over, and the locals' spending up to now is settled
+      if (d.mapKey && character?.reckonings?.[d.mapKey]) { const rk = character.reckonings[d.mapKey]; rk.paidValue = (Number(rk.paidValue) || 0) + (Number(d.valueOwed) || 0); rk.state = "settled"; }
       out.push({ op: kind, ok: true, key, paid: Number.isFinite(d.amount) ? d.amount : 0 });
+    } else if (kind === "refuse" || kind === "flee" || kind === "work") {
+      // ✅ SNG-679 R3 — `reckoning.outcomes`: refuse sends the escalation to the top at once; flee starts the search again from
+      // where they went; work it off offers the making-good again (their rungs then come off what is owed)
+      const d = character?.worldState?.debts?.[key];
+      const rk = d?.mapKey ? character?.reckonings?.[d.mapKey] : null;
+      if (!d || !rk) { out.push({ op: kind, ok: false, key, why: "no reckoning stands with them" }); continue; }
+      if (kind === "refuse") { d.escalation = 2; d.lastMovedDay = day; d.history = [...(d.history || []), { day, note: "refused to make it good" }].slice(-12); rk.state = "refused"; }
+      else if (kind === "flee") { rk.state = "asking"; rk.since = Number.isFinite(Number(day)) ? Number(day) : rk.since; }
+      else { rk.state = "working"; if (character.mendDeclined) delete character.mendDeclined[d.mapKey]; }
+      out.push({ op: kind, ok: true, key });
     } else if (kind === "forgive") {
       const r = settleDebt(character, key, { how: "deed", day, why: op.why || op.reason || null });
+      if (r?.mapKey && character?.reckonings?.[r.mapKey]) character.reckonings[r.mapKey].state = "forgiven";   // ✅ SNG-679 R3: a deed that outweighs it ends the reckoning
       out.push({ op: kind, ok: !!r, key, ...(r ? {} : { why: "no such debt" }) });
     }
   }

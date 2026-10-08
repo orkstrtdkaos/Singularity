@@ -6826,7 +6826,8 @@ console.log("\n── §69 · the five — roll=card, meaning ceiling, stacking 
   const g2 = mk69(); H69.recordDebt(g2, { holderId: "greta", kind: "unpaid-price", amount: 30, reason: "a bed", day: 1 });
   check("§69: …the narrator is told (a WHAT YOU OWE block), the GM has `debtOps`, and the app applies them",
     /you owe greta: 30 crystal — a bed/.test(H69.debtsForGM(g2, { nameOf: id => id }) || "") && /debtsDetail/.test(rd("engine/gm_registry.js")) && /WHAT YOU OWE/.test(rd("engine/gm.js"))
-    && /"debtOps": \[\{"op": "record\|settle\|forgive"/.test(rd("engine/gm.js")) && /applyStep\("debtOps"/.test(app69) && /"holdingOps", "debtOps",/.test(rd("engine/gm.js")));
+    // ⛑ CCODE-682 (SNG-679 R3): the reckoning's outcomes are three more ops on the same channel
+    && /"debtOps": \[\{"op": "record\|settle\|forgive\|refuse\|flee\|work"/.test(rd("engine/gm.js")) && /applyStep\("debtOps"/.test(app69) && /"holdingOps", "debtOps",/.test(rd("engine/gm.js")));
 
   // ── Q8 · the store
   const eco69 = C69.rules.economy, sCfg = eco69?.holdStore;

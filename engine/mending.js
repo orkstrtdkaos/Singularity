@@ -14,7 +14,10 @@
 // door (`applyMapChange`, by the character). ⛑ PAID AS EACH RUNG IS DONE, through the job's own `crystal` stake and `earnAt`
 // (origin "reward", the place's own money — a Reach's scrip or crystal; no region pays in coin): the same total as "paid when it is
 // whole", and the share a player is owed when the locals finish first is exactly what they were already paid.
-import { parseMapKey, mapStateOf, rungOf, ladderOf, localsWillMend, mapThingOf, repairFraction, applyMapChange, localRepairAt } from "./mapstate.js";
+import { parseMapKey, mapStateOf, rungOf, ladderOf, localsWillMend, mapThingOf, repairFraction, applyMapChange, localRepairAt, eventsFor, sortEvents } from "./mapstate.js";
+import { personIdFor } from "./fates.js";   // ✅ R3: a holder minted from the event that made the debt — the same person in every game
+import { mintedName } from "./names.js";
+import { priceHere } from "./money.js";
 import { worthOfGoods } from "./holdings.js";
 import { walkingDays } from "./worldmap.js";
 import { postJob, dropJob, ensureJobs } from "./jobstate.js";
@@ -185,4 +188,151 @@ export function applyMend(character, mend, { content = null, worldDay = null } =
   const W = wordsOf(content);
   const said = whole && W.mended ? fill(W.mended, { thing: t.thing, place: t.place }) : `the ${t.thing} at ${t.place} is ${r.state} now, no longer ${before}`;
   return { ok: true, state: r.state, whole, said };
+}
+
+/* ═════ PART R · R3: AND THEY GO AFTER WHOEVER DID IT ═════
+ * ✅ AEVI: *"This happens when the mending costs the locals anything (their own work or a reward they pay) and the change was
+ * `named` or `described`: A debt of kind `damages` goes on the culprit's save … Holder: a named local. Use the place's own people
+ * (`npcsPresent`) when there are any. Otherwise mint one with an id derived from the event, so every game meets the same person.
+ * Amount: what the locals actually spent … recomputed as the work goes on. … this holder always acts … Someone is sent … The
+ * culprit's news reads `asking`, then `sent`. When they arrive it is a scene: `found`. The outcomes are `reckoning.outcomes`."*
+ * ⛔ IT RUNS IN THE CULPRIT'S OWN GAME, from the shared events: every game holds the same events, and only the one whose character
+ * did it owes. ⛑ `unseen` damage is not traced here — the locals mend it and remember (R7's investigation can still find out). */
+const DAMAGE = new Set(["damaged", "ruined", "destroyed"]);
+/** The fold replayed event by event, in the fold's own order: `[{ e, before, after }]`. */
+function replay(events, content) {
+  const l = ladderOf(content);
+  let st = l[0];
+  const out = [];
+  for (const e of sortEvents(events, content)) {
+    const before = st;
+    if (e?.change === "repaired") st = l[Math.max(0, rungOf(content, st) - 1)];
+    else if (DAMAGE.has(e?.change)) st = l[Math.max(rungOf(content, st), rungOf(content, e.change))];
+    else if (e?.change === "added" && st === "destroyed") st = l[0];
+    out.push({ e, before, after: st });
+  }
+  return out;
+}
+const rungPay = (state, value, content) => (value != null ? rungValue(state, value, content) : 4 + 6 * rungOf(content, state));
+/** ⛔ WHAT THE LOCALS HAVE SPENT on a key since it was last whole — their own rungs, and the rewards they paid players who were not
+ *  the culprit. The culprit's own rungs cost them nothing and come OFF what is owed (*"work it off … the debt falls by its value"*).
+ *  → `{ damage, culprit, seen, value, spent, workedOff, rungs }`, or null when it is whole. Pure. */
+export function localsSpentOn(character, key, { content = null } = {}) {
+  const steps = replay(eventsFor(character, key), content);
+  const l0 = ladderOf(content)[0];
+  let start = -1;
+  steps.forEach((s, i) => { if (s.before === l0 && s.after !== l0) start = i; });
+  if (start < 0) return null;
+  const cycle = steps.slice(start);
+  const damage = [...cycle].reverse().find((s) => DAMAGE.has(s.e?.change))?.e || null;
+  if (!damage) return null;
+  const culprit = damage.by || null;
+  const place = keyPlaces(key)[0];
+  const site = siteOfKey(key, { content, character });
+  const value = mendValue(key, { content, regionId: content?.locations?.[place]?.regionId || null, siteKind: site?.kind || null });
+  let spent = 0, workedOff = 0;
+  const rungs = { locals: 0, players: 0, culprit: 0 };
+  for (const s of cycle) {
+    if (s.e?.change !== "repaired") continue;
+    const v = rungPay(s.before, value, content);
+    if (s.e.by === "locals") { spent += v; rungs.locals++; }
+    else if (culprit && s.e.by === culprit) { workedOff += v; rungs.culprit++; }
+    else { spent += v; rungs.players++; }
+  }
+  return { damage, culprit, seen: damage.seen || null, value, spent: Math.round(spent), workedOff: Math.round(workedOff), rungs };
+}
+function seededRng(text) {
+  let h = 2166136261; for (const ch of String(text)) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); }
+  let s = h >>> 0;
+  return () => { s = (s + 0x6d2b79f5) >>> 0; let t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+}
+/** ⛔ WHO IS OWED — *"a named local"*: the place's own people first, else one minted from the event (id and name both derived from
+ *  it, so every game meets the same person). → `{ id, name, minted, communityId, placeId }` */
+export function damagesHolder(key, damage, { content = null, character = null } = {}) {
+  const placeId = keyPlaces(key)[0] || null;
+  const loc = content?.locations?.[placeId] || null;
+  const gone = new Set(["dead", "departed"]);
+  const present = (loc?.npcsPresent || []).find((id) => content?.npcs?.[id] && !gone.has(String(character?.npcRegistry?.[id]?.status || "")));
+  if (present) return { id: present, name: content.npcs[present].name || present, minted: false, communityId: loc?.communityId || null, placeId };
+  const id = personIdFor(`damages|${damage?.id || key}`);
+  // ⛑ a local owed for a broken mill is nobody's legend: the plain name (given and family), not a byname — `personName`'s own rule
+  const m = mintedName({ pools: content?.rules?.mintedNames || null, originKind: "_default", rng: seededRng(id) });
+  const plain = m ? ([m.given, m.surname].filter(Boolean).join(" ").trim() || m.name || null) : null;
+  const name = character?.npcRegistry?.[id]?.name || plain || `one of the people of ${loc?.name || "the place"}`;
+  return { id, name, minted: true, communityId: loc?.communityId || null, placeId };
+}
+export function ensureReckonings(character) {
+  if (!character) return {};
+  if (!character.reckonings || typeof character.reckonings !== "object") character.reckonings = {};
+  return character.reckonings;
+}
+/** ⛔ THE RECKONING PASS — the world tick's, in the culprit's game. For each thing this character broke (named or described) that
+ *  the locals have spent on: the `damages` debt to its holder, recomputed; and the search — `asking` once it begins, `sent` when
+ *  someone sets out (after `searchBeginsAfterDays[seen]`, at the latest `jobs.hunt.localsSendAfterDays`), `found` when they arrive
+ *  (`findWithinDays[seen]` + the walk to where the culprit is). Mutates the save. → `{ news }` */
+export function reckoningPass(character, { content = null, worldDay = null } = {}) {
+  const news = [];
+  if (!character?.id || worldDay == null || !Number.isFinite(Number(worldDay))) return { news };
+  const R = content?.mapStates?.reckoning || {}, Jh = content?.mapStates?.jobs?.hunt || {}, W = R.words || {};
+  const L = content?.locations || {};
+  const RK = ensureReckonings(character);
+  const debts = (() => { if (!character.worldState || typeof character.worldState !== "object") character.worldState = {};
+    if (!character.worldState.debts || typeof character.worldState.debts !== "object") character.worldState.debts = {}; return character.worldState.debts; })();
+  const wd = Number(worldDay);
+  for (const key of heldKeys(character)) {
+    const s = localsSpentOn(character, key, { content });
+    if (!s || s.culprit !== character.id) continue;
+    if (!["named", "described"].includes(s.seen)) continue;
+    let rk = RK[key];
+    if (!rk || rk.damageId !== s.damage.id) rk = RK[key] = { damageId: s.damage.id, since: Math.floor(Number(s.damage.day) || 0), seen: s.seen, state: "owed", paidValue: 0 };
+    if (rk.state === "forgiven" || rk.state === "settled") continue;
+    const owed = Math.max(0, s.spent - (Number(rk.paidValue) || 0) - s.workedOff);
+    const holder = damagesHolder(key, s.damage, { content, character });
+    const site = siteOfKey(key, { content, character });
+    const t = mapThingOf(key, content, { siteName: site?.name || null, from: holder.placeId }) || { thing: "it", place: "there" };
+    const did = (W.did || {})[s.damage.change] || s.damage.change;
+    if (owed <= 0) {
+      // nothing spent on it yet, or all of it worked off: no debt stands — but a debt that did stand comes off
+      if (debts[holder.id]?.mapKey === key) delete debts[holder.id];
+      continue;
+    }
+    if (holder.minted) {
+      character.npcRegistry = character.npcRegistry && typeof character.npcRegistry === "object" ? character.npcRegistry : {};
+      if (!character.npcRegistry[holder.id]) character.npcRegistry[holder.id] = { id: holder.id, name: holder.name, status: "active",
+        locationId: holder.placeId, communityId: holder.communityId, role: `owed for the ${t.thing} at ${t.place}`, mintedFor: "damages" };
+    }
+    const price = priceHere(owed, L[holder.placeId]?.regionId || null, content?.rules?.economy || null);
+    const prev = debts[holder.id]?.mapKey === key ? debts[holder.id] : null;
+    debts[holder.id] = { kind: R.debtKind || "damages", amount: price.amount, currency: price.currency, ...(price.currency === "scrip" ? { regionId: price.regionId } : {}),
+      valueOwed: owed, reason: `the ${t.thing} at ${t.place}, ${did}`, heldBy: holder.id, communityId: holder.communityId, mapKey: key,
+      // ⛔ *"this holder always acts: damages are not a matter of temperament"*
+      alwaysActs: true, sinceDay: prev?.sinceDay ?? rk.since, lastMovedDay: prev?.lastMovedDay ?? rk.since, escalation: prev?.escalation || 0,
+      history: prev?.history || [{ day: rk.since, note: `owed: damages — the ${t.thing} at ${t.place}` }] };
+    const vals = { name: holder.name, place: t.place, did, thing: t.thing };
+    if (rk.state === "owed") { rk.state = "asking"; if (W.asking) news.push(fill(W.asking, vals)); }
+    const sendAfter = Math.min(Number(R.searchBeginsAfterDays?.[s.seen] ?? 7), Number(Jh.localsSendAfterDays ?? 7));
+    if (rk.state === "asking" && wd >= rk.since + sendAfter) {
+      const target = character.currentLocationId && L[character.currentLocationId] ? character.currentLocationId : null;
+      const walk = target && holder.placeId && L[holder.placeId] ? (target === holder.placeId ? 0 : walkingDays(L[holder.placeId], L[target])) : 0;
+      rk.state = "sent"; rk.sentDay = Math.floor(wd); rk.seeker = holder.id; rk.seekerName = holder.name;
+      rk.arriveDay = rk.sentDay + Math.ceil((Number(R.findWithinDays?.[s.seen]) || 6) + (Number.isFinite(walk) ? walk : 0));
+      if (W.sent) news.push(fill(W.sent, vals));
+    }
+    if (rk.state === "sent" && wd >= rk.arriveDay) { rk.state = "found"; rk.foundDay = Math.floor(wd); if (W.found) news.push(fill(W.found, vals)); }
+  }
+  return { news };
+}
+/** The GM's reckoning lines: who has come, about what, and the five ways it can go — each through the channel that does it. */
+export function reckoningsForGM(character, { content = null } = {}) {
+  const RK = character?.reckonings || {}, debts = character?.worldState?.debts || {};
+  const out = [];
+  for (const d of Object.values(debts)) {
+    if (!d?.mapKey || RK[d.mapKey]?.state !== "found") continue;
+    const who = character?.npcRegistry?.[d.heldBy]?.name || content?.npcs?.[d.heldBy]?.name || d.heldBy;
+    out.push(`⚑ RECKONING — ${who} (${d.heldBy}) has come about ${d.reason}: they want what their people spent on it, ${d.amount} ${d.currency}. `
+      + `PLAY IT AS A SCENE; the choice is the character's: pay (debtOps "settle"), work it off (debtOps "work" — they mend it themselves and what that is worth comes off), `
+      + `refuse (debtOps "refuse" — word goes round and they are refused there), fight (an ordinary fight; their standing there falls with it), `
+      + `or flee (debtOps "flee" — the search starts again from where they went).`);
+  }
+  return out;
 }

@@ -25087,6 +25087,53 @@ await (async () => {
       && /const br = brokenAt\(character, l\.id, \{ content: CONTENT, worldDay: absoluteWorldDay\(\) \}\);/.test(app681)
       && /if \(j\?\.stakes\?\.mend\?\.culprit\) \{ character\.mendDeclined = /.test(app681) && /postMendingJobs\(character, \{ content, day: currentDay \}\)/.test(tick681));
   }
+  /* ── ✅ SNG-679 Part R, R3 (CCODE-682): and they go after whoever did it ── */
+  {
+    const MS682 = await import("../engine/mapstate.js");
+    const MD682 = await import("../engine/mending.js");
+    const H682 = await import("../engine/holdings.js");
+    const { loadContentHeadless: lch682 } = await import("./headless_content.mjs");
+    const C682 = await lch682();
+    const wheels682 = (C682.rules.localLayouts.millbrook.sites || []).find((x) => x.kind === "mill");
+    const key682 = `site:millbrook/${wheels682.id}`;
+    const culprit682 = (seen = "named", key = key682, at = "millbrook") => { const ch = { id: "player-me", name: "Me", currentLocationId: at, holdings: [], mapEvents: [], purse: {}, npcRegistry: {} };
+      MS682.applyMapChange(ch, { key, change: "ruined", by: "player-me", seen }, { content: C682, worldDay: 100 }); return ch; };
+    const ch682 = culprit682();
+    const states682 = [], news682 = [], owed682 = [];
+    for (const d of [110, 136, 142, 150]) {
+      MS682.localsMendPass(ch682, { content: C682, worldDay: d });
+      news682.push(...MD682.reckoningPass(ch682, { content: C682, worldDay: d }).news);
+      states682.push(ch682.reckonings?.[key682]?.state || "-");
+      owed682.push(ch682.worldState?.debts?.water_keeper?.amount ?? 0);
+    }
+    const debt682 = ch682.worldState.debts.water_keeper;
+    check("Part R · R3: ⛔ THEY GO AFTER WHOEVER DID IT — the locals' spending on a thing this character wrecked (named) is a `damages` debt to the place's OWN person, recomputed as the work goes on; the news reads asking, then sent, then the one sent arrives (found) after the search and the walk",
+      states682.join() === "owed,sent,found,found" && owed682[0] === 0 && owed682[1] > 0 && owed682[3] > owed682[1]
+      && debt682?.kind === "damages" && debt682.alwaysActs === true && debt682.mapKey === key682 && debt682.currency !== "coin"
+      && /asking after whoever wrecked the Water Wheels/.test(news682.join(" ")) && /has been sent from Millbrook/.test(news682.join(" ")) && /has come from Millbrook about the Water Wheels/.test(news682.join(" ")),
+      `${states682.join(",")} · owed ${owed682.join("→")}`);
+    // a place with nobody named: one minted from the event, the SAME person in every game; unseen is not traced
+    const ercKey = "site:echo_river_crossing/erc_bridge";
+    const g1 = culprit682("described", ercKey, "echo_river_crossing"), g2 = culprit682("described", ercKey, "echo_river_crossing");
+    for (const g of [g1, g2]) { MS682.localsMendPass(g, { content: C682, worldDay: 200 }); MD682.reckoningPass(g, { content: C682, worldDay: 200 }); }
+    const h1 = Object.values(g1.worldState.debts)[0], h2 = Object.values(g2.worldState.debts)[0];
+    const unseen682 = culprit682("unseen"); MS682.localsMendPass(unseen682, { content: C682, worldDay: 200 }); MD682.reckoningPass(unseen682, { content: C682, worldDay: 200 });
+    const esc682 = (() => { const c = JSON.parse(JSON.stringify(g1)); H682.advanceDebts(c, { npcs: C682.npcs, cfg: C682.rules.economy.debts, day: 400 }); return Object.values(c.worldState.debts)[0]?.escalation || 0; })();
+    check("Part R · R3: ⛔ …HELD BY A NAMED LOCAL — where the place has nobody named, one is minted from the event (the same id and name in every game) and goes on the save; this holder ALWAYS acts (the debt escalates without a temperament for it); `unseen` damage is mended and remembered, not traced",
+      !!h1 && h1.heldBy === h2.heldBy && /^person-/.test(h1.heldBy) && g1.npcRegistry[h1.heldBy]?.name === g2.npcRegistry[h2.heldBy]?.name && !!g1.npcRegistry[h1.heldBy]?.name
+      && esc682 >= 1 && Object.keys(unseen682.worldState?.debts || {}).length === 0, `${h1?.heldBy} ${g1.npcRegistry[h1?.heldBy]?.name}`);
+    const outcome682 = (op) => { const c = JSON.parse(JSON.stringify(ch682)); c.purse = { crystal: 999, scrip: { valley: 999 } };
+      const r = H682.applyDebtOps(c, [{ op, holderId: "water_keeper" }], { day: 150, regionId: "valley", economy: C682.rules.economy });
+      if (op === "settle") { MS682.localsMendPass(c, { content: C682, worldDay: 300 }); MD682.reckoningPass(c, { content: C682, worldDay: 300 }); }
+      return { ok: r[0]?.ok, state: c.reckonings[key682].state, esc: c.worldState.debts.water_keeper?.escalation ?? null, debt: !!c.worldState.debts.water_keeper }; };
+    const o682 = Object.fromEntries(["refuse", "flee", "work", "settle", "forgive"].map((op) => [op, outcome682(op)]));
+    const gmText682 = readFileSync(join(root, "engine/gm.js"), "utf8"), reg682 = readFileSync(join(root, "engine/gm_registry.js"), "utf8");
+    check("Part R · R3: ⛔ WHEN THEY ARRIVE IT IS A SCENE — the GM is told who has come and the five outcomes, and each is an op: refuse sends it to the top at once, flee starts the search again, work it off offers the making-good again, settle pays it and ends it (more mending after is not charged twice), forgive ends it",
+      o682.refuse.ok && o682.refuse.esc === 2 && o682.flee.state === "asking" && o682.work.state === "working" && o682.settle.state === "settled" && !o682.settle.debt && o682.forgive.state === "forgiven"
+      && MD682.reckoningsForGM(ch682, { content: C682 })[0]?.includes("has come about the Water Wheels at Millbrook")
+      && /"debtOps": \[\{"op": "record\|settle\|forgive\|refuse\|flee\|work"/.test(gmText682) && /const reck = reckoningsForGM\(env\.character, \{ content: env\.CONTENT \}\)/.test(reg682),
+      JSON.stringify(o682));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

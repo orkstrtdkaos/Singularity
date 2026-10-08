@@ -24789,7 +24789,7 @@ await (async () => {
     check("ground G4: ⛔ EVERY ENTRY DRAWS, on every place — each mark entry its full `n` (an authored site of the same glyph counting as one, G5), each line and fill at least one run or patch, and whatever could not fit is SAID in `short`, never dropped in silence",
       ids675.length >= 150 && wanted675 >= 1000 && missing675.length === 0 && short675.length === 0 && unsaid675.length === 0,
       `${drawn675} drawn + ${kept675} named sites / ${wanted675} · ${missing675.slice(0, 4).join(" | ")} ${short675.slice(0, 4).join(" | ")}`);
-    const LMsrc675 = readFileSync(join(root, "engine/localmap.js"), "utf8");
+    const LMsrc675 = readFileSync(join(root, "engine/localmap.js"), "utf8").replace(/\r\n/g, "\n");   // ⛑ a checkout may write CRLF (CCODE-644's rule)
     check("ground G4: ⛔ `own` draws AT THE PLACE'S OWN MARK — every own mark of one stands exactly on the centre where the roads meet, and the painter draws the own marks LAST, over everything else on the ground",
       ownOff675.length === 0 && /for \(const m of G\.marks\) if \(!m\.own\) paintGroundMark\(ctx, m, model\);\n    for \(const m of G\.marks\) if \(m\.own\) paintGroundMark\(ctx, m, model\);/.test(LMsrc675), ownOff675.join(", "));
     check("ground G4: ⛔ the houses keep clear of what stands on the ground — no roof on any place sits on a mark",

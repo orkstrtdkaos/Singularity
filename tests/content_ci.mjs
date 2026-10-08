@@ -642,6 +642,35 @@ for (const pack of PACKS) {
     outliers.length === 0, outliers.slice(0, 6).join(" · "));
 }
 
+// ✅ AEVI (the local ground, 2026-10-08): `local_ground.json` — every non-region place has an entry, and every word in it is in
+// the file's own vocabulary (CCODE-674)
+{
+  let lg = null; try { lg = rj("content/packs/core/world/local_ground.json"); } catch { lg = null; }
+  const locsLG = {};
+  try { for (const f of readdirSync(join(root, "content/packs/valley/locations")).filter((x) => x.endsWith(".json"))) { const d = rj(`content/packs/valley/locations/${f}`); for (const l of (d.locations ? Object.values(d.locations) : [d])) if (l && l.id) locsLG[l.id] = l; } } catch { }
+  const terr = (() => { try { return rj("content/packs/core/world/terrain.json").locations || {}; } catch { return {}; } })();
+  const isRegion = (id) => (locsLG[id]?.tier || (terr[id]?.t === "region" ? "region" : "")) === "region";
+  const P = lg?.places || {};
+  const ids = Object.keys(terr).length ? Object.keys(terr) : Object.keys(locsLG);
+  const missing = ids.filter((id) => !isRegion(id) && !P[id]);
+  check("local ground: every non-region place has an entry in local_ground.json", !!lg && missing.length === 0, missing.slice(0, 8).join(", "));
+  const kinds = new Set(Object.keys(lg?._kinds || {}).filter((k) => !k.startsWith("_")));
+  const ats = new Set(Object.keys(lg?._rules?.at || {})), lays = new Set(Object.keys(lg?._rules?.layout || {})), dws = new Set(Object.keys(lg?._rules?.dwellings || {}));
+  const words = (s) => new Set(String(s || "").split("·").map((x) => x.trim().split(/[\s(]/)[0]).filter(Boolean));
+  const states = words(lg?._rules?.state), effects = words(lg?._rules?.effects);
+  const bad = [];
+  for (const [id, e] of Object.entries(P)) {
+    if (!dws.has(e.dwellings)) bad.push(`${id}: dwellings ${e.dwellings}`);
+    if (e.layout && !lays.has(e.layout)) bad.push(`${id}: layout ${e.layout}`);
+    if (e.dwellings === "few" && !Number.isFinite(Number(e.n))) bad.push(`${id}: few without n`);
+    const fs = [...(e.features || []), ...(e.outlying || [])];
+    if (fs.filter((f) => f.own).length > 1) bad.push(`${id}: more than one own`);
+    for (const f of fs) { if (!kinds.has(f.k)) bad.push(`${id}: kind ${f.k}`); if (f.at && !ats.has(f.at)) bad.push(`${id}: at ${f.at}`); if (f.state && !states.has(f.state)) bad.push(`${id}: state ${f.state}`); }
+    for (const ef of (Array.isArray(e.effects) ? e.effects : e.effects ? [e.effects] : [])) if (!effects.has(ef)) bad.push(`${id}: effect ${ef}`);
+  }
+  check("local ground: every k, at, layout, dwellings, state and effect is in the file's own vocabulary; at most one `own` a place; `few` carries `n`", bad.length === 0, bad.slice(0, 8).join(" | "));
+}
+
 // (3c-vii-d) SNG-391 — THE WORLD PIPELINE GATES. Aevi's §4 table: "each from a bug that actually
 // happened". ONE regeneration feeds all of them — the build is ~8s and buying seven gates with it is the
 // cheapest verification in this file per unit of confidence. ⚠️ Three of her ten cannot run yet:

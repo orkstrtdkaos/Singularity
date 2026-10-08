@@ -24714,6 +24714,45 @@ await (async () => {
       && (dry.r.stated || []).some((x) => x.water && x.state === "destroyed") && !dry.strokes.includes("#6f9fc2") && (low.r.stated || []).some((x) => x.water && x.state === "ruined")
       && /waterStateOf: \(n, f\) => mapView\(character, `water:\$\{model\?\.id\}\/\$\{n\}`/.test(readFileSync(join(root, "app.js"), "utf8")));
   }
+  /* ── ✅ AEVI, the local ground (CCODE-674): G1 and G2, driven on every place ── */
+  {
+    const LMG = await import("../engine/localmap.js");
+    const { loadContentHeadless: lchG } = await import("./headless_content.mjs");
+    const CG = await lchG();
+    const P_G = CG.rules?.localGround?.places || {};
+    const modelOfG = (id) => { const lay = LMG.localLayoutFor(id, { content: CG }); return LMG.localModel(lay, LMG.localFrame(lay, { w: 800, h: 500 }), { placeId: id, placeName: CG.locations[id]?.name || id }); };
+    const ids = Object.keys(P_G).filter((id) => CG.locations[id]);
+    const rangeBad = [], outside = [], models = {};
+    for (const id of ids) {
+      let m; try { m = modelOfG(id); } catch (e) { rangeBad.push(`${id}: threw ${e.message}`); continue; }
+      models[id] = m;
+      const rg = LMG.dwellingRange(P_G[id]); const n = (m.houses || []).length;
+      if (!Array.isArray(m.houses) || !rg) { rangeBad.push(`${id}: no houses array`); continue; }
+      // ⛑ a frame can be too small to seat a whole range — never MORE than the range, never any where it is none
+      if (n > rg[1] || (rg[1] === 0 && n !== 0) || (P_G[id].dwellings === "few" && n !== rg[0])) rangeBad.push(`${id}: ${n} for ${P_G[id].dwellings}`);
+      const lay = (P_G[id].layout || "cluster");
+      if (!["scatter", "street", "stilts", "hulls", "floating", "underwater", "canopy"].includes(lay)) for (const h of m.houses) if (Math.hypot(h.x - m.built.x, h.y - m.built.y) > m.built.r * 1.06 + 1) { outside.push(id); break; }
+    }
+    check("ground G1: ⛔ local_ground.json reaches the content through the loader and every layout carries its place's entry (attached on the way out, never cached on the save)",
+      ids.length >= 150 && ids.every((id) => models[id]?.layout?.ground === P_G[id]) && !!CG.rules.localGround._rules);
+    check("ground G2: ⛔ ROOFS COME FROM WHO LIVES THERE — on every place the count is within its dwellings range, exactly n for `few`, ZERO where it is `none`; and no roof of a laid-out village stands outside its built ground",
+      rangeBad.length === 0 && outside.length === 0, `${rangeBad.slice(0, 6).join(" | ")} ${outside.slice(0, 6).join(", ")}`);
+    const yards = ids.filter((id) => /_gate_yard$/.test(id));
+    // ⚠️ Aevi's order says all fifteen gate yards draw 0 roofs; her own entry gives Cairnhold's "a warden's hut" (few, n 1), and the
+    // entry is the source — so every gate yard draws exactly its entry's count: fourteen none, Cairnhold's its one hut
+    check("ground G2: ⛔ by name — the Spent Yard and the Kept Shrine draw no roof, the Painter's Shelf exactly one, and every gate yard exactly what its entry says (fourteen none; Cairnhold's its warden's hut)",
+      (models.the_spent_yard?.houses || [1]).length === 0 && (models.the_kept_shrine?.houses || [1]).length === 0
+      && yards.length >= 15 && yards.every((id) => (models[id]?.houses || []).length === LMG.dwellingRange(P_G[id])[0])
+      && yards.filter((id) => (models[id]?.houses || []).length === 0).length === 14 && (models.cairnhold_gate_yard?.houses || []).length === 1
+      && (models.the_painters_shelf?.houses || []).length === 1, `gate yards ${yards.length}`);
+    // ⛔ never five roofs in a line at one spacing: three points a, b, c with b−a ≈ c−b, extended twice more
+    const evenRun = (hs, tol) => { for (const a of hs) for (const b of hs) { if (a === b) continue; const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy); if (d < 1 || d > 60) continue;
+      let ok = 1, cur = b; for (let k = 0; k < 3; k++) { const nx = cur.x + dx, ny = cur.y + dy; const hit = hs.find((q) => Math.hypot(q.x - nx, q.y - ny) < tol); if (!hit) break; ok++; cur = hit; }
+      if (ok >= 4) return true; } return false; };
+    const mbH = models.millbrook?.houses || [];
+    check("ground G2: ⛔ Millbrook's houses are a cluster, not rows — 15 to 45 of them, and no five in a line at one spacing (measured on the points, not the picture)",
+      mbH.length >= 15 && mbH.length <= 45 && !evenRun(mbH, 1.5), `${mbH.length} houses`);
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

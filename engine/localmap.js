@@ -462,25 +462,172 @@ export function localLayoutFor(placeId, { content = null, character = null, chil
     const extra = (children || []).filter((c) => c && !named.has(c.id) && !named.has(String(c.name || "").toLowerCase()));
     // ⛑ the AUTHORED measurements win over a live reading that may have nothing in it (no hydrology, no sampler)
     const gen = extra.length ? generateLayout(placeId, { loc, kind, gradients: { ...(measured || {}), ...(authored._measured || {}), roadsOut: authored._measured?.roadsOut || measured?.roadsOut || [] }, children: extra, locations: content?.locations }) : null;
-    return { ...authored, kind, authored: true, placeId,
+    return withGround({ ...authored, kind, authored: true, placeId,
       _measured: { ...(measured || {}), ...(authored._measured || {}) },
-      sites: [...(authored.sites || []), ...(gen ? gen.sites : [])] };
+      sites: [...(authored.sites || []), ...(gen ? gen.sites : [])] }, placeId, content);
   }
   const cached = character?.localLayouts?.[placeId] || null;
   const have = new Set((cached?.sites || []).map((s) => s.id));
-  if (cached && (children || []).every((c) => !c || have.has(c.id))) return { ...cached, kind, placeId };
+  if (cached && (children || []).every((c) => !c || have.has(c.id))) return withGround({ ...cached, kind, placeId }, placeId, content);
   // ⛑ a cached layout GROWS when a new sub-place is named, it is not re-rolled (L3: "placed into the existing
   // layout, not re-rolled with it") — the extent and the sites already placed keep their seats
   const fresh = generateLayout(placeId, { loc, kind, gradients: measured, children: cached ? (children || []).filter((c) => c && !have.has(c.id)) : children, locations: content?.locations });
   const out = cached ? { ...cached, sites: [...cached.sites, ...fresh.sites] } : fresh;
   out.kind = kind; out.placeId = placeId; out.generated = true;
   if (character) { character.localLayouts = character.localLayouts || {}; character.localLayouts[placeId] = out; }
-  return out;
+  return withGround(out, placeId, content);
+}
+
+/** ✅ AEVI (the local ground, G1): *"`localLayoutFor` takes the place's entry."* Attached on the way OUT, never into the save's
+ *  cache: the entry is content, and a cached copy of content is the thing that goes stale. A place with no entry (a place
+ *  grown in play) keeps drawing the way it always has. */
+function withGround(layout, placeId, content) {
+  const g = content?.rules?.localGround || null;
+  const entry = g?.places?.[placeId] || null;
+  return entry ? { ...layout, ground: entry, groundRules: g._rules || null } : layout;
 }
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────
 // ⛔ THE MODEL: every shape the painter draws, computed once from the layout and the frame. The painter then
 // only puts ink down, which is what lets the film draw the same model sixty times a second.
+
+/* ═════ THE LOCAL GROUND, G2 · ROOFS COME FROM WHO LIVES THERE, NEVER FROM THE KIND ═════
+ * ✅ ERIK: *"Not every location had homes... and if they do they aren't always lined neatly along the roads."* ✅ AEVI (G2):
+ * *"`none` draws no roofs. `few` draws exactly `n`. Every other value draws within its range. `cluster`, the default, must not
+ * look laid out: knots of houses round the centre and the junctions, thinning outward; each house turned to its nearest way
+ * within about ±30°, some set back with a yard, with gaps between knots; never two continuous rows at one spacing down a
+ * road."* ⚠️ MEASURED before: every kind with a built fraction got roofs on both sides of every way at one spacing — the
+ * fifteen gate yards, a single cabin, a machine in a riverbed — and the Spent Yard drew a row of houses on a road.
+ * ⛑ The layouts not on open ground are folded for now, and said so: `dug`, `rock` and `interior` are openings cut in, not
+ * roofs; `stilts`, `hulls`, `floating` and `underwater` sit on the water where there is water; `canopy` sits in the wood. */
+export const DWELLING_RANGE = Object.freeze({ none: [0, 0], hamlet: [6, 15], village: [15, 45], town: [45, 150], city: [150, 320] });
+export function dwellingRange(ground) {
+  const d = String(ground?.dwellings || "");
+  if (d === "few") { const n = Math.max(0, Number(ground?.n) || 3); return [n, n]; }
+  return DWELLING_RANGE[d] || null;
+}
+const HOUSE_STYLE = { dug: "dug", rock: "dug", interior: "dug", camp: "tent", hulls: "hull", floating: "hull", underwater: "hull", stilts: "stilt" };
+/** The houses a place's ground says it has, laid out the way its entry says they sit. Pure: the model's own ways, water and
+ *  wood in; `[{ x, y, ang, style }]` out. The count is within the entry's range (fewer only when the ground has no room). */
+export function groundHouses({ ground, frame, built, roads = [], lanes = [], sites = [], water = null, features = [], id = "place", uphill = null }) {
+  const range = dwellingRange(ground);
+  if (!range || range[1] <= 0) return [];
+  const rnd = rngOf(seedOf("houses:" + id));
+  const want = range[0] + Math.floor(rnd() * (range[1] - range[0] + 1));
+  const s = frame.pxPerMetre;
+  const L = Math.max(2.2, 9 * s), Wd = Math.max(1.6, 6 * s);
+  const layout = String(ground?.layout || "cluster");
+  const style = HOUSE_STYLE[layout] || "roof";
+  const segsOf = (pts) => { const out = []; for (let i = 1; i < (pts || []).length; i++) out.push([pts[i - 1], pts[i]]); return out; };
+  const segs = [...roads.flatMap((r) => segsOf(r.pts)), ...lanes.flatMap((l) => segsOf(l.pts))];
+  const segDist = (x, y, [a, b]) => { const vx = b[0] - a[0], vy = b[1] - a[1], L2 = vx * vx + vy * vy || 1; const t = clamp(((x - a[0]) * vx + (y - a[1]) * vy) / L2, 0, 1); return { d: Math.hypot(a[0] + vx * t - x, a[1] + vy * t - y), ang: Math.atan2(vy, vx) }; };
+  const nearestWay = (x, y) => { let best = { d: Infinity, ang: 0 }; for (const sg of segs) { const r = segDist(x, y, sg); if (r.d < best.d) best = r; } return best; };
+  const wSegs = water?.channel?.pts ? segsOf(water.channel.pts) : [];
+  const wHalf = water?.channel ? water.channel.widthPx / 2 : 0;
+  const waterDist = (x, y) => { let d = Infinity; for (const sg of wSegs) d = Math.min(d, segDist(x, y, sg).d); return d; };
+  const wayHalf = Math.max(1.6, 4 * s);
+  const placed = [];
+  const inFrame = (x, y) => x > 4 && y > 4 && x < frame.w - 4 && y < frame.h - 4;
+  const tryPlace = (x, y, ang, { gap = L * 1.15, onWater = false } = {}) => {
+    if (placed.length >= want || !inFrame(x, y)) return false;
+    const wd = wSegs.length ? waterDist(x, y) : Infinity;
+    if (onWater ? !(wd < wHalf + L) : wd < wHalf + Wd) return false;
+    if (nearestWay(x, y).d < wayHalf + Wd * 0.8) return false;
+    if (!placed.every((q) => Math.hypot(q.x - x, q.y - y) >= gap)) return false;
+    placed.push({ x, y, ang, style }); return true;
+  };
+  const gauss = () => { let u = 0, v = 0; while (u === 0) u = rnd(); while (v === 0) v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  const turnToWay = (x, y) => nearestWay(x, y).ang + (rnd() - 0.5) * (Math.PI / 3) + (rnd() < 0.4 ? Math.PI / 2 : 0);   // ±30°, end-on or side-on
+  const pointAlong = (pts, dist) => { let acc = 0; for (let i = 1; i < (pts || []).length; i++) { const [a, b] = [pts[i - 1], pts[i]]; const l = Math.hypot(b[0] - a[0], b[1] - a[1]); if (acc + l >= dist) { const f = (dist - acc) / (l || 1); return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f]; } acc += l; } return null; };
+  const R0 = Math.max(8, built.r);
+  const tries = want * 40;
+  const cluster = (centreBias = 1, around = null) => {
+    // knots: the centre, a point out along each road, the open sites, and two of the ground's own
+    const knots = around ? [{ x: around.x, y: around.y, w: 3, r: around.r }] : [{ x: built.x, y: built.y, w: 3 * centreBias, r: R0 * 0.3 }];
+    if (!around) {
+      for (const r of roads) { const p = pointAlong(r.pts, R0 * (0.4 + rnd() * 0.25)); if (p) knots.push({ x: p[0], y: p[1], w: 1.6, r: R0 * 0.22 }); }
+      for (const st of sites) if (["green", "square", "market", "well"].includes(st.kind) && Math.hypot(st.x - built.x, st.y - built.y) < R0) knots.push({ x: st.x, y: st.y, w: 1.4, r: R0 * 0.2 });
+      for (let k = 0; k < 2; k++) { const a = rnd() * Math.PI * 2, d = R0 * (0.35 + rnd() * 0.4); knots.push({ x: built.x + Math.cos(a) * d, y: built.y + Math.sin(a) * d, w: 1, r: R0 * 0.18 }); }
+    }
+    const tw = knots.reduce((n, k) => n + k.w, 0);
+    for (let i = 0; i < tries && placed.length < want; i++) {
+      let pick = rnd() * tw, k = knots[0];
+      for (const q of knots) { pick -= q.w; if (pick <= 0) { k = q; break; } }
+      const a = rnd() * Math.PI * 2, rr = k.r * Math.abs(gauss());
+      const x = k.x + Math.cos(a) * rr, y = k.y + Math.sin(a) * rr;
+      const dc = Math.hypot(x - built.x, y - built.y) / R0;
+      if (!around && (dc > 1.05 || rnd() < dc * dc * 0.55)) continue;   // thinning outward
+      tryPlace(x, y, turnToWay(x, y), { gap: L * (1.1 + rnd() * 0.8) });   // yards and gaps vary
+    }
+  };
+  const along = (pts, depth) => {
+    let acc = 0, next = 0;
+    for (let i = 1; i < (pts || []).length && placed.length < want; i++) {
+      const [a, b] = [pts[i - 1], pts[i]]; const l = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1;
+      const tx = (b[0] - a[0]) / l, ty = (b[1] - a[1]) / l, nx = -ty, ny = tx;
+      for (; next < acc + l; next += L * (1.2 + rnd() * 0.9)) {
+        const t = next - acc, x = a[0] + tx * t, y = a[1] + ty * t;
+        if (Math.hypot(x - built.x, y - built.y) > R0 * 1.35) continue;
+        const side = rnd() < 0.5 ? 1 : -1, off = depth + Wd * (0.9 + rnd() * 0.5);
+        tryPlace(x + nx * side * off, y + ny * side * off, Math.atan2(ty, tx) + (rnd() - 0.5) * 0.28, { gap: L * 1.05 });
+        if (rnd() < 0.25) tryPlace(x + nx * side * (off + Wd * 2.2), y + ny * side * (off + Wd * 2.2), Math.atan2(ty, tx) + (rnd() - 0.5) * 0.5, { gap: L * 1.05 });   // a little depth behind
+      }
+      acc += l;
+    }
+  };
+  const mainRoad = roads.slice().sort((p, q) => (q.pts?.length || 0) - (p.pts?.length || 0))[0] || null;
+  const baseAng = mainRoad && mainRoad.pts.length > 1 ? Math.atan2(mainRoad.pts[1][1] - mainRoad.pts[0][1], mainRoad.pts[1][0] - mainRoad.pts[0][0]) : 0;
+  const ranks = (spacingAcross, spacingAlong, ang, within = 1) => {
+    const ux = Math.cos(ang), uy = Math.sin(ang), vx = -uy, vy = ux;
+    for (let r = -R0; r <= R0 && placed.length < want; r += spacingAcross) for (let t = -R0; t <= R0 && placed.length < want; t += spacingAlong) {
+      const x = built.x + ux * t + vx * r, y = built.y + uy * t + vy * r;
+      if (Math.hypot(x - built.x, y - built.y) > R0 * within) continue;
+      tryPlace(x, y, ang, { gap: Math.min(spacingAlong, spacingAcross) * 0.9 });
+    }
+  };
+  switch (layout) {
+    case "street": {
+      const stream = (ground.features || []).some((f) => ["stream", "river", "channel"].includes(f.k) && f.at === "across");
+      const line = stream && water?.channel?.pts ? water.channel.pts : (mainRoad ? mainRoad.pts : null);
+      if (line) along(line, stream ? wHalf : wayHalf);
+      if (placed.length < want) cluster(0.6);
+      break;
+    }
+    case "rows": ranks(Wd * 3, L * 1.5, baseAng); break;
+    case "grid": ranks(Wd * 2.6, L * 1.35, baseAng); break;
+    case "rings": for (const f of [0.35, 0.6, 0.85]) { const r = R0 * f, n = Math.max(4, Math.floor((2 * Math.PI * r) / (L * 1.6))); for (let i = 0; i < n; i++) { const a = (i / n) * Math.PI * 2; tryPlace(built.x + Math.cos(a) * r, built.y + Math.sin(a) * r, a + Math.PI / 2, { gap: L }); } } break;
+    case "tiers": { const u = uphill != null ? uphill * Math.PI / 180 - Math.PI / 2 : baseAng; ranks(Wd * 3.4, L * 1.45, u + Math.PI / 2, 0.95); break; }
+    case "scatter": for (let i = 0; i < tries && placed.length < want; i++) { const a = rnd() * Math.PI * 2, d = R0 * 1.4 * Math.sqrt(rnd()); const x = built.x + Math.cos(a) * d, y = built.y + Math.sin(a) * d; tryPlace(x, y, turnToWay(x, y), { gap: R0 * 0.25 }); } break;
+    case "yard": case "court": {
+      const r = R0 * 0.5, n = Math.max(want, 6);
+      for (let i = 0; i < n * 3 && placed.length < want; i++) {
+        const a = layout === "court" ? (Math.floor(rnd() * 4) / 4) * Math.PI * 2 + Math.PI / 4 + (rnd() - 0.5) * 1.2 : rnd() * Math.PI * 2;
+        const rr = layout === "court" ? r / Math.max(0.55, Math.abs(Math.cos(((a - Math.PI / 4) % (Math.PI / 2)) - Math.PI / 4))) : r * (0.9 + rnd() * 0.2);
+        tryPlace(built.x + Math.cos(a) * rr, built.y + Math.sin(a) * rr, a + Math.PI / 2, { gap: L * 1.1 });   // facing in
+      }
+      break;
+    }
+    case "camp": for (let i = 0; i < tries && placed.length < want; i++) { const a = -Math.PI * 0.55 + rnd() * Math.PI * 1.1 + baseAng, rr = R0 * (0.45 + (rnd() - 0.5) * 0.2); tryPlace(built.x + Math.cos(a) * rr, built.y + Math.sin(a) * rr, a, { gap: L * 1.3 }); } break;
+    case "dug": case "rock": case "interior": cluster(1.6); break;
+    case "canopy": {
+      const woods = features.filter((f) => f.kind === "wood");
+      for (const w of woods) cluster(1, { x: w.x, y: w.y, r: w.rPx * 0.5 });
+      if (placed.length < want) cluster(1);
+      break;
+    }
+    case "stilts": case "hulls": case "floating": case "underwater": {
+      if (wSegs.length) for (let i = 0; i < tries && placed.length < want; i++) {
+        const sg = wSegs[Math.floor(rnd() * wSegs.length)], f = rnd(); const x = sg[0][0] + (sg[1][0] - sg[0][0]) * f + (rnd() - 0.5) * wHalf, y = sg[0][1] + (sg[1][1] - sg[0][1]) * f + (rnd() - 0.5) * wHalf;
+        if (Math.hypot(x - built.x, y - built.y) > R0 * 1.6) continue;
+        tryPlace(x, y, Math.atan2(sg[1][1] - sg[0][1], sg[1][0] - sg[0][0]), { gap: L * 1.2, onWater: true });
+      }
+      if (placed.length < want) cluster(1);
+      break;
+    }
+    default: cluster(1);
+  }
+  return placed;
+}
 
 /** A blob: a circle with a seeded radial wobble, so a field is a field and not a compass rose. */
 function blobPath(cx, cy, r, rnd, { wobble = 0.14, n = 18 } = {}) {
@@ -692,7 +839,11 @@ export function localModel(layout, frame, { placeName = "", placeId = "", nameOf
     }
     return { lines: out, strength, spacing };
   })();
-  return { id, placeName, frame, layout, sites, roads, lanes, features, contours, built: { ...builtAt, r: builtR }, water, rnd, level: Number(level) || 0 };
+  // ✅ G2: the houses the ground says there are, laid out as it says — only on the surface, and only where there is an entry
+  const houses = (layout?.ground && !((Number(level) || 0) < 0))
+    ? groundHouses({ ground: layout.ground, frame, built: { ...builtAt, r: builtR }, roads, lanes, sites, water, features, id, uphill: Number.isFinite(Number(meas.uphillBearing)) ? Number(meas.uphillBearing) : null })
+    : null;
+  return { id, placeName, frame, layout, sites, roads, lanes, features, contours, built: { ...builtAt, r: builtR }, water, rnd, level: Number(level) || 0, houses };
 }
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────
@@ -917,6 +1068,8 @@ function paintFeature(ctx, f, model, rnd, wv = null) {
     return;
   }
   if (f.kind === "built") {
+    // ✅ G2: *"`none` draws no roofs. The built ground then draws as what its features say … or not at all."*
+    if (model.layout?.ground?.dwellings === "none") { ctx.restore(); return; }
     ctx.fillStyle = INK.built; ctx.fill();
     ctx.strokeStyle = INK.builtEdge; ctx.lineWidth = 1; ctx.stroke();
     ctx.restore();
@@ -968,6 +1121,24 @@ function paintRoofs(ctx, model, rnd) {
   const { frame, built } = model;
   const s = frame.pxPerMetre;
   const roofL = Math.max(2.2, 9 * s), roofW = Math.max(1.6, 6 * s), gap = Math.max(3, 14 * s);
+  // ✅ G2: a place with a ground entry draws ITS houses — the count and the arrangement its entry says — and nothing else
+  if (Array.isArray(model.houses)) {
+    ctx.save();
+    for (const h of model.houses) {
+      ctx.save(); ctx.translate(h.x, h.y); ctx.rotate(h.ang);
+      if (h.style === "dug") { ctx.fillStyle = "rgba(48,38,30,0.85)"; ctx.beginPath(); ctx.ellipse(0, 0, roofL * 0.42, roofW * 0.45, 0, 0, Math.PI * 2); ctx.fill(); }
+      else if (h.style === "tent") { ctx.fillStyle = "#cdb98f"; ctx.strokeStyle = INK.roofEdge; ctx.lineWidth = 0.5; ctx.beginPath(); ctx.moveTo(-roofL * 0.45, roofW * 0.4); ctx.lineTo(0, -roofW * 0.6); ctx.lineTo(roofL * 0.45, roofW * 0.4); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+      else if (h.style === "hull") { ctx.fillStyle = "#7a5a3a"; ctx.strokeStyle = INK.roofEdge; ctx.lineWidth = 0.5; ctx.beginPath(); ctx.ellipse(0, 0, roofL * 0.6, roofW * 0.4, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); }
+      else {
+        if (h.style === "stilt") { ctx.strokeStyle = INK.roofEdge; ctx.lineWidth = 0.6; for (const [px, py] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) { ctx.beginPath(); ctx.moveTo(px * roofL * 0.5, py * roofW * 0.5); ctx.lineTo(px * roofL * 0.7, py * roofW * 0.8); ctx.stroke(); } }
+        ctx.fillStyle = INK.roof; ctx.strokeStyle = INK.roofEdge; ctx.lineWidth = 0.5;
+        ctx.beginPath(); ctx.rect(-roofL / 2, -roofW / 2, roofL, roofW); ctx.fill(); ctx.stroke();
+      }
+      ctx.restore();
+    }
+    ctx.restore();
+    return;
+  }
   const inBuilt = (x, y) => Math.hypot(x - built.x, y - built.y) <= built.r * 1.02;
   ctx.save();
   ctx.fillStyle = INK.roof; ctx.strokeStyle = INK.roofEdge; ctx.lineWidth = 0.5;

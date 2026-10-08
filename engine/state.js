@@ -759,7 +759,7 @@ export async function loadContent() {
   // fold the two that mutate already-loaded maps (accords tag abilities, legends hydrate into npcs).
   // Failure semantics preserved exactly: `region` stays fatal; every optional one keeps its fallback.
   const [region, substrate, greaterArcs, sovereignMarksDoc, sovereignSeatsDoc, genNpc, genLoc, genArc, genCreature, originsDoc, backgroundsDoc, regionsDoc,
-         accords, helpDoc, substrateModel, powerSourcesDoc, foothillsDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc, localLayoutsDoc, locationKindsDoc, openingDoc, filmDocs, theVeilDoc, powerCosmologyDoc, tierSignalsDoc, tierRarityDoc, seaLanesDoc] = await Promise.all([
+         accords, helpDoc, substrateModel, powerSourcesDoc, foothillsDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc, localLayoutsDoc, locationKindsDoc, openingDoc, filmDocs, theVeilDoc, powerCosmologyDoc, tierSignalsDoc, tierRarityDoc, seaLanesDoc, localGroundDoc] = await Promise.all([
     fetchJSON("world/regions/valley.json"),
     fetchJSON("content/packs/valley/lore/generative_substrate.json").catch(() => null),           // generation off on a miss
     fetchJSON("content/packs/valley/lore/greater_arcs.json").then(x => x.arcs || []).catch(() => []), // no arc few-shot
@@ -866,12 +866,16 @@ export async function loadContent() {
     loadRule("tier_rarity", null),
     // ✅ ERIK (2026-10-08): the long road AND a boat. DERIVED, not authored — `tests/world_roads_measure.mjs --write` writes it from
     // `seaLanePairs` and fails the push when it disagrees with the rule — so the map and the journey read one list, not terrain.
-    fetchJSON("content/packs/core/world/sea_lanes.json").catch(() => null)
+    fetchJSON("content/packs/core/world/sea_lanes.json").catch(() => null),
+    // ✅ AEVI (2026-10-08, the local ground, G1): what stands on each place's own ground, read off the place's own words —
+    // who lives there and how the houses sit, its marks, lines and areas, its farms. Read beside `local_layouts.json`.
+    fetchJSON("content/packs/core/world/local_ground.json").catch(() => null)
   ]);
   // ⛔ R28 — ATTACHED, not merely fetched, and attached IN THIS WAVE. My first pass put this beside the
   // ladder rule 250 lines up, where `localLayoutsDoc` does not exist yet — the exact temporal-dead-zone
   // shape the comment above the wave warns about. ⚠️ A fetch with no attach is a download thrown away.
   if (localLayoutsDoc) rules.localLayouts = localLayoutsDoc;
+  if (localGroundDoc) rules.localGround = localGroundDoc;   // ✅ G1: the local ground, beside the authored layouts
   // ⛑ the whole doc on `rules`, so `regionDisplay`, `kinds` and `_siteVocabulary` are reachable without a
   // second fetch; `mapStates` ALSO rides at the top level, because Aevi's S1 spec names `content.mapStates`.
   if (locationKindsDoc) rules.locationKinds = locationKindsDoc;

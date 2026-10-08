@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Location",
-  "description": "One place. DERIVED from the authored packs/*/locations corpus (SNG-BATCH-9 build-step-1) — the authored set is cleanly uniform (all 26 carry the same 14 fields), so those 14 are `required`. generate('location', ctx) authors to this shape in-grain from the arriving location's poleIntensity (± a rolled asymmetric secondary axis, per the substrate's asymmetry rule); repair fills any required field the model omits (map coords from the parent + offset, communityId/loreRefs from context, empty arrays where apt). Optional fields (dangerLevel, npcsPresent, seedFiction/nativeLogic for manifest domains, encounterSeeds, image) are added when the grain calls for them.",
+  "description": "One place. DERIVED from the authored packs/*/locations corpus (SNG-BATCH-9 build-step-1) — the authored set is cleanly uniform (all 26 carry the same 14 fields), so those 14 are `required`. generate('location', ctx) authors to this shape in-grain from the arriving location's poleIntensity (± a rolled asymmetric secondary axis, per the substrate's asymmetry rule); repair fills any required field the model omits (communityId/loreRefs from context, empty arrays where apt). Optional fields (dangerLevel, npcsPresent, seedFiction/nativeLogic for manifest domains, encounterSeeds, image) are added when the grain calls for them.",
   "type": "object",
   "required": [
     "schemaVersion",
@@ -85,21 +85,6 @@
         "type": "string"
       },
       "description": "hooks the GM can pull; may be empty"
-    },
-    "map": {
-      "type": "object",
-      "required": [
-        "x",
-        "y"
-      ],
-      "properties": {
-        "x": {
-          "type": "number"
-        },
-        "y": {
-          "type": "number"
-        }
-      }
     },
     "dangerLevel": {
       "type": "integer"

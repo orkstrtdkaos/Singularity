@@ -530,5 +530,10 @@
     "purpose": "Aevi's local ground, G4 and G5: what stands on a place's ground (its marks, lines and fills from local_ground.json) placed where each entry's `at` says, in the local frame's pixels, before the houses so they keep clear of it; the place's own mark at the centre where the roads meet; an authored site of the same glyph counted as one of an entry's `n` so nothing is drawn twice; and anything that could not fit reported in `short`, never dropped.",
     "playerVisibleSurface": "the local map (\"Look inside\") and the films' place shots: the Spent Yard's stacks in rows with its sheds and rigs at the far end, the Kept Shrine's shrine at its centre, Thinwater's shrines along its stream, Millbrook's stone bridge and moored boats — drawn unlabelled, because they are the ground, not places to go",
     "whatMakesItFire": "`localModel` on every local map and enlargement and on every film place shot, for any place with a local_ground.json entry; nothing fires it otherwise"
+  },
+  "mending.js": {
+    "purpose": "SNG-679 Part R, R4 and R6: a broken thing near the character is a mending job on their job list (nearest first, at most three, the culprit's make-good first and unpaid); a job's success brings it up one rung through the one door, by the character, and pays the rung's share of the repair value in the place's own money; the place card lists every broken thing.",
+    "playerVisibleSurface": "the Jobs tab (\"Restore the Water Wheels at Millbrook\", \"Make good the road to Echo River Crossing at Millbrook\"), the reward line when the team comes back, and the place card's \"Wanted at {place}: hands to mend the {thing}\" or \"The people of {place} are at work on the {thing}\"",
+    "whatMakesItFire": "the world tick keeps the board (`postMendingJobs`) after the locals' pass; `applyJobEffects` applies a `mend` stake when a team comes back with a success; `placeCardHTML` reads `brokenAt`"
   }
 }

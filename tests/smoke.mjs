@@ -25047,6 +25047,46 @@ await (async () => {
       && /localsMendPass\(character, \{ content, worldDay: wd680 \}\)/.test(tick680) && /const extraNews = \[\.\.\.mendNews680,/.test(tick680)
       && /String\(words\.mended\)\.replace\("\{thing\}", t\.thing\)/.test(tick680));
   }
+  /* ── ✅ SNG-679 Part R, R4 + R6 (CCODE-681): a player mends, and is rewarded; mending is a job on the job list ── */
+  {
+    const MS681 = await import("../engine/mapstate.js");
+    const MD681 = await import("../engine/mending.js");
+    const JB681 = await import("../engine/jobs.js");
+    const { loadContentHeadless: lch681 } = await import("./headless_content.mjs");
+    const C681 = await lch681();
+    const wheels681 = (C681.rules.localLayouts.millbrook.sites || []).find((x) => x.kind === "mill");
+    const key681 = `site:millbrook/${wheels681.id}`, road681 = MS681.roadKey("millbrook", "echo_river_crossing");
+    const ch681 = { id: "player-me", name: "Me", currentLocationId: "millbrook", holdings: [], mapEvents: [], purse: {} };
+    MS681.applyMapChange(ch681, { key: key681, change: "ruined", by: "player-other", seen: "named" }, { content: C681, worldDay: 100 });
+    MS681.applyMapChange(ch681, { key: road681, change: "damaged", by: "player-me" }, { content: C681, worldDay: 100 });
+    MS681.applyMapChange(ch681, { key: "site:the_blaze/far_off", change: "ruined", by: "x" }, { content: C681, worldDay: 100 });
+    const specs681 = MD681.mendingJobsFor(ch681, { content: C681 });
+    check("Part R · R6: ⛔ MENDING IS A JOB ON THE JOB LIST — broken things within two days of you or a hold, nearest first, at most three; the one who broke it is offered to make good FIRST and is paid nothing for it; a thing far off is not offered",
+      specs681.length === 2 && specs681[0].stakes.mend.culprit === true && specs681[0].label === "Make good the road to Echo River Crossing at Millbrook" && !specs681[0].stakes.crystal
+      && specs681[1].label === "Restore the Water Wheels at Millbrook" && specs681[1].stakes.crystal > 0 && specs681[1].effort === C681.mapStates.jobs.effortDays.ruined
+      && !specs681.some((x) => x.stakes.mend.key.includes("the_blaze")), specs681.map((x) => x.label).join(" | "));
+    MD681.postMendingJobs(ch681, { content: C681, day: 5 });
+    const job681 = ch681.jobs.board.find((j) => j.stakes?.mend?.key === key681);
+    const partial681 = JB681.jobEffects(job681, "partial", C681.rules);
+    const fx681 = JB681.jobEffects(job681, "success", C681.rules);
+    const lines681 = JB681.applyJobEffects(ch681, { team: ["player"], job: job681, names: {} }, fx681, { content: C681 });
+    const after681 = MS681.mapStateOf(ch681, key681, { content: C681 });
+    check("Part R · R4: ⛔ A SUCCESS BRINGS IT UP ONE RUNG, through the one door BY THE CHARACTER, and pays the rung's share of the repair value as a reward in the place's own money (scrip or crystal — no region pays in coin); a partial success mends nothing",
+      !partial681.mend && after681.state === "damaged" && after681.by === "player-me" && ch681.mendWork?.[key681]?.rungs === 1
+      && (Number(ch681.purse?.crystal) || 0) + Object.values(ch681.purse?.scrip || {}).reduce((x, y) => x + (Number(y) || 0), 0) > 0 && !ch681.purse?.coin
+      && lines681.some((l) => /Water Wheels at Millbrook is damaged now/.test(l)), lines681.join(" · "));
+    MD681.postMendingJobs(ch681, { content: C681, day: 6 });
+    const next681 = ch681.jobs.board.find((j) => j.stakes?.mend?.key === key681);
+    ch681.mendDeclined = { [road681]: true };
+    const afterDecline681 = MD681.mendingJobsFor(ch681, { content: C681 });
+    const app681 = readFileSync(join(root, "app.js"), "utf8"), tick681 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+    check("Part R · R4/R6: ⛔ …the board follows the work (the next rung re-posted, offered to the mender, not to them as the culprit), a declined make-good is gone for good, the place card lists every broken thing (`wanted`, or `mending` while the locals work), and the tick keeps the board",
+      next681?.stakes?.mend?.from === "damaged" && next681.label === "Mend the Water Wheels at Millbrook" && !next681.stakes.mend.culprit && !!next681.stakes.deed
+      && !afterDecline681.some((x) => x.stakes.mend.key === road681)
+      && MD681.brokenAt(ch681, "millbrook", { content: C681, worldDay: 105 }).length === 2
+      && /const br = brokenAt\(character, l\.id, \{ content: CONTENT, worldDay: absoluteWorldDay\(\) \}\);/.test(app681)
+      && /if \(j\?\.stakes\?\.mend\?\.culprit\) \{ character\.mendDeclined = /.test(app681) && /postMendingJobs\(character, \{ content, day: currentDay \}\)/.test(tick681));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

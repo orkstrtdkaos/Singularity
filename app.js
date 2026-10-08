@@ -52,6 +52,7 @@ import { openingFrame, placeCardBox } from "./engine/worldmap.js";
 import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange, mapView, roadKey } from "./engine/mapstate.js";
 // ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
 import { mapHolds, holdMarker, ensureHoldSite, placeHoldSite, holdSiteOf, holdView } from "./engine/mapholds.js";
+import { brokenAt } from "./engine/mending.js";   // ✅ SNG-679 Part R · R4: what is broken at a place, on its card
 // ⛔ SNG-680: the film is DATA. Not one of its words is written in this file.
 import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
   filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase, filmFrame, filmLandings } from "./engine/films.js";
@@ -208,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.24.5";
+const APP_VERSION = "2.25.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -19126,6 +19127,15 @@ function placeCardHTML(selectedId) {
         })()}
         ${(() => { const s = l.communityId ? standingWith(character, l.communityId, CONTENT.rules) : null; return s?.score ? `<span class="rep-band ${s.band}" title="Your standing here — ${s.band} (${s.score})">${esc(s.band)}</span>` : ""; })()}
       </div>
+      ${(() => {
+        /* ✅ SNG-679 Part R · R4: *"Every game shows the job at the place, drawn from the shared record: `wanted` … The place card
+         * lists them all"* — and while the locals are at it, `mending`. Only for a place the character knows of. */
+        if (!known) return "";
+        try {
+          const br = brokenAt(character, l.id, { content: CONTENT, worldDay: absoluteWorldDay() });
+          return br.length ? `<div class="loc-wanted">${br.map((b) => `<div class="hint">${esc(b.mending || b.wanted || "")}</div>`).join("")}</div>` : "";
+        } catch { return ""; }
+      })()}
       ${(() => { const ppl = knownPeopleAt(character, l.id, { locations: CONTENT.locations, npcs: CONTENT.npcs }); return ppl.length ? `<div class="loc-people"><span class="hint">You know here: </span>${ppl.map(p => `<span class="known-here">${esc(p.name)} <span class="cost">${esc(p.label)}</span></span>`).join(", ")}</div>` : ""; })()}
       ${visited && locationImageFor(l.id) ? `<img class="location-image" src="${esc(locationImageFor(l.id))}" alt="${esc(l.name)}" data-lightbox="location" data-regen-kind="location" data-regen-subject="${esc(l.id)}" loading="lazy" onerror="this.style.display='none'">` : ""}
       ${visited
@@ -24403,6 +24413,8 @@ function renderJobsTab(selId = null) {
     // ⛔ CCODE-452: a raise taken off the board puts its materials back
     const j = (character.jobs?.board || []).find(x => x && x.id === drop.dataset.jobDrop);
     if (j?.stakes?.raise) returnRaiseGoods(character, j.stakes.raise);
+    // ✅ SNG-679 Part R: *"Offered once, first on their board; declining takes it off and costs nothing by itself."*
+    if (j?.stakes?.mend?.culprit) { character.mendDeclined = { ...(character.mendDeclined || {}), [j.stakes.mend.key]: true }; }
     dropJob(character, drop.dataset.jobDrop); _jobsUi.sel = null; saveCharacter(character); renderJobsTab();
   };
   const send = document.getElementById("job-send");

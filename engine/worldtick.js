@@ -61,6 +61,7 @@ import { TRADES_PATH, settleOrders, refundOrders, mergeOrders } from "./holdtrad
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval, rollRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
 import { localsMendPass, mapThingOf } from "./mapstate.js";   // ✅ SNG-679 Part R · R2
+import { postMendingJobs } from "./mending.js";   // ✅ SNG-679 Part R · R6: mending is a job on the job list
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
 import { rollErrands, workCraftsOf, workDayChance, workHeads, bandMissionOutcome } from "./jobs.js";   // ⛔ CCODE-428: …by the job's own dice · CCODE-450: standing work
@@ -932,6 +933,9 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
       }).filter(Boolean).slice(0, 4);
     } catch { return []; }
   })();
+  // ✅ SNG-679 Part R · R6 — and what is still broken near you is on your board, nearest first (the locals' pass ran first, so a
+  // thing they just finished comes off it)
+  try { postMendingJobs(character, { content, day: currentDay }); } catch { /* a board is never a reason the world stops turning */ }
   const extraNews = [...mendNews680, ...debtsPass.news.map(t => ({ text: t, section: "yours" })), ...grown.slice(0, 3), ...woke.slice(0, 3), ...powersPass.slice(0, 2), ...noticedPass.slice(0, 2)];   // ⛑ a power NOTICING you is always worth a line — it is about you
 
   // ⚠️ SNG-368: the RETURN is stamped too, on BOTH paths. The early return handed back raw entries

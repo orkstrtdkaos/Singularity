@@ -607,7 +607,7 @@ export function localsMendPass(character, { content = null, worldDay = null } = 
   return out;
 }
 /** The words for a key: `{ place, thing }` — the place it is at and the thing itself, for `reckoning.words`. */
-export function mapThingOf(key, content, { siteName = null } = {}) {
+export function mapThingOf(key, content, { siteName = null, from = null } = {}) {
   const p = parseMapKey(key);
   if (!p) return null;
   const L = content?.locations || {};
@@ -617,7 +617,8 @@ export function mapThingOf(key, content, { siteName = null } = {}) {
     const authored = (content?.rules?.localLayouts?.[p.id]?.sites || []).find((s) => s.id === p.sub)?.name;
     return { place: nm(p.id), thing: plain(siteName || authored || String(p.sub).replace(/[-_]+/g, " ")) };
   }
-  if (p.cls === "road") { const [a, b] = p.rest.split("|"); return { place: nm(a), thing: `road to ${nm(b)}` }; }
+  // a road is named from the end it is seen from: Millbrook's "road to Echo River Crossing", not the other way about
+  if (p.cls === "road") { const [a0, b0] = p.rest.split("|"); const [a, b] = from === b0 ? [b0, a0] : [a0, b0]; return { place: nm(a), thing: `road to ${nm(b)}` }; }
   if (p.cls === "gate") return { place: nm(p.id), thing: "gate" };
   if (p.cls === "water") return { place: nm(p.id), thing: "water" };
   if (p.cls === "ground") return { place: nm(p.id), thing: "ground" };

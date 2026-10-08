@@ -95,6 +95,9 @@ export function normalizeJob(spec = {}, { day = null } = {}) {
   const rs = s.raise && typeof s.raise === "object" ? s.raise : null;
   if (rs && text(rs.holdId, 80) && text(rs.kind, 40)) stakes.raise = { holdId: text(rs.holdId, 80), index: clampInt(rs.index, 0, 99, 0), kind: text(rs.kind, 40), level: clampInt(rs.level, 2, 3, 2),
     goods: Object.fromEntries(Object.entries(rs.goods && typeof rs.goods === "object" ? rs.goods : {}).filter(([g]) => /^[a-z][a-z_]{1,39}$/.test(g)).map(([g, n]) => [g, clampInt(n, 0, 999, 0)]).filter(([, n]) => n > 0)) };
+  // ✅ SNG-679 Part R · R6: a mend — the key, the state it is brought up from, and whether its doer is the one who broke it
+  const md = s.mend && typeof s.mend === "object" ? s.mend : null;
+  if (md && text(md.key, 120)) stakes.mend = { key: text(md.key, 120), from: text(md.from, 20) || null, culprit: md.culprit === true };
   const job = {
     id: text(spec.id, 80) || `job-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 48)}-${day ?? "x"}`,
     label, where, level,

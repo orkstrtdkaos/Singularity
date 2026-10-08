@@ -30,6 +30,7 @@ import { measureGradients, usableGradients, placeSite, roadsOut as roadBearings 
 import { glyphFor, drawGlyph, drawStateMark } from "./mapicons.mjs";
 import { drawLabel, labelSpace } from "./maplabel.js";
 import { placeGround, finishGround, inPoly } from "./localground.js";
+import { overlayAdded } from "./mapstate.js";   // ✅ SNG-679 S8: what has been added to a place joins its layout as an overlay
 
 const R = Math.PI / 180;
 const norm180 = (d) => ((d + 540) % 360) - 180;
@@ -465,24 +466,26 @@ export function localLayoutFor(placeId, { content = null, character = null, chil
     const gen = extra.length ? generateLayout(placeId, { loc, kind, gradients: { ...(measured || {}), ...(authored._measured || {}), roadsOut: authored._measured?.roadsOut || measured?.roadsOut || [] }, children: extra, locations: content?.locations }) : null;
     return withGround({ ...authored, kind, authored: true, placeId,
       _measured: { ...(measured || {}), ...(authored._measured || {}) },
-      sites: [...(authored.sites || []), ...(gen ? gen.sites : [])] }, placeId, content);
+      sites: [...(authored.sites || []), ...(gen ? gen.sites : [])] }, placeId, content, character);
   }
   const cached = character?.localLayouts?.[placeId] || null;
   const have = new Set((cached?.sites || []).map((s) => s.id));
-  if (cached && (children || []).every((c) => !c || have.has(c.id))) return withGround({ ...cached, kind, placeId }, placeId, content);
+  if (cached && (children || []).every((c) => !c || have.has(c.id))) return withGround({ ...cached, kind, placeId }, placeId, content, character);
   // ⛑ a cached layout GROWS when a new sub-place is named, it is not re-rolled (L3: "placed into the existing
   // layout, not re-rolled with it") — the extent and the sites already placed keep their seats
   const fresh = generateLayout(placeId, { loc, kind, gradients: measured, children: cached ? (children || []).filter((c) => c && !have.has(c.id)) : children, locations: content?.locations });
   const out = cached ? { ...cached, sites: [...cached.sites, ...fresh.sites] } : fresh;
   out.kind = kind; out.placeId = placeId; out.generated = true;
   if (character) { character.localLayouts = character.localLayouts || {}; character.localLayouts[placeId] = out; }
-  return withGround(out, placeId, content);
+  return withGround(out, placeId, content, character);
 }
 
 /** ✅ AEVI (the local ground, G1): *"`localLayoutFor` takes the place's entry."* Attached on the way OUT, never into the save's
  *  cache: the entry is content, and a cached copy of content is the thing that goes stale. A place with no entry (a place
  *  grown in play) keeps drawing the way it always has. */
-function withGround(layout, placeId, content) {
+function withGround(layout, placeId, content, character = null) {
+  // ✅ S8: the additions this character knows of, laid over the layout on the way out (never cached: they are the world's, and move)
+  if (character) layout = overlayAdded(layout, placeId, character, { content });
   const g = content?.rules?.localGround || null;
   const entry = g?.places?.[placeId] || null;
   return entry ? { ...layout, ground: entry, groundRules: g._rules || null, groundKinds: g._kinds || null } : layout;
@@ -1122,6 +1125,13 @@ function paintFeature(ctx, f, model, rnd, wv = null) {
         if (coppice && rnd() < 0.3) { ctx.fillStyle = INK.stool; ctx.beginPath(); ctx.arc(x + jx + r * 0.8, y + jy + r * 0.6, Math.max(0.8, r * 0.25), 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = INK.wood; }
       }
     }
+    ctx.restore();
+    return;
+  }
+  if (f.kind === "clearing") {
+    // ✅ SNG-679 S8: ground CLEARED — kept ground, pale, its edge dashed
+    ctx.fillStyle = "#e9e6cc"; ctx.fill();
+    ctx.strokeStyle = "rgba(140,128,90,0.6)"; ctx.lineWidth = 0.8; ctx.setLineDash([3, 3]); ctx.stroke(); ctx.setLineDash([]);
     ctx.restore();
     return;
   }

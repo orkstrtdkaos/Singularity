@@ -25257,6 +25257,38 @@ await (async () => {
       && tick685.includes("learnMapEvents(character, { content, worldDay: absoluteWorldDay() })")
       && app685.includes("const st = knownStateOf(character, `place:${l.id}`, { content: CONTENT });") && app685.includes("pv.lastKnown ? (CONTENT.mapStates?.knowledge?.lastKnown || null) : null"));
   }
+  /* ── ✅ SNG-679 S8, first half (CCODE-686): adding a site, ground or water; turning a river ── */
+  {
+    const MS686 = await import("../engine/mapstate.js");
+    const LM686 = await import("../engine/localmap.js");
+    const { loadContentHeadless: lch686 } = await import("./headless_content.mjs");
+    const C686 = await lch686();
+    const authoredCount686 = (C686.rules.localLayouts.millbrook.sites || []).length;
+    const ch686 = { id: "player-me", currentLocationId: "millbrook", mapEvents: [], holdings: [] };
+    const ex686 = (kind, id) => kind === "place" && !!C686.locations[id];
+    const add686 = (key, extra) => MS686.applyMapChange(ch686, { key, change: "added", by: "player-me", ...extra }, { content: C686, worldDay: 50, exists: ex686 });
+    const r1 = add686("site:millbrook/new_shrine", { name: "The Ford Shrine", kind: "shrine", pos: { bearing: 120, fromMetres: 260 } });
+    const r2 = add686("site:millbrook/the_new_store", { name: "The New Store", kind: "shop", pos: { toward: "echo_river_crossing", near: true } });
+    const rBad = add686("site:millbrook/nowhere", { name: "x", kind: "shop" });
+    const rG = add686("ground:millbrook/1", { kind: "cleared", pos: { bearing: -60, fromMetres: 500 } });
+    const rGbad = add686("ground:millbrook/2", { kind: "paved", pos: { bearing: 0, fromMetres: 1 } });
+    const rW = add686("water:millbrook/9", { name: "The Mill Leat", pos: { bearing: 90, fromMetres: 200, widthMetres: 12, flowBearing: 0 } });
+    const rT = MS686.applyMapChange(ch686, { key: "water:millbrook/0", change: "moved", by: "player-me", pos: { flowBearing: 45 } }, { content: C686, worldDay: 51 });
+    const lay686 = LM686.localLayoutFor("millbrook", { content: C686, character: ch686 });
+    const md686 = LM686.localModel(lay686, LM686.localFrame(lay686, { w: 800, h: 500 }), { placeId: "millbrook" });
+    const stranger686 = { id: "player-x", currentLocationId: "the_blaze", mapEvents: [], holdings: [], worldMapStore: MS686.mergeMapEvents({ keys: {} }, ch686.mapEvents).store };
+    const lay2686 = LM686.localLayoutFor("millbrook", { content: C686, character: stranger686 });
+    check("S8: ⛔ ADDING JOINS THE LAYOUT AS AN OVERLAY — a site by `{ bearing, fromMetres }` or `{ toward, near }`, ground cleared/planted/drained, a cut channel, a river turned; drawn by the same model; content is never edited; a game that has not learned of them (S7) draws none",
+      r1.ok && r2.ok && rG.ok && rW.ok && rT.ok && lay686.sites.some((x) => x.added && x.name === "The Ford Shrine" && x.localMap.bearing === 120 && x.localMap.metres === 260)
+      && lay686.sites.some((x) => x.added && x.name === "The New Store") && lay686.extent.some((f) => f.added && f.kind === "clearing") && lay686.extent.some((f) => f.cut && f.kind === "water" && f.widthMetres === 12)
+      && lay686.extent.some((f) => f.turned && f.flowBearing === 45) && md686.sites.filter((x) => x.added).length === 2 && md686.features.filter((f) => f.added).length === 2
+      && (C686.rules.localLayouts.millbrook.sites || []).length === authoredCount686 && lay2686.sites.filter((x) => x.added).length === 0);
+    const vis686 = [{ key: "place:millbrook" }];
+    const gmIn = MS686.applyMapOp(ch686, { key: "site:millbrook/gm_well", change: "added", name: "The Second Well", kind: "well", pos: { bearing: 10, fromMetres: 80 } }, { content: C686, worldDay: 52, visible: vis686, exists: ex686 });
+    const gmOut = MS686.applyMapOp(ch686, { key: "site:the_blaze/x", change: "added", name: "x", kind: "well", pos: { bearing: 1, fromMetres: 1 } }, { content: C686, worldDay: 52, visible: vis686, exists: ex686 });
+    check("S8: ⛔ …AN ADDITION SAYS WHERE, or the door refuses it in words (and ground says which of cleared, planted, drained); the GM may add to a place in the scene's view, never to one out of it",
+      !rBad.ok && /has to say where/.test(rBad.why) && !rGbad.ok && /cleared, planted, drained/.test(rGbad.why) && gmIn.ok && !gmOut.ok);
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

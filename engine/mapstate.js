@@ -160,6 +160,13 @@ export function validateMapChange(change, { content = null, state = null, exists
     if (parsed.sub != null && typeof exists === "function" && !exists("place", parsed.id)) {
       return { ok: false, why: `there is no ${parsed.id} to add a ${parsed.cls} to` };
     }
+    // ✅ SNG-679 S8: *"Adding a site or ground takes `{ bearing, fromMetres }` or `{ toward: <placeId>, near|far }` … Adding water is a cut
+    // channel, `{ bearing, fromMetres, widthMetres, flowBearing }`."* A thing added has to say WHERE, or nothing can draw it.
+    if (["site", "ground"].includes(parsed.cls) || (parsed.cls === "water" && parsed.sub != null)) {
+      const why = addedPosProblem(parsed.cls, c.pos);
+      if (why) return { ok: false, why };
+      if (parsed.cls === "ground" && !(parsed.row.addKinds || []).includes(String(c.kind || ""))) return { ok: false, why: `ground is added as one of ${(parsed.row.addKinds || []).join(", ")}` };
+    }
   }
   if (c.change === "moved" && !c.pos) return { ok: false, why: `a move has to say where to` };
   if (c.change === "renamed" && !String(c.name || "").trim()) return { ok: false, why: `a rename has to say what to` };
@@ -211,7 +218,7 @@ export function foldKey(events, content) {
       was = pos ? { pos } : was; pos = e.pos ?? pos; by = e.by ?? by; since = e.day ?? since;
     } else if (ch === "added") {
       // the FIRST added stands; a second is the same thing being founded twice
-      if (!added) { added = { day: e.day ?? null, by: e.by ?? null, kind: e.kind ?? null, pos: e.pos ?? null };
+      if (!added) { added = { day: e.day ?? null, by: e.by ?? null, kind: e.kind ?? null, pos: e.pos ?? null, ...(e.name ? { name: e.name } : {}) };   // S8: a thing added keeps the name it was given
         if (e.pos && !pos) pos = e.pos; }
       // ⛑ founding something again brings it back to whole, which is what "a razed place can be founded
       // again" means in S0's `addBack` column
@@ -530,7 +537,9 @@ export function applyMapOp(character, op, { content = null, worldDay = null, her
   const change = String(o.change || o.op || "").trim().toLowerCase();
   const seen = visible || visibleMapKeys(character, content, { hereId, layout });
   if (!key) return { ok: false, why: "a map op has to name a key" };
-  if (!seen.some((k) => k.key === key)) return { ok: false, why: `"${key}" is not something the scene can see — the keys it can are listed in the prompt` };
+  // ⛑ S8: a thing ADDED has a new key by its nature — it is allowed when the place it is added to is in view
+  const addingHere = change === "added" && (() => { const p = parseMapKey(key); return !!p && p.sub != null && seen.some((k) => k.key === `place:${p.id}`); })();
+  if (!addingHere && !seen.some((k) => k.key === key)) return { ok: false, why: `"${key}" is not something the scene can see — the keys it can are listed in the prompt` };
   const by = o.by != null && String(o.by).trim() ? String(o.by).trim() : "the world";
   const seenHow = ["named", "described", "unseen"].includes(String(o.seen || "")) ? String(o.seen) : (by === "the world" ? "unseen" : "described");
   return applyMapChange(character, {
@@ -704,4 +713,73 @@ export function learnMapEvents(character, { content = null, worldDay = null, loc
     }
   }
   return out;
+}
+
+/* ═════ SNG-679 S8 · ADDING, AND THE CASES THAT NEED RULES (first half) ═════
+ * ✅ AEVI: *"Adding a site or ground takes `{ bearing, fromMetres }` or `{ toward: <placeId>, near|far }`, the same shapes local_layouts
+ * uses. The new thing joins the layout as an overlay entry; content isn't edited. Adding water is a cut channel, `{ bearing, fromMetres,
+ * widthMetres, flowBearing }`, drawn like extent water. Turning a river (`moved`) re-routes its local channel at the places on it."*
+ * ⛔ AN OVERLAY, NEVER AN EDIT: the added things are folded out of the events every time a layout is asked for, so a game that has
+ * not learned of a new shrine does not draw it (S7), and content stays the authored truth. */
+const num0 = (v) => (Number.isFinite(Number(v)) ? Number(v) : null);
+export function addedPosProblem(cls, pos) {
+  const p = pos && typeof pos === "object" ? pos : null;
+  if (!p) return `an added ${cls} has to say where — { bearing, fromMetres }${cls === "water" ? ", widthMetres, flowBearing" : " or { toward, near|far }"}`;
+  if (cls === "water") return [p.bearing, p.fromMetres, p.widthMetres, p.flowBearing].every((v) => num0(v) != null) ? null
+    : "a cut channel says { bearing, fromMetres, widthMetres, flowBearing }";
+  if (num0(p.bearing) != null && num0(p.fromMetres ?? p.metres) != null) return null;
+  if (p.toward && (p.near || p.far || ["on", "near", "far", "away"].includes(String(p.relation || "")))) return null;
+  return `an added ${cls} says { bearing, fromMetres } or { toward, near|far }`;
+}
+/** A `toward` placement read against the layout's own roads: on the way, beside it, further out along it, or away from it. */
+function resolveToward(pos, layout) {
+  const road = (layout?._measured?.roadsOut || []).find((r) => r?.to === pos.toward);
+  const built = (layout?.extent || []).find((f) => f?.kind === "built");
+  const R = Number(built?.radiusMetres) || (Number(layout?.radiusMetres) || 300) * 0.4;
+  const rel = pos.relation || (pos.far ? "far" : pos.near ? "near" : "near");
+  const b = Number(road?.bearing ?? 0);
+  if (rel === "on") return { bearing: Math.round(b), metres: Math.round(R * 0.8) };
+  if (rel === "away") return { bearing: Math.round(((b + 360) % 360) - 180), metres: Math.round(R * 0.9) };
+  if (rel === "far") return { bearing: Math.round(b + 12), metres: Math.round(R * 1.6) };
+  return { bearing: Math.round(b + 18), metres: Math.round(R * 0.7) };   // near: beside the way, set back (Mara Wells' store sits 18° off)
+}
+/** ⛔ THE OVERLAY: the place's layout with everything added to it that this character KNOWS of (S7) — sites, ground, cut channels — and
+ *  its own water turned where a `moved` says so. Destroyed additions are not drawn (their trace is S5's). Pure over the inputs. */
+export function overlayAdded(layout, placeId, character, { content = null } = {}) {
+  if (!layout || !placeId || !character) return layout;
+  const keys = new Set([...(character.mapEvents || []).map((e) => e?.key), ...Object.keys(character.worldMapStore?.keys || {})]
+    .filter((k) => typeof k === "string" && (k.startsWith(`site:${placeId}/`) || k.startsWith(`ground:${placeId}/`) || k.startsWith(`water:${placeId}/`))));
+  if (!keys.size) return layout;
+  const named = new Set((layout.sites || []).map((s) => s?.id));
+  const sites = [], extent = [], turns = [];
+  for (const key of keys) {
+    const p = parseMapKey(key);
+    const st = knownStateOf(character, key, { content });
+    if (p.cls === "water" && st.pos && Number.isFinite(Number(st.pos.flowBearing)) && !st.added) { turns.push({ n: Number(p.sub), pos: st.pos }); continue; }
+    if (!st.added || st.state === "destroyed") continue;
+    const pos = st.added.pos || st.pos || {};
+    if (p.cls === "site") {
+      if (named.has(p.sub)) continue;   // an authored or remembered site of that id is already drawn
+      const at = pos.toward ? resolveToward(pos, layout) : { bearing: Number(pos.bearing), metres: Number(pos.fromMetres ?? pos.metres) };
+      sites.push({ id: p.sub, name: st.name || st.added.name || String(p.sub).replace(/[-_]+/g, " "), kind: st.added.kind || "hall", localMap: at, added: true, generated: true,
+        placedBecause: `added on day ${Math.floor(Number(st.added.day) || 0)}` });
+    } else if (p.cls === "ground") {
+      const at = pos.toward ? resolveToward(pos, layout) : { bearing: Number(pos.bearing), metres: Number(pos.fromMetres ?? pos.metres) };
+      const kind = { planted: "field", drained: "field", cleared: "clearing" }[st.added.kind] || "field";
+      extent.push({ id: `${placeId}:added:${p.sub}`, name: st.name || st.added.name || null, kind, bearing: at.bearing, fromMetres: at.metres, radiusMetres: Number(pos.radiusMetres) || 90, added: true });
+    } else if (p.cls === "water") {
+      extent.push({ id: `${placeId}:cut:${p.sub}`, name: st.name || st.added.name || null, kind: "water", bearing: Number(pos.bearing), fromMetres: Number(pos.fromMetres),
+        widthMetres: Number(pos.widthMetres), flowBearing: Number(pos.flowBearing), added: true, cut: true });
+    }
+  }
+  if (!sites.length && !extent.length && !turns.length) return layout;
+  // a river turned: the n-th water feature of the place's own extent takes the new course
+  let wi = -1;
+  const base = (layout.extent || []).map((f) => {
+    if (f?.kind !== "water") return f;
+    wi++;
+    const t = turns.find((x) => x.n === wi);
+    return t ? { ...f, ...(Number.isFinite(Number(t.pos.bearing)) ? { bearing: Number(t.pos.bearing) } : {}), ...(Number.isFinite(Number(t.pos.fromMetres)) ? { fromMetres: Number(t.pos.fromMetres) } : {}), flowBearing: Number(t.pos.flowBearing), turned: true } : f;
+  });
+  return { ...layout, extent: [...base, ...extent], sites: [...(layout.sites || []), ...sites] };
 }

@@ -11433,9 +11433,24 @@ console.log("\n── §107 · who is around today, offered and never forced ─
 
   check("§107: ⛑ …AND THE MAP IS NOT FLATTENED BY THE NORMALISING, which was the trap in it. Dividing by each place's OWN nearby cast would make every place equally busy and undo Aevi's \"'you have not met a heroic this week' is not a reason for one to appear in an empty fen\" — so the divisor is the reference place's cast, once, and somewhere better connected genuinely runs busier",
     (() => {
+      // ✅ AEVI (NOTE_aevi_ccode_107_sampled_order, 2026-10-04): the ordering holds in EXPECTATION (68 / 57 / 49 on the pockets
+      // branch) and ONE 400-day sample of it was red four windows in ten — "a coin with good odds". So the ordering is asserted
+      // on the expected counts, the sum of each person's daily chance (the roll's own arithmetic, one reader), and the sampled
+      // window stays as a smoke of the roll path with a tolerance about the Poisson spread on these gaps.
+      const E = (loc) => 400 * PR.presenceExpected(who, C107, { hereId: loc, want: "heroic" }).total;
+      const hubE = E("the_crossing"), refE = E("millbrook"), farE = E("the_blaze");
       const at = (loc) => { let n = 0; for (let d = 0; d < 400; d++) n += PR.presentToday(who, C107, { day: d, hereId: loc, want: "heroic" }).length; return n; };
-      const hubN = at("the_crossing"), refN = at("millbrook"), farN = at("the_blaze");
-      return hubN > refN && refN > farN;
+      const near = (n, e) => Math.abs(n - e) <= Math.max(12, 0.35 * e);
+      return hubE > refE && refE > farE && near(at("the_crossing"), hubE) && near(at("millbrook"), refE) && near(at("the_blaze"), farE);
+    })());
+  check("§107: ⛑ …AND THE EXPECTATION IS THE ROLL'S OWN ARITHMETIC — one reader computes the chances, the roll draws against them and the expectation sums them; divide by each place's OWN cast and the three come out level, which is the flattening the ordering guards against",
+    (() => {
+      const e = (loc) => PR.presenceExpected(who, C107, { hereId: loc, want: "heroic" });
+      const hub = e("the_crossing"), ref = e("millbrook"), far = e("the_blaze");
+      if (!(hub.people > 0 && ref.people > 0 && far.people > 0)) return false;
+      const flat = [hub, ref, far].map((x) => x.total / x.people);                      // per-person mean: the flattening
+      const spread = (Math.max(...flat) - Math.min(...flat)) / Math.max(...flat);
+      return hub.total > ref.total && ref.total > far.total && spread < 0.5 && hub.total / hub.people < hub.total;
     })());
 
   check("§107: ⛔ A MYTHIC IS NEVER OFFERED ON A TIMER — \"a mythic appearing IS the event\"",

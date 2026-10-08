@@ -167,7 +167,9 @@ export function relationOf(myBand, theirBand) {
   return { gap, kind: "event", say: "far above you — being helped by them is an EVENT, not a favour" };
 }
 
-export function presentToday(character, content = {}, { day = 0, hereId = null, placeKey = null, want = null, exclude = [], crowd = 1, bandOf = null, myBand = null } = {}) {
+/** ⛔ WHO COULD BE HERE TODAY, AND WITH WHAT CHANCE — the eligibility and the per-person daily chance `presentToday` rolls
+ *  against, computed once so one reader answers both "who turned up" and "what the world offers in expectation". Pure. */
+function dailyChances(character, content = {}, { hereId = null, placeKey = null, exclude = [], crowd = 1 } = {}) {
   const locs = content.locations || {};
   const here = locs[hereId || character?.currentLocationId] || null;
   const met = new Set(Object.keys(character?.npcRegistry || {}));
@@ -179,7 +181,7 @@ export function presentToday(character, content = {}, { day = 0, hereId = null, 
   const where = placeKey || here?.id || hereId || "x";
   const scale = presenceScale(content);        // ⛔ CCODE-485: the great rungs' per-person chance, derived once
 
-  const pool = [];
+  const rows = [];
   for (const [id, n] of Object.entries(content.npcs || {})) {
     if (!n || skip.has(id)) continue;
     if (n.status === "dead") continue;
@@ -217,6 +219,31 @@ export function presentToday(character, content = {}, { day = 0, hereId = null, 
     // person on this day so the roster does not flicker between turns.
     // ⚑ the dial lands HERE and nowhere else — on how often, never on who
     const chance = Math.min(0.9, weight * Math.max(0, Number(crowd) || 1));
+    rows.push({ id, n, tier, chance, days });
+  }
+  return { rows, met, where };
+}
+
+/** ✅ AEVI (NOTE_aevi_ccode_107_sampled_order, 2026-10-04): *"Assert the ordering on the expected counts … sum the chances
+ *  instead of counting the rolls, and the check becomes deterministic and exact."* The expected number of people offered per
+ *  day at a place: the sum of each eligible person's daily chance (by rung, and in all). ⚠️ `presentToday` also caps a day
+ *  at six people before the rung filter, so a thronged square can offer a little less than this sum. */
+export function presenceExpected(character, content = {}, { hereId = null, placeKey = null, want = null, exclude = [], crowd = 1 } = {}) {
+  const { rows } = dailyChances(character, content, { hereId, placeKey, exclude, crowd });
+  const byTier = {}; let total = 0, people = 0;
+  for (const r of rows) {
+    if (want && r.tier !== want) continue;
+    byTier[r.tier] = (byTier[r.tier] || 0) + r.chance; total += r.chance; people++;
+  }
+  return { total, byTier, people };
+}
+
+export function presentToday(character, content = {}, { day = 0, hereId = null, placeKey = null, want = null, exclude = [], crowd = 1, bandOf = null, myBand = null } = {}) {
+  // ⛔ CCODE-659: the chances are computed ONCE, in `dailyChances`, and this rolls against them — `presenceExpected` sums
+  // the same rows, so a gate can ask what the world offers in expectation with the arithmetic the roll uses.
+  const { rows, met, where } = dailyChances(character, content, { hereId, placeKey, exclude, crowd });
+  const pool = [];
+  for (const { id, n, tier, chance, days } of rows) {
     const roll = seedOf(`${where}|${day}|${id}`);
     if (roll >= chance) continue;              // not today
     pool.push({ id, name: n.name || id, tier, met: met.has(id), days: days == null ? null : Math.round(days * 10) / 10,

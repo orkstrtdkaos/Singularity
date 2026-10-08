@@ -9077,8 +9077,13 @@ await (async () => {
           return -Math.abs(LM35.siteLevel(host)) === -4 && -Math.abs(LM35.siteLevel(site)) === -4 && LM35.siteLevel({ worldPos: { depth: 0 } }) === 0; })());
       check("35/F2: ⛔ dark space to bright paper is a CUT no more — `map` is a weight: off for the first part of a place shot (the globe closes in), on from 0.3, eased at the cut's own pace, and the painter's alpha is that weight",
         FT35.FILM_BASE.map === 0 && FT35.filmTargets("place", { u: 0.1 }).map === 0 && FT35.filmTargets("place", { u: 0.3 }).map === 1 && FT35.filmTargets("place", { u: 1 }).map === 1
-        && FT35.filmTargets("earth", { u: 1 }).map === 0 && /localA = T\.map;/.test(shot35)
+        && FT35.filmTargets("earth", { u: 1 }).map === 0 && /localA = lm \? T\.map : 0;/.test(shot35)
         && /const target = filmTargets\(frames\[i\]\?\.visual, \{ index: i, shrinkAt: coda \? -1 : shrinkAtF, u \}\);/.test(film35));
+      check("35/ERIK (CCODE-669): ⛔ a figure shot ends on its home's local map like a place shot — the same `map` weight from 0.3 of the shot, the home's map dissolved in under the portrait and the name card — and a figure with no home, or a home with no map, keeps the close-in (the weight only counts when there is a map to show)",
+        FT35.filmTargets("figure", { u: 0.1 }).map === 0 && FT35.filmTargets("figure", { u: 0.3 }).map === 1
+        && /const localId = V === "place" \? shot\?\.place : V === "figure" \? subject\?\.loc\?\.id : null;/.test(shot35)
+        && /const lm = T\.map > 0 \? filmLocalMap\(localId, subject\.loc, w, h\) : null;/.test(shot35)
+        && shot35.indexOf("filmLocalMap(localId") < shot35.indexOf("paintNameCard(ctx, { name: subject.who.name"));
       /* ── C6 · the montage on the globe ── */
       check("35/C6: ⛔ the pause montage is ON THE GLOBE — the net, the workings, the glitter and the ash replayed one at a time, 0.9 s each, at 0.45 of the weight, by the SAME painters that drew them — and the strip on the progress track is gone",
         /const beat = 0\.9, elapsedS = Math\.max\(0, Math\.min\(1, u\)\) \* secs\(shot\);/.test(shot35) && /const k = Math\.floor\(elapsedS \/ beat\) % 4, uu = \(elapsedS % beat\) \/ beat;/.test(shot35)
@@ -24017,7 +24022,7 @@ await (async () => {
     /openPlaceCard\(\{ canvas: cv, id: hit\.id/.test(wireT) && /data-lmc-inside/.test(wireT));
   check("678/H1 (SNG-679): a hold kept at this place is drawn on the local tier through the one hold painter", /paintHoldRow\(/.test(paintT));
   check("678/film: a place shot ends on the place's local map — the same painter with everything revealed, painted once per frame size (Erik: 'those should probably be local maps instead of the regional ones zoomed in')",
-    /filmLocalMap\(shot\.place/.test(bodyOf678("paintFilmShot")) && /paintLocalMap\(c2, model, \{ space, reveal: true/.test(bodyOf678("filmLocalMap")) && /character: null/.test(bodyOf678("filmLocalMap")));
+    /filmLocalMap\(localId, subject\.loc/.test(bodyOf678("paintFilmShot")) && /const localId = V === "place" \? shot\?\.place/.test(bodyOf678("paintFilmShot")) && /paintLocalMap\(c2, model, \{ space, reveal: true/.test(bodyOf678("filmLocalMap")) && /character: null/.test(bodyOf678("filmLocalMap")));
 }
 
 // --- SNG-680 I/J/K · the shots that drew nothing draw, and lines over a sphere are arcs ---

@@ -268,7 +268,9 @@ export function filmTargets(visual, { index = 0, shrinkAt = -1, u = 1 } = {}) {
   /* ✅ F2 (the 35 again): *"Close in on the globe for the first part of the shot, then cross-dissolve to the map. With G,
    * that's a `map` weight like any other."* ⛑ The target turns on at 0.3 of the shot — the first part is the globe's — and
    * from there `cur.map` eases at the cut's own pace, which IS the dissolve. Under reduced motion the frame is the target. */
-  if (String(visual || "") === "place") t.map = Number(u) >= 0.3 ? 1 : 0;
+  // ✅ ERIK (2026-10-08, via Aevi): *"A figure shot ends on its home's local map, the same as the place shots, with the
+  // portrait over it."* The same weight; the painter keeps the close-in where there is no home or no map to dissolve to.
+  if (String(visual || "") === "place" || String(visual || "") === "figure") t.map = Number(u) >= 0.3 ? 1 : 0;
   return t;
 }
 /** One step of the easing: `cur` toward `target` over `dtSeconds`, Aevi's 0.18 — 82% of the gap closes in a

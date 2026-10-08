@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.23.1";
+const APP_VERSION = "2.23.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8539,10 +8539,12 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
      * settles, slightly larger to smaller, so it arrives rather than switches on. ⛑ Painted once per place per
      * frame size and kept, so the film pays a drawImage a frame and not a repaint. */
     let localA = 0;
-    if (V === "place" && subject?.loc && shot?.place) {
-      localA = T.map;   // ✅ F2: a weight — the dissolve is the cut's own easing, after the close-in
+    // ✅ ERIK (2026-10-08): a figure shot ends on its HOME's local map too, the portrait over it; no home, or no map, keeps the close-in
+    const localId = V === "place" ? shot?.place : V === "figure" ? subject?.loc?.id : null;
+    if ((V === "place" || V === "figure") && subject?.loc && localId) {
+      const lm = T.map > 0 ? filmLocalMap(localId, subject.loc, w, h) : null;
+      localA = lm ? T.map : 0;   // ✅ F2: a weight — the dissolve is the cut's own easing, after the close-in
       if (localA > 0) {
-        const lm = filmLocalMap(shot.place, subject.loc, w, h);
         if (lm) {
           const z = 1.06 - 0.06 * Math.min(1, u);
           ctx.save(); ctx.globalAlpha = localA;

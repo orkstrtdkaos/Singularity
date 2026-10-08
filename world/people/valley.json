@@ -1697,12 +1697,13 @@
     },
     "the_one_called_loki": {
       "status": "wounded",
-      "woundedUntilDay": 50,
-      "woundedBy": "the_glad_dissolution",
-      "atWorldDay": 42,
+      "woundedUntilDay": 108,
+      "woundedBy": "halvex_coil",
+      "sinceWorldDay": 100,
+      "atWorldDay": 100,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-mr6eq1a5",
+        "name": "Usnea Beard"
       }
     },
     "the_one_called_ares": {
@@ -1924,14 +1925,16 @@
       }
     },
     "the_lost_chord_seeker": {
-      "status": "stopped",
-      "sinceWorldDay": 93,
+      "status": "wounded",
+      "sinceWorldDay": 100,
       "stoppedUntilDay": 96,
       "stoppedBy": "person-5e7fbd40733ed12e",
-      "atWorldDay": 93,
+      "woundedUntilDay": 108,
+      "woundedBy": "the_clockmother",
+      "atWorldDay": 100,
       "fateBy": {
-        "characterId": "char-mrum8y4d",
-        "name": "Loki"
+        "characterId": "char-mr6eq1a5",
+        "name": "Usnea Beard"
       }
     },
     "the_last_mercy": {
@@ -1965,6 +1968,28 @@
       "fateBy": {
         "characterId": "char-msgpisca",
         "name": "Splarf"
+      }
+    },
+    "the_clockmother": {
+      "status": "wounded",
+      "sinceWorldDay": 100,
+      "woundedUntilDay": 108,
+      "woundedBy": "keeper_the_unsaid",
+      "atWorldDay": 100,
+      "fateBy": {
+        "characterId": "char-mr6eq1a5",
+        "name": "Usnea Beard"
+      }
+    },
+    "the_unbound_churn": {
+      "status": "stopped",
+      "sinceWorldDay": 100,
+      "stoppedUntilDay": 103,
+      "stoppedBy": "halvex_coil",
+      "atWorldDay": 100,
+      "fateBy": {
+        "characterId": "char-mr6eq1a5",
+        "name": "Usnea Beard"
       }
     }
   }

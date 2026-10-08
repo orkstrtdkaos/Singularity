@@ -80,7 +80,7 @@ export function mapHolds(character, { sharedStore = null, locations = {}, worldD
     // what H2 existed to remove.
     const w = whereaboutsOf(h, { worldDay, locations, routes });
     const moored = !w.atSea;
-    const pos = posOf(w.atSea ? w.worldPos : positionedPlace(locations, h.locationId)?.worldPos);
+    const pos = posOf(w.atSea ? w.worldPos : positionedPlace(locations, h.locationId, { worldDay })?.worldPos);   // H5: a hold at a moving place moves with it
     rows.push({
       key: `hold:${h.id}`, kind: "hold", id: h.id, name: h.name || h.id,
       ownerId: character?.id || null, ownerName: character?.name || null, own: true,
@@ -141,12 +141,11 @@ export function mapHolds(character, { sharedStore = null, locations = {}, worldD
     sources.caravan++;
   }
 
-  // ── 4 · moving places on their circuits — H5, and it is NOT built ──
-  // ⚑ Deliberately empty. `circuitPosition` does not exist and three places carry a `carriage.circuit`
-  // nothing reads; approximating them here would put the Unlanded at a waypoint it may not be at, which is
-  // the one thing its own text promises against.
+  // ── 4 · moving places on their circuits — H5 (CCODE-684) ──
+  // ✅ BUILT, AND NOT AS ROWS: `positionedPlace(…, { worldDay })` answers a moving place's live point, and the globe's own pin for it is
+  // drawn there — so a row here would draw the Long Span twice. ⛑ `movingPlacesBuilt` says it is built; the rows stay empty on purpose.
 
-  return { rows, sources, movingPlacesBuilt: false };
+  return { rows, sources, movingPlacesBuilt: true };
 }
 
 /* ⛔ WHAT A MAP DRAWS FOR A ROW, AND IT IS NOT A SECOND TABLE. ✅ Aevi (H3): *"A new `markerKind` for holds,

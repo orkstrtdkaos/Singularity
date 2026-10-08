@@ -8668,10 +8668,10 @@ await (async () => {
             || (r.worldPos.longitude >= -180.0001 && r.worldPos.longitude <= 180.0001)); })(),
         "content stores 0–360 and `Math.atan2` returns ±180; a reader that claims to be THE reader cannot hand out both");
 
-      // ⛔ THE FOURTH SOURCE IS NOT BUILT AND SAYS SO, rather than approximating three moving places.
-      check("679/H1: …and the unbuilt fourth source REPORTS itself rather than approximating — moving places are H5",
+      // ⛔ THE FOURTH SOURCE: H5 is built (CCODE-684) — a moving place's own pin is drawn at its live point, so it is NOT a row
+      check("679/H1: …and the fourth source REPORTS itself built — moving places are drawn by their own pins at their live point (H5), never as a second row",
         (() => { const out = MHh.mapHolds(me, { locations: Lh, worldDay: 4 });
-          return out.movingPlacesBuilt === false && out.sources.movingPlace === 0; })(),
+          return out.movingPlacesBuilt === true && out.sources.movingPlace === 0; })(),
         "the Unlanded's own text promises a player who arrives on the wrong day finds ruts and nothing else — a guess there would be a lie");
 
       /* ⛔ H4 · A HULL IS PUBLISHED WHERE SHE IS. ✅ Aevi: *"Another player's hold under way is published at
@@ -25187,6 +25187,40 @@ await (async () => {
       && Object.keys(u683.worldState?.debts || {}).length === 1 && ["asking", "sent", "found"].includes(u683.reckonings?.[key683]?.state)
       && MD683.huntJobsFor(inv683, { content: C683 })[0]?.stakes.hunt.kind === "hunt"
       && readFileSync(join(root, "engine/worldtick.js"), "utf8").includes("postHuntJobs(character, { content, day: currentDay })"));
+  }
+  /* ── ✅ SNG-679 H5 (CCODE-684): moving places move ── */
+  {
+    const WT684 = await import("../engine/worldtime.js");
+    const WM684 = await import("../engine/worldmap.js");
+    const { loadContentHeadless: lch684 } = await import("./headless_content.mjs");
+    const C684 = await lch684();
+    const walk684 = (id) => {
+      const loc = C684.locations[id], c = loc.carriage;
+      let stopped = 0, steps = 0, maxStep = 0, last = null;
+      for (let d = 0; d < c.daysPerCircuit; d += 0.5) {
+        const p = WT684.circuitPosition(loc, d, { locations: C684.locations });
+        steps++; if (p.at) stopped++;
+        if (last) maxStep = Math.max(maxStep, WM684.geodesic({ worldPos: last }, { worldPos: p.worldPos }));
+        last = p.worldPos;
+      }
+      const p0 = WT684.circuitPosition(loc, 3, { locations: C684.locations }), p1 = WT684.circuitPosition(loc, 3 + c.daysPerCircuit, { locations: C684.locations });
+      return { stopShare: stopped / steps, maxStep, closes: JSON.stringify(p0.worldPos) === JSON.stringify(p1.worldPos) };
+    };
+    const ls684 = walk684("the_long_span"), un684 = walk684("the_unlanded"), we684 = walk684("the_wend");
+    check("679/H5: ⛔ MOVING PLACES MOVE — `circuitPosition` walks each circuit at its `daysPerCircuit`, legs in proportion to their length, the same point on the same day in every game; the Long Span and the Wend stop a fifth of each leg at a waypoint, the Unlanded never stops; the walk is smooth and comes round again",
+      Math.abs(ls684.stopShare - 0.2) < 0.03 && Math.abs(we684.stopShare - 0.2) < 0.03 && un684.stopShare === 0
+      && [ls684, un684, we684].every((w) => w.closes && w.maxStep < 0.1),
+      JSON.stringify({ ls684, un684, we684 }));
+    const live684 = WT684.positionedPlace(C684.locations, "the_long_span", { worldDay: 40 });
+    const app684 = readFileSync(join(root, "app.js"), "utf8");
+    check("679/H5: ⛔ …`positionedPlace` ANSWERS THE LIVE POINT when it is told the day (a caller with no day gets the authored point, so nothing reads the wall clock), a fixed place is untouched; the globe's pin, the GM's sense of where, a hold there and the card all read it; arriving where it is not finds its trace",
+      JSON.stringify(live684.worldPos) !== JSON.stringify(C684.locations.the_long_span.worldPos) && !!live684.circuitAt
+      && WT684.positionedPlace(C684.locations, "the_long_span") === C684.locations.the_long_span && WT684.positionedPlace(C684.locations, "millbrook", { worldDay: 40 }) === C684.locations.millbrook
+      && /const worldPosOf = \(id\) => \{ const l = CONTENT\.locations\?\.\[id\]; if \(l\?\.carriage\?\.circuit && wd684 != null\)/.test(app684)
+      && /if \(live684 && live684\.at !== locId\) \{/.test(app684) && /mapStateWord\(CONTENT, "place", "trace"/.test(app684)
+      && /const mv684 = l\.carriage\?\.circuit \? circuitWords\(l, absoluteWorldDay\(\)/.test(app684)
+      && /positionedPlace\(locations, h\.locationId, \{ worldDay \}\)/.test(readFileSync(join(root, "engine/mapholds.js"), "utf8"))
+      && /positionedPlace\(env\.CONTENT\?\.locations \|\| \{\}, env\.location\?\.id \|\| env\.character\?\.currentLocationId, \{ worldDay:/.test(readFileSync(join(root, "engine/gm_registry.js"), "utf8")));
   }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)

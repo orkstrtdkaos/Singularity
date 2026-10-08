@@ -39,7 +39,7 @@ import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engin
 import { composeImagePrompt } from "./engine/imageprompt.js";   // CCODE-190: code selects the parts, a model composes the line
 import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills, gearIntoWorld } from "./engine/inventory.js"; // CCODE-161: reclaim items the story conferred but the ledger missed
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive, madeAtLevelOf } from "./engine/earnedpower.js"; // SNG-251 §2c · SNG-659 §2b: the level an item was made at/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
-import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch, positionedPlace, seasonCalendar, seasonOfWorldDay } from "./engine/worldtime.js";
+import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch, positionedPlace, seasonCalendar, seasonOfWorldDay, circuitWords } from "./engine/worldtime.js";
 import { smartClamp, playerText, normName } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { LIBRARY_INDEX, loreToHtml, libMdToHtml, circleRows } from "./engine/library.js";
 import { contributionsBy, lookKey } from "./engine/canon.js";   // CCODE-422: where a look is filed   // ⛔ SNG-584: who made the shared world — tallied since SNG-128, read by nobody until now   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.25.2";
+const APP_VERSION = "2.25.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5763,7 +5763,7 @@ async function handleGenerateRequests(turn) {
   ensureGenerated(character);
   const location = hereNow();
   // (genContractDeps below supplies the SNG-250 born-whole contract to every generate() call)
-  const time = readClock(character.clock, undefined, positionedPlace(CONTENT.locations || {}, character.currentLocationId));   // CCODE-377: this place's season
+  const time = readClock(character.clock, undefined, positionedPlace(CONTENT.locations || {}, character.currentLocationId, { worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() }));   // CCODE-377: this place's season
   const memCtx = { locationId: location.id, day: time.day, worldDay: absoluteWorldDay(), entities: codexEntities(), rules: CONTENT.rules, affiliate: affiliateNpc,
     npcs: CONTENT.npcs || {} };   // CCODE-421: an authored person's name keys their authored id
   const notes = [];
@@ -10442,7 +10442,7 @@ function gmEnv(extra = {}) {
     arcMoods: npcMoodLines(arcFx),             // SNG-273: an advanced arc changes how people carry themselves
     sceneBeats, rules: CONTENT.rules,          // SNG-266/1d: the pacing directive reads both — a builder
                                                // that reads an env key nobody puts here is the same dark wire.
-    time: readClock(character.clock, undefined, positionedPlace(CONTENT.locations || {}, character.currentLocationId)),   // CCODE-377: the season where they stand
+    time: readClock(character.clock, undefined, positionedPlace(CONTENT.locations || {}, character.currentLocationId, { worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() })),   // CCODE-377: the season where they stand
     worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), // SNG-173: recency needs a clock
     app: {
       fullCatalog, FN_INDEX: () => FN_INDEX, activeEnc, listAvailableEncounters,
@@ -14662,6 +14662,16 @@ async function travelTo(locId, { cost } = {}) {
   const news = await maybeTick();
   if (await maybeRandomEncounter("onTravel", news)) return; // the road had something to say
   if (await maybeRandomEncounter("onEnterLocation", news)) return; // arrival itself had something waiting
+  /* ✅ SNG-679 H5: *"Arriving where the place is not finds its trace (`words.place.trace`), as the Unlanded's own text promises."* A
+   * moving place that is elsewhere on its circuit today leaves ruts and nothing else where it stands when it is home. */
+  const live684 = (() => { try { const l = CONTENT.locations[locId]; return l?.carriage?.circuit ? positionedPlace(CONTENT.locations, locId, { worldDay: absoluteWorldDay() })?.circuitAt || null : null; } catch { return null; } })();
+  if (live684 && live684.at !== locId) {
+    const l684 = CONTENT.locations[locId];
+    const trace684 = mapStateWord(CONTENT, "place", "trace", { name: l684?.name || locId }) || `where ${l684?.name || locId} was`;
+    const where684 = circuitWords(l684, absoluteWorldDay(), { locations: CONTENT.locations }) || "";
+    startScene(`(The character has just arrived where ${l684?.name || locId} makes its home — and it is not here: it moves on its circuit. They find ${trace684}: ruts, trodden ground, the marks of a place that has gone on. ${where684} Open the scene with that arrival; do not put ${l684?.name || locId} or its people here.)`, news);
+    return;
+  }
   startScene(`(The character has just arrived here, traveling from elsewhere in the valley. Open the scene with the arrival.)`, news);
 }
 
@@ -17909,7 +17919,9 @@ function wireWorldGlobe() {
   };
 
   const bandFor = () => CONTENT.substrateModel?.sourceBands?.sources?.[source]?.band || null;
-  const worldPosOf = (id) => CONTENT.locations?.[id]?.worldPos || null;
+  // ✅ SNG-679 H5: a moving place's pin is where it is TODAY — the same live point routing and `whereOf` read
+  const wd684 = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
+  const worldPosOf = (id) => { const l = CONTENT.locations?.[id]; if (l?.carriage?.circuit && wd684 != null) return positionedPlace(CONTENT.locations, id, { worldDay: wd684 })?.worldPos || l.worldPos || null; return l?.worldPos || null; };
 
   // ⚠️ HALF RESOLUTION WHILE DRAGGING. A 700px globe is ~150k pixels and each one costs an unproject plus
   // five array reads; at full res that stutters under the mouse. Coarse while it moves, sharp when it stops
@@ -19138,7 +19150,11 @@ function placeCardHTML(selectedId) {
          * lists them all"* — and while the locals are at it, `mending`. Only for a place the character knows of. */
         if (!known) return "";
         try {
+          // ✅ SNG-679 H5: a moving place's card says where it is today
+          const mv684 = l.carriage?.circuit ? circuitWords(l, absoluteWorldDay(), { locations: CONTENT.locations }) : null;
           const br = brokenAt(character, l.id, { content: CONTENT, worldDay: absoluteWorldDay() });
+          if (mv684 && !br.length) return `<div class="loc-wanted"><div class="hint">${esc(mv684)}</div></div>`;
+          if (mv684) br.unshift({ mending: mv684 });
           return br.length ? `<div class="loc-wanted">${br.map((b) => `<div class="hint">${esc(b.mending || b.wanted || "")}</div>`).join("")}</div>` : "";
         } catch { return ""; }
       })()}
@@ -28133,7 +28149,7 @@ function renderPlay(turn, opts = {}) {
   // every beat at a place the character is standing still in.
   const banner = sceneImage(location, sceneState, { ratingLevel: viewerRatingLevel(),
     existing: locationImageFor(location?.id) });
-  const time = readClock(character.clock, undefined, positionedPlace(CONTENT.locations || {}, character.currentLocationId));   // CCODE-377: near the ring, fewer seasons
+  const time = readClock(character.clock, undefined, positionedPlace(CONTENT.locations || {}, character.currentLocationId, { worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() }));   // CCODE-377: near the ring, fewer seasons
   // SNG-247 Tier 0: the play surface carries the KIND of the bounded thing you are inside, so `--enc-hue` cascades
   // to the frame strip AND the contest panel from one place. Same encounterKind() the engine uses to pick the exit
   // rule — one source of truth for "what kind of thing is this", so the colour can never contradict the mechanics.

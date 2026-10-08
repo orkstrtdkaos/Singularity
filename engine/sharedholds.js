@@ -50,7 +50,7 @@ export function holdCard(character, h, { locations = {}, nameOf = null, economy 
   const away = whereaboutsOf(h, { worldDay, locations, routes });
   const pos = away?.atSea
     ? away.worldPos
-    : (h.locationId ? positionedPlace(locations || {}, h.locationId)?.worldPos : null);
+    : (h.locationId ? positionedPlace(locations || {}, h.locationId, { worldDay })?.worldPos : null);   // H5
   const where = h.locationId ? whereOf({ currentLocationId: h.locationId }, locations || {}) : null;
   const nm = (id) => (id && nameOf ? nameOf(id) : null) || null;
   return {

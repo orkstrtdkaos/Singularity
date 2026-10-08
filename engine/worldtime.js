@@ -8,6 +8,8 @@
 // CCODE-193 §2: module-private. Exported and imported by app.js, which never used it — the
 // "live code, needless public surface" third of the importedNeverCalled list.
 const TIME_MODES = ["story", "real"];
+import { geodesic, worldPosBetween } from "./worldmap.js";   // ✅ SNG-679 H5: a moving place walks its circuit on the great circle
+
 export const DEFAULT_RATIO = 3; // real mode default: 1 real hour = 1 game day
  // registry:internal
 
@@ -102,10 +104,63 @@ export function seasonBandFor(place, cal = _calendar) {
 }
 
 /** The nearest place with a position — a spot inside a town has the town's sky. Climbs `parentId`; null when none has one. */
-export function positionedPlace(locations, id) {
+export function positionedPlace(locations, id, { worldDay = null } = {}) {
   let loc = id ? locations?.[id] : null, guard = 0;
   while (loc && !Number.isFinite(Number(loc.worldPos?.colatitude)) && loc.parentId && guard++ < 8) loc = locations?.[loc.parentId] || null;
-  return loc && Number.isFinite(Number(loc.worldPos?.colatitude)) ? loc : null;
+  if (!(loc && Number.isFinite(Number(loc.worldPos?.colatitude)))) return null;
+  // ✅ SNG-679 H5: *"`positionedPlace` answers the live position for these three, so maps, routing and `whereOf` agree."* ⛑ Only when
+  // the caller says WHICH day — a caller with no day gets the authored point, as it always has, so nothing reads the wall clock here.
+  if (worldDay != null && loc.carriage?.circuit) {
+    const live = circuitPosition(loc, worldDay, { locations });
+    if (live?.worldPos) return { ...loc, worldPos: { ...loc.worldPos, ...live.worldPos }, circuitAt: live };
+  }
+  return loc;
+}
+
+/* ═════ SNG-679 H5 · MOVING PLACES MOVE ═════
+ * ✅ AEVI: *"`circuitPosition(loc, worldDay)` walks `carriage.circuit` at `daysPerCircuit`. Each leg gets days in proportion to its
+ * great-circle length, and the position comes from the same H2 rule. … The Unlanded never stops, so it has no "at" state. The Long
+ * Span and the Wend are "at" a waypoint for the first part of each leg. Their content says nothing finer, so use a stop of 20% of
+ * the leg's days."*
+ * ⛔ THE CIRCUIT'S FIRST ENTRY IS THE PLACE ITSELF, at its authored point; the rest are the places it passes. It closes: the last leg
+ * runs back to the first. ⛑ PURE AND DETERMINISTIC in the world's day, so every game puts the Long Span in the same field today. */
+export const CIRCUIT_STOP = 0.2;
+/** ✅ The Unlanded's own words: *"It does not halt … the circuit is where it PASSES, not where it stays."* Named, with that reason, since
+ *  `carriage` has no field for it; a place whose content says `carriage.halts: false` joins it. */
+export const NEVER_HALTS = Object.freeze(["the_unlanded"]);
+export function circuitPosition(loc, worldDay, { locations = {} } = {}) {
+  const c = loc?.carriage;
+  const ids = Array.isArray(c?.circuit) ? c.circuit : null;
+  const total = Number(c?.daysPerCircuit);
+  if (!ids || ids.length < 2 || !(total > 0) || worldDay == null || !Number.isFinite(Number(worldDay))) return null;
+  const pts = ids.map((pid) => (pid === loc.id ? loc : locations?.[pid]) || null);
+  if (pts.some((p) => !p?.worldPos || !Number.isFinite(Number(p.worldPos.colatitude)))) return null;
+  const n = pts.length;
+  const lens = pts.map((p, i) => { const d = geodesic(p, pts[(i + 1) % n]); return Number.isFinite(d) && d > 0 ? d : 0.01; });
+  const sum = lens.reduce((a, b) => a + b, 0);
+  const halts = c.halts !== false && !NEVER_HALTS.includes(loc.id);
+  let t = ((Number(worldDay) % total) + total) % total;
+  for (let i = 0; i < n; i++) {
+    const legDays = (total * lens[i]) / sum;
+    if (t <= legDays || i === n - 1) {
+      const from = ids[i], to = ids[(i + 1) % n];
+      const stop = halts ? CIRCUIT_STOP * legDays : 0;
+      if (t < stop) return { worldPos: { colatitude: Number(pts[i].worldPos.colatitude), longitude: Number(pts[i].worldPos.longitude) }, at: from, from, to, fraction: 0, leg: i, legDays, dayInCircuit: Number(worldDay) % total };
+      const f = Math.max(0, Math.min(1, (t - stop) / Math.max(1e-6, legDays - stop)));
+      const wp = worldPosBetween(pts[i], pts[(i + 1) % n], f);
+      return { worldPos: wp ? { colatitude: Number(wp.colatitude), longitude: Number(wp.longitude) } : { ...pts[i].worldPos }, at: null, from, to, fraction: f, leg: i, legDays, dayInCircuit: Number(worldDay) % total };
+    }
+    t -= legDays;
+  }
+  return null;
+}
+/** Where a moving place is today, in words a card can show — or null for a place that does not move. */
+export function circuitWords(loc, worldDay, { locations = {} } = {}) {
+  const live = circuitPosition(loc, worldDay, { locations });
+  if (!live) return null;
+  const nm = (id) => (id === loc.id ? "its own ground" : locations?.[id]?.name || id);
+  if (live.at) return `Today it is at ${nm(live.at)}, and moves on toward ${nm(live.to)}.`;
+  return `Today it is on the way from ${nm(live.from)} to ${nm(live.to)}, ${Math.round(live.fraction * 100)}% of the way.`;
 }
 
 export const ADVANCE = { beat: 1, travel: 3, rest: 8, sceneEnd: 2 };

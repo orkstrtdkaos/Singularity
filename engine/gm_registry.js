@@ -88,7 +88,7 @@ import { narrativeRegister } from "./gm.js";
 import { livingWorldForGM } from "./generate.js";
 import { standingForGM } from "./standing.js"; // BATCH-12 §3
 import { renderNamesDeep } from "./names.js"; // SNG-182
-import { worldCount, worldCountLabel, positionedPlace } from "./worldtime.js";
+import { worldCount, worldCountLabel, positionedPlace, absoluteWorldDay } from "./worldtime.js";
 import { holdsNearForGM } from "./sharedholds.js";
 import { nemesisForGM } from "./nemesis.js";   // ⛔ SNG-648: who the antagonist IS — `pacing.js` never had one to point at   // CCODE-383: a hold nearby is known
 import { powersHoldingForGM, housesForGM } from "./powers.js";
@@ -792,7 +792,7 @@ export const GM_CONTEXT = [
   { key: "holdsNearDetail", builder: "sharedholds.holdsNearForGM (CCODE-383)", carries: ["another traveler's holding within two walking days", "what it is and who runs it", "its condition, what it has and who guards it"],
     reachedBy: "always (empty unless another traveler's hold stands within two walking days)", spec: "CCODE-383", views: ["turn", "ask"],
     build: (env) => holdsNearForGM(env.app?.holdsStore?.() || null, { selfId: env.character?.id || null,
-      here: positionedPlace(env.CONTENT?.locations || {}, env.location?.id || env.character?.currentLocationId),
+      here: positionedPlace(env.CONTENT?.locations || {}, env.location?.id || env.character?.currentLocationId, { worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() }),   // H5
       pending: env.app?.tradesPending?.() || [] }) },   // CCODE-388: what is already bought and not yet filled
   { key: "travelersDetail", builder: "travelers.travelersForGM (SNG-595)", carries: ["another player's character the words named", "their public deeds, every ledger month", "who in this story was part of theirs"],
     reachedBy: "always (empty unless the words, or the last two beats, name another traveler)", spec: "SNG-595", views: ["turn", "ask"],

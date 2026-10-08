@@ -20988,8 +20988,9 @@ console.log("\n── §263 · one year for the world; fewer seasons near the ri
   const A263 = rd("app.js").replace(/\r\n/g, "\n");
   const W263 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
   check("§263: ⛔ the header, the GM and the generation all read the season of the place the character stands in",
-    (A263.match(/readClock\(character\.clock, undefined, positionedPlace\(CONTENT\.locations \|\| \{\}, character\.currentLocationId\)\)/g) || []).length === 3
-    && /readClock\(character\.clock, undefined, positionedPlace\(content\?\.locations \|\| \{\}, character\?\.currentLocationId\)\)\.season/.test(W263));
+    // ⛑ CCODE-684 (SNG-679 H5): each now passes the world's day, so a character standing at a MOVING place reads the season where it is today
+    (A263.match(/readClock\(character\.clock, undefined, positionedPlace\(CONTENT\.locations \|\| \{\}, character\.currentLocationId, \{ worldDay: /g) || []).length === 3
+    && /readClock\(character\.clock, undefined, positionedPlace\(content\?\.locations \|\| \{\}, character\?\.currentLocationId, \{ worldDay: absoluteWorldDay\(\) \}\)\)\.season/.test(W263));
 }
 
 // ⛔ CCODE-379 (Erik, 2026-09-16, through Aevi's queue) — "I want the attribute a skill uses to be obvious in the skill pop-up and

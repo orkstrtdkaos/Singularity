@@ -71,7 +71,7 @@ const LEDGER = [
             "679/H1: ⛔ ONE READER returns a row per hold the character can know about — before this, no map drew a holding at all",
             "679/H1: …and a moored hold answers with its place while one under way answers with her point on the water",
             "679/H1: …and every row speaks ONE longitude convention, however its position was derived",
-            "679/H1: …and the unbuilt fourth source REPORTS itself rather than approximating — moving places are H5",
+            "679/H1: …and the fourth source REPORTS itself built — moving places are drawn by their own pins at their live point (H5), never as a second row",
             "679/H4: ⛔ a hull under way is PUBLISHED on the water, not at the port she left",
             "679/H4: …and the card publishes only what a VISITOR could know — the outward features, never the store or the crew",
             "679/H3: ⛔ the label precedence is Aevi's amended order — your holds above places, other players' below them",

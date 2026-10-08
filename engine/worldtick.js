@@ -1108,7 +1108,7 @@ export async function runGenerationTurn({ character, content, now = Date.now(), 
 
   // §7.4 seasonal pressure — the conditions arcs happen in, and they recur. The season TILTS which
   // KINDS ferment (a shortage grows in deep-winter want, a feud in the working heat).
-  const season = (() => { try { return readClock(character.clock, undefined, positionedPlace(content?.locations || {}, character?.currentLocationId)).season; } catch { return null; } })();   // CCODE-377: this place's season
+  const season = (() => { try { return readClock(character.clock, undefined, positionedPlace(content?.locations || {}, character?.currentLocationId, { worldDay: absoluteWorldDay() })).season; } catch { return null; } })();   // CCODE-377: this place's season
   const tilts = new Set(seasonalPressure(season)?.tilts || []);
   // 1. foment existing arcs — they grow (unguardrailed), or the world quietly resolves one itself (§7.3);
   //    a growing arc the season leans on ferments a touch faster.

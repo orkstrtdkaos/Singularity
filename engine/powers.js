@@ -23,6 +23,7 @@
 import { smartClamp } from "./namematch.js";   // a reason is prose, and prose is clamped on a word boundary
 import { sheetFor, tierOf, personRecordFor } from "./npcsheet.js";   // SNG-655: a named raider is a person, and a person has a rung
 import { walkingDays } from "./worldmap.js";    // ⛔ SNG-634 C7 `neighbour`: how close your ground is to theirs
+import { applyMapChange } from "./mapstate.js";   // ✅ SNG-679 S4: a seat broken by force leaves its gate damaged, through the one door
 
 /** ⛔ THE LOADED POWERS, or an empty list. ⚠️ ALWAYS AN ARRAY: every reader below runs on a world with no
  *  powers in it at all and must behave exactly as the game did before them, because for most of the
@@ -928,12 +929,18 @@ export function seedPowerKnowledge(character, { content = null, day = null } = {
 /** ⛔ BROKEN BY HAND — the player took the seat, or the story says so. Kept separate from `notePowerLoss`
  *  because "you killed the last of them" and "this is over" are different claims and the second one is
  *  sometimes a ruling. */
-export function breakPower(character, power, { day = null, why = null } = {}) {
+export function breakPower(character, power, { day = null, why = null, content = null } = {}) {
   if (!character || !power?.id) return null;
   character.powerState = (character.powerState && typeof character.powerState === "object") ? character.powerState : {};
   const st = (character.powerState[power.id] = character.powerState[power.id] || {});
   if (st.broken) return null;
   st.broken = true; st.brokenDay = day ?? null;
+  // ✅ SNG-679 S4: *"when a power takes or loses a seat … a fought gate becomes damaged"* — the seat is a place; where it is a
+  // waygate, the arch takes the breaking. ⚠️ The world tick moves no seats today; this is the one seat-loss the engine has.
+  const seatLoc = power.seat ? content?.locations?.[power.seat] : null;
+  if (seatLoc && (seatLoc.waygate || seatLoc.role === "gate")) {
+    try { applyMapChange(character, { key: `gate:${power.seat}`, change: "damaged", by: character.id || "the player", seen: "named", cause: `the seat of ${power.name || power.id} was broken`, day }, { content, worldDay: day }); } catch { /* the break stands */ }
+  }
   // ⚠️ smartClamp, never `slice` — a fixed cut mid-word is the raw prose cap the wiring ratchet forbids,
   // and a reason somebody will read is prose whatever its length.
   if (why) st.brokenWhy = smartClamp(String(why), 200);

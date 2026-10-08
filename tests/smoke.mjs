@@ -24565,6 +24565,42 @@ await (async () => {
       && /applyStep\("mapOps", \(\) => \{/.test(appS3) && /const res = applyMapOp\(character, op, \{ content: CONTENT, worldDay: absoluteWorldDay\(\), hereId: location\?\.id, layout, visible, recordOf,/.test(appS3)
       && appS3.indexOf('applyStep("holdingOps"') < appS3.indexOf('applyStep("mapOps"') && appS3.indexOf('applyStep("mapOps"') < appS3.indexOf('applyStep("holdTrades"'));
   }
+  /* ── ✅ SNG-679 S4 (CCODE-668): the existing channels go through the door ── */
+  {
+    const H4 = await import("../engine/holdings.js");
+    const P4 = await import("../engine/powers.js");
+    const MS4 = await import("../engine/mapstate.js");
+    const { loadContentHeadless: lch4 } = await import("./headless_content.mjs");
+    const C4 = await lch4();
+    // the hold dials as the app and the tick assemble them: the store's dials with the feature catalogue beside them
+    const cfg4 = { ...(C4.rules?.economy?.holdStore || {}), features: C4.rules?.economy?.holdFeatures || null };
+    // ⚠️ a fresh wall per hold: a wall object shared between the fixtures took the burning raid's `ruined` after the first raid's `damaged`
+    const wall4 = { id: "wall", kind: "wall", name: "the wall" };
+    const mkHold = () => ({ id: "post-4", name: "The Post", kind: "post", locationId: "millbrook", condition: "sound", state: "whole", store: { grain: 10 }, features: [{ id: "forge", kind: "forge", name: "the forge" }, { ...wall4 }] });
+    const ch4 = { id: "s4", currentLocationId: "millbrook", holdings: [mkHold()], mapEvents: [], mapState: {} };
+    const isDef4 = H4.featureProperty(wall4, cfg4) === "defence";
+    const r4 = H4.raidWritesState(ch4, ch4.holdings[0], { day: 12, cfg: cfg4, power: { id: "the_gralloch" } });
+    const burned4 = H4.raidWritesState({ ...ch4, holdings: [mkHold()] }, mkHold(), { day: 13, cfg: cfg4, burned: true });
+    const bare4 = { id: "s4b", currentLocationId: "millbrook", holdings: [{ id: "camp", name: "The Camp", kind: "post", locationId: "millbrook", state: "whole", features: [] }], mapEvents: [], mapState: {} };
+    const r4b = H4.raidWritesState(bare4, bare4.holdings[0], { day: 12, cfg: cfg4 });
+    check("679/S4: ⛔ A RAID THAT SUCCEEDS writes `damaged` to the first DEFENCE feature (the wall, not the forge) on the hold's own record, by the raiding power, described; a raid that burns writes `ruined`; a hold with no defence feature takes it on itself — and both raid outcomes call it beside the condition slip",
+      isDef4 && r4?.ok && r4.key === "feature:post-4/wall" && r4.state === "damaged" && r4.onRecord === true && ch4.holdings[0].features[1].state === "damaged" && !ch4.holdings[0].features[0].state && r4.event.by === "the_gralloch"
+      && burned4?.ok && burned4.state === "ruined" && r4b?.ok && r4b.key === "hold:camp" && bare4.holdings[0].state === "damaged" && r4b.event.by === "raiders"
+      && (readFileSync(join(root, "engine/holdings.js"), "utf8").match(/raidWritesState\(character, holding, \{ day, cfg, power \}\);/g) || []).length === 2);
+    const seatC4 = { locations: { gate_seat: { id: "gate_seat", name: "The Seat Arch", waygate: true, worldPos: { colatitude: 10, longitude: 10 } }, plain_seat: { id: "plain_seat", name: "The Plain Seat", worldPos: { colatitude: 11, longitude: 11 } } } };
+    const chP4 = { id: "s4p", mapEvents: [], mapState: {} };
+    P4.breakPower(chP4, { id: "the_gate_power", name: "The Gate Power", seat: "gate_seat" }, { day: 20, why: "the player broke it", content: seatC4 });
+    const chP4b = { id: "s4q", mapEvents: [], mapState: {} };
+    P4.breakPower(chP4b, { id: "the_plain_power", name: "The Plain Power", seat: "plain_seat" }, { day: 20, content: seatC4 });
+    check("679/S4: ⛔ A POWER WHOSE SEAT IS BROKEN leaves its gate damaged — named, by the one who broke it — and a seat that is no arch leaves nothing on the map (the tick moves no seats today; this is the one seat-loss the engine has)",
+      MS4.mapStateOf(chP4, "gate:gate_seat").state === "damaged" && chP4.mapEvents.length === 1 && chP4.mapEvents[0].by === "s4p" && chP4.mapEvents[0].seen === "named"
+      && chP4b.mapEvents.length === 0 && chP4b.powerState.the_plain_power.broken === true);
+    const app4 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n"), gm4 = readFileSync(join(root, "engine/gm.js"), "utf8");
+    check("679/S4: ⛔ `holdingOps` gains damage, ruin, destroy, repair and move — on the hold or on one feature with `featureId` — in the schema, the doctrine and the app's dispatch, every one through `applyMapChange` with the hold and its features as the door's records, the world's word said",
+      /\|damage\|ruin\|destroy\|repair\|move", "featureId":/.test(gm4) && /"holdingOps" — ⛔ A HOLD CAN BE HURT AND MENDED \(SNG-679 S4\)/.test(gm4)
+      && /else if \(\["damage", "ruin", "destroy", "repair", "move"\]\.includes\(kind\)\) \{/.test(app4) && /const key = feat \? `feature:\$\{h\.id\}\/\$\{feat\.id \|\| feat\.kind\}` : `hold:\$\{h\.id\}`;/.test(app4)
+      && /const r = applyMapChange\(character, \{ key, change, by: op\.by \|\| "the world"/.test(app4) && /said\(r\.ok \? \(mapStateWord\(CONTENT, feat \? "feature" : "hold", r\.state/.test(app4));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(face416\[id\]\?\.name \|\| l\.name \|\| id, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

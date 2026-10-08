@@ -34,7 +34,7 @@ import { walkingDays } from "./worldmap.js";
 import { workMods } from "./holdwork.js";   // ⛔ CCODE-450: standing work — who joins the watch, the yields and the upkeep while it is done
 import { chargedWith } from "./assignments.js";   // ✅ Aevi item 8: whoever is CHARGED with a hold's growth is a hand on that job
 import { postJob } from "./jobstate.js";   // ⛔ CCODE-452: a raise is a job on the board     // …within gateWithinDays of it
-import { featureScale } from "./mapstate.js";   // ⛔ SNG-679 S6: a damaged feature gives less, and a hold caps its features
+import { featureScale, applyMapChange } from "./mapstate.js";   // ⛔ SNG-679 S6: a damaged feature gives less, and a hold caps its features
 
 export const HOLDING_KINDS = ["post", "enterprise"];
 /** ⚠️ WHICH SIDE AN UNKNOWN WORD FALLS ON. A holding that PRODUCES is an enterprise; everything else holds
@@ -683,6 +683,23 @@ export function yieldFor(holding, cfg, { density = null } = {}) {
  *
  *  ⚠️ A WATCH IS WHAT DETECTS: people on the garrison, or a feature that keeps one (sentries, a tower). Stone alone does not
  *  see. Returns the receipt the news reads, or null when nothing came of it. */
+/** ✅ SNG-679 S4 (CCODE-668): *"A raid that succeeds writes `damaged` to the features its slip names (defence features first),
+ *  not only a fall in `condition`. A raid that 'burns' writes `ruined`."* The first DEFENCE feature (the martial family — a
+ *  wall, a gate, a tower, a keep) takes it; a hold with none takes it on its own record. Through the one door, beside the
+ *  condition slip: fortune and fabric are separate axes. ⚠️ No raid burns today — the hook is here for the day one does. */
+export function raidWritesState(character, holding, { day = null, cfg = null, power = null, burned = false } = {}) {   // registry:internal — resolveRaid is its live caller twice over; the gate alone drives it by name
+  if (!character || !holding?.id) return null;
+  const feats = featuresOf(holding);
+  const target = feats.find((f) => f && featureProperty(f, cfg) === "defence") || null;
+  const sub = target ? String(target.id || target.kind) : null;
+  const key = target ? `feature:${holding.id}/${sub}` : `hold:${holding.id}`;
+  const recordOf = (cls, id, s) => cls === "feature" ? (feats.find((f) => f && String(f.id || f.kind) === s) || null) : holding;
+  try {
+    return applyMapChange(character, { key, change: burned ? "ruined" : "damaged", by: power?.id || "raiders", seen: "described",
+      cause: burned ? "burned in the raid" : "broken in the raid", day }, { worldDay: day, recordOf });
+  } catch { return null; }
+}
+
 export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, npcCfg = {}, keeperFloor = null, power = null, meleeCfg = null, rules = {}, kitDeps = null, byGate = null } = {}) {
   // ⛔ ERIK 2026-09-12, OVER AEVI'S §4: a hull under way is RAIDABLE WHERE SHE IS — "it doesn't make sense to only update their
   // location at the very end." Her whereabouts come from the day (`carriage.voyagePosition`), the danger is the nearest place's,
@@ -728,6 +745,7 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     const taken = take(share);
     if (!Object.keys(taken).length) return { detected: false, taken: {}, day, atSea, ...(arrived ? { byGate: arrived } : {}), why: atSea ? "they came alongside and found nothing worth the carrying" : "they found nothing worth the carrying" };
     if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided", keeperFloor ? { keeperFloor } : null);   // ⚑ SLIP FIRST, THEN NOTE — the raid's own line stays the last entry (§78). AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
+    if (Object.keys(taken).length) raidWritesState(character, holding, { day, cfg, power });   // ✅ S4: the wall that let them in is broken
     const how = wOdds.watchers || wOdds.features ? `the watch missed them (${wOdds.pct}% to see)` : "nobody was watching";
     note(`raided — ${how} — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ")} taken`);
     return { detected: false, taken, day, atSea, watch: wOdds, ...(arrived ? { byGate: arrived } : {}), ...paid() };
@@ -872,6 +890,7 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
   }
   const taken = take(Math.max(0, Math.min(1, baseShare - step * stone)));
   if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided", keeperFloor ? { keeperFloor } : null);   // ⚑ AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
+  if (Object.keys(taken).length) raidWritesState(character, holding, { day, cfg, power });   // ✅ S4: and the fabric takes it too
   // ⛔ SNG-657 §3 — AN OVERRUN BY A CRUEL POWER COSTS ONE THING MORE than the store share. Aevi's own "or": a
   // disrupted barrier layer, or a wounded keeper. ⚠️ THE FIRST HAS NO STATE TO SET — `watchStrength` recorded that
   // features carry no lapsed/disrupted flag and that inventing one to filter was refused — so it is the keeper,

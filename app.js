@@ -49,7 +49,7 @@ import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnab
 import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
 import { openingFrame, placeCardBox } from "./engine/worldmap.js";
 // ⛔ SNG-679 S2: ONE READER for what state anything on a map is in, and the word a player reads for it.
-import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey } from "./engine/mapstate.js";
+import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange } from "./engine/mapstate.js";
 // ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
 import { mapHolds, holdMarker } from "./engine/mapholds.js";
 // ⛔ SNG-680: the film is DATA. Not one of its words is written in this file.
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.23.0";
+const APP_VERSION = "2.23.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -11757,6 +11757,26 @@ function applyTurn(turn, resolution, playerWords = null) {
         // ⛔ CCODE-429: a build into a full hold is refused, and — like a mine aboard a ship — the refusal is SAID, both ways out with it
         if (!r.ok) { if (r.noRoom) said(r.why); else console.warn("[holdingOps] feature refused:", r.why); } }
       else if (kind === "rename") renameHolding(character, id, op.name, { worldCount: worldCount() });
+      // ✅ SNG-679 S4 (CCODE-668): *"`holdingOps` gains damage, ruin, destroy, repair and move … `feature` gains the same, aimed at
+      // one feature."* On the hold, or on one feature with `featureId`; through the one door, with the world's word said.
+      else if (["damage", "ruin", "destroy", "repair", "move"].includes(kind)) {
+        const h = (character.holdings || []).find(x => x.id === id);
+        if (!h) said(`No hold by that name stands here.`);
+        else {
+          const change = { damage: "damaged", ruin: "ruined", destroy: "destroyed", repair: "repaired", move: "moved" }[kind];
+          const fid = op.featureId ? String(op.featureId) : null;
+          const feat = fid ? (h.features || []).find(f => f && (String(f.id) === fid || String(f.kind) === fid || String(f.name || "").toLowerCase() === fid.toLowerCase())) : null;
+          if (fid && !feat) said(`${h.name} has no ${fid} to ${kind}.`);
+          else {
+            const key = feat ? `feature:${h.id}/${feat.id || feat.kind}` : `hold:${h.id}`;
+            const pos = op.pos && typeof op.pos === "object" ? op.pos : (op.siteId ? { siteId: String(op.siteId) } : null);
+            const r = applyMapChange(character, { key, change, by: op.by || "the world", seen: op.seen || (op.by ? "described" : "unseen"),
+              cause: op.cause ? smartClamp(String(op.cause), 120) : null, day: absoluteWorldDay(), ...(pos ? { pos } : {}) },
+              { content: CONTENT, worldDay: absoluteWorldDay(), recordOf: (cls, hid, sub) => cls === "feature" ? ((h.features || []).find(f => f && String(f.id || f.kind) === String(sub)) || null) : h });
+            said(r.ok ? (mapStateWord(CONTENT, feat ? "feature" : "hold", r.state, { name: feat ? `${h.name}'s ${feat.name || feat.kind}` : h.name }) || `${h.name} is ${r.state}.`) : `${h.name} stays as it is — ${r.why}`);
+          }
+        }
+      }
       // ✅ B6b: the GM may give a place a carriage (a hull bought at a yard, a dragon that agrees) and may sail it. A `willed`
       // carriage records `steward: bearerId` — Aevi's Q3: you hold it WITH them, and a dragon must not read as property.
       else if (kind === "carriage") { const h = (character.holdings || []).find(x => x.id === id);

@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.14";
+const APP_VERSION = "2.22.15";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -17510,6 +17510,24 @@ function wireWorldGlobe() {
     _bendFor.set(k2, pts);
     return pts;
   };
+  /* ✅ AEVI W1 (SNG-682): *"On a coarse frame, pass a bend that returns ONLY what is already cached: `_worldRoutes.byPair` and
+   * `_bendFor`. It never calls `bendRoad`. … A road with nothing cached is not drawn while moving, rather than drawn
+   * straight. Nothing that looks different from the settled frame may appear during a drag."* ⚠️ Before this, a drag
+   * offered no bend at all, so all 200 roads became their straight arcs across the seas until the globe settled — Erik's
+   * "old lines". A cached null (a bend that failed when settled) stays null here, so that road is the arc on both frames. */
+  const cachedBend = (a, b, idA, idB) => {
+    const routed = _worldRoutes && _worldRoutes.byPair;
+    if (routed && idA && idB) {
+      const k = idA < idB ? `${idA}|${idB}` : `${idB}|${idA}`;
+      const p = routed.get(k);
+      if (p && p.length > 1) return p;
+    }
+    if (_bendFor && _bendTerrain === _terrain) {
+      const k2 = `${a[0].toFixed(3)},${a[1].toFixed(3)}|${b[0].toFixed(3)},${b[1].toFixed(3)}`;
+      if (_bendFor.has(k2)) return _bendFor.get(k2);
+    }
+    return false;
+  };
   /* ⛔ COMPUTED OFF THE FIRST PAINT, NOT BEFORE IT. 520ms is a visible hitch, and the globe already has a
    * "reading the world…" frame; making the player wait longer for it to appear at all would trade one
    * complaint for another. So the first frame draws with the arc, the routes are built once the frame is on
@@ -17774,7 +17792,7 @@ function wireWorldGlobe() {
     const net = networkPaths(_terrain, view, { locations: CONTENT.locations, precursor: _precursorLines,
       showPrecursor: hasOldRoads, canvasPx: Math.min(GW(), GH()),
       tierOf: (l) => l?.tier,
-      bend: coarse ? null : globeBend });
+      bend: coarse ? cachedBend : globeBend });   // ✅ W1: a moving frame draws the cached routes, never the arcs
     if (net.fade > 0 || net.trunkFade > 0) {
       ctx.save();
       ctx.lineJoin = "round"; ctx.lineCap = "round";

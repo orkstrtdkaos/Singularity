@@ -24381,6 +24381,40 @@ await (async () => {
       && Math.abs(mb655({ }, () => ({ raw: 1, type: 1 }), { lo0: -20, lo1: 18, la0: -5, la1: 5 }).toScreen(357, 0, 100, 100).x - (17 / 38) * 100) < 1e-6
       && typeof stub655.wrapLon === "function" && stub655.wrapLon(-122) === 238);
   }
+  /* ── ✅ AEVI W1 (SNG-682, CCODE-660): a coarse frame and a settled frame draw the SAME road paths, apart from the roads
+   *    still waiting for a cached route — tested on the projection, not the pixels ── */
+  {
+    const WG660 = await import("../engine/worldglobe.js");
+    const { loadContentHeadless: lch660 } = await import("./headless_content.mjs");
+    const C660 = await lch660();
+    const t660 = WG660.decodeTerrain(JSON.parse(readFileSync(join(root, "content/packs/core/world/terrain.json"), "utf8")));
+    const view660 = { ...WG660.DEFAULT_VIEW, r: 300, cx: 350, cy: 270 };
+    // a settled bend: a fixed three-point path for every third pair, null (the arc) for the rest; the coarse bend answers
+    // the same paths and `false` where nothing is cached
+    const cache660 = new Map(); let k660 = 0;
+    const settled660 = (a, b, idA, idB) => { const k = idA < idB ? `${idA}|${idB}` : `${idB}|${idA}`; if (!cache660.has(k)) cache660.set(k, (k660++ % 3 === 0) ? [a, [(a[0] + b[0]) / 2 + 0.2, (a[1] + b[1]) / 2], b] : null); return cache660.get(k); };
+    // ⚠️ the moving frame's stub answers `false` wherever no PATH is cached — a null here is a route still waiting, which
+    // is what the real `cachedBend` answers for a pair `worldRoadRoutes` has not reached yet
+    const coarse660 = (a, b, idA, idB) => { const k = idA < idB ? `${idA}|${idB}` : `${idB}|${idA}`; const v = cache660.get(k); return (v && v.length > 1) ? v : false; };
+    const opts660 = { locations: C660.locations, canvasPx: 700, tierOf: (l) => l?.tier };
+    const settledNet = WG660.networkPaths(t660, view660, { ...opts660, bend: settled660 });
+    const coarseNet = WG660.networkPaths(t660, view660, { ...opts660, bend: coarse660 });
+    const cachedPairs = [...cache660.values()].filter(Boolean).length, uncached = [...cache660.values()].filter((v) => v === null).length;
+    const sig = (net) => net.roads.map((r) => r.run.map((p) => p.map((v) => Math.round(v * 100) / 100).join(",")).join(";")).sort();
+    const sS = sig(settledNet), sC = sig(coarseNet);
+    check("SNG-682 W1: ⛔ a moving frame draws every road the settled frame draws from a CACHED route — the projected runs are identical — and nothing else: a road with no cached route is absent while moving, never a straight arc (the settled frame draws the arc)",
+      cachedPairs > 20 && uncached > 20 && sC.every((x) => sS.includes(x)) && sC.length < sS.length
+      && coarseNet.roads.length >= cachedPairs * 0.5 && coarseNet.roads.length <= cachedPairs * 2 && settledNet.roads.length - coarseNet.roads.length > 50);
+    const srcW1 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");
+    const wgW1 = readFileSync(join(root, "engine/worldglobe.js"), "utf8").replace(/\r\n/g, "\n");
+    check("SNG-682 W1: ⛔ …and the globe passes that bend on a coarse frame — `cachedBend` reads `_worldRoutes.byPair` and `_bendFor` and never calls `bendRoad`; `networkPaths` skips a road whose bend answers false",
+      /bend: coarse \? cachedBend : globeBend \}\);/.test(srcW1) && /const cachedBend = \(a, b, idA, idB\) => \{/.test(srcW1)
+      && !/bendRoad\(/.test(srcW1.slice(srcW1.indexOf("const cachedBend = "), srcW1.indexOf("/* ⛔ COMPUTED OFF THE FIRST PAINT")))
+      && /if \(pts === false\) continue;/.test(wgW1));
+    check("SNG-682: ⛔ Aevi's road measurement runs in CI with her ratchets (tests/world_roads_measure.mjs in the runner, a baseline that may only go DOWN)",
+      existsSync(join(root, "tests/world_roads_measure.mjs")) && existsSync(join(root, "tests/world_roads_baseline.json"))
+      && /\["world_roads_measure", "node", \["tests\/world_roads_measure\.mjs"\]\]/.test(readFileSync(join(root, "scripts/run_tests.mjs"), "utf8")));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(face416\[id\]\?\.name \|\| l\.name \|\| id, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

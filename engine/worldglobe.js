@@ -1512,6 +1512,9 @@ export function networkPaths(t, view, { locations, precursor, showPrecursor = fa
       // ⛑ THE IDS RIDE ALONG. A routed path is stored per PAIR, and keying a lookup on rounded coordinates
       // instead would be a second identity for a thing that already has one.
       const pts = bend ? bend(a, b, id, other) : null;
+      // ✅ AEVI W1 (SNG-682): a bend that answers `false` has NOTHING cached for this road on a moving frame — the road is
+      // not drawn, rather than drawn straight. `null` still means "no route": the arc, as on a settled frame.
+      if (pts === false) continue;
       const runs = [];
       if (pts && pts.length > 1) {
         // ⛑ ONE CHAIN, NOT A RUN PER SEGMENT. Arcing each segment separately gave 1,637 runs for 226 roads —

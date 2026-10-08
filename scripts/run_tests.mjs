@@ -32,6 +32,7 @@ const SUITES = [
   ["craft_crit", "node", ["tests/craft_crit.mjs"]],
   ["world_drive_audit", "node", ["tests/world_drive_audit.mjs"]],
   ["wiring_audit", "node", ["tests/wiring_audit.mjs"]],
+  ["world_roads_measure", "node", ["tests/world_roads_measure.mjs"]],   // SNG-682: Aevi's road measurement, ratcheted
   // ✅ SNG-658 §3 (ERIK): "check every single type of thing against the latest schema … then make the
   // checks standard". Every type, both layers, ratcheted — counts may only go DOWN.
   ["schema_census", "node", ["tests/schema_census.mjs"]],

@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 115 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 116 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-10-07 · v2.22.12 · 115 files.** (`scripts/worldspace_audit.mjs` is gone — CCODE-656, Aevi's ruling 4: it measured the retired `map.x/y` as positions. Before it: 2026-09-26 · v2.10.1 · 116 files, `scripts/freeze_save_fixtures.mjs` — CCODE-527: a gate may not read a save somebody is playing.)
+**Last measured: 2026-10-08 · v2.22.15 · 116 files.** (`tests/world_roads_measure.mjs` is new — CCODE-660, SNG-682: Aevi's road measurement in the runner, ratcheted. Before it: 2026-10-07 · v2.22.12 · 115 files, `scripts/worldspace_audit.mjs` gone — CCODE-656, Aevi's ruling 4: it measured the retired `map.x/y` as positions. Before it: 2026-09-26 · v2.10.1 · 116 files, `scripts/freeze_save_fixtures.mjs` — CCODE-527: a gate may not read a save somebody is playing.)
 
 ---
 
@@ -18,7 +18,7 @@ node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 
 | kind | n | what it is | belongs |
 |---|---|---|---|
-| ✅ **GATE** | **26** | asserts something and fails the build | ⛔ **in the runner** |
+| ✅ **GATE** | **27** | asserts something and fails the build | ⛔ **in the runner** |
 | ⛔ **GATE-UNWIRED** | **0** | assertions nobody runs | ⛔ **nowhere — this must stay zero** |
 | ⚠️ **LIVE-API** | 2 | needs a real API key; costs money; cannot run in CI | run by hand, deliberately |
 | ○ **REPORT** | 19 | answers *how often / how hard / at what tier* | in a person's hand |
@@ -139,6 +139,7 @@ worthless.
 | `tests/content_ci` | ✅ GATE | 197 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
 | `tests/wiring_audit` | ✅ GATE | 41 | BATCH-11 §23 |
+| `tests/world_roads_measure` | ✅ GATE | 4 | SNG-682 (CCODE-660): the world map's roads measured against the ground — straight arcs, detours, wet arcs, the cap — ratcheted in `world_roads_baseline.json` |
 | `tests/group_capability` | ✅ GATE | 26 | CCODE-307 |
 | `tests/damage_sensitivity` | ✅ GATE | 22 | — |
 | `tests/interpose_wiring` | ✅ GATE | 19 | CCODE-311 |

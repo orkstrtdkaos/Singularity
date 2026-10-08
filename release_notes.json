@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.22.15",
+      "date": "2026-10-08",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "No more straight lines while you spin the world",
+          "summary": "Dragging or spinning the world map used to redraw every road as a straight arc across the seas until the globe settled. A moving frame now draws the same routed roads as a still one; a road whose route is not ready yet simply waits."
+        }
+      ]
+    },
+    {
       "version": "2.22.14",
       "date": "2026-10-08",
       "entries": [

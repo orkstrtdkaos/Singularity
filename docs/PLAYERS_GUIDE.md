@@ -514,9 +514,9 @@ bank, a fen to the south the road has to go round. Ordinary on purpose.
 |---|---|
 | **Echo River Crossing | the old stone-and-cable bridge where the Echo narrows. Everyone crosses here**, which is why everyone meets here |
 | **Waystone** | bridge-builders and road-walkers. A bridge needs a road, and a road needs somebody who will keep it |
-| **Greywater Stilts | a town on stilts over the southern marsh. Dead flat, and the water is the only direction that matters** |
+| **Greywater | a town on stilts over the southern marsh. Dead flat, and the water is the only direction that matters** |
 | **Archive Hollow** | a collapsed limestone sink, **opened by spring floods.** Something was under there and now it is not |
-| **The Quiet Ground** | still grey water and wide windows. **The water is what the dying look at** |
+| **Greypool** | still grey water and wide windows. **The water is what the dying look at** |
 | **Thinwater** | *"the water runs thin here, and so does everything else"* |
 
 And seven kilometres east, the fringe of a Disputed Zone — where you feel a quarrel that is 113 walking

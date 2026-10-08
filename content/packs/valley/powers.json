@@ -264,14 +264,14 @@
    "wantsFromYou": "A store room at your post and a blind eye, for a tenth of what passes through it. If you refuse, what is inside your walls.",
    "offersYou": "A fence for anything, a door into any house in the Crossing, and the first word of who is coming for you and why.",
    "leverage": "The guild has one law: never rob a seller at their own stall. The Hundred Markets' prices are true because of it, and every member who has ever broken it has disappeared.",
-   "whenBroken": "The fences in Dusklow and the Low Market go quiet, stolen goods stop moving, and every thief in the Crossing is suddenly working for themselves.",
+   "whenBroken": "The fences in Dusklow and Lowmarket go quiet, stolen goods stop moving, and every thief in the Crossing is suddenly working for themselves.",
    "rivals": [],
    "opposedBy": [
     "warden-coll",
     "broker_sain"
    ],
    "plainly": "A thieves' guild working out of the Hundred Markets. It never robs a seller at their own stall, and it robs nearly everyone else.",
-   "descriptionSeed": "The Undercount is the count under the count: every market keeps a ledger, and the guild keeps the one underneath it. It fences through Dusklow, where nobody repeats anything, and through the Low Market, where the price is on everything. It protects the Hundred Markets because it feeds on them. It will come for any new wealth that settles within reach of the Crossing, quietly, at night.",
+   "descriptionSeed": "The Undercount is the count under the count: every market keeps a ledger, and the guild keeps the one underneath it. It fences through Dusklow, where nobody repeats anything, and through Lowmarket, where the price is on everything. It protects the Hundred Markets because it feeds on them. It will come for any new wealth that settles within reach of the Crossing, quietly, at night.",
    "appearance": "A crowded market lane at dusk, a spice stall with a back room behind a hanging rug, a ledger open on a crate, a hooded figure counting coins by a shuttered lamp",
    "clientOf": {
     "power": "power_radiant_plateau",
@@ -1513,7 +1513,7 @@
    "wantsFromYou": "That you let the dead be tended. Bring them your dying and they will take them in; leave a body unburied on their road and they will want to know why.",
    "offersYou": "A place to die that is not frightening, a burial for anyone at all, and wardens who will stand between the living and whatever the Long Grey sends.",
    "leverage": "The Wardens will tend anyone, including their enemies. Every warband that has marched on Cairnhold has had its own dead buried by the people it came to kill.",
-   "whenBroken": "The tending stops at Cairnhold's edge, the Long Grey comes a mile closer each season, and the Quiet Ground has no one standing in front of it.",
+   "whenBroken": "The tending stops at Cairnhold's edge, the Long Grey comes a mile closer each season, and Greypool has no one standing in front of it.",
    "bodies": [
     {
      "name": "the Wardens' council",
@@ -1523,16 +1523,16 @@
      ]
     },
     {
-     "name": "the Quiet Ground",
+     "name": "Greypool",
      "does": "takes in the dying and keeps vigil",
      "people": []
     }
    ],
    "plainly": "The Ashwardens' council at Cairnhold. It tends the dying and buries anyone, friend or enemy, and it holds the edge of the grey country.",
-   "descriptionSeed": "Cairnhold is the least frightening place in the world once you are inside it, and the Wardens keep it that way. They tend the dying at the Quiet Ground, bury anyone at all, and hold the Hollowing against the Long Grey, where the tending stops and something else harvests instead.",
+   "descriptionSeed": "Cairnhold is the least frightening place in the world once you are inside it, and the Wardens keep it that way. They tend the dying at Greypool, bury anyone at all, and hold the Hollowing against the Long Grey, where the tending stops and something else harvests instead.",
    "appearance": "A grey stone city of cairns and wide windows, tenders in ash-coloured robes, a watch-post on a bare ridge looking out over endless ash",
    "secretsGM": [
-    "Neth holds the Life / Death seat (SNG-644) and lives at the Quiet Ground under the Wardens' protection. The Wardens do not know what she is holding back; they only know she must not be disturbed."
+    "Neth holds the Life / Death seat (SNG-644) and lives at Greypool under the Wardens' protection. The Wardens do not know what she is holding back; they only know she must not be disturbed."
    ],
    "comes": "mixed",
    "_comesWhy": "march-wardens move unseen on the moor; the grave-crews do not",
@@ -1592,7 +1592,7 @@
    "leverage": "They believe they only reap what is ready. Show one of them a thing they judged ready that lived, and they will hesitate — and a reaper who hesitates is not one.",
    "whenBroken": "The Long Grey goes still, and for a season the Hollowing's wardens can walk past the last cairn and come back.",
    "plainly": "The reapers of the Long Grey, past the last cairn, where the Ashwardens' tending stops. They end what is ready, and they have stopped asking what that means.",
-   "descriptionSeed": "Out past the last cairn nobody tends anything, and the Harvest Hand reaps. Morvane leads them with a logic that is nearly mercy. They are pushing toward the Quiet Ground, and they do not know why the one woman there makes them want to stop.",
+   "descriptionSeed": "Out past the last cairn nobody tends anything, and the Harvest Hand reaps. Morvane leads them with a logic that is nearly mercy. They are pushing toward Greypool, and they do not know why the one woman there makes them want to stop.",
    "appearance": "An ash-field without end under a colourless sky, grey-robed reapers moving in a line with long curved blades, cairns falling behind them",
    "secretsGM": [
     "Morvane is a challenger for the Life / Death seat (SNG-644). The Harvest Hand is her road there, and Neth is in the way."
@@ -1634,7 +1634,7 @@
     {
      "at": "the_clearing_ground",
      "kind": "post",
-     "name": "the Clearing Ground's gates, where endings are brought",
+     "name": "Clearground's gates, where endings are brought",
      "garrison": 20
     }
    ],
@@ -1653,7 +1653,7 @@
    "wantsFromYou": "A reason. Bring the Masters something that should end and they will end it well; ask them to end something that should not, and they will ask you why until you stop.",
    "offersYou": "Any ending done properly — a failing house, a binding, a cage of a life's work — and crews who can bring down a fortress without scratching the street.",
    "leverage": "They will not end anything without asking whether it should end. Anyone who can make that question hard enough can stop them.",
-   "whenBroken": "The crews scatter, the Clearing Ground closes, and the Scouring comes down out of the pure pole into a city with no one asking the question.",
+   "whenBroken": "The crews scatter, Clearground closes, and the Scouring comes down out of the pure pole into a city with no one asking the question.",
    "bodies": [
     {
      "name": "the Masters' council",
@@ -1663,7 +1663,7 @@
      ]
     },
     {
-     "name": "the Clearing Ground",
+     "name": "Clearground",
      "does": "where things are brought to be ended properly",
      "people": []
     }
@@ -1672,7 +1672,7 @@
    "descriptionSeed": "The Scour is a city of controlled ruin and beautiful demolitions, and the Masters govern it by asking one question of everything brought to them: should this end? Up the road, in the pure pole, the Scouring stopped asking, and the Masters know exactly how close that is.",
    "appearance": "A city of elegant half-demolished towers, crews working with ropes and wedges, a gated yard where people bring things to be ended",
    "secretsGM": [
-    "The Last Mercy holds the Breaking / Building seat (SNG-644) and works the Clearing Ground. The Masters count her as one of their own and do not know what she holds back."
+    "The Last Mercy holds the Breaking / Building seat (SNG-644) and works Clearground. The Masters count her as one of their own and do not know what she holds back."
    ],
    "comes": "loud",
    "_verbsWhy": "The Scour exists to stop the Scouring. A body whose whole reason is one enemy goes after that enemy.",
@@ -1872,7 +1872,7 @@
      ]
     },
     {
-     "name": "the Choir of the Appetite Halls",
+     "name": "the Choir of Appetite Halls",
      "does": "names aloud the wants people cannot admit to",
      "people": []
     }
@@ -1951,10 +1951,10 @@
     "crossed",
     "rival_ally"
    ],
-   "wantsFromYou": "Your weight, laid down at the Mercy House, and your word that you will not carry it again.",
+   "wantsFromYou": "Your weight, laid down at Mercy House, and your word that you will not carry it again.",
    "offersYou": "Mercy that is entirely real: a burden lifted, permanently, by a Seraph who pays for it. And Seraphs at your side against anything that answers to the dark.",
    "leverage": "Every mercy the Orders give costs the Seraph who gives it. The Orders are exactly as strong as they are willing to be spent, and some of them are running out.",
-   "whenBroken": "The Mercy House closes, the Unfallen come down from the pure pole unopposed, and the Burning Certainty's inquisition is the only law left on the Ascent.",
+   "whenBroken": "Mercy House closes, the Unfallen come down from the pure pole unopposed, and the Burning Certainty's inquisition is the only law left on the Ascent.",
    "bodies": [
     {
      "name": "the Hierarchy",
@@ -1971,7 +1971,7 @@
      ]
     },
     {
-     "name": "the Mercy House",
+     "name": "Mercy House",
      "does": "takes weight off people, genuinely, at real cost",
      "people": []
     }
@@ -2038,9 +2038,9 @@
    "wantsFromYou": "That you keep what you learn here to yourself. Everyone in the Harborward is here because someone, somewhere, would burn them for being seen.",
    "offersYou": "Refuge for anyone the light has judged, a place to keep what you cannot let be found, and keepers who will not tell.",
    "leverage": "The Harborward keeps everything and shows nothing. Anyone it has sheltered owes it silence, and a keeper who breaks silence is the only thing it cannot survive.",
-   "whenBroken": "The keeping-halls are opened, the refugees scatter into the light, and every banned book in the Underlight is carried up the Slow Stair to be burned.",
+   "whenBroken": "The keeping-halls are opened, the refugees scatter into the light, and every banned book in the Underlight is carried up Slowstair to be burned.",
    "plainly": "The Umbral keepers of the Harborward, who shelter refugees, heretics and banned books — everything the light would burn — and never show any of it.",
-   "descriptionSeed": "The Harborward is where the Umbrals keep what the light would burn. Its keepers are kind and silent, and their refuge is the best-kept secret in the dark. The Starless, on the Slow Stair, wants the dark to be total; the Harborward wants the dark to be a place where people are safe. They are not the same thing.",
+   "descriptionSeed": "The Harborward is where the Umbrals keep what the light would burn. Its keepers are kind and silent, and their refuge is the best-kept secret in the dark. The Starless, on Slowstair, wants the dark to be total; the Harborward wants the dark to be a place where people are safe. They are not the same thing.",
    "appearance": "Dark halls lit only by touch and voice, refugees resting in quiet alcoves, shelves of wrapped books, a keeper listening at a door",
    "secretsGM": [
     "The Harborward is a counterweight to Lucifer (SNG-640): privacy kept on purpose. It starves him without knowing. It is also opposed by the Starless, who wants no refuge in the dark — only the Void."
@@ -2226,7 +2226,7 @@
     {
      "at": "the_measured_engine",
      "kind": "post",
-     "name": "the pump-house and relay yard at the Measured Engine",
+     "name": "the pump-house and relay yard at Gaugeworks",
      "garrison": 15
     }
    ],
@@ -2250,7 +2250,7 @@
    "leverage": "They are embarrassed to have a house at all. Offer the Compact a reason to leave the Wayhouse and most of them will take it.",
    "whenBroken": "The Wayhouse is left empty and the long roads close one by one, not by anyone's hand but because nobody walks them to keep them.",
    "plainly": "The loose agreement of the Horizon-Walkers that keeps the far roads crossable. It meets at the Wayhouse only because people insisted on a place to find it, and it is led, lightly, by the Farwalker.",
-   "descriptionSeed": "The Compact is a moot that convenes whenever enough walkers happen to be at the Wayhouse at once, which is rarer than it sounds. It decides very little and does a great deal: every road-marker from the Long Span to the Measured Engine is theirs. The Farwalker speaks for it and keeps one waygate shut that the Gate That Gapes would open.",
+   "descriptionSeed": "The Compact is a moot that convenes whenever enough walkers happen to be at the Wayhouse at once, which is rarer than it sounds. It decides very little and does a great deal: every road-marker from the Long Span to Gaugeworks is theirs. The Farwalker speaks for it and keeps one waygate shut that the Gate That Gapes would open.",
    "appearance": "A low stone house with every door open, packs stacked along the walls, maps chalked on the floor and walked over, and a fire that someone new is always feeding",
    "comes": "mixed",
    "bodies": [
@@ -2359,7 +2359,7 @@
     {
      "at": "the_figure_works",
      "kind": "post",
-     "name": "the unlocked workshops of the Figure-Works",
+     "name": "the unlocked workshops of Figureworks",
      "garrison": 15
     }
    ],
@@ -2379,15 +2379,15 @@
    "wantsFromYou": "To see what you're carrying that means something, and to make sure nobody has closed it. A symbol that has become a wall is their business wherever it is.",
    "offersYou": "A figure made for you that does exactly one thing well, and a guide through Cloudform who knows which path is real today.",
    "leverage": "They cannot bear a closed pattern. Show them one and they will stop whatever they're doing to open it.",
-   "whenBroken": "The Figure-Works' symbols go to work unsupervised, and the Untethered walk down into Cloudform to show everyone what pure form does to bodies.",
-   "plainly": "An order of Figurists pledged to keep the patterns open, led by the Open Figure. They guard the Figure-Works against its own pure pole, the Untethered.",
-   "descriptionSeed": "The Hand is the Figurists' conscience, and they are not sure they wanted one. Its wrights make meanings that act and swear never to make one that locks. They are fair and quick and very hard to argue with, and they are the only thing standing between the Figure-Works and the Untethered's conclusion.",
+   "whenBroken": "Figureworks' symbols go to work unsupervised, and the Untethered walk down into Cloudform to show everyone what pure form does to bodies.",
+   "plainly": "An order of Figurists pledged to keep the patterns open, led by the Open Figure. They guard Figureworks against its own pure pole, the Untethered.",
+   "descriptionSeed": "The Hand is the Figurists' conscience, and they are not sure they wanted one. Its wrights make meanings that act and swear never to make one that locks. They are fair and quick and very hard to argue with, and they are the only thing standing between Figureworks and the Untethered's conclusion.",
    "appearance": "Workshops with every door and drawer open, symbols chalked in the air that hold their shape, wrights in ink-stained gloves passing a figure from hand to hand",
    "comes": "quiet",
    "bodies": [
     {
      "name": "the Hand",
-     "does": "keeps the Figure-Works' patterns open",
+     "does": "keeps Figureworks' patterns open",
      "people": [
       "the_open_figure"
      ]
@@ -2447,7 +2447,7 @@
    "leverage": "They cannot abandon a sound argument. Show them one, in their own form, that ends with mercy, and the Hold has to follow it or stop being what it is.",
    "whenBroken": "The lecture-halls empty and the reasoners walk back into the Axiom, bewildered, feeling things they had proved they didn't.",
    "plainly": "The Syllogists' pure pole, organised: reason purified of feeling, which turns out to be something else wearing reason's clothes. The Final Argument leads it, and it is reaching down toward the Axiom.",
-   "descriptionSeed": "The Bloodless Hold recruits the best minds of the Axiom one proof at a time, and every one of them leaves courteously, with their reasons in order and something missing. The Final Argument has almost finished reasoning the world clean. Quillon Vey's proof, still unrefuted in the Proof-Halls, is the one thing in the region it cannot get past.",
+   "descriptionSeed": "The Bloodless Hold recruits the best minds of the Axiom one proof at a time, and every one of them leaves courteously, with their reasons in order and something missing. The Final Argument has almost finished reasoning the world clean. Quillon Vey's proof, still unrefuted in Proof Halls, is the one thing in the region it cannot get past.",
    "appearance": "White halls without windows, rows of reasoners at slates who do not look up when you enter, and at the front a figure whose argument you can almost follow",
    "comes": "loud",
    "bodies": [
@@ -2553,7 +2553,7 @@
     {
      "at": "the_grief_house",
      "kind": "post",
-     "name": "the Grief-House and its long public hall",
+     "name": "Grief House and its long public hall",
      "garrison": 15
     }
    ],
@@ -2885,7 +2885,7 @@
     {
      "at": "the_low_market",
      "kind": "enterprise",
-     "name": "a plain table and a single lamp in the Low Market, where the terms are written down",
+     "name": "a plain table and a single lamp in Lowmarket, where the terms are written down",
      "garrison": 2
     }
    ],
@@ -2904,7 +2904,7 @@
    "whenBroken": "The tally-sticks stop matching. Every deal the Table witnessed is suddenly a matter of who remembers what, and the Hundred Markets get louder.",
    "rivals": [],
    "opposedBy": [],
-   "plainly": "The Bargainers: brokers who name every term aloud and keep it exactly. Their table is at the Low Market, the honest end of the Descent's trade; their house at the Crossing is in the Hub Yard; and the One Called Loki keeps another in the Wayhouse's back room.",
+   "plainly": "The Bargainers: brokers who name every term aloud and keep it exactly. Their table is at Lowmarket, the honest end of the Descent's trade; their house at the Crossing is in the Hub Yard; and the One Called Loki keeps another in the Wayhouse's back room.",
    "descriptionSeed": "The Bargainers deal in terms, not goods. You sit across a plain table under a single lamp, you say what you want, and the Broker tells you the price before you swear; the witness splits a tally-stick and each of you keeps half. The Hollow Court also grants exactly what is asked, but it never says what it takes. The Table always says. That is the whole difference, and it is everything.",
    "appearance": "A plain table under a single lamp in a caravan yard, ledger paper and wax seals, a jar of split tally-sticks, and a man in worn brass buttons who is smiling slightly too early",
    "secretsGM": [
@@ -2913,7 +2913,7 @@
    "houseAt": "the_crossing_gate_yard",
    "comes": "quiet",
    "_sng668": "✅ ERIK 2026-10-04: every tradition keeps a power at the Crossing. The Bargainers (Terms: abyssal 0.5, verist 0.3, mason 0.2) had their Broker at the Wayhouse and no power.",
-   "_seatWhy": "The Low Market's own canon: 'the honest end of the Descent's trade: bargains with the terms written down.' Corrected 2026-10-04 from the Hub Yard, which I chose before reading it. The Table keeps its house at the Crossing in the Hub Yard; the One Called Loki keeps a second table in the Wayhouse's back room."
+   "_seatWhy": "Lowmarket's own canon: 'the honest end of the Descent's trade: bargains with the terms written down.' Corrected 2026-10-04 from the Hub Yard, which I chose before reading it. The Table keeps its house at the Crossing in the Hub Yard; the One Called Loki keeps a second table in the Wayhouse's back room."
   },
   {
    "id": "power_anvilhall",
@@ -2976,7 +2976,7 @@
   },
   {
    "id": "power_long_delve",
-   "name": "The Wardens of the Long Delve",
+   "name": "The Wardens of Longdelve",
    "kind": "lordship",
    "temper": "fair",
    "seat": "long_delve",
@@ -3025,7 +3025,7 @@
    "rivals": [],
    "opposedBy": [],
    "plainly": "A dwarven hold in the Kept Reach range that has been driving one tunnel west for nine hundred years, and keeps the calendar everyone else checks against.",
-   "descriptionSeed": "The Long Delve is a hold, a calendar and a promise. The founders set a heading and a pace and died, and their grandchildren's grandchildren are still digging. Delvewarden Hesk keeps the heading; the Hourkeepers trust her calendar more than their own, which annoys them.",
+   "descriptionSeed": "Longdelve is a hold, a calendar and a promise. The founders set a heading and a pace and died, and their grandchildren's grandchildren are still digging. Delvewarden Hesk keeps the heading; the Hourkeepers trust her calendar more than their own, which annoys them.",
    "appearance": "A narrow gate in a sheer face, a stone clock carved by the century above it, and a lamplit tunnel running away so straight you can see where it will be in a hundred years",
    "comes": "quiet",
    "houseAt": "the_crossing",
@@ -3597,7 +3597,7 @@
    "whenBroken": "The singing stops, and the Palelands' drowned stop resting.",
    "rivals": [],
    "opposedBy": [],
-   "plainly": "The selkies of the Greywater Deep, a grey sea off the Palelands. They come ashore at the Ashwardens' cairns to sing for the drowned.",
+   "plainly": "The selkies of Greysound, a grey sea off the Palelands. They come ashore at the Ashwardens' cairns to sing for the drowned.",
    "descriptionSeed": "The Greywater Kin are as much a mourning-order as a people. They come ashore at the Ashwardens' cairns to sing for whoever the sea has taken, and take their skins back before morning; the Ashwardens consider them colleagues.",
    "appearance": "A grey harbour of seal-rocks and kelp, a ring of cairns on the shore, and grey heads in the water watching the tide-line",
    "comes": "quiet",

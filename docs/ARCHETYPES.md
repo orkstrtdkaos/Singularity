@@ -126,7 +126,7 @@ Names of Power
 
 ### The Advocate — *Mind / Light / Building*
 Case Closed · Contradiction · Known Price · Unbroken Thread · Physician's Tome · Built System ·
-Proof-Halls
+Proof Halls
 **Light (verist):** Standing Word · Held Truth · Weight of Truth — **Building:** Mediator's Tongue ·
 Broker Truce
 **Case Closed is T1 AND LETHAL-RUNG** — **the Syllogists' darkest craft is their FIRST**, which no
@@ -264,7 +264,7 @@ Lifted Word
 ### The Mercy — *Angelic / Death / Life*
 Administered Mercy · Carried Weight · Answered Prayer · Understudy · Miracle
 **Death:** Kept Vigil · Attended End · Palework — **Life:** Staunch · Graftlife
-**Oreth of the Quiet Ground is built here** — and `closed: ["hastened_grey", "the_cut_thread"]` is
+**Oreth of Greypool is built here** — and `closed: ["hastened_grey", "the_cut_thread"]` is
 what makes him a MERCY rather than an Ashwarden.
 
 ---

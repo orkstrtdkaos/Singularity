@@ -29,6 +29,11 @@
     "name": {
       "type": "string"
     },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Older names the world has used for this place. A save or a speaker that says an old name still finds it (namematch reads aliases)."
+    },
     "regionId": {
       "type": "string",
       "description": "e.g. valley; a generated place inherits the arriving region"

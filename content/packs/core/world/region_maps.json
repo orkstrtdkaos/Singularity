@@ -58,7 +58,7 @@
     "bearing": -88,
     "km": 501,
     "radiusKm": 330,
-    "why": "The ground Greywater Stilts stands on poles above. ⚠️ Its edge is soft by nature — that is what a marsh edge IS.",
+    "why": "The ground Greywater stands on poles above. ⚠️ Its edge is soft by nature — that is what a marsh edge IS.",
     "encounter": "Poles, boats, and no dry ground. ⚠️ You do not cross it — you are carried across it by somebody from Greywater, and they set the price."
    }
   ],
@@ -395,7 +395,7 @@
     "kind": "point",
     "bearing": 164,
     "km": 434,
-    "why": "⛔ Where the Made Gate was cut — the 27th waygate and the first BUILT. A player did this. It stands at the Crossing because that is where a wright who tends endings was standing."
+    "why": "⛔ Where Madegate was cut — the 27th waygate and the first BUILT. A player did this. It stands at the Crossing because that is where a wright who tends endings was standing."
    }
   ],
   "edges": [
@@ -522,7 +522,7 @@
    }
   ],
   "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 10.6° → 9.6° (9% tighter); centre moved 1.87°. Features re-expressed, ground unchanged.",
-  "_membershipNote": "⚠️ GAINED `cairn_and_scour` from the SNG-414 split — burying and demolition trades sharing a yard, 5° from the Quiet Ground. ⛔ The Palelands is where endings are kept, so a town whose trade is endings belongs to it; the Foothills only ever held it because nothing else claimed it."
+  "_membershipNote": "⚠️ GAINED `cairn_and_scour` from the SNG-414 split — burying and demolition trades sharing a yard, 5° from Greypool. ⛔ The Palelands is where endings are kept, so a town whose trade is endings belongs to it; the Foothills only ever held it because nothing else claimed it."
  },
  "umbral_depths": {
   "centre": {
@@ -532,7 +532,7 @@
   "radiusDeg": 11.6,
   "members": 6,
   "purpose": "⛔ A CITY IN THE DARK, and the dark is not the absence of the city — it is the material it is built in. A player crossing it is going DOWN and then along, and the only real question is how far from a lamp they are willing to be.",
-  "_shapeFinding": "⛔ THE FIRST REGION THAT NEEDS THE VERTICAL AXIS AT REGION SCALE. The Slow Stair is 'the long way up and out — DAYS of ascending stair'. ⚠️ `level` exists on `localMap` for interiors; a region map needs it too, because here depth is not a detail of a building, it is the shape of the country.",
+  "_shapeFinding": "⛔ THE FIRST REGION THAT NEEDS THE VERTICAL AXIS AT REGION SCALE. Slowstair is 'the long way up and out — DAYS of ascending stair'. ⚠️ `level` exists on `localMap` for interiors; a region map needs it too, because here depth is not a detail of a building, it is the shape of the country.",
   "ways": [
    {
     "id": "way_the_slow_stair",
@@ -633,7 +633,7 @@
     "km": 1088,
     "radiusKm": 300,
     "level": -1,
-    "why": "Where the Slow Stair stops being underground. ⚠️ 'Until it is only evening' — an edge you notice by your eyes adjusting, not by arriving."
+    "why": "Where Slowstair stops being underground. ⚠️ 'Until it is only evening' — an edge you notice by your eyes adjusting, not by arriving."
    }
   ],
   "edges": [
@@ -656,7 +656,7 @@
   ],
   "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 17.1° → 11.6° (32% tighter); centre moved 5.67°. Features re-expressed, ground unchanged."
  },
- "_shapeFindings": "⛔ FOUR REGIONS, FOUR SHAPES, AND THE FRAME BENT TWICE. ECHO VALE: a band between two powers. THE CENTER: a HUB — four of eight members share one bearing and distance because they ARE the Crossing, so the ways matter more than the ground. THE PALELANDS: a MARCH that runs out and stops, whose far edge is defined by ABANDONMENT and not by terrain. ⚠️ UMBRAL DEPTHS NEEDED `level` AT REGION SCALE — the Slow Stair changes depth ALONG its length, which no other route does. ⛔ `level` was authored for interiors; a region can be vertical too, and CCode should expect it on ways and on named ground, not only on sites. ⚠️ ALSO NEW: an edge of kind `none`. The Palelands and the Quickwood are antipodal and DO NOT TOUCH — recorded so nobody draws a border between them.",
+ "_shapeFindings": "⛔ FOUR REGIONS, FOUR SHAPES, AND THE FRAME BENT TWICE. ECHO VALE: a band between two powers. THE CENTER: a HUB — four of eight members share one bearing and distance because they ARE the Crossing, so the ways matter more than the ground. THE PALELANDS: a MARCH that runs out and stops, whose far edge is defined by ABANDONMENT and not by terrain. ⚠️ UMBRAL DEPTHS NEEDED `level` AT REGION SCALE — Slowstair changes depth ALONG its length, which no other route does. ⛔ `level` was authored for interiors; a region can be vertical too, and CCode should expect it on ways and on named ground, not only on sites. ⚠️ ALSO NEW: an edge of kind `none`. The Palelands and the Quickwood are antipodal and DO NOT TOUCH — recorded so nobody draws a border between them.",
  "_frameNote": "⛔ SNG-418. CENTRES ARE MINIMUM ENCLOSING CIRCLES. THIRD DEFINITION AND THE LAST.\n  1. arithmetic mean of lat/lon — MINE, wrong near a pole (3.01° out on the Centre)\n  2. lat/lon bounding-box midpoint — CCode's, wrong the same way\n  3. spherical mean direction — correct, but MINIMISES THE SUM of distances\n  4. ⛔ MINIMUM ENCLOSING CIRCLE — minimises the MAXIMUM, which is what a radius IS\n⚠️ CCode spotted that the valley's 24.1° radius had a tighter option at 19.9°. He was right and the true minimax is tighter still: 15.7°, THIRTY-FIVE PERCENT smaller. Umbral Depths gained 32%, the Riven Marches 21%.\n⛔ THE POINT IS RENDERING, NOT PURITY: the radius sets how much of the frame a region fills, so a 35% smaller radius is a 35% more zoomed map showing the same places. A mean direction is the right centre for asking 'where is this region'; a minimum enclosing circle is the right centre for DRAWING it.\n⚠️ Standing rule for the remaining ~22: MINIMAX, and never the arithmetic mean.",
  "valley": {
   "centre": {

@@ -114,14 +114,14 @@
 | `master_endmore` | Master Endmore | person | `npcs/master_endmore.json` | heroic | 26 | — | ✅ | ✅ | 12 | 2 | — |
 | `master_taro` | Master Taro | person | `npcs/master_taro.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
 | `matriarch_oona` | Oona Deepcaller | person | `npcs/matriarch_oona.json` | heroic | 27 | 10 | ✅ | ✅ | 14 | 2 | — |
-| `maud_who_sings_before` | Maud of the Grief House, Who Sings Before | person | `npcs/maud_who_sings_before.json` | leader | 22 | 6 | ✅ | ✅ | 11 | 2 | — |
+| `maud_who_sings_before` | Maud of Grief House, Who Sings Before | person | `npcs/maud_who_sings_before.json` | leader | 22 | 6 | ✅ | ✅ | 11 | 2 | — |
 | `mediator_corran` | Corran of the Marchward | person | `npcs/mediator_corran.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
 | `mother_hesk` | Mother Hesk | person | `npcs/mother_hesk.json` | heroic | 27 | — | ✅ | ✅ | 12 | 2 | — |
 | `mother_sallowmire` | Mother Sallowmire | person | `npcs/mother_sallowmire.json` | heroic | 31 | 7 | ✅ | ✅ | 16 | 2 | — |
 | `mountain_scout` | Kit Farrow, the Mountain Scout | person | `npcs/mountain_scout.json` | notable | →5 | — | ✅ | ✅ | 3 | — | — |
 | `odd_wren` | Wren | person | `npcs/odd_wren.json` | riffraff | →1 | — | ✅ | ✅ | 1 | — | — |
 | `old_choirmaster` | The Old Choirmaster | person | `npcs/old_choirmaster.json` | notable | →5 | — | ✅ | ✅ | 3 | — | — |
-| `oreth_quiet` | Oreth of the Quiet Ground | person | `npcs/oreth_quiet.json` | heroic | 24 | 8 | ✅ | ✅ | 12 | 2 | — |
+| `oreth_quiet` | Oreth of Greypool | person | `npcs/oreth_quiet.json` | heroic | 24 | 8 | ✅ | ✅ | 12 | 2 | — |
 | `oriel_vane_drowned` | Captain Oriel Vane, Who Came Back to Finish the Voyage | person | `npcs/oriel_vane_drowned.json` | heroic | 36 | 6 | ✅ | ✅ | 17 | 2 | — |
 | `orrun_shieldbreaker` | Orrun Shieldbreaker | person | `npcs/orrun_shieldbreaker.json` | heroic | 31 | 16 | ✅ | ✅ | 16 | 2 | — |
 | `oswin_tarrant` | Oswin Tarrant | person | `npcs/oswin_tarrant.json` | heroic | 25 | — | ✅ | ✅ | 12 | 2 | — |
@@ -200,7 +200,7 @@
 | `bench_arbiter_joss` | Arbiter Joss | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
 | `bench_brannoc` | Brannoc Ironvein of the Anvilhall | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
 | `bench_breaker_una` | Breaker Una | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
-| `bench_brother_caliel` | Brother Caliel of the Lower Court | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
+| `bench_brother_caliel` | Brother Caliel of Choirfoot | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
 | `bench_cass_ratchet` | Cass Ratchet | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
 | `bench_corra_wade` | Corra Wade of Millbrook | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
 | `bench_corwin_returned` | Corwin Who Came Back | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
@@ -236,7 +236,7 @@
 | `bench_saelor_drowned` | Ser Saelor of the Drowned Crown | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
 | `bench_selk_listener` | Selk the Listener | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
 | `bench_sylas_silverbough` | Sylas of the Silverbough | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
-| `bench_sythe` | Sythe of the Figure-Works | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
+| `bench_sythe` | Sythe of Figureworks | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
 | `bench_tala_leviathan` | Tala Swellrider | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
 | `bench_tamsin` | Tamsin Twice-Thrown | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
 | `bench_thistle` | Thistle, glade-born | challenger | `npcs/coliseum_bench.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |

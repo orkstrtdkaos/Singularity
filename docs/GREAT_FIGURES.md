@@ -95,7 +95,7 @@
 | **Marn of Two Forms** `marn_two_forms` | Marn Dov Kesselt | of Two Forms | everyone | human |  | Body −0.6, Spiritual +0.4, Violence −0.3 |
 | **Marshal Veyn** `marshal_veyn` | Signe Dagmar Veyn | Marshal | everyone | human |  | Violence −0.6, Truth +0.4, Body −0.3 |
 | **Mother Hesk** `mother_hesk` | Agathe Morrow Hesk | Mother of the Undercount | everyone | human |  | Order +0.4 |
-| **Oreth of the Quiet Ground** `oreth_quiet` | Oreth Innes Restwell | of the Quiet Ground | everyone | human |  | Life +0.4 |
+| **Oreth of Greypool** `oreth_quiet` | Oreth Innes Restwell | of Greypool | everyone | human |  | Life +0.4 |
 | **Orrun Shieldbreaker** `orrun_shieldbreaker` | Orrun Jarl Stenholt | Shieldbreaker | everyone | human |  | Violence −0.6, Time +0.5 |
 | **Oswin Tarrant** `oswin_tarrant` | Oswin Calder Tarrant | Baron at Firstsight | everyone | human |  | strongly Order +0.7, Violence −0.6, Concrete −0.4, Death −0.3, Mechanical −0.3 |
 | **Overseer Grael of the Edge District** `overseer_grael` | Grael Dexa Ledgard | Overseer of the Edge District | everyone | lattice | Villain | Logical +0.6, Mind +0.3 |

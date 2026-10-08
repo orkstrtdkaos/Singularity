@@ -44,7 +44,7 @@
    "roads": "Location `connections` ARE the roads. The Axis Gate's twelve roads are the map's spine — draw them heaviest.",
    "elevation": "Use it for hatching/relief. The Ascent is the highest point; the Umbral Depths are BELOW the map.",
    "honestFailures": "Three regions must LOOK wrong, deliberately: the_pattern_reach (resists mapping), the_veiled_reach (the map is lying), the_numinous_reach (the cartography loses confidence). Do not clean these up — the failure is the content.",
-   "growth": "The Blaze, the Churn Edge, the Scouring and the Ceaseless are all EXPANDING. If cheap, show it."
+   "growth": "The Blaze, Churnedge, the Scouring and the Ceaseless are all EXPANDING. If cheap, show it."
   }
  },
  "nearestTraditionWithinDeg": 15,
@@ -107,7 +107,7 @@
     "edge": "#0d0d14"
    },
    "features": [
-    "the Slow Stair (the only surface entrance — draw it)",
+    "Slowstair (the only surface entrance — draw it)",
     "terraced cave-city",
     "lightless deeps"
    ],
@@ -232,7 +232,7 @@
     "roads that end",
     "Tumbledown Market",
     "the Wend",
-    "the Churn Edge (a creeping, ragged border)"
+    "Churnedge (a creeping, ragged border)"
    ],
    "water": [
     "rivers that change course"
@@ -332,7 +332,7 @@
    },
    "features": [
     "Wellspring (built for sound to carry)",
-    "the Grief-House",
+    "Grief House",
     "tidal flats"
    ],
    "water": [
@@ -353,7 +353,7 @@
    },
    "features": [
     "the Axiom (a city built like an argument — draw it as derivation)",
-    "the Proof-Halls",
+    "Proof Halls",
     "the Bloodless Hold"
    ],
    "water": [
@@ -416,7 +416,7 @@
    },
    "features": [
     "the Bargain Gate",
-    "the Appetite-Halls",
+    "Appetite Halls",
     "THE MAW — a hole, and it should be the darkest point on the map"
    ],
    "water": [
@@ -436,7 +436,7 @@
    },
    "features": [
     "Choir-Height (tiers ascending)",
-    "the Mercy-House",
+    "Mercy House",
     "THE UNFALLEN — burning white at the summit"
    ],
    "water": [
@@ -476,7 +476,7 @@
    },
    "features": [
     "Cloudform (buildings that are ARGUMENTS)",
-    "the Figure-Works",
+    "Figureworks",
     "the Untethered"
    ],
    "water": [
@@ -542,7 +542,7 @@
    },
    "features": [
     "the Scour",
-    "the Clearing Ground",
+    "Clearground",
     "THE SCOURING — bare ground, spreading"
    ],
    "water": [
@@ -617,12 +617,12 @@
   },
   {
    "regionId": "foothill_the_low_market",
-   "name": "The Low Market Foothill",
+   "name": "Lowmarket Foothill",
    "note": "SNG-414: a foothill is a centre with its ground (Erik). Membership follows the authored `foothill` tag, not `kind` — kind is SHAPE and could not answer a population question (Aevi)."
   },
   {
    "regionId": "foothill_the_worn_yard",
-   "name": "The Worn Yard Foothill",
+   "name": "Wornyard Foothill",
    "note": "SNG-414: a foothill is a centre with its ground (Erik). Membership follows the authored `foothill` tag, not `kind` — kind is SHAPE and could not answer a population question (Aevi)."
   },
   {
@@ -644,7 +644,7 @@
   },
   {
    "regionId": "pocket_long_delve",
-   "name": "The Long Delve",
+   "name": "Longdelve",
    "note": "SNG-670: a pocket of the dwarven (Erik 2026-10-04: 'they live in pockets across the world'). A centre with its own ground, as a foothill is.",
    "visualIdentity": "A sheer range with one straight line cut into it."
   },
@@ -704,7 +704,7 @@
   },
   {
    "regionId": "pocket_greywater_deep",
-   "name": "The Greywater Deep",
+   "name": "Greysound",
    "note": "SNG-670: a pocket of the selkie (Erik 2026-10-04: 'they live in pockets across the world'). A centre with its own ground, as a foothill is.",
    "visualIdentity": "A grey sea; draw the seal-rocks and the cairns on its shore."
   },

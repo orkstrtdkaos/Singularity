@@ -102,7 +102,7 @@
       {
        "type": "create_waygate",
        "id": "the_made_gate",
-       "name": "The Made Gate",
+       "name": "Madegate",
        "description": "The first waygate MADE rather than reached-for — cut at the Crossing by a wright who tends endings, standing where the fold once was. Proof that a gate can be made, not only reached.",
        "connectsTo": [
         "the_crossing"
@@ -156,13 +156,13 @@
       {
        "type": "waygate",
        "gateId": "the_made_gate",
-       "name": "The Made Gate (Silas's Waygate)",
+       "name": "Madegate (Silas's Waygate)",
        "at": "the_left_branch_approach",
        "connects": [
         {
          "to": "the_crossing",
          "kind": "long_passage",
-         "note": "the passage the father's lineage was for — the Made Gate reaches the Crossing, the hub where all roads meet. A season becomes an afternoon.",
+         "note": "the passage the father's lineage was for — Madegate reaches the Crossing, the hub where all roads meet. A season becomes an afternoon.",
          "default": true
         },
         {

@@ -90,7 +90,7 @@ evidence is already scattered through the game:
 - **A craft that works better than it should, once, and never again.**
 - **A waygate that opens somewhere it does not lead.**
 - **Ask the Dead returning an answer in a voice that is not the dead person's.**
-- **The Made Gate.** A player cut the 27th waygate at the Crossing; the other 26 are inherited and
+- **Madegate.** A player cut the 27th waygate at the Crossing; the other 26 are inherited and
   unclaimed. **Something permitted that.**
 
 **How contact escalates:** it does not speak. **It responds early.** A character who spends long enough on

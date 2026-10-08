@@ -68,14 +68,14 @@ measurement.**
 | The Kept Hours | 0.84 | 0.80 | `precursor` · `nanite` · `body` |
 | The Numinous Reach | 0.82 | 0.55 | `precursor` · `body` |
 | Gearsflat Foothill | 0.80 | 0.78 | `precursor` · `nanite` · `body` |
-| The Worn Yard Foothill | 0.75 | 0.70 | `precursor` · `nanite` · `body` |
+| Wornyard Foothill | 0.75 | 0.70 | `precursor` · `nanite` · `body` |
 | The Crossing | 0.70 | 0.70 | `precursor` · `nanite` · `body` |
 | the_foothills | 0.70 | 0.60 | `precursor` · `body` |
 | Longshore Foothill | 0.70 | 0.68 | `precursor` · `body` · `nanite` |
 | The Mirrorlands | 0.66 | 0.60 | `body` · `precursor` |
 | The Reasoned Hold | 0.60 | 0.80 | `nanite` · `body` |
 | Hardline Foothill | 0.60 | 0.65 | `body` · `nanite` |
-| The Low Market Foothill | 0.60 | 0.66 | `body` · `nanite` |
+| Lowmarket Foothill | 0.60 | 0.66 | `body` · `nanite` |
 | The Umbral Depths | 0.58 | 0.50 | `body` · `wild` |
 | The Descent | 0.55 | 0.60 | `body` · `wild` |
 | Dusklow Foothill | 0.55 | 0.62 | `body` · `wild` |

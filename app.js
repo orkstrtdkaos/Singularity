@@ -51,7 +51,7 @@ import { openingFrame, placeCardBox } from "./engine/worldmap.js";
 // ⛔ SNG-679 S2: ONE READER for what state anything on a map is in, and the word a player reads for it.
 import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange, mapView, roadKey } from "./engine/mapstate.js";
 // ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
-import { mapHolds, holdMarker, ensureHoldSite, placeHoldSite, holdSiteOf } from "./engine/mapholds.js";
+import { mapHolds, holdMarker, ensureHoldSite, placeHoldSite, holdSiteOf, holdView } from "./engine/mapholds.js";
 // ⛔ SNG-680: the film is DATA. Not one of its words is written in this file.
 import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
   filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase, filmFrame, filmLandings } from "./engine/films.js";
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.24.3";
+const APP_VERSION = "2.24.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -18594,6 +18594,20 @@ const LOCAL_ASPECT = 0.62;
 /** The layout for a place, with the sub-places the ring used to draw handed in as children (L2: *"its sub-places
  *  from `locationTierNodes`, the same list the ring draws today"*), and the miles of each road out. */
 function localLayoutHere(locationId) {
+  /* ✅ SNG-679 H6: *"opening it shows its features as sites"* — `hold:<id>` is the hold's own local map: its features on its
+   * ground (or its deck), the way back to its place as the road out. Only your own: a visitor sees the hold, not its rooms. */
+  if (String(locationId || "").startsWith("hold:")) {
+    const hid = String(locationId).slice(5);
+    const h = (character.holdings || []).find((x) => x.id === hid) || null;
+    if (h) {
+      const placeLayout = h.locationId ? localLayoutHere(h.locationId).layout : null;
+      const before = JSON.stringify((h.features || []).map((f) => f?.site || null));
+      const layout = holdView(h, { content: CONTENT, locations: CONTENT.locations, worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), routes: _worldRoutes?.byPair || null, placeLayout });
+      // ⛑ a feature placed for the first time is STORED — saved once, the moment it is placed
+      if (JSON.stringify((h.features || []).map((f) => f?.site || null)) !== before) { try { saveCharacter(character); } catch {} }
+      return { host: { name: h.name || hid, hold: h }, children: [], layout };
+    }
+  }
   const { host, children } = locationTierNodes(character, CONTENT, locationId);
   const kids = children.map((c) => c.kind === "location"
     ? { ...c, worldPos: CONTENT.locations[c.id]?.worldPos || null, placeKind: CONTENT.locationKinds?.kinds?.[c.id]?.kind || CONTENT.locations[c.id]?.kind || null,
@@ -18613,7 +18627,7 @@ function renderMapLocation(locationId) {
   const nSites = (layout.sites || []).length;
   chrome(`<div class="screen screen-ground">
     <h2>${esc(name)}</h2>
-    <p class="hint" style="margin-bottom:8px">${layout.authored ? "Authored ground" : "Ground laid out from the measured land"} — ${nSites} named ${nSites === 1 ? "site" : "sites"}${here ? ". You are here." : "."}${layout.generated ? " Drawn from the roads, the water and the slope the world measures here, and it draws the same way every time." : ""} Drag to pan, scroll or pinch to zoom; tap a site for its card.</p>
+    <p class="hint" style="margin-bottom:8px">${host?.hold ? (layout.sea ? "Out on the water" : layout.deck ? `Your ${esc(String(layout.deck.frame || "frame"))}` : "Your hold's own ground") : layout.authored ? "Authored ground" : "Ground laid out from the measured land"} — ${nSites} ${host?.hold ? (nSites === 1 ? "feature" : "features") : `named ${nSites === 1 ? "site" : "sites"}`}${here ? ". You are here." : "."}${layout.generated ? " Drawn from the roads, the water and the slope the world measures here, and it draws the same way every time." : ""} Drag to pan, scroll or pinch to zoom; tap a site for its card.</p>
     ${mapTierBar()}
     ${(() => {
       /* ✅ L5 · THE LEVEL SWITCH: shown only when the place HAS levels, surface first, then down. ⛑ Not a tier —
@@ -18641,7 +18655,10 @@ function renderMapLocation(locationId) {
   for (const b of app.querySelectorAll("[data-lmlevel]")) b.onclick = () => { _localLevel = Number(b.dataset.lmlevel) || 0; renderMap(); };
   wireFieldPanel(() => renderMap());   // CCODE-472: one wiring, three tiers
   wireMapTierBar();
-  document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+  // ✅ H6: from a hold's own map, Back is its place's map — the hold was opened from there
+  document.getElementById("map-back").onclick = host?.hold?.locationId
+    ? () => { mapTier = "location"; mapFocus = host.hold.locationId; renderMap(); }
+    : () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
 /** ⛔ PAINT THE LOCAL CANVAS. The backing store follows the pane (M1: CSS map pixels under a dpr transform);
@@ -18728,7 +18745,10 @@ function paintLocalCanvas(locationId) {
   const inset = _localView.k <= 1.01 && nearCentre ? enlargementFor(model) : null;
   if (inset) _labelSpace.claim({ x0: inset.x - 4, x1: inset.x + inset.w + 4, y0: inset.y - 4, y1: inset.y + inset.h + 4, rank: -2, kind: "inset" });
   const res = paintLocalMap(ctx, model, { spreading: isSpreading(model?.id, CONTENT),
-    stateOf: (s) => mapView(character, `site:${model?.id}/${s.id}`, { content: CONTENT, name: String(s.name || s.id), worldDay: absoluteWorldDay() }),   // ✅ S5: each site's state
+    stateOf: (s) => s.feature?.id
+      ? mapView(character, `feature:${s.feature.holdId}/${s.feature.id}`, { content: CONTENT, name: String(s.name || s.id), worldDay: absoluteWorldDay(),
+          recordOf: () => (character.holdings || []).find((x) => x.id === s.feature.holdId)?.features?.find((x) => x?.id === s.feature.id) || null })   // ✅ H6: a feature's state is its own (Part S)
+      : mapView(character, `site:${model?.id}/${s.id}`, { content: CONTENT, name: String(s.name || s.id), worldDay: absoluteWorldDay() }),   // ✅ S5: each site's state
     waterStateOf: (n, f) => mapView(character, `water:${model?.id}/${n}`, { content: CONTENT, name: String(f?.name || "the water") }),   // ✅ S5: the place's own water
     space: _labelSpace, queue: queueLabel, exitSpace: _exitSpace, character, known, hereSite, inset,
     labelMinPx: inset ? inset.builtRadiusPx * 1.6 + 12 : 0 });
@@ -18809,7 +18829,15 @@ function wireLocalCanvas(locationId) {
       const st = hd.state && hd.state !== "whole" ? ` · ${esc(String(hd.state))}` : "";
       chip.innerHTML = `<div class="rmc-what"><strong>${esc(s.name || s.id)}</strong> <span class="hint">${esc(String(hd.rung || "a hold"))}${st}</span></div>`
         + `<div class="hint rmc-whose">${hd.own ? "Your hold." : `${esc(hd.ownerName || "Someone")}'s hold. A visitor sees the hold, not its rooms.`}</div>`
-        + (hd.own && hd.features ? `<div class="hint rmc-far">${hd.features} ${hd.features === 1 ? "feature" : "features"} built.</div>` : "");
+        + (hd.own && hd.features ? `<div class="hint rmc-far">${hd.features} ${hd.features === 1 ? "feature" : "features"} built.</div>` : "")
+        + (hd.own ? `<div class="rmc-acts"><button class="opt" data-lmc-hold="${esc(hd.id)}">Open the hold</button></div>` : "");
+    } else if (hit.site?.feature) {
+      // ✅ H6: *"A feature with `count` > 1 is one site with the count on its card"*; its state from Part S
+      const s = hit.site, fe = s.feature;
+      const kindLabel = CONTENT.rules?.economy?.holdFeatures?.kinds?.[fe.kind]?.label || fe.kind || s.kind;
+      chip.innerHTML = `<div class="rmc-what"><strong>${esc(s.name || s.id)}</strong>${fe.count > 1 ? ` <span class="hint">×${fe.count}</span>` : ""}</div>`
+        + `<div class="hint rmc-far">${esc(String(kindLabel))}${fe.level > 1 ? ` · raised to ${fe.level}` : ""}${fe.state && fe.state !== "whole" ? ` · ${esc(String(fe.state))}` : ""}</div>`
+        + (s.placedBecause ? `<div class="hint rmc-whose">${esc(String(s.placedBecause))}</div>` : "");
     } else {
       const s = hit.site;
       const vocab = CONTENT.locationKinds?._siteVocabulary?.[s.kind] || CONTENT.locationKinds?._vocabulary?.[s.kind] || "";
@@ -18827,6 +18855,8 @@ function wireLocalCanvas(locationId) {
     placeChip(hit.x, hit.y);
     const ib = chip.querySelector("[data-lmc-inside]");
     if (ib) ib.onclick = (e) => { e.stopPropagation(); mapTier = "location"; mapFocus = ib.dataset.lmcInside; renderMap(); };
+    const hb = chip.querySelector("[data-lmc-hold]");
+    if (hb) hb.onclick = (e) => { e.stopPropagation(); mapTier = "location"; mapFocus = "hold:" + hb.dataset.lmcHold; renderMap(); };
     const tb = chip.querySelector("[data-lmc-travel]");
     if (tb) tb.onclick = (e) => { e.stopPropagation(); if (!planJourneyTo(tb.dataset.lmcTravel)) travelTo(tb.dataset.lmcTravel); };
     const gb = chip.querySelector("[data-lmc-go]");

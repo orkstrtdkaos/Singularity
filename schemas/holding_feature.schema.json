@@ -41,6 +41,12 @@
    "type": "number",
    "description": "100% — how many of it stand here."
   },
+  "site": {
+   "type": "object",
+   "description": "SNG-679 H6 (CCODE-679): where it stands on its hold's own local map — within the rung's `siteRadiusMetres` of the hold's centre (or a `scatter` deck's length), placed once on first draw and STORED so it never jumps.",
+   "properties": { "bearing": { "type": "number" }, "fromMetres": { "type": "number" } },
+   "required": ["bearing", "fromMetres"]
+  },
   "day": {
    "type": "number",
    "description": "100% — the day it was raised."

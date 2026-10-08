@@ -24694,7 +24694,8 @@ await (async () => {
       && /const view416 = mapView\(character, `place:\$\{id\}`/.test(src5) && /if \(m\.heard && m\.view\?\.mark\) drawStateMark\(ctx, m\.view\.mark/.test(src5)
       && /const roadState416 = new Map\(lines\.map\(\(\{ r \}\) => \[r, mapView\(character, roadKey\(r\.a, r\.b\)/.test(src5) && /if \(st === "ruined"\) \{   \/\/ blocked: a bar across the road/.test(src5)
       && /const pv = mapView\(character, `place:\$\{p\.id\}`/.test(src5) && /const gRoadState = new Map\(net\.roads\.map/.test(src5)
-      && /stateOf: \(s\) => mapView\(character, `site:\$\{model\?\.id\}\/\$\{s\.id\}`/.test(src5) && /pv\.renamed \? mapStateWord\(CONTENT, "place", "renamed"/.test(src5), res5?.err || "");
+      // ⛑ CCODE-679: a hold's feature reads its OWN key first (`feature:<hold>/<id>`); every other site is still `site:<place>/<id>`
+      && /stateOf: \(s\) => s\.feature\?\.id[\s\S]{0,420}: mapView\(character, `site:\$\{model\?\.id\}\/\$\{s\.id\}`/.test(src5) && /pv\.renamed \? mapStateWord\(CONTENT, "place", "renamed"/.test(src5), res5?.err || "");
   }
   /* ── ✅ SNG-679 S5 water (CCODE-673): the place's own water, narrowed, low, or a dry bed ── */
   {
@@ -24953,6 +24954,53 @@ await (async () => {
       /const layout = withHoldSites\(locationId, placeLayout\);/.test(app678) && /if \(placedNow\) \{ try \{ saveCharacter\(character\); \} catch \{\} \}/.test(app678)
       && /A visitor sees the hold, not its rooms\./.test(app678) && /if \(site\?\.hold\) return "seen";/.test(readFileSync(join(root, "engine/localmap.js"), "utf8"))
       && /sites\.filter\(\(st\) => !st\.hold && /.test(readFileSync(join(root, "engine/localground.js"), "utf8")));
+  }
+  /* ── ✅ SNG-679 H6, second half (CCODE-679): opening a hold shows its own local map, its features as sites ── */
+  {
+    const LM679 = await import("../engine/localmap.js");
+    const MH679 = await import("../engine/mapholds.js");
+    const { loadContentHeadless: lch679 } = await import("./headless_content.mjs");
+    const C679 = await lch679();
+    const KINDS679 = C679.rules.economy.holdFeatures.kinds;
+    const stub679 = () => new Proxy({ globalAlpha: 1, lineWidth: 1 }, { get: (t, k) => k in t ? t[k] : (k === "measureText" ? (x) => ({ width: String(x).length * 5.6 }) : k === "createRadialGradient" || k === "createLinearGradient" ? () => ({ addColorStop() {} }) : k === "getImageData" ? () => ({ data: new Uint8ClampedArray(4) }) : () => {}), set: (t, k, v) => { t[k] = v; return true; } });
+    // a fixed hold: Silas's Stillwater's Trouble, nineteen features — a keep, so its features stand within the keep's radius
+    const silas679 = JSON.parse(readFileSync(join(root, "characters/player-s9z9u1/char-mrhs8286.json"), "utf8"));
+    const st679 = silas679.holdings.find((h) => (h.features || []).length >= 19);
+    const place679 = LM679.localLayoutFor(st679.locationId, { content: C679 });
+    MH679.ensureHoldSite(st679, place679);
+    const Rkeep679 = MH679.holdSiteRadius(st679, C679);   // nineteen features: a keep
+    st679.features.push({ kind: Object.keys(KINDS679).find((k) => KINDS679[k].siteKind === "works"), name: "the kilns", count: 3, day: 1 });
+    const lay679 = MH679.holdLayoutFor(st679, { content: C679, placeLayout: place679 });
+    const R679 = MH679.holdSiteRadius(st679, C679);
+    const again679 = MH679.holdLayoutFor(st679, { content: C679, placeLayout: { ...place679, extent: [] } });
+    const kilns679 = lay679.sites.filter((x) => x.name === "the kilns");
+    check("679/H6: ⛔ A FIXED HOLD'S OWN MAP — every feature is a site of its kind's `siteKind`, within its rung's `siteRadiusMetres` (a keep's 300 m, a fortress's 400 once the kilns make it one), each point placed once and STORED on the feature, and a feature of three is ONE site with its count",
+      lay679.sites.length === st679.features.length && Rkeep679 === 300 && R679 >= Rkeep679 && lay679.sites.every((x) => x.localMap.metres <= R679)
+      && lay679.sites.every((x, i) => x.kind === (st679.features[i].siteKind || KINDS679[st679.features[i].kind]?.siteKind || "works"))
+      && st679.features.every((f) => f.site) && again679.sites.every((x, i) => x.localMap.metres === lay679.sites[i].localMap.metres && x.localMap.bearing === lay679.sites[i].localMap.bearing)
+      && kilns679.length === 1 && kilns679[0].feature.count === 3 && lay679._measured.roadsOut[0]?.to === st679.locationId
+      && JSON.parse(readFileSync(join(root, "schemas/holding_feature.schema.json"), "utf8")).properties.site?.required?.includes("bearing"),
+      `${lay679.sites.length} sites, radius ${R679}`);
+    // a moving hold is the hold itself: its deck, on what it is passing over
+    const feats679 = Array.from({ length: 5 }, (_, i) => ({ id: "f" + i, kind: "hall", name: "Room " + (i + 1), count: 1, day: 1 }));
+    const deck679 = (frame, atSea) => { const h = { id: "mv_" + frame, name: frame, frame, locationId: "millbrook", features: feats679.map((f) => ({ ...f })), site: { bearing: 40, fromMetres: 120 } };
+      const lay = MH679.holdLayoutFor(h, { content: C679, placeLayout: LM679.localLayoutFor("millbrook", { content: C679 }), atSea, heading: 60 });
+      const md = LM679.localModel(lay, LM679.localFrame(lay, { w: 800, h: 500 }), { placeId: lay.placeId, placeName: frame });
+      return { h, lay, md, o: LM679.paintLocalMap(stub679(), md, { reveal: true }) }; };
+    const hull = deck679("hull", true), legs = deck679("legs", false), lift = deck679("lift", false), grown = deck679("grown", false);
+    const hm = hull.lay.sites.map((x) => x.localMap);
+    check("679/H6: ⛔ A MOVING HOLD'S MAP IS THE HOLD — a hull lays its rooms bow to stern along the way she is going (the bow first) and, out at sea, is drawn on the water with no town under her; legs stack its rooms on two decks; a lift rings an open middle; a grown hold's rooms are placed and stored",
+      hull.lay.sea && hull.o.sea && hull.o.deck === "line" && hull.lay.extent.length === 0 && hm[0].bearing === 60 && hm[0].metres > hm[1].metres && hm[4].bearing === -120
+      && LM679.levelsOf(legs.lay).length === 2 && legs.o.deck === "stack"
+      && lift.o.deck === "ring" && new Set(lift.lay.sites.map((x) => x.localMap.metres)).size === 1
+      && grown.h.features.every((f) => f.site) && new Set(grown.lay.sites.map((x) => `${x.localMap.bearing}/${x.localMap.metres}`)).size === 5
+      && [hull, legs, lift, grown].every((d) => Array.isArray(d.md.houses) && d.md.houses.length === 0));
+    const app679 = readFileSync(join(root, "app.js"), "utf8");
+    check("679/H6: ⛔ OPENING IT — your own hold's chip has \"Open the hold\" (a visitor's has none), `hold:<id>` is a map the local tier draws, Back returns to its place, and a feature's state is read from its own key (Part S)",
+      /data-lmc-hold="\$\{esc\(hd\.id\)\}">Open the hold</.test(app679) && /\(hd\.own \? `<div class="rmc-acts"><button class="opt" data-lmc-hold=/.test(app679)
+      && /if \(String\(locationId \|\| ""\)\.startsWith\("hold:"\)\) \{/.test(app679) && /mapFocus = "hold:" \+ hb\.dataset\.lmcHold/.test(app679)
+      && /\? \(\) => \{ mapTier = "location"; mapFocus = host\.hold\.locationId; renderMap\(\); \}/.test(app679)
+      && /mapView\(character, `feature:\$\{s\.feature\.holdId\}\/\$\{s\.feature\.id\}`/.test(app679));
   }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)

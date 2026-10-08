@@ -893,7 +893,9 @@ export function localModel(layout, frame, { placeName = "", placeId = "", nameOf
     : null;
   const houses = (layout?.ground && onSurface)
     ? groundHouses({ ground: layout.ground, frame, built: { ...builtAt, r: builtR }, roads, lanes, sites, water, features, id, uphill: uphillB, blocked: ground?.blocked || null, streamLine: ground?.streamLine || null, pools: (ground?.areas || []).filter((a) => a.k === "water") })
-    : null;
+    // ✅ SNG-679 H6: a hold's own map draws its FEATURES — no roofs invented along its road (the old rule drew a street down
+    // Stillwater's Trouble's way in, and roofs the size of the hull on the open sea round the Grey Gull)
+    : (layout?.hold ? [] : null);
   if (ground) finishGround(ground, houses || []);
   return { id, placeName, frame, layout, sites, roads, lanes, features, contours, built: { ...builtAt, r: builtR }, water, rnd, level: Number(level) || 0, houses, ground };
 }
@@ -1376,6 +1378,32 @@ function paintGroundLine(ctx, l, model) {
   }
   ctx.restore();
 }
+/** The deck a moving hold stands on, in the frame's metres. Returns its shape. */
+function paintDeck(ctx, model) {
+  const d = model.layout.deck, f = model.frame, s = f.pxPerMetre;
+  const L = (Number(d.lengthMetres) || 30) * s, hd = (Number(d.heading) || 0) * R;
+  const ux = Math.sin(hd), uy = -Math.cos(hd), nx = -uy, ny = ux, cx = f.cx, cy = f.cy;
+  const at = (t, o) => [cx + ux * t + nx * o, cy + uy * t + ny * o];
+  ctx.save();
+  ctx.fillStyle = "rgba(160,122,82,0.88)"; ctx.strokeStyle = "rgba(70,44,24,0.9)"; ctx.lineWidth = 1.4;
+  if (d.shape === "line") {
+    const W = L * 0.3;
+    const pts = [at(L * 0.62, 0), at(L * 0.3, W / 2), at(-L * 0.46, W / 2 * 0.9), at(-L * 0.52, 0), at(-L * 0.46, -W / 2 * 0.9), at(L * 0.3, -W / 2)];
+    smoothPath(ctx, pts, true); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = "rgba(70,44,24,0.35)"; ctx.lineWidth = 0.7;
+    for (const o of [-W * 0.22, 0, W * 0.22]) { const a = at(-L * 0.44, o), b = at(L * 0.36, o * 0.6); ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
+  } else if (d.shape === "ring") {
+    ctx.lineWidth = L * 0.16; ctx.strokeStyle = "rgba(160,122,82,0.88)";
+    ctx.beginPath(); ctx.arc(cx, cy, L * 0.35, 0, Math.PI * 2); ctx.stroke();
+    ctx.lineWidth = 1.2; ctx.strokeStyle = "rgba(70,44,24,0.9)";
+    for (const r of [L * 0.35 - L * 0.08, L * 0.35 + L * 0.08]) { ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke(); }
+  } else if (d.shape === "stack") {
+    const pts = [at(L / 2, L * 0.28), at(L / 2, -L * 0.28), at(-L / 2, -L * 0.28), at(-L / 2, L * 0.28)];
+    strokePath(ctx, pts, true); ctx.fill(); ctx.stroke();
+  }
+  ctx.restore();
+  return d.shape;
+}
 const TURNS = new Set(["boats", "bridge", "ford", "stacks", "shed", "column", "footings"]);
 function paintGroundMark(ctx, m, model) {
   const st = m.state, sz = m.sz;
@@ -1502,6 +1530,14 @@ export function paintLocalMap(ctx, model, {
   if (clip) { ctx.beginPath(); ctx.rect(clip.x, clip.y, clip.w, clip.h); ctx.clip(); }
   // paper
   ctx.fillStyle = INK.paper; ctx.fillRect(0, 0, w, h);
+  // ✅ SNG-679 H6: a moving hold out on the water is drawn on the water — *"whatever it is passing over … not a town"*
+  if (model.layout?.sea) {
+    ctx.fillStyle = INK.water; ctx.globalAlpha = 0.9; ctx.fillRect(0, 0, w, h); ctx.globalAlpha = 1;
+    ctx.strokeStyle = "rgba(255,255,255,0.35)"; ctx.lineWidth = 0.8;
+    const sr = rngOf(seedOf("sea:" + model.id));
+    for (let i = 0; i < Math.round((w * h) / 2600); i++) { const x = sr() * w, y = sr() * h; ctx.beginPath(); ctx.moveTo(x - 4, y); ctx.quadraticCurveTo(x, y - 2.5, x + 4, y); ctx.stroke(); }
+    out.sea = true;
+  }
   // a faint paper grain — a few hundred seeded specks
   ctx.fillStyle = "rgba(120,98,66,0.06)";
   for (let i = 0; i < Math.round((w * h) / 900); i++) ctx.fillRect(R2() * w, R2() * h, 1.2, 1.2);
@@ -1510,6 +1546,7 @@ export function paintLocalMap(ctx, model, {
   ctx.globalAlpha = model.contours.strength <= 0.018 ? 0.5 : 1;
   for (const line of model.contours.lines) { smoothPath(ctx, line); ctx.stroke(); }
   ctx.globalAlpha = 1;
+  if (model.layout?.sea) { /* no contours on the open water */ }
   // the ground: fields, woods, rock, marsh, waste first; built ground over them; water last so it cuts them
   const order = { field: 0, marsh: 0, waste: 0, rock: 1, wood: 2, built: 3, water: 4 };
   // ✅ SNG-679 S5 (CCODE-673): the place's own water by its state — keyed by the feature's index, `water:<place>/<n>`, the key
@@ -1563,6 +1600,9 @@ export function paintLocalMap(ctx, model, {
     ctx.restore();
   }
   paintRoofs(ctx, model, rngOf(seedOf("roofs:" + model.id)));
+  // ✅ SNG-679 H6: a moving hold IS its local map — its deck under its rooms: a hull bow to stern, a ring round its open
+  // middle, a stack's frame; a `scatter` deck (a grown hold) has none, its rooms where the living thing allows
+  if (model.layout?.deck) out.deck = paintDeck(ctx, model);
   // ✅ G4: the marks over the roofs, unlabelled, and the place's own mark LAST — *"the first thing the eye finds"*
   if (G) {
     for (const m of G.marks) if (!m.own) paintGroundMark(ctx, m, model);

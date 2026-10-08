@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-10-07T22:28:14.750Z",
-  "build": "2.22.11",
+  "at": "2026-10-08T12:52:09.090Z",
+  "build": "2.23.1",
   "field": {
     "where": "radiant_plateau_edge",
     "lat": -65,
@@ -18,7 +18,7 @@
     "name": "Usnea Beard",
     "playerKey": "player-s9z9u1",
     "level": 5,
-    "rev": 63,
+    "rev": 65,
     "day": 12,
     "turns": 2,
     "countingSince": null,
@@ -75,6 +75,7 @@
       "itemUpdates",
       "jobOps",
       "ledgerEvents",
+      "mapOps",
       "markDefiningMoment",
       "markTeacher",
       "moveTo",
@@ -93,8 +94,8 @@
       "unlockPrecursor",
       "unlockSubstrate"
     ],
-    "neverCount": 37,
-    "knownCount": 48,
+    "neverCount": 38,
+    "knownCount": 49,
     "unknown": {},
     "inProse": {},
     "emptyClaims": 0
@@ -132,8 +133,8 @@
   "fireTests": null,
   "promptRows": null,
   "world": {
-    "locations": 165,
+    "locations": 185,
     "abilities": 441,
-    "npcs": 196
+    "npcs": 218
   }
 }

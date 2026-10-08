@@ -1657,14 +1657,63 @@ export function regionRoadPaths(t, locations, regionId, { gen, authored = null, 
   return { byPair, roads: roads.length, routed: byPair.size };
 }
 
-export function worldRoadRoutes(t, locations, { tierOf = null, gridW = 360, regionPaths = null, regionStamp = 0 } = {}) {
+/** ✅ AEVI W3 (SNG-682): the azimuthal plane the cap is routed on — ρ is the distance from the pole in degrees, u east, v toward
+ *  longitude 0 — the same arithmetic `makePolarBase` draws the Crossing's map with, without its samples (the router samples the
+ *  world raster itself through `makeGroundCost`). PURE. */
+export function polarProjection(R, pole = -1) {
+  const RAD = Math.PI / 180, DEG = 180 / Math.PI;
+  const rhoOf = (lat) => (pole < 0 ? lat + 90 : 90 - lat);
+  const latOf = (rho) => (pole < 0 ? rho - 90 : 90 - rho);
+  return {
+    R, pole,
+    toScreen(lon, lat, w, h) { const k = Math.min(w, h) / (2 * R); const r = rhoOf(lat), a = lon * RAD; return { x: w / 2 + k * r * Math.sin(a), y: h / 2 - k * r * Math.cos(a) }; },
+    toWorld(x, y, w, h) { const k = Math.min(w, h) / (2 * R); const u = (x - w / 2) / k, v = -(y - h / 2) / k; return { lon: Math.atan2(u, v) * DEG, lat: latOf(Math.min(Math.hypot(u, v), 180)) }; },
+  };
+}
+/** the cap: a road with an end within this many degrees of the Crossing's pole is routed on the polar grid */
+export const WORLD_CAP_DEG = 60;
+
+/** ✅ AEVI W3 (SNG-682): *"Every road with both ends within ~60° of the Crossing goes on an azimuthal (polar) grid centred on
+ *  the Crossing, using `makeGroundCost`'s polar disc. Roads out toward the equator poles stay on the lon/lat grid, which is
+ *  sound there. The seam guard stays, and a polar grid has no seam to guard in the cap."*
+ *  ⚠️ MEASURED on the way: a road with ONE end at the pole is broken at that end on the lon/lat grid whatever its far end is —
+ *  21 such roads, 9 of them over ×2 — so every road with an end in the cap routes here: both ends in the cap on a 60° disc,
+ *  one end on a disc wide enough for the far end (the plane distorts toward its rim, and still beats cells that collapse).
+ *  `roads` narrows the work to a chunk (the app routes the cap in idle slices); the whole cap when omitted. PURE. */
+export function capRoadRoutes(t, locations, { tierOf = null, roads = null, cell = 2, px = 720 } = {}) {
+  if (!t || !locations) return null;
+  const colat = (id) => { const w = locations[id]?.worldPos; return w ? Number(w.colatitude) : null; };
+  const all = roads || roadNetwork(locations, { tierOf }).roads;
+  const inCap = all.filter((r) => { const a = colat(r.a), b = colat(r.b); return a != null && b != null && Math.min(a, b) <= WORLD_CAP_DEG; });
+  const byPair = new Map();
+  let routed = 0;
+  for (const [label, pick, Rdeg] of [["inner", (r) => Math.max(colat(r.a), colat(r.b)) <= WORLD_CAP_DEG, WORLD_CAP_DEG], ["outer", (r) => Math.max(colat(r.a), colat(r.b)) > WORLD_CAP_DEG, 0]]) {
+    const set = inCap.filter(pick);
+    if (!set.length) continue;
+    const Rr = label === "inner" ? Rdeg : Math.min(150, Math.ceil(Math.max(...set.map((r) => Math.max(colat(r.a), colat(r.b)))) + 10));
+    const ext = { polar: true, pole: -1, poleRadiusDeg: Rr, centre: { lat: -90, lon: 0 }, la0: -90, la1: -90 + Rr, lo0: -180, lo1: 180 };
+    const proj = polarProjection(Rr, -1);
+    const G = makeGroundCost(t, { ...GROUND_COST.road, extent: ext });
+    const out = routeRoads(set, locations, { W: px, H: px, step: G.step, toScreen: proj.toScreen, toWorld: proj.toWorld, extent: ext, cell });
+    for (const r of (out?.roads || [])) {
+      const pts = r.points || [];
+      if (pts.length < 2) continue;
+      const key = r.a < r.b ? `${r.a}|${r.b}` : `${r.b}|${r.a}`;
+      byPair.set(key, pts.map((p) => { const w = proj.toWorld(p.x, p.y, px, px); return [w.lat, w.lon]; }));
+      routed++;
+    }
+  }
+  return { byPair, roads: inCap.length, routed, pairs: inCap.map((r) => (r.a < r.b ? `${r.a}|${r.b}` : `${r.b}|${r.a}`)) };
+}
+
+export function worldRoadRoutes(t, locations, { tierOf = null, gridW = 360, regionPaths = null, regionStamp = 0, capPaths = null, capStamp = 0 } = {}) {
   if (!t || !locations) return null;
   let hit = _worldRoutes.get(t);
   // ⛑ W2: the grid routing is cached by itself; the region paths are MERGED over it per `regionStamp`, so a region
   // landing in idle time costs a merge and not a 580ms re-route of the world
   const stamp = `${gridW}|${Object.keys(locations).length}`;
-  if (hit && hit.stamp === stamp && hit.regionStamp === regionStamp) return hit;
-  if (hit && hit.stamp === stamp) return mergeRegionPaths(t, hit, locations, regionPaths, regionStamp);
+  if (hit && hit.stamp === stamp && hit.regionStamp === regionStamp && hit.capStamp === capStamp) return hit;
+  if (hit && hit.stamp === stamp) return mergeRegionPaths(t, hit, locations, regionPaths, regionStamp, capPaths, capStamp);
 
   const gw = gridW, gh = Math.round(gridW / 2);
   const toScreen = (lon, lat) => ({ x: ((lon + 180) / 360) * gw, y: ((90 - lat) / 180) * gh });
@@ -1695,15 +1744,19 @@ export function worldRoadRoutes(t, locations, { tierOf = null, gridW = 360, regi
     byPair.set(key, path);
     kept++;
   }
-  hit = { stamp, byPair, gridByPair: byPair, kept, seamDropped, input: net.roads.length, ms: Date.now() - t0, gw, gh, regionStamp: 0, fromRegions: 0 };
+  hit = { stamp, byPair, gridByPair: byPair, kept, seamDropped, input: net.roads.length, ms: Date.now() - t0, gw, gh, regionStamp: 0, fromRegions: 0, capStamp: 0, fromCap: 0 };
   _worldRoutes.set(t, hit);
-  return regionPaths ? mergeRegionPaths(t, hit, locations, regionPaths, regionStamp) : hit;
+  return (regionPaths || capPaths) ? mergeRegionPaths(t, hit, locations, regionPaths, regionStamp, capPaths, capStamp) : hit;
 }
 
 /** W2's merge: for every road whose two ends share a region, the region's own path replaces the grid's (or supplies one
  *  the grid never found); the trunks between regions keep the world grid's. Pure over `hit.gridByPair`. */
-function mergeRegionPaths(t, hit, locations, regionPaths, regionStamp) {
+function mergeRegionPaths(t, hit, locations, regionPaths, regionStamp, capPaths = null, capStamp = 0) {
   const byPair = new Map(hit.gridByPair);
+  // ✅ W3: the cap's polar paths over the grid's, before the regions' own take their same-region pairs
+  let fromCap = 0;
+  const cap = typeof capPaths === "function" ? capPaths() : capPaths;
+  if (cap && typeof cap.get === "function") for (const [key, p] of cap) { if (p && p.length > 1) { byPair.set(key, p); fromCap++; } }
   let fromRegions = 0;
   if (typeof regionPaths === "function") {
     const regionOf = (id) => locations[id]?.regionId || locations[id]?.region || null;
@@ -1717,7 +1770,7 @@ function mergeRegionPaths(t, hit, locations, regionPaths, regionStamp) {
       if (p && p.length > 1) { byPair.set(key, p); fromRegions++; }
     }
   }
-  const merged = { ...hit, byPair, kept: byPair.size, regionStamp, fromRegions };
+  const merged = { ...hit, byPair, kept: byPair.size, regionStamp, fromRegions, capStamp, fromCap };
   _worldRoutes.set(t, merged);
   return merged;
 }

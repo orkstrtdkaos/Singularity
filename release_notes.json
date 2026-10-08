@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.22.20",
+      "date": "2026-10-08",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The roads around the Crossing stop zigzagging",
+          "summary": "The world map routed every road on a flat grid of longitude and latitude, whose cells collapse at the pole the Crossing sits on, so the roads near it walked two or three times their length. Every road with an end near the Crossing is now routed on a grid centred on it, evenly spaced on the ground all the way in; they arrive a few seconds after the map opens."
+        }
+      ]
+    },
+    {
       "version": "2.22.19",
       "date": "2026-10-08",
       "entries": [

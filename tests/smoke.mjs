@@ -24440,7 +24440,24 @@ await (async () => {
       && [...grid661.gridByPair.keys()].filter((k) => { const [a, b] = k.split("|"); return (C660.locations[a].regionId || C660.locations[a].region) !== (C660.locations[b].regionId || C660.locations[b].region); }).every((k) => merged661.byPair.get(k) === grid661.gridByPair.get(k)));
     check("SNG-682 W2: ⛔ …and the globe routes the regions in idle time after the trunks and merges them with a cheap stamp, never re-routing the world per region",
       /scheduleRegionPaths\(\);\s*\/\/[^\n]*W2/.test(srcW1) && /regionRoadPaths\(_terrain, CONTENT\.locations, rid, \{ gen: \(win\) => _fineGenShared\.make\(_fineGenShared\.gp, win\)/.test(srcW1)
-      && /regionPaths: regionPathsFor, regionStamp: _regionPathsCache\.size/.test(srcW1) && /if \(hit && hit\.stamp === stamp\) return mergeRegionPaths\(t, hit, locations, regionPaths, regionStamp\);/.test(wgW1));
+      && /regionPaths: regionPathsFor, regionStamp: _regionPathsCache\.size, capPaths: capPathsFor, capStamp: _capStamp/.test(srcW1) && /_worldRoutes = routeWorld\(\);/.test(srcW1)
+      && /if \(hit && hit\.stamp === stamp\) return mergeRegionPaths\(t, hit, locations, regionPaths, regionStamp, capPaths, capStamp\);/.test(wgW1));
+    // ✅ W3 (CCODE-665): the cap on a polar grid
+    const pp665 = WG660.polarProjection(60, -1);
+    const rt665 = [[-90, 0], [-70, 251.5], [-40, -120], [-31, 179]].every(([lat, lon]) => { const s = pp665.toScreen(lon, lat, 720, 720); const w = pp665.toWorld(s.x, s.y, 720, 720); const dl = ((w.lon - lon) % 360 + 540) % 360 - 180; return Math.abs(w.lat - lat) < 1e-6 && (Math.abs(dl) < 1e-6 || Math.abs(lat + 90) < 1e-9); });
+    const cap665 = WG660.capRoadRoutes(t660, C660.locations, { tierOf: (l) => l?.tier });
+    const merged665 = WG660.worldRoadRoutes(t660, C660.locations, { tierOf: (l) => l?.tier, capPaths: cap665.byPair, capStamp: 1 });
+    const colat665 = (id) => C660.locations[id].worldPos.colatitude;
+    const capKeys665 = [...cap665.byPair.keys()];
+    const tw665 = merged665.byPair.get("the_crossing|thinwater");
+    const ratio665 = tw665 ? walk661(tw665) / walk661([tw665[0], tw665[tw665.length - 1]]) : null;
+    const anchored665 = capKeys665.filter((k) => { const [a, b] = k.split("|"); return Math.min(colat665(a), colat665(b)) <= 10; });
+    const over2 = anchored665.filter((k) => { const p = merged665.byPair.get(k); return walk661(p) / walk661([p[0], p[p.length - 1]]) > 2; }).length;
+    check("SNG-682 W3: ⛔ every road with an end within 60° of the Crossing routes on an azimuthal grid over the polar disc (`polarProjection` round-trips; `capRoadRoutes` counts them), its path is the one the merge carries, the roads with no end in the cap stay on the lon/lat grid — and within 10° of the Crossing the roads over ×2 fall from 13 to a handful, the Crossing → Thinwater from ×3.22",
+      rt665 && cap665.routed > 40 && cap665.roads >= cap665.routed && capKeys665.every((k) => merged665.byPair.get(k) === cap665.byPair.get(k))
+      && capKeys665.every((k) => { const [a, b] = k.split("|"); return Math.min(colat665(a), colat665(b)) <= 60; })
+      && [...merged665.gridByPair.keys()].filter((k) => !cap665.byPair.has(k)).every((k) => merged665.byPair.get(k) === merged665.gridByPair.get(k))
+      && over2 < 13 && ratio665 != null && ratio665 < 3.22, `the Crossing → Thinwater x${ratio665 == null ? "?" : ratio665.toFixed(2)} · ${cap665.routed} of ${cap665.roads} cap roads · over x2 within 10°: ${over2} (13 before; the rest is the ground, ratcheted in the measurement)`);
     check("SNG-682: ⛔ Aevi's road measurement runs in CI with her ratchets (tests/world_roads_measure.mjs in the runner, a baseline that may only go DOWN)",
       existsSync(join(root, "tests/world_roads_measure.mjs")) && existsSync(join(root, "tests/world_roads_baseline.json"))
       && /\["world_roads_measure", "node", \["tests\/world_roads_measure\.mjs"\]\]/.test(readFileSync(join(root, "scripts/run_tests.mjs"), "utf8")));

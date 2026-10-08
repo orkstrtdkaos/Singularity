@@ -51,7 +51,7 @@ import { openingFrame, placeCardBox } from "./engine/worldmap.js";
 // ⛔ SNG-679 S2: ONE READER for what state anything on a map is in, and the word a player reads for it.
 import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange, mapView, roadKey } from "./engine/mapstate.js";
 // ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
-import { mapHolds, holdMarker } from "./engine/mapholds.js";
+import { mapHolds, holdMarker, ensureHoldSite, placeHoldSite, holdSiteOf } from "./engine/mapholds.js";
 // ⛔ SNG-680: the film is DATA. Not one of its words is written in this file.
 import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
   filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase, filmFrame, filmLandings } from "./engine/films.js";
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.24.2";
+const APP_VERSION = "2.24.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -18647,6 +18647,35 @@ function renderMapLocation(locationId) {
 /** ⛔ PAINT THE LOCAL CANVAS. The backing store follows the pane (M1: CSS map pixels under a dpr transform);
  *  every label goes through the shared space and queue and is flushed once in rank order (D1/§0); the
  *  enlargement claims its panel in the space FIRST so no main-frame name can land across it. */
+/** ✅ SNG-679 H6/H7: the holds kept at a place are SITES on its local map — your own at the point placed once and stored
+ *  on the hold (saved the moment it is first placed), another player's at the point its card publishes (or, before its
+ *  owner has drawn it, at the same point its owner will be given). A hold under way is not here; it is on the water. */
+function withHoldSites(locationId, layout) {
+  let rows = [];
+  try {
+    rows = mapHolds(character, { sharedStore: sharedHolds, locations: CONTENT.locations,
+      worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), routes: _worldRoutes?.byPair || null, content: CONTENT,
+      nameOf: (nid) => character?.npcRegistry?.[nid]?.name || CONTENT.npcs?.[nid]?.name || null }).rows || [];
+  } catch { rows = []; }
+  const here = rows.filter((r) => r.kind === "hold" && r.placeId === locationId && !r.atSea);
+  if (!here.length) return layout;
+  let placedNow = false;
+  const taken = [];
+  const sites = [];
+  for (const r of here) {
+    let site = r.site;
+    if (r.own) {
+      const h = (character.holdings || []).find((x) => x.id === r.id);
+      if (h) { const had = !!h.site; site = ensureHoldSite(h, layout, { taken }); if (!had && h.site) placedNow = true; }
+    } else if (!site) site = placeHoldSite(layout, r.id, { taken });
+    if (site) taken.push(site);
+    const s = holdSiteOf(r, site, { content: CONTENT });
+    if (s) sites.push(s);
+  }
+  if (placedNow) { try { saveCharacter(character); } catch {} }
+  return sites.length ? { ...layout, sites: [...(layout.sites || []), ...sites] } : layout;
+}
+
 function paintLocalCanvas(locationId) {
   const cv = document.getElementById("local-map");
   if (!cv) return null;
@@ -18657,7 +18686,8 @@ function paintLocalCanvas(locationId) {
   const bw = Math.round(want * dpr), bh = Math.round(want * aspect * dpr);
   if (cv.width !== bw || cv.height !== bh) { cv.width = bw; cv.height = bh; }
   const W = Math.round(cv.width / dpr), H = Math.round(cv.height / dpr);
-  const { host, layout } = localLayoutHere(locationId);
+  const { host, layout: placeLayout } = localLayoutHere(locationId);
+  const layout = withHoldSites(locationId, placeLayout);   // ✅ H6/H7: the holds kept here are sites on this ground
   const name = host?.name || CONTENT.locations[locationId]?.name || locationId;
   const ctx = cv.getContext("2d");
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -18715,7 +18745,8 @@ function paintLocalCanvas(locationId) {
       nameOf: (nid) => character?.npcRegistry?.[nid]?.name || CONTENT.npcs?.[nid]?.name || null });
     let k = 0;
     for (const row of held.rows || []) {
-      if (row.placeId !== locationId) continue;
+      // ✅ H6/H7: a hold kept here is a SITE now (`withHoldSites`); only one under way past this place is marked beside its centre
+      if (row.placeId !== locationId || (row.kind === "hold" && !row.atSea)) continue;
       const at = { x: model.built.x + 14 + k * 18, y: model.built.y - Math.min(model.built.r, 26) - 10 };
       paintHoldRow(ctx, row, () => at, {
         labelOf: (r, p, m) => {
@@ -18772,6 +18803,13 @@ function wireLocalCanvas(locationId) {
       chip.innerHTML = `<div class="rmc-what"><strong>${esc(l?.name || hit.name || hit.id)}</strong> <span class="hint">${esc(String(l?.tier || "place"))}</span></div>`
         + `<div class="hint rmc-far">The road out of here leads there.</div>`
         + `<div class="rmc-acts"><button class="opt" data-lmc-inside="${esc(hit.id)}">Look inside</button><button class="opt" data-lmc-travel="${esc(hit.id)}">Travel</button></div>`;
+    } else if (hit.site?.hold) {
+      // ✅ H6: *"the rung's name on the card"*; ✅ H7: *"A visitor sees the hold, not its rooms."*
+      const s = hit.site, hd = s.hold;
+      const st = hd.state && hd.state !== "whole" ? ` · ${esc(String(hd.state))}` : "";
+      chip.innerHTML = `<div class="rmc-what"><strong>${esc(s.name || s.id)}</strong> <span class="hint">${esc(String(hd.rung || "a hold"))}${st}</span></div>`
+        + `<div class="hint rmc-whose">${hd.own ? "Your hold." : `${esc(hd.ownerName || "Someone")}'s hold. A visitor sees the hold, not its rooms.`}</div>`
+        + (hd.own && hd.features ? `<div class="hint rmc-far">${hd.features} ${hd.features === 1 ? "feature" : "features"} built.</div>` : "");
     } else {
       const s = hit.site;
       const vocab = CONTENT.locationKinds?._siteVocabulary?.[s.kind] || CONTENT.locationKinds?._vocabulary?.[s.kind] || "";

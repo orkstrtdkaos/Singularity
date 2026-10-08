@@ -464,7 +464,7 @@ export function placeGround({ ground, kinds = null, frame, built, roads = [], la
     const glyph = groundGlyphOf(f.k, S.drawn[f.k]);
     const n = Math.max(1, Math.round(Number(f.n) || 1));
     // ✅ G5: a site the layout already names, of this glyph, is one of the n — and an own mark only an AUTHORED one
-    const same = sites.filter((st) => !usedSite.has(st.id) && glyphFor({ kind: st.kind }) === glyph && (!f.own || !st.generated)
+    const same = sites.filter((st) => !st.hold && !usedSite.has(st.id) && glyphFor({ kind: st.kind }) === glyph && (!f.own || !st.generated)
       && Math.hypot(st.x - C.x, st.y - C.y) <= Math.max(R0 * 2.5, Math.min(W, H) * 0.5));
     const keep = Math.min(n, same.length);
     for (const st of same.slice(0, keep)) { usedSite.add(st.id); out.kept.push({ k: f.k, entry: i, site: st.id, own: !!f.own }); }

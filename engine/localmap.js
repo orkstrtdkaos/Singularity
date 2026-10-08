@@ -1467,6 +1467,7 @@ function paintSite(ctx, site, { here = false, know = "seen", scale = 1, level = 
  *  you have walked to it. A site that is a place of its own answers by the region map's own `isPlaceKnown`. */
 export function siteKnowledge(site, { character = null, placeId = null, layout = null, known = null, reveal = false } = {}) {
   if (reveal || !character) return "seen";
+  if (site?.hold) return "seen";   // ✅ SNG-679 H6/H7: a hold is drawn because it is known — your own, or a card you were shown
   const pm = character.placeMemory?.[placeId] || {};
   const here = character.currentLocationId === placeId;
   // ⛑ standing here IS a visit, and `notePlaceVisit` has usually counted it already — so the two are not summed
@@ -1607,7 +1608,12 @@ export function paintLocalMap(ctx, model, {
   out.labelsDropped = [];
   // the sites, by what is known of them
   const fit = model.frame.fitMetres;
-  for (const s of model.sites) {
+  /* ⛑ AND NAMED IN ORDER OF WHAT MATTERS, because a crowded map seats only so many names (A3: dropped, not shrunk): where
+   * you stand and your own holds first, then the places, then the rest. ⚠️ Measured on Silas's Millbrook: the panel seats 11
+   * of 20 names, and his own hold — appended last — was the one that lost its name. */
+  const nameRank = (s) => (s.id === hereSite || s.hold?.own) ? 0 : s.location ? 1 : s.hold ? 2 : 3;
+  const sitesByRank = [...model.sites].sort((a, b) => nameRank(a) - nameRank(b));
+  for (const s of sitesByRank) {
     const kn = siteKnowledge(s, { character, placeId: model.id, layout: model.layout, known, reveal });
     if (kn === "unknown") { out.withheld.push(s.id); continue; }
     if (s.x < -20 || s.y < -20 || s.x > w + 20 || s.y > h + 20) continue;

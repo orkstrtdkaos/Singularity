@@ -69,6 +69,9 @@ export function holdCard(character, h, { locations = {}, nameOf = null, economy 
      * they are still absent. */
     rung: h.rung || null, frame: h.frame || null,
     state: h.state || "whole",
+    // ✅ SNG-679 H7: *"`holdCard` adds `site` alone, not the hold's feature layout. A visitor sees the hold, not its rooms."*
+    ...(h.site && Number.isFinite(Number(h.site.bearing)) && Number.isFinite(Number(h.site.fromMetres))
+      ? { site: { bearing: Number(h.site.bearing), fromMetres: Number(h.site.fromMetres) } } : {}),
     // ⛑ H4's four: so a reader can draw her on the water and say how far along she is.
     ...(away?.atSea ? { atSea: true, from: away.from || null, to: away.to || null,
       fraction: Number.isFinite(Number(away.fraction)) ? Number(away.fraction) : null } : {}),

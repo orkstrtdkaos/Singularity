@@ -24908,6 +24908,52 @@ await (async () => {
       && /const pts = bend && kind !== "sea" \? bend\(a, b, id, other\) : null;/.test(src676)
       && [...k676.entries()].filter(([, v]) => v.kind === "sea").every(([key]) => key.includes("leviathan_road") || !k676.get(key).routed));
   }
+  /* ── ✅ SNG-679 H6 + H7 (CCODE-678): a hold is a site on its place's local map, placed once and stored; another player's
+   *    stands where its card says ── */
+  {
+    const LM678 = await import("../engine/localmap.js");
+    const MH678 = await import("../engine/mapholds.js");
+    const LG678 = await import("../engine/localground.js");
+    const SH678 = await import("../engine/sharedholds.js");
+    const { loadContentHeadless: lch678 } = await import("./headless_content.mjs");
+    const C678 = await lch678();
+    // a hold on every place in the world: never in the water, never on a named site, the same point every time
+    const placesH = Object.keys(C678.locations).filter((id) => C678.locations[id]?.tier !== "region");
+    let wet678 = 0, onSite678 = 0, moved678 = 0; const bad678 = [];
+    for (const pid of placesH) {
+      const lay = LM678.localLayoutFor(pid, { content: C678 });
+      const a = MH678.placeHoldSite(lay, "h_" + pid), b = MH678.placeHoldSite(lay, "h_" + pid);
+      if (a.bearing !== b.bearing || a.fromMetres !== b.fromMetres) moved678++;
+      const site = MH678.holdSiteOf({ id: "h_" + pid, name: "Test Hold", own: true, rung: "keep", features: [] }, a, { content: C678 });
+      const md = LM678.localModel({ ...lay, sites: [...(lay.sites || []), site] }, LM678.localFrame(lay, { w: 800, h: 500 }), { placeId: pid });
+      const hs = md.sites.find((x) => x.id === site.id);
+      if (md.water && LG678.lineDist(hs.x, hs.y, md.water.channel.pts) < md.water.channel.widthPx / 2 + 1) { wet678++; bad678.push(pid + " wet"); }
+      if (md.sites.some((x) => x !== hs && Math.hypot(x.x - hs.x, x.y - hs.y) < 6)) { onSite678++; bad678.push(pid + " on a site"); }
+    }
+    check("679/H6: ⛔ A HOLD IS A SITE ON ITS PLACE'S GROUND — placed on every place in the world it stands clear of the water and of every named site, and at the same point every time",
+      placesH.length >= 150 && wet678 === 0 && onSite678 === 0 && moved678 === 0, bad678.slice(0, 5).join(" | "));
+    // placed ONCE, then stored: a second layout does not move it
+    const hold678 = { id: "h_store", name: "Stillwater", rung: "keep", locationId: "millbrook", features: [] };
+    const lay678 = LM678.localLayoutFor("millbrook", { content: C678 });
+    const first678 = MH678.ensureHoldSite(hold678, lay678);
+    const again678 = MH678.ensureHoldSite(hold678, { ...lay678, sites: [] });
+    check("679/H6: ⛔ …placed ONCE and STORED on the hold (`holding.site`), so a changed layout never moves it; its kind is its rung — `tower` from keep up, `quarter` below",
+      !!hold678.site && again678.bearing === first678.bearing && again678.fromMetres === first678.fromMetres
+      && MH678.holdSiteKind("keep", C678) === "tower" && MH678.holdSiteKind("stronghold", C678) === "tower" && MH678.holdSiteKind("town", C678) === "quarter" && MH678.holdSiteKind(null, C678) === "quarter"
+      && JSON.parse(readFileSync(join(root, "schemas/holding.schema.json"), "utf8")).properties.site?.required?.includes("fromMetres"));
+    // H7: the card publishes the point and not the rooms; a shared row carries it
+    const ch678 = { id: "player-x", name: "Neth", holdings: [{ ...hold678, features: [{ id: "f1", kind: "wall", name: "the wall", site: { bearing: 10, fromMetres: 20 } }] }] };
+    const card678 = SH678.holdCard(ch678, ch678.holdings[0], { locations: C678.locations });
+    const rows678 = MH678.mapHolds({ id: "player-y", holdings: [] }, { sharedStore: { holds: { [card678.key]: card678 } }, locations: C678.locations, content: C678 }).rows;
+    check("679/H7: ⛔ ANOTHER PLAYER'S HOLD stands where its card says — `holdCard` adds `site` alone (no feature has a position on the card: a visitor sees the hold, not its rooms) and the map row carries it",
+      card678.site?.bearing === first678.bearing && card678.site?.fromMetres === first678.fromMetres && !JSON.stringify(card678).includes('"site":{"bearing":10')
+      && rows678.some((r) => r.id === "h_store" && !r.own && r.site?.fromMetres === first678.fromMetres));
+    const app678 = readFileSync(join(root, "app.js"), "utf8");
+    check("679/H6+H7: ⛔ the local tier draws them — `withHoldSites` puts every hold kept at the place on its ground (own: placed once and SAVED; another's: its card's point), the chip names the rung, and a G5 count never takes a hold for one of the ground's marks",
+      /const layout = withHoldSites\(locationId, placeLayout\);/.test(app678) && /if \(placedNow\) \{ try \{ saveCharacter\(character\); \} catch \{\} \}/.test(app678)
+      && /A visitor sees the hold, not its rooms\./.test(app678) && /if \(site\?\.hold\) return "seen";/.test(readFileSync(join(root, "engine/localmap.js"), "utf8"))
+      && /sites\.filter\(\(st\) => !st\.hold && /.test(readFileSync(join(root, "engine/localground.js"), "utf8")));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

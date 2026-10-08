@@ -108,6 +108,14 @@ export function drawGlyph(ctx, glyph, x, y, s, style) {
   };
 
   switch (glyph) {
+    case "unknown": {
+      // ✅ ERIK (2026-10-07, via Aevi): a place the character has not heard of *"shows a '?' mark at the true spot, in
+      // place of the glyph. The mark still takes a tap."* A disc in the fill with the question in the ink.
+      ctx.beginPath(); ctx.arc(x, y, s * 0.95, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = ink; ctx.font = `bold ${Math.round(s * 1.5)}px serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText("?", x, y + s * 0.05);
+      break;
+    }
     case "waygate": {
       // ⛔ A MADE ARCH THAT OPENS ELSEWHERE — the world's only fast travel, so it gets the accent colour
       // and a lit interior. Two uprights, a round head, and something shining in the gap.

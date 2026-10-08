@@ -23822,7 +23822,9 @@ console.log("\n── §297 · a gate leads to the hub through the network, and 
   // because enough labels are hidden that the survivors stand well apart. This closes the class, not a visible
   // defect — and it will start to matter as Aevi authors places into a crowded region.
   check("§297: ⛔ …and a label's box is measured from the string it DRAWS, badge and all — not from the bare name",
-    /const text416 = \(m, by\) => m\.name \+ \(by\[m\.id\] \? ` \+\$\{by\[m\.id\]\}` : ""\);/.test(paint297)
+    // ✅ CCODE-657: the drawn string is trimmed, because a place not heard of has its name WITHHELD (an empty name) and
+    // may still carry a tally — "+2" is what it draws, and what the box measures
+    /const text416 = \(m, by\) => \(m\.name \+ \(by\[m\.id\] \? ` \+\$\{by\[m\.id\]\}` : ""\)\)\.trim\(\);/.test(paint297)
     && /ctx\.measureText\(text416\(m, by\)\)\.width/.test(paint297)
     && /const pass2 = placeLabels\(boxes416\(kept1, pass1\.hiddenBy\)\);/.test(paint297)
     && !/w: ctx\.measureText\(m\.name\)\.width/.test(paint297));

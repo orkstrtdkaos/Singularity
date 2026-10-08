@@ -68,7 +68,7 @@ import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from 
 import { cityPlan, blockPath, blockRoofs, faubourgs, beltRoofs, leanOf } from "./engine/cityplan.js";
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";
-import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf, siteLevel, regionLook, isSpreading, lookRand } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
+import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf, siteLevel, regionLook, isSpreading, spreadingSay, lookRand } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
 import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.12";
+const APP_VERSION = "2.22.13";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -16224,7 +16224,7 @@ function paintRegionMap(regionId) {
     ctx.drawImage(_rasterOff, 0, 0, rw, rh, 0, 0, W, H);
     /* ✅ AEVI (ruling 2): THE NUMINOUS REACH — *"the map fades out past its settled middle. 'The survey gives out here.'"*
      * The ground goes to the stage's dark beyond the middle; the marks and the roads drawn after this stay exactly where they are. */
-    if (regionLook(regionId)?.look === "fading") {
+    if (regionLook(regionId, CONTENT)?.look === "fading") {
       // ⚠️ an ELLIPSE in the canvas's own aspect, not a circle: a circle wide enough to reach the corners of a 2:1 canvas
       // left its top and bottom edges untouched (measured: corners 44–63 against a centre of 103). Scaled, the middle
       // 60% is the survey and the mid-edges are already the full dark.
@@ -16281,7 +16281,9 @@ function paintRegionMap(regionId) {
     // HARD CUT MID-WORD, which `smartClamp` has existed to prevent since SNG-152. `labelText` breaks on a word.
     // ✅ ERIK (ruling 3, 2026-10-07): a place the character has not heard of shows as a "?" — still a mark, still tappable
     const heard416 = isPlaceKnown(character, id, CONTENT.locations);
-    marks416.push({ id, l, p, name: heard416 ? labelText(face416[id]?.name || l.name || id, "place", 24) : "?", regionKind: face416[id]?.kind || null, heard: heard416 });
+    // ✅ AEVI: *"the region map withholds the name … It shows a '?' mark at the true spot, in place of the glyph."* The label is
+    // withheld (a tally it hides others into still shows); the mark is the "?" glyph below.
+    marks416.push({ id, l, p, name: heard416 ? labelText(face416[id]?.name || l.name || id, "place", 24) : "", regionKind: face416[id]?.kind || null, heard: heard416 });
   }
   // ✅ M2 — *"place | serif, bold, 12–13px, 3px dark halo"*, from the table rather than from a local const.
   // ⛑ IT SETS THE STATE; IT DOES NOT RETURN A STRING. My first cut returned `ctx.font` and a caller below did
@@ -16317,7 +16319,7 @@ function paintRegionMap(regionId) {
   // survivor will SAY; pass 2 re-places the survivors at their true drawn widths. A wider box can only hide more, so
   // pass 2 never resurrects what pass 1 dropped. ⚠️ AND A SURVIVOR DROPPED IN PASS 2 HANDS ITS TALLY ON, through
   // `hiddenInto` — the pairing the engine always had — so no place vanishes off the screen uncounted.
-  const text416 = (m, by) => m.name + (by[m.id] ? ` +${by[m.id]}` : "");
+  const text416 = (m, by) => (m.name + (by[m.id] ? ` +${by[m.id]}` : "")).trim();
   const boxes416 = (ms, by) => ms.map(m => ({ id: m.id, x: m.p.x, y: m.p.y + 18, w: ctx.measureText(text416(m, by)).width, h: 10, rank: rank416(m) }));
   const pass1 = placeLabels(boxes416(marks416, {}));
   const kept1 = marks416.filter(m => pass1.shown.has(m.id));
@@ -16685,7 +16687,7 @@ function paintRegionMap(regionId) {
       /* ✅ AEVI (ruling 2): THE PATTERN REACH — *"its lines redraw a little differently each time you open the map. 'The lines here
        * will not hold still.'"* Only the drawn line drifts (up to 2.4 px, by the per-open seed); the route underneath, the exits,
        * the marks and the clicks are untouched. */
-      const unsteady = regionLook(regionId)?.look === "unsteady";
+      const unsteady = regionLook(regionId, CONTENT)?.look === "unsteady";
       const drift = (pts, k) => unsteady ? pts.map((p, i) => ({ x: p.x + (lookRand(_regionOpenSeed + k, i) - 0.5) * 4.8, y: p.y + (lookRand(_regionOpenSeed + k * 7, i + 31) - 0.5) * 4.8 })) : pts;
       const lines = routed.roads.map((r, k) => ({ r, pts: drift(smoothRoad(r.points), k) }));
       // ⚠️ EVERY CASING FIRST, THEN EVERY FILL. Cased road by cased road, a later road's dark edge cuts a
@@ -16699,16 +16701,28 @@ function paintRegionMap(regionId) {
       const widthOf = (r) => (r.primary ? (r.shared > 0.25 ? 3.2 : 2.2) : 1.3);
       ctx.save();
       ctx.lineJoin = "round"; ctx.lineCap = "round";
-      ctx.strokeStyle = "rgba(24,20,14,0.55)";
-      for (const { r, pts } of lines) {
-        if (!r.primary || pts.length < 2) continue;
-        ctx.lineWidth = widthOf(r) + 2.4; trace(pts); ctx.stroke();
-      }
-      ctx.strokeStyle = "rgba(226,206,158,0.92)";
-      for (const { r, pts } of lines) {
-        if (!r.primary || pts.length < 2) continue;
-        ctx.lineWidth = widthOf(r); trace(pts); ctx.stroke();
-      }
+      const strokeRoads = () => {
+        ctx.strokeStyle = "rgba(24,20,14,0.55)";
+        for (const { r, pts } of lines) {
+          if (!r.primary || pts.length < 2) continue;
+          ctx.lineWidth = widthOf(r) + 2.4; trace(pts); ctx.stroke();
+        }
+        ctx.strokeStyle = "rgba(226,206,158,0.92)";
+        for (const { r, pts } of lines) {
+          if (!r.primary || pts.length < 2) continue;
+          ctx.lineWidth = widthOf(r); trace(pts); ctx.stroke();
+        }
+      };
+      /* ✅ AEVI (fade): *"past about 60% of the frame from the settled middle … coast and roads go to dashes and then end"*.
+       * The roads are solid inside the settled middle, dashed in the ring where the survey thins, and END where it gives
+       * out — the same ellipse the ground fades under. The routes they stand for are unchanged. */
+      if (regionLook(regionId, CONTENT)?.look === "fading") {
+        // ⚠️ ONE path, two ellipses: a helper that began a path per ellipse made the ring clip the inner disc alone
+        // (measured: 3 road pixels in the ring, 1,403 inside, 0 beyond), so the dashes never drew where the survey thins.
+        const ell = (k) => ctx.ellipse(W / 2, H / 2, W * k, H * k, 0, 0, Math.PI * 2);
+        ctx.save(); ctx.beginPath(); ell(0.30); ctx.clip(); strokeRoads(); ctx.restore();
+        ctx.save(); ctx.beginPath(); ell(0.52); ell(0.30); ctx.clip("evenodd"); ctx.setLineDash([5, 4]); strokeRoads(); ctx.setLineDash([]); ctx.restore();
+      } else strokeRoads();
       // ⛑ A TRACK IS DASHED because it is not the same kind of thing: it ends at a site, somewhere you go TO,
       // and a solid line of equal weight would claim a road where there is a path.
       ctx.setLineDash([3.5, 3.5]);
@@ -16722,29 +16736,30 @@ function paintRegionMap(regionId) {
       /* ✅ AEVI (ruling 2): THE MIRRORLANDS — *"one fake road appears each time. 'Not everything drawn here is so.'"* One road
        * between two places that have none, in the road's own cased style, chosen by the per-open seed and curved a little so it
        * reads as a road; the real routes, the exits and the marks stay exactly true. */
-      if (regionLook(regionId)?.look === "lying" && marks416.length >= 1) {
+      if (regionLook(regionId, CONTENT)?.look === "lying" && marks416.length >= 2) {
         // ⛑ between two places the road network does NOT join — a fake road beside a real one reads as the real one drawn
         // twice — and a region with one placed place (the Mirrorlands today) gets a road from it into the ground, to nowhere.
+        // ✅ AEVI: *"It is never routed over, never a place's only way in, and never the same road twice running."* So: a pair
+        // the network does not join, where BOTH ends already have a real road (the decoy is never anyone's only way in).
         const joined = new Set(net.roads.map((r) => `${r.a}|${r.b}`));
+        const roaded = new Set(net.roads.flatMap((r) => [r.a, r.b]));
         const pairs = [];
         for (let i = 0; i < marks416.length; i++) for (let j = i + 1; j < marks416.length; j++) {
           const ida = marks416[i].id, idb = marks416[j].id;
+          if (!roaded.has(ida) || !roaded.has(idb)) continue;
           if (!joined.has(`${ida}|${idb}`) && !joined.has(`${idb}|${ida}`)) pairs.push([i, j]);
         }
-        let A, B;
+        let A = null, B = null;
         if (pairs.length) { const [i0, i1] = pairs[Math.floor(lookRand(_regionOpenSeed, 1) * pairs.length)]; A = marks416[i0].p; B = marks416[i1].p; }
-        else {
-          A = marks416[Math.floor(lookRand(_regionOpenSeed, 1) * marks416.length)].p;
-          const ang = lookRand(_regionOpenSeed, 2) * Math.PI * 2, len = Math.min(W, H) * (0.22 + 0.16 * lookRand(_regionOpenSeed, 5));
-          B = { x: A.x + Math.cos(ang) * len, y: A.y + Math.sin(ang) * len };
+        if (A && B) {
+          const mid = { x: (A.x + B.x) / 2 + (lookRand(_regionOpenSeed, 3) - 0.5) * 60, y: (A.y + B.y) / 2 + (lookRand(_regionOpenSeed, 4) - 0.5) * 60 };
+          ctx.save(); ctx.lineJoin = "round"; ctx.lineCap = "round";
+          for (const [style, wdt] of [["rgba(24,20,14,0.55)", 4.6], ["rgba(226,206,158,0.92)", 2.2]]) {
+            ctx.strokeStyle = style; ctx.lineWidth = wdt;
+            ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.quadraticCurveTo(mid.x, mid.y, B.x, B.y); ctx.stroke();
+          }
+          ctx.restore();
         }
-        const mid = { x: (A.x + B.x) / 2 + (lookRand(_regionOpenSeed, 3) - 0.5) * 60, y: (A.y + B.y) / 2 + (lookRand(_regionOpenSeed, 4) - 0.5) * 60 };
-        ctx.save(); ctx.lineJoin = "round"; ctx.lineCap = "round";
-        for (const [style, wdt] of [["rgba(24,20,14,0.55)", 4.6], ["rgba(226,206,158,0.92)", 2.2]]) {
-          ctx.strokeStyle = style; ctx.lineWidth = wdt;
-          ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.quadraticCurveTo(mid.x, mid.y, B.x, B.y); ctx.stroke();
-        }
-        ctx.restore();
       }
       // ⚠️ ONE LABEL PER EXIT POINT, NAMING EVERY DESTINATION. Roads that leave toward the same far country
       // leave through nearly the same spot, and a label apiece stacked them into an illegible pile — which is
@@ -16856,10 +16871,12 @@ function paintRegionMap(regionId) {
     const meta = _terrain.locations[m.id] || {};
     // ⛑ L0: the region-scale kind wins over the stamped one — "Echo River Crossing" is a bridge at this scale
     const g = glyphFor({ ...meta, k: m.regionKind || meta.k });
-    if (g) drawGlyph(ctx, g, m.p.x, m.p.y, m.id === here ? 9 : 7, {});
+    // ✅ ERIK's "?": the mark in place of the glyph for a place not heard of; it is in `marks416`, so it takes the tap
+    if (!m.heard) drawGlyph(ctx, "unknown", m.p.x, m.p.y, 7, {});
+    else if (g) drawGlyph(ctx, g, m.p.x, m.p.y, m.id === here ? 9 : 7, {});
     /* ✅ AEVI (ruling 2): THE FOUR SPREADING PLACES — *"the Blaze, the Churn Edge, the Scouring, the Ceaseless get a dashed,
      * outward-hatched edge."* The mark itself is where it is; the edge is the spreading. */
-    if (isSpreading(m.id)) {
+    if (isSpreading(m.id, CONTENT)) {
       ctx.save(); ctx.strokeStyle = "rgb(226,160,96)"; ctx.lineWidth = 1.6; ctx.setLineDash([3, 3]);
       ctx.beginPath(); ctx.arc(m.p.x, m.p.y, 14, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
       ctx.beginPath();
@@ -18422,7 +18439,7 @@ function paintLocalCanvas(locationId) {
   const nearCentre = model.sites.some((s) => Math.hypot(s.x - model.built.x, s.y - model.built.y) <= model.built.r * 1.3);
   const inset = _localView.k <= 1.01 && nearCentre ? enlargementFor(model) : null;
   if (inset) _labelSpace.claim({ x0: inset.x - 4, x1: inset.x + inset.w + 4, y0: inset.y - 4, y1: inset.y + inset.h + 4, rank: -2, kind: "inset" });
-  const res = paintLocalMap(ctx, model, { space: _labelSpace, queue: queueLabel, exitSpace: _exitSpace, character, known, hereSite, inset,
+  const res = paintLocalMap(ctx, model, { spreading: isSpreading(model?.id, CONTENT), space: _labelSpace, queue: queueLabel, exitSpace: _exitSpace, character, known, hereSite, inset,
     labelMinPx: inset ? inset.builtRadiusPx * 1.6 + 12 : 0 });
   // ⛑ you are here, at the place's own centre when no sub-place has been entered — the gold ring every tier uses
   if (here && !hereSite) {
@@ -18875,7 +18892,17 @@ function renderMap(selectedId = null) {
     ${/* ⛑ the diagram's corner line, kept: the day, and — on the Valley, whose authored event it is — the crisis stage */""}
     <p class="hint" style="margin-bottom:8px">${locs.length} place${locs.length === 1 ? "" : "s"} in this region, on real ground · Day ${readClock(character.clock).day}${focusRegion === "valley" ? ` · ${crisisAnswered354 ? "Water Crisis answered" : `Water Crisis stage ${stage}`}` : ""}. Gold ring: you are here.</p>
     ${/* ✅ AEVI (ruling 2): the deliberately-wrong regions each say so, in her words */""}
-    ${regionLook(focusRegion)?.hint ? `<p class="hint" style="margin:-4px 0 8px;font-style:italic">${esc(regionLook(focusRegion).hint)}</p>` : ""}
+    ${(() => {
+      // ✅ AEVI: her `say` lines — the region's, and "{name} is spreading." for each spreading place drawn here (named only
+      // if the character has heard of it)
+      const says = [];
+      const look = regionLook(focusRegion, CONTENT); if (look?.hint) says.push(look.hint);
+      for (const l of Object.values(CONTENT.locations)) {
+        if (!l?.worldPos || (l.regionId || l.region) !== focusRegion || l.supersededBy || !isSpreading(l.id, CONTENT)) continue;
+        says.push(spreadingSay(isPlaceKnown(character, l.id, CONTENT.locations) ? l.name : "Something here", CONTENT));
+      }
+      return says.length ? `<p class="hint" style="margin:-4px 0 8px;font-style:italic">${esc(says.join(" "))}</p>` : "";
+    })()}
     ${mapTierBar()}
     ${/* ✅ AEVI §1.3 — "let the canvas use the window, filling the available width up to about 1600px". The backing
           store is sized to the pane on open (`sizeRegionCanvas`), so the marks, the hit test and the labels are all

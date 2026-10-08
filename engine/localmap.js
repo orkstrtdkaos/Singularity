@@ -103,8 +103,32 @@ const REGION_LOOKS = Object.freeze({
 });
 /** the four spreading places: the Blaze, the Churn Edge, the Scouring, the Ceaseless — a dashed, outward-hatched edge */
 const SPREADING_PLACES = Object.freeze(["the_blaze", "the_churn_edge", "the_scouring", "the_ceaseless"]);
-export function regionLook(regionId) { return REGION_LOOKS[String(regionId || "")] || null; }
-export function isSpreading(placeId) { return SPREADING_PLACES.includes(String(placeId || "")); }
+/** ✅ AEVI (REPLY_aevi_ccode_the_diagrams_retire, 2026-10-07): *"Authored with this note in `regions.json` →
+ *  `renderGuidance`. Each failure has a `treatment`, a `how`, and a `say` line for the region map's hint."* Her record is
+ *  the source; the table above is the fallback for a world without one. Treatment → look: jitter/unsteady, decoy/lying,
+ *  fade/fading. */
+const TREATMENT_LOOK = Object.freeze({ jitter: "unsteady", decoy: "lying", fade: "fading" });
+export function regionLook(regionId, content = null) {
+  const id = String(regionId || "");
+  const hf = content?.regionRules?.renderGuidance?.honestFailures?.[id];
+  if (hf && typeof hf === "object") {
+    const look = TREATMENT_LOOK[String(hf.treatment || "")] || null;
+    if (look) return { look, hint: String(hf.say || REGION_LOOKS[id]?.hint || ""), how: String(hf.how || "") };
+  }
+  return REGION_LOOKS[id] || null;
+}
+/** ✅ AEVI: *"Growth is authored there too … a dashed outer edge with an outward hatch on their region and local maps,
+ *  nothing at world scale, and '{name} is spreading.' in the hint."* */
+export function isSpreading(placeId, content = null) {
+  const id = String(placeId || "");
+  const places = content?.regionRules?.renderGuidance?.growth?.places;
+  if (Array.isArray(places)) return places.includes(id);
+  return SPREADING_PLACES.includes(id);
+}
+export function spreadingSay(name, content = null) {
+  const say = content?.regionRules?.renderGuidance?.growth?.say;
+  return String(say || "{name} is spreading.").replace("{name}", String(name || "This place"));
+}
 /** a stable pseudo-random in [0, 1) from a seed and an index — "a little differently each time you open the map" is a
  *  per-open seed, never Math.random, so one open draws one picture however often it repaints */
 export function lookRand(seed, i) { const x = Math.sin((Number(seed) || 0) * 12.9898 + (Number(i) || 0) * 78.233) * 43758.5453; return x - Math.floor(x); }
@@ -1022,6 +1046,7 @@ export function siteKnowledge(site, { character = null, placeId = null, layout =
 export function paintLocalMap(ctx, model, {
   space = null, queue = null, exitSpace = null, character = null, known = null, reveal = false,
   hereSite = null, inset = null, labelMinPx = 0, title = true, legend = true, compass = true, exits = true, legendShort = false, clip = null,
+  spreading = false,
 } = {}) {
   const { frame, rnd } = model;
   const w = frame.w, h = frame.h;
@@ -1147,6 +1172,16 @@ export function paintLocalMap(ctx, model, {
   if (title && model.placeName) {
     const text = String(model.placeName).toUpperCase();
     const tw = (drawLabel(ctx, text, -9999, -9999, "landmark", { here: true })?.w) || 0;
+    /* ✅ AEVI (growth): on the local map too — a dashed outer edge a little beyond the built ground, hatched outward */
+    if (spreading && model.built?.r > 0) {
+      const er = model.built.r * 1.18 + 6;
+      ctx.save(); ctx.strokeStyle = "rgb(226,160,96)"; ctx.lineWidth = 1.6; ctx.setLineDash([4, 4]);
+      ctx.beginPath(); ctx.arc(model.built.x, model.built.y, er, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+      ctx.beginPath();
+      for (let t = 0; t < 24; t++) { const ang = (t / 24) * Math.PI * 2; ctx.moveTo(model.built.x + er * Math.cos(ang), model.built.y + er * Math.sin(ang)); ctx.lineTo(model.built.x + (er + 9) * Math.cos(ang), model.built.y + (er + 9) * Math.sin(ang)); }
+      ctx.stroke(); ctx.restore();
+      out.spreading = true;
+    }
     const box = sp.place(model.built.x, model.built.y - model.built.r - 8, tw, 14, { kind: "landmark", opts: { here: true }, clampTo: { w, h }, offsets: [[0, 0], [0, model.built.r * 2 + 30], [tw / 2 + model.built.r + 10, 0], [-tw / 2 - model.built.r - 10, 0]] });
     if (box) q(ctx, text, box, "landmark", { here: true, align: "center" });
   }

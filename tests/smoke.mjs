@@ -24326,6 +24326,16 @@ await (async () => {
     /id="map-kg-hint"/.test(mapR) && /getElementById\("map-kg-hint"\)/.test(paintR) && /kgHint\.textContent = people\.length \?/.test(paintR));
   /* ── Aevi's rulings 2 and 3 on the retirement (2026-10-07), on the ground ── */
   const LMr = await import("../engine/localmap.js");
+  // ✅ CCODE-657: her record is the source — `renderGuidance.honestFailures` / `.growth` on regions.json, read through the content
+  const { loadContentHeadless: lchR } = await import("./headless_content.mjs");
+  const CR = await lchR();
+  check("678/rulings: ⛔ AEVI'S RECORD IS THE SOURCE — `regionLook` reads `renderGuidance.honestFailures` (treatment → look, `say` → hint) and `isSpreading` reads `.growth.places`; the engine table is only the fallback for a world without them",
+    CR.regionRules?.renderGuidance?.honestFailures?.the_pattern_reach?.treatment === "jitter"
+    && LMr.regionLook("the_pattern_reach", CR)?.look === "unsteady" && LMr.regionLook("the_pattern_reach", CR).hint === CR.regionRules.renderGuidance.honestFailures.the_pattern_reach.say
+    && LMr.regionLook("the_veiled_reach", CR)?.look === "lying" && LMr.regionLook("the_numinous_reach", CR)?.look === "fading"
+    && LMr.regionLook("the_pattern_reach", { regionRules: { renderGuidance: { honestFailures: { the_pattern_reach: { treatment: "fade", say: "X" } } } } })?.look === "fading"
+    && LMr.isSpreading("the_ceaseless", CR) && !LMr.isSpreading("millbrook", CR) && LMr.isSpreading("x", { regionRules: { renderGuidance: { growth: { places: ["x"] } } } })
+    && LMr.spreadingSay("The Blaze", CR) === "The Blaze is spreading." && LMr.spreadingSay("Y", { regionRules: { renderGuidance: { growth: { say: "{name} grows." } } } }) === "Y grows.");
   check("678/rulings: ⛔ the deliberately-wrong regions are ONE table — the Pattern Reach unsteady, the Mirrorlands lying, the Numinous Reach fading — with her hint lines, and the four spreading places are named",
     LMr.regionLook("the_pattern_reach")?.look === "unsteady" && LMr.regionLook("the_pattern_reach").hint === "The lines here will not hold still."
     && LMr.regionLook("the_veiled_reach")?.look === "lying" && LMr.regionLook("the_veiled_reach").hint === "Not everything drawn here is so."
@@ -24333,12 +24343,14 @@ await (async () => {
     && LMr.regionLook("valley") === null && ["the_blaze", "the_churn_edge", "the_scouring", "the_ceaseless"].every(LMr.isSpreading) && !LMr.isSpreading("millbrook")
     && (() => { const a = LMr.lookRand(7, 3), b = LMr.lookRand(7, 3), c = LMr.lookRand(8, 3); return a === b && a !== c && a >= 0 && a < 1; })());
   check("678/rulings: ⛔ …and the painter draws them — the fade past the middle, the drift of the DRAWN road only (the route, the marks and the clicks untouched), one fake road by the per-open seed, the hatched edge — and the hint under the title says so",
-    /if \(regionLook\(regionId\)\?\.look === "fading"\) \{/.test(paintR) && /ctx\.scale\(1, H \/ W\);\s*\n\s*const fg = ctx\.createRadialGradient\(0, 0, W \* 0\.30, 0, 0, W \* 0\.52\);/.test(paintR)
+    /if \(regionLook\(regionId, CONTENT\)\?\.look === "fading"\) \{/.test(paintR) && /ctx\.scale\(1, H \/ W\);\s*\n\s*const fg = ctx\.createRadialGradient\(0, 0, W \* 0\.30, 0, 0, W \* 0\.52\);/.test(paintR)
     && /const drift = \(pts, k\) => unsteady \? pts\.map/.test(paintR) && /const lines = routed\.roads\.map\(\(r, k\) => \(\{ r, pts: drift\(smoothRoad\(r\.points\), k\) \}\)\);/.test(paintR)
-    && /if \(regionLook\(regionId\)\?\.look === "lying" && marks416\.length >= 1\) \{/.test(paintR) && /const joined = new Set\(net\.roads\.map\(\(r\) => `\$\{r\.a\}\|\$\{r\.b\}`\)\);/.test(paintR) && /ctx\.quadraticCurveTo\(mid\.x, mid\.y, B\.x, B\.y\)/.test(paintR)
-    && /if \(isSpreading\(m\.id\)\) \{/.test(paintR) && /function reseedRegionMap\(\) \{ _regionOpenSeed = Date\.now\(\) % 100000; \}/.test(srcR)
+    && /if \(regionLook\(regionId, CONTENT\)\?\.look === "lying" && marks416\.length >= 2\) \{/.test(paintR) && /const joined = new Set\(net\.roads\.map\(\(r\) => `\$\{r\.a\}\|\$\{r\.b\}`\)\);/.test(paintR)
+    && /const roaded = new Set\(net\.roads\.flatMap\(\(r\) => \[r\.a, r\.b\]\)\);/.test(paintR) && /if \(!roaded\.has\(ida\) \|\| !roaded\.has\(idb\)\) continue;/.test(paintR) && !/to nowhere/.test(paintR.replace(/\/\/[^\n]*/g, ""))
+    && /ell\(0\.52\); ell\(0\.30\); ctx\.clip\("evenodd"\); ctx\.setLineDash\(\[5, 4\]\); strokeRoads\(\);/.test(paintR) && /ctx\.quadraticCurveTo\(mid\.x, mid\.y, B\.x, B\.y\)/.test(paintR)
+    && /if \(isSpreading\(m\.id, CONTENT\)\) \{/.test(paintR) && /function reseedRegionMap\(\) \{ _regionOpenSeed = Date\.now\(\) % 100000; \}/.test(srcR)
     && /reseedRegionMap\(\);\s*\/\/[^\n]*change of region/.test(paintR) && /if \(mapBtn\) mapBtn\.onclick = \(\) => \{ reseedRegionMap\(\); renderMap\(\); \};/.test(srcR)
-    && /regionLook\(focusRegion\)\?\.hint/.test(mapR) && !/Math\.random\(\)/.test(paintR));
+    && /const look = regionLook\(focusRegion, CONTENT\); if \(look\?\.hint\) says\.push\(look\.hint\);/.test(mapR) && /says\.push\(spreadingSay\(/.test(mapR) && !/Math\.random\(\)/.test(paintR));
   check("678/rulings: ⛔ the roads draw for EVERY region — the routed roads, the exits and their labels are no longer nested under the authored-map guard that only 8 of 39 regions pass; only the named ground still reads the authored map",
     !/if \(authoredMap\) \{/.test(paintR) && /for \(const g of authoredMap\?\.namedGround \|\| \[\]\) \{/.test(paintR)
     && paintR.indexOf("const net = roadNetwork(CONTENT.locations, { k: 1.1 });") > paintR.indexOf("authoredMap?.namedGround")
@@ -24370,7 +24382,10 @@ await (async () => {
       && typeof stub655.wrapLon === "function" && stub655.wrapLon(-122) === 238);
   }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
-    /name: heard416 \? labelText\(face416\[id\]\?\.name \|\| l\.name \|\| id, "place", 24\) : "\?"/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
+    /name: heard416 \? labelText\(face416\[id\]\?\.name \|\| l\.name \|\| id, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
+    && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)
+    && (() => { const MI = readFileSync(join(root, "engine/mapicons.mjs"), "utf8"); return /case "unknown": \{/.test(MI) && /ctx\.fillText\("\?", x, y \+ s \* 0\.05\);/.test(MI); })()
+    && (() => { const LMs = readFileSync(join(root, "engine/localmap.js"), "utf8"); return /spreading = false,/.test(LMs) && /if \(spreading && model\.built\?\.r > 0\) \{/.test(LMs) && /spreading: isSpreading\(model\?\.id, CONTENT\)/.test(srcR); })()
     && (() => { const card = srcR.slice(srcR.indexOf("function placeCardHTML("), srcR.indexOf("\nfunction ", srcR.indexOf("function placeCardHTML(") + 10));
       return /esc\(known \? l\.name : "\?"\)/.test(card) && /you have not heard of it/.test(card)
         && /const routePlan = \(!reachable && l\.id !== here\) \? journeyPlanFor\(l\.id\) : null;/.test(card) && !/l\.id !== here && known\)/.test(card)

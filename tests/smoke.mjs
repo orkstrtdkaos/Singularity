@@ -24753,6 +24753,86 @@ await (async () => {
     check("ground G2: ⛔ Millbrook's houses are a cluster, not rows — 15 to 45 of them, and no five in a line at one spacing (measured on the points, not the picture)",
       mbH.length >= 15 && mbH.length <= 45 && !evenRun(mbH, 1.5), `${mbH.length} houses`);
   }
+  /* ── ✅ AEVI, the local ground (CCODE-675): G4 every entry draws, G5 authored layouts keep what they name — driven on every place ── */
+  {
+    const LM675 = await import("../engine/localmap.js");
+    const LG675 = await import("../engine/localground.js");
+    const { loadContentHeadless: lch675 } = await import("./headless_content.mjs");
+    const C675 = await lch675();
+    const GR675 = C675.rules.localGround, P675 = GR675.places;
+    const S675 = LG675.groundSections(GR675._kinds);
+    const ids675 = Object.keys(P675).filter((id) => C675.locations[id]);
+    const M675 = {};
+    const model675 = (id) => M675[id] || (M675[id] = (() => { const lay = LM675.localLayoutFor(id, { content: C675 }); return LM675.localModel(lay, LM675.localFrame(lay, { w: 800, h: 500 }), { placeId: id, placeName: C675.locations[id]?.name || id }); })());
+    const isWallLine = (f) => f.k === "wall" && (f.at === "ring" || f.at === "across");
+    const short675 = [], missing675 = [], unsaid675 = [], ownOff675 = [], houseOnMark = [];
+    let wanted675 = 0, drawn675 = 0, kept675 = 0;
+    for (const id of ids675) {
+      const md = model675(id), g = md.ground;
+      if (!g) { missing675.push(`${id}: no ground`); continue; }
+      (P675[id].features || []).forEach((f, i) => {
+        const n = Math.max(1, Math.round(Number(f.n) || 1));
+        if (S675.marks.has(f.k) && !isWallLine(f)) {
+          const placed = g.marks.filter((m) => m.entry === i).length, kept = g.kept.filter((k) => k.entry === i).length;
+          wanted675 += n; drawn675 += placed; kept675 += kept;
+          if (placed + kept < n) { short675.push(`${id}: ${f.k}@${f.at} ${placed + kept}/${n}`); if (!g.short.some((x) => x.entry === i)) unsaid675.push(`${id}: ${f.k}`); }
+        } else if (!g.lines.some((l) => l.entry === i) && !g.areas.some((a) => a.entry === i)) missing675.push(`${id}: ${f.k}@${f.at}`);
+      });
+      const oe = (P675[id].features || []).find((f) => f.own);
+      if (oe && S675.marks.has(oe.k) && !isWallLine(oe) && (Number(oe.n) || 1) === 1 && !g.kept.some((k) => k.own)) {
+        const om = g.marks.find((m) => m.own && m.entry === (P675[id].features || []).indexOf(oe));
+        if (!om || Math.hypot(om.x - md.built.x, om.y - md.built.y) > 0.5) ownOff675.push(id);
+      }
+      for (const h of md.houses || []) if (g.marks.some((m) => Math.hypot(m.x - h.x, m.y - h.y) < m.sz * 0.8)) { houseOnMark.push(id); break; }
+    }
+    check("ground G4: ⛔ EVERY ENTRY DRAWS, on every place — each mark entry its full `n` (an authored site of the same glyph counting as one, G5), each line and fill at least one run or patch, and whatever could not fit is SAID in `short`, never dropped in silence",
+      ids675.length >= 150 && wanted675 >= 1000 && missing675.length === 0 && short675.length === 0 && unsaid675.length === 0,
+      `${drawn675} drawn + ${kept675} named sites / ${wanted675} · ${missing675.slice(0, 4).join(" | ")} ${short675.slice(0, 4).join(" | ")}`);
+    const LMsrc675 = readFileSync(join(root, "engine/localmap.js"), "utf8");
+    check("ground G4: ⛔ `own` draws AT THE PLACE'S OWN MARK — every own mark of one stands exactly on the centre where the roads meet, and the painter draws the own marks LAST, over everything else on the ground",
+      ownOff675.length === 0 && /for \(const m of G\.marks\) if \(!m\.own\) paintGroundMark\(ctx, m, model\);\n    for \(const m of G\.marks\) if \(m\.own\) paintGroundMark\(ctx, m, model\);/.test(LMsrc675), ownOff675.join(", "));
+    check("ground G4: ⛔ the houses keep clear of what stands on the ground — no roof on any place sits on a mark",
+      houseOnMark.length === 0, houseOnMark.join(", "));
+    // ── by name
+    const sy = model675("the_spent_yard"), syM = (k) => sy.ground.marks.filter((m) => m.k === k);
+    const roadD675 = (md, x, y) => Math.min(...md.roads.map((r) => LG675.lineDist(x, y, r.pts)));
+    const yard675 = syM("yard")[0];
+    check("ground G4: ⛔ by name — the Spent Yard: 0 roofs, at least 10 stacks, 3 sheds, 3 cranes, and its intake yard nearer the road than every one of its sheds (Aevi's `_order`: in at the road, waiting in the rows, cut down under the sheds)",
+      (sy.houses || [1]).length === 0 && syM("stacks").length >= 10 && syM("shed").length === 3 && syM("crane").length === 3 && !!yard675
+      && syM("shed").every((s) => roadD675(sy, yard675.x, yard675.y) < roadD675(sy, s.x, s.y)),
+      yard675 ? `yard ${roadD675(sy, yard675.x, yard675.y).toFixed(0)} px from the road, sheds ${syM("shed").map((s) => roadD675(sy, s.x, s.y).toFixed(0)).join("/")}` : "no yard");
+    const ks = model675("the_kept_shrine"), ksS = ks.ground.marks.find((m) => m.k === "shrine");
+    check("ground G4: ⛔ by name — the Kept Shrine: its shrine at the centre, drawn as the place's own, and 0 roofs",
+      !!ksS && ksS.own && Math.hypot(ksS.x - ks.built.x, ksS.y - ks.built.y) < 0.5 && (ks.houses || [1]).length === 0);
+    const tw = model675("thinwater"), twS = tw.ground.marks.filter((m) => m.k === "shrine"), twL = tw.ground.streamLine;
+    check("ground G4: ⛔ by name — Thinwater: its six shrines along its stream (each on the bank, within two of its own widths of the water), and its street of houses along that same stream",
+      twS.length === 6 && !!twL && twS.every((m) => LG675.lineDist(m.x, m.y, twL.pts) - twL.half <= m.sz * 2.2) && tw.ground.lines.some((l) => l.k === "stream")
+      && (tw.houses || []).length >= 15 && (() => { const d = tw.houses.map((h) => LG675.lineDist(h.x, h.y, twL.pts)).sort((a, b) => a - b); return d[d.length >> 1] < tw.built.r * 0.75; })(),
+      `${twS.length} shrines, ${(tw.houses || []).length} houses`);
+    // ── G5
+    const mb = model675("millbrook"), mbG = mb.ground;
+    const authored675 = mb.sites.filter((x) => !x.generated);
+    const dupes675 = [];
+    for (const id of ids675) {
+      const md = model675(id);
+      for (const m of md.ground?.marks || []) for (const st of md.sites) if (st.glyph === m.glyph && Math.hypot(st.x - m.x, st.y - m.y) < m.sz * 2.5) dupes675.push(`${id}: ${m.k}`);
+    }
+    const gh = model675("greyhearth");
+    check("ground G5: ⛔ AUTHORED LAYOUTS KEEP WHAT THEY NAME — Millbrook keeps its well, green, smithy and wheels, and gains its stone bridge across the river and its four moored boats ON it; Greyhearth's four burial plots are its Burying Grounds and three more; and no ground mark anywhere lands on a site of its own glyph",
+      ["well", "green", "works", "mill"].every((k) => authored675.some((x) => x.kind === k)) && mbG.marks.filter((m) => m.k === "bridge" && m.onWater).length === 1
+      && mbG.marks.filter((m) => m.k === "boats" && m.onWater).length === 4 && mbG.kept.length === 0
+      && gh.ground.marks.filter((m) => m.k === "burial").length === 3 && gh.ground.kept.some((k) => k.k === "burial" && k.site === "greyhearth_grounds")
+      && dupes675.length === 0, dupes675.slice(0, 5).join(" | "));
+    // ── the painter draws what the model placed, and every state the content uses has a drawing
+    const stub675 = () => new Proxy({ globalAlpha: 1, lineWidth: 1, strokeStyle: "", fillStyle: "" }, { get: (t, k) => k in t ? t[k] : (k === "measureText" ? () => ({ width: 30 }) : k === "createRadialGradient" || k === "createLinearGradient" ? () => ({ addColorStop() {} }) : k === "getImageData" ? () => ({ data: new Uint8ClampedArray(4) }) : () => {}), set: (t, k, v) => { t[k] = v; return true; } });
+    const painted675 = ["the_spent_yard", "the_kept_shrine", "thinwater", "millbrook", "undermere", "the_painters_shelf", "coral_court", "sunfold"].map((id) => { const md = model675(id); const o = LM675.paintLocalMap(stub675(), md, { reveal: true }); return { id, ok: o.ground && o.ground.marks === md.ground.marks.length && o.ground.lines === md.ground.lines.length && o.ground.areas === md.ground.areas.length }; });
+    const statesUsed = [...new Set(Object.values(P675).flatMap((p) => (p.features || []).map((f) => f.state).filter(Boolean)))];
+    const painterSrc675 = LMsrc675.slice(LMsrc675.indexOf("THE LOCAL GROUND, G4 · THE PAINTER"), LMsrc675.indexOf("/** the \"you are here\" ring"));
+    const undrawnStates = statesUsed.filter((st) => !painterSrc675.includes(`"${st}"`));
+    check("ground G4: ⛔ the painter draws every mark, line and fill the model placed, and every `state` the entries use changes the drawing (abandoned dimmed and fallen, unfinished outlined in scaffold, dead grey, sealed capped, razed and former as footprints)",
+      painted675.every((p) => p.ok) && statesUsed.length >= 8 && undrawnStates.length === 0,
+      `${painted675.filter((p) => !p.ok).map((p) => p.id).join(", ")} undrawn states: ${undrawnStates.join(", ")}`);
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

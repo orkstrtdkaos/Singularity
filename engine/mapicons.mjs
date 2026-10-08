@@ -443,6 +443,130 @@ export function drawGlyph(ctx, glyph, x, y, s, style) {
       ctx.globalAlpha = 0.65;
       P([[-0.15, -0.3], [0.1, 0.8]]); ctx.stroke();
       break;
+    /* ═════ THE GROUND ALPHABET (CCODE-675) ═════
+     * ✅ AEVI (the local ground, G4): *"New marks needed: farmstead, shed, machinery, crane, stacks, cairn, cairn row, post,
+     * lens, scales, stair, fire, shelter, footings, figure, aperture, stone field, leviathan, solid, sun disc, column. …
+     * Plain shapes are enough: a cog for machinery, a stack of bars for stacks, a gantry for crane."* ⛑ Drawn smaller than a
+     * site and never labelled — they are the ground, not places to go. A cairn row is cairns; moored boats are `boat`. */
+    case "farmstead":
+      // the farmhouse, its barn at a right angle, and the yard between them fenced
+      ctx.beginPath(); ctx.rect(x - s * 0.95, y - s * 0.1, s * 0.85, s * 0.55); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.rect(x + s * 0.15, y - s * 0.9, s * 0.75, s * 1.3); ctx.fill(); ctx.stroke();
+      P([[-0.95, 0.45], [-0.95, 0.95], [0.9, 0.95], [0.9, 0.4]]); ctx.stroke();
+      break;
+    case "shed":
+      // an open-sided shed: a roof on posts and no walls — the eaves, the ridge, the posts at the corners
+      ctx.beginPath(); ctx.rect(x - s, y - s * 0.55, s * 2, s * 1.1); ctx.stroke();
+      P([[-1, 0], [1, 0]]); ctx.stroke();
+      for (const [px, py] of [[-1, -0.55], [1, -0.55], [-1, 0.55], [1, 0.55]]) { ctx.beginPath(); ctx.arc(x + px * s, y + py * s, s * 0.2, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); }
+      break;
+    case "machinery": {
+      // a cog: the wheel, eight teeth, the hub
+      ctx.beginPath(); ctx.arc(x, y, s * 0.55, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.beginPath();
+      for (let i = 0; i < 8; i++) { const a = (i / 8) * Math.PI * 2; ctx.moveTo(x + Math.cos(a) * s * 0.55, y + Math.sin(a) * s * 0.55); ctx.lineTo(x + Math.cos(a) * s * 0.95, y + Math.sin(a) * s * 0.95); }
+      ctx.stroke();
+      ctx.beginPath(); ctx.arc(x, y, s * 0.18, 0, Math.PI * 2); ctx.stroke();
+      break;
+    }
+    case "crane":
+      // a gantry: two legs, the beam across them, the hook hanging from it
+      P([[-0.8, 1], [-0.8, -0.8]]); ctx.stroke(); P([[0.8, 1], [0.8, -0.8]]); ctx.stroke();
+      P([[-1.05, -0.8], [1.05, -0.8]]); ctx.stroke();
+      P([[0.25, -0.8], [0.25, 0.15]]); ctx.stroke();
+      ctx.beginPath(); ctx.arc(x + s * 0.1, y + s * 0.15, s * 0.15, 0, Math.PI); ctx.stroke();
+      break;
+    case "stacks":
+      // sorted material in rows: three bars stacked, each a little shorter
+      for (const [y0, w0] of [[0.35, 1.9], [-0.15, 1.5], [-0.65, 1.1]]) { ctx.beginPath(); ctx.rect(x - (s * w0) / 2, y + s * y0, s * w0, s * 0.42); ctx.fill(); ctx.stroke(); }
+      break;
+    case "cairn":
+      // a heap of stones: three, two, one
+      for (const [cx0, cy0] of [[-0.58, 0.6], [0, 0.6], [0.58, 0.6], [-0.29, 0.08], [0.29, 0.08], [0, -0.44]]) { ctx.beginPath(); ctx.arc(x + cx0 * s, y + cy0 * s, s * 0.27, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); }
+      break;
+    case "post":
+      // a post, a pillar, a lamp-pole: one upright on its foot, a mark at its head
+      P([[0, 1], [0, -0.5]]); ctx.stroke(); P([[-0.4, 1], [0.4, 1]]); ctx.stroke();
+      ctx.beginPath(); ctx.arc(x, y - s * 0.72, s * 0.26, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      break;
+    case "lens":
+      // a mounted lens: the glass edge-on, its stand, and the light it throws
+      ctx.beginPath(); ctx.ellipse(x - s * 0.35, y - s * 0.25, s * 0.26, s * 0.62, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      P([[-0.35, 0.37], [-0.35, 1]]); ctx.stroke(); P([[-0.75, 1], [0.05, 1]]); ctx.stroke();
+      ctx.save(); ctx.strokeStyle = accent; P([[0, -0.25], [1.05, -0.75]]); ctx.stroke(); P([[0, -0.25], [1.05, 0.25]]); ctx.stroke(); ctx.restore();
+      break;
+    case "scales":
+      // great balance scales: the post, the beam, a pan hung from each end
+      P([[0, 1], [0, -0.85]]); ctx.stroke(); P([[-0.45, 1], [0.45, 1]]); ctx.stroke();
+      P([[-0.9, -0.6], [0.9, -0.6]]); ctx.stroke();
+      P([[-0.9, -0.6], [-0.9, 0.05]]); ctx.stroke(); P([[0.9, -0.6], [0.9, 0.05]]); ctx.stroke();
+      ctx.beginPath(); ctx.arc(x - s * 0.9, y + s * 0.05, s * 0.3, 0, Math.PI); ctx.stroke();
+      ctx.beginPath(); ctx.arc(x + s * 0.9, y + s * 0.05, s * 0.3, 0, Math.PI); ctx.stroke();
+      break;
+    case "stair":
+      // a great stair: the flight in profile
+      P([[-0.95, 0.9], [-0.95, 0.45], [-0.5, 0.45], [-0.5, 0], [-0.05, 0], [-0.05, -0.45], [0.4, -0.45], [0.4, -0.9], [0.95, -0.9], [0.95, 0.9]], true); ctx.fill(); ctx.stroke();
+      break;
+    case "fire":
+      // an open fire: the flame on its ring of stones
+      ctx.save(); ctx.fillStyle = "rgba(214,120,48,0.9)";
+      P([[0, -1], [0.45, -0.25], [0.42, 0.3], [0, 0.55], [-0.42, 0.3], [-0.45, -0.25]], true); ctx.fill(); ctx.stroke(); ctx.restore();
+      ctx.beginPath(); ctx.ellipse(x, y + s * 0.72, s * 0.8, s * 0.24, 0, 0, Math.PI * 2); ctx.stroke();
+      break;
+    case "shelter":
+      // a drystone shelter: a thick half-ring of wall, its door to the lee
+      ctx.save(); ctx.lineWidth = Math.max(1.5, s * 0.3);
+      ctx.beginPath(); ctx.arc(x, y + s * 0.4, s * 0.85, Math.PI, Math.PI * 2); ctx.stroke(); ctx.restore();
+      P([[-0.85, 0.4], [-0.3, 0.4]]); ctx.stroke(); P([[0.3, 0.4], [0.85, 0.4]]); ctx.stroke();
+      break;
+    case "footings":
+      // the footprint of what is gone: the corners of a building, and nothing between them
+      for (const [cx0, cy0, dx, dy] of [[-1, -0.7, 1, 1], [1, -0.7, -1, 1], [1, 0.7, -1, -1], [-1, 0.7, 1, -1]]) { P([[cx0 + dx * 0.45, cy0], [cx0, cy0], [cx0, cy0 + dy * 0.4]]); ctx.stroke(); }
+      ctx.beginPath(); ctx.arc(x, y, s * 0.12, 0, Math.PI * 2); ctx.stroke();
+      break;
+    case "figure":
+      // a great carved symbol standing in the open: a cut lozenge with its eye, on a plinth
+      P([[0, -1], [0.62, -0.1], [0, 0.72], [-0.62, -0.1]], true); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.arc(x, y - s * 0.12, s * 0.16, 0, Math.PI * 2); ctx.stroke();
+      P([[-0.7, 1], [0.7, 1]]); ctx.stroke();
+      break;
+    case "aperture":
+      // a round opening in a wall: the face of the wall, and the dark round hole cut through it
+      ctx.beginPath(); ctx.rect(x - s * 0.72, y - s * 0.95, s * 1.44, s * 1.9); ctx.fill(); ctx.stroke();
+      ctx.save(); ctx.fillStyle = ink; ctx.globalAlpha = 0.6; ctx.beginPath(); ctx.arc(x, y - s * 0.1, s * 0.4, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); ctx.restore();
+      break;
+    case "stone_field":
+      // many small upright stones in loose rows
+      for (let r = -1; r <= 1; r++) for (let c = -1; c <= 1; c++) { const ox = c * 0.62 + (r === 0 ? 0.25 : 0), oy = r * 0.62; P([[ox, oy - 0.24], [ox, oy + 0.24]]); ctx.stroke(); }
+      break;
+    case "leviathan":
+      // a leviathan's back breaking the water, huts on it
+      ctx.beginPath(); ctx.arc(x, y + s * 0.45, s * 0.95, Math.PI, Math.PI * 2); ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.save(); ctx.strokeStyle = accent; P([[-1.1, 0.72], [-0.7, 0.56], [-0.3, 0.72], [0.1, 0.56], [0.5, 0.72], [0.9, 0.56], [1.1, 0.66]]); ctx.stroke(); ctx.restore();
+      for (const hx of [-0.4, 0.15]) { ctx.beginPath(); ctx.rect(x + hx * s, y - s * 0.3, s * 0.28, s * 0.26); ctx.stroke(); }
+      break;
+    case "solid":
+      // a geometric solid with no way in: a cube, its three faces
+      P([[0, -1], [0.87, -0.5], [0.87, 0.5], [0, 1], [-0.87, 0.5], [-0.87, -0.5]], true); ctx.fill(); ctx.stroke();
+      P([[-0.87, -0.5], [0, 0], [0.87, -0.5]]); ctx.stroke(); P([[0, 0], [0, 1]]); ctx.stroke();
+      break;
+    case "sun_disc":
+      // a kept sun in a cavern roof, ringed with its machinery
+      ctx.save(); ctx.fillStyle = "rgba(240,196,80,0.92)"; ctx.beginPath(); ctx.arc(x, y, s * 0.42, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); ctx.restore();
+      ctx.beginPath(); ctx.arc(x, y, s * 0.8, 0, Math.PI * 2); ctx.stroke();
+      for (let i = 0; i < 6; i++) { const a = (i / 6) * Math.PI * 2; ctx.beginPath(); ctx.rect(x + Math.cos(a) * s * 0.8 - s * 0.13, y + Math.sin(a) * s * 0.8 - s * 0.13, s * 0.26, s * 0.26); ctx.fill(); ctx.stroke(); }
+      break;
+    case "column":
+      // a column on the move: people and a cart in file on the road they are walking
+      for (const cx0 of [-1.05, -0.7, 0.1, 0.45]) { ctx.beginPath(); ctx.arc(x + cx0 * s, y + (cx0 < 0 ? 0.25 : -0.25) * s, s * 0.17, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); }
+      ctx.beginPath(); ctx.rect(x - s * 0.45, y - s * 0.05, s * 0.5, s * 0.5); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.rect(x + s * 0.62, y - s * 0.55, s * 0.5, s * 0.5); ctx.fill(); ctx.stroke();
+      break;
+    case "boat":
+      // a moored flat-bottomed boat: the hull, its thwart
+      P([[-1, -0.32], [1, -0.32], [0.62, 0.36], [-0.62, 0.36]], true); ctx.fill(); ctx.stroke();
+      P([[0, -0.32], [0, 0.36]]); ctx.stroke();
+      break;
     case "region":
       // the map's own furniture — a seat, not a building
       ctx.strokeStyle = (style && style.regionInk) || "#e8d6a0";
@@ -461,3 +585,7 @@ export const ALL_GLYPHS = [...new Set(Object.values(KIND_GLYPH))];
 // ⛑ KEPT APART from ALL_GLYPHS so the reduction gate keeps counting what it was written to count: how far
 // the 34 LOCATION kinds fold onto drawable place glyphs. The site alphabet is its own claim.
 export const ALL_SITE_GLYPHS = [...new Set(Object.values(SITE_GLYPH))];
+/** ✅ AEVI (G4): the ground alphabet — what stands on a place's ground, unlabelled. Its own list for the same reason the
+ *  site alphabet has one: each alphabet is judged against itself (content_ci, SNG-678's rasteriser). */
+export const GROUND_GLYPHS = Object.freeze(["farmstead", "shed", "machinery", "crane", "stacks", "cairn", "post", "lens", "scales",
+  "stair", "fire", "shelter", "footings", "figure", "aperture", "stone_field", "leviathan", "solid", "sun_disc", "column", "boat"]);

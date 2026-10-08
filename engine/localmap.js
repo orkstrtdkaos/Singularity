@@ -29,6 +29,7 @@
 import { measureGradients, usableGradients, placeSite, roadsOut as roadBearings } from "./localdetail.mjs";
 import { glyphFor, drawGlyph, drawStateMark } from "./mapicons.mjs";
 import { drawLabel, labelSpace } from "./maplabel.js";
+import { placeGround, finishGround, inPoly } from "./localground.js";
 
 const R = Math.PI / 180;
 const norm180 = (d) => ((d + 540) % 360) - 180;
@@ -484,7 +485,7 @@ export function localLayoutFor(placeId, { content = null, character = null, chil
 function withGround(layout, placeId, content) {
   const g = content?.rules?.localGround || null;
   const entry = g?.places?.[placeId] || null;
-  return entry ? { ...layout, ground: entry, groundRules: g._rules || null } : layout;
+  return entry ? { ...layout, ground: entry, groundRules: g._rules || null, groundKinds: g._kinds || null } : layout;
 }
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────
@@ -509,7 +510,7 @@ export function dwellingRange(ground) {
 const HOUSE_STYLE = { dug: "dug", rock: "dug", interior: "dug", camp: "tent", hulls: "hull", floating: "hull", underwater: "hull", stilts: "stilt" };
 /** The houses a place's ground says it has, laid out the way its entry says they sit. Pure: the model's own ways, water and
  *  wood in; `[{ x, y, ang, style }]` out. The count is within the entry's range (fewer only when the ground has no room). */
-export function groundHouses({ ground, frame, built, roads = [], lanes = [], sites = [], water = null, features = [], id = "place", uphill = null }) {
+export function groundHouses({ ground, frame, built, roads = [], lanes = [], sites = [], water = null, features = [], id = "place", uphill = null, blocked = null, streamLine = null, pools = [] }) {
   const range = dwellingRange(ground);
   if (!range || range[1] <= 0) return [];
   const rnd = rngOf(seedOf("houses:" + id));
@@ -518,12 +519,17 @@ export function groundHouses({ ground, frame, built, roads = [], lanes = [], sit
   const L = Math.max(2.2, 9 * s), Wd = Math.max(1.6, 6 * s);
   const layout = String(ground?.layout || "cluster");
   const style = HOUSE_STYLE[layout] || "roof";
+  // ✅ G4: a layout ON the water stands in the entry's pools too (the reef city in its shallows); every other keeps out of them
+  const wetLayout = ["stilts", "hulls", "floating", "underwater"].includes(layout);
+  const inPool = (x, y) => pools.some((p) => inPoly(x, y, p.poly));
   const segsOf = (pts) => { const out = []; for (let i = 1; i < (pts || []).length; i++) out.push([pts[i - 1], pts[i]]); return out; };
   const segs = [...roads.flatMap((r) => segsOf(r.pts)), ...lanes.flatMap((l) => segsOf(l.pts))];
   const segDist = (x, y, [a, b]) => { const vx = b[0] - a[0], vy = b[1] - a[1], L2 = vx * vx + vy * vy || 1; const t = clamp(((x - a[0]) * vx + (y - a[1]) * vy) / L2, 0, 1); return { d: Math.hypot(a[0] + vx * t - x, a[1] + vy * t - y), ang: Math.atan2(vy, vx) }; };
   const nearestWay = (x, y) => { let best = { d: Infinity, ang: 0 }; for (const sg of segs) { const r = segDist(x, y, sg); if (r.d < best.d) best = r; } return best; };
-  const wSegs = water?.channel?.pts ? segsOf(water.channel.pts) : [];
-  const wHalf = water?.channel ? water.channel.widthPx / 2 : 0;
+  // ✅ G4: the place's river, or where it has none, the entry's own stream (Thinwater's) — both are water a house is not in
+  const wLine = water?.channel?.pts ? { pts: water.channel.pts, half: water.channel.widthPx / 2 } : (streamLine?.pts ? streamLine : null);
+  const wSegs = wLine ? segsOf(wLine.pts) : [];
+  const wHalf = wLine ? wLine.half : 0;
   const waterDist = (x, y) => { let d = Infinity; for (const sg of wSegs) d = Math.min(d, segDist(x, y, sg).d); return d; };
   const wayHalf = Math.max(1.6, 4 * s);
   const placed = [];
@@ -531,8 +537,9 @@ export function groundHouses({ ground, frame, built, roads = [], lanes = [], sit
   const tryPlace = (x, y, ang, { gap = L * 1.15, onWater = false } = {}) => {
     if (placed.length >= want || !inFrame(x, y)) return false;
     const wd = wSegs.length ? waterDist(x, y) : Infinity;
-    if (onWater ? !(wd < wHalf + L) : wd < wHalf + Wd) return false;
+    if (onWater ? !(wd < wHalf + L || inPool(x, y)) : wd < wHalf + Wd) return false;
     if (nearestWay(x, y).d < wayHalf + Wd * 0.8) return false;
+    if (blocked && blocked(x, y, Wd * 0.9, wetLayout)) return false;   // ✅ G4: clear of every mark, site, stream, pool and drop
     if (!placed.every((q) => Math.hypot(q.x - x, q.y - y) >= gap)) return false;
     placed.push({ x, y, ang, style }); return true;
   };
@@ -588,15 +595,26 @@ export function groundHouses({ ground, frame, built, roads = [], lanes = [], sit
   switch (layout) {
     case "street": {
       const stream = (ground.features || []).some((f) => ["stream", "river", "channel"].includes(f.k) && f.at === "across");
-      const line = stream && water?.channel?.pts ? water.channel.pts : (mainRoad ? mainRoad.pts : null);
-      if (line) along(line, stream ? wHalf : wayHalf);
+      const sLine = stream ? (streamLine?.pts ? streamLine : (water?.channel?.pts ? { pts: water.channel.pts, half: wHalf } : null)) : null;
+      const line = sLine ? sLine.pts : (mainRoad ? mainRoad.pts : null);
+      if (line) along(line, sLine ? sLine.half : wayHalf);
       if (placed.length < want) cluster(0.6);
       break;
     }
     case "rows": ranks(Wd * 3, L * 1.5, baseAng); break;
     case "grid": ranks(Wd * 2.6, L * 1.35, baseAng); break;
     case "rings": for (const f of [0.35, 0.6, 0.85]) { const r = R0 * f, n = Math.max(4, Math.floor((2 * Math.PI * r) / (L * 1.6))); for (let i = 0; i < n; i++) { const a = (i / n) * Math.PI * 2; tryPlace(built.x + Math.cos(a) * r, built.y + Math.sin(a) * r, a + Math.PI / 2, { gap: L }); } } break;
-    case "tiers": { const u = uphill != null ? uphill * Math.PI / 180 - Math.PI / 2 : baseAng; ranks(Wd * 3.4, L * 1.45, u + Math.PI / 2, 0.95); break; }
+    case "tiers": {
+      /* ✅ `_rules.layout.tiers`: *"stepped levels, up a slope or down round a shaft or a lake"* — a lake at the centre
+       * (Undermere's black lake) is ringed by its tiers; otherwise the levels step across the slope */
+      const lake = pools.find((p) => Math.hypot(p.x - built.x, p.y - built.y) < R0 * 0.3 && p.rPx >= R0 * 0.3);
+      if (lake) for (let r = lake.rPx + Wd * 2.2; r <= R0 * 1.02 && placed.length < want; r += Wd * 2.6) {
+        const n = Math.max(6, Math.floor((2 * Math.PI * r) / (L * 1.4))), ph = rnd() * Math.PI * 2;
+        for (let i = 0; i < n && placed.length < want; i++) { const a = ph + (i / n) * Math.PI * 2; tryPlace(built.x + Math.cos(a) * r, built.y + Math.sin(a) * r, a + Math.PI / 2, { gap: L * 1.15 }); }
+      }
+      else { const u = uphill != null ? uphill * Math.PI / 180 - Math.PI / 2 : baseAng; ranks(Wd * 3.4, L * 1.45, u + Math.PI / 2, 0.95); }
+      break;
+    }
     case "scatter": for (let i = 0; i < tries && placed.length < want; i++) { const a = rnd() * Math.PI * 2, d = R0 * 1.4 * Math.sqrt(rnd()); const x = built.x + Math.cos(a) * d, y = built.y + Math.sin(a) * d; tryPlace(x, y, turnToWay(x, y), { gap: R0 * 0.25 }); } break;
     case "yard": case "court": {
       const r = R0 * 0.5, n = Math.max(want, 6);
@@ -621,10 +639,30 @@ export function groundHouses({ ground, frame, built, roads = [], lanes = [], sit
         if (Math.hypot(x - built.x, y - built.y) > R0 * 1.6) continue;
         tryPlace(x, y, Math.atan2(sg[1][1] - sg[0][1], sg[1][0] - sg[0][0]), { gap: L * 1.2, onWater: true });
       }
+      // ✅ G4: no river, but the entry's own pools — the houses stand in them
+      for (let i = 0; pools.length && i < tries && placed.length < want; i++) {
+        const p = pools[Math.floor(rnd() * pools.length)], a = rnd() * Math.PI * 2, d = p.rPx * 0.9 * Math.sqrt(rnd());
+        const x = p.x + Math.cos(a) * d, y = p.y + Math.sin(a) * d;
+        if (Math.hypot(x - built.x, y - built.y) > R0 * 1.6) continue;
+        tryPlace(x, y, rnd() * Math.PI, { gap: L * 1.2, onWater: true });
+      }
       if (placed.length < want) cluster(1);
       break;
     }
     default: cluster(1);
+  }
+  /* ⛑ A FILL PASS for the organic layouts: the marks and the water now take ground the houses used to have, so a pass
+   * that ran out of tries is given more before the count is called short — irregular, inside the built ground, never in
+   * rows. "Fewer only when the ground has no room" is then true and not a matter of the first sweep's luck. */
+  if (placed.length < want && ["cluster", "street", "dug", "rock", "interior", "canopy", "tiers", "stilts", "hulls", "floating", "underwater"].includes(layout)) {
+    for (let i = 0; i < want * 80 && placed.length < want; i++) {
+      const a = rnd() * Math.PI * 2, d = R0 * 1.03 * Math.sqrt(rnd()), x = built.x + Math.cos(a) * d, y = built.y + Math.sin(a) * d;
+      tryPlace(x, y, turnToWay(x, y), { gap: L * (1.05 + rnd() * 0.4) });
+    }
+  }
+  // a camp keeps its loose curve: the same sweep, a wider band of it
+  if (placed.length < want && layout === "camp") {
+    for (let i = 0; i < want * 80 && placed.length < want; i++) { const a = -Math.PI * 0.55 + rnd() * Math.PI * 1.1 + baseAng, rr = R0 * (0.3 + rnd() * 0.65); tryPlace(built.x + Math.cos(a) * rr, built.y + Math.sin(a) * rr, a, { gap: L * 1.2 }); }
   }
   return placed;
 }
@@ -840,10 +878,19 @@ export function localModel(layout, frame, { placeName = "", placeId = "", nameOf
     return { lines: out, strength, spacing };
   })();
   // ✅ G2: the houses the ground says there are, laid out as it says — only on the surface, and only where there is an entry
-  const houses = (layout?.ground && !((Number(level) || 0) < 0))
-    ? groundHouses({ ground: layout.ground, frame, built: { ...builtAt, r: builtR }, roads, lanes, sites, water, features, id, uphill: Number.isFinite(Number(meas.uphillBearing)) ? Number(meas.uphillBearing) : null })
+  const onSurface = !((Number(level) || 0) < 0);
+  // ⚠️ Number(null) is 0, a bearing — an unmeasured uphill stays unmeasured (it had been read as due up-map)
+  const uphillB = meas.uphillBearing != null && Number.isFinite(Number(meas.uphillBearing)) ? Number(meas.uphillBearing) : null;
+  /* ✅ G4/G5 (CCODE-675): what stands on the ground, placed BEFORE the houses so they keep clear of it; what is `among`
+   * the houses after them. Only on the surface, and only where there is an entry. */
+  const ground = (layout?.ground && onSurface)
+    ? placeGround({ ground: layout.ground, kinds: layout.groundKinds, frame, built: { ...builtAt, r: builtR }, roads, lanes, sites, water, uphill: uphillB, rnd: rngOf(seedOf("ground:" + id)) })
     : null;
-  return { id, placeName, frame, layout, sites, roads, lanes, features, contours, built: { ...builtAt, r: builtR }, water, rnd, level: Number(level) || 0, houses };
+  const houses = (layout?.ground && onSurface)
+    ? groundHouses({ ground: layout.ground, frame, built: { ...builtAt, r: builtR }, roads, lanes, sites, water, features, id, uphill: uphillB, blocked: ground?.blocked || null, streamLine: ground?.streamLine || null, pools: (ground?.areas || []).filter((a) => a.k === "water") })
+    : null;
+  if (ground) finishGround(ground, houses || []);
+  return { id, placeName, frame, layout, sites, roads, lanes, features, contours, built: { ...builtAt, r: builtR }, water, rnd, level: Number(level) || 0, houses, ground };
 }
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────
@@ -1177,6 +1224,199 @@ function paintRoofs(ctx, model, rnd) {
   ctx.restore();
 }
 
+/* ═════ THE LOCAL GROUND, G4 · THE PAINTER (CCODE-675) ═════
+ * ✅ AEVI: *"marks as glyphs, lines as lines, areas as fills … `state` changes the drawing: `abandoned` dimmed with roofs
+ * fallen, `unfinished` an outline with scaffold, `dead` grey, `sealed` capped, `razed` and `former` as footprints only."*
+ * The geometry is `localground.js`'s; this only puts ink down. A fill the map already knows (field, wood, rock, marsh,
+ * waste) is drawn by the same hand as the measured ground, so a ground wood and a measured wood read as one wood. */
+const GINK = {
+  orchard: "#dfe6c0", orchardTree: "#7fa463", ash: "#cbc8c1", ashDot: "rgba(90,88,84,0.45)", glass: "#d3e7ea", glassLine: "rgba(255,255,255,0.95)",
+  grass: "#d9e6c2", heath: "#ddd5ab", heathDot: "rgba(110,104,60,0.55)", mud: "#c2ac88", mudLine: "rgba(96,74,48,0.5)",
+  burnt: "#8f8881", stump: "rgba(30,24,20,0.8)", salt: "#f4f2ec", saltLine: "rgba(150,146,136,0.75)", blocks: "#cfc8ba", blockLine: "rgba(110,100,86,0.75)",
+  clearing: "#e9e6cc", clearingEdge: "rgba(140,128,90,0.6)", drop: "rgba(70,58,46,0.34)", dropLine: "rgba(60,46,34,0.9)", pool: "#7ea9c9",
+  dead: "#b2aea6", stream: "#6f9fc2", pipe: "#7d828a", trench: "#5d4a34", hedge: "#5f7f4b", chain: "#55524e",
+  beam: "rgba(255,236,160,0.5)", beamCore: "#fff7cf", shaft: "#6e6a64", wall: "#8f8678", wallEdge: "rgba(60,54,46,0.85)", path: "rgba(140,112,72,0.85)",
+};
+function walkLine(pts, step, cb) {
+  let carry = 0;
+  for (let i = 1; i < (pts || []).length; i++) {
+    const [ax, ay] = pts[i - 1], [bx, by] = pts[i], L = Math.hypot(bx - ax, by - ay) || 1e-9, tx = (bx - ax) / L, ty = (by - ay) / L;
+    let t = carry;
+    for (; t < L; t += step) cb(ax + tx * t, ay + ty * t, tx, ty);
+    carry = t - L;
+  }
+}
+function paintGroundArea(ctx, a, model, rnd) {
+  const s = model.frame.pxPerMetre, dead = a.state === "dead";
+  const reuse = { field: "field", pasture: "field", garden: "field", wood: "wood", marsh: "marsh", rock: "rock", waste: "waste" }[a.k];
+  if (reuse && !dead) {
+    paintFeature(ctx, { kind: reuse, poly: a.poly, x: a.x, y: a.y, rPx: a.rPx, name: a.k === "pasture" ? "pasture" : "", stripAngle: a.stripAngle }, model, rnd);
+  } else {
+    // ⛑ the texture is counted by the part of the fill INSIDE the frame — a band across the whole map is not a million specks
+    const xs = a.poly.map((p) => p[0]), ys = a.poly.map((p) => p[1]);
+    const x0 = Math.max(0, Math.min(...xs)), x1 = Math.min(model.frame.w, Math.max(...xs)), y0 = Math.max(0, Math.min(...ys)), y1 = Math.min(model.frame.h, Math.max(...ys));
+    const bw = Math.max(0, x1 - x0), bh = Math.max(0, y1 - y0);
+    const count = (per) => Math.min(1400, Math.round((bw * bh) / per));
+    const spot = () => [x0 + rnd() * bw, y0 + rnd() * bh];
+    const fills = { orchard: GINK.orchard, ash: GINK.ash, glass: GINK.glass, grass: GINK.grass, heath: GINK.heath, mud: GINK.mud, burnt: GINK.burnt,
+      salt_pans: GINK.salt, blocks: GINK.blocks, clearing: GINK.clearing, water: a.state === "fouled" ? "#7f8f86" : GINK.pool, drop: GINK.drop };
+    ctx.save(); smoothPath(ctx, a.poly, true);
+    ctx.fillStyle = dead && a.k !== "water" ? GINK.dead : (fills[a.k] || INK.waste); ctx.fill(); ctx.clip();
+    switch (a.k) {
+      case "orchard": {
+        // fruit trees in rows, laid to the road like the fields; dead, the bare crowns only
+        const ang = a.stripAngle || 0, dx = Math.cos(ang), dy = Math.sin(ang), step = Math.max(4.5, 14 * s), r = Math.max(1.3, 4.5 * s);
+        const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2, RR = Math.hypot(bw, bh) / 2 + step;
+        ctx.fillStyle = GINK.orchardTree; ctx.strokeStyle = dead ? "rgba(96,92,86,0.85)" : INK.woodEdge; ctx.lineWidth = 0.5;
+        for (let u = -RR; u <= RR; u += step) for (let v = -RR; v <= RR; v += step * 1.25) { const x = cx + dx * u - dy * v, y = cy + dy * u + dx * v; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); if (!dead) ctx.fill(); ctx.stroke(); }
+        break;
+      }
+      case "ash": ctx.fillStyle = GINK.ashDot; for (let i = 0; i < count(70); i++) { const [x, y] = spot(); ctx.fillRect(x, y, 1.2, 1.2); } break;
+      case "glass": ctx.strokeStyle = GINK.glassLine; ctx.lineWidth = 0.8; for (let i = 0; i < count(240); i++) { const [x, y] = spot(), L = 3 + rnd() * 5; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + L, y - L * 0.6); ctx.stroke(); } break;
+      case "grass": ctx.strokeStyle = INK.grass; ctx.lineWidth = 0.7; for (let i = 0; i < count(150); i++) { const [x, y] = spot(); ctx.beginPath(); ctx.moveTo(x, y + 2); ctx.lineTo(x - 1, y - 1.5); ctx.moveTo(x + 1.5, y + 2); ctx.lineTo(x + 2, y - 1); ctx.stroke(); } break;
+      case "heath": ctx.fillStyle = GINK.heathDot; for (let i = 0; i < count(90); i++) { const [x, y] = spot(); ctx.beginPath(); ctx.arc(x, y, 0.9 + rnd() * 1.1, 0, Math.PI * 2); ctx.fill(); } break;
+      case "mud": ctx.strokeStyle = GINK.mudLine; ctx.lineWidth = 0.9; for (let i = 0; i < count(150); i++) { const [x, y] = spot(); ctx.beginPath(); ctx.moveTo(x - 3, y); ctx.quadraticCurveTo(x, y - 2, x + 3, y); ctx.stroke(); } break;
+      case "burnt": ctx.fillStyle = GINK.stump; ctx.strokeStyle = GINK.stump; ctx.lineWidth = 0.7; for (let i = 0; i < count(140); i++) { const [x, y] = spot(); ctx.beginPath(); ctx.arc(x, y, 1, 0, Math.PI * 2); ctx.fill(); ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + 1.5, y - 2.5); ctx.stroke(); } break;
+      case "salt_pans": case "blocks": {
+        // squares in rows: white pans with their dykes; ground resolved into stacked units, some lifted
+        const step = a.k === "salt_pans" ? Math.max(5, 18 * s) : Math.max(4, 12 * s);
+        ctx.strokeStyle = a.k === "salt_pans" ? GINK.saltLine : GINK.blockLine; ctx.lineWidth = 0.7;
+        for (let x = x0 - (x0 % step); x < x1; x += step) for (let y = y0 - (y0 % step); y < y1; y += step) {
+          const o = a.k === "blocks" && rnd() < 0.35 ? 1.2 : 0;
+          ctx.strokeRect(x + 1 + o, y + 1 - o, step - 2, step - 2);
+          if (o) { ctx.fillStyle = "rgba(255,255,255,0.35)"; ctx.fillRect(x + 1 + o, y + 1 - o, step - 2, 2); }
+        }
+        break;
+      }
+      case "drop": case "water": case "clearing": break;
+      default:
+        // a dead wood or marsh: grey, the crowns bare
+        if (dead) { ctx.strokeStyle = "rgba(104,100,94,0.75)"; ctx.lineWidth = 0.6; for (let i = 0; i < count(110); i++) { const [x, y] = spot(); ctx.beginPath(); ctx.arc(x, y, 1.6 + rnd() * 1.4, 0, Math.PI * 2); ctx.stroke(); } }
+    }
+    ctx.restore();
+    ctx.save();
+    if (a.k === "drop" && a.edge) {
+      // the lip, and the hachures falling away from it
+      ctx.strokeStyle = GINK.dropLine; ctx.lineWidth = 1.5; strokePath(ctx, a.edge); ctx.stroke();
+      ctx.lineWidth = 0.8;
+      walkLine(a.edge, 5, (x, y) => { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + a.dir[0] * 6.5, y + a.dir[1] * 6.5); ctx.stroke(); });
+    } else if (a.k === "water") { smoothPath(ctx, a.poly, true); ctx.strokeStyle = INK.bank; ctx.lineWidth = 1; ctx.stroke(); }
+    else if (a.k === "clearing") { smoothPath(ctx, a.poly, true); ctx.strokeStyle = GINK.clearingEdge; ctx.lineWidth = 0.8; ctx.setLineDash([3, 3]); ctx.stroke(); }
+    else { smoothPath(ctx, a.poly, true); ctx.strokeStyle = "rgba(120,100,70,0.35)"; ctx.lineWidth = 0.7; ctx.stroke(); }
+    ctx.restore();
+  }
+  if (a.own && a.k !== "drop") { ctx.save(); smoothPath(ctx, a.poly, true); ctx.strokeStyle = "rgba(60,40,24,0.6)"; ctx.lineWidth = 1.5; ctx.stroke(); ctx.restore(); }
+}
+function paintGroundLine(ctx, l, model) {
+  const w = l.own ? 1.5 : 1;
+  ctx.save(); ctx.lineCap = "round"; ctx.lineJoin = "round";
+  if (l.state === "unfinished") ctx.setLineDash([5, 4]);
+  if (l.state === "dead" || l.state === "empty" || l.state === "abandoned") ctx.globalAlpha = 0.55;
+  switch (l.k) {
+    case "stream":
+      ctx.strokeStyle = INK.bank; ctx.lineWidth = l.half * 2 + 1.2; smoothPath(ctx, l.pts); ctx.stroke();
+      ctx.strokeStyle = l.state === "fouled" ? "#7f8f86" : GINK.stream; ctx.lineWidth = l.half * 2; smoothPath(ctx, l.pts); ctx.stroke();
+      break;
+    case "channel":
+      // a cut channel: straight banks, square ends
+      ctx.lineCap = "butt"; ctx.lineJoin = "miter";
+      ctx.strokeStyle = INK.bank; ctx.lineWidth = l.half * 2 + 2 * w; strokePath(ctx, l.pts); ctx.stroke();
+      ctx.strokeStyle = GINK.stream; ctx.lineWidth = l.half * 2; strokePath(ctx, l.pts); ctx.stroke();
+      break;
+    case "pipe_run":
+      ctx.strokeStyle = GINK.pipe; ctx.lineWidth = 2.6 * w; strokePath(ctx, l.pts); ctx.stroke();
+      ctx.strokeStyle = "rgba(222,224,228,0.8)"; ctx.lineWidth = 0.8; strokePath(ctx, l.pts); ctx.stroke();
+      ctx.strokeStyle = GINK.pipe; ctx.lineWidth = 1;
+      walkLine(l.pts, 10, (x, y, tx, ty) => { ctx.beginPath(); ctx.moveTo(x - ty * 2.4, y + tx * 2.4); ctx.lineTo(x + ty * 2.4, y - tx * 2.4); ctx.stroke(); });
+      break;
+    case "trench":
+      ctx.strokeStyle = GINK.trench; ctx.lineWidth = 3 * w; smoothPath(ctx, l.pts); ctx.stroke();
+      ctx.lineWidth = 0.7;
+      walkLine(l.pts, 4, (x, y, tx, ty) => { for (const sd of [1, -1]) { ctx.beginPath(); ctx.moveTo(x - ty * sd * 2, y + tx * sd * 2); ctx.lineTo(x - ty * sd * 4.2, y + tx * sd * 4.2); ctx.stroke(); } });
+      break;
+    case "hedgerow":
+      ctx.fillStyle = GINK.hedge; ctx.strokeStyle = "rgba(40,64,32,0.7)"; ctx.lineWidth = 0.5;
+      walkLine(l.pts, 2.6, (x, y) => { ctx.beginPath(); ctx.arc(x + Math.sin(x * 7.1 + y) * 0.6, y + Math.cos(x + y * 5.3) * 0.6, 1.5 + Math.abs(Math.sin(x * 3 + y)) * 0.6, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); });
+      break;
+    case "chain": {
+      ctx.strokeStyle = GINK.chain; ctx.lineWidth = 0.9; let k = 0;
+      walkLine(l.pts, 4, (x, y, tx, ty) => { ctx.save(); ctx.translate(x, y); ctx.rotate(Math.atan2(ty, tx)); ctx.beginPath(); ctx.ellipse(0, 0, 2.6, k++ % 2 ? 0.9 : 1.6, 0, 0, Math.PI * 2); ctx.stroke(); ctx.restore(); });
+      break;
+    }
+    case "beam":
+      ctx.strokeStyle = GINK.beam; ctx.lineWidth = 6 * w; strokePath(ctx, l.pts); ctx.stroke();
+      ctx.strokeStyle = GINK.beamCore; ctx.lineWidth = 1.4; strokePath(ctx, l.pts); ctx.stroke();
+      break;
+    case "drive_shaft":
+      ctx.strokeStyle = GINK.shaft; ctx.lineWidth = 2 * w; strokePath(ctx, l.pts); ctx.stroke();
+      ctx.lineWidth = 1;
+      walkLine(l.pts, 7, (x, y, tx, ty) => { ctx.beginPath(); ctx.moveTo(x - ty * 3, y + tx * 3); ctx.lineTo(x + ty * 3, y - tx * 3); ctx.stroke(); });
+      break;
+    case "wall":
+      ctx.strokeStyle = GINK.wallEdge; ctx.lineWidth = 3.4 * w; smoothPath(ctx, l.pts); ctx.stroke();
+      ctx.strokeStyle = GINK.wall; ctx.lineWidth = 2 * w; smoothPath(ctx, l.pts); ctx.stroke();
+      break;
+    default:
+      // a path or track
+      ctx.setLineDash(l.state === "unfinished" ? [2, 4] : [4, 3]); ctx.strokeStyle = GINK.path; ctx.lineWidth = 1.3 * w; smoothPath(ctx, l.pts); ctx.stroke();
+  }
+  ctx.restore();
+}
+const TURNS = new Set(["boats", "bridge", "ford", "stacks", "shed", "column", "footings"]);
+function paintGroundMark(ctx, m, model) {
+  const st = m.state, sz = m.sz;
+  ctx.save();
+  if (st === "razed" || st === "former") {
+    // footprints only: where it stood, dashed, fainter for an old layout
+    ctx.globalAlpha = st === "former" ? 0.45 : 0.85; ctx.strokeStyle = INK.glyph; ctx.lineWidth = 0.9; ctx.setLineDash([2.5, 2]);
+    ctx.translate(m.x, m.y); if (m.ang && TURNS.has(m.k)) ctx.rotate(m.ang);
+    ctx.strokeRect(-sz * 0.95, -sz * 0.65, sz * 1.9, sz * 1.3);
+    ctx.restore(); return;
+  }
+  if (m.own) {
+    // the place's own mark: a paper ground under it and a ring, so the eye finds it first
+    ctx.fillStyle = "rgba(250,246,234,0.88)"; ctx.beginPath(); ctx.arc(m.x, m.y, sz * 1.4, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = "rgba(150,108,40,0.65)"; ctx.lineWidth = 1.1; ctx.stroke();
+  }
+  if (st === "abandoned") ctx.globalAlpha = 0.5; else if (st === "empty") ctx.globalAlpha = 0.62;
+  const style = st === "dead" ? { ink: "rgba(110,108,104,0.92)", fill: "rgba(208,206,200,0.92)", accent: "#8f8f8f" }
+    : st === "unfinished" ? { ink: INK.glyph, fill: "rgba(0,0,0,0)", accent: INK.glyphAccent }
+    : { ink: INK.glyph, fill: INK.glyphFill, accent: INK.glyphAccent };
+  // ⛑ only what has a long axis turns to its line — a hull to the current, a bridge across it, a stack to its row; a tower stands up
+  ctx.translate(m.x, m.y); if (m.ang && TURNS.has(m.k)) ctx.rotate(m.ang);
+  if (st === "unfinished") ctx.setLineDash([2, 1.6]);
+  if (m.k === "bridge" && m.onWater) {
+    // a bridge on its water: the deck across the channel, the two parapets
+    const L = (m.half || 4) + 4;
+    ctx.fillStyle = "#cdbf9f"; ctx.strokeStyle = INK.glyph; ctx.lineWidth = 0.8;
+    ctx.beginPath(); ctx.rect(-L, -sz * 0.38, 2 * L, sz * 0.76); ctx.fill(); ctx.stroke();
+    ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(-L, -sz * 0.38); ctx.lineTo(L, -sz * 0.38); ctx.moveTo(-L, sz * 0.38); ctx.lineTo(L, sz * 0.38); ctx.stroke();
+  } else if (m.k === "ford" && m.onWater) {
+    const L = (m.half || 4) + 2, n = Math.max(4, Math.round(L / 1.6));
+    ctx.fillStyle = "rgba(250,246,234,0.9)"; ctx.strokeStyle = "rgba(90,80,60,0.6)"; ctx.lineWidth = 0.5;
+    for (let k = 0; k <= n; k++) { ctx.beginPath(); ctx.arc(-L + (2 * L * k) / n, ((k % 2) - 0.5) * 1.5, 1.3, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); }
+  } else {
+    try { drawGlyph(ctx, m.glyph, 0, 0, sz, style); }
+    catch { ctx.fillStyle = INK.glyph; ctx.beginPath(); ctx.arc(0, 0, 2.5, 0, Math.PI * 2); ctx.fill(); }
+  }
+  ctx.setLineDash([]);
+  if (st === "unfinished") {
+    // the scaffold standing round what is not done
+    ctx.strokeStyle = "rgba(120,90,50,0.85)"; ctx.lineWidth = 0.6; ctx.beginPath();
+    for (const fx of [-0.7, 0, 0.7]) { ctx.moveTo(sz * fx, -sz * 1.05); ctx.lineTo(sz * fx, sz * 1.05); }
+    for (const fy of [-0.5, 0.35]) { ctx.moveTo(-sz * 0.85, sz * fy); ctx.lineTo(sz * 0.85, sz * fy); }
+    ctx.stroke();
+  }
+  if (st === "sealed") {
+    // capped: a stone lid over it, and the bar across
+    ctx.fillStyle = "rgba(52,44,36,0.92)"; ctx.strokeStyle = "rgba(240,236,224,0.9)"; ctx.lineWidth = 0.9;
+    ctx.beginPath(); ctx.arc(0, 0, sz * 0.48, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-sz * 0.48, 0); ctx.lineTo(sz * 0.48, 0); ctx.stroke();
+  }
+  ctx.restore();
+  if (st === "abandoned" || st === "ruined") drawStateMark(ctx, "ruin", m.x, m.y, sz);
+}
+
 /** the "you are here" ring, the glyph and the hit target for a site; dimmed when only heard of */
 function paintSite(ctx, site, { here = false, know = "seen", scale = 1, level = 0 }) {
   const dim = know === "heard";
@@ -1260,11 +1500,19 @@ export function paintLocalMap(ctx, model, {
   // ✅ SNG-679 S5 (CCODE-673): the place's own water by its state — keyed by the feature's index, `water:<place>/<n>`, the key
   // the GM's map ops can name. The index is the feature's place in the model's own list, which is the layout's extent order.
   const waterView = (f) => (f.kind === "water" && typeof waterStateOf === "function") ? waterStateOf(model.features.indexOf(f), f) : null;
-  for (const f of [...model.features].sort((a, b) => (order[a.kind] ?? 1) - (order[b.kind] ?? 1))) {
+  const sortedFeatures = [...model.features].sort((a, b) => (order[a.kind] ?? 1) - (order[b.kind] ?? 1));
+  const paintExtent = (f) => {
     const wv = waterView(f);
     if (wv && wv.state && wv.state !== "whole") out.stated.push({ id: f.id, state: wv.state, water: true });
     paintFeature(ctx, f, model, rnd, wv);
-  }
+  };
+  for (const f of sortedFeatures) if (f.kind !== "water") paintExtent(f);
+  // ✅ G4 (CCODE-675): the ground's own fills, over the measured ground and under its water; its lines over the water
+  const G = model.ground || null;
+  const groundRnd = rngOf(seedOf("groundpaint:" + model.id));
+  if (G) for (const a of G.areas) paintGroundArea(ctx, a, model, groundRnd);
+  for (const f of sortedFeatures) if (f.kind === "water") paintExtent(f);
+  if (G) for (const l of G.lines) paintGroundLine(ctx, l, model);
   // the ways
   ctx.save(); ctx.lineCap = "round"; ctx.lineJoin = "round";
   const roadW = Math.max(2.2, Math.min(7, 5 * frame.pxPerMetre * 1.6 + 1.6));
@@ -1298,6 +1546,12 @@ export function paintLocalMap(ctx, model, {
     ctx.restore();
   }
   paintRoofs(ctx, model, rngOf(seedOf("roofs:" + model.id)));
+  // ✅ G4: the marks over the roofs, unlabelled, and the place's own mark LAST — *"the first thing the eye finds"*
+  if (G) {
+    for (const m of G.marks) if (!m.own) paintGroundMark(ctx, m, model);
+    for (const m of G.marks) if (m.own) paintGroundMark(ctx, m, model);
+    out.ground = { marks: G.marks.length, lines: G.lines.length, areas: G.areas.length, own: G.marks.filter((m) => m.own).length };
+  }
   // ⛔ THE EXITS GO FIRST, in their own band at the rim (SNG-677 §0) — and their boxes are CLAIMED in the main
   // space as well, so a site's name cannot land across a road's name. ⚠️ The box is CENTRED on where the ink
   // will be: a left-aligned label placed by its left edge and then clamped into the frame by its centre drew

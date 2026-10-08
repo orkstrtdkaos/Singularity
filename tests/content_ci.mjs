@@ -1824,6 +1824,30 @@ for (const pack of PACKS) {
       check("SNG-678: …and no site glyph reads as a PLACE glyph, since a local map draws its place and its sites together",
         xWorst < 0.45, `most-similar pair ${xPair} overlaps ${(xWorst * 100).toFixed(0)}%`);
     }
+    /* ═════ ✅ AEVI's local ground, G4 (CCODE-675) · THE GROUND ALPHABET ═════
+     * *"New marks needed: farmstead, shed, machinery, crane, stacks, … Plain shapes are enough."* The same rasteriser, the same
+     * threshold, judged against itself and against the two alphabets it is drawn beside on a local map. */
+    {
+      const LG675 = await import("../engine/localground.js");
+      const gdoc675 = rj("content/packs/core/world/local_ground.json");
+      const S675 = LG675.groundSections(gdoc675._kinds);
+      const marks675 = [...S675.marks];
+      const blank675 = marks675.filter((k) => !raster(LG675.groundGlyphOf(k, S675.drawn[k])).some((v) => v));
+      check("ground G4: every MARK kind in `_kinds` resolves to a glyph that puts ink down — the 21 new ones in their own ground alphabet",
+        marks675.length >= 50 && MI.GROUND_GLYPHS.length >= 21 && blank675.length === 0, blank675.length ? "blank: " + blank675.join(", ") : `${marks675.length} mark kinds`);
+      const gg = MI.GROUND_GLYPHS.map(raster);
+      const ov = (a, b) => { let u = 0, s2 = 0; for (let q = 0; q < a.length; q++) { if (a[q] || b[q]) u++; if (a[q] && b[q]) s2++; } return u ? s2 / u : 1; };
+      let gw = 0, gp = "";
+      for (let i = 0; i < gg.length; i++) for (let j = i + 1; j < gg.length; j++) { const v = ov(gg[i], gg[j]); if (v > gw) { gw = v; gp = MI.GROUND_GLYPHS[i] + "/" + MI.GROUND_GLYPHS[j]; } }
+      const others = [...MI.ALL_GLYPHS, ...MI.ALL_SITE_GLYPHS], og = others.map(raster);
+      let xw = 0, xp = "";
+      for (let i = 0; i < gg.length; i++) for (let j = 0; j < og.length; j++) { const v = ov(gg[i], og[j]); if (v > xw) { xw = v; xp = MI.GROUND_GLYPHS[i] + " vs " + others[j]; } }
+      check("ground G4: …and no two ground glyphs read the same, nor any ground glyph as a place or a site glyph — measured pairwise on the drawn pixels",
+        gw < 0.45 && xw < 0.45, `within: ${gp} ${(gw * 100).toFixed(0)}% · across: ${xp} ${(xw * 100).toFixed(0)}%`);
+      const noLine = [...S675.lines].filter((k) => !LG675.GROUND_LINE_KINDS.includes(k)), noArea = [...S675.areas].filter((k) => !LG675.GROUND_AREA_KINDS.includes(k));
+      check("ground G4: …and every LINE and FILL kind in `_kinds` has a painter",
+        S675.lines.size >= 9 && S675.areas.size >= 19 && noLine.length === 0 && noArea.length === 0, `${noLine.join(", ")} ${noArea.join(", ")}`);
+    }
   }
 
   // ══ SNG-404 — THE LOCAL DETAILING ENGINE, MEASURED AGAINST THE EIGHT AUTHORED LAYOUTS.

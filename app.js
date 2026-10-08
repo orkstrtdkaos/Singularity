@@ -56,7 +56,7 @@ import { mapHolds, holdMarker } from "./engine/mapholds.js";
 import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
   filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase, filmFrame, filmLandings } from "./engine/films.js";
 import { arcReachesRegion } from "./engine/arceffects.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
-import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, regionRoadPaths, capRoadRoutes, WORLD_CAP_DEG, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST, fineWindowBox } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, regionRoadPaths, capRoadRoutes, WORLD_CAP_DEG, roadKinds, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST, fineWindowBox } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
 import { groundHolders, resolvedPowers, stateStamp, powerRelation } from "./engine/realms.js";
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.20";
+const APP_VERSION = "2.22.21";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -17588,7 +17588,12 @@ function wireWorldGlobe() {
    * hitch nobody should feel) and merged over the grid's paths as each slice lands; the regions' own roads follow. */
   let _capPaths = new Map(), _capTerrain = null, _capQueue = null, _capDone = null, _capStamp = 0;
   const capPathsFor = () => _capPaths;
-  const routeWorld = () => worldRoadRoutes(_terrain, CONTENT.locations, { tierOf: (l) => l?.tier, regionPaths: regionPathsFor, regionStamp: _regionPathsCache.size, capPaths: capPathsFor, capStamp: _capStamp });
+  const routeWorld = () => {
+    const r = worldRoadRoutes(_terrain, CONTENT.locations, { tierOf: (l) => l?.tier, regionPaths: regionPathsFor, regionStamp: _regionPathsCache.size, capPaths: capPathsFor, capStamp: _capStamp });
+    // ✅ W4/W5: every road's kind, from the ground and its ends, once per set of routes (a merge makes a new set)
+    if (r && !r.kinds) { try { r.kinds = roadKinds(_terrain, CONTENT.locations, r.byPair); } catch { r.kinds = new Map(); } }
+    return r;
+  };
   // ⚠️ an idle slice that is never idle: a repaint per region kept the frame busy and the idle callbacks starved, so the
   // walk waits with a timeout, repaints every fourth region, and the generator's arrival (it loads beside the routes)
   // reschedules the walk instead of silently ending it
@@ -17658,7 +17663,7 @@ function wireWorldGlobe() {
     _worldRoutesTried = _terrain;
     setTimeout(() => {
       try {
-        _worldRoutes = worldRoadRoutes(_terrain, CONTENT.locations, { tierOf: (l) => l?.tier });
+        _worldRoutes = routeWorld();
         // ⛑ H2: the same object the tick reads, so a hull's drawn position and her raided position are one.
         console.log(`[globe roads] ${_worldRoutes.kept} of ${_worldRoutes.input} routed in ${_worldRoutes.ms}ms`
           + (_worldRoutes.seamDropped ? ` · ${_worldRoutes.seamDropped} dropped at the ±180 seam` : ""));
@@ -17912,6 +17917,7 @@ function wireWorldGlobe() {
     const net = networkPaths(_terrain, view, { locations: CONTENT.locations, precursor: _precursorLines,
       showPrecursor: hasOldRoads, canvasPx: Math.min(GW(), GH()),
       tierOf: (l) => l?.tier,
+      roadKind: (key) => _worldRoutes?.kinds?.get(key)?.kind || null,   // ✅ W4/W5: sea lanes and buried roads draw as what they are
       bend: coarse ? cachedBend : globeBend });   // ✅ W1: a moving frame draws the cached routes, never the arcs
     if (net.fade > 0 || net.trunkFade > 0) {
       ctx.save();
@@ -17935,20 +17941,31 @@ function wireWorldGlobe() {
         ctx.beginPath(); ctx.moveTo(run[0][0], run[0][1]);
         for (let i = 1; i < run.length; i++) ctx.lineTo(run[i][0], run[i][1]);
       };
+      /* ✅ AEVI W4/W5 (SNG-682): a crossing over water is a SEA LANE — dotted, in the hydrology palette, only where both ends are
+       * coastal (`roadKinds` decided; a crossing with an end inland is not in `net.roads` at all) — and a road to a place under
+       * the ground is drawn as under-ground: dashed in the buried style the precursor lines use, on the land and lattice layers
+       * only, never as a surface road over the sea or the land above it. */
+      ctx.globalAlpha = 0.7 * net.trunkFade; ctx.strokeStyle = "#3f86bd"; ctx.lineWidth = 1.2; ctx.setLineDash([1.5, 4]);
+      for (const r of net.roads) { if (r.kind !== "sea" || r.run.length < 2) continue; trace(r.run); ctx.stroke(); }
+      if (layer === "biome" || layer === "lattice") {
+        ctx.globalAlpha = 0.55 * net.fade; ctx.strokeStyle = "#7a6ab8"; ctx.lineWidth = 1.1; ctx.setLineDash([4, 5]);
+        for (const r of net.roads) { if (r.kind !== "buried" || r.run.length < 2) continue; trace(r.run); ctx.stroke(); }
+      }
+      ctx.setLineDash([]);
       ctx.globalAlpha = 0.55 * net.trunkFade; ctx.strokeStyle = "rgba(24,20,14,0.62)";
       for (const r of net.roads) {
-        if (!r.primary || r.run.length < 2) continue;
+        if (!r.primary || r.run.length < 2 || (r.kind && r.kind !== "road")) continue;
         ctx.lineWidth = 2.4; trace(r.run); ctx.stroke();
       }
       ctx.globalAlpha = 0.72 * net.trunkFade; ctx.strokeStyle = "#dfc89a";
       for (const r of net.roads) {
-        if (!r.primary || r.run.length < 2) continue;
+        if (!r.primary || r.run.length < 2 || (r.kind && r.kind !== "road")) continue;
         ctx.lineWidth = 1.3; trace(r.run); ctx.stroke();
       }
       ctx.globalAlpha = 0.46 * net.fade; ctx.strokeStyle = "rgba(198,176,132,0.78)";
       ctx.setLineDash([3, 3.5]); ctx.lineWidth = 0.9;
       for (const r of net.roads) {
-        if (r.primary || r.run.length < 2) continue;
+        if (r.primary || r.run.length < 2 || (r.kind && r.kind !== "road")) continue;
         trace(r.run); ctx.stroke();
       }
       ctx.setLineDash([]);

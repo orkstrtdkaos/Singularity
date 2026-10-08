@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.22.21",
+      "date": "2026-10-08",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Sea lanes and buried roads on the world map",
+          "summary": "A road that crosses open sea is drawn as a sea lane — dotted, in the water's colour — and only between two coastal places; a crossing from an inland place is no longer drawn as a straight line across the water. A road to a place under the ground is dashed in the buried style on the land and lattice layers, never drawn as a surface road over what lies above it."
+        }
+      ]
+    },
+    {
       "version": "2.22.20",
       "date": "2026-10-08",
       "entries": [

@@ -1440,7 +1440,7 @@ export function areaMembers(area, locations) {
  * change, and nobody could see what it bought. `bendRoad` is the world-scale answer: a handful of samples per
  * road, bent toward the cheaper ground, computed once per terrain and cached by the caller. */
 export function networkPaths(t, view, { locations, precursor, showPrecursor = false, canvasPx = 700,
-  bend = null, tierOf = null } = {}) {
+  bend = null, tierOf = null, roadKind = null } = {}) {
   const arc = (a, b, radius, steps) => {
     // spherical interpolation between two [lat, lon] points, projected per step
     const R2 = Math.PI / 180;
@@ -1504,6 +1504,9 @@ export function networkPaths(t, view, { locations, precursor, showPrecursor = fa
       seen.add(key);
       const o2 = locations[other];
       if (!o2?.worldPos) continue;
+      // ✅ W4/W5: what this road IS (`roadKinds`); a crossing with an end inland is not drawn at world scale at all
+      const kind = roadKind ? (roadKind(key) || "road") : "road";
+      if (kind === "hidden") continue;
       const a = [l.worldPos.colatitude - 90, l.worldPos.longitude];
       const b = [o2.worldPos.colatitude - 90, o2.worldPos.longitude];
       const primary = tier(l) !== "site" && tier(o2) !== "site";
@@ -1514,7 +1517,7 @@ export function networkPaths(t, view, { locations, precursor, showPrecursor = fa
       const pts = bend ? bend(a, b, id, other) : null;
       // ✅ AEVI W1 (SNG-682): a bend that answers `false` has NOTHING cached for this road on a moving frame — the road is
       // not drawn, rather than drawn straight. `null` still means "no route": the arc, as on a settled frame.
-      if (pts === false) continue;
+      if (pts === false && kind === "road") continue;   // a sea lane or a buried arc is the arc by design, moving or still
       const runs = [];
       if (pts && pts.length > 1) {
         // ⛑ ONE CHAIN, NOT A RUN PER SEGMENT. Arcing each segment separately gave 1,637 runs for 226 roads —
@@ -1531,7 +1534,7 @@ export function networkPaths(t, view, { locations, precursor, showPrecursor = fa
       } else {
         for (const run of arc(a, b, 1.0)) runs.push(run);
       }
-      for (const run of runs) out.roads.push({ run, primary });
+      for (const run of runs) out.roads.push({ run, primary, kind });
     }
   }
 
@@ -1704,6 +1707,43 @@ export function capRoadRoutes(t, locations, { tierOf = null, roads = null, cell 
     }
   }
   return { byPair, roads: inCap.length, routed, pairs: inCap.map((r) => (r.a < r.b ? `${r.a}|${r.b}` : `${r.b}|${r.a}`)) };
+}
+
+/** ✅ AEVI W4/W5 (SNG-682): what each road IS, decided once from the ground and its ends — `road` (drawn as a road), `sea` (an
+ *  unrouted crossing more than `wetAbove`% wet between two coastal ends: a sea lane), `hidden` (such a crossing with an end
+ *  inland: not drawn at world scale at all), `buried` (an end under the ground: dashed in the buried style). A routed path's
+ *  wetness is the path's; an unrouted road's is its straight arc's. Coastal: water within `coastDeg` of the end. PURE. */
+export function roadKinds(t, locations, byPair, { wetAbove = 20, coastDeg = 1.2 } = {}) {
+  const out = new Map();
+  if (!t || !locations) return out;
+  const R2 = Math.PI / 180;
+  const wet = (lat, lon) => { let lo = lon; while (lo > 180) lo -= 360; while (lo < -180) lo += 360; const s = sampleAt(t, lo, lat); return s ? (s.type & 3) === 0 : false; };
+  const slerp = (a, b, n) => {
+    const v = (p) => [Math.cos(p[0] * R2) * Math.cos(p[1] * R2), Math.cos(p[0] * R2) * Math.sin(p[1] * R2), Math.sin(p[0] * R2)];
+    const A = v(a), B = v(b), pts = [];
+    for (let i = 0; i <= n; i++) { const f = i / n; const x = A.map((c, k) => c + (B[k] - c) * f); const m = Math.hypot(...x) || 1; pts.push([Math.asin(x[2] / m) / R2, Math.atan2(x[1], x[0]) / R2]); }
+    return pts;
+  };
+  const coastal = (p) => { if (wet(p[0], p[1])) return true; for (let k = 0; k < 8; k++) { const a = (k / 8) * Math.PI * 2; if (wet(p[0] + coastDeg * Math.sin(a), p[1] + coastDeg * Math.cos(a) / Math.max(0.2, Math.cos(p[0] * R2)))) return true; } return false; };
+  const P = (id) => { const w = locations[id]?.worldPos; return w ? [Number(w.colatitude) - 90, Number(w.longitude)] : null; };
+  for (const id of Object.keys(locations)) {
+    for (const other of (locations[id]?.connections || [])) {
+      const key = id < other ? `${id}|${other}` : `${other}|${id}`;
+      if (out.has(key)) continue;
+      const a = P(id), b = P(other); if (!a || !b) continue;
+      const buried = (Number(locations[id]?.worldPos?.depth) || 0) < 0 || (Number(locations[other]?.worldPos?.depth) || 0) < 0;
+      const path = byPair?.get(key) || null;
+      const line = path && path.length > 1 ? path : slerp(a, b, 48);
+      let n = 0, w = 0;
+      for (let i = 1; i < line.length; i++) for (const p of slerp(line[i - 1], line[i], 3)) { n++; if (wet(p[0], p[1])) w++; }
+      const wetPct = Math.round(100 * w / Math.max(1, n));
+      let kind = "road";
+      if (buried) kind = "buried";
+      else if (!path && wetPct > wetAbove) kind = (coastal(a) && coastal(b)) ? "sea" : "hidden";
+      out.set(key, { kind, wet: wetPct, routed: !!path, buried });
+    }
+  }
+  return out;
 }
 
 export function worldRoadRoutes(t, locations, { tierOf = null, gridW = 360, regionPaths = null, regionStamp = 0, capPaths = null, capStamp = 0 } = {}) {

@@ -26,6 +26,7 @@ const regionPaths = (rid) => { if (!regionCache.has(rid)) regionCache.set(rid, W
 const cap = WG.capRoadRoutes(t, C.locations, { tierOf: (l) => l?.tier });
 const routes = WG.worldRoadRoutes(t, C.locations, { tierOf: (l) => l?.tier, regionPaths, regionStamp: 1, capPaths: cap.byPair, capStamp: 1 });
 const net = WG.roadNetwork(C.locations, { tierOf: (l) => l?.tier });
+const kinds = WG.roadKinds(t, C.locations, routes.byPair);   // ✅ W4/W5: what each road is
 const R = Math.PI / 180;
 const gc = (a, b) => Math.acos(Math.max(-1, Math.min(1, Math.sin(a[0] * R) * Math.sin(b[0] * R) + Math.cos(a[0] * R) * Math.cos(b[0] * R) * Math.cos((a[1] - b[1]) * R)))) / R;
 const wet = (lat, lon) => { let lo = lon; while (lo > 180) lo -= 360; while (lo < -180) lo += 360; const s = WG.sampleAt(t, lo, lat); return s ? (s.type & 3) === 0 : false; };
@@ -53,7 +54,7 @@ for (const e of net.roads) {
   const straight = gc(a, b);
   const depthA = Number(C.locations[e.a]?.worldPos?.depth) || 0, depthB = Number(C.locations[e.b]?.worldPos?.depth) || 0;
   const sameRegion = (C.locations[e.a]?.regionId || C.locations[e.a]?.region) === (C.locations[e.b]?.regionId || C.locations[e.b]?.region);
-  rows.push({ key, sameRegion, fromRegion, fromCap, routed: !!routed, wetPct: Math.round(100 * w / Math.max(1, n)), ratio: straight > 0.2 ? +(walked / straight).toFixed(2) : null,
+  rows.push({ key, kind: kinds.get(key)?.kind || "road", sameRegion, fromRegion, fromCap, routed: !!routed, wetPct: Math.round(100 * w / Math.max(1, n)), ratio: straight > 0.2 ? +(walked / straight).toFixed(2) : null,
     straightDeg: +straight.toFixed(2), minColat: +Math.min(C.locations[e.a].worldPos.colatitude, C.locations[e.b].worldPos.colatitude).toFixed(2),
     primary: !!e.primary, buried: depthA < 0 || depthB < 0 });
 }
@@ -62,14 +63,16 @@ const pct = (xs, q) => { const s = [...xs].sort((x, y) => x - y); return s.lengt
 const measured = {
   roads: rows.length,
   routed: routedRows.length,
-  unroutedStraightArcs: arcs.length,
+  // ✅ W4/W5: a straight ARC is a road drawn straight; a sea lane is a lane and a buried arc is under the ground
+  unroutedStraightArcs: arcs.filter((r) => r.kind === "road").length,
+  seaLanes: rows.filter((r) => r.kind === "sea").length, hiddenAtWorld: rows.filter((r) => r.kind === "hidden").length, buriedRoads: rows.filter((r) => r.kind === "buried").length,
   seamDropped: routes.seamDropped,
   // ⛑ two routers, two numbers: Aevi's "over ×2, down from 25" is the world GRID's; a region's own route is the region
   // map's picture of that road, and its detours (the Echo's water cost takes Millbrook → the Crossing x3.3) are ruled there
   routedOver2x: routedRows.filter((r) => !r.fromRegion && !r.fromCap && r.ratio != null && r.ratio > 2).length,
   regionOver2x: routedRows.filter((r) => r.fromRegion && r.ratio != null && r.ratio > 2).length,
   capOver2x: routedRows.filter((r) => r.fromCap && r.ratio != null && r.ratio > 2).length,
-  wetStraightArcs: arcs.filter((r) => r.wetPct > 20).length,
+  wetStraightArcs: arcs.filter((r) => r.kind === "road" && r.wetPct > 20).length,
   capArcsWithin10: arcs.filter((r) => r.minColat < 10).length,
   capRoutedOver2xWithin10: routedRows.filter((r) => r.minColat < 10 && r.ratio != null && r.ratio > 2).length,
   fromRegions: routes.fromRegions || 0,
@@ -86,6 +89,7 @@ const measured = {
 console.log(`world roads: ${measured.roads} · routed ${measured.routed} · straight arcs ${measured.unroutedStraightArcs} (wet ${measured.wetStraightArcs}) · seam-dropped ${measured.seamDropped}`);
 console.log(`W2: ${measured.fromRegions} roads take their region's own route · Millbrook → Echo River Crossing walks x${measured.millbrookCrossingRatio} · short stubs with a region route: ${measured.shortStubsWithRegionRoute}`);
 console.log(`W3: ${measured.fromCap} of ${measured.capRoads} cap roads on the polar grid (over x2 among them: ${measured.capOver2x}) · cap walked/straight median ${measured.capMedianRatio} · p90 ${measured.capP90Ratio} · the Crossing → Thinwater x${measured.crossingThinwaterRatio} · over x2 within 10° of the Crossing: ${measured.capRoutedOver2xWithin10}`);
+console.log(`W4/W5: sea lanes ${measured.seaLanes} · not drawn at world scale ${measured.hiddenAtWorld} · buried ${measured.buriedRoads}`);
 console.log(`routed: walked/straight median ${measured.medianRatio} · p90 ${measured.p90Ratio} · over ×2: ${measured.routedOver2x} (within 10° of the Crossing: ${measured.capRoutedOver2xWithin10})`);
 console.log("worst routed by detour:"); routedRows.filter((r) => r.ratio).sort((x, y) => y.ratio - x.ratio).slice(0, 5).forEach((r) => console.log("   ", r.key, "x" + r.ratio, r.straightDeg + "°", "colat " + r.minColat));
 console.log("straight arcs drawn (unrouted), wettest first:"); arcs.sort((x, y) => y.wetPct - x.wetPct).slice(0, 8).forEach((r) => console.log("   ", r.key, r.wetPct + "% wet", r.straightDeg + "°", r.buried ? "buried" : ""));

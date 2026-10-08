@@ -24420,7 +24420,7 @@ await (async () => {
     check("SNG-682 W1: ⛔ …and the globe passes that bend on a coarse frame — `cachedBend` reads `_worldRoutes.byPair` and `_bendFor` and never calls `bendRoad`; `networkPaths` skips a road whose bend answers false",
       /bend: coarse \? cachedBend : globeBend \}\);/.test(srcW1) && /const cachedBend = \(a, b, idA, idB\) => \{/.test(srcW1)
       && !/bendRoad\(/.test(srcW1.slice(srcW1.indexOf("const cachedBend = "), srcW1.indexOf("/* ⛔ COMPUTED OFF THE FIRST PAINT")))
-      && /if \(pts === false\) continue;/.test(wgW1));
+      && /if \(pts === false && kind === "road"\) continue;/.test(wgW1));
     // ✅ W2 (CCODE-661): a region's roads routed on its own fine ground, merged over the grid for same-region pairs only
     const { makeTerrain: mkT661 } = await import("../scripts/world/terrain.mjs");
     const gp661 = JSON.parse(readFileSync(join(root, "content/packs/core/world/genparams.json"), "utf8"));
@@ -24458,6 +24458,23 @@ await (async () => {
       && capKeys665.every((k) => { const [a, b] = k.split("|"); return Math.min(colat665(a), colat665(b)) <= 60; })
       && [...merged665.gridByPair.keys()].filter((k) => !cap665.byPair.has(k)).every((k) => merged665.byPair.get(k) === merged665.gridByPair.get(k))
       && over2 < 13 && ratio665 != null && ratio665 < 3.22, `the Crossing → Thinwater x${ratio665 == null ? "?" : ratio665.toFixed(2)} · ${cap665.routed} of ${cap665.roads} cap roads · over x2 within 10°: ${over2} (13 before; the rest is the ground, ratcheted in the measurement)`);
+    // ✅ W4/W5 (CCODE-666): what each road is, and the painter draws it as that
+    const kinds666 = WG660.roadKinds(t660, C660.locations, merged665.byPair);
+    const k666 = (key) => kinds666.get(key)?.kind;
+    const unlit666 = k666("gen-the-passage-below-the-unlit-deep|the_unlit_deep");
+    const wetUnrouted666 = [...kinds666.entries()].filter(([k, v]) => !v.routed && v.wet > 20 && !v.buried);
+    const net666 = WG660.networkPaths(t660, { ...WG660.DEFAULT_VIEW, r: 300, cx: 350, cy: 270 }, { locations: C660.locations, canvasPx: 700, tierOf: (l) => l?.tier, bend: null, roadKind: k666 });
+    check("SNG-682 W4/W5: ⛔ `roadKinds` names every road from the ground and its ends — a road to a place under the ground is `buried`, an unrouted crossing over water is a `sea` lane between coastal ends and `hidden` with an end inland — and `networkPaths` tags each run with its kind and leaves a hidden road out",
+      kinds666.size > 200 && unlit666 === "buried" && wetUnrouted666.length > 0 && wetUnrouted666.every(([k, v]) => v.kind === "sea" || v.kind === "hidden")
+      && [...kinds666.values()].every((v) => ["road", "sea", "hidden", "buried"].includes(v.kind))
+      && net666.roads.every((r) => r.kind && r.kind !== "hidden") && net666.roads.some((r) => r.kind === "buried")
+      && (wetUnrouted666.some(([k, v]) => v.kind === "hidden") ? !net666.roads.some((r) => r.kind === "hidden") : true));
+    const srcW4 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");
+    check("SNG-682 W4/W5: ⛔ …and the globe draws a sea lane dotted in the hydrology palette, a buried road dashed in the buried style on the land and lattice layers only, and a surface road only as a road",
+      /roadKind: \(key\) => _worldRoutes\?\.kinds\?\.get\(key\)\?\.kind \|\| null,/.test(srcW4) && /r\.kinds = roadKinds\(_terrain, CONTENT\.locations, r\.byPair\);/.test(srcW4)
+      && /if \(r\.kind !== "sea" \|\| r\.run\.length < 2\) continue; trace\(r\.run\); ctx\.stroke\(\);/.test(srcW4) && /ctx\.strokeStyle = "#3f86bd"; ctx\.lineWidth = 1\.2; ctx\.setLineDash\(\[1\.5, 4\]\);/.test(srcW4)
+      && /if \(layer === "biome" \|\| layer === "lattice"\) \{\s*\n\s*ctx\.globalAlpha = 0\.55 \* net\.fade; ctx\.strokeStyle = "#7a6ab8"/.test(srcW4)
+      && (srcW4.match(/\|\| \(r\.kind && r\.kind !== "road"\)\) continue;/g) || []).length === 3);
     check("SNG-682: ⛔ Aevi's road measurement runs in CI with her ratchets (tests/world_roads_measure.mjs in the runner, a baseline that may only go DOWN)",
       existsSync(join(root, "tests/world_roads_measure.mjs")) && existsSync(join(root, "tests/world_roads_baseline.json"))
       && /\["world_roads_measure", "node", \["tests\/world_roads_measure\.mjs"\]\]/.test(readFileSync(join(root, "scripts/run_tests.mjs"), "utf8")));

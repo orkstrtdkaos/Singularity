@@ -10302,5 +10302,56 @@
   },
   "tradeSettled": {},
   "tradeRefunded": {},
-  "invitationsSeen": {}
+  "invitationsSeen": {},
+  "localLayouts": {
+    "the_unlanded": {
+      "radiusMetres": 520,
+      "extent": [
+        {
+          "id": "the_unlanded:built",
+          "name": null,
+          "kind": "built",
+          "bearing": 0,
+          "fromMetres": 0,
+          "radiusMetres": 104,
+          "generated": true
+        },
+        {
+          "id": "the_unlanded:rock0",
+          "name": null,
+          "kind": "rock",
+          "bearing": 161,
+          "fromMetres": 484,
+          "radiusMetres": 149,
+          "generated": true
+        },
+        {
+          "id": "the_unlanded:waste0",
+          "name": null,
+          "kind": "waste",
+          "bearing": 71,
+          "fromMetres": 344,
+          "radiusMetres": 362,
+          "generated": true
+        }
+      ],
+      "sites": [],
+      "generated": true,
+      "_measured": {
+        "uphillBearing": null,
+        "relief": null,
+        "riverBearing": null,
+        "riverDistanceDeg": null,
+        "roadsOut": [
+          {
+            "to": "the_long_span",
+            "bearing": 161,
+            "mi": 386
+          }
+        ]
+      },
+      "kind": "pole",
+      "placeId": "the_unlanded"
+    }
+  }
 }

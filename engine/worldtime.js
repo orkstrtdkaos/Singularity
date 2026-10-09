@@ -110,7 +110,9 @@ export function positionedPlace(locations, id, { worldDay = null } = {}) {
   if (!(loc && Number.isFinite(Number(loc.worldPos?.colatitude)))) return null;
   // ✅ SNG-679 H5: *"`positionedPlace` answers the live position for these three, so maps, routing and `whereOf` agree."* ⛑ Only when
   // the caller says WHICH day — a caller with no day gets the authored point, as it always has, so nothing reads the wall clock here.
-  if (worldDay != null && loc.carriage?.circuit) {
+  // ⛑ CCODE-692: a record `liveLocations` already put where it is today (`circuitAt`) is not walked a second time — its circuit's
+  // first point would be its live point, and the place would be moved twice
+  if (worldDay != null && loc.carriage?.circuit && !loc.circuitAt) {
     const live = circuitPosition(loc, worldDay, { locations });
     if (live?.worldPos) return { ...loc, worldPos: { ...loc.worldPos, ...live.worldPos }, circuitAt: live };
   }

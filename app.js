@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.5";
+const APP_VERSION = "2.26.6";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -16244,6 +16244,24 @@ function paintRegionMap(regionId) {
   const authoredMap = _regionMaps && _regionMaps[regionId];
   const ext = regionExtent(regionId, CONTENT.locations, { authored: authoredMap });
   if (!ext) return;
+  /* ✅ CCODE-692 · S8 — AEVI: *"The region map for a moved place: yes, next. It should read live locations the same as the globe."*
+   * The character's live locations: a place they know was moved stands where it stands now, a road opened is a road, and the three
+   * moving places are where they are today. ⛔ THE FRAME STAYS THE AUTHORED ONE (`ext`, above, and the cached base): a place that
+   * moved does not move the region. ⛑ EACH LIVE LONGITUDE IS PUT BACK BESIDE ITS AUTHORED ONE — this base projects unwrapped
+   * longitudes, and a position written as −108 for a place authored at 252 would land a frame away. */
+  const locs692 = (() => {
+    let live = null;
+    try { live = liveLocations(character, CONTENT.locations, { content: CONTENT, worldDay: absoluteWorldDay() }); } catch { live = null; }
+    if (!live || live === CONTENT.locations) return CONTENT.locations;
+    const out = {};
+    for (const [id, l] of Object.entries(live)) {
+      const a = CONTENT.locations[id];
+      if (l === a || !l?.worldPos || !a?.worldPos || !Number.isFinite(Number(l.worldPos.longitude))) { out[id] = l; continue; }
+      const lon = Number(a.worldPos.longitude) + ((((Number(l.worldPos.longitude) - Number(a.worldPos.longitude)) % 360) + 540) % 360 - 180);
+      out[id] = { ...l, worldPos: { ...l.worldPos, longitude: lon } };
+    }
+    return out;
+  })();
   let base = _regionBases.get(regionId);
   if (!base) {
     const pad = 2;
@@ -16374,8 +16392,8 @@ function paintRegionMap(regionId) {
    * too; here it only skips, renames, and counts the skipped into the parent's tally. */
   const suppressed416 = {};
   const face416 = {};
-  for (const id of Object.keys(CONTENT.locations)) {
-    const l = CONTENT.locations[id];
+  for (const id of Object.keys(locs692)) {
+    const l = locs692[id];   // ✅ CCODE-692: where it stands for this character today
     if (!l?.worldPos || (l.regionId || l.region) !== regionId) continue;
     if (l.supersededBy || aliased416[id]) continue;
     const face = regionFaceOf(id, CONTENT);
@@ -16599,8 +16617,8 @@ function paintRegionMap(regionId) {
       // side a scatter against a lattice says that in a way two tints never could.
       if (fieldCtl.kinds.has("nanite") && lens.grids.nanite) {
         const tended = [];
-        for (const id of Object.keys(CONTENT.locations || {})) {
-          const l = CONTENT.locations[id];
+        for (const id of Object.keys(locs692 || {})) {
+          const l = locs692[id];   // ✅ CCODE-692: a moved settlement's lattice is tended where it stands
           if (!l?.worldPos) continue;
           const tier = String(l.tier || "");
           if (tier !== "settlement" && tier !== "region") continue;
@@ -16794,7 +16812,7 @@ function paintRegionMap(regionId) {
     // the straight line, the worst going 1.96× round, and 11 of 17 share ground with another as a trunk.
     // ⚠️ the network folds journeys that go through another town onto their legs, so a triangle does not draw
     // its third side alongside the other two (SNG-422)
-    const net = roadNetwork(CONTENT.locations, { k: 1.1 });
+    const net = roadNetwork(locs692, { k: 1.1 });   // ✅ CCODE-692: a road opened is a road, to where the place stands
     // ⛑ on a city the AVENUES are the roads — drawn already, from the hall out through the wall — so routing
     // them a second time would lay a duplicate set over the top on a projection the city no longer uses.
     const routed = city ? null : routedRoadsFor(regionId, net.roads, ext, base, W, H);
@@ -16909,7 +16927,7 @@ function paintRegionMap(regionId) {
       // destination, and `rules.regions` carries that region's display name.
       for (const x of routed.exits) {
         const near = exits.find((g) => Math.hypot(g.at.x - x.at.x, g.at.y - x.at.y) < 26);
-        const dest = CONTENT.locations?.[x.to];
+        const dest = locs692?.[x.to];
         const name = exitNameFor(dest, x.to, regionId);
         if (near) {
           if (!near.names.includes(name)) near.names.push(name);
@@ -16992,7 +17010,7 @@ function paintRegionMap(regionId) {
       ctx.strokeStyle = "rgba(214,188,138,0.85)"; ctx.lineWidth = 1.8;
       ctx.lineJoin = "round"; ctx.lineCap = "round";
       for (const w of authoredMap.ways || []) {
-        const from = CONTENT.locations?.[w.from], to = CONTENT.locations?.[w.to];
+        const from = locs692?.[w.from], to = locs692?.[w.to];
         if (!from?.worldPos || !to?.worldPos) continue;
         const a = base.toScreen(from.worldPos.longitude, from.worldPos.colatitude - 90, W, H);
         const b = base.toScreen(to.worldPos.longitude, to.worldPos.colatitude - 90, W, H);
@@ -17004,6 +17022,12 @@ function paintRegionMap(regionId) {
     }
   }
 
+  // ✅ CCODE-692 · S8: *"leaves a trace at the old one"* — where a place this character knows was moved used to stand, as the globe draws it
+  if (!city && locs692 !== CONTENT.locations) for (const l692 of Object.values(locs692)) {
+    if (!l692?.movedFrom || (l692.regionId || l692.region) !== regionId || !Number.isFinite(Number(l692.movedFrom.colatitude))) continue;
+    const pr692 = base.toScreen(Number(l692.movedFrom.longitude), Number(l692.movedFrom.colatitude) - 90, W, H);
+    if (pr692 && Number.isFinite(pr692.x)) drawStateMark(ctx, "trace", pr692.x, pr692.y, 6);
+  }
   for (const m of marks416) {
     const meta = _terrain.locations[m.id] || {};
     // ⛑ L0: the region-scale kind wins over the stamped one — "Echo River Crossing" is a bridge at this scale
@@ -17074,7 +17098,7 @@ function paintRegionMap(regionId) {
       while (mid - v > 180) v += 360;
       return v;
     };
-    const held = mapHolds(character, { sharedStore: sharedHolds, locations: CONTENT.locations,
+    const held = mapHolds(character, { sharedStore: sharedHolds, locations: locs692,   // ✅ CCODE-692: a hold rides with its place
       worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
       routes: _worldRoutes?.byPair || null, content: CONTENT,
       nameOf: (id) => character?.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || null });
@@ -17089,7 +17113,7 @@ function paintRegionMap(regionId) {
      * (H2's `nearestId`) — so she appears on the map of the water she is actually crossing.
      * ⛑ The count of what was skipped is kept, so "no holds here" never reads the same as "no holds at all". */
     const regionOfRow = (row) => {
-      const l = row.placeId ? CONTENT.locations?.[row.placeId] : null;
+      const l = row.placeId ? locs692?.[row.placeId] : null;
       return l ? (l.regionId || l.region || null) : null;
     };
     for (const row of held.rows) {
@@ -18242,7 +18266,7 @@ function wireWorldGlobe() {
        * stake; it is the RESERVATIONS that have to be in rank order.
        * ⛑ No unwrap and no region filter here: `project` feeds the longitude to sin and cos, which are
        * periodic, and this is the whole world, so every hold belongs on it. The limb culls the far side. */
-      const heldG = mapHolds(character, { sharedStore: sharedHolds, locations: CONTENT.locations,
+      const heldG = mapHolds(character, { sharedStore: sharedHolds, locations: live687 || CONTENT.locations,   // ✅ CCODE-692: a hold rides with its place
         worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
         routes: _worldRoutes?.byPair || null, content: CONTENT,
         nameOf: (id) => character?.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || null });

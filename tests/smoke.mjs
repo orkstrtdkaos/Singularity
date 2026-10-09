@@ -24369,7 +24369,7 @@ await (async () => {
     && /const look = regionLook\(focusRegion, CONTENT\); if \(look\?\.hint\) says\.push\(look\.hint\);/.test(mapR) && /says\.push\(spreadingSay\(/.test(mapR) && !/Math\.random\(\)/.test(paintR));
   check("678/rulings: ⛔ the roads draw for EVERY region — the routed roads, the exits and their labels are no longer nested under the authored-map guard that only 8 of 39 regions pass; only the named ground still reads the authored map",
     !/if \(authoredMap\) \{/.test(paintR) && /for \(const g of authoredMap\?\.namedGround \|\| \[\]\) \{/.test(paintR)
-    && paintR.indexOf("const net = roadNetwork(CONTENT.locations, { k: 1.1 });") > paintR.indexOf("authoredMap?.namedGround")
+    && paintR.indexOf("const net = roadNetwork(locs692, { k: 1.1 });") > paintR.indexOf("authoredMap?.namedGround")   // ⛑ CCODE-692: the live locations
     && (() => { const open = paintR.indexOf("\n  {\n    const R2 = Math.PI / 180;"); const roads = paintR.indexOf("const net = roadNetwork("); return open > 0 && roads > open; })());
   {
     // ⛔ CCODE-655: a region's frame and its places share one longitude convention, and the base wraps a stray one in
@@ -25503,6 +25503,34 @@ await (async () => {
       && w691.filter((f) => !f.added).length === 1
       && stranger691.length === 1 && stranger691[0].bearing === echo0691.bearing && stranger691[0].fromMetres === echo0691.fromMetres,
       JSON.stringify(w691.map((f) => [f.id, f.bearing, f.fromMetres])));
+  }
+  /* ── ✅ Aevi's answer to S8 (CCODE-692): the region map for a moved place reads live locations, the same as the globe ── */
+  {
+    const MS692 = await import("../engine/mapstate.js");
+    const WT692 = await import("../engine/worldtime.js");
+    const MH692 = await import("../engine/mapholds.js");
+    const { loadContentHeadless: lch692 } = await import("./headless_content.mjs");
+    const C692 = await lch692();
+    const mb692 = { ...C692.locations.millbrook.worldPos };
+    const ch692 = { id: "player-me", currentLocationId: "millbrook", mapEvents: [], holdings: [{ id: "h692", name: "Mill Store", kind: "post", locationId: "millbrook", condition: "holding" }] };
+    MS692.applyMapChange(ch692, { key: "place:millbrook", change: "moved", by: "player-me", pos: { colatitude: mb692.colatitude + 0.1, longitude: mb692.longitude } }, { content: C692, worldDay: 60 });
+    const live692 = MS692.liveLocations(ch692, C692.locations, { content: C692, worldDay: 80 });
+    const twice692 = WT692.positionedPlace(live692, "the_long_span", { worldDay: 80 });
+    const rows692 = MH692.mapHolds(ch692, { sharedStore: null, locations: live692, worldDay: 80, content: C692 });
+    const row692 = (rows692?.rows || []).find((r) => r.id === "h692");
+    const app692 = readFileSync(join(root, "app.js"), "utf8");
+    const region692 = app692.slice(app692.indexOf("function paintRegionMap(regionId) {"), app692.indexOf("\nfunction wireRegionGroundMap("));
+    check("692/S8: ⛔ THE REGION MAP READS THE CHARACTER'S LIVE LOCATIONS, AS THE GLOBE DOES — the pins, the roads, the ways, the tended lattice and the holds are where the places stand today (a moved place at its new point with its trace where it stood, a moving place where its circuit has it), while the frame stays the authored one; each live longitude is put back beside its authored one; a record already put where it is today is not walked a second time, so a hold rides with its place exactly once, on the region map and on the globe",
+      JSON.stringify(twice692.worldPos) === JSON.stringify(live692.the_long_span.worldPos) && JSON.stringify(live692.the_long_span.worldPos) !== JSON.stringify(C692.locations.the_long_span.worldPos)
+      && !!row692 && Math.abs(Number(row692.worldPos?.colatitude) - (mb692.colatitude + 0.1)) < 1e-9
+      && region692.includes("try { live = liveLocations(character, CONTENT.locations, { content: CONTENT, worldDay: absoluteWorldDay() }); }")
+      && region692.includes("const ext = regionExtent(regionId, CONTENT.locations, { authored: authoredMap });")
+      && region692.includes("for (const id of Object.keys(locs692)) {") && region692.includes("const net = roadNetwork(locs692, { k: 1.1 });")
+      && region692.includes("const from = locs692?.[w.from], to = locs692?.[w.to];") && region692.includes("locations: locs692,")
+      && region692.includes('drawStateMark(ctx, "trace", pr692.x, pr692.y, 6)')
+      && !/for \(const id of Object\.keys\(CONTENT\.locations\)\) \{\n\s+const l = CONTENT\.locations\[id\];\n\s+if \(!l\?\.worldPos \|\| \(l\.regionId/.test(region692)
+      && app692.includes("const heldG = mapHolds(character, { sharedStore: sharedHolds, locations: live687 || CONTENT.locations,"),
+      JSON.stringify({ twice: twice692?.worldPos, live: live692.the_long_span.worldPos, row: row692?.worldPos }));
   }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)

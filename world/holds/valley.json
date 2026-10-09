@@ -2,6 +2,52 @@
   "schemaVersion": 1,
   "regionId": "valley",
   "holds": {
+    "char-mrum8y4d:the_standing_annex": {
+      "key": "char-mrum8y4d:the_standing_annex",
+      "id": "the_standing_annex",
+      "ownerId": "char-mrum8y4d",
+      "ownerName": "Loki",
+      "name": "The Standing Annex",
+      "kind": "enterprise",
+      "describedAs": "floating tower",
+      "locationId": "gen-the-made-gate",
+      "placeName": "The Made Gate",
+      "settlementId": "millbrook",
+      "settlementName": "Millbrook",
+      "worldPos": {
+        "colatitude": 20.4,
+        "longitude": 251.95,
+        "depth": 0
+      },
+      "keeperId": "halvex_coil",
+      "keeperName": "Halvex Coil",
+      "condition": "thriving",
+      "rung": null,
+      "frame": null,
+      "state": "whole",
+      "outward": [
+        {
+          "name": "a watchtower",
+          "siteKind": null,
+          "state": "whole"
+        }
+      ],
+      "has": [
+        "a watchtower",
+        "Centcom"
+      ],
+      "guardedBy": [],
+      "trades": {
+        "goods": [
+          {
+            "goods": "raw_material",
+            "name": "hide, sinew, timber, ore",
+            "units": 5,
+            "each": 4
+          }
+        ]
+      }
+    },
     "char-mrhs8286:hold-fendt::warden-of-the-threshold-post-at-the-ridg": {
       "key": "char-mrhs8286:hold-fendt::warden-of-the-threshold-post-at-the-ridg",
       "id": "hold-fendt::warden-of-the-threshold-post-at-the-ridg",
@@ -22,6 +68,16 @@
       "keeperId": "fendt",
       "keeperName": "Fendt",
       "condition": "thriving",
+      "rung": null,
+      "frame": null,
+      "state": "whole",
+      "outward": [
+        {
+          "name": "a mill",
+          "siteKind": null,
+          "state": "whole"
+        }
+      ],
       "has": [
         "Threshold Iron Mine",
         "Threshold Ashwarden Temple",
@@ -61,6 +117,26 @@
       "keeperId": "cassiel-ord",
       "keeperName": "Cassiel Ord",
       "condition": "thriving",
+      "rung": null,
+      "frame": null,
+      "state": "whole",
+      "outward": [
+        {
+          "name": "Warded Wall",
+          "siteKind": null,
+          "state": "whole"
+        },
+        {
+          "name": "Huginn's Watch",
+          "siteKind": null,
+          "state": "whole"
+        },
+        {
+          "name": "Stillwater's Trouble Keep",
+          "siteKind": null,
+          "state": "whole"
+        }
+      ],
       "has": [
         "The Accumulation",
         "Skeltal Animal Sentries",
@@ -101,13 +177,17 @@
       "settlementId": "millbrook",
       "settlementName": "Millbrook",
       "worldPos": {
-        "colatitude": 20.31,
-        "longitude": 251.895,
+        "colatitude": 20.291,
+        "longitude": 251.662,
         "depth": 0
       },
       "keeperId": "pell",
       "keeperName": "Pell Ran Marsh",
       "condition": "thriving",
+      "rung": null,
+      "frame": null,
+      "state": "whole",
+      "outward": [],
       "has": [
         "a workshop",
         "a forge",
@@ -155,6 +235,10 @@
       "keeperId": "deni-cors",
       "keeperName": "Deni Cors",
       "condition": "thriving",
+      "rung": null,
+      "frame": null,
+      "state": "whole",
+      "outward": [],
       "has": [
         "a Watch — people posted, and they SEE",
         "a relay station — the network's node",
@@ -171,11 +255,11 @@
       "id": "hold-made-gate",
       "ownerId": "char-mrhs8286",
       "ownerName": "Silas Weir",
-      "name": "The Made Gate",
+      "name": "Madegate",
       "kind": "post",
       "describedAs": "a gate that was made rather than found",
       "locationId": "gen-the-made-gate",
-      "placeName": "The Made Gate",
+      "placeName": "Madegate",
       "settlementId": "millbrook",
       "settlementName": "Millbrook",
       "worldPos": {
@@ -186,6 +270,16 @@
       "keeperId": "pell",
       "keeperName": "Pell Ran Marsh",
       "condition": "thriving",
+      "rung": null,
+      "frame": null,
+      "state": "whole",
+      "outward": [
+        {
+          "name": "a gate that closes",
+          "siteKind": null,
+          "state": "whole"
+        }
+      ],
       "has": [
         "a gate that closes",
         "a standing ward-line",
@@ -202,52 +296,6 @@
             "goods": "raw_material",
             "name": "hide, sinew, timber, ore",
             "units": 7,
-            "each": 4
-          }
-        ]
-      }
-    },
-    "char-mrum8y4d:the_standing_annex": {
-      "key": "char-mrum8y4d:the_standing_annex",
-      "id": "the_standing_annex",
-      "ownerId": "char-mrum8y4d",
-      "ownerName": "Loki",
-      "name": "The Standing Annex",
-      "kind": "enterprise",
-      "describedAs": "floating tower",
-      "locationId": "gen-the-made-gate",
-      "placeName": "The Made Gate",
-      "settlementId": "millbrook",
-      "settlementName": "Millbrook",
-      "worldPos": {
-        "colatitude": 20.4,
-        "longitude": 251.95,
-        "depth": 0
-      },
-      "keeperId": "halvex_coil",
-      "keeperName": "Halvex Coil",
-      "condition": "thriving",
-      "rung": null,
-      "frame": null,
-      "state": "whole",
-      "outward": [
-        {
-          "name": "a watchtower",
-          "siteKind": null,
-          "state": "whole"
-        }
-      ],
-      "has": [
-        "a watchtower",
-        "Centcom"
-      ],
-      "guardedBy": [],
-      "trades": {
-        "goods": [
-          {
-            "goods": "raw_material",
-            "name": "hide, sinew, timber, ore",
-            "units": 5,
             "each": 4
           }
         ]

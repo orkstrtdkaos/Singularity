@@ -75,10 +75,10 @@ export function roadRules(rules = {}) {
 }
 
 /** A plan saved before its ways carried legs is given them now, by the same measure. Mutates the plan. */
-export function ensureLegsOn(plan, { locations = {}, character = null, rules = {}, abilities = {} } = {}) {
+export function ensureLegsOn(plan, { locations = {}, character = null, rules = {}, abilities = {}, content = null } = {}) {
   if (!plan) return plan;
   const march = journeyCraftsOf(character, rules, abilities).march?.share || 0;
-  for (const o of plan.options || []) if (!Array.isArray(o.legs)) o.legs = legsOfWay(o, locations, { march });
+  for (const o of plan.options || []) if (!Array.isArray(o.legs)) o.legs = legsOfWay(o, locations, { march, content });   // ✅ J1
   return plan;
 }
 

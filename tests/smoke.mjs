@@ -25561,6 +25561,41 @@ await (async () => {
       && !readFileSync(join(root, "engine/mapstate.js"), "utf8").includes('c0 === "waygate"'),
       `${half693.said} · ${whole693.said}`);
   }
+  /* ── ✅ J1 · ERIK 2026-10-09 (CCODE-694): a journey takes the road's length ── */
+  {
+    const JN694 = await import("../engine/journey.js");
+    const JP694 = await import("../engine/journeyplan.js");
+    const WM694 = await import("../engine/worldmap.js");
+    const { loadContentHeadless: lch694 } = await import("./headless_content.mjs");
+    const C694 = await lch694();
+    const file694 = JSON.parse(readFileSync(join(root, "content/packs/core/world/road_lengths.json"), "utf8"));
+    const ch694 = { id: "c694", currentLocationId: "thinwater", knownPlaces: ["the_numen", "thinwater"], abilities: [], skills: {} };
+    const plan694 = JP694.planJourney({ character: ch694, destId: "the_numen", content: C694, locations: C694.locations, rules: C694.rules });
+    const road694 = (plan694?.options || []).find((o) => o.kind === "road"), water694 = (plan694?.options || []).find((o) => o.kind === "water");
+    const crow694 = WM694.walkingDays(C694.locations.thinwater, C694.locations.the_numen);
+    const sum694 = (o) => (o?.legs || []).reduce((s, l) => s + l.days, 0);
+    // a road with no route keeps the straight line, and its leg says so
+    const fb694 = (file694.fallbacks || []).map((k) => k.split("|")).find(([a, b]) => C694.locations[a]?.worldPos && C694.locations[b]?.worldPos);
+    const fbLegs694 = fb694 ? JP694.legsOfWay({ kind: "road", path: fb694 }, C694.locations, { content: C694 }) : [];
+    // the graph's edge on a two-place map whose road walks exactly twice its line
+    const two694 = { a: { id: "a", worldPos: { colatitude: 20, longitude: 10 }, connections: ["b"] }, b: { id: "b", worldPos: { colatitude: 20.5, longitude: 10 }, connections: ["a"] } };
+    const d694 = JN694.roadDistances("a", two694, { content: { roadLengths: { "a|b": 2 } } }).dist.b;
+    const line694 = WM694.walkingDays(two694.a, two694.b);
+    const jsrc694 = readFileSync(join(root, "engine/journey.js"), "utf8"), app694 = readFileSync(join(root, "app.js"), "utf8"), car694 = readFileSync(join(root, "engine/caravan.js"), "utf8");
+    check("J1: ⛔ ERIK — A JOURNEY TAKES THE ROAD'S LENGTH — a road leg is the straight walk × the road's own length over it, read from the derived table the app loads (never the router at play time): Thinwater → the Numen by road is about 325 days (it was the crow's 74), by water still the crow's line at the water speed; the legs add up to the way; a road with no route keeps the straight line and its leg says `straight`",
+      Object.keys(C694.roadLengths || {}).length === Object.keys(file694.roads).length && Object.keys(file694.roads).length > 200
+      && !!road694 && road694.days > 300 && road694.days < 350 && !!water694 && Math.abs(water694.days - crow694 / (Number(C694.rules?.economy?.holdStore?.trade?.waterSpeed) || 3)) < 0.1
+      && Math.abs(sum694(road694) - road694.days) < 0.2
+      && !!fb694 && fbLegs694.length === 1 && fbLegs694[0].straight === true && Math.abs(fbLegs694[0].days - WM694.walkingDays(C694.locations[fb694[0]], C694.locations[fb694[1]])) < 1e-9
+      && Math.abs(d694 - 2 * line694) < 1e-9 && Math.abs(JN694.roadDistances("a", two694, {}).dist.b - line694) < 1e-9,
+      JSON.stringify({ road: road694?.days, water: water694?.days, crow: crow694, fb: fb694, d: d694, line: line694 }));
+    check("J1: ⛔ ONE DOOR FOR EVERY ROAD — the route graph's edge is `roadDays` (so the travel screen, a caravan's run, a job's reach and a band's march take the same road), the way round and a company's road are asked with the content that carries the lengths, a saved plan's legs are measured the same way, and the local map's \"miles to\" are the road's own",
+      jsrc694.includes("let w = roadDays(locations, u, v, { content });") && jsrc694.includes("const alt = roadRoute(fromId, toId, locations, { banned: [via.id], character: who, content, carts });")
+      && car694.includes("{ traveller: co.knowsGates ? null : { knownPlaces: [], abilities: [] }, content }") && car694.includes("{ traveller: null, content }")
+      && (app694.match(/roadDays\(CONTENT\.locations, a, b, \{ content: CONTENT \}\)/g) || []).length === 2
+      && (app694.match(/ensureLegsOn\([a-z]+, \{ locations: CONTENT\.locations, character, rules: CONTENT\.rules, abilities: fullCatalog\(\), content: CONTENT \}\)/g) || []).length === 2
+      && readFileSync(join(root, "engine/state.js"), "utf8").includes('fetchJSON("content/packs/core/world/road_lengths.json").catch(() => null)'));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

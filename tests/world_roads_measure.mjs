@@ -60,7 +60,9 @@ for (const e of net.roads) {
   const sameRegion = (C.locations[e.a]?.regionId || C.locations[e.a]?.region) === (C.locations[e.b]?.regionId || C.locations[e.b]?.region);
   rows.push({ key, kind: kinds.get(key)?.kind || "road", sameRegion, fromRegion, fromCap, routed: !!routed, wetPct: Math.round(100 * w / Math.max(1, n)), ratio: straight > 0.2 ? +(walked / straight).toFixed(2) : null,
     straightDeg: +straight.toFixed(2), minColat: +Math.min(C.locations[e.a].worldPos.colatitude, C.locations[e.b].worldPos.colatitude).toFixed(2),
-    primary: !!e.primary, buried: depthA < 0 || depthB < 0 });
+    primary: !!e.primary, buried: depthA < 0 || depthB < 0,
+    // ✅ J1: the road's own length over its straight line, for every routed road however short (the regions route the short ones)
+    lenRatio: routed && straight > 0 ? +(walked / straight).toFixed(2) : null });
 }
 const routedRows = rows.filter((r) => r.routed), arcs = rows.filter((r) => !r.routed);
 const pct = (xs, q) => { const s = [...xs].sort((x, y) => x - y); return s.length ? s[Math.floor(q * (s.length - 1))] : null; };
@@ -156,6 +158,34 @@ if (!baseline) {
   check("Erik's boat: content/packs/core/world/sea_lanes.json IS the rule's answer (rewrite with --write when the world moves)", same, `file ${(filed?.lanes || []).map((l) => l.key).join(", ")} · rule ${lanes.map((l) => l.key).join(", ")}`);
   check("Erik's boat: the pairs with both a road and a sea lane are exactly the two Erik ruled — the Numen ↔ Thinwater and Kindlerow ↔ the Blaze; a third is a ruling, not a quiet addition",
     JSON.stringify(lanes.map((l) => l.key)) === JSON.stringify(["kindlerow|the_blaze", "the_numen|thinwater"]));
+}
+/* ✅ J1 · ERIK 2026-10-09 (through Aevi): *"A leg's days follow the routed road's length, not the crow's line … A road with no route keeps
+ * the straight line, and says so in `fallbacks`."* ⛔ DERIVED, LIKE THE SEA LANES: the journey reads this file, never the router at
+ * play time (the router takes ~0.6 s and would price a journey one way before the globe opened and another after). Written on --write;
+ * every push asks that the file IS the router's answer. ⛑ A sea lane keeps its line — it is drawn as the arc across the water. */
+{
+  const LENGTHS = join(root, "content/packs/core/world/road_lengths.json");
+  const roads = {}, fallbacks = [], sea = [];
+  for (const r of [...rows].sort((x, y) => (x.key < y.key ? -1 : 1))) {
+    if (r.kind === "sea") { sea.push(r.key); continue; }
+    if (r.routed && r.lenRatio != null) roads[r.key] = Math.max(1, r.lenRatio);
+    else fallbacks.push(r.key);
+  }
+  let filed = null; try { filed = JSON.parse(readFileSync(LENGTHS, "utf8")); } catch { filed = null; }
+  if (WRITE) {
+    filed = { _what: "DERIVED — each routed road's length over its straight line, which is how long a journey on it takes (Erik, 2026-10-09: \"Makes sense for road journeys to take longer\"). Written by tests/world_roads_measure.mjs --write from the same router the map draws; the push fails when this file and the router disagree. Do not edit by hand.",
+      _rule: "roads: key 'a|b' (ids sorted) → walked ÷ straight, two decimals, never under 1. fallbacks: roads with no route — they keep the straight line. sea: roads drawn as a sea lane — the lane is the line.",
+      roads, fallbacks, sea };
+    writeFileSync(LENGTHS, JSON.stringify(filed, null, 1) + "\n");
+    console.log(`road lengths written: ${Object.keys(roads).length} routed, ${fallbacks.length} straight, ${sea.length} sea`);
+  }
+  const same = !!filed && JSON.stringify(filed.roads || {}) === JSON.stringify(roads) && JSON.stringify(filed.fallbacks || []) === JSON.stringify(fallbacks)
+    && JSON.stringify(filed.sea || []) === JSON.stringify(sea);
+  const vals = Object.values(roads).sort((a, b) => a - b);
+  check("J1: content/packs/core/world/road_lengths.json IS the router's answer — each routed road's length over its straight line, the roads with no route listed as `fallbacks` (rewrite with --write when the world moves)",
+    same, `file ${Object.keys(filed?.roads || {}).length}/${(filed?.fallbacks || []).length} · router ${Object.keys(roads).length}/${fallbacks.length}`);
+  check("J1: the median road walks about ×1.4 its straight line (Aevi's measure) and no road is shorter than its line",
+    vals.length > 100 && vals[Math.floor(vals.length / 2)] >= 1.25 && vals[Math.floor(vals.length / 2)] <= 1.55 && vals[0] >= 1, `median ×${vals[Math.floor(vals.length / 2)]}`);
 }
 console.log(failures ? `${failures} FAILURE(S)` : "world roads: every ratchet holds");
 process.exit(failures ? 1 : 0);

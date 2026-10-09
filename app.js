@@ -113,7 +113,7 @@ import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: t
 import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
 import { harmGateFor, harmTargetFor, departureGateFor, guessedDestination, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost, aimsOpen } from "./engine/waygate.js";
-import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
+import { routeBetween, routeLine, twoWayRoads, roadDays } from "./engine/journey.js";   // ✅ J1: a road leg is the road's own length
 import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob, jobPersonFor, workCraftsOf, workDayChance, workHeads, bandTeamOf, sendBandOnMission, bandMissionParty } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
 import { sendCaravan, caravansOf, storeExits, setRoute, clearRoute, hireCompany, routeCompany, standingCrewFor , heldForRuns , allocatePass, setRunUnits, removeRun, addRun, runLoadTarget, routeValue } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.7";
+const APP_VERSION = "2.26.8";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7925,7 +7925,7 @@ function filmLocalMap(placeId, loc, w, h) {
     c2.setTransform(dpr, 0, 0, dpr, 0, 0);
     const { children } = locationTierNodes(character, CONTENT, placeId);
     const nameOf = (pid) => CONTENT.locations?.[pid]?.name || pid;
-    const roadsMiles = (a, b) => { const la = CONTENT.locations?.[a], lb = CONTENT.locations?.[b]; const d = la && lb ? walkingDays(la, lb) : null; return d == null ? null : milesFor(d, WORLD_SCALE); };
+    const roadsMiles = (a, b) => { const la = CONTENT.locations?.[a], lb = CONTENT.locations?.[b]; const d = la && lb ? roadDays(CONTENT.locations, a, b, { content: CONTENT }) : null; return d == null ? null : milesFor(d, WORLD_SCALE); };   // ✅ J1: the road's own length
     const layout = localLayoutFor(placeId, { content: CONTENT, character: null, children, roadsMiles });
     const frame = localFrame(layout, { w, h, pad: Math.round(Math.min(w, h) * 0.1) });
     /* ✅ the 35 again (the Service Ways): A PLACE BELOW THE GROUND DRAWS AS ONE — its own level, not surface roads converging
@@ -14445,7 +14445,7 @@ async function setOutOnJourney() {
     renderPlay(character.activeScene?.lastTurn || null, { aside: `You are not where the road stood — from here, ${again.destName} is about ${chosenWay(again).days} days. Look it over, then ${again.underway ? "take up the road" : "set out"}.` });
     return;
   }
-  ensureLegsOn(plan, { locations: CONTENT.locations, character, rules: CONTENT.rules, abilities: fullCatalog() });
+  ensureLegsOn(plan, { locations: CONTENT.locations, character, rules: CONTENT.rules, abilities: fullCatalog(), content: CONTENT });
   const fresh671 = !plan.underway;
   beginRoadOn(plan, { worldDay: absoluteWorldDay() });
   // ✅ AEVI's words (Erik's ruling 2): the passage is taken at the coastal end — said once, on the road's own record
@@ -18673,7 +18673,7 @@ function localLayoutHere(locationId) {
         // ✅ L5: a grown place's depth is its level, read down
         ...(Number(CONTENT.locations[c.id]?.worldPos?.depth) ? { level: -Math.round(Number(CONTENT.locations[c.id].worldPos.depth)) } : {}) }
     : c);
-  const roadsMiles = (a, b) => { const la = CONTENT.locations[a], lb = CONTENT.locations[b]; const d = la && lb ? walkingDays(la, lb) : null; return d == null ? null : milesFor(d, WORLD_SCALE); };
+  const roadsMiles = (a, b) => { const la = CONTENT.locations[a], lb = CONTENT.locations[b]; const d = la && lb ? roadDays(CONTENT.locations, a, b, { content: CONTENT }) : null; return d == null ? null : milesFor(d, WORLD_SCALE); };   // ✅ J1
   const layout = localLayoutFor(locationId, { content: CONTENT, character, children: kids, roadsMiles });
   return { host, children, layout };
 }
@@ -28589,7 +28589,7 @@ function renderPlay(turn, opts = {}) {
   if (character?.journey && !character.journey.underway && !activeEnc()) {
     const j = character.journey;
     const carried387 = provisionsCarried(character, CONTENT.rules, CONTENT.items || {});
-    ensureLegsOn(j, { locations: CONTENT.locations, character, rules: CONTENT.rules, abilities: fullCatalog() });
+    ensureLegsOn(j, { locations: CONTENT.locations, character, rules: CONTENT.rules, abilities: fullCatalog(), content: CONTENT });
     const peril390 = perilousLegsOf(j, CONTENT.rules);
     main += `<div class="journey-card">
       <div class="jc-head">🧭 <strong>Journey to ${esc(j.destName)}</strong> <span class="hint">— planned; you have not left ${esc(j.fromName)}</span></div>

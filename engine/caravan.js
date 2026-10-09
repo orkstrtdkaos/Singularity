@@ -973,7 +973,7 @@ export function storeExits(character, holding, { content = null, cfg = null, eco
     for (const co of companiesFor(character, holding, { companies, locations, cfg, dist: dd?.dist || null })) {
       if (!companyReaches(co, m.id, { locations, cfg })) continue;
       // they know the gates or they do not, and that decides which road they take (`gatesUsableBy(null)` is every gate)
-      const coRoute = (() => { try { return routeBetween(holding.locationId, m.id, locations, { traveller: co.knowsGates ? null : { knownPlaces: [], abilities: [] } }); } catch { return null; } })();
+      const coRoute = (() => { try { return routeBetween(holding.locationId, m.id, locations, { traveller: co.knowsGates ? null : { knownPlaces: [], abilities: [] }, content }); } catch { return null; } })();
       const coOpt = (coRoute?.options || []).slice().sort((a, b) => (a.days ?? 99) - (b.days ?? 99))[0] || null;
       const coDays = coOpt ? num(coOpt.days, days) : days;
       const coPath = coOpt?.path?.length ? coOpt.path : path;
@@ -1016,7 +1016,7 @@ export function storeExits(character, holding, { content = null, cfg = null, eco
       const cv = routeValue(character, holding, { powers, rules, toId: m.id, days, danger, path, cfg, economy, locations, density, companyCut, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost });
       // ⛔ GATE-AWARE, which is lever C's last row: a company knows the gates whether or not YOU have found them, so
       // its route is asked with no traveller — which is exactly what `gatesUsableBy(null)` means.
-      const cRoute = (() => { try { return routeBetween(holding.locationId, m.id, locations, { traveller: null }); } catch { return null; } })();
+      const cRoute = (() => { try { return routeBetween(holding.locationId, m.id, locations, { traveller: null, content }); } catch { return null; } })();
       const cOpt = (cRoute?.options || []).slice().sort((a, b) => (a.days ?? 99) - (b.days ?? 99))[0] || null;
       const cDays = cOpt ? num(cOpt.days, days) : days;
       const cv2 = cDays < days ? routeValue(character, holding, { powers, rules, toId: m.id, days: cDays, danger: roadDanger(cOpt?.path || path, locations), path: cOpt?.path || path, cfg, economy, locations, density, companyCut, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost }) : cv;

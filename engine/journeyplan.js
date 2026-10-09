@@ -24,7 +24,7 @@
 // The dials sit in `rules.journey` when authored; the fallbacks below are the item's own words ("Two days if you're honest with
 // yourself") and SNG-331's rule that hunger is attrition.
 
-import { routeBetween } from "./journey.js";
+import { routeBetween, roadDays, roadIsStraight } from "./journey.js";
 import { walkingDays, isPlaceKnown, bearingBetween } from "./worldmap.js";
 import { removeItem } from "./inventory.js";
 import { mountsAt } from "./holdings.js";   // ⛔ CCODE-432: set out from where you keep mounts, and you ride
@@ -159,25 +159,27 @@ export function isJourneyRoute(route, rules = {}) {
 
 /** ⛔ A WAY'S LEGS — each stretch of its path between two places: the days it takes (a marcher's shorter, a gate's hop never), the danger of
  *  the place it reaches, and whether people live there. The days are kept unrounded, so the legs of a way add up to the way. Pure. */
-export function legsOfWay(o, locations = {}, { march = 0 } = {}) {
+export function legsOfWay(o, locations = {}, { march = 0, content = null } = {}) {
   const path = Array.isArray(o?.path) ? o.path : [];
   const legs = [];
   for (let k = 1; k < path.length; k++) {
     const a = path[k - 1], b = path[k], la = locations?.[a], lb = locations?.[b];
     const gate = o.kind === "gate" && o.gate && a === o.gate.from && b === o.gate.to;
     // ✅ ERIK (2026-10-08): a passage by water is the road's distance at the water speed, and a marcher's pace does not row the boat
+    // ✅ J1 (Erik 2026-10-09): a road leg is the road's own length; water stays the crow's line at the water speed
     const days = gate ? (Number(o.gate.hours) || 0) / 24
       : o.kind === "water" ? (Number(walkingDays(la, lb)) || 0) / (Number(o.speed) || 3)
-      : (Number(walkingDays(la, lb)) || 0) * (1 - (Number(march) || 0));
+      : (Number(roadDays(locations, a, b, { content })) || 0) * (1 - (Number(march) || 0));
+    const straight = !gate && o.kind !== "water" && roadIsStraight(content, a, b);   // ✅ "says so": a road with no route keeps the line
     legs.push({ i: k - 1, fromId: a, toId: b, fromName: la?.name || a, toName: lb?.name || b, days, danger: Number(lb?.dangerLevel) || 0,
-      roof: !!lb?.communityId, gate: gate ? { hours: Number(o.gate.hours) || 0, energy: Number(o.energy) || 0 } : null });
+      roof: !!lb?.communityId, gate: gate ? { hours: Number(o.gate.hours) || 0, energy: Number(o.energy) || 0 } : null, ...(straight ? { straight: true } : {}) });
   }
   return legs;
 }
 
 /** A way there, as the plan shows it: the days, the worst danger on the path, and the nights — under a roof where a stop on the way is
  *  a place people live, in the open otherwise. Pure. */
-function wayOf(o, i, locations, march = 0) {
+function wayOf(o, i, locations, march = 0, content = null) {
   const path = Array.isArray(o.path) ? o.path : [];
   let worst = null;
   for (const id of path.slice(1)) {
@@ -189,7 +191,7 @@ function wayOf(o, i, locations, march = 0) {
   const stops = path.slice(1, -1).filter(id => !!locations?.[id]?.communityId).length;
   const roofs = Math.min(nights, stops);
   return { key: `${o.kind}-${i}`, kind: o.kind, label: o.label, days: round1(o.days), energy: Number(o.energy) || 0, path, gate: o.gate || null, ...(o.speed ? { speed: Number(o.speed) } : {}),
-    worst, nights, roofs, camps: nights - roofs, legs: legsOfWay(o, locations, { march }) };
+    worst, nights, roofs, camps: nights - roofs, legs: legsOfWay(o, locations, { march, content }) };
 }
 
 /** ⛔ AGREEING TO A JOURNEY: the plan it logs. Null when the way cannot be measured, or the trip is a step rather than a journey. Pure. */
@@ -240,7 +242,7 @@ export function planJourney({ character, destId, content = null, locations = {},
   const march = Math.max(crafts.march?.share || 0, mount?.share || 0);
   const options = r.options.map((o, i) => wayOf(march ? { ...o, days: o.kind === "gate"
     ? (Number(o.walkIn || 0) + Number(o.walkOut || 0)) * (1 - march) + (Number(o.gate?.hours) || 0) / 24
-    : Number(o.days) * (1 - march) } : o, i, locations, march));
+    : Number(o.days) * (1 - march) } : o, i, locations, march, content));
   /* ✅ ERIK (2026-10-08, via Aevi): *"A plan between two ends joined by a sea lane offers two ways: the road, as now; by water,
    * a passage taken at the coastal end. It moves at the 'by water' speed already in Erik's lever-C table (3×,
    * `trade.waterSpeed`), so there is one number for water and not two."* The lanes are `content.seaLanes` — the derived list
@@ -251,7 +253,7 @@ export function planJourney({ character, destId, content = null, locations = {},
     const speed = Number(rules?.economy?.holdStore?.trade?.waterSpeed) || 3;
     for (const o of options) if (o.kind !== "gate" && !o.choice) o.choice = words.road;
     const by = { kind: "water", label: "by water", days: (Number(walkingDays(locations[fromId], locations[destId])) || 0) / speed, path: [fromId, destId], speed };
-    options.push({ ...wayOf(by, options.length, locations, 0), choice: words.water, speed });
+    options.push({ ...wayOf(by, options.length, locations, 0, content), choice: words.water, speed });
   }
   const chosen = options[0];
   return {

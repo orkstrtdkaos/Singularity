@@ -31,6 +31,32 @@ import { roadLeg, gateLeg } from "./mapstate.js";
  *  ⚠️ THE WEIGHT IS `walkingDays`, NOT A HOP COUNT. Measured, a road runs 1.0x to 2.0x the straight line, and
  *  counting hops instead would call a single 150-day leg "closer" than three 2-day ones. `banned` lets a
  *  caller ask for the way round something, which is how the second option gets found. PURE. */
+/* ═════ J1 · A JOURNEY TAKES THE ROAD'S LENGTH ═════
+ * ✅ ERIK 2026-10-09 (through Aevi): *"Makes sense for road journeys to take longer. That's why we have travel skills."* ✅ AEVI: *"A
+ * leg's days follow the routed road's length, not the crow's line. The median road gets about ×1.4 longer, and that is the intent. …
+ * Water stays at `trade.waterSpeed` on the crow's distance, since a boat doesn't follow the road. … A road with no route (a gate
+ * yard stub, a leg the router can't price) keeps the straight line, and says so in `fallbacks`."*
+ * ⛔ THE LENGTH IS READ FROM A DERIVED TABLE, NEVER FROM THE ROUTER AT PLAY TIME. The router runs on the terrain in the app and
+ * takes ~0.6 s; a journey priced from it would cost one number before the globe was opened and another after. So
+ * `tests/world_roads_measure.mjs --write` writes `content/packs/core/world/road_lengths.json` (each routed road's length over its
+ * straight line, and the `fallbacks` that have no route), and every push fails when the file and the router disagree — the
+ * pattern Erik's sea lanes already use. ⛑ One door: every road leg in the game is `roadDays`, so the travel screen, a caravan's
+ * run, a job's reach and a band's march all take the same road. */
+export function roadRatio(content, a, b) {
+  const k = a < b ? `${a}|${b}` : `${b}|${a}`;
+  const r = Number(content?.roadLengths?.[k]);
+  return Number.isFinite(r) && r >= 1 ? r : 1;
+}
+/** Whether this road keeps the straight line because it has no route (a `fallbacks` road, or one the table does not know). */
+export function roadIsStraight(content, a, b) {
+  const k = a < b ? `${a}|${b}` : `${b}|${a}`;
+  return !Number.isFinite(Number(content?.roadLengths?.[k]));
+}
+/** The days a road leg takes: the straight walk × the road's own length over it. Null for an unplaced end. */
+export function roadDays(locations, a, b, { content = null } = {}) {
+  const w = walkingDays(locations?.[a], locations?.[b]);
+  return w == null ? null : w * roadRatio(content, a, b);
+}
 export function roadDistances(fromId, locations = {}, { banned = null, character = null, content = null, carts = false } = {}) {
   const skip = banned instanceof Set ? banned : new Set(banned || []);
   skip.delete(fromId);
@@ -44,7 +70,7 @@ export function roadDistances(fromId, locations = {}, { banned = null, character
     done.add(u);
     for (const v of (locations[u]?.connections || [])) {
       if (!locations[v] || skip.has(v) || done.has(v)) continue;
-      let w = walkingDays(locations[u], locations[v]);
+      let w = roadDays(locations, u, v, { content });   // ✅ J1: the road's own length
       if (w == null) continue;                   // an unplaced end has no measurable leg — skip, never guess
       /* ⛔ S6 · THE LEG'S STATE, ON THE ONE EDGE THE WHOLE GRAPH IS WALKED BY. Every route in the game — the
        * travel screen, a caravan's run, a job's reach, a band's march — comes through here, so a road that is
@@ -123,12 +149,12 @@ export function gatesUsableBy(traveller, locations = {}) {
 /** ⚠️ NAME THE ROUTE BY WHAT YOU GO THROUGH. "Four days through the Wend" only works if something names the
  *  Wend, and a list of nine ids is not a name. The place nearest the HALFWAY POINT by distance is the one a
  *  traveller would actually say they went via — not the longest leg, which is often just the empty middle. */
-function viaName(path, locations) {
+function viaName(path, locations, content = null) {
   if (!Array.isArray(path) || path.length < 3) return null;
   let total = 0;
   const cum = [0];
   for (let i = 1; i < path.length; i++) {
-    total += walkingDays(locations[path[i - 1]], locations[path[i]]) || 0;
+    total += roadDays(locations, path[i - 1], path[i], { content }) || 0;   // ✅ J1: halfway along the road walked
     cum.push(total);
   }
   if (!(total > 0)) return null;
@@ -176,7 +202,7 @@ export function routeBetween(fromId, toId, locations = {}, { traveller = null, a
   const options = [];
   const road = roadRoute(fromId, toId, locations, { character: who, content, carts });
   if (road) {
-    const via = viaName(road.path, locations);
+    const via = viaName(road.path, locations, content);
     options.push({
       kind: "road", label: via ? `on foot, by way of ${via.name}` : "on foot",
       days: round1(road.days), energy: 0, legs: road.legs, path: road.path, via: via?.id || null,
@@ -250,11 +276,11 @@ export function routeBetween(fromId, toId, locations = {}, { traveller = null, a
 
   // ── a way ROUND, but only when it is a real one
   if (road && options.length < 2) {
-    const via = viaName(road.path, locations);
+    const via = viaName(road.path, locations, content);
     if (via) {
-      const alt = roadRoute(fromId, toId, locations, { banned: [via.id] });
+      const alt = roadRoute(fromId, toId, locations, { banned: [via.id], character: who, content, carts });   // ⛑ J1: the way round walks the same roads
       if (alt && alt.days <= road.days * altFactor) {
-        const altVia = viaName(alt.path, locations);
+        const altVia = viaName(alt.path, locations, content);
         options.push({
           kind: "road", label: altVia ? `around ${via.name}, by way of ${altVia.name}` : `around ${via.name}`,
           days: round1(alt.days), energy: 0, legs: alt.legs, path: alt.path, via: altVia?.id || null, avoids: via.id,

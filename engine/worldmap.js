@@ -522,6 +522,22 @@ export function placeCardBox(map, card, glyph) {
   return { mode: "popover", left: Math.round(left), top: Math.round(top), width: w, height: h };
 }
 
+/** ✅ AEVI, P2 (WORKORDER_aevi_20261006_world_map_and_the_card): *"Narrow (phones): a bottom sheet over the lower part of the map,
+ *  about 45% of the map's height, with a handle. Drag it up for the full card and down to dismiss."* ⛔ CCODE-720 · the handle was drawn
+ *  and nothing dragged it. The arithmetic, pure, so the gate measures the numbers the hand moves: `top0` is where the sheet's top
+ *  stood when the finger went down (map pixels from the map's top), `dy` how far the finger has moved (down is +). While it moves the
+ *  sheet follows the finger, never above the map's top nor below its bottom; let go, and it SNAPS — to the full card when its top is in
+ *  the upper third, closed when it was pulled down past a third of the half sheet's height, else back to the half sheet. */
+export function sheetAfterDrag(mapH, top0, dy, { release = false, halfFrac = 0.45 } = {}) {
+  const H = Math.max(1, Number(mapH) || 0);
+  const half = Math.round(H * halfFrac), halfTop = H - half;
+  const top = Math.max(0, Math.min(H, (Number(top0) || 0) + (Number(dy) || 0)));
+  if (!release) return { state: "dragging", top, height: H - top };
+  if (top > halfTop + half / 3) return { state: "closed", top: H, height: 0 };
+  if (top < H / 3) return { state: "full", top: 0, height: H };
+  return { state: "half", top: halfTop, height: half };
+}
+
 /* ═════ SNG-679 H2 · A POINT PART-WAY ALONG A JOURNEY, ON THE SPHERE ═════
  * ✅ AEVI, reading origin: *"A moving hold's position exists but is LINEAR in longitude and colatitude.
  * From longitude 350 to 10 she sails the long way round through 180. Near the Crossing it is the same pole

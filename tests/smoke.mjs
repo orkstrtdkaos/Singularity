@@ -26075,6 +26075,26 @@ await (async () => {
       && /Object\.assign\(view, openingView\(at719\.worldPos, px719, \{ frameDeg: REGION_FRAME_DEG, floorR: floorRadius\(px719\) \}\)\)/.test(readFileSync(join(root, "app.js"), "utf8")),
       `centre ${JSON.stringify(centre719)} · Millbrook ${JSON.stringify(mb719)} · span ${span719.toFixed(1)}°`);
   }
+  /* ── ✅ AEVI P2 (SNG-677, CCODE-720): the phone's sheet drags — up for the full card, down to dismiss ── */
+  {
+    const WM720 = await import("../engine/worldmap.js");
+    const H = 192, half = Math.round(H * 0.45), halfTop = H - half;
+    const follow = WM720.sheetAfterDrag(H, halfTop, -40);
+    const up = WM720.sheetAfterDrag(H, halfTop, -100, { release: true });
+    const nudge = WM720.sheetAfterDrag(H, halfTop, 12, { release: true });
+    const down = WM720.sheetAfterDrag(H, halfTop, 40, { release: true });
+    const fromFull = WM720.sheetAfterDrag(H, 0, 160, { release: true });
+    const over = WM720.sheetAfterDrag(H, halfTop, -999);
+    const box720 = WM720.placeCardBox({ w: 365, h: H }, { w: 320, h: 220 }, { x: 180, y: 90 });
+    const app720 = readFileSync(join(root, "app.js"), "utf8"), css720 = readFileSync(join(root, "style.css"), "utf8");
+    check("720/P2: ⛔ AEVI — THE PHONE'S SHEET DRAGS (\"drag it up for the full card and down to dismiss\" — the handle was drawn and nothing moved it): it follows the finger, never above the map's top; let go high and it is the full card, a small nudge goes back to the half sheet it opened at, a pull down past a third of it closes it, and from the full card a long pull down closes it too; the handle is a finger's width to grab and the app moves it by this arithmetic",
+      follow.state === "dragging" && follow.top === halfTop - 40 && follow.height === H - (halfTop - 40) && over.top === 0
+      && up.state === "full" && up.top === 0 && up.height === H && nudge.state === "half" && nudge.top === halfTop && down.state === "closed" && fromFull.state === "closed"
+      && box720.mode === "sheet" && box720.top === halfTop && box720.height === half
+      && /handle\.onpointerdown = /.test(app720) && /sheetAfterDrag\(mapH, start\.top0, \(e\?\.clientY \?\? start\.y\) - start\.y, \{ release: true \}\)/.test(app720)
+      && /\.place-card-handle \{[^}]*width: 72px; height: 24px;[^}]*touch-action: none;/.test(css720),
+      JSON.stringify({ follow, up, nudge, down, fromFull }));
+  }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {
     const ST706 = await import("../engine/state.js");

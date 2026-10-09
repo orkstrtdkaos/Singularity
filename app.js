@@ -47,7 +47,7 @@ import { sourcesHere, meaningDensity } from "./engine/substrate.js";   // ✅ Er
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, refusedSaid} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
-import { openingFrame, placeCardBox } from "./engine/worldmap.js";
+import { openingFrame, placeCardBox, sheetAfterDrag } from "./engine/worldmap.js";
 // ⛔ SNG-679 S2: ONE READER for what state anything on a map is in, and the word a player reads for it.
 import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange, mapView, roadKey, knownStateOf, liveLocations } from "./engine/mapstate.js";
 // ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.27";
+const APP_VERSION = "2.27.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -19072,6 +19072,30 @@ function openPlaceCard({ canvas, id, glyph = null, extra = null }) {
     el.style.left = `${offX}px`; el.style.right = "auto"; el.style.top = `${offY + box.top}px`;
     el.style.bottom = "auto"; el.style.width = `${Math.round(box.width)}px`;
     el.style.maxHeight = `${box.height}px`;
+    /* ✅ P2 (CCODE-720): *"Drag it up for the full card and down to dismiss."* The handle was drawn and nothing moved it. ⛑ The arithmetic
+     * is `sheetAfterDrag`'s (worldmap.js); this is only the hand: pointer capture on the handle, the sheet following the finger, the snap
+     * on release. The top is in MAP pixels, so it is the canvas's height that bounds it, wherever the wrap sits. */
+    const handle = el.querySelector(".place-card-handle");
+    if (handle) {
+      const mapH = r.height;
+      let start = null;
+      const place = (s) => { el.style.top = `${offY + s.top}px`; el.style.maxHeight = `${Math.max(0, Math.round(s.height))}px`; };
+      handle.onpointerdown = (e) => {
+        e.preventDefault(); e.stopPropagation();
+        start = { y: e.clientY, top0: (parseFloat(el.style.top) || 0) - offY };
+        try { handle.setPointerCapture(e.pointerId); } catch { /* an old engine — the drag still follows */ }
+        el.classList.add("dragging");
+      };
+      handle.onpointermove = (e) => { if (start) place(sheetAfterDrag(mapH, start.top0, e.clientY - start.y)); };
+      const finish = (e) => {
+        if (!start) return;
+        const s = sheetAfterDrag(mapH, start.top0, (e?.clientY ?? start.y) - start.y, { release: true });
+        start = null; el.classList.remove("dragging");
+        if (s.state === "closed") { closePlaceCard(); return; }
+        place(s); el.classList.toggle("full", s.state === "full");
+      };
+      handle.onpointerup = finish; handle.onpointercancel = finish;
+    }
     return true;
   }
   el.style.right = "auto"; el.style.bottom = "auto"; el.style.width = "";

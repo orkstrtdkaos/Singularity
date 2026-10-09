@@ -21,7 +21,7 @@ import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } fr
 import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b: the author god-mode (dev-gated, separate surface)
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver, MODELS } from "./engine/claude.js";
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures, recordCombatRound, combatRounds } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
-import { unearnedDepth, generate, ensureGenerated, commitPlace, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
+import { unearnedDepth, generate, ensureGenerated, commitPlace, bornDeps, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
 import { checkBorn, describeBorn, contractedTypes } from "./engine/borncontract.js";
 import { drawAxis, resolvePick, readOfPick, championPick, drawBackgroundAxis, benchBout, benchAxis } from "./engine/coliseum.js"; // SNG-149: the Coliseum blind grid · SNG-669: the bench
 import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own critical, in its own words
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.22";
+const APP_VERSION = "2.26.23";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5680,7 +5680,8 @@ function pickExamples(type, location) {
  *  engine will actually resolve them through, not by a second copy that could drift. */
 function genContractDeps() {
   return {
-    contract: CONTENT.consumerContract || null,
+    // ⛔ CCODE-714: the finisher's whole world — the contract alone left every GM-made place without an `axisVector`, and rejected
+    ...bornDeps(CONTENT),
     vocabs: { "function_vocabulary.verbs": Object.values(FN_INDEX?.byFamily || {}).flat() }
   };
 }

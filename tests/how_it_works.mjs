@@ -37382,14 +37382,27 @@ console.log("\n── §423 · generation makes whole things ──");
     spectrum: { dark_light: -0.2, chaos_order: 0.1 },
     encounterFlavor: "Carters resting out of the wind.", questSeeds: ["Someone is counting the carts."],
   });
+  /* ⛔ CCODE-714 · AS THE APP CALLS IT. This mint handed `axisOrder` in by hand, so it passed while every GM-made place in play was
+   * rejected for a missing `axisVector` — the app's deps carried the contract alone. The world's deps come from `bornDeps(content)`,
+   * the one builder app.js's `genContractDeps` spreads, and the context carries only what the app's does. */
   const mint = async (raw, hint = "a hollow below the ridge") => {
     let born = null;
     const out = await GEN.generate("location", {
-      character: { currentLocationId: "millbrook" }, hint, known: { authored: C423.locations }, contract: contract423,
-      axisOrder: atlas423.axisOrder,
-    }, { schema: locSchema, callJSON: async () => raw, onContractReject: (ty, e, b) => { born = b; } });
+      character: { currentLocationId: "millbrook" }, hint, known: { authored: C423.locations },
+    }, { schema: locSchema, callJSON: async () => raw, onContractReject: (ty, e, b) => { born = b; }, ...GEN.bornDeps(C423) });
     return { out, born };
   };
+  check("§423: ⛔ THE AXIS ORDER IS IN THE WORLD THE ENGINE READS — loaded from the atlas into `CONTENT.axisOrder`, the same order as the file, and the app's deps are `bornDeps(CONTENT)` (it built its own, with the contract alone)",
+    JSON.stringify(C423.axisOrder) === JSON.stringify(atlas423.axisOrder) && Array.isArray(C423.axisOrder) && C423.axisOrder.length >= 8
+    && /\.\.\.bornDeps\(CONTENT\),/.test(rd("app.js")) && contract423 && !!C423.consumerContract);
+  {
+    // the negative: without the world's axis order a written place is rejected — the defect, kept as a check that the gate is real
+    let rej = null;
+    const bare = await GEN.generate("location", { character: { currentLocationId: "millbrook" }, hint: "a hollow below the ridge", known: { authored: C423.locations } },
+      { schema: locSchema, callJSON: async () => filled423(), onContractReject: (ty, e, b) => { rej = b; }, contract: C423.consumerContract });
+    check("§423: ⚑ …and the gate is real — the same place with the contract alone (the app's old deps) is rejected for its `axisVector`",
+      bare === null && (rej?.missing || []).some((m) => m.field === "axisVector"), JSON.stringify((rej?.missing || []).map((m) => m.field)));
+  }
 
   /* ---- 1 · ⛔ A PLACE IS BORN AT ALL ---- */
   const good423 = await mint(filled423());

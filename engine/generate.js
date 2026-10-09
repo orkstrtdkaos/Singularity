@@ -67,6 +67,19 @@ export function commitPlace(character, locations, id, rec) {
   return id;
 }
 
+/** ⛔ CCODE-714 · WHAT THE BORN-WHOLE FINISHER NEEDS FROM THE WORLD, built in ONE place for every caller: the contract, the atlas's
+ *  axis order (a place's `axisVector`), the lore that resolves (a place inherits only real `loreRefs`) and the spectrums' pole names
+ *  (`poleIntensity`). ⚠️ The app built its own deps with the contract alone, and §423 handed the axis order in by hand — so the test
+ *  passed and every GM-made place in play was rejected for a missing `axisVector`. The app and the test both call this now. */
+export function bornDeps(content) {
+  return {
+    contract: content?.consumerContract || null,
+    axisOrder: Array.isArray(content?.axisOrder) && content.axisOrder.length ? content.axisOrder : null,
+    loreIds: new Set(Object.keys(content?.lore || {})),
+    spectrums: content?.spectrums || null,
+  };
+}
+
 export function ensureGenerated(character) {
   if (!character.generated) character.generated = { schemaVersion: 1, npc: {}, location: {}, arc: {}, creature: {}, item: {} };
   for (const t of GEN_TYPES) if (!character.generated[t]) character.generated[t] = {};

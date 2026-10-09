@@ -316,10 +316,12 @@
     "sent": "{name} has been sent from {place} to find whoever {did} the {thing}.",
     "found": "{name} has come from {place} about the {thing}.",
     "wanted": "Wanted at {place}: hands to {mend} the {thing}.",
+    "wantedPlace": "Wanted at {place}: hands to {mend} it.",
     "mending": "The people of {place} are at work on the {thing}.",
     "mended": "The {thing} at {place} stands again.",
     "mendedPlace": "{place} is whole again.",
     "thanked": "{place} remembers who helped {mend} the {thing}.",
+    "thankedPlace": "{place} remembers who helped {mend} it.",
     "remembered": "{place} has not forgotten the {thing}."
    }
   },
@@ -346,7 +348,7 @@
       "weight": 1
      }
     ],
-    "waygate": [
+    "gate": [
      {
       "family": "SHAPE",
       "weight": 2
@@ -421,6 +423,7 @@
    "_board": "At most three mending jobs on a board at once, nearest first, from things the character knows of within two days of where they are or of one of their holds. The place card lists them all.",
    "labels": {
     "mend": "{Mend} the {thing} at {place}",
+    "mendPlace": "{Mend} {place}",
     "makeGood": "Make good the {thing} at {place}",
     "remake": "Make the gate at {place} again",
     "resettle": "Resettle {name}",
@@ -445,6 +448,7 @@
  },
  "_poleWarning": "⛔ 12 locations are `pole` — pure extremities like the Blaze, the Scouring, the Numen. THEY ARE NOT TOWNS and an icon that says 'settlement' would lie about the most dangerous places in the world. ⚠️ They want their own mark.",
  "kinds": {
+  "the_null_stone": { "kind": "strange", "from": "authored", "_why": "An unmarked precursor stone at the Crossing's hub, sealed and answering. Not a monument anyone raised: the world's own strange thing. Its five arches are waygates of their own." },
   "anvilhall": {
    "kind": "hold",
    "from": "authored"

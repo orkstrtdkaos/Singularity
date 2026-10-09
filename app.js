@@ -57,7 +57,7 @@ import { brokenAt, giftMend } from "./engine/mending.js";   // ✅ SNG-679 Part 
 import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
   filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase, filmFrame, filmLandings } from "./engine/films.js";
 import { arcReachesRegion } from "./engine/arceffects.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
-import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, mapPlace, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, regionRoadPaths, capRoadRoutes, WORLD_CAP_DEG, roadKinds, roadRules as groundRoadRules, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST, fineWindowBox } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, mapPlace, DEFAULT_VIEW, openingView, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, regionRoadPaths, capRoadRoutes, WORLD_CAP_DEG, roadKinds, roadRules as groundRoadRules, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST, fineWindowBox } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
 import { groundHolders, resolvedPowers, stateStamp, powerRelation } from "./engine/realms.js";
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.26";
+const APP_VERSION = "2.26.27";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -17818,6 +17818,11 @@ function wireWorldGlobe() {
   // ⚠️ the opening framing is the VIEWER's, not a number retyped here — see DEFAULT_VIEW's note:
   // it faces the inhabited southern hemisphere, and a gate holds it there.
   const view = { ...DEFAULT_VIEW, r: Math.min(GW(), GH()) * 0.44, cx: GW() / 2, cy: GH() / 2 };
+  // ✅ W5 (CCODE-719): it opens on where you stand, at the region frame — the live point (a moving place is where it is today)
+  try {
+    const at719 = character?.currentLocationId ? positionedPlace(CONTENT.locations || {}, character.currentLocationId, { worldDay: absoluteWorldDay() }) : null;
+    if (at719?.worldPos) { const px719 = Math.min(GW(), GH()); Object.assign(view, openingView(at719.worldPos, px719, { frameDeg: REGION_FRAME_DEG, floorR: floorRadius(px719) })); }
+  } catch { /* the fixed view stands */ }
   let layer = "topo", source = "precursor", dragging = false, pins = [];
   // ⛔ SNG-402 — THE GENERATOR IS THE DETAIL, AND IT HAS BEEN IN THE REPO UNUSED SINCE SNG-391.
   // scripts/world/terrain.mjs says so in its own header: "Terrain generator with VIEW CULLING — only the

@@ -26057,6 +26057,24 @@ await (async () => {
       && types718.every((t) => examples718[t] >= 1) && /pickExamplesFor\(type, location, CONTENT\)/.test(readFileSync(join(root, "app.js"), "utf8")),
       `${bad718.join(" · ") || "none bad"} · ${rows718.join(" ")} · examples ${JSON.stringify(examples718)}`);
   }
+  /* ── ✅ AEVI W5 (SNG-677, CCODE-719): the globe opens on where you are, at the region frame ── */
+  {
+    const WG719 = await import("../engine/worldglobe.js");
+    const { loadContentHeadless: lch719 } = await import("./headless_content.mjs");
+    const C719 = await lch719();
+    const px719 = 540, mb719 = C719.locations.millbrook.worldPos;
+    const v719 = { ...WG719.openingView(mb719, px719, { frameDeg: 26, floorR: WG719.floorRadius(px719) }), cx: 350, cy: 270 };
+    const centre719 = WG719.unproject(350, 270, v719);
+    const span719 = WG719.spanDeg(v719, px719);
+    const none719 = WG719.openingView(null, px719);
+    const pole719 = WG719.openingView(C719.locations.the_crossing.worldPos, px719, { frameDeg: 26 });
+    const lonD719 = Math.abs(((centre719.lon - (mb719.longitude > 180 ? mb719.longitude - 360 : mb719.longitude)) + 540) % 360 - 180);
+    check("719/W5: ⛔ AEVI — THE GLOBE OPENS CENTRED ON WHERE YOU ARE, AT THE REGION FRAME (it opened on a fixed view: \"Thinwater Foothill\" while Silas stood in Millbrook) — the centre of the opening frame unprojects to the character's place, the frame is about 26° across (never inside the floor), at the pole too, and with no place the fixed view that faces the inhabited hemisphere; the app opens through it",
+      !!centre719 && Math.abs(centre719.lat - (mb719.colatitude - 90)) < 0.5 && lonD719 < 0.5 && span719 > 20 && span719 < 32
+      && none719.yaw === WG719.DEFAULT_VIEW.yaw && none719.pitch === WG719.DEFAULT_VIEW.pitch && pole719.pitch === -89
+      && /Object\.assign\(view, openingView\(at719\.worldPos, px719, \{ frameDeg: REGION_FRAME_DEG, floorR: floorRadius\(px719\) \}\)\)/.test(readFileSync(join(root, "app.js"), "utf8")),
+      `centre ${JSON.stringify(centre719)} · Millbrook ${JSON.stringify(mb719)} · span ${span719.toFixed(1)}°`);
+  }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {
     const ST706 = await import("../engine/state.js");

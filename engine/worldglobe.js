@@ -32,6 +32,20 @@
  *  This is the camera fix, and `worldPos` never moved. */
 export const DEFAULT_VIEW = { yaw: 20, pitch: -52 };
 
+/** ✅ AEVI, W5 (WORKORDER_aevi_20261006_world_map_and_the_card): *"M3's framing: the globe opens centred on where you are, at the 26°
+ *  region frame, not at a fixed view."* ⛔ CCODE-719 · MEASURED on 10-06 and left: the crumb read "Thinwater Foothill" on a fresh open
+ *  while Silas stood in Millbrook — the globe opened at `DEFAULT_VIEW` whatever the save. ⛑ The camera `flyTo` would end on: yaw −lon,
+ *  pitch the latitude (map frame: lat = colatitude − 90), and the radius that shows `frameDeg` across the shorter side — never past
+ *  the floor (W6: nothing is drawn below it). No position → `DEFAULT_VIEW`, which faces the inhabited hemisphere. PURE. */
+export function openingView(worldPos, px, { frameDeg = 26, floorR = null } = {}) {
+  const colat = Number(worldPos?.colatitude), lon = Number(worldPos?.longitude);
+  const half = Math.max(1, Number(px) || 700) / 2;
+  if (!Number.isFinite(colat) || !Number.isFinite(lon)) return { ...DEFAULT_VIEW, r: half * 0.88 };
+  const want = half / Math.sin((Number(frameDeg) || 26) / 2 * Math.PI / 180);
+  const cap = Number.isFinite(Number(floorR)) && Number(floorR) > 0 ? Number(floorR) : Infinity;
+  return { yaw: -lon, pitch: Math.max(-89, Math.min(89, colat - 90)), r: Math.max(120, Math.min(cap, want)) };
+}
+
 /** ⛔ WHERE THE WORLD TIER ENDS, AND IT IS MEASURED RATHER THAN CHOSEN. Total variation of the terrain
  *  field per degree of ground, as the sampling scale shrinks: refining 2°→1° gives ×2.09 more structure
  *  and 1°→0.5° gives ×1.27 — then it goes FLAT (×1.10, ×0.87, ×1.09, ×1.06). Below roughly a quarter

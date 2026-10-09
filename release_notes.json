@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.26.18",
+      "date": "2026-10-09",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Places near the Crossing point the right way",
+          "summary": "On a place's own map, a place inside it is set in the true direction and at the true distance from it. Near the Crossing, at the top of the world, every such place had been drawn in the same direction. A place's map in the films now shows the same places as its map in play."
+        }
+      ]
+    },
+    {
       "version": "2.26.17",
       "date": "2026-10-09",
       "entries": [

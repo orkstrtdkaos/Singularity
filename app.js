@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.17";
+const APP_VERSION = "2.26.18";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7927,7 +7927,7 @@ function filmLocalMap(placeId, loc, w, h) {
     const nameOf = (pid) => CONTENT.locations?.[pid]?.name || pid;
     // ⛑ CCODE-697: unrounded, so a road under a mile can say its metres (milesFor rounds, and 0.3 mi came back as 0)
     const roadsMiles = (a, b) => { const la = CONTENT.locations?.[a], lb = CONTENT.locations?.[b]; const d = la && lb ? roadDays(CONTENT.locations, a, b, { content: CONTENT }) : null; const per = Number(WORLD_SCALE?.milesPerWalkingDay); return d == null || !(per > 0) ? null : d * per; };   // ✅ J1: the road's own length
-    const layout = localLayoutFor(placeId, { content: CONTENT, character: null, children, roadsMiles });
+    const layout = localLayoutFor(placeId, { content: CONTENT, character: null, children: layoutKids(children), roadsMiles });   // ⛑ CCODE-709: the live map's list
     const frame = localFrame(layout, { w, h, pad: Math.round(Math.min(w, h) * 0.1) });
     /* ✅ the 35 again (the Service Ways): A PLACE BELOW THE GROUND DRAWS AS ONE — its own level, not surface roads converging
      * on a point. The host's level is its depth read down (`siteLevel`), and the film shows that level when the layout has it. */
@@ -18655,6 +18655,16 @@ const LOCAL_ASPECT = 0.62;
 
 /** The layout for a place, with the sub-places the ring used to draw handed in as children (L2: *"its sub-places
  *  from `locationTierNodes`, the same list the ring draws today"*), and the miles of each road out. */
+/** The places under a place, as its local layout reads them: each with its own position (placed by it, on the sphere — L1 rule 2),
+ *  its kind and its level. ⛔ CCODE-709 · ONE LIST FOR THE LIVE MAP AND THE FILM: the film's local map passed the bare tier nodes, so
+ *  a promoted place stood at its own bearing on the card and wherever its name put it in the film. */
+function layoutKids(children) {
+  return (children || []).map((c) => c.kind === "location"
+    ? { ...c, worldPos: CONTENT.locations[c.id]?.worldPos || null, placeKind: CONTENT.locationKinds?.kinds?.[c.id]?.kind || CONTENT.locations[c.id]?.kind || null,
+        // ✅ L5: a grown place's depth is its level, read down
+        ...(Number(CONTENT.locations[c.id]?.worldPos?.depth) ? { level: -Math.round(Number(CONTENT.locations[c.id].worldPos.depth)) } : {}) }
+    : c);
+}
 function localLayoutHere(locationId) {
   /* ✅ SNG-679 H6: *"opening it shows its features as sites"* — `hold:<id>` is the hold's own local map: its features on its
    * ground (or its deck), the way back to its place as the road out. Only your own: a visitor sees the hold, not its rooms. */
@@ -18671,11 +18681,7 @@ function localLayoutHere(locationId) {
     }
   }
   const { host, children } = locationTierNodes(character, CONTENT, locationId);
-  const kids = children.map((c) => c.kind === "location"
-    ? { ...c, worldPos: CONTENT.locations[c.id]?.worldPos || null, placeKind: CONTENT.locationKinds?.kinds?.[c.id]?.kind || CONTENT.locations[c.id]?.kind || null,
-        // ✅ L5: a grown place's depth is its level, read down
-        ...(Number(CONTENT.locations[c.id]?.worldPos?.depth) ? { level: -Math.round(Number(CONTENT.locations[c.id].worldPos.depth)) } : {}) }
-    : c);
+  const kids = layoutKids(children);
   const roadsMiles = (a, b) => { const la = CONTENT.locations[a], lb = CONTENT.locations[b]; const d = la && lb ? roadDays(CONTENT.locations, a, b, { content: CONTENT }) : null; const per = Number(WORLD_SCALE?.milesPerWalkingDay); return d == null || !(per > 0) ? null : d * per; };   // ⛑ CCODE-697: unrounded   // ✅ J1
   const layout = localLayoutFor(locationId, { content: CONTENT, character, children: kids, roadsMiles });
   return { host, children, layout };

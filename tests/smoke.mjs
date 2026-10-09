@@ -25878,6 +25878,28 @@ await (async () => {
       && /function roadWidthPx\(frame\)/.test(lmSrc708) && /const roadW = roadWidthPx\(frame\);/.test(lmSrc708) && /towardRoadOf\(s\) === r\.to && towardRelationOf\(s\) === "on"/.test(lmSrc708),
       `${wetModels} with water · on the water: ${wetRoads.slice(0, 3).join(", ") || "none"} · land sites in it: ${wetSites.join(", ") || "none"} · ${onSites} on-sites, off: ${offRoad.slice(0, 3).join(", ") || "none"} · Millbrook road side ${millSide}, queue ${queue ? sideE(queue.x, queue.y) : "?"}, Archive road ${archSide}, town ${erc ? sideE(erc.built.x, erc.built.y) : "?"}`);
   }
+  /* ── ✅ Aevi's L1 drawing rule 2 (CCODE-709): a place under a place is placed on the sphere — at the pole too ── */
+  {
+    const LM709 = await import("../engine/localmap.js");
+    const LD709 = await import("../engine/localdetail.mjs");
+    const { loadContentHeadless: lch709 } = await import("./headless_content.mjs");
+    const C709 = await lch709();
+    const kids709 = (ids) => ids.map((id) => ({ id, name: C709.locations[id].name, kind: "location", worldPos: C709.locations[id].worldPos }));
+    const sphere709 = (pid, id) => { const a = C709.locations[pid].worldPos, b = C709.locations[id].worldPos; return Math.round(LD709.bearingBetween([a.colatitude - 90, a.longitude], [b.colatitude - 90, b.longitude])); };
+    const placed709 = (pid, ids) => { const lay = LM709.localLayoutFor(pid, { content: C709, children: kids709(ids) }); return ids.map((id) => { const st = (lay.sites || []).find((x) => x.id === id); return { id, at: st?.localMap?.bearing ?? null, want: sphere709(pid, id), m: st?.localMap?.metres ?? null }; }); };
+    // the four places nearest the Crossing, set under it as children would be: at colatitude 0 the flat step put all four at bearing 0
+    const poleIds = ["the_hundred_markets", "the_great_coliseum", "gen-the-ent-grove", "the_quiet_house"].filter((id) => C709.locations[id]?.worldPos);
+    const pole = poleIds.length === 4 && C709.locations.the_crossing?.worldPos ? placed709("the_crossing", poleIds) : [];
+    // across the antimeridian: the flat step never wrapped longitude (39,556 km for 646)
+    const anti = C709.locations.the_underlight?.worldPos && C709.locations.the_harborward?.worldPos ? placed709("the_underlight", ["the_harborward"]) : [];
+    const lmSrc709 = readFileSync(join(root, "engine/localmap.js"), "utf8"), appSrc709 = readFileSync(join(root, "app.js"), "utf8");
+    check("709/sphere: ⛔ AEVI — FRAME ON GREAT-CIRCLE DISTANCE (layouts_ready, L1 rule 2: \"at the pole, a difference of longitude is not a distance\") — a place under a place is set at the sphere's bearing and distance from it: the four places nearest the Crossing stand at four bearings, each the great circle's (the flat step put all four at 0), and a child across the antimeridian at its own bearing; the flat step is gone from the local map; and the film's local map reads the same list of places as the live map (`layoutKids`) — it passed the bare tier nodes, with no positions",
+      pole.length === 4 && pole.every((p) => p.at === p.want) && new Set(pole.map((p) => p.at)).size === 4
+      && anti.length === 1 && anti[0].at === anti[0].want && Math.abs(anti[0].want) > 5
+      && !/Math\.cos\(from\[0\] \* R\)/.test(lmSrc709) && /bearingBetween\(from, to\)/.test(lmSrc709) && /degBetween\(from, to\) \* 111320/.test(lmSrc709)
+      && (appSrc709.match(/layoutKids\(children\)/g) || []).length >= 2 && /children: layoutKids\(children\), roadsMiles/.test(appSrc709),
+      `pole ${pole.map((p) => `${p.id} ${p.at}/${p.want}`).join(", ")} · anti ${anti.map((p) => `${p.at}/${p.want}`).join("")}`);
+  }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {
     const ST706 = await import("../engine/state.js");

@@ -26,7 +26,7 @@
 // ⚠️ EVERYTHING SEEDED IS SEEDED FROM THE PLACE ID. The same place draws the same way on every visit and on
 // every device; a texture that moved between visits would read as the world having changed.
 
-import { measureGradients, usableGradients, placeSite, roadsOut as roadBearings } from "./localdetail.mjs";
+import { measureGradients, usableGradients, placeSite, roadsOut as roadBearings, degBetween, bearingBetween } from "./localdetail.mjs";
 import { glyphFor, drawGlyph, drawStateMark } from "./mapicons.mjs";
 import { drawLabel, labelSpace } from "./maplabel.js";
 import { placeGround, finishGround, inPoly, singleSiteOf } from "./localground.js";
@@ -451,12 +451,18 @@ export function generateLayout(placeId, { loc = null, kind = "village", gradient
     const nb = basisFromName(c.name, c.aliases);
     let at = null, why = "";
     // ⛑ A PROMOTED PLACE HAS A POSITION OF ITS OWN, and its bearing from the parent is a fact, not a guess
+    /* ✅ AEVI (NOTE_aevi_ccode_layouts_ready, L1 rule 2): *"Frame on great-circle distance … At the pole, a difference of longitude
+     * is not a distance … L1's framing will make the same mistake for every place near the Crossing."* ⛔ CCODE-709 · MEASURED: it
+     * did, and I had told her it would not. The child was placed by a flat step (`dLon · cos(lat)`, longitude never wrapped): at the
+     * Crossing — colatitude 0 — every child came out at bearing 0, so the Hundred Markets (27°), the Coliseum (40°), the Ent Grove
+     * (34°) and the Quiet House (−70°) stood in one line; across the antimeridian the Harborward came out 39,556 km from the
+     * Underlight instead of 646. 15 of 114 parent → child pairs were off by more than 3° or 3%. The distance and the bearing are now
+     * the sphere's, from the same `localdetail` functions the roads out are measured by — one convention for a road and a place. */
     if (c.worldPos && loc?.worldPos) {
       const from = [loc.worldPos.colatitude - 90, loc.worldPos.longitude];
       const to = [c.worldPos.colatitude - 90, c.worldPos.longitude];
-      const dLat = to[0] - from[0], dLon = (to[1] - from[1]) * Math.cos(from[0] * R);
-      const bearing = norm180(Math.atan2(dLon, dLat) / R);
-      const metres = Math.hypot(dLat, dLon) * 111320;
+      const bearing = bearingBetween(from, to);
+      const metres = degBetween(from, to) * 111320;
       if (metres > 5) { at = { bearing: Math.round(bearing), metres: Math.round(Math.min(metres, radiusMetres * 1.6)) }; why = "its own position, bearing from here"; }
     }
     if (!at) {
@@ -534,7 +540,10 @@ function moveMetres(a, b) {
   const la = Number(a?.colatitude) - 90, lb = Number(b?.colatitude) - 90;
   const dLon = norm180(Number(b?.longitude) - Number(a?.longitude));   // ⛑ both conventions of longitude come out the same
   if (![la, lb, dLon].every(Number.isFinite)) return null;
-  return { east: dLon * Math.cos(la * R) * 111320, north: (lb - la) * 111320 };
+  // ⛑ CCODE-709: on the sphere, as a child is placed (L1 rule 2) — the flat step has no answer at the pole
+  const from = [la, Number(a.longitude)], to = [lb, Number(a.longitude) + dLon];
+  const m = degBetween(from, to) * 111320, b0 = bearingBetween(from, to) * R;
+  return { east: Math.sin(b0) * m, north: Math.cos(b0) * m };
 }
 /** The feature held where it is in the world while its frame's centre moved by `d` (metres east, metres up-map). */
 function heldInWorld(f, d) {

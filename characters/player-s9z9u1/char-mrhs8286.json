@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 33,
-  "xp": 3294,
+  "xp": 3299,
   "attributes": {
     "physical": 5,
     "mental": 8,
@@ -202,19 +202,19 @@
     "chaos_order": 0.2809929820852397,
     "mechanical_spiritual": 0.2748215186534554,
     "concrete_abstract": 0.015036324025588584,
-    "death_life": -0.08148234780060092,
+    "death_life": -0.06740823041057087,
     "emotional_logical": 0.008330843749999983,
     "falsehood_truth": 0.31186470452944887,
     "demonic_angelic": 0.013499999999999998,
     "dark_light": -0.15000000000000002,
     "space_time": 0.1,
-    "destruction_creation": 0
+    "destruction_creation": 0.05
   },
   "attunement": 32,
   "maxHealth": 201,
   "health": 201,
   "maxEnergy": 292,
-  "energy": 186,
+  "energy": 182,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2401,6 +2401,20 @@
       "spread": [],
       "day": 18,
       "worldDay": 82
+    },
+    {
+      "at": "2026-10-09T15:13:25.657Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Reinforced the failing north gate ward alongside Pell and Veth in deep night—held the moorland's wrong stirring at a distance while the convene prepares to vote.",
+      "tags": [
+        "craft",
+        "steady"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 19,
+      "worldDay": 101
     }
   ],
   "relationships": {},
@@ -2533,64 +2547,49 @@
         "player": "We did. Veth, see what you and Pell can do to strengthen the failing gate.  After the  vote tomorrow... I'm taking the band into action.",
         "summary": "Silas returns to Millbrook with proof of pole-pull and coordinates the response: Veth and Pell reinforce the failing north gate ward while the band prepares for action in the moorland after tomorrow's convene vote.",
         "narration": "You turn to Veth as the last light fades from the forge threshold, and name it plainly: the north gate ward is failing, and it needs holding until tomorrow's vote closes. Veth's grey eyes settle on yours for a moment—reading the weight behind the words—then she steps forward into the forge where Pell has already begun gathering materials. No argument. No question about what comes after.\n\nPell moves with the economy of someone who knows exactly what a failing ward requires. She pulls iron stock from the bench—cold-worked strips that will take a rune-thread clean—and spreads them on the work surface. Veth joins her there, and you watch as they begin the work together: Pell reading the iron's grain through ironsense, Veth laying the marks that will bind them into a reinforcement lattice. The forge fire climbs as they work, and the light catches the sweat on Pell's jaw.\n\nYour words land between them like a stone in still water: *After the vote tomorrow, I'm taking the band into action.* Pell's hands pause for one breath—just one—before she resumes the binding-work without looking up. Veth glances back at you, and there's something in that glance: acknowledgment, not approval, but something harder and more certain. The ashwarden's nod. She turns back to the marks.\n\n\"The gate will hold,\" Veth says quietly, working the rune-thread into the first binding. \"We'll see it holds until noon.\" Pell says nothing—but her hands move faster now, the work taking on the particular intensity of someone moving toward something they understand. The ward will be reinforced. And tomorrow, when the convene votes on the readings you've brought back, the village will know: the band is moving. The wright is no longer standing watch at a threshold. He is moving into the moorland with everything he can carry.\n\nThe forge glows copper and gold as they work into the dark."
+      },
+      {
+        "player": "Help Pell and Veth with the ward reinforcement—your hands on the iron, your craft in the binding.",
+        "summary": "In Millbrook forge, deep night: Silas, Pell, and Veth reinforce the failing north gate ward together—steady hands, practiced rhythm, three people moving as one. The ward holds. Tomorrow brings the convene vote. After that, the moorland.",
+        "narration": "You settle into the work beside Pell, your hands finding the cold iron as Veth marks out the binding-points with ashwarden precision. The forge is a known space—every tool worn to your grip, every angle of the bench familiar enough to move without thinking. Pell glances at you once, a read that takes a breath, then returns to the iron. No words needed.\n\nThe binding threads slide into place with your guidance—Pell's ironsense reading the metal's grain while Veth's deathsense traces the ward's failing edges, showing you exactly where the structure is thinning. You lean into the work conservatively, letting the threads seat without strain. Order-Sense moves through your hands to show the pattern whole: the old ward's shape, the new reinforcement's path, how the two will interlock. The work is steady. Methodical. Three people moving as one rhythm.\n\nBy the time the fire begins to bank, the north gate's strengthening is complete. Veth steps back and nods—once, plainly—acknowledging that what was failing is now holding. Pell runs her hand along the bound iron, feeling the work through her craft, and the small exhale she lets out is satisfaction. The ward will hold until tomorrow. It will hold the vote. It will hold the moorland's wrong stirring at a distance while your band gathers and prepares to move south.\n\nThe three of you stand in the copper-gold light of the banking fire, and the world pauses at the threshold—waiting for noon, waiting for the convene, waiting for what moves in the dark beyond the village walls."
       }
     ],
     "lastTurn": {
-      "narration": "You turn to Veth as the last light fades from the forge threshold, and name it plainly: the north gate ward is failing, and it needs holding until tomorrow's vote closes. Veth's grey eyes settle on yours for a moment—reading the weight behind the words—then she steps forward into the forge where Pell has already begun gathering materials. No argument. No question about what comes after.\n\nPell moves with the economy of someone who knows exactly what a failing ward requires. She pulls iron stock from the bench—cold-worked strips that will take a rune-thread clean—and spreads them on the work surface. Veth joins her there, and you watch as they begin the work together: Pell reading the iron's grain through ironsense, Veth laying the marks that will bind them into a reinforcement lattice. The forge fire climbs as they work, and the light catches the sweat on Pell's jaw.\n\nYour words land between them like a stone in still water: *After the vote tomorrow, I'm taking the band into action.* Pell's hands pause for one breath—just one—before she resumes the binding-work without looking up. Veth glances back at you, and there's something in that glance: acknowledgment, not approval, but something harder and more certain. The ashwarden's nod. She turns back to the marks.\n\n\"The gate will hold,\" Veth says quietly, working the rune-thread into the first binding. \"We'll see it holds until noon.\" Pell says nothing—but her hands move faster now, the work taking on the particular intensity of someone moving toward something they understand. The ward will be reinforced. And tomorrow, when the convene votes on the readings you've brought back, the village will know: the band is moving. The wright is no longer standing watch at a threshold. He is moving into the moorland with everything he can carry.\n\nThe forge glows copper and gold as they work into the dark.",
-      "sceneSummary": "Silas returns to Millbrook with proof of pole-pull and coordinates the response: Veth and Pell reinforce the failing north gate ward while the band prepares for action in the moorland after tomorrow's convene vote.",
+      "narration": "You settle into the work beside Pell, your hands finding the cold iron as Veth marks out the binding-points with ashwarden precision. The forge is a known space—every tool worn to your grip, every angle of the bench familiar enough to move without thinking. Pell glances at you once, a read that takes a breath, then returns to the iron. No words needed.\n\nThe binding threads slide into place with your guidance—Pell's ironsense reading the metal's grain while Veth's deathsense traces the ward's failing edges, showing you exactly where the structure is thinning. You lean into the work conservatively, letting the threads seat without strain. Order-Sense moves through your hands to show the pattern whole: the old ward's shape, the new reinforcement's path, how the two will interlock. The work is steady. Methodical. Three people moving as one rhythm.\n\nBy the time the fire begins to bank, the north gate's strengthening is complete. Veth steps back and nods—once, plainly—acknowledging that what was failing is now holding. Pell runs her hand along the bound iron, feeling the work through her craft, and the small exhale she lets out is satisfaction. The ward will hold until tomorrow. It will hold the vote. It will hold the moorland's wrong stirring at a distance while your band gathers and prepares to move south.\n\nThe three of you stand in the copper-gold light of the banking fire, and the world pauses at the threshold—waiting for noon, waiting for the convene, waiting for what moves in the dark beyond the village walls.",
+      "sceneSummary": "In Millbrook forge, deep night: Silas, Pell, and Veth reinforce the failing north gate ward together—steady hands, practiced rhythm, three people moving as one. The ward holds. Tomorrow brings the convene vote. After that, the moorland.",
       "choices": [
         {
-          "label": "Help Pell and Veth with the ward reinforcement—your hands on the iron, your craft in the binding.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "death_life": 0.2
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "craft",
-            "help",
-            "defend"
-          ],
-          "abilityId": "raised_thing",
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Find Mara and brief the band on the moorland action—what you learned in the hollow, what comes next.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "violence_peace": -0.2
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "command",
-            "lead",
-            "rally"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Rest before tomorrow—eat, sleep, let the body settle what the mind has learned in the hollow.",
+          "label": "Step back into the night and walk the north gate yourself—see what the ward is actually holding at bay.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "chaos_order": 0.2
+            "death_life": 0.2,
+            "concrete_abstract": 0.1
+          },
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Stay with Pell and Veth as the fire banks—share a meal, let the three of you settle before tomorrow's vote.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "emotional_logical": -0.3,
+            "death_life": 0.1
           },
           "difficulty": "very easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "rest",
-            "sustain"
+            "comfort"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2599,91 +2598,97 @@
           "emergenceId": null
         },
         {
-          "label": "Walk the north gate yourself and read what presses against the failing ward.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Ask Veth plainly what she read in the ward's failure—what is pressing against it from the moorland, and whether it is something the band should know before moving.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
-            "death_life": -0.1
+            "falsehood_truth": 0.2,
+            "death_life": 0.15
           },
-          "difficulty": "hard",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "scout",
-            "study",
-            "reveal"
+            "study"
           ],
-          "abilityId": "order_sense",
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Walk to the mill-yard and check on Mara—confirm that the readings are safe, that the message to the convene committee is clear, and that everything is ready for tomorrow at noon.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "falsehood_truth": 0.1,
+            "chaos_order": 0.2
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "plan"
+          ],
+          "abilityId": null,
           "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Reinforced the failing north gate ward alongside Pell and Veth in deep night—held the moorland's wrong stirring at a distance while the convene prepares to vote.",
+          "tags": [
+            "craft",
+            "steady"
+          ],
+          "weight": 1,
+          "communityId": "valley.millbrook"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
-        "energy": -10,
+        "energy": -2,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [
-        {
-          "what": "The band prepares for action in the moorland after the convene vote.",
-          "tags": [
-            "preparation",
-            "coming_conflict",
-            "moorland"
-          ],
-          "visibility": "witnessed",
-          "spectrumDeltas": {
-            "violence_peace": -0.15
-          },
-          "impactsLocal": true
-        }
-      ],
+      "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "jobOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": {
-        "thing": "Veth and Pell's immediate coordination on the gate reinforcement—no hesitation, no discussion, just the ashwarden and the smith moving as one toward the work.",
-        "from": "Silas's stated need and the bond these three have built through the water crisis"
-      },
+      "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "Millbrook forge at late evening, the fire climbing as Veth and Pell work the ward reinforcement. Copper and gold light on the stone and iron. The world holding its breath before the convene vote at noon.",
+        "setting": "Millbrook forge at deep night, the fire banking to copper-gold embers. Three figures stand in the warm light, the north gate ward complete and holding. Beyond the open door, the village is dark and waiting.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Working iron at the forge bench, binding-threads in hand, moving with the focused intensity of someone moving toward a known outcome"
+            "state": "Standing at the forge bench, her hand still on the bound iron she and Silas just reinforced—reading the work through ironsense, satisfied. Shoulders loose. Eyes on Silas."
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Laying rune-marks alongside Pell, reading each placement with ashwarden precision, acknowledging Silas's statement of intent with a nod and no surprise"
-          },
-          {
-            "name": "Mara Wells",
-            "state": "Emerged from the mill-yard; present but stepping back to give Pell and Veth the work-space they need"
+            "state": "Stepped back from the binding-work, ashwarden grey still in her eyes—the reading-place where she saw the ward's weakness. Steady. Waiting to see what comes next."
           },
           {
             "name": "Huginn",
-            "state": "At Silas's side, observing the ward-work with the patient attention of one who understands what endings require"
+            "state": "Perched at the forge's iron-work frame, observing the three humans in the light. Unmoving. Present."
           }
         ],
         "objects": [
-          "The buried water readings—proof of pole-pull, carried to the convene",
-          "Iron stock and binding-threads spread on the forge bench",
-          "The forge fire, climbing as the ward-work proceeds",
+          "The forge fire, banking to embers",
+          "Iron stock and binding-threads on the work bench",
+          "The north gate ward, newly reinforced",
           "Memory, the shadow-spear, resting near the smith's tools"
         ],
         "threads": [
-          "What presses against the failing north gate ward from the moorland",
-          "Whether the band is truly ready for action in the moorland",
-          "What the moorland holds that moves wrong",
-          "How the convene will receive the proof of pole-pull"
+          "What is pressing against the moorland side of the gate from the wrong-moving dark",
+          "Whether the band is ready to move south after the convene vote at noon",
+          "What Veth saw when she read the ward's failure"
         ]
       },
       "npcUpdates": [
@@ -2691,37 +2696,26 @@
           "op": "update",
           "npcId": "pell",
           "status": "active",
-          "statusNote": "At Millbrook forge, reinforcing the north gate ward with Veth—moving into action without hesitation when Silas names the next step",
-          "learned": [
-            "Silas carries proof of pole-pull from the moorland and is taking the band into action after the convene vote"
-          ]
+          "statusNote": "At Millbrook forge, deep night—reinforced the north gate ward with Silas and Veth. Satisfied with the work. Present and ready.",
+          "note": "The three of you moved as one rhythm through the binding-work. Pell read the iron without hesitation, moved with economy, and her final hand on the bound work was a confirmation. She is present and steady."
         },
         {
           "op": "update",
-          "npcId": "veth-stillwater-ondra",
+          "npcId": "veth-stillhold",
           "status": "active",
-          "statusNote": "At Millbrook forge, laying rune-marks to reinforce the failing north gate ward alongside Pell—reading Silas's intent and moving to meet it",
-          "learned": [
-            "Silas will take the band into the moorland after the convene vote; something in the moorland moves wrong and presses against the north gate ward"
-          ]
-        },
-        {
-          "op": "update",
-          "npcId": "mara-wells",
-          "status": "active",
-          "statusNote": "At Millbrook, stepping back from the forge-work to let Pell and Veth proceed with the ward reinforcement",
-          "learned": [
-            "Silas has returned with proof of pole-pull; the band will move into action after the vote"
-          ]
+          "statusNote": "At Millbrook forge, deep night—marked the binding-points with ashwarden precision and read the ward's failing edges to show Silas where the structure was thinning. Stepped back satisfied.",
+          "note": "Veth's ashwarden sight found the weakness in the ward and showed you the exact points where the reinforcement would hold. Her final nod was a warden's confirmation—what was failing is now holding."
         }
       ],
       "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [
+      "factUpdates": [
         {
-          "note": "North gate ward is failing and will be reinforced by Veth and Pell during the night before the convene vote"
+          "op": "add",
+          "text": "The north gate ward has been reinforced by Silas, Pell, and Veth working together in deep night—the failing structure is now holding against the moorland's wrong stirring.",
+          "subjectId": "millbrook"
         }
       ],
+      "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [],
       "holdingOps": [],
@@ -2740,14 +2734,14 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 1.5,
-        "why": "the ward reinforcement work at the forge as evening turns to night"
+        "hoursPassed": 3,
+        "why": "the north gate ward reinforcement took the better part of three hours—steady work, no haste"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": null,
+      "imagePrompt": "Three figures in a forge's copper-gold light—Pell's hand on cold iron, Veth's ashwarden grey eyes still holding the reading of what they just reinforced, Silas standing back from the work. The fire banks to embers. The night presses at the open door beyond.",
       "imageMedium": null,
       "newAbility": null,
       "gambitOps": null,
@@ -2757,48 +2751,44 @@
       "offerPromotion": null,
       "offerAcquisition": null,
       "offerIntent": null,
-      "sceneEnded": false
+      "sceneEnded": false,
+      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Three%20figures%20in%20a%20forge's%20copper-gold%20light%E2%80%94Pell's%20hand%20on%20cold%20iron%2C%20Veth's%20ashwarden%20grey%20eyes%20still%20holding%20the%20reading%20of%20what%20they%20just%20reinforced%2C%20Silas%20standing%20back%20from%20the%20work.%20The%20fire%20banks%20to%20embers.%20The%20night%20presses%20at%20the%20open%20door%20beyond.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=6328&nologo=true"
     },
     "sceneState": {
-      "setting": "Millbrook forge at late evening, the fire climbing as Veth and Pell work the ward reinforcement. Copper and gold light on the stone and iron. The world holding its breath before the convene vote at noon.",
+      "setting": "Millbrook forge at deep night, the fire banking to copper-gold embers. Three figures stand in the warm light, the north gate ward complete and holding. Beyond the open door, the village is dark and waiting.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Working iron at the forge bench, binding-threads in hand, moving with the focused intensity of someone moving toward a k"
+          "state": "Standing at the forge bench, her hand still on the bound iron she and Silas just reinforced—reading the work through iro"
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Laying rune-marks alongside Pell, reading each placement with ashwarden precision, acknowledging Silas's statement of in"
-        },
-        {
-          "name": "Mara Wells",
-          "state": "Emerged from the mill-yard; present but stepping back to give Pell and Veth the work-space they need"
+          "state": "Stepped back from the binding-work, ashwarden grey still in her eyes—the reading-place where she saw the ward's weakness"
         },
         {
           "name": "Huginn",
-          "state": "At Silas's side, observing the ward-work with the patient attention of one who understands what endings require"
+          "state": "Perched at the forge's iron-work frame, observing the three humans in the light. Unmoving. Present."
         }
       ],
       "objects": [
-        "The buried water readings—proof of pole-pull, carried to the convene",
-        "Iron stock and binding-threads spread on the forge bench",
-        "The forge fire, climbing as the ward-work proceeds",
+        "The forge fire, banking to embers",
+        "Iron stock and binding-threads on the work bench",
+        "The north gate ward, newly reinforced",
         "Memory, the shadow-spear, resting near the smith's tools"
       ],
       "threads": [
-        "What presses against the failing north gate ward from the moorland",
-        "Whether the band is truly ready for action in the moorland",
-        "What the moorland holds that moves wrong",
-        "How the convene will receive the proof of pole-pull"
+        "What is pressing against the moorland side of the gate from the wrong-moving dark",
+        "Whether the band is ready to move south after the convene vote at noon",
+        "What Veth saw when she read the ward's failure"
       ]
     },
-    "beats": 9,
+    "beats": 10,
     "subPlace": null
   },
   "clock": {
     "schemaVersion": 1,
     "day": 19,
-    "hour": 0,
+    "hour": 3,
     "realAnchor": null
   },
   "companions": [
@@ -4261,7 +4251,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d16] Deep night at the Whistling Woman post—Silas traced the shape of her with plain words and plain touch. She received it the way she receives true things: without ornament, and asking for more tomorrows. The child she carries is steady; she is at rest.",
         "[d16] Sleeping deeply, settled and present, her grip on Silas's hand holding even in rest—asking for more tomorrows, and the three of them held together in the dark.",
         "[d16] At the Whistling Woman post at midday on Day 16: read Silas's attention shift from rest to action. Named what Grael fears ending (the illusion that he ever understood the seal-question). Warned that the moorland's starved lattice will weaken shadowstep, and that breaking the cabinet's warden-mark…",
         "[d16] Watched Silas return from the Archive gambit with the readings in hand. Reading his face, understanding what it cost and what comes next. Present, attentive, not moving.",
@@ -4270,7 +4259,8 @@
         "[d18] Setting to ready the packs for the road south to Millbrook. Understands without question that she and Silas move together toward what needs striking.",
         "[d18] Received word of Silas's departure northward. Nodded once—no question, no performance. Already thinking ahead to the road south, to Mara, to what the vote will mean for the water crews. Hand-clasp and release. Ready to move.",
         "[d18] Saw Silas and Maren emerge from the north road at late afternoon. Made no performance of it — simply the readiness that comes from knowing they were coming back.",
-        "[d18] Reported plainly to Silas: the water cleared three days ago without announcement; the elder panel is fractious; Dresh has been walking the village knowing tomorrow's vote matters."
+        "[d18] Reported plainly to Silas: the water cleared three days ago without announcement; the elder panel is fractious; Dresh has been walking the village knowing tomorrow's vote matters.",
+        "[d19] The three of you moved as one rhythm through the binding-work. Pell read the iron without hesitation, moved with economy, and her final hand on the bound work was a confirmation. She is present and steady."
       ],
       "knownFacts": [
         "Veth will know Silas broke into the Archive",
@@ -4291,10 +4281,10 @@
         "reading structural intent through ironsense while another cr"
       ],
       "status": "active",
-      "statusNote": "At Millbrook forge, reinforcing the north gate ward with Veth—moving into action without hesitation when Silas names the next step",
+      "statusNote": "At Millbrook forge, deep night—reinforced the north gate ward with Silas and Veth. Satisfied with the work. Present and ready.",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 18
+        "day": 19
       },
       "bondType": "romantic",
       "bondStage": "partner",
@@ -4310,7 +4300,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 38,
+      "met": 39,
       "imageSeedKey": "pell#r3",
       "imagePinned": true,
       "sex": "female"
@@ -7198,7 +7188,7 @@
     "lastTickWorldDay": 101,
     "lastCanonWorldDay": 101,
     "lastGenCount": 2439,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Maren's direct counsel on attending an ending without stopping it—the warden's core practice made plain",
@@ -20479,22 +20469,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.14552966778181,
-    "cerebral": 17.32212172926873,
-    "social": 11.347225271000664,
-    "generous": 6.827368993814041,
-    "cautious": 5.133018294530606,
-    "physical": 0.12630881458245355,
-    "risky": 0.3669609624066177,
-    "ruthless": 0.06594077964463545,
-    "carousing": 0.6926843759531726,
-    "amorous": 1.6285548839518933,
-    "patient": 1.1485726594570913,
-    "stealth": 0.0000023045710041235455,
-    "devotion": 0.0941723800922974,
-    "craft": 3.665827175649558,
-    "leadership": 1.5281724328836244,
-    "deception": 0.011036251639378544
+    "strategic": 19.641891426087263,
+    "cerebral": 16.88906868603701,
+    "social": 11.063544639225647,
+    "generous": 7.65668476896869,
+    "cautious": 6.004692837167341,
+    "physical": 0.1231510942178922,
+    "risky": 0.35778693834645225,
+    "ruthless": 0.06429226015351956,
+    "carousing": 0.6753672665543432,
+    "amorous": 1.587841011853096,
+    "patient": 1.119858342970664,
+    "stealth": 0.0000022469567290204566,
+    "devotion": 0.09181807058998998,
+    "craft": 4.574181496258319,
+    "leadership": 1.4899681220615337,
+    "deception": 0.01076034534839408
   },
   "aptitudes": [
     "strategist",
@@ -20503,10 +20493,18 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 1000,
+  "actionCount": 1001,
   "grantsVersion": 1,
   "reconcileVersion": 96,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Three figures in a forge's copper-gold light—Pell's hand on cold iron, Veth's ashwarden grey eyes still holding the reading of what they just reinforced, Silas standing back from the work. The fire ba",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Three%20figures%20in%20a%20forge's%20copper-gold%20light%E2%80%94Pell's%20hand%20on%20cold%20iron%2C%20Veth's%20ashwarden%20grey%20eyes%20still%20holding%20the%20reading%20of%20what%20they%20just%20reinforced%2C%20Silas%20standing%20back%20from%20the%20work.%20The%20fire%20banks%20to%20embers.%20The%20night%20presses%20at%20the%20open%20door%20beyond.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=6328&nologo=true",
+      "caption": "In Millbrook forge, deep night: Silas, Pell, and Veth reinforce the failing north gate war",
+      "worldDay": 101,
+      "at": "2026-10-09T15:13:25.710Z"
+    },
     {
       "kind": "moment",
       "prompt": "Silas and Maren emerge from the north road into Millbrook at late afternoon — the warden in corvid-form at his shoulder, Memory's shadow-spear held steady in one hand, the other carrying the scroll of",
@@ -21687,8 +21685,8 @@
     }
   ],
   "portrait": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1791558707424,
-  "rev": 2253,
+  "updatedAt": 1791558805710,
+  "rev": 2255,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -25308,6 +25306,12 @@
       "text": "The reclamation system's bearing failure has been held sound using Raised Thing—it will not widen further while the system continues its work to completion. The remedy is not to repair the old mechanism, but to ask the system to listen to both its original purpose and Silas's father's new order…",
       "day": 18,
       "subjectId": null
+    },
+    {
+      "id": "millbrook",
+      "text": "The north gate ward has been reinforced by Silas, Pell, and Veth working together in deep night—the failing structure is now holding against the moorland's wrong stirring.",
+      "day": 19,
+      "subjectId": "millbrook"
     }
   ],
   "practice": {
@@ -25351,7 +25355,7 @@
       "open_material": 2,
       "the_attended_end": 46,
       "echo_memory": 1,
-      "raised_thing": 2,
+      "raised_thing": 3,
       "kept_breath": 1
     },
     "coActivations": {
@@ -25460,7 +25464,7 @@
       "wildcraft": 74,
       "open_material": 81,
       "echo_memory": 81,
-      "raised_thing": 82,
+      "raised_thing": 101,
       "kept_breath": 82
     }
   },
@@ -26260,7 +26264,7 @@
   "syncedAt": 1790433129179,
   "teachers": {},
   "regionsKnown": {
-    "valley": 705,
+    "valley": 706,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -26627,10 +26631,10 @@
     {
       "id": "sess-40",
       "startedAt": "2026-10-09T14:48:11.312Z",
-      "lastAt": "2026-10-09T15:05:43.833Z",
+      "lastAt": "2026-10-09T15:13:25.657Z",
       "startDay": 101,
       "endDay": 101,
-      "beats": 2
+      "beats": 3
     }
   ],
   "company": [
@@ -27152,23 +27156,23 @@
     "gen-whistling-woman-post": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Small%20wooden%20watchpost%20beside%20a%20shimmering%20dark%20portal%2C%20woman%20silhouetted%20in%20doorway%20whistling%2C%20dusty%20road%20converging%20toward%20her%2C%20twilight%20atmosphere.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=34173&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 378,
-    "choices": 377,
-    "characterDeltas": 204,
-    "scene": 378,
-    "npcUpdates": 327,
-    "factUpdates": 43,
+    "sceneSummary": 379,
+    "choices": 378,
+    "characterDeltas": 205,
+    "scene": 379,
+    "npcUpdates": 328,
+    "factUpdates": 44,
     "placeUpdates": 81,
     "codexUpdates": 223,
-    "timeOps": 331,
-    "imagePrompt": 46,
-    "sceneEnded": 150,
+    "timeOps": 332,
+    "imagePrompt": 47,
+    "sceneEnded": 151,
     "itemUpdates": 9,
     "questUpdates": 54,
     "offer": 61,
     "moveTo": 21,
     "delegateOps": 6,
-    "deeds": 27,
+    "deeds": 28,
     "standingOps": 6,
     "ledgerEvents": 17,
     "discovery": 6,
@@ -27179,7 +27183,7 @@
     "_applyFailedOp": 8,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 76,
+    "gambitApt": 77,
     "markDefiningMoment": 1,
     "_engineClosedScene": 6,
     "gambitOps": 1,
@@ -27187,7 +27191,7 @@
     "partyOps": 3,
     "stateOps": 1
   },
-  "_opTurns": 378,
+  "_opTurns": 379,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -28458,8 +28462,8 @@
     "negotiate": 4,
     "prepare": 16,
     "investigate": 8,
-    "craft": 9,
-    "help": 12,
+    "craft": 10,
+    "help": 13,
     "discipline": 3,
     "persuade": 3,
     "rapport": 12,
@@ -28483,7 +28487,8 @@
     "retrieve": 1,
     "listen": 1,
     "consult": 1,
-    "endure": 1
+    "endure": 1,
+    "defend": 1
   },
   "aptitudeEarnCount": {
     "silver_tongue": 1,
@@ -28729,6 +28734,14 @@
       "day": 18,
       "worldDay": 82,
       "actionCount": 996
+    },
+    {
+      "companionId": "marrow",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 19,
+      "worldDay": 101,
+      "actionCount": 1000
     }
   ],
   "_standingOpRefusals": [
@@ -30055,7 +30068,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 11
+    "sceneSummary": 12
   },
   "_opCountingSince": "2026-09-16T22:18:48.671Z",
   "_fireTests": {

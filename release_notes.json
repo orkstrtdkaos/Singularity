@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.26.9",
+      "date": "2026-10-09",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Single places on the local map are drawn at their real size",
+          "summary": "A place that is one thing (a shrine, a gate, a hall, the Half-Cathedral, a yard) used to be a few tiny icons on empty paper. Its map is now framed on the place itself, and what stands there is drawn as it is, at its size: the cathedral half vaulted and half in scaffold with cranes on the open half, a shrine in its swept court, a yard's tagged rows of stacks with sheds beyond them inside its fence."
+        }
+      ]
+    },
+    {
       "version": "2.26.8",
       "date": "2026-10-09",
       "entries": [

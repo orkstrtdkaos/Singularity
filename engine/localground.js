@@ -51,6 +51,54 @@ export function groundGlyphOf(k, drawn) {
 /** A shrine is drawn smaller than a temple (`_kinds`: "drawn smaller than a temple"); the rest by what they are. */
 const SIZE_OF = Object.freeze({ shrine: 0.8, temple: 1.2, post: 0.75, cairn: 0.85, cairn_row: 0.8, stone_field: 1.1, footings: 1.1,
   boats: 0.85, crane: 1.1, shed: 1.15, leviathan: 1.6, sun_disc: 1.4, solid: 1.2, arena: 1.2, figure: 1.1, stacks: 1.05 });
+/* ═════ G8 · A SINGLE PLACE IS DRAWN AT THE SIZE OF THE THING ═════
+ * ✅ AEVI 2026-10-09 (the local maps, seen): *"Every place whose substance is its marks draws as a few specks on empty paper … The
+ * fix is scale. 1. The frame fits what the place is. When `dwellings` is `none` or `few`, frame the drawn extent of the features
+ * (×1.6, at least 60 m across), not the radius a town would want. … 2. The `own` mark is drawn at the size of the thing. A building
+ * is a footprint, not an icon: a cathedral 60–80 m … a temple 30–50 m; a shrine 8–15 m with its court; a cabin one roof. Draw it
+ * on the ground at metres, never under 40 px across on screen, with the glyph only as its label's marker."*
+ * ⛔ THE SIZES ARE HERS WHERE SHE GAVE THEM (temple 40, shrine 12) AND MINE FOR THE REST, said so: each is the long side of the thing
+ * in metres, and content wins — a feature's own `m`, then `_kinds.<k>.metres`. ⬜ AEVI: the rest are yours to correct. */
+export const OWN_METRES = Object.freeze({
+  temple: 40, shrine: 12, hall: 30, inn: 22, store: 14, tower: 10, works: 45, market: 48, arena: 110, gate: 24, stair: 20, cave: 16,
+  machinery: 34, scales: 14, lens: 18, cairn: 6, column: 5, post: 3, stone: 5, standing_stones: 24, square: 40, court: 30, terrace: 30,
+  aperture: 12, bridge: 30, well: 5, cistern: 10, forge: 14, mill: 18, dock: 20, footings: 30, figure: 10, cairn_row: 30, wall: 60 });
+/** An accessory's size in metres on a single place's map (a post, a crane, a stack), where a town draws it as an icon. */
+export const MARK_METRES = Object.freeze({ post: 2, crane: 12, shed: 16, stacks: 18, machinery: 7, spoil: 10, cairn: 4, stone: 3, well: 3, yard: 26,
+  boats: 8, figure: 3, column: 3, lens: 5, scales: 5, standing_stones: 3, shrine: 8, cairn_row: 4, gate: 10, tower: 8, store: 10, hall: 18 });
+export function ownMetresOf(f, kinds = null) {
+  const m = Number(f?.m);
+  if (Number.isFinite(m) && m > 0) return m;
+  const kv = Number(kinds?.[f?.k]?.metres);
+  if (Number.isFinite(kv) && kv > 0) return kv;
+  return OWN_METRES[f?.k] || 20;
+}
+export function markMetresOf(k, kinds = null) {
+  const kv = Number(kinds?.[k]?.markMetres);
+  return Number.isFinite(kv) && kv > 0 ? kv : (MARK_METRES[k] || 6);
+}
+/** ✅ AEVI: *"A yard draws its yard."* Its ground's long side, in metres — the rows, the sheds and the intake, and a margin. */
+export const YARD_METRES = 95;
+/** Whether a place is a SINGLE SITE — no town round it, so its map is framed on the thing it is — and the sizes that frame it:
+ *  `{ k, own, ownMetres, yard, siteMetres }`, `siteMetres` being the radius of the drawn extent (never under 30 m, so the frame is at
+ *  least 60 m across before Aevi's ×1.6). Null for a place with houses enough to be a town, or whose own thing is ground (a wood,
+ *  a pool, an ash field): those keep the frame they had. PURE. */
+export function singleSiteOf(ground, kinds = null) {
+  const d = String(ground?.dwellings || "");
+  if (d !== "none" && d !== "few") return null;
+  const feats = Array.isArray(ground?.features) ? ground.features : [];
+  const own = feats.find((f) => f && f.own) || null;
+  const S = groundSections(kinds);
+  const ownMark = !!own && S.marks.has(own.k) && own.k !== "yard" && Math.max(1, Math.round(Number(own.n) || 1)) === 1;
+  const ownMetres = ownMark ? ownMetresOf(own, kinds) : null;
+  const yard = ground?.layout === "yard" || (!!own && (own.k === "yard" || own.k === "stacks"));
+  if (yard) return { k: own?.k || "yard", own, ownMetres, yard: true, siteMetres: Math.max(Math.round(YARD_METRES / 2), ownMetres || 0) };
+  // ⛑ the drawn extent's radius: half the thing's length and its ground round it — so the frame (×1.6) is a little over the thing
+  if (ownMark) return { k: own.k, own, ownMetres, yard: false, siteMetres: Math.max(30, Math.round(ownMetres * 0.7)) };
+  const n = Number(ground?.n);
+  if (d === "few" && n > 0 && n <= 4) return { k: own?.k || null, own, ownMetres: null, yard: false, siteMetres: Math.max(30, 16 + 10 * n) };
+  return null;
+}
 /** What may stand on a way (a gate across the road, a column on the move); what stands on the water. */
 const ON_WAY = new Set(["gate", "bridge", "ford", "column", "cairn_row", "post"]);
 const ON_WATER = new Set(["boats", "dock", "leviathan", "bridge", "ford", "mill"]);
@@ -120,8 +168,8 @@ export function farmsOf(ground) {
 /** ⛔ PHASE ONE: everything but `among`. Returns `{ marks, lines, areas, kept, short, fallbacks, streamLine, blocked }`.
  *  `blocked(x, y, pad)` is what the houses keep clear of: every mark and site, the water lines and the water and drop
  *  fills. `streamLine` is the entry's own water line, which a `street` layout lines its houses along. */
-export function placeGround({ ground, kinds = null, frame, built, roads = [], lanes = [], sites = [], water = null, uphill = null, fields = [], rnd }) {
-  const out = { marks: [], lines: [], areas: [], kept: [], short: [], fallbacks: [], streamLine: null };
+export function placeGround({ ground, kinds = null, frame, built, roads = [], lanes = [], sites = [], water = null, uphill = null, fields = [], rnd, metric = null }) {
+  const out = { marks: [], lines: [], areas: [], kept: [], short: [], fallbacks: [], streamLine: null, yard: null };
   const feats = Array.isArray(ground?.features) ? ground.features : [];
   const S = groundSections(kinds);
   const C = { x: Number(built?.x) || frame.cx, y: Number(built?.y) || frame.cy };
@@ -208,7 +256,13 @@ export function placeGround({ ground, kinds = null, frame, built, roads = [], la
   }
 
   // ════ LINES ════
-  const lineEntries = feats.map((f, i) => ({ f, i })).filter(({ f }) => S.lines.has(f.k) || isWallLine(f));
+  // ⛑ G8: a yard's ring wall IS its fence — drawn as the yard's own edge, not a circle round a centre the yard is not on
+  const yardWalled = !!metric?.single?.yard && feats.some((f) => f?.k === "wall" && f.at === "ring");
+  // ⛑ and both are SAID drawn: the yard's ring wall is its fence, the yard named as the place (or at its centre) is its ground
+  if (metric?.single?.yard) feats.forEach((f, i) => {
+    if ((f?.k === "wall" && f.at === "ring") || (f?.k === "yard" && (f.own || f.at === "centre"))) out.kept.push({ k: f.k, entry: i, site: null, own: !!f.own, yard: true });
+  });
+  const lineEntries = feats.map((f, i) => ({ f, i })).filter(({ f }) => (S.lines.has(f.k) || isWallLine(f)) && !(yardWalled && f.k === "wall" && f.at === "ring"));
   let acrossCount = 0;
   for (const { f, i } of lineEntries) {
     // ⛑ a kind the vocabulary has and the painter has not is SAID, not drawn as something else
@@ -457,7 +511,16 @@ export function placeGround({ ground, kinds = null, frame, built, roads = [], la
     out.farms = { want, placed: placedF, why: farm.why, fields: farmland.length, named: farmland.some((f) => f.named) };
     if (placedF < want) out.short.push({ k: "farmstead", entry: null, want, placed: placedF, why: "no room in the farmland at this scale" });
   }
-  const markEntries = feats.map((f, i) => ({ f, i })).filter(({ f }) => S.marks.has(f.k) && !isWallLine(f));
+  // ✅ G8: *"Packed-earth ground with its fence line is the place's ground"* — a yard's ground, along the road it is entered by
+  // ⛑ beside the road it is entered by, not across it: the road runs inside along the near fence, and the yard opens away from it
+  if (metric?.single?.yard) {
+    const vx = -Math.sin(mainAng), vy = Math.cos(mainAng), side = farDir[0] * vx + farDir[1] * vy >= 0 ? 1 : -1;
+    // ⛑ deep enough that the yard and what stands in it are the picture: a sixth of the frame (Aevi's gate: at least 15%)
+    const hl = R0 * 1.0, hw = R0 * 0.82, shift = hw - roadHalf - 3;
+    out.yard = { x: C.x + vx * side * shift, y: C.y + vy * side * shift, ang: mainAng, hl, hw, side, walled: yardWalled };
+  }
+  // ⛑ G8: in a yard, the `yard` named as the place or at its centre IS the fenced ground — only one at the road is an intake of its own
+  const markEntries = feats.map((f, i) => ({ f, i })).filter(({ f }) => S.marks.has(f.k) && !isWallLine(f) && !(metric?.single?.yard && f.k === "yard" && (f.own || f.at === "centre")));
   const usedSite = new Set();
   const entries = [];
   for (const { f, i } of markEntries) {
@@ -469,11 +532,18 @@ export function placeGround({ ground, kinds = null, frame, built, roads = [], la
     const keep = Math.min(n, same.length);
     for (const st of same.slice(0, keep)) { usedSite.add(st.id); out.kept.push({ k: f.k, entry: i, site: st.id, own: !!f.own }); }
     const shrink = n > 8 ? clamp(Math.sqrt(8 / n), 0.5, 1) : 1;
-    entries.push({ f, i, glyph, n, want: n - keep, placed: 0, sz: base * (SIZE_OF[f.k] || 1) * shrink, ownFirst: !!f.own && keep === 0 });
+    // ✅ G8: on a single place's map a mark is drawn at the size of the thing (a post 2 m, a crane 12 m), never under the icon it was
+    const sz = metric?.single ? Math.max(base * 0.8, markMetresOf(f.k, kinds) * metric.pxPerMetre / 2) * shrink : base * (SIZE_OF[f.k] || 1) * shrink;
+    entries.push({ f, i, glyph, n, want: n - keep, placed: 0, sz, ownFirst: !!f.own && keep === 0 });
   }
   const record = (e, p, c = {}) => {
-    const m = { k: e.f.k, glyph: e.glyph, x: p.x, y: p.y, sz: e.sz, ang: c.ang || 0, own: false, state: e.f.state || null, entry: e.i, at: e.f.at, onWater: !!c.onWater, half: c.half || 0 };
-    out.marks.push(m); e.placed++; return m;
+    const m = { k: e.f.k, glyph: e.glyph, x: p.x, y: p.y, sz: e.sz, ang: c.ang || (metric?.single && ["yard", "shed", "stacks", "hall", "works", "store", "inn", "forge", "mill", "temple", "gate", "market", "scales", "stair"].includes(e.f.k) ? mainAng : 0), own: false, state: e.f.state || null, entry: e.i, at: e.f.at, onWater: !!c.onWater, half: c.half || 0,
+      // ✅ G8: on a single place's map a mark knows its length on the ground, for the painter's plan of it
+      ...(metric?.single ? { plan: Math.max(6, markMetresOf(e.f.k, kinds) * metric.pxPerMetre) } : {}), ...(c.tag ? { tag: c.tag } : {}) };
+    out.marks.push(m); e.placed++;
+    // ⛑ G8: a mark laid out directly (a yard's rows, a crane on a footprint) takes its room too, so the houses keep clear of it
+    if (!occ.some((o) => o.x === p.x && o.y === p.y)) occ.push({ x: p.x, y: p.y, r: e.sz });
+    return m;
   };
   const tryCands = (e, cands, steps) => {
     for (const c of cands) { const p = put(c.x, c.y, e.sz, e.f.k, !!c.onWater, steps, !!c.onWay, !!c.centre); if (p) return record(e, p, c); }
@@ -482,12 +552,21 @@ export function placeGround({ ground, kinds = null, frame, built, roads = [], la
   // ⛔ OWN FIRST, AT THE CENTRE: *"the first thing the eye finds"*. An own of one is the centre whatever its `at`.
   for (const e of entries) {
     if (!e.ownFirst || e.want <= 0 || e.n > 1) continue;
-    const sz0 = e.sz; e.sz = sz0 * 1.6;
+    const sz0 = e.sz;
+    // ✅ G8: a single place's own thing is a FOOTPRINT at its metres, never under 40 px across — laid along the road it is entered by
+    const foot = metric?.single?.ownMetres ? Math.max(40, metric.single.ownMetres * metric.pxPerMetre) : null;
+    e.sz = foot ? foot / 2 : sz0 * 1.6;
     // ⛔ THE ROADS RUN INTO A PLACE'S OWN MARK — they all start at the centre — so the centre may sit on them
     // ⛑ and it stands in what is drawn there: the Sunken Choir's arena is IN its pool
-    const m = tryCands(e, [{ x: C.x, y: C.y, centre: true, ang: e.f.k === "stacks" || e.f.k === "shed" ? mainAng : 0 }], 6);
-    e.sz = sz0;
-    if (m) { m.own = true; m.sz = sz0 * 1.6; e.want--; }
+    const m = tryCands(e, [{ x: C.x, y: C.y, centre: true, ang: foot || e.f.k === "stacks" || e.f.k === "shed" ? mainAng : 0 }], 6);
+    const own = e.sz; e.sz = sz0;
+    /* ⛑ AND ITS OWN GROUND ROUND IT — the shrine's court (Aevi's), the swept ground a cairn or a post stands in — at least what makes the
+     * mark and its ground 2% of the frame (Aevi's gate). A cairn is 6 m and the frame is never under 60 m across, so drawing the cairn
+     * up to 2% would lie about its size on the scale bar; its ground is what gets the room, and the cairn stays a cairn. A yard's
+     * ground is its fenced yard, so it needs none. */
+    const floorR = Math.sqrt((0.022 * W * H) / Math.PI);
+    const apron = foot && !metric.single.yard ? Math.max(e.f.k === "shrine" ? foot * 1.45 : foot * 0.72, floorR) : 0;
+    if (m) { m.own = true; m.sz = own; if (foot) m.footprint = { px: foot, metres: metric.single.ownMetres, ang: mainAng, apron }; e.want--; }
   }
   const itemsOf = (group) => {
     const items = [];
@@ -514,18 +593,90 @@ export function placeGround({ ground, kinds = null, frame, built, roads = [], la
     }
     return out2;
   };
+  /* ✅ G8 (Aevi): *"A yard draws its yard … `stacks` are long rectangles in parallel rows … give each row a short tag. `shed` is an
+   * open-sided roof footprint. `crane` is a gantry spanning a row. `machinery` cogs are accents among the rows, not marks of their own.
+   * The `_order` runs along the road: in at the intake yard, waiting in the rows, cut down under the sheds."* ⛑ BLOCK BY BLOCK, at the
+   * end of the yard each one's `at` names — `end` along the road's way in, `far_end` deep in the yard away from the road, `road` by it,
+   * anything else the middle: the stacks in tagged rows, the cogs in the aisles between them, the sheds in a row beyond the last
+   * stack, and each crane spanning a shed (or, with no shed, a row). Laid out exactly; nothing here is nudged into anything else. */
+  if (metric?.single?.yard && out.yard) {
+    const p = metric.pxPerMetre, Y = out.yard, ux = Math.cos(Y.ang), uy = Math.sin(Y.ang), vx = -uy * Y.side, vy = ux * Y.side;
+    const at2 = (a, b) => ({ x: Y.x + ux * a + vx * b, y: Y.y + uy * a + vy * b });
+    const anchorOf = (at) => at === "end" ? { a: Y.hl * 0.42, b: -Y.hw * 0.1 } : at === "far_end" ? { a: -Y.hl * 0.1, b: Y.hw * 0.45 }
+      : at === "road" ? { a: -Y.hl * 0.55, b: -Y.hw * 0.5 } : { a: 0, b: -Y.hw * 0.15 };
+    const YK = new Set(["stacks", "machinery", "shed", "crane"]);
+    const blocks = new Map();
+    for (const e of entries) { if (e.want <= 0 || !YK.has(e.f.k)) continue; const at = ["end", "far_end", "road"].includes(e.f.at) ? e.f.at : "centre"; if (!blocks.has(at)) blocks.set(at, []); blocks.get(at).push(e); }
+    const Ls = Math.max(14, markMetresOf("stacks", kinds) * p), Ws = Math.max(4, 4.5 * p), gapA = Math.max(3, 3.5 * p), aisle = Math.max(7, 7 * p);
+    const shL = Math.max(14, markMetresOf("shed", kinds) * p), shW = shL * 0.62;
+    const TAGS = "ABCDEFGHJK"; let tagI = 0;
+    for (const [at, es] of blocks) {
+      const A = anchorOf(at);
+      const st = es.find((e) => e.f.k === "stacks"), sh = es.find((e) => e.f.k === "shed"), mc = es.find((e) => e.f.k === "machinery"), cr = es.find((e) => e.f.k === "crane");
+      let nextB = A.b;
+      const rowsAt = [];
+      if (st) {
+        const n = st.want, perRow = Math.max(2, Math.min(4, Math.ceil(n / 3))), rowsN = Math.max(1, Math.ceil(n / perRow));
+        for (let q = 0; q < n; q++) {
+          const r = Math.floor(q / perRow), k = q % perRow, inRow = Math.min(perRow, n - r * perRow);
+          const a = A.a + (k - (inRow - 1) / 2) * (Ls + gapA), b = A.b + (r - (rowsN - 1) / 2) * (Ws + aisle);
+          if (k === 0) rowsAt.push({ b, n: inRow });
+          record(st, at2(a, b), { ang: Y.ang, ...(k === 0 ? { tag: TAGS[tagI++] || String(tagI) } : {}) });
+        }
+        st.want = 0; nextB = A.b + ((rowsN - 1) / 2) * (Ws + aisle) + Ws / 2 + aisle;
+        if (mc) {
+          // the cogs between the rows (or beside the one row), spaced along the aisle
+          for (let q = 0; q < mc.want; q++) {
+            const gaps = Math.max(1, rowsAt.length - 1), g = q % gaps, along = Math.floor(q / gaps);
+            const b = rowsAt.length > 1 ? (rowsAt[g].b + rowsAt[g + 1].b) / 2 : rowsAt[0].b + (Ws + aisle) / 2;
+            const a = A.a + ((along % 3) - 1) * (Ls + gapA) * 0.9 + (g % 2 ? 0.5 : -0.5) * gapA;
+            record(mc, at2(a, b), {});
+          }
+          mc.want = 0;
+        }
+      }
+      if (sh) {
+        const n = sh.want, b = st ? nextB + shW / 2 : A.b;
+        const sheds = [];
+        for (let q = 0; q < n; q++) { const a = A.a + (q - (n - 1) / 2) * (shL + gapA * 1.5); sheds.push(record(sh, at2(a, b), { ang: Y.ang })); }
+        sh.want = 0;
+        if (cr) { for (let q = 0; q < cr.want; q++) { const s = sheds[q % sheds.length]; record(cr, { x: s.x + ux * (q >= sheds.length ? shL * 0.25 : 0), y: s.y + uy * (q >= sheds.length ? shL * 0.25 : 0) }, { ang: Y.ang + Math.PI / 2 }); } cr.want = 0; }
+      } else if (cr) {
+        // no shed: a gantry spans each row of stacks, or stands in a row of its own
+        for (let q = 0; q < cr.want; q++) {
+          const row = rowsAt.length ? rowsAt[q % rowsAt.length] : null;
+          const a = A.a + ((q % 3) - 1) * (Ls + gapA) * 0.8, b = row ? row.b : A.b + (q - (cr.want - 1) / 2) * aisle;
+          record(cr, at2(a, b), { ang: Y.ang + Math.PI / 2 });
+        }
+        cr.want = 0;
+      }
+      if (mc && mc.want > 0) { for (let q = 0; q < mc.want; q++) record(mc, at2(A.a + (q - (mc.want - 1) / 2) * aisle * 1.4, A.b), {}); mc.want = 0; }
+    }
+  }
   const AT_ORDER = ["centre", "road", "end", "far_end", "gate", "along", "river", "water", "rows", "ring", "junctions", "uphill", "downhill", "edge", "across", "scatter"];
   const groups = new Map();
   for (const e of entries) { if (e.want <= 0) continue; const a = AT_ORDER.includes(e.f.at) ? e.f.at : (e.f.at === "among" ? "among" : "centre"); if (!groups.has(a)) groups.set(a, []); groups.get(a).push(e); }
+  // ✅ G8: *"cranes on the unroofed section"* — on a single place whose own thing stands unfinished, what is `at: centre` and works on
+  // a building (a crane) stands ON the open half of the footprint, spanning it, not in a ring round the outside
+  const openFoot = metric?.single ? out.marks.find((m) => m.own && m.footprint && m.state === "unfinished") : null;
+  if (openFoot && groups.has("centre")) {
+    const L = openFoot.footprint.px, ang = openFoot.footprint.ang || 0, ux = Math.cos(ang), uy = Math.sin(ang);
+    const cr = groups.get("centre").filter((e) => e.f.k === "crane");
+    for (const e of cr) { for (let q = 0; q < e.want; q++) { const f = 0.1 + (0.32 * (q + 0.5)) / e.want; record(e, { x: openFoot.x + ux * L * f, y: openFoot.y + uy * L * f }, { ang: ang + Math.PI / 2 }); } e.want = 0; }
+    groups.set("centre", groups.get("centre").filter((e) => e.want > 0));
+    if (!groups.get("centre").length) groups.delete("centre");
+  }
   for (const at of AT_ORDER) {
     const group = groups.get(at); if (!group) continue;
     const szM = szMaxOf(group), sp = szM * 2.5;
     if (at === "centre") {
       const items = itemsOf(group); let ringI = 0, slot = 0;
       const centreFree = !out.marks.some((m) => Math.hypot(m.x - C.x, m.y - C.y) < szM);
+      // ⛑ G8: round a single place's own FOOTPRINT, the ring starts at its walls — inside them nothing can stand
+      const foot0 = out.marks.find((m) => m.own && m.footprint), ownR0 = foot0 ? foot0.footprint.px * 0.55 : 0;
       const cands = [];
       if (centreFree) cands.push({ x: C.x, y: C.y, onWay: true });
-      while (cands.length < items.length + 6) { ringI++; const rr = szM * 2.6 * ringI, cap = Math.max(4, Math.floor((TAU * rr) / (szM * 2.4))), ph = ringI * 0.7; for (slot = 0; slot < cap; slot++) { const a = ph + (slot / cap) * TAU; cands.push({ x: C.x + Math.cos(a) * rr, y: C.y + Math.sin(a) * rr }); } }
+      while (cands.length < items.length + 6) { ringI++; const rr = ownR0 + szM * 2.6 * ringI, cap = Math.max(4, Math.floor((TAU * rr) / (szM * 2.4))), ph = ringI * 0.7; for (slot = 0; slot < cap; slot++) { const a = ph + (slot / cap) * TAU; cands.push({ x: C.x + Math.cos(a) * rr, y: C.y + Math.sin(a) * rr }); } }
       let ci = 0;
       for (const it of items) { let ok = null; while (!ok && ci < cands.length) ok = tryCands(it.e, [cands[ci++]], 0); if (!ok) tryCands(it.e, [{ x: C.x, y: C.y }], 6); }
     } else if (at === "road") {
@@ -550,7 +701,8 @@ export function placeGround({ ground, kinds = null, frame, built, roads = [], la
     } else if (at === "gate") {
       const g = out.marks.find((m) => m.glyph === "gate" || m.glyph === "waygate") || sites.find((st) => ["gate", "waygate"].includes(glyphFor({ kind: st.kind })))
         || (mainRoad ? pointOnRoadAt(mainRoad, R0) : null) || C;
-      itemsOf(group).forEach((it, q) => { const a = mainAng + Math.PI / 2 + q * 1.1; tryCands(it.e, [{ x: g.x + Math.cos(a) * szM * 2.4, y: g.y + Math.sin(a) * szM * 2.4 }], 4); });
+      const gd = Math.max(szM * 2.4, (Number(g.sz) || 0) + szM * 1.6);   // ⛑ G8: outside a gate drawn at its size
+      itemsOf(group).forEach((it, q) => { const a = mainAng + Math.PI / 2 + q * 1.1; tryCands(it.e, [{ x: g.x + Math.cos(a) * gd, y: g.y + Math.sin(a) * gd }], 4); });
     } else if (at === "along") {
       // ⛔ ALONG THE LINE THE ENTRY NAMES, else the main road through the centre: Thinwater's shrines are on its stream
       const named = out.streamLine?.pts || out.lines.find((l) => ["path", "pipe_run", "channel", "stream"].includes(l.k) && (l.at === "across" || l.at === "along"))?.pts;
@@ -603,9 +755,11 @@ export function placeGround({ ground, kinds = null, frame, built, roads = [], la
       let ci = 0;
       for (const it of items) { let ok = null; while (!ok && ci < cells.length) ok = tryCands(it.e, [cells[ci++]], 0); if (!ok) tryCands(it.e, [{ x: C.x, y: C.y, ang: mainAng }], 6); }
     } else if (at === "ring") {
-      const items = itemsOf(group); let left = items.length, rr = R0 * 0.72, k = 0; const cands = [];
+      // ⛑ G8: in a yard the ring is the yard's own edge, inside its fence — not a circle round a centre the yard is beside
+      const Yc = out.yard ? { x: out.yard.x, y: out.yard.y } : C;
+      const items = itemsOf(group); let left = items.length, rr = out.yard ? Math.min(out.yard.hl, out.yard.hw) * 0.78 : R0 * 0.72, k = 0; const cands = [];
       const ph = rnd() * TAU;
-      while (left > 0 && k < 4) { const cap = Math.max(3, Math.floor((TAU * rr) / (szM * 2.4))), m = Math.min(left, cap); for (let q = 0; q < m; q++) { const a = ph + (q / m) * TAU + k * 0.3; cands.push(keepIn({ x: C.x + Math.cos(a) * rr, y: C.y + Math.sin(a) * rr, ang: a + Math.PI / 2 }, szM + 2)); } left -= m; rr += szM * 2.6; k++; }
+      while (left > 0 && k < 4) { const cap = Math.max(3, Math.floor((TAU * rr) / (szM * 2.4))), m = Math.min(left, cap); for (let q = 0; q < m; q++) { const a = ph + (q / m) * TAU + k * 0.3; cands.push(keepIn({ x: Yc.x + Math.cos(a) * rr, y: Yc.y + Math.sin(a) * rr, ang: a + Math.PI / 2 }, szM + 2)); } left -= m; rr += szM * 2.6; k++; }
       items.forEach((it, q) => tryCands(it.e, [cands[q] || cands[q % cands.length]], 3));
     } else if (at === "junctions") {
       const J = junctionsOf();
@@ -643,6 +797,9 @@ export function placeGround({ ground, kinds = null, frame, built, roads = [], la
   // ⛑ `wetOK`: a layout on the water (stilts, hulls, floating, underwater) is not kept out of it — only out of the marks
   const blocked = (x, y, pad = 0, wetOK = false) => {
     for (const o of occ) if (Math.hypot(o.x - x, o.y - y) < o.r + pad) return true;
+    // ⛑ G8: and out of a yard — the houses of a yard's people stand outside its fence
+    if (out.yard) { const dx = x - out.yard.x, dy = y - out.yard.y, ca = Math.cos(out.yard.ang), sa = Math.sin(out.yard.ang);
+      if (Math.abs(dx * ca + dy * sa) < out.yard.hl + pad && Math.abs(-dx * sa + dy * ca) < out.yard.hw + pad) return true; }
     return !wetOK && waterGap(x, y) < pad * 0.6;
   };
   Object.defineProperty(out, "blocked", { value: blocked, enumerable: false });

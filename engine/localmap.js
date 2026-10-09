@@ -29,7 +29,7 @@
 import { measureGradients, usableGradients, placeSite, roadsOut as roadBearings } from "./localdetail.mjs";
 import { glyphFor, drawGlyph, drawStateMark } from "./mapicons.mjs";
 import { drawLabel, labelSpace } from "./maplabel.js";
-import { placeGround, finishGround, inPoly } from "./localground.js";
+import { placeGround, finishGround, inPoly, singleSiteOf } from "./localground.js";
 import { overlayAdded, liveLocations, eventsFor, eventKnown } from "./mapstate.js";   // ✅ SNG-679 S8: what has been added to a place joins its layout as an overlay
 
 const R = Math.PI / 180;
@@ -207,7 +207,37 @@ export function cityPlacesOf(layout, { nameOf = null } = {}) {
 // Millbrook's wheels, landing and ford — the three sites its own seed calls a centre of daily life — off the
 // map. The near edge of a feature is where it STARTS: a river 3200 m out is reached at its near bank, a
 // meadow that begins at the village edge is reached at zero.
+/** ⛔ A SINGLE SITE, SIZED TO HOLD WHAT IT HOLDS. `singleSiteOf` sizes it from its own thing; a few places hold more than fits round it
+ *  (the Axis Gate's eight posts along its road, the Reclamation Site's six cogs by the river), and Aevi's frame is *"the drawn extent
+ *  of the features"* — so the site is tried at its size and grown by a quarter, at most twice, until nothing is short for room.
+ *  Cached on the place's ground entry (content, so it is the same object every time).
+ *  ⛔ AN AUTHORED LAYOUT KEEPS THE FRAME ITS SITES NEED: Aevi placed them in metres (Echo River Crossing is a few houses' place with
+ *  sites hundreds of metres out), and framing the houses would put her sites off the map. */
+const _singleGrow = new WeakMap();
+export function singleFor(layout) {
+  if (!layout?.ground || layout.authored) return null;
+  const base = singleSiteOf(layout.ground, layout.groundKinds);
+  if (!base) return null;
+  const key = layout.ground;
+  if (!_singleGrow.has(key)) {
+    let g = 1;
+    for (let k = 0; k < 2; k++) {
+      const s = { ...base, siteMetres: base.siteMetres * g };
+      const fr = localFrame(layout, { w: 800, h: 500, focusMetres: Math.max(30, s.siteMetres * 1.6) });
+      let short = false;
+      try { short = (localModel(layout, fr, { placeId: layout.placeId, _single: s }).ground?.short || []).some((x) => /no room/.test(String(x.why || ""))); } catch { short = false; }
+      if (!short) break;
+      g *= 1.25;
+    }
+    _singleGrow.set(key, g);
+  }
+  return { ...base, siteMetres: base.siteMetres * _singleGrow.get(key) };
+}
 export function fitMetres(layout) {
+  // ✅ G8 (Aevi): *"When `dwellings` is `none` or `few`, frame the drawn extent of the features (×1.6, at least 60 m across), not the
+  // radius a town would want. Far sites and the roads out stay as edge pointers."*
+  const single = singleFor(layout);
+  if (single) return Math.round(Math.max(30, single.siteMetres * 1.6));
   let fit = Number(layout?.radiusMetres) || 300;
   for (const s of layout?.sites || []) {
     const m = Number(s?.localMap?.metres);
@@ -834,7 +864,7 @@ function exitPoint(pts, w, h, inset = 6) {
 }
 
 /** ⛔ THE WHOLE MODEL FOR ONE FRAME. `layout` from `localLayoutFor`; `frame` from `localFrame`. */
-export function localModel(layout, frame, { placeName = "", placeId = "", nameOf = null, level = 0 } = {}) {
+export function localModel(layout, frame, { placeName = "", placeId = "", nameOf = null, level = 0, _single = undefined } = {}) {
   const id = placeId || layout?.placeId || "place";
   const rnd = rngOf(seedOf("model:" + id + (level ? ":L" + level : "")));
   // ✅ L5: one level at a time — its own sites, and the way down from the level below
@@ -851,9 +881,12 @@ export function localModel(layout, frame, { placeName = "", placeId = "", nameOf
        { id: `${id}:rockN`, name: null, kind: "rock", bearing: 45, fromMetres: Math.round((Number(layout?.radiusMetres) || 300) * 1.15), radiusMetres: Math.round((Number(layout?.radiusMetres) || 300) * 0.6), generated: true },
        { id: `${id}:rockS`, name: null, kind: "rock", bearing: -135, fromMetres: Math.round((Number(layout?.radiusMetres) || 300) * 1.15), radiusMetres: Math.round((Number(layout?.radiusMetres) || 300) * 0.6), generated: true }]
     : (layout?.extent || []);
+  // ✅ G8: a single place's ground is the size of the thing it is, at the centre — not the built radius a town would want
+  const single = (Number(level) || 0) < 0 ? null : (_single !== undefined ? _single : singleFor(layout));
   const built = extentAtLevel.find((f) => f.kind === "built") || null;
-  const builtR = built ? (Number(built.radiusMetres) || 200) * frame.pxPerMetre : (Number(layout?.radiusMetres) || 300) * 0.4 * frame.pxPerMetre;
-  const builtAt = built ? frame.toXY(built.bearing, built.fromMetres) : { x: frame.cx, y: frame.cy };
+  const builtR = single ? single.siteMetres * frame.pxPerMetre
+    : built ? (Number(built.radiusMetres) || 200) * frame.pxPerMetre : (Number(layout?.radiusMetres) || 300) * 0.4 * frame.pxPerMetre;
+  const builtAt = single ? frame.toXY(0, 0) : built ? frame.toXY(built.bearing, built.fromMetres) : { x: frame.cx, y: frame.cy };
   // roads out, each through the site that names it — none below ground: a delve's ways out are its stairs
   const roads = ((Number(level) || 0) < 0 ? [] : (meas.roadsOut || [])).map((r, i) => {
     const through = sites.find((s) => s.toward === r.to) || null;
@@ -864,12 +897,15 @@ export function localModel(layout, frame, { placeName = "", placeId = "", nameOf
    * uphill, wood in the widest gap between roads). Fields come only from the farms rule or the entry's areas, so a gate yard
    * stops growing two fields."* With a ground entry a GENERATED field is not drawn — read at the model, so a layout already
    * cached on a save loses it too. An authored field (Millbrook's) is canon and stays. */
-  const extentDrawn = layout?.ground ? extentAtLevel.filter((f) => !(f.generated && f.kind === "field")) : extentAtLevel;
+  // ⛑ G8: and a single place with no houses draws no generated built-up ground — that blob was sized for a town
+  const extentDrawn = layout?.ground ? extentAtLevel.filter((f) => !(f.generated && f.kind === "field") && !(single && (layout.ground.dwellings === "none" || single.yard) && f.generated && f.kind === "built")) : extentAtLevel;
   // the extent, each as what it is
   const features = extentDrawn.map((f) => {
     const frnd = rngOf(seedOf(`extent:${id}:${f.id}`));
-    const at = frame.toXY(f.bearing, f.fromMetres);
-    const rPx = (Number(f.radiusMetres) || 150) * frame.pxPerMetre;
+    // ⛑ G8: a few-house single place's built ground is the size of its site, round its own centre
+    const sized = single && f.kind === "built" && f.generated;
+    const at = sized ? frame.toXY(0, 0) : frame.toXY(f.bearing, f.fromMetres);
+    const rPx = sized ? single.siteMetres * 0.9 * frame.pxPerMetre : (Number(f.radiusMetres) || 150) * frame.pxPerMetre;
     const base = { ...f, x: at.x, y: at.y, rPx };
     if (f.kind === "water") return { ...base, channel: channel(f, frame, frnd) };
     const poly = blobPath(at.x, at.y, rPx, frnd, { wobble: f.kind === "built" ? 0.1 : 0.16 });
@@ -953,7 +989,7 @@ export function localModel(layout, frame, { placeName = "", placeId = "", nameOf
   /* ✅ G4/G5 (CCODE-675): what stands on the ground, placed BEFORE the houses so they keep clear of it; what is `among`
    * the houses after them. Only on the surface, and only where there is an entry. */
   const ground = (layout?.ground && onSurface)
-    ? placeGround({ ground: layout.ground, kinds: layout.groundKinds, frame, built: { ...builtAt, r: builtR }, roads, lanes, sites, water, uphill: uphillB, fields: features.filter((f) => f.kind === "field"), rnd: rngOf(seedOf("ground:" + id)) })
+    ? placeGround({ ground: layout.ground, kinds: layout.groundKinds, frame, built: { ...builtAt, r: builtR }, roads, lanes, sites, water, uphill: uphillB, fields: features.filter((f) => f.kind === "field"), rnd: rngOf(seedOf("ground:" + id)), metric: single ? { pxPerMetre: frame.pxPerMetre, single } : null })
     : null;
   const houses = (layout?.ground && onSurface)
     ? groundHouses({ ground: layout.ground, frame, built: { ...builtAt, r: builtR }, roads, lanes, sites, water, features, id, uphill: uphillB, blocked: ground?.blocked || null, streamLine: ground?.streamLine || null, pools: (ground?.areas || []).filter((a) => a.k === "water") })
@@ -961,7 +997,7 @@ export function localModel(layout, frame, { placeName = "", placeId = "", nameOf
     // Stillwater's Trouble's way in, and roofs the size of the hull on the open sea round the Grey Gull)
     : (layout?.hold ? [] : null);
   if (ground) finishGround(ground, houses || []);
-  return { id, placeName, frame, layout, sites, roads, lanes, features, contours, built: { ...builtAt, r: builtR }, water, rnd, level: Number(level) || 0, houses, ground };
+  return { id, placeName, frame, layout, sites, roads, lanes, features, contours, built: { ...builtAt, r: builtR }, water, rnd, level: Number(level) || 0, houses, ground, single };
 }
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────
@@ -1476,8 +1512,186 @@ function paintDeck(ctx, model) {
   return d.shape;
 }
 const TURNS = new Set(["boats", "bridge", "ford", "stacks", "shed", "column", "footings"]);
+/* ═════ G8 · THE OWN THING, DRAWN AS WHAT IT IS ═════
+ * ✅ AEVI: *"A building is a footprint, not an icon: a cathedral 60–80 m, the half that stands solid and the rest in scaffold; a
+ * temple 30–50 m; a shrine 8–15 m with its court; a cabin one roof. Draw it on the ground at metres, never under 40 px across on
+ * screen."* ⛑ A plan seen from above, its long side along the road it is entered by (`footprint.ang`), its width the kind's own
+ * proportion. Its state is drawn on the plan: unfinished open ribs in scaffold, razed only the dashed footprint, abandoned faded. */
+const FOOT_W = Object.freeze({ temple: 0.45, shrine: 1, hall: 0.6, inn: 0.5, store: 0.7, works: 0.62, market: 0.85, stair: 0.42, gate: 0.32,
+  forge: 0.7, mill: 0.7, terrace: 0.5, court: 1, square: 1, arena: 0.76, bridge: 0.22, footings: 0.6, wall: 0.08 });
+function drawFootprint(ctx, m) {
+  const L = Number(m.footprint?.px) || 40, k = m.k, st = m.state;
+  const W = L * (FOOT_W[k] ?? 0.62);
+  const wall = "rgba(52,40,30,0.92)", stone = "#dccfb5", roofLine = "rgba(120,92,62,0.55)", sand = "#e4d4ae", dark = "rgba(46,40,58,0.82)";
+  ctx.save(); ctx.translate(m.x, m.y); ctx.rotate(Number(m.footprint?.ang) || 0);
+  ctx.lineJoin = "round"; ctx.lineCap = "round";
+  if (st === "abandoned") ctx.globalAlpha = 0.62; else if (st === "empty" || st === "dead") ctx.globalAlpha = 0.72;
+  const rect = (x0, y0, w, h, fill = stone, lw = 1.4) => { ctx.beginPath(); ctx.rect(x0, y0, w, h); ctx.fillStyle = fill; ctx.fill(); ctx.strokeStyle = wall; ctx.lineWidth = lw; ctx.stroke(); };
+  const ridge = (x0, x1) => { ctx.strokeStyle = roofLine; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x0, 0); ctx.lineTo(x1, 0); ctx.stroke(); };
+  // its own ground under it: the shrine's court, the swept ground a cairn or a post stands in (see `placeGround`'s apron)
+  const apron = Number(m.footprint?.apron) || 0;
+  if (apron > 0) {
+    ctx.beginPath(); ctx.arc(0, 0, apron, 0, Math.PI * 2); ctx.fillStyle = "rgba(228,216,188,0.6)"; ctx.fill();
+    ctx.setLineDash([3, 3]); ctx.strokeStyle = "rgba(120,96,66,0.55)"; ctx.lineWidth = 1; ctx.stroke(); ctx.setLineDash([]);
+  }
+  if (st === "razed" || st === "former") {
+    // where it stood: the footprint dashed, nothing standing in it
+    ctx.globalAlpha = st === "former" ? 0.5 : 0.85; ctx.setLineDash([4, 3]); ctx.strokeStyle = wall; ctx.lineWidth = 1.1;
+    ctx.strokeRect(-L / 2, -W / 2, L, W); ctx.setLineDash([]); ctx.restore(); return;
+  }
+  if (k === "temple") {
+    // the nave and its apse, the aisles marked by their columns; the door toward the road (+x), the apse away from it; unfinished: the
+    // apse half solid, the half toward the road open ribs in scaffold
+    const ax = -L / 2 + W / 2;
+    const shape = () => { ctx.beginPath(); ctx.moveTo(L / 2, -W / 2); ctx.lineTo(ax, -W / 2); ctx.arc(ax, 0, W / 2, -Math.PI / 2, Math.PI / 2, true); ctx.lineTo(L / 2, W / 2); ctx.closePath(); };
+    if (st === "unfinished") {
+      ctx.save(); ctx.beginPath(); ctx.rect(-L / 2 - 1, -W, L / 2 + 1, 2 * W); ctx.clip(); shape(); ctx.fillStyle = stone; ctx.fill(); ctx.strokeStyle = wall; ctx.lineWidth = 1.6; ctx.stroke();
+      ctx.strokeStyle = roofLine; ctx.lineWidth = 0.8; for (let x = -L / 2 + 4; x < 0; x += 5) { ctx.beginPath(); ctx.moveTo(x, -W / 2 + 2); ctx.lineTo(x + W * 0.25, W / 2 - 2); ctx.stroke(); }
+      ctx.restore();
+      ctx.save(); ctx.beginPath(); ctx.rect(0, -W, L, 2 * W); ctx.clip(); shape(); ctx.setLineDash([3, 2.5]); ctx.strokeStyle = wall; ctx.lineWidth = 1.2; ctx.stroke(); ctx.setLineDash([]);
+      ctx.strokeStyle = "rgba(70,54,40,0.7)"; ctx.lineWidth = 1; for (let x = 4; x < L / 2; x += Math.max(5, L / 14)) { ctx.beginPath(); ctx.moveTo(x, -W / 2); ctx.lineTo(x, W / 2); ctx.stroke(); }
+      ctx.restore();
+      // the scaffold standing round what is not done
+      ctx.strokeStyle = "rgba(140,104,60,0.75)"; ctx.lineWidth = 0.7; ctx.beginPath();
+      for (let x = 0; x <= L / 2 + 2; x += Math.max(6, L / 12)) { ctx.moveTo(x, -W / 2 - 4); ctx.lineTo(x, W / 2 + 4); }
+      for (const y of [-W / 2 - 3, -W / 6, W / 6, W / 2 + 3]) { ctx.moveTo(0, y); ctx.lineTo(L / 2 + 3, y); }
+      ctx.stroke();
+    } else {
+      shape(); ctx.fillStyle = stone; ctx.fill(); ctx.strokeStyle = wall; ctx.lineWidth = 1.6; ctx.stroke();
+      ctx.fillStyle = "rgba(70,54,40,0.6)";
+      for (let x = ax + W * 0.2; x < L / 2 - W * 0.2; x += Math.max(5, L / 12)) for (const y of [-W / 4, W / 4]) { ctx.beginPath(); ctx.arc(x, y, 1.3, 0, Math.PI * 2); ctx.fill(); }
+    }
+  } else if (k === "shrine") {
+    // (its court is the apron drawn above) the shrine, its porch toward the way in, and the lamp
+    rect(-L / 2, -L / 2, L, L, stone, 1.6);
+    ctx.beginPath(); ctx.rect(L / 2, -L * 0.3, L * 0.34, L * 0.6); ctx.fillStyle = "#ece2cb"; ctx.fill(); ctx.strokeStyle = wall; ctx.lineWidth = 0.9; ctx.stroke();
+    ctx.beginPath(); ctx.arc(L / 2 - L * 0.12, 0, Math.max(1.8, L * 0.07), 0, Math.PI * 2); ctx.fillStyle = "#e0a640"; ctx.fill();
+  } else if (k === "tower") {
+    ctx.beginPath(); ctx.arc(0, 0, L / 2, 0, Math.PI * 2); ctx.fillStyle = stone; ctx.fill(); ctx.strokeStyle = wall; ctx.lineWidth = 1.8; ctx.stroke();
+    ctx.beginPath(); ctx.arc(0, 0, L * 0.3, 0, Math.PI * 2); ctx.strokeStyle = roofLine; ctx.lineWidth = 1; ctx.stroke();
+  } else if (k === "arena") {
+    // the bowl: its outer wall, the tiers stepping down, the floor
+    ctx.beginPath(); ctx.ellipse(0, 0, L / 2, W / 2, 0, 0, Math.PI * 2); ctx.fillStyle = stone; ctx.fill(); ctx.strokeStyle = wall; ctx.lineWidth = 1.8; ctx.stroke();
+    ctx.strokeStyle = roofLine; ctx.lineWidth = 0.9;
+    for (const f of [0.86, 0.72, 0.58]) { ctx.beginPath(); ctx.ellipse(0, 0, L / 2 * f, W / 2 * f, 0, 0, Math.PI * 2); ctx.stroke(); }
+    ctx.beginPath(); ctx.ellipse(0, 0, L / 2 * 0.46, W / 2 * 0.46, 0, 0, Math.PI * 2); ctx.fillStyle = sand; ctx.fill(); ctx.strokeStyle = wall; ctx.lineWidth = 1; ctx.stroke();
+  } else if (k === "gate") {
+    // the paved apron the gate stands on, the two piers, and the fold between them across the road
+    ctx.beginPath(); ctx.rect(-L / 2 - 4, -L * 0.36, L + 8, L * 0.72); ctx.fillStyle = "#e2d7bf"; ctx.fill(); ctx.strokeStyle = "rgba(110,90,64,0.55)"; ctx.lineWidth = 1; ctx.stroke();
+    ctx.strokeStyle = "rgba(150,130,100,0.35)"; ctx.lineWidth = 0.7; ctx.beginPath();
+    for (let x = -L / 2; x <= L / 2; x += Math.max(4, L / 9)) { ctx.moveTo(x, -L * 0.36); ctx.lineTo(x, L * 0.36); }
+    ctx.stroke();
+    const p = Math.max(5, L * 0.16);
+    ctx.beginPath(); ctx.rect(-L / 2 + p, -W * 0.28, L - 2 * p, W * 0.56); ctx.fillStyle = dark; ctx.fill();
+    rect(-L / 2, -W / 2, p, W, stone, 1.6); rect(L / 2 - p, -W / 2, p, W, stone, 1.6);
+    ctx.strokeStyle = "rgba(160,170,220,0.7)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(-L / 2 + p, 0); ctx.lineTo(L / 2 - p, 0); ctx.stroke();
+  } else if (k === "market" || k === "square" || k === "court") {
+    rect(-L / 2, -W / 2, L, W, "#e9dfc6", 1.2);
+    if (k === "market") { ctx.strokeStyle = wall; ctx.lineWidth = 0.8; const s = L / 7; for (let i = -2; i <= 2; i += 2) for (let j = -1; j <= 1; j += 2) { ctx.beginPath(); ctx.rect(i * s - s * 0.4, j * W * 0.22 - s * 0.3, s * 0.8, s * 0.6); ctx.fillStyle = "#c79a6a"; ctx.fill(); ctx.stroke(); } }
+  } else if (k === "stair") {
+    rect(-L / 2, -W / 2, L, W, stone, 1.3);
+    ctx.strokeStyle = roofLine; ctx.lineWidth = 0.9; for (let x = -L / 2 + L / 10; x < L / 2; x += L / 10) { ctx.beginPath(); ctx.moveTo(x, -W / 2); ctx.lineTo(x, W / 2); ctx.stroke(); }
+  } else if (k === "cave") {
+    ctx.beginPath(); ctx.ellipse(0, 0, L / 2, L * 0.36, 0, 0, Math.PI * 2); ctx.fillStyle = "rgba(150,142,128,0.7)"; ctx.fill(); ctx.strokeStyle = "rgba(80,74,64,0.7)"; ctx.lineWidth = 1.2; ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(-L * 0.08, 0, L * 0.26, L * 0.18, 0, 0, Math.PI * 2); ctx.fillStyle = "rgba(28,24,22,0.88)"; ctx.fill();
+  } else if (k === "machinery") {
+    const r = L / 2, n = 12; ctx.beginPath();
+    for (let i = 0; i < n * 2; i++) { const a = (i / (n * 2)) * Math.PI * 2, rr = i % 2 ? r : r * 0.84; ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); }
+    ctx.closePath(); ctx.fillStyle = "#c9c2b2"; ctx.fill(); ctx.strokeStyle = wall; ctx.lineWidth = 1.4; ctx.stroke();
+    ctx.beginPath(); ctx.arc(0, 0, r * 0.3, 0, Math.PI * 2); ctx.fillStyle = "#8f877a"; ctx.fill(); ctx.stroke();
+  } else if (k === "standing_stones" || k === "cairn") {
+    if (k === "standing_stones") for (let i = 0; i < 9; i++) { const a = (i / 9) * Math.PI * 2; ctx.save(); ctx.translate(Math.cos(a) * L / 2, Math.sin(a) * L / 2); ctx.rotate(a); rect(-2.5, -1.5, 5, 3, "#bdb6a8", 1); ctx.restore(); }
+    else { ctx.beginPath(); ctx.arc(0, 0, L / 2, 0, Math.PI * 2); ctx.fillStyle = "#c4bdae"; ctx.fill(); ctx.strokeStyle = wall; ctx.lineWidth = 1.2; ctx.stroke();
+      ctx.fillStyle = "rgba(80,74,64,0.6)"; for (let i = 0; i < 9; i++) { const a = i * 2.4, rr = (L / 2) * Math.sqrt((i + 0.5) / 9) * 0.8; ctx.beginPath(); ctx.arc(Math.cos(a) * rr, Math.sin(a) * rr, Math.max(1.2, L * 0.05), 0, Math.PI * 2); ctx.fill(); } }
+  } else if (k === "inn") {
+    rect(-L / 2, -W / 2, L, W, stone, 1.5); rect(L / 2 - W * 0.8, W / 2 - 1, W * 0.8, W * 0.7, stone, 1.5); ridge(-L / 2 + 3, L / 2 - 3);
+  } else if (k === "works" || k === "forge" || k === "mill") {
+    rect(-L / 2, -W / 2, L, W, "#d6cbb5", 1.5);
+    ctx.strokeStyle = roofLine; ctx.lineWidth = 0.9; for (let x = -L / 2 + L / 8; x < L / 2; x += L / 8) { ctx.beginPath(); ctx.moveTo(x, -W / 2); ctx.lineTo(x - L / 16, W / 2); ctx.stroke(); }
+  } else {
+    // a hall, a store, a house of the place's own: the plan and its roof ridge
+    rect(-L / 2, -W / 2, L, W, stone, 1.5); ridge(-L / 2 + Math.min(4, L * 0.1), L / 2 - Math.min(4, L * 0.1));
+  }
+  if (st === "unfinished" && k !== "temple") {
+    ctx.strokeStyle = "rgba(140,104,60,0.75)"; ctx.lineWidth = 0.7; ctx.setLineDash([2, 2]); ctx.strokeRect(-L / 2 - 4, -W / 2 - 4, L + 8, W + 8); ctx.setLineDash([]);
+  }
+  if (st === "sealed") { ctx.strokeStyle = "rgba(40,34,28,0.9)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(-L * 0.3, -W * 0.3); ctx.lineTo(L * 0.3, W * 0.3); ctx.moveTo(L * 0.3, -W * 0.3); ctx.lineTo(-L * 0.3, W * 0.3); ctx.stroke(); }
+  ctx.restore();
+}
+
+/* ═════ G8 · A YARD DRAWS ITS YARD ═════
+ * ✅ AEVI: *"Packed-earth ground with its fence line is the place's ground. `stacks` are long rectangles in parallel rows … give each
+ * row a short tag. `shed` is an open-sided roof footprint. `crane` is a gantry spanning a row. `machinery` cogs are accents among the
+ * rows, not marks of their own. The `_order` runs along the road."* */
+function paintYardGround(ctx, y, model) {
+  ctx.save(); ctx.translate(y.x, y.y); ctx.rotate(y.ang || 0);
+  const r = Math.min(y.hl, y.hw) * 0.12;
+  const path = () => { ctx.beginPath(); ctx.moveTo(-y.hl + r, -y.hw); ctx.lineTo(y.hl - r, -y.hw); ctx.quadraticCurveTo(y.hl, -y.hw, y.hl, -y.hw + r); ctx.lineTo(y.hl, y.hw - r);
+    ctx.quadraticCurveTo(y.hl, y.hw, y.hl - r, y.hw); ctx.lineTo(-y.hl + r, y.hw); ctx.quadraticCurveTo(-y.hl, y.hw, -y.hl, y.hw - r); ctx.lineTo(-y.hl, -y.hw + r); ctx.quadraticCurveTo(-y.hl, -y.hw, -y.hl + r, -y.hw); ctx.closePath(); };
+  path(); ctx.fillStyle = "rgba(200,178,140,0.55)"; ctx.fill();
+  // the churned earth: short strokes along the way the loads are dragged
+  const rnd = rngOf(seedOf("yardground:" + model.id));
+  ctx.strokeStyle = "rgba(120,94,60,0.28)"; ctx.lineWidth = 0.8; ctx.beginPath();
+  for (let i = 0; i < 140; i++) { const px = (rnd() * 2 - 1) * y.hl * 0.95, py = (rnd() * 2 - 1) * y.hw * 0.92, l = 3 + rnd() * 5; ctx.moveTo(px, py); ctx.lineTo(px + l, py + (rnd() - 0.5) * 1.5); }
+  ctx.stroke();
+  // the fence, posts along it — or, where the entry rings the yard with a wall, the wall
+  if (y.walled) { path(); ctx.strokeStyle = "rgba(60,52,44,0.9)"; ctx.lineWidth = 3.2; ctx.stroke(); path(); ctx.strokeStyle = "rgba(200,190,170,0.9)"; ctx.lineWidth = 1.2; ctx.stroke(); }
+  else { path(); ctx.strokeStyle = "rgba(70,52,34,0.8)"; ctx.lineWidth = 1.1; ctx.setLineDash([7, 2.5]); ctx.stroke(); ctx.setLineDash([]); }
+  ctx.restore();
+}
+const PLAN_KINDS = new Set(["stacks", "shed", "crane", "spoil", "yard"]);
+const FOOT_KINDS = new Set(["hall", "works", "store", "inn", "forge", "mill", "tower", "temple", "shrine", "gate", "market", "scales", "arena", "stair"]);
+function drawPlanMark(ctx, m) {
+  const L = Number(m.plan) || 12, k = m.k;
+  ctx.save(); ctx.translate(m.x, m.y); ctx.rotate(m.ang || 0); ctx.lineJoin = "round";
+  if (k === "stacks") {
+    // a stack: a long rectangle of material laid in courses, its row's tag at its end
+    const W = Math.max(4, L * 0.25), tones = ["#a07a52", "#8d8a84", "#5f5a52", "#b39668"], tone = tones[Math.abs(Math.round((m.x + m.y) / 7)) % tones.length];
+    ctx.beginPath(); ctx.rect(-L / 2, -W / 2, L, W); ctx.fillStyle = tone; ctx.fill(); ctx.strokeStyle = "rgba(40,30,22,0.85)"; ctx.lineWidth = 0.9; ctx.stroke();
+    ctx.strokeStyle = "rgba(250,240,220,0.35)"; ctx.lineWidth = 0.7; ctx.beginPath(); for (let x = -L / 2 + 3; x < L / 2; x += 3.2) { ctx.moveTo(x, -W / 2 + 0.8); ctx.lineTo(x, W / 2 - 0.8); } ctx.stroke();
+    if (m.tag) { ctx.rotate(-(m.ang || 0)); ctx.font = `bold ${Math.max(8, Math.min(12, W * 1.4))}px Georgia, serif`; ctx.fillStyle = "rgba(60,44,30,0.9)"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      const ex = -Math.cos(m.ang || 0) * (L / 2 + 7), ey = -Math.sin(m.ang || 0) * (L / 2 + 7); ctx.fillText(m.tag, ex, ey); }
+  } else if (k === "shed") {
+    // open-sided: the roof's footprint, its ridge, posts at the corners and no walls
+    const W = L * 0.62;
+    ctx.beginPath(); ctx.rect(-L / 2, -W / 2, L, W); ctx.fillStyle = "rgba(160,150,136,0.5)"; ctx.fill();
+    ctx.setLineDash([4, 3]); ctx.strokeStyle = "rgba(50,40,30,0.75)"; ctx.lineWidth = 1; ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle = "rgba(60,50,40,0.7)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(-L / 2, 0); ctx.lineTo(L / 2, 0); ctx.stroke();
+    ctx.fillStyle = "rgba(40,30,22,0.9)"; for (const [px, py] of [[-1, -1], [1, -1], [-1, 1], [1, 1], [0, -1], [0, 1]]) { ctx.beginPath(); ctx.rect(px * L / 2 - 1.3, py * W / 2 - 1.3, 2.6, 2.6); ctx.fill(); }
+  } else if (k === "crane") {
+    // a gantry: the beam spanning, a leg at each end, the trolley on it
+    ctx.strokeStyle = "rgba(150,96,40,0.95)"; ctx.lineWidth = 2.2; ctx.beginPath(); ctx.moveTo(-L / 2, 0); ctx.lineTo(L / 2, 0); ctx.stroke();
+    ctx.fillStyle = "rgba(60,44,30,0.95)"; for (const s of [-1, 1]) { ctx.beginPath(); ctx.rect(s * L / 2 - 2, -3, 4, 6); ctx.fill(); }
+    ctx.beginPath(); ctx.rect(-2.5, -2.5, 5, 5); ctx.fillStyle = "#e0b060"; ctx.fill(); ctx.strokeStyle = "rgba(60,44,30,0.9)"; ctx.lineWidth = 0.8; ctx.stroke();
+  } else if (k === "spoil") {
+    // a heap of what was cut away
+    ctx.beginPath(); for (let i = 0; i < 14; i++) { const a = (i / 14) * Math.PI * 2, rr = L / 2 * (0.75 + 0.25 * Math.sin(i * 2.7)); ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr * 0.7); } ctx.closePath();
+    ctx.fillStyle = "rgba(150,128,100,0.6)"; ctx.fill(); ctx.strokeStyle = "rgba(90,74,56,0.6)"; ctx.lineWidth = 0.8; ctx.stroke();
+    ctx.fillStyle = "rgba(80,64,48,0.5)"; for (let i = 0; i < 8; i++) { ctx.beginPath(); ctx.arc(Math.cos(i * 2.3) * L * 0.25, Math.sin(i * 1.7) * L * 0.15, 1, 0, Math.PI * 2); ctx.fill(); }
+  } else if (k === "yard") {
+    // the intake: a patch of harder-worn ground where the loads come off the road
+    const W = L * 0.66; ctx.beginPath(); ctx.rect(-L / 2, -W / 2, L, W); ctx.fillStyle = "rgba(170,146,108,0.45)"; ctx.fill();
+    ctx.setLineDash([3, 2]); ctx.strokeStyle = "rgba(90,70,48,0.6)"; ctx.lineWidth = 0.9; ctx.stroke(); ctx.setLineDash([]);
+  }
+  ctx.restore();
+}
+
 function paintGroundMark(ctx, m, model) {
   const st = m.state, sz = m.sz;
+  // ✅ G8: a single place's own thing is its footprint at metres, not a glyph in a ring
+  if (m.own && m.footprint) {
+    drawFootprint(ctx, m);
+    if (st === "abandoned" || st === "ruined") drawStateMark(ctx, "ruin", m.x, m.y, Math.min(sz, 18));
+    return;
+  }
+  // ✅ G8: and what stands on a single place's ground is drawn as a plan of itself, at its metres
+  if (model?.single && m.plan && PLAN_KINDS.has(m.k) && !(m.own && m.k !== "stacks")) { drawPlanMark(ctx, m); return; }
+  // ✅ G8: a building on a single place's ground (a hall in a yard, the works at its end) is a footprint too, never a giant icon
+  if (model?.single && m.plan && FOOT_KINDS.has(m.k) && !m.footprint) {
+    drawFootprint(ctx, { ...m, footprint: { px: Math.max(14, m.plan), ang: m.ang || 0 } });
+    if (st === "abandoned" || st === "ruined") drawStateMark(ctx, "ruin", m.x, m.y, Math.min(sz, 12));
+    return;
+  }
   ctx.save();
   if (st === "razed" || st === "former") {
     // footprints only: where it stood, dashed, fainter for an old layout
@@ -1636,6 +1850,8 @@ export function paintLocalMap(ctx, model, {
   for (const f of sortedFeatures) if (f.kind !== "water") paintExtent(f);
   // ✅ G4 (CCODE-675): the ground's own fills, over the measured ground and under its water; its lines over the water
   if (G) for (const a of G.areas) if (!a.farm) paintGroundArea(ctx, a, model, groundRnd);
+  // ✅ G8: the yard's own ground — packed earth inside its fence — over the measured ground, under its water, its ways and what stands in it
+  if (G?.yard) paintYardGround(ctx, G.yard, model);
   for (const f of sortedFeatures) if (f.kind === "water") paintExtent(f);
   if (G) for (const l of G.lines) paintGroundLine(ctx, l, model);
   // the ways
@@ -1676,8 +1892,11 @@ export function paintLocalMap(ctx, model, {
   if (model.layout?.deck) out.deck = paintDeck(ctx, model);
   // ✅ G4: the marks over the roofs, unlabelled, and the place's own mark LAST — *"the first thing the eye finds"*
   if (G) {
+    // ✅ G8: a single place's own thing is its ground-sized footprint, so it goes down FIRST and what stands on it (the cranes on the
+    // Half-Cathedral's open half) over it; a town's own mark is a glyph, and goes last so the eye finds it
+    if (model.single) for (const m of G.marks) if (m.own) paintGroundMark(ctx, m, model);
     for (const m of G.marks) if (!m.own) paintGroundMark(ctx, m, model);
-    for (const m of G.marks) if (m.own) paintGroundMark(ctx, m, model);
+    if (!model.single) for (const m of G.marks) if (m.own) paintGroundMark(ctx, m, model);
     out.ground = { marks: G.marks.length, lines: G.lines.length, areas: G.areas.length, own: G.marks.filter((m) => m.own).length };
   }
   // ⛔ THE EXITS GO FIRST, in their own band at the rim (SNG-677 §0) — and their boxes are CLAIMED in the main

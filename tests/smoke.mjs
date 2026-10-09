@@ -24777,7 +24777,8 @@ await (async () => {
           const placed = g.marks.filter((m) => m.entry === i).length, kept = g.kept.filter((k) => k.entry === i).length;
           wanted675 += n; drawn675 += placed; kept675 += kept;
           if (placed + kept < n) { short675.push(`${id}: ${f.k}@${f.at} ${placed + kept}/${n}`); if (!g.short.some((x) => x.entry === i)) unsaid675.push(`${id}: ${f.k}`); }
-        } else if (!g.lines.some((l) => l.entry === i) && !g.areas.some((a) => a.entry === i)) missing675.push(`${id}: ${f.k}@${f.at}`);
+        // ⛑ CCODE-696 (G8): a yard's ring wall is drawn as the yard's own fence — kept, and said so
+        } else if (!g.lines.some((l) => l.entry === i) && !g.areas.some((a) => a.entry === i) && !g.kept.some((k) => k.entry === i && k.yard)) missing675.push(`${id}: ${f.k}@${f.at}`);
       });
       const oe = (P675[id].features || []).find((f) => f.own);
       if (oe && S675.marks.has(oe.k) && !isWallLine(oe) && (Number(oe.n) || 1) === 1 && !g.kept.some((k) => k.own)) {
@@ -24791,7 +24792,9 @@ await (async () => {
       `${drawn675} drawn + ${kept675} named sites / ${wanted675} · ${missing675.slice(0, 4).join(" | ")} ${short675.slice(0, 4).join(" | ")}`);
     const LMsrc675 = readFileSync(join(root, "engine/localmap.js"), "utf8").replace(/\r\n/g, "\n");   // ⛑ a checkout may write CRLF (CCODE-644's rule)
     check("ground G4: ⛔ `own` draws AT THE PLACE'S OWN MARK — every own mark of one stands exactly on the centre where the roads meet, and the painter draws the own marks LAST, over everything else on the ground",
-      ownOff675.length === 0 && /for \(const m of G\.marks\) if \(!m\.own\) paintGroundMark\(ctx, m, model\);\n    for \(const m of G\.marks\) if \(m\.own\) paintGroundMark\(ctx, m, model\);/.test(LMsrc675), ownOff675.join(", "));
+      // ⛑ CCODE-696 (G8): a town's own mark is a glyph and goes LAST; a single place's own thing is its ground-sized footprint and goes
+      // FIRST, under what stands on it (the cranes on the Half-Cathedral's open half)
+      ownOff675.length === 0 && LMsrc675.includes("if (model.single) for (const m of G.marks) if (m.own) paintGroundMark(ctx, m, model);\n    for (const m of G.marks) if (!m.own) paintGroundMark(ctx, m, model);\n    if (!model.single) for (const m of G.marks) if (m.own) paintGroundMark(ctx, m, model);"), ownOff675.join(", "));
     check("ground G4: ⛔ the houses keep clear of what stands on the ground — no roof on any place sits on a mark",
       houseOnMark.length === 0, houseOnMark.join(", "));
     // ── by name
@@ -25595,6 +25598,65 @@ await (async () => {
       && (app694.match(/roadDays\(CONTENT\.locations, a, b, \{ content: CONTENT \}\)/g) || []).length === 2
       && (app694.match(/ensureLegsOn\([a-z]+, \{ locations: CONTENT\.locations, character, rules: CONTENT\.rules, abilities: fullCatalog\(\), content: CONTENT \}\)/g) || []).length === 2
       && readFileSync(join(root, "engine/state.js"), "utf8").includes('fetchJSON("content/packs/core/world/road_lengths.json").catch(() => null)'));
+  }
+  /* ── ✅ G8 (CCODE-696): a single place is drawn at the size of the thing ── */
+  {
+    const LM696 = await import("../engine/localmap.js");
+    const LG696 = await import("../engine/localground.js");
+    const { loadContentHeadless: lch696 } = await import("./headless_content.mjs");
+    const C696 = await lch696();
+    const P696 = C696.rules.localGround.places;
+    const lay696 = (id) => LM696.localLayoutFor(id, { content: C696 });
+    const mod696 = (id, w = 800, h = 500) => { const l = lay696(id); const f = LM696.localFrame(l, { w, h }); return { l, f, m: LM696.localModel(l, f, { placeId: id, placeName: C696.locations[id]?.name || id }) }; };
+    const singles696 = Object.keys(P696).filter((id) => C696.locations[id] && LM696.singleFor(lay696(id)));
+    const badFit696 = [], lowCov696 = [], small696 = [];
+    for (const id of singles696) {
+      const l = lay696(id), sg = LM696.singleFor(l), fit = LM696.fitMetres(l);
+      if (fit !== Math.round(Math.max(30, sg.siteMetres * 1.6)) || fit < 30 || sg.siteMetres < 30) badFit696.push(`${id} ${fit}`);
+      for (const [w, h] of [[600, 400], [800, 500]]) {
+        const { m } = mod696(id, w, h), g = m.ground;
+        const own = (g?.marks || []).find((x) => x.own && x.footprint);
+        if (g?.yard) { if ((4 * g.yard.hl * g.yard.hw) / (w * h) < 0.15) lowCov696.push(`${id} yard ${w}`); continue; }
+        if (!own) continue;
+        const L = own.footprint.px, A = own.footprint.apron || 0, body = own.k === "gate" ? (L + 8) * 0.72 * L : L * L * 0.45;
+        if (Math.max(Math.PI * A * A, body) / (w * h) < 0.02) lowCov696.push(`${id} ${own.k} ${w}`);
+        if (L < 40 - 1e-9 || L < own.footprint.metres * m.frame.pxPerMetre - 1e-6) small696.push(`${id} ${Math.round(L)}`);
+      }
+    }
+    check("G8: ⛔ AEVI — A SINGLE PLACE IS FRAMED ON WHAT IT IS — every place with no or few houses whose own thing is a mark (or that is a yard) is framed at ×1.6 its drawn extent, never under 60 m across, and grown until what it holds fits; a town keeps its frame, and an authored layout keeps the frame its sites need",
+      singles696.length >= 60 && badFit696.length === 0
+      && LM696.fitMetres(lay696("millbrook")) > 1000 && LM696.singleFor(lay696("echo_river_crossing")) === null && LM696.singleFor(lay696("greyhearth")) === null,
+      `${singles696.length} single · ${badFit696.slice(0, 4).join(" | ")}`);
+    check("G8: ⛔ THE OWN MARK IS DRAWN AT THE SIZE OF THE THING — a footprint at its metres, never under 40 px across, and with its own ground (the shrine's court, the swept ground a cairn stands in; a yard's fenced ground) covering at least 2% of the frame — a yard 15% — on a 600×400 map and an 800×500 one",
+      lowCov696.length === 0 && small696.length === 0, `${lowCov696.slice(0, 6).join(" | ")} ${small696.slice(0, 4).join(" | ")}`);
+    // the Half-Cathedral: Aevi's cathedral, one half solid and one in scaffold, its cranes on the open half
+    const hc696 = mod696("the_half_cathedral").m, hcOwn = hc696.ground.marks.find((x) => x.own);
+    const ux = Math.cos(hcOwn.footprint.ang), uy = Math.sin(hcOwn.footprint.ang);
+    const cranes696 = hc696.ground.marks.filter((x) => x.k === "crane");
+    const onOpen696 = cranes696.every((c) => { const a = (c.x - hcOwn.x) * ux + (c.y - hcOwn.y) * uy; return a > 0 && a < hcOwn.footprint.px / 2; });
+    check("G8: ⛔ BY NAME — THE HALF-CATHEDRAL is a cathedral (70 m, Aevi's 60–80, from its own `m`), unfinished — its apse half standing and the half toward the road open in scaffold — with its three cranes ON the open half and its dressed stone drawn as stacks at metres",
+      hcOwn.k === "temple" && hcOwn.state === "unfinished" && hcOwn.footprint.metres === 70 && P696.the_half_cathedral.features[0].m === 70
+      && cranes696.length === 3 && onOpen696 && hc696.ground.marks.filter((x) => x.k === "stacks").every((x) => x.plan > 0),
+      JSON.stringify({ metres: hcOwn.footprint.metres, cranes: cranes696.length, onOpen696 }));
+    // the Spent Yard, in its own order
+    const sy696 = mod696("the_spent_yard").m, Y = sy696.ground.yard;
+    const across = (p) => (-(p.x - Y.x) * Math.sin(Y.ang) + (p.y - Y.y) * Math.cos(Y.ang)) * Y.side;
+    const st696 = sy696.ground.marks.filter((x) => x.k === "stacks"), sh696 = sy696.ground.marks.filter((x) => x.k === "shed"), cr696 = sy696.ground.marks.filter((x) => x.k === "crane"), mc696 = sy696.ground.marks.filter((x) => x.k === "machinery");
+    const rowsB = [...new Set(st696.map((x) => Math.round(across(x))))].sort((a, b) => a - b);
+    const tags696 = st696.filter((x) => x.tag).map((x) => x.tag).sort().join("");
+    check("G8: ⛔ BY NAME — THE SPENT YARD DRAWS ITS YARD: fenced packed earth beside its road (at least 15% of the frame); its ten stacks in parallel rows along the road, each row tagged; the cogs in the aisles between the rows; its three sheds in a row beyond the last stack, each crane spanning a shed — in at the road, waiting in the rows, cut down under the sheds",
+      !!Y && (4 * Y.hl * Y.hw) / (800 * 500) >= 0.15 && st696.length === 10 && st696.every((x) => Math.abs(x.ang - Y.ang) < 1e-9 && x.plan > 0)
+      && rowsB.length === 3 && tags696 === "ABC"
+      && mc696.length === 4 && mc696.every((x) => across(x) > rowsB[0] && across(x) < rowsB[rowsB.length - 1])
+      && sh696.length === 3 && sh696.every((x) => across(x) > rowsB[rowsB.length - 1]) && cr696.length === 3 && cr696.every((c) => sh696.some((x) => Math.hypot(x.x - c.x, x.y - c.y) < 1)),
+      JSON.stringify({ rowsB, tags696, sheds: sh696.map((x) => Math.round(across(x))), cogs: mc696.map((x) => Math.round(across(x))) }));
+    const wg696 = mod696("bedrock_gate_yard").m;
+    const LMsrc696 = readFileSync(join(root, "engine/localmap.js"), "utf8");
+    check("G8: ⛔ WHAT STANDS ON A SINGLE PLACE'S GROUND IS A PLAN OF ITSELF — a hall in a yard is a footprint, not a giant icon; stacks, sheds, cranes, spoil and the intake are drawn at their metres; a yard's ring wall IS its fence (Weighgate: walled, and no ring drawn round a centre the yard is beside); a yard's people live outside its fence",
+      wg696.ground.yard?.walled === true && !wg696.ground.lines.some((l) => l.k === "wall" && l.at === "ring") && wg696.ground.kept.some((k) => k.yard && k.k === "wall")
+      && LMsrc696.includes('const FOOT_KINDS = new Set(["hall", "works", "store", "inn", "forge", "mill", "tower", "temple", "shrine", "gate", "market", "scales", "arena", "stair"]);')
+      && LMsrc696.includes("if (model?.single && m.plan && FOOT_KINDS.has(m.k) && !m.footprint) {")
+      && LG696.OWN_METRES.temple === 40 && LG696.OWN_METRES.shrine === 12 && LG696.ownMetresOf({ k: "temple", m: 70 }) === 70 && LG696.ownMetresOf({ k: "temple" }, { temple: { metres: 55 } }) === 55);
   }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)

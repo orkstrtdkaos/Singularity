@@ -15,7 +15,9 @@
   const reel = filmReel(doc); const shots = reel.shots; const shot = shots[idx];
   const cv = document.createElement("canvas"); cv.width = w; cv.height = h; const ctx = cv.getContext("2d");
   _filmLandSince.clear();
-  const tgt = (j, uu) => filmTargets(shots[j]?.visual, { index: j, shrinkAt: -1, u: uu });
+  // ⛑ CCODE-713: the shrink shot as `renderFilm` finds it — at -1 every shot was past the shrink, so the opening's Earth shots drew Exesa
+  const shrinkAt = reel.shots.findIndex((s) => s.visual === "shrink");
+  const tgt = (j, uu) => filmTargets(shots[j]?.visual, { index: j, shrinkAt, u: uu });
   let cur = idx > 0 ? tgt(idx - 1, 1) : null;
   const dur = shotSeconds(shot?.title || shot, reel.pacing);
   const fps = 30, steps = Math.max(1, Math.round(Math.min(1, u) * dur * fps));

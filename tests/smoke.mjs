@@ -25982,6 +25982,18 @@ await (async () => {
       && ["worldRevision", "mapEvents", "mapState", "mapLearned", "worldMapStore"].every((k) => !!charSchema712.properties?.[k]),
       `stamps ${[s0, s1, s2, s3].map((x) => x.split("|").slice(-2).join("|")).join(" → ")} · revisions ${r1}, ${r2} · map change ${ok712?.ok} ${ok712?.why || ""}`);
   }
+  /* ── ✅ Aevi's film note, Part 2 D (CCODE-713): Earth's mask at 1440×720, its shelf still a degree wide ── */
+  {
+    const E713 = await import("../engine/earth.js");
+    const shelf713 = (w, h) => { const b = E713.bakeEarthRGB(w, h); let sea = 0, sh = 0; for (let i = 0; i < w * h; i++) if (b.mask[i] === 0) { sea++; if (b.rgb[i * 3 + 2] > 63) sh++; } return sh / sea; };
+    const lo713 = shelf713(720, 360), hi713 = shelf713(1440, 720);
+    const app713 = readFileSync(join(root, "app.js"), "utf8");
+    check("713/earth: ⛔ AEVI — EARTH'S MASK AT 1440×720 (\"the stairs that remain are the bake's own cells … also bake the mask at 1440×720\") — the film bakes at the one size `EARTH_BAKE` names, and the shelf keeps its width in DEGREES (it is a distance in cells, and held in cells it would have halved with the resolution)",
+      E713.EARTH_BAKE.w === 1440 && E713.EARTH_BAKE.h === 720
+      && /bakeEarthRGB\(EARTH_BAKE\.w, EARTH_BAKE\.h\)/.test(app713) && /earthCityLights\(EARTH_BAKE\.w, EARTH_BAKE\.h,/.test(app713) && !/bakeEarthRGB\(720, 360\)/.test(app713)
+      && hi713 > lo713 * 0.75 && hi713 < lo713 * 1.25,
+      `shelf share of the sea: ${(lo713 * 100).toFixed(2)}% at 720, ${(hi713 * 100).toFixed(2)}% at 1440`);
+  }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {
     const ST706 = await import("../engine/state.js");

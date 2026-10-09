@@ -70,7 +70,7 @@ import { cityPlan, blockPath, blockRoofs, faubourgs, beltRoofs, leanOf } from ".
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph, drawStateMark } from "./engine/mapicons.mjs";
 import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, shotRefocus, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf, siteLevel, regionLook, isSpreading, spreadingSay, lookRand, placeKindOf } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
-import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
+import { bakeEarthRGB, earthCityLights, EARTH_BAKE } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.21";
+const APP_VERSION = "2.26.22";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7274,8 +7274,9 @@ function filmFineWindow(loc, spanDeg) {
 function openingBake(which) {
   if (_opBakes[which]) return _opBakes[which];
   if (which === "earth") {
-    const b = bakeEarthRGB(720, 360);
-    _opBakes.earth = { ...b, lights: earthCityLights(720, 360, { mask: b.mask }) };
+    // ✅ CCODE-713 (Aevi, Part 2 D): at 1440×720 — the coastline's last stairs were the bake's own cells
+    const b = bakeEarthRGB(EARTH_BAKE.w, EARTH_BAKE.h);
+    _opBakes.earth = { ...b, lights: earthCityLights(EARTH_BAKE.w, EARTH_BAKE.h, { mask: b.mask }) };
     return _opBakes.earth;
   }
   if (!_terrain) return null;                       // Exesa's bake needs the asset; the caller falls back

@@ -69,8 +69,13 @@ export const EARTH_LAND = [
  * shot is a turning globe at night, not a map. */
 export const EARTH_ICE = { north: 75, south: -68 };   // ⚠️ measured on the bake: at 72/−62 the caps were 25.6% of the equirect grid, which is half again Earth's land
 
+/** ✅ AEVI (NOTE_aevi_ccode_the_film_frame_by_frame, Part 2 D): *"The stairs that remain are the bake's own cells, read
+ *  nearest-neighbour … For Earth, also bake the mask at 1440×720. It's a polygon fill, once, so it costs nothing per frame."*
+ *  ⛔ CCODE-713 · the bake's size, in one place. Measured: 53 ms at 720×360, 160 ms at 1440×720 — once, when the film opens. */
+export const EARTH_BAKE = Object.freeze({ w: 1440, h: 720 });
+
 /** Rasterise the land into an equirectangular byte grid: 1 land, 0 sea, 2 ice. One scanline fill, once. */
-export function bakeEarthMask(w = 720, h = 360) {
+export function bakeEarthMask(w = EARTH_BAKE.w, h = EARTH_BAKE.h) {
   const mask = new Uint8Array(w * h);
   const lonOf = (x) => -180 + (x + 0.5) * (360 / w);
   const latOf = (y) => 90 - (y + 0.5) * (180 / h);
@@ -112,7 +117,7 @@ export function bakeEarthMask(w = 720, h = 360) {
 const DEEP = [6, 22, 62], SHELF = [16, 74, 134], SAND = [214, 180, 112], GREEN = [52, 118, 52],
   TAIGA = [38, 82, 58], ICE = [236, 242, 250], TUNDRA = [132, 134, 102];
 
-export function bakeEarthRGB(w = 720, h = 360) {
+export function bakeEarthRGB(w = EARTH_BAKE.w, h = EARTH_BAKE.h) {
   const { mask } = bakeEarthMask(w, h);
   const rgb = new Uint8ClampedArray(w * h * 3);
   const at = (x, y) => mask[((y + h) % h) * w + ((x + w) % w)];
@@ -140,8 +145,10 @@ export function bakeEarthRGB(w = 720, h = 360) {
       if (m === 2) c = ICE;
       else if (m === 0) {
         /* ⚠️ NARROW. At six cells the shelf is ~3° of pale blue around every coast, and on a globe that
-         * fills the frame it reads as a glow around the continents rather than as shallow water. Two cells. */
-        c = mix(SHELF, DEEP, Math.min(1, (dist[y * w + x] - 1) / 2));
+         * fills the frame it reads as a glow around the continents rather than as shallow water. Two cells — of the 720-wide
+         * grid it was tuned on, so ONE DEGREE. ⛑ CCODE-713: the distance is in cells, so at 1440 it is four; a shelf held in
+         * cells would have halved with the resolution. */
+        c = mix(SHELF, DEEP, Math.min(1, (dist[y * w + x] - 1) / (2 * (w / 720))));
       } else {
         // the land's own bands: ice-edge tundra, taiga, the temperate belt, the desert latitudes, the tropics
         const desert = Math.exp(-((al - 24) ** 2) / 90);          // the two desert belts
@@ -158,7 +165,7 @@ export function bakeEarthRGB(w = 720, h = 360) {
 }
 
 /** Where the lights of cities go: land, away from the ice, with the dense belts brighter. Deterministic. */
-export function earthCityLights(w = 720, h = 360, { mask = null } = {}) {
+export function earthCityLights(w = EARTH_BAKE.w, h = EARTH_BAKE.h, { mask = null } = {}) {
   const m = mask || bakeEarthMask(w, h).mask;
   const out = [];
   const rnd = (i) => { const x = Math.sin(i * 12.9898) * 43758.5453; return x - Math.floor(x); };

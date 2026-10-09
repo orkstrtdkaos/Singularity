@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.26.21",
+      "date": "2026-10-09",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Maps update without a reload",
+          "summary": "When a new place appears, a place changes, or a hold moves, the maps now redraw with the change straight away. A new place beyond the edge of a region's map widens the map to show it."
+        }
+      ]
+    },
+    {
       "version": "2.26.20",
       "date": "2026-10-09",
       "entries": [

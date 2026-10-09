@@ -263,7 +263,14 @@ export function stateStamp(character, powers = []) {
   for (const h of holds) eyes += (Array.isArray(h?.garrison) ? h.garrison.length : 0);
   const bandHeads = (character?.bands || []).reduce((n, b) =>
     n + (b?.contingents || []).reduce((m, c) => m + (Number(c?.n) || 0), 0), 0);
-  return `${Math.round(heads)}|${Math.round(marks)}|${holds.length}|${eyes}|${bandHeads}|${Object.keys(gatesHeldBy(character)).length}`;
+  /* ✅ AEVI, M4 (SNG-672, CCODE-712): *"One counter, bumped by any mint, any `placeState` write and any holding change (including a
+   * moved `locationId`). The field, `_fieldTex`, `_regionBases` (re-frame when a place falls outside), roads and the territory key all
+   * include it."* ⚠️ MEASURED: a hold that only changed `locationId` left this stamp where it was, so territory waited for a reload; and
+   * the world revision (bumped by a map change, and now by a mint) was read by nothing outside mapstate. ⛑ Where each hold STANDS is
+   * read here rather than counted at every holding writer — the same reason the mint's guard lives at the door: a writer nobody
+   * remembered cannot leave the picture stale. */
+  const standsAt = holds.map((h) => `${h?.id || ""}@${h?.locationId || ""}`).join(",");
+  return `${Math.round(heads)}|${Math.round(marks)}|${holds.length}|${eyes}|${bandHeads}|${Object.keys(gatesHeldBy(character)).length}|${Number(character?.worldRevision) || 0}|${standsAt}`;
 }
 
 /** Everything that holds ground, in one list, ready for either reader. */

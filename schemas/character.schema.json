@@ -13,6 +13,30 @@
     "level"
   ],
   "properties": {
+    "worldRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "SNG-672 M4 (CCODE-712): how many times this character's world has changed — bumped by a map change (`mapstate.applyMapChange`) and by a mint (`generate.commitPlace`). Every cached map read keys on it (`realms.stateStamp`, the city plan), so nothing waits for a reload."
+    },
+    "mapEvents": {
+      "type": "array",
+      "items": { "type": "object" },
+      "description": "SNG-679 Part S (`mapstate.js`): the map changes this character's world recorded — append-only events (damaged, ruined, destroyed, repaired, added, moved, renamed …), each with its key, who did it and the day. The state is a fold of these."
+    },
+    "mapState": {
+      "type": "object",
+      "additionalProperties": { "type": "object" },
+      "description": "SNG-679 Part S: the folded state of each changed map key — a cache of `mapEvents` (and the world's store), rebuilt at every change."
+    },
+    "mapLearned": {
+      "type": "object",
+      "additionalProperties": { "type": "object" },
+      "description": "SNG-679 S7: which map events this character has LEARNED, and how (seen, word) — the maps draw what is known, not what the world holds."
+    },
+    "worldMapStore": {
+      "type": "object",
+      "description": "SNG-679 S2: the map events adopted from the one shared world (other saves' changes), keyed by map key."
+    },
     "reckonings": {
       "type": "object",
       "description": "SNG-679 Part R · R3 (CCODE-682, `mending.js`): the reckoning for each thing this character broke that the locals spent on, keyed by the thing's map key — the damage it is about, its state (owed, asking, sent, found, settled, forgiven), the day it began, how it was seen, and what has been paid. The damages debt itself lives in `worldState.debts`.",

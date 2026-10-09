@@ -25956,6 +25956,32 @@ await (async () => {
       && /mapView\(character, `place:\$\{p\.id\}`, \{ content: CONTENT, name: p\.name \|\| p\.id \}\)\.label/.test(app711),
       `frozen stale ${frozenStale711.length}, live stale ${liveStale711.length} · Hundred Markets: live "${hm711(pinsLive711)}", frozen "${hm711(pinsFrozen711)}" · cellar pin ${!!cellar711}, glyph ${cellarGlyph711}`);
   }
+  /* ── ✅ Aevi's M4 (SNG-672, CCODE-712): every cached map read keys on what changed the world ── */
+  {
+    const RL712 = await import("../engine/realms.js");
+    const GEN712 = await import("../engine/generate.js");
+    const MS712 = await import("../engine/mapstate.js");
+    const { loadContentHeadless: lch712 } = await import("./headless_content.mjs");
+    const C712 = await lch712();
+    const ch712 = { id: "c712", currentLocationId: "millbrook", holdings: [{ id: "h1", locationId: "millbrook" }], mapEvents: [] };
+    const s0 = RL712.stateStamp(ch712, []);
+    ch712.holdings[0].locationId = "echo_river_crossing";                 // the hold moved, and nothing was counted
+    const s1 = RL712.stateStamp(ch712, []);
+    const live712 = { ...C712.locations };
+    GEN712.commitPlace(ch712, live712, "gen-712-yard", { id: "gen-712-yard", name: "The Yard", parentId: "millbrook" });   // a mint
+    const r1 = Number(ch712.worldRevision) || 0, s2 = RL712.stateStamp(ch712, []);
+    const ok712 = MS712.applyMapChange(ch712, { key: "place:millbrook", change: "damaged", by: "c712", cause: "a test" }, { content: C712, worldDay: 10 });
+    const r2 = Number(ch712.worldRevision) || 0, s3 = RL712.stateStamp(ch712, []);
+    const app712 = readFileSync(join(root, "app.js"), "utf8");
+    const charSchema712 = JSON.parse(readFileSync(join(root, "schemas/character.schema.json"), "utf8"));
+    check("712/M4: ⛔ AEVI — EVERYTHING THAT CACHES KEYS ON WHAT CHANGED THE WORLD — a hold that only moved changes the territory stamp (it did not), a mint and a map change each bump the one world revision and the stamp reads it; the city plan and the field (its meaning term reads every place, a minted one included) key on it, and the region base is keyed on its extent so a place outside the first frame re-frames it (it was culled); the counter and the map fields it rides with are declared, so a synced save does not raise the census",
+      s1 !== s0 && r1 === 1 && s2 !== s1 && ok712?.ok === true && r2 === 2 && s3 !== s2
+      && /Object\.keys\(CONTENT\.locations\)\.length\}\|\$\{Number\(character\?\.worldRevision\) \|\| 0\}/.test(app712)
+      && /if \(_field && _fieldKey === key712\) return _field;/.test(app712) && /_fieldTex = new Map\(\); _fieldCov = new Map\(\);/.test(app712)
+      && /_regionBases\.get\(baseKey712\)/.test(app712) && /_regionBases\.set\(baseKey712, base\)/.test(app712) && !/_regionBases\.get\(regionId\)/.test(app712)
+      && ["worldRevision", "mapEvents", "mapState", "mapLearned", "worldMapStore"].every((k) => !!charSchema712.properties?.[k]),
+      `stamps ${[s0, s1, s2, s3].map((x) => x.split("|").slice(-2).join("|")).join(" → ")} · revisions ${r1}, ${r2} · map change ${ok712?.ok} ${ok712?.why || ""}`);
+  }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {
     const ST706 = await import("../engine/state.js");

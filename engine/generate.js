@@ -62,6 +62,8 @@ export function commitPlace(character, locations, id, rec) {
   }
   character.generated.location[id] = rec;   // persists on the save (hydrateGeneratedIntoContent revives it)
   if (locations) locations[id] = rec;       // live this session
+  // ✅ M4 (CCODE-712): a mint is a change to the world — the same counter a map change bumps (`mapstate.applyMapChange`)
+  character.worldRevision = (Number(character.worldRevision) || 0) + 1;
   return id;
 }
 

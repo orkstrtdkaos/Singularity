@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.20";
+const APP_VERSION = "2.26.21";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2940,7 +2940,7 @@ function normalisedCatalogId(id, catalog = null) {
  *  ⚠️ Built ONCE per session and only when the world's own numbers are loaded — this is telemetry, and telemetry
  *  that makes a session slower is telemetry nobody leaves on. A coarse grid, because a reading is a number and
  *  not a picture. */
-let _field = null;
+let _field = null, _fieldKey = null;
 
 /** ⛔ CCODE-472 — ONE FIELD, EVERY SURFACE. This memo used to live INSIDE `fieldReadingHere`, so the probe
  *  could build it and the map could not reach it. Three surfaces read it now — the dev report's probe, the
@@ -2949,7 +2949,14 @@ let _field = null;
  *  ⚠️ Returns null until the map has been opened once: the voters live in the terrain asset. Say nothing
  *  rather than guess — the same rule as the probe. */
 function worldField() {
-  if (_field) return _field;
+  /* ✅ M4 (SNG-672, CCODE-712): *"The field … include[s] it."* ⚠️ MEASURED: the field's meaning term (`meansFrom`) reads EVERY place in
+   * `CONTENT.locations`, a place made in play included — so a place minted after the field was built was missing from it until a
+   * reload. ⛑ Keyed on the world revision and the place count; a rebuild lets the lens textures go with it (they were sampled from
+   * the old field). A mint is rare, so the 740ms a lens costs is paid once per change of the world, not per paint. */
+  const key712 = `${Object.keys(CONTENT?.locations || {}).length}|${Number(character?.worldRevision) || 0}`;
+  if (_field && _fieldKey === key712) return _field;
+  if (_field) { _field = null; _fieldTex = new Map(); _fieldCov = new Map(); }
+  _fieldKey = key712;
   const fields = _terrain?.fields;
   if (!fields?.voters?.length || !CONTENT?.locations) return null;
   try {
@@ -15307,7 +15314,8 @@ function paintTerritory(ctx, base, ext, regionId, W, H) {
 let _cityPlan = { key: null, plan: null };
 function cityFor(regionId, W, H) {
   if (!CONTENT?.locations) return null;
-  const key = `${regionId}|${W}x${H}|${Object.keys(CONTENT.locations).length}`;
+  // ✅ M4 (CCODE-712): and the world revision — a place renamed, moved or ruined changes the plan without changing the count
+  const key = `${regionId}|${W}x${H}|${Object.keys(CONTENT.locations).length}|${Number(character?.worldRevision) || 0}`;
   if (_cityPlan.key === key) return _cityPlan.plan;
   const inRegion = (id) => (CONTENT.locations[id]?.regionId || CONTENT.locations[id]?.region) === regionId;
   const places = Object.keys(CONTENT.locations).filter((id) => inRegion(id) && CONTENT.locations[id]?.worldPos)
@@ -16268,8 +16276,13 @@ function paintRegionMap(regionId) {
     }
     return out;
   })();
-  let base = _regionBases.get(regionId);
+  /* ✅ M4 (CCODE-712): *"`_regionBases` (re-frame when a place falls outside)"*. ⚠️ The base was cached by region alone, so a place made
+   * in play outside the region's first frame grew the extent and was culled off a base that never grew with it. ⛑ Keyed on the extent
+   * itself: the base is re-made exactly when the frame changes, and the old one for the region is let go. */
+  const baseKey712 = `${regionId}|${ext.polar ? `p${ext.pole}:${ext.poleRadiusDeg}` : `${ext.la0},${ext.lo0},${ext.la1},${ext.lo1}`}`;
+  let base = _regionBases.get(baseKey712);
   if (!base) {
+    for (const k of [..._regionBases.keys()]) if (k.startsWith(`${regionId}|`)) _regionBases.delete(k);
     const pad = 2;
     // ⛔ C1 · ✅ ERIK: *"We do need a pole-centered Crossing map."* A region on the axis gets an azimuthal
     // equidistant base instead of a lon/lat one. It returns the SAME shape, so the painter below, the roads,
@@ -16281,7 +16294,7 @@ function paintRegionMap(regionId) {
           : { la0: 90 - ext.poleRadiusDeg * 1.15 - pad, la1: 90, lo0: -180, lo1: 180 }), ext)
       : makeRegionBase(_terrain, _fineGenShared.make(_fineGenShared.gp,
           { la0: ext.la0 - pad, la1: ext.la1 + pad, lo0: ext.lo0 - pad, lo1: ext.lo1 + pad }), ext);
-    _regionBases.set(regionId, base);
+    _regionBases.set(baseKey712, base);
   }
   // ⛔ W AND H ARE CSS "MAP PIXELS", NOT DEVICE PIXELS, and every line below depends on that: fonts, marker
   // radii, label offsets and the two walks' cells are all absolute numbers, and they mean CSS pixels.

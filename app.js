@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.3";
+const APP_VERSION = "2.26.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -19150,7 +19150,8 @@ function placeCardHTML(selectedId) {
             // ✅ S5 (CCODE-672): a rename says "once called {old}", a founding says "newly founded" for thirty days
             const pv = mapView(character, `place:${l.id}`, { content: CONTENT, name: l.name || l.id, worldDay: absoluteWorldDay() });
             const extra = [pv.renamed ? mapStateWord(CONTENT, "place", "renamed", { old: pv.once || l.name || l.id }) : null, pv.isNew ? mapStateWord(CONTENT, "place", "added", {}) : null,
-              pv.lastKnown ? (CONTENT.mapStates?.knowledge?.lastKnown || null) : null]   // ✅ S7: *"the card says `knowledge.lastKnown`"*
+              pv.lastKnown ? (CONTENT.mapStates?.knowledge?.lastKnown || null) : null,   // ✅ S7: *"the card says `knowledge.lastKnown`"*
+              pv.mendedByWord ? (CONTENT.mapStates?.knowledge?.mendedByWord || null) : null]   // ✅ CCODE-690, Aevi: *"'mended, by word'"*
               .filter(Boolean).map((w) => `<span class="rep-band">${esc(w)}</span>`).join("");
             if (!st || st.state === "whole") return extra;
             const word = mapStateWord(CONTENT, "place", st.state, { name: l.name || l.id });

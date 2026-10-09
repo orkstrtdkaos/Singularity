@@ -25044,7 +25044,8 @@ await (async () => {
       !v101.mending && v104.mending?.by === "locals" && v104.mending.progress > 0 && v104.mending.progress < 0.05
       && (o680.stated || []).some((x) => x.id === site680.id && x.mending)
       && /if \(m\.heard && m\.view\?\.mending\) drawStateMark\(ctx, "mending"/.test(readFileSync(join(root, "app.js"), "utf8"))
-      && /localsMendPass\(character, \{ content, worldDay: wd680 \}\)/.test(tick680) && /const extraNews = \[\.\.\.mendNews680,/.test(tick680)
+      // ⛑ CCODE-690: the tick runs the pass first and then learns; the news is what is learned (the 690 gates hold the rest)
+      && /localsMendPass\(character, \{ content, worldDay: absoluteWorldDay\(\) \}\)/.test(tick680) && /const extraNews = \[\.\.\.mendNews680,/.test(tick680)
       && /String\(words\.mended\)\.replace\("\{thing\}", t\.thing\)/.test(tick680));
   }
   /* ── ✅ SNG-679 Part R, R4 + R6 (CCODE-681): a player mends, and is rewarded; mending is a job on the job list ── */
@@ -25253,11 +25254,70 @@ await (async () => {
     const own685 = { id: "player-me", currentLocationId: far685[0], holdings: [], mapEvents: [] };
     MS685.applyMapChange(own685, { key: key685, change: "damaged", by: "player-me" }, { content: C685, worldDay: 100 });
     const app685 = readFileSync(join(root, "app.js"), "utf8"), tick685 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
-    check("S7: ⛔ …WHAT THIS GAME WROTE IS KNOWN, but the locals' mending is the world's and is learned like it (a near character still sees it ruined after they finish, until they go and look); the TRUTH still rules the world (S6 reads it); the tick learns, the card shows what was learned",
-      MS685.mapView(e685, key685, { content: C685, worldDay: 200 }).state === "ruined" && MS685.mapStateOf(e685, key685, { content: C685 }).state === "whole"
+    // ⛑ CCODE-690 — AEVI REVERSED THE READING THIS GATE HELD: *"Word of mending travels exactly as word of ruin does … It reaches only
+    // a character who knows the thing as broken."* The near character who heard of the ruin hears of the mending; see the 690 gates.
+    const ev685 = MS685.mapView(e685, key685, { content: C685, worldDay: 200 });
+    check("S7: ⛔ …WHAT THIS GAME WROTE IS KNOWN, but the locals' mending is the world's and is learned like it — by WORD to a near character who knew it broken (CCODE-690: \"mended, by word\" on the card); the TRUTH still rules the world (S6 reads it); the tick learns, the card shows what was learned",
+      ev685.state === "whole" && ev685.mendedByWord === true && !ev685.lastKnown && MS685.mapStateOf(e685, key685, { content: C685 }).state === "whole"
       && MS685.mapView(own685, key685, { content: C685, worldDay: 100 }).state === "damaged"
       && tick685.includes("learnMapEvents(character, { content, worldDay: absoluteWorldDay() })")
       && app685.includes("const st = knownStateOf(character, `place:${l.id}`, { content: CONTENT });") && app685.includes("pv.lastKnown ? (CONTENT.mapStates?.knowledge?.lastKnown || null) : null"));
+  }
+  /* ── ✅ Aevi's answers to SNG-679 R5–S8 (CCODE-690): word of mending, and the Unlanded's own field ── */
+  {
+    const MS690 = await import("../engine/mapstate.js");
+    const WM690 = await import("../engine/worldmap.js");
+    const WT690 = await import("../engine/worldtime.js");
+    const { loadContentHeadless: lch690 } = await import("./headless_content.mjs");
+    const C690 = await lch690();
+    const wheels690 = (C690.rules.localLayouts.millbrook.sites || []).find((x) => x.kind === "mill");
+    const key690 = `site:millbrook/${wheels690.id}`;
+    const near690 = Object.entries(C690.locations).filter(([i, l]) => i !== "millbrook" && l.worldPos && l.tier !== "region").map(([i, l]) => [i, WM690.walkingDays(C690.locations.millbrook, l)]).filter(([, d]) => d > 0.5 && d <= 3).sort((a, b) => a[1] - b[1])[0];
+    const far690 = Object.entries(C690.locations).filter(([, l]) => l.worldPos && l.tier !== "region").map(([i, l]) => [i, WM690.walkingDays(C690.locations.millbrook, l)]).filter(([, d]) => d > 10)[0];
+    // one world: another game ruins the Wheels on day 100 and the locals mend them; a second key is only DAMAGED, then mended
+    const other690 = { id: "player-other", mapEvents: [] };
+    MS690.applyMapChange(other690, { key: key690, change: "ruined", by: "player-other", seen: "named" }, { content: C690, worldDay: 100 });
+    const store690 = MS690.mergeMapEvents({ keys: {} }, other690.mapEvents).store;
+    const me690 = (at) => ({ id: "player-me", currentLocationId: at, holdings: [], mapEvents: [], worldMapStore: store690 });
+    const knew690 = me690(near690[0]);
+    MS690.learnMapEvents(knew690, { content: C690, worldDay: 110 });                       // heard of the ruin, by word
+    const mends690 = MS690.localsMendPass(knew690, { content: C690, worldDay: 400 });       // the locals finish
+    const whole690 = mends690.find((m) => m.whole);
+    const early690 = MS690.learnMapEvents(knew690, { content: C690, worldDay: Math.floor(whole690.day) });
+    const viewEarly690 = MS690.mapView(knew690, key690, { content: C690, worldDay: Math.floor(whole690.day) });
+    const late690 = MS690.learnMapEvents(knew690, { content: C690, worldDay: Math.ceil(whole690.day + near690[1]) + 1 });
+    const viewLate690 = MS690.mapView(knew690, key690, { content: C690, worldDay: Math.ceil(whole690.day + near690[1]) + 1 });
+    // a near character who never knew it broken: the Wheels only DAMAGED (no word of that travels), then mended — nobody says "they are fine"
+    const key2690 = `site:millbrook/${((C690.rules.localLayouts.millbrook.sites || []).find((x) => x.id !== wheels690.id && x.kind) || {}).id}`;
+    const o2690 = { id: "player-other", mapEvents: [] };
+    MS690.applyMapChange(o2690, { key: key2690, change: "damaged", by: "player-other", seen: "named" }, { content: C690, worldDay: 100 });
+    MS690.applyMapChange(o2690, { key: key2690, change: "repaired", by: "player-other" }, { content: C690, worldDay: 101 });
+    const never690 = { id: "player-me", currentLocationId: near690[0], holdings: [], mapEvents: [], worldMapStore: MS690.mergeMapEvents({ keys: {} }, o2690.mapEvents).store };
+    const neverLearned690 = MS690.learnMapEvents(never690, { content: C690, worldDay: 140 });
+    const far2690 = { ...me690(far690[0]) }; MS690.learnMapEvents(far2690, { content: C690, worldDay: 110 });
+    const tick690 = readFileSync(join(root, "engine/worldtick.js"), "utf8"), app690 = readFileSync(join(root, "app.js"), "utf8");
+    check("690/S7: ⛔ WORD OF MENDING TRAVELS AS WORD OF RUIN DOES — the same reach and the same delay, and only to a character who knows the thing as broken: the near character who heard of the ruin still sees it ruined the day the locals finish and sees it whole once the walk has had time, with \"mended, by word\" on the card; a near character who never knew it broken (only damaged, which no word carries) learns nothing; a far one hears of neither",
+      !!whole690 && viewEarly690.state !== "whole"
+      && late690.some((l) => l.change === "repaired" && l.how === "word" && l.by === "locals")
+      && viewLate690.state === "whole" && viewLate690.mendedByWord === true && !viewLate690.lastKnown
+      && C690.mapStates?.knowledge?.mendedByWord === "mended, by word"
+      && neverLearned690.length === 0 && MS690.mapView(never690, key2690, { content: C690 }).state === "whole" && MS690.mapView(never690, key2690, { content: C690 }).lastKnown === true
+      && !Object.keys(far2690.mapLearned || {}).length,
+      JSON.stringify({ near: near690, whole: whole690?.day, early: viewEarly690.state, late: viewLate690.state, word: viewLate690.mendedByWord, never: neverLearned690 }));
+    check("690/S7: ⛔ THE MENDED NEWS IS WHAT THE CHARACTER LEARNS — the tick writes the locals' work first and then learns, and \"stands again\" is told only for a mending the character has just learned of that leaves the thing whole (it was told to every character whose tick wrote it, near or far); the card shows \"mended, by word\" from the authored knowledge words",
+      tick690.indexOf("try { localsMendPass(character, { content, worldDay: absoluteWorldDay() }); }") > 0
+      && tick690.indexOf("try { localsMendPass(character, { content, worldDay: absoluteWorldDay() }); }") < tick690.indexOf("const learned690 = (() => { try { return learnMapEvents(character, { content, worldDay: absoluteWorldDay() }); }")
+      && tick690.includes('return learned690.filter((l) => l.change === "repaired" && !seen.has(l.key) && seen.add(l.key)).map((l) => {')
+      && tick690.includes("if (!st || st.state !== ladderOf(content)[0]) return null;")
+      && app690.includes("pv.mendedByWord ? (CONTENT.mapStates?.knowledge?.mendedByWord || null) : null"));
+    const un690 = C690.locations.the_unlanded, span690 = C690.locations.the_long_span;
+    const posU690 = [0, 5, 10, 20, 30, 45, 61].map((d) => WT690.circuitPosition(un690, d, { locations: C690.locations }));
+    const posS690 = [0, 3, 6].map((d) => WT690.circuitPosition(span690, d, { locations: C690.locations }));
+    check("690/H5: ⛔ THE UNLANDED NEVER STOPS BY ITS OWN FIELD — `carriage.halts: false` is read and the engine's list of names is gone; it is never \"at\" a waypoint on any day, while the Long Span still stops at its own on the first part of a leg; the circuits Aevi re-cut walk at about a walk a day",
+      un690.carriage?.halts === false && WT690.NEVER_HALTS === undefined && !readFileSync(join(root, "engine/worldtime.js"), "utf8").includes("NEVER_HALTS.includes")
+      && posU690.every((p) => p && p.at === null) && posS690[0]?.at === "the_long_span"
+      && un690.carriage.daysPerCircuit === 62,
+      JSON.stringify(posU690.map((p) => p && [p.at, p.leg, Math.round(p.fraction * 100)])));
   }
   /* ── ✅ SNG-679 S8, first half (CCODE-686): adding a site, ground or water; turning a river ── */
   {

@@ -60,7 +60,7 @@ import { HOLDS_PATH, holdCardsOf, holdCardsChanged, mergeHoldCards } from "./sha
 import { TRADES_PATH, settleOrders, refundOrders, mergeOrders } from "./holdtrade.js";   // CCODE-388: trading with another player's hold
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval, rollRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
-import { localsMendPass, mapThingOf, learnMapEvents } from "./mapstate.js";   // ✅ SNG-679 Part R · R2 · S7: what the character learns
+import { localsMendPass, mapThingOf, learnMapEvents, knownStateOf, ladderOf } from "./mapstate.js";   // ✅ SNG-679 Part R · R2 · S7: what the character learns
 import { postMendingJobs, reckoningPass, postHuntJobs } from "./mending.js";   // ✅ SNG-679 Part R · R6: mending is a job on the job list · R3: the reckoning
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
@@ -923,14 +923,20 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
    * the one door (by "locals", on the day it finished — the same event in every game), and a thing brought back to whole is
    * news: `reckoning.words.mended`. ⛑ S7 is not built, so "everyone who knew it was broken" is everyone (Aevi: "ship with
    * learned = everything"). A failure here is never a reason the world stops turning. */
-  // ✅ SNG-679 S7 — what the character LEARNS this tick: being there, a hold's report, or word of a ruin walking in
-  try { learnMapEvents(character, { content, worldDay: absoluteWorldDay() }); } catch { /* knowing is never a reason the world stops */ }
+  // ⛔ CCODE-690 (Aevi's answers to R5–S8): THE LOCALS' WORK IS WRITTEN FIRST, AND THEN THE CHARACTER LEARNS. The news said every
+  // mending the world finished to every character whose tick wrote it — near or far, knowing it broken or not — which is the stale
+  // map S7 exists to prevent, told in words instead. Now the news is what they LEARN: being there, a hold's report, or word of it.
+  try { localsMendPass(character, { content, worldDay: absoluteWorldDay() }); } catch { /* the locals' work is never a reason the world stops */ }
+  // ✅ SNG-679 S7 — what the character LEARNS this tick: being there, a hold's report, word of a ruin walking in, or word of its mending
+  const learned690 = (() => { try { return learnMapEvents(character, { content, worldDay: absoluteWorldDay() }); } catch { return []; } })();
   const mendNews680 = (() => {
     try {
-      const wd680 = absoluteWorldDay();
       const words = content?.mapStates?.reckoning?.words || {};
-      return localsMendPass(character, { content, worldDay: wd680 }).filter((m) => m.whole).map((m) => {
-        const t = mapThingOf(m.key, content);
+      const seen = new Set();
+      return learned690.filter((l) => l.change === "repaired" && !seen.has(l.key) && seen.add(l.key)).map((l) => {
+        const st = knownStateOf(character, l.key, { content });
+        if (!st || st.state !== ladderOf(content)[0]) return null;   // stands again only when it is whole again
+        const t = mapThingOf(l.key, content);
         return t && words.mended ? { text: String(words.mended).replace("{thing}", t.thing).replace("{place}", t.place), section: "world" } : null;
       }).filter(Boolean).slice(0, 4);
     } catch { return []; }

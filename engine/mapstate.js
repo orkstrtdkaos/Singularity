@@ -405,7 +405,15 @@ export function mapView(character, key, { content = null, name = "", worldDay = 
     since: st.since ?? null, cause: st.cause ?? null,
     mending: rep?.mending ? { progress: rep.progress, wholeDay: rep.wholeDay, by: "locals" } : null,
     // ✅ S7: *"Until then their map shows the old state, and the card says `knowledge.lastKnown`."*
-    lastKnown: hasUnlearned(character, key) };
+    lastKnown: hasUnlearned(character, key),
+    // ✅ Aevi: *"The card's words when it lands: 'mended, by word'"* — the last thing they know of it is a mending that came by word
+    mendedByWord: mendedByWordAt(character, key) };
+}
+/** Whether the last change the character knows of at this key is a mending that reached them by word. */
+export function mendedByWordAt(character, key) {
+  const known = eventsFor(character, key).filter((e) => eventKnown(character, e)).sort(byDay);
+  const last = known[known.length - 1];
+  return !!last && WORD_OF_MENDING.has(String(last.change)) && character?.mapLearned?.[last.id]?.how === "word";
 }
 
 export function mapStateWord(content, cls, state, { name = "", old = "", from = "" } = {}) {
@@ -667,11 +675,24 @@ export function mapThingOf(key, content, { siteName = null, from = null } = {}) 
  * ⛑ WHAT THIS GAME WROTE IS KNOWN: its own events — the character's deeds, the GM's lines in its scenes, its jobs. Only what another
  * game wrote, adopted through the shared store, waits to be learned.
  * ⚠️ "Word of it" is DERIVED from the shared events, not posted to `world/feed.json`: the feed is the players' scrapbook, and its own
- * guard is that it is "never an auto-log". The word walks: learned once the days a walk from the place would take have passed. */
+ * guard is that it is "never an auto-log". The word walks: learned once the days a walk from the place would take have passed.
+ * ✅ AEVI 2026-10-08 (answers to R5–S8): *"Word of mending travels exactly as word of ruin does: the same 3 days' reach and the same
+ * delay. It reaches only a character who knows the thing as broken, because nobody passes on 'the Wheels are fine'. Otherwise a near
+ * character sees the Wheels ruined for good, which is the stale map S7 exists to prevent. The card's words when it lands: 'mended,
+ * by word'."* ⛑ "Knows it as broken" is the state they have LEARNED, read at the moment the word would land — so a ruin and its
+ * mending that both walk in on one tick arrive in their order, the ruin first. */
 export const WORD_WITHIN_DAYS = 3;
 /** ✅ S8: *"Cap it at 0.5 days from the old point."* */
 export const MOVE_CAP_DAYS = 0.5;
 const WORD_OF = new Set(["ruined", "destroyed"]);
+/** ✅ Aevi: word of MENDING carries too — but only to someone who knows the thing as broken. */
+const WORD_OF_MENDING = new Set(["repaired"]);
+const byDay = (a, b) => (Number(a?.day) || 0) - (Number(b?.day) || 0);
+/** Whether the character has learned this key to be anything but whole. */
+function knowsBroken(character, key, content) {
+  const s = knownStateOf(character, key, { content })?.state;
+  return !!s && s !== ladderOf(content)[0];
+}
 /** The places a key is at (a road has two ends; a hold, a feature and a region are nobody's place). */
 export function placesOfKey(key) {
   const p = parseMapKey(key);
@@ -705,8 +726,8 @@ export function hasUnlearned(character, key) {
 }
 /** ⛔ THE LEARNING PASS — the world tick's. Each change another game wrote that this character has not learned is learned: by being
  *  THERE (a key at the place they stand), by a hold's REPORT (a key at a place they keep a hold), or by WORD of it (ruined or worse,
- *  within `WORD_WITHIN_DAYS` of where they are, once the walk from there has had time). Mutates `character.mapLearned`.
- *  → `[{ key, id, how }]` */
+ *  or a mending of a thing they know as broken, within `WORD_WITHIN_DAYS` of where they are, once the walk from there has had time).
+ *  Mutates `character.mapLearned`. → `[{ key, id, how, change, by }]` */
 export function learnMapEvents(character, { content = null, worldDay = null, locations = null } = {}) {
   const out = [];
   if (!character) return out;
@@ -717,12 +738,13 @@ export function learnMapEvents(character, { content = null, worldDay = null, loc
   for (const key of keys) {
     const places = placesOfKey(key);
     if (!places.length) continue;
-    for (const e of eventsFor(character, key)) {
+    for (const e of [...eventsFor(character, key)].sort(byDay)) {
       if (eventKnown(character, e)) continue;
       let how = null;
       if (here && places.includes(here)) how = "there";
       else if (places.some((p) => holds.has(p))) how = "report";
-      else if (WORD_OF.has(String(e.change)) && worldDay != null && here && L[here]) {
+      else if (worldDay != null && here && L[here]
+        && (WORD_OF.has(String(e.change)) || (WORD_OF_MENDING.has(String(e.change)) && knowsBroken(character, key, content)))) {
         let d = Infinity;
         for (const p of places) if (L[p]) { const w = walkingDays(L[p], L[here]); if (Number.isFinite(w) && w < d) d = w; }
         if (d <= WORD_WITHIN_DAYS && Number(worldDay) >= Number(e.day || 0) + d) how = "word";
@@ -730,7 +752,7 @@ export function learnMapEvents(character, { content = null, worldDay = null, loc
       if (!how) continue;
       character.mapLearned = character.mapLearned && typeof character.mapLearned === "object" ? character.mapLearned : {};
       character.mapLearned[e.id] = { day: worldDay != null ? Math.floor(Number(worldDay)) : null, how };
-      out.push({ key, id: e.id, how });
+      out.push({ key, id: e.id, how, change: e.change || null, by: e.by || null });
     }
   }
   return out;

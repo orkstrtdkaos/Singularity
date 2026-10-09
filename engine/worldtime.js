@@ -125,9 +125,8 @@ export function positionedPlace(locations, id, { worldDay = null } = {}) {
  * ⛔ THE CIRCUIT'S FIRST ENTRY IS THE PLACE ITSELF, at its authored point; the rest are the places it passes. It closes: the last leg
  * runs back to the first. ⛑ PURE AND DETERMINISTIC in the world's day, so every game puts the Long Span in the same field today. */
 export const CIRCUIT_STOP = 0.2;
-/** ✅ The Unlanded's own words: *"It does not halt … the circuit is where it PASSES, not where it stays."* Named, with that reason, since
- *  `carriage` has no field for it; a place whose content says `carriage.halts: false` joins it. */
-export const NEVER_HALTS = Object.freeze(["the_unlanded"]);
+/* ✅ AEVI 2026-10-08: *"`carriage.halts: false` is on the Unlanded. You can drop `NEVER_HALTS`."* The field is the only source now:
+ * the Unlanded's own words, *"It does not halt … the circuit is where it PASSES, not where it stays"*, are in its record. */
 export function circuitPosition(loc, worldDay, { locations = {} } = {}) {
   const c = loc?.carriage;
   const ids = Array.isArray(c?.circuit) ? c.circuit : null;
@@ -138,7 +137,7 @@ export function circuitPosition(loc, worldDay, { locations = {} } = {}) {
   const n = pts.length;
   const lens = pts.map((p, i) => { const d = geodesic(p, pts[(i + 1) % n]); return Number.isFinite(d) && d > 0 ? d : 0.01; });
   const sum = lens.reduce((a, b) => a + b, 0);
-  const halts = c.halts !== false && !NEVER_HALTS.includes(loc.id);
+  const halts = c.halts !== false;
   let t = ((Number(worldDay) % total) + total) % total;
   for (let i = 0; i < n; i++) {
     const legDays = (total * lens[i]) / sum;

@@ -256,12 +256,12 @@
 | `maren_ossitide` | Maren Ossitide, Who Buried the Drowned Year | lore figure | `lore/legends.json` | legendary | →60 | — | ✅ | ✅ | 22 | — | — |
 | `overseer_grael` | Overseer Grael of the Edge District | lore figure | `lore/legends.json` | heroic | →25 | — | ✅ | ✅ | 10 | — | — |
 | `sister_alder` | Sister Alder, the Ward That Does Not Break | lore figure | `lore/legends.json` | epic | →40 | — | ✅ | ✅ | 15 | — | — |
-| `cinder_vael` | Cinder Vael, the Wright Who Would Not Stop | epic | `tradition_epics.json` | epic | →40 | — | ✅ | ✅ | 15 | — | — |
+| `cinder_vael` | Cinder Vael, the Wright Who Would Not Stop | epic | `tradition_epics.json` | legendary | →60 | — | ✅ | ✅ | 22 | — | — |
 | `ember_who_banks_the_fire` | Ember, Who Banks the Fire | epic | `tradition_epics.json` | epic | →40 | — | ✅ | ✅ | 15 | — | — |
 | `first_flame_ateph` | Ateph of the First Flame | epic | `tradition_epics.json` | epic | →40 | — | ✅ | ✅ | 15 | — | — |
 | `halcyon_the_finished` | Halcyon, Who Built One Perfect Thing | epic | `tradition_epics.json` | epic | →40 | — | ✅ | ✅ | 15 | — | — |
 | `iselde_the_wanderer` | Iselde Wend, She Who Reads the Long Roads | epic | `tradition_epics.json` | heroic | →25 | — | ✅ | ✅ | 10 | — | — |
-| `morvane_the_harvest` | Morvane of the Harvest Hand | epic | `tradition_epics.json` | epic | →40 | — | ✅ | ✅ | 15 | — | — |
+| `morvane_the_harvest` | Morvane of the Harvest Hand | epic | `tradition_epics.json` | legendary | →60 | — | ✅ | ✅ | 22 | — | — |
 | `neth_the_stayed` | Neth, Who Has Buried More Than She Has Known | epic | `tradition_epics.json` | epic | →40 | — | ✅ | ✅ | 15 | — | — |
 | `prodigal_gearheart` | Gearheart, Who Built at Twelve What Masters Couldn't | epic | `tradition_epics.json` | heroic | →25 | — | ✅ | ✅ | 10 | — | — |
 | `the_apostate_choir` | The Apostate of the Choir | epic | `tradition_epics.json` | heroic | →25 | — | ✅ | ✅ | 10 | — | — |

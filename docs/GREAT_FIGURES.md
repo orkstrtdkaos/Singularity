@@ -14,7 +14,7 @@
 | **Parakletos** `parakletos` | *Parakletos* (true name) | the One Called Alongside | a few | precursor | Precursor — above the map | strongly Abstract +0.9, strongly Truth +0.7 |
 | **The Hollow King of the Wild Half** `the_hollow_king` | Ashur Lucan Morcant | the Hollow King of the Wild Half | GM only | abyssal | Sovereign — Demonic (refused Angelic) | strongly Demonic −0.8, Falsehood −0.4, Chaos −0.3 |
 
-## Legendary (20)
+## Legendary (22)
 
 | called | whole name | title | known by | people | Sovereign / Savior | vectors |
 |---|---|---|---|---|---|---|
@@ -38,19 +38,19 @@
 | **The Unbodied** `the_ninefold_ascendant` | Syntha Lethe Noethe | the Unbodied | GM only | cogitant | Sovereign — Mind (refused Body) · the Unbodied | strongly Mind +0.9 |
 | **Valen Sunwrack, Who Left No Shadow Standing** `sunwrack_valen` | Valen Blaise Sunwrack | Who Left No Shadow Standing | everyone | blazeborn | Supply line — Lucifer's | strongly Light +0.9 |
 | **Ysenkar, Who Wears the Smaller Door** `ysenkar` | *Ysenkaravel* (true name) | Who Wears the Smaller Door | GM only | dragon |  | strongly Truth +0.7, Abstract +0.4 |
+| **Cinder Vael, the Wright Who Would Not Stop** `cinder_vael` | Cinder Odile Vael | the Wright Who Would Not Stop | everyone | wright | Challenger — Building (held by the Last Mercy) | strongly Creation +0.9, Mechanical −0.5 |
+| **Morvane of the Harvest Hand** `morvane_the_harvest` | Morvane Sorcha Graveny | of the Harvest Hand | everyone | ashwarden | Challenger — Death (held by Neth) | strongly Death −0.9, strongly Logical +0.7, Violence −0.4 |
 
-## Epic (33)
+## Epic (31)
 
 | called | whole name | title | known by | people | Sovereign / Savior | vectors |
 |---|---|---|---|---|---|---|
 | **Ateph of the First Flame** `first_flame_ateph` | Ateph Sunniva Candelor | of the First Flame | everyone | blazeborn |  | strongly Light +0.7, Spiritual +0.4 |
-| **Cinder Vael, the Wright Who Would Not Stop** `cinder_vael` | Cinder Odile Vael | the Wright Who Would Not Stop | everyone | wright | Challenger — Building (held by the Last Mercy) | strongly Creation +0.9, Mechanical −0.5 |
 | **Ember, Who Banks the Fire** `ember_who_banks_the_fire` | Ember Iria Glassford | Who Banks the Fire | everyone | blazeborn | Savior — counterweight to Valen Sunwrack, Who Left No Shadow Standing | strongly Light +0.7, Peace +0.4, Logical +0.3 |
 | **Halcyon, Who Built One Perfect Thing** `halcyon_the_finished` | Halcyon Linnea Castell | Who Built One Perfect Thing | everyone | wright |  | strongly Creation +0.7, Order +0.6, Logical +0.3 |
 | **Iseult of the Kept Word** `dame_iseult_hardline` | Iseult Constant Oathley | Dame, of the Kept Word | everyone | human |  | strongly Truth +0.7, Order +0.5, Violence −0.4 |
 | **Kesh Ardent, the Edge That Holds** `the_edge_that_holds` | Kesh Runa Ardent | the Edge That Holds | everyone | marcher | Savior — counterweight to The Ender Who Forgot Why | Violence −0.6, Truth +0.5 |
 | **Ledda, the Last Choirmistress** `the_last_choirmistress` | Ledda Halia Sheerwater | the Last Choirmistress | everyone | numinous | Savior — anti-Sovereign: knows, and hunts (R41c) · counterweight to The Choirmaster Who Would Not Return | Emotional −0.5, Spiritual +0.4 |
-| **Morvane of the Harvest Hand** `morvane_the_harvest` | Morvane Sorcha Graveny | of the Harvest Hand | everyone | ashwarden | Challenger — Death (held by Neth) | strongly Death −0.9, strongly Logical +0.7, Violence −0.4 |
 | **Neth, Who Has Buried More Than She Has Known** `neth_the_stayed` | Neth Eluned Welland | Who Has Buried More Than She Has Known | everyone | ashwarden | Savior — HOLDS Life / Death; challengers must beat her · counterweight to Morvane of the Harvest Hand | strongly Death −0.9, Truth +0.6 |
 | **Seraphine the Unbending Witness** `the_unbending_witness` | Seraphine Verity Barestone | the Unbending Witness | everyone | verist |  | strongly Truth +0.9, Logical +0.5 |
 | **Sister Alder, the Ward That Does Not Break** `sister_alder` | Alder Psalm Wistan | Sister, the Ward That Does Not Break | everyone | threnodist | Savior — anti-Sovereign: knows, and hunts (R41c) | strongly Spiritual +0.7, Emotional −0.3 |

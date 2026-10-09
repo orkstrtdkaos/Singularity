@@ -25719,6 +25719,35 @@ await (async () => {
       && /F1 \(the 35 again\): NO INSET IN A FILM/.test(app698) && app698.includes("paintLocalMap(c2, model2, { space: labelSpace(), reveal: true, inset: null, labelMinPx: 0 });"),
       JSON.stringify({ dropped: mb698.o.labelsDropped.length, re698, after: again698?.o.labelsDropped.length }));
   }
+  /* ── ✅ the local ground's `effects` (CCODE-700): the treatment the strange places' words describe ── */
+  {
+    const LM700 = await import("../engine/localmap.js");
+    const ML700 = await import("../engine/maplabel.js");
+    const { loadContentHeadless: lch700 } = await import("./headless_content.mjs");
+    const C700 = await lch700();
+    const stub700 = () => new Proxy({ globalAlpha: 1, lineWidth: 1 }, { get: (t, k) => k in t ? t[k] : (k === "measureText" ? (x) => ({ width: String(x).length * 5.6 })
+      : k === "createRadialGradient" || k === "createLinearGradient" || k === "createPattern" ? () => ({ addColorStop() {} }) : k === "getLineDash" ? () => [] : () => {}), set: (t, k, v) => { t[k] = v; return true; } });
+    const P700 = C700.rules.localGround.places;
+    const withFx700 = Object.keys(P700).filter((id) => C700.locations[id] && Array.isArray(P700[id].effects) && P700[id].effects.length);
+    // the vocabulary is "name (what it does) · name · …" — the first word of each item ("roofless" has no gloss)
+    const vocab700 = String(C700.rules.localGround._rules?.effects || "").split("·").map((x) => x.trim().split(/[\s(]/)[0]).filter(Boolean);
+    const bad700 = [];
+    let blockyOk700 = null, ghost700 = null;
+    for (const id of withFx700) {
+      const l = LM700.localLayoutFor(id, { content: C700 }); const md = LM700.localModel(l, LM700.localFrame(l, { w: 800, h: 500 }), { placeId: id, placeName: id });
+      const o = LM700.paintLocalMap(stub700(), md, { reveal: true, space: ML700.labelSpace(), inset: null, labelMinPx: 0 });
+      const want = P700[id].effects.slice().sort().join(","), got = (o.effects || []).slice().sort().join(",");
+      if (want !== got) bad700.push(`${id}: wanted ${want}, drew ${got}`);
+      if (id === "the_blocklands") blockyOk700 = [...md.features, ...(md.ground?.areas || [])].filter((f) => Array.isArray(f.poly) && f.poly.length > 3)
+        .every((f) => f.poly.every((p, i) => { const q = f.poly[(i + 1) % f.poly.length]; return Math.abs(p[0] - q[0]) < 1e-9 || Math.abs(p[1] - q[1]) < 1e-9; }));
+      if (id === "tumbledown_market") ghost700 = (md.ghost?.marks || []).length > 0 && (md.ghost?.houses || []).length > 0;
+    }
+    const lm700 = readFileSync(join(root, "engine/localmap.js"), "utf8");
+    check("700/effects: ⛔ AEVI — THE STRANGE PLACES DRAW AS THEIR WORDS SAY — every place whose entry names `effects` draws exactly those (Spindrift Hollow doubled, the Blocklands squared off to a grid, the Flensing in frames, the Last Mask as false fronts, the Wellspring Deep roofless under rain, the Unlit Deep dark but for the light along its ways, the Unfallen white and scorched, the Stopped with its dust held, Tumbledown over the faint marks of another layout); every effect in the vocabulary has a treatment",
+      withFx700.length >= 10 && bad700.length === 0 && blockyOk700 === true && ghost700 === true
+      && vocab700.length >= 10 && vocab700.every((e) => lm700.includes(`fx.has("${e}")`)),
+      `${bad700.slice(0, 4).join(" | ")} · blocky ${blockyOk700} · ghost ${ghost700} · vocab ${vocab700.join(",")}`);
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

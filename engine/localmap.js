@@ -1012,7 +1012,38 @@ export function localModel(layout, frame, { placeName = "", placeId = "", nameOf
     // Stillwater's Trouble's way in, and roofs the size of the hull on the open sea round the Grey Gull)
     : (layout?.hold ? [] : null);
   if (ground) finishGround(ground, houses || []);
-  return { id, placeName, frame, layout, sites, roads, lanes, features, contours, built: { ...builtAt, r: builtR }, water, rnd, level: Number(level) || 0, houses, ground, single };
+  /* ✅ AEVI (the local ground): *"`effects`: for the strange places, the treatment their words describe."* `_rules.effects`:
+   * doubled · false_fronts · frames · roofless · unlit · stopped · scorched · rain · blocky · shifting. The two that change WHERE
+   * things are drawn are applied here, to the model, so every painter (the tier, the film, the enlargement) draws the same ground;
+   * the rest are treatments in `paintLocalMap`. */
+  const effects = onSurface && Array.isArray(layout?.ground?.effects) ? layout.ground.effects.filter((e) => typeof e === "string") : [];
+  if (effects.includes("blocky")) {
+    // ✅ "blocky (all ground squared off to a grid)": every fill's outline stepped to the grid, every roof square to it
+    const cell = Math.max(8, 14 * Math.sqrt(frame.k || 1));
+    for (const f of features) if (Array.isArray(f.poly)) f.poly = blockyPoly(f.poly, cell);
+    for (const a of ground?.areas || []) if (Array.isArray(a.poly)) a.poly = blockyPoly(a.poly, cell);
+    for (const h of houses || []) { h.ang = Math.round((Number(h.ang) || 0) / (Math.PI / 2)) * (Math.PI / 2); h.x = Math.round(h.x / (cell / 2)) * (cell / 2); h.y = Math.round(h.y / (cell / 2)) * (cell / 2); }
+  }
+  let ghost = null;
+  if (effects.includes("shifting") && layout?.ground) {
+    // ✅ "shifting (the marks of other layouts show faintly)": the same entry laid out again from another seed — what stood here before
+    const g2 = placeGround({ ground: layout.ground, kinds: layout.groundKinds, frame, built: { ...builtAt, r: builtR }, roads, lanes, sites, water, uphill: uphillB, fields: features.filter((f) => f.kind === "field"), rnd: rngOf(seedOf("ground-shift:" + id)), metric: single ? { pxPerMetre: frame.pxPerMetre, single } : null });
+    const h2 = groundHouses({ ground: layout.ground, frame, built: { ...builtAt, r: builtR }, roads, lanes, sites, water, features, id: id + ":shift", uphill: uphillB, blocked: g2?.blocked || null, streamLine: g2?.streamLine || null, pools: [] });
+    ghost = { marks: g2?.marks || [], houses: h2 || [] };
+  }
+  return { id, placeName, frame, layout, sites, roads, lanes, features, contours, built: { ...builtAt, r: builtR }, water, rnd, level: Number(level) || 0, houses, ground, single, effects, ghost };
+}
+/** A fill's outline stepped to a grid: each corner snapped, and every edge turned into a run along the grid and a run across it. */
+function blockyPoly(poly, cell) {
+  const snap = (v) => Math.round(v / cell) * cell;
+  const s = poly.map(([x, y]) => [snap(x), snap(y)]);
+  const out = [];
+  for (let i = 0; i < s.length; i++) {
+    const a = s[i], b = s[(i + 1) % s.length];
+    if (!out.length || out[out.length - 1][0] !== a[0] || out[out.length - 1][1] !== a[1]) out.push(a);
+    if (a[0] !== b[0] && a[1] !== b[1]) out.push([b[0], a[1]]);
+  }
+  return out.length >= 4 ? out : poly;
 }
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────
@@ -1303,12 +1334,31 @@ function paintRoofs(ctx, model, rnd) {
   const roofL = Math.max(2.2, 9 * s), roofW = Math.max(1.6, 6 * s), gap = Math.max(3, 14 * s);
   // ✅ G2: a place with a ground entry draws ITS houses — the count and the arrangement its entry says — and nothing else
   if (Array.isArray(model.houses)) {
+    const fx = new Set(model.effects || []);
     ctx.save();
+    // ✅ effects: "shifting" — the other layout's houses, faint, under this one's
+    if (fx.has("shifting") && model.ghost?.houses?.length) {
+      ctx.save(); ctx.globalAlpha *= 0.2; ctx.strokeStyle = INK.roofEdge; ctx.lineWidth = 0.6; ctx.setLineDash([2, 2]);
+      for (const h of model.ghost.houses) { ctx.save(); ctx.translate(h.x, h.y); ctx.rotate(h.ang); ctx.strokeRect(-roofL / 2, -roofW / 2, roofL, roofW); ctx.restore(); }
+      ctx.restore();
+    }
+    const houseStyled = (h) => {
+      // ✅ "frames (buildings drawn as open frames)" · "false_fronts (buildings as facades with nothing behind)" · "roofless"
+      if (fx.has("frames")) { ctx.strokeStyle = INK.roofEdge; ctx.lineWidth = 0.9; ctx.beginPath(); ctx.rect(-roofL / 2, -roofW / 2, roofL, roofW);
+        ctx.moveTo(-roofL / 2, -roofW / 2); ctx.lineTo(roofL / 2, roofW / 2); ctx.moveTo(roofL / 2, -roofW / 2); ctx.lineTo(-roofL / 2, roofW / 2); ctx.stroke(); return true; }
+      if (fx.has("false_fronts")) { ctx.strokeStyle = INK.roofEdge; ctx.lineWidth = Math.max(1.4, roofW * 0.32); ctx.beginPath(); ctx.moveTo(-roofL / 2, roofW / 2); ctx.lineTo(roofL / 2, roofW / 2); ctx.stroke();
+        ctx.lineWidth = 0.6; ctx.setLineDash([1.5, 1.5]); ctx.beginPath(); ctx.moveTo(-roofL * 0.3, roofW / 2); ctx.lineTo(-roofL * 0.15, -roofW / 2); ctx.moveTo(roofL * 0.3, roofW / 2); ctx.lineTo(roofL * 0.15, -roofW / 2); ctx.stroke(); ctx.setLineDash([]); return true; }
+      // ✅ "scorched": the Unfallen's own words — *"White buildings burning at the edges"* — so its houses are white, scorched after
+      if (fx.has("scorched")) { ctx.fillStyle = "#f3efe4"; ctx.strokeStyle = "rgba(60,40,28,0.8)"; ctx.lineWidth = 0.6; ctx.beginPath(); ctx.rect(-roofL / 2, -roofW / 2, roofL, roofW); ctx.fill(); ctx.stroke(); return true; }
+      if (fx.has("roofless")) { ctx.fillStyle = "rgba(96,124,150,0.55)"; ctx.strokeStyle = INK.roofEdge; ctx.lineWidth = 0.9; ctx.beginPath(); ctx.rect(-roofL / 2, -roofW / 2, roofL, roofW); ctx.fill(); ctx.stroke(); return true; }
+      return false;
+    };
     for (const h of model.houses) {
       ctx.save(); ctx.translate(h.x, h.y); ctx.rotate(h.ang);
       if (h.style === "dug") { ctx.fillStyle = "rgba(48,38,30,0.85)"; ctx.beginPath(); ctx.ellipse(0, 0, roofL * 0.42, roofW * 0.45, 0, 0, Math.PI * 2); ctx.fill(); }
       else if (h.style === "tent") { ctx.fillStyle = "#cdb98f"; ctx.strokeStyle = INK.roofEdge; ctx.lineWidth = 0.5; ctx.beginPath(); ctx.moveTo(-roofL * 0.45, roofW * 0.4); ctx.lineTo(0, -roofW * 0.6); ctx.lineTo(roofL * 0.45, roofW * 0.4); ctx.closePath(); ctx.fill(); ctx.stroke(); }
       else if (h.style === "hull") { ctx.fillStyle = "#7a5a3a"; ctx.strokeStyle = INK.roofEdge; ctx.lineWidth = 0.5; ctx.beginPath(); ctx.ellipse(0, 0, roofL * 0.6, roofW * 0.4, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); }
+      else if (houseStyled(h)) { /* drawn as its place's effect says */ }
       else {
         if (h.style === "stilt") { ctx.strokeStyle = INK.roofEdge; ctx.lineWidth = 0.6; for (const [px, py] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) { ctx.beginPath(); ctx.moveTo(px * roofL * 0.5, py * roofW * 0.5); ctx.lineTo(px * roofL * 0.7, py * roofW * 0.8); ctx.stroke(); } }
         ctx.fillStyle = INK.roof; ctx.strokeStyle = INK.roofEdge; ctx.lineWidth = 0.5;
@@ -1634,6 +1684,85 @@ function drawFootprint(ctx, m) {
   ctx.restore();
 }
 
+/* ═════ THE LOCAL GROUND · `effects` — THE TREATMENTS THE STRANGE PLACES' WORDS DESCRIBE ═════
+ * ✅ AEVI: `_rules.effects` — *"doubled (every mark faintly drawn twice, offset) · false_fronts (buildings as facades with nothing
+ * behind) · frames (buildings drawn as open frames) · roofless · unlit (the map is dark but for what is lit) · stopped (nothing on the
+ * map animates) · scorched (dark arcs on the faces toward the light) · rain (streaks over everything) · blocky (all ground squared off
+ * to a grid) · shifting (the marks of other layouts show faintly)"*. Frames, false fronts, roofless, blocky and shifting change how
+ * the houses and the ground are drawn (in the model and `paintRoofs`); these are laid over what is drawn, under the names, so a place
+ * keeps its words readable. Returns the effects drawn, said for the gate.
+ * ⛑ "stopped": nothing on a local map moves, so it has nothing to stop; it is said, and the treatment is the place's own words
+ * ("dust suspended"): motes held in the air, all at one instant. ⛑ "unlit": the Unlit Deep's niches are emptied, so nothing in it is
+ * lit — only the light that comes in along its ways, and a traveller's own lamp where they stand. ⛑ "scorched": the Unfallen's light
+ * is its own burning heart, so each building is scorched on the face toward the centre. */
+function paintEffects(ctx, model, { w, h, hereSite = null } = {}) {
+  const fx = new Set(model.effects || []);
+  if (!fx.size) return [];
+  const drawn = [];
+  const G = model.ground || null;
+  const rnd = rngOf(seedOf("effects:" + model.id));
+  const s = model.frame.pxPerMetre, roofL = Math.max(2.2, 9 * s), roofW = Math.max(1.6, 6 * s);
+  if (fx.has("doubled")) {
+    // every house and every mark again, faint, a step off — the same objects appear faintly doubled
+    const dx = 4.5, dy = 3;
+    ctx.save(); ctx.globalAlpha *= 0.32; ctx.translate(dx, dy);
+    ctx.fillStyle = INK.roof; ctx.strokeStyle = INK.roofEdge; ctx.lineWidth = 0.5;
+    for (const hh of model.houses || []) { ctx.save(); ctx.translate(hh.x, hh.y); ctx.rotate(hh.ang); ctx.beginPath(); ctx.rect(-roofL / 2, -roofW / 2, roofL, roofW); ctx.fill(); ctx.stroke(); ctx.restore(); }
+    for (const m of G?.marks || []) paintGroundMark(ctx, m, model);
+    ctx.restore(); drawn.push("doubled");
+  }
+  if (fx.has("shifting") && model.ghost?.marks?.length) {
+    ctx.save(); ctx.globalAlpha *= 0.22; for (const m of model.ghost.marks) paintGroundMark(ctx, { ...m, own: false, footprint: null }, model); ctx.restore(); drawn.push("shifting");
+  }
+  if (fx.has("frames")) drawn.push("frames");
+  if (fx.has("false_fronts")) drawn.push("false_fronts");
+  if (fx.has("roofless")) drawn.push("roofless");
+  if (fx.has("blocky")) {
+    // the ground grids: a faint grid over the frame, the steps of the terraced blocks
+    const cell = Math.max(8, 14 * Math.sqrt(model.frame.k || 1)) * 2;
+    ctx.save(); ctx.strokeStyle = "rgba(90,80,64,0.16)"; ctx.lineWidth = 0.7; ctx.beginPath();
+    for (let x = 0; x <= w; x += cell) { ctx.moveTo(x, 0); ctx.lineTo(x, h); }
+    for (let y = 0; y <= h; y += cell) { ctx.moveTo(0, y); ctx.lineTo(w, y); }
+    ctx.stroke(); ctx.restore(); drawn.push("blocky");
+  }
+  if (fx.has("scorched")) {
+    // a dark arc on each building's face toward the burning heart, and the ground scorched in clean arcs round it
+    const cx = model.built.x, cy = model.built.y;
+    ctx.save(); ctx.strokeStyle = "rgba(40,24,16,0.7)"; ctx.lineWidth = Math.max(1.2, roofW * 0.35); ctx.lineCap = "round";
+    for (const hh of model.houses || []) { const a = Math.atan2(cy - hh.y, cx - hh.x); ctx.beginPath(); ctx.arc(hh.x, hh.y, roofL * 0.62, a - 0.9, a + 0.9); ctx.stroke(); }
+    ctx.strokeStyle = "rgba(60,36,22,0.28)"; ctx.lineWidth = 2.2;
+    for (let k = 1; k <= 4; k++) { const r = model.built.r * (0.35 + k * 0.22), a0 = rnd() * Math.PI * 2; ctx.beginPath(); ctx.arc(cx, cy, r, a0, a0 + 0.9 + rnd() * 0.8); ctx.stroke(); }
+    ctx.restore(); drawn.push("scorched");
+  }
+  if (fx.has("stopped")) {
+    // dust held in the air at one instant: motes that do not fall
+    ctx.save(); ctx.fillStyle = "rgba(120,104,80,0.35)";
+    for (let i = 0; i < 140; i++) { ctx.beginPath(); ctx.arc(rnd() * w, rnd() * h, 0.6 + rnd() * 1.1, 0, Math.PI * 2); ctx.fill(); }
+    ctx.restore(); drawn.push("stopped");
+  }
+  if (fx.has("rain")) {
+    // streaks over everything, all one slant
+    ctx.save(); ctx.strokeStyle = "rgba(70,96,128,0.28)"; ctx.lineWidth = 0.8; ctx.beginPath();
+    for (let i = 0; i < Math.round((w * h) / 900); i++) { const x = rnd() * (w + 40) - 20, y = rnd() * h, L = 7 + rnd() * 9; ctx.moveTo(x, y); ctx.lineTo(x - L * 0.35, y + L); }
+    ctx.stroke(); ctx.restore(); drawn.push("rain");
+  }
+  if (fx.has("unlit")) {
+    // dark but for what is lit: the light that comes in along the ways at the frame's edge, and a lamp where the traveller stands
+    const lights = (model.roads || []).map((r) => ({ x: r.exit?.x, y: r.exit?.y, r: Math.min(w, h) * 0.16 })).filter((p) => Number.isFinite(p.x));
+    const here = hereSite ? (model.sites || []).find((st) => st.id === hereSite) : null;
+    if (here) lights.push({ x: here.x, y: here.y, r: Math.min(w, h) * 0.12 });
+    ctx.save(); ctx.beginPath(); ctx.rect(0, 0, w, h);
+    for (const p of lights) { ctx.moveTo(p.x + p.r, p.y); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true); }
+    ctx.fillStyle = "rgba(8,9,14,0.84)"; ctx.fill("evenodd");
+    // ⛑ the soft edge where a context can make a gradient; a hard-edged pool where it cannot — a map is never the thing that throws
+    for (const p of lights) { const g = typeof ctx.createRadialGradient === "function" ? ctx.createRadialGradient(p.x, p.y, p.r * 0.35, p.x, p.y, p.r) : null;
+      if (!g || typeof g.addColorStop !== "function") continue;
+      g.addColorStop(0, "rgba(8,9,14,0)"); g.addColorStop(1, "rgba(8,9,14,0.84)"); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill(); }
+    ctx.restore(); drawn.push("unlit");
+  }
+  return drawn;
+}
+
 /* ═════ G8 · A YARD DRAWS ITS YARD ═════
  * ✅ AEVI: *"Packed-earth ground with its fence line is the place's ground. `stacks` are long rectangles in parallel rows … give each
  * row a short tag. `shed` is an open-sided roof footprint. `crane` is a gantry spanning a row. `machinery` cogs are accents among the
@@ -1916,6 +2045,7 @@ export function paintLocalMap(ctx, model, {
     if (!model.single) for (const m of G.marks) if (m.own) paintGroundMark(ctx, m, model);
     out.ground = { marks: G.marks.length, lines: G.lines.length, areas: G.areas.length, own: G.marks.filter((m) => m.own).length };
   }
+  out.effects = paintEffects(ctx, model, { w, h, hereSite });
   // ⛔ THE EXITS GO FIRST, in their own band at the rim (SNG-677 §0) — and their boxes are CLAIMED in the main
   // space as well, so a site's name cannot land across a road's name. ⚠️ The box is CENTRED on where the ink
   // will be: a left-aligned label placed by its left edge and then clamped into the frame by its centre drew

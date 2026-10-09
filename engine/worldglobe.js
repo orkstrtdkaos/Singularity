@@ -1665,10 +1665,33 @@ export function hydrologyPaths(t, view, canvasPx) {
 /** The locations to draw, projected and culled to the near face, far-first so near pins draw over them.
  *  ⚠️ `worldPosOf` is INJECTED: this module never reads a location's position itself, so it cannot become
  *  the second source of position Aevi warned about. */
-export function visiblePins(t, view, worldPosOf) {
+/** ✅ AEVI, M2 (WORKORDER_aevi_20261004_maps_follow_the_story): *"One place-reader for every map … merges the frozen index with the
+ *  live records, live wins for name, kind, worldPos and state. … A minted place's kind comes from its own record … If neither yields
+ *  one, it gets a generic glyph. ⛔ A place with no icon is a place nobody sees; `null` is never the answer."*
+ *  ⛔ CCODE-711 · MEASURED: the globe read the frozen `terrain.json` index alone, so 33 of its 183 names were the ones before Erik's
+ *  renames ("The Hundred Markets" over a place called Hundred Markets), and a place made in play could never be a pin; the region
+ *  map took its icons from the same index, so a minted place's label floated over empty ground.
+ *  Returns the index row's shape (`n r wg t ro k`) with the live record over it; null only for an id neither knows. The kind is the
+ *  authored one (`kinds`, location_kinds' table), then the record's, then the index's, then `kindOf(id, record)` — the generic
+ *  fallback. Measured over the 183: tier, role, waygate and region agree between the index and the records, so live-first changes
+ *  only the 33 stale names. PURE. */
+export function mapPlace(t, live, id, { kinds = null, kindOf = null } = {}) {
+  const m = t?.locations?.[id] || null, l = live?.[id] || null;
+  if (!m && !l) return null;
+  const k = kinds?.[id]?.kind || l?.kind || m?.k || (typeof kindOf === "function" ? kindOf(id, l) : null) || null;
+  return { n: String(l?.name || m?.n || id), r: l?.regionId || l?.region || m?.r || null, wg: l && l.waygate != null ? !!l.waygate : !!m?.wg,
+    t: l?.tier || m?.t || null, ro: l?.role || m?.ro || null, k, indexed: !!m, live: !!l };
+}
+
+/** ⛑ M2 (CCODE-711): `metaOf(id)` is the one place-reader (`mapPlace`) when the caller has the live world, and `extraIds` the places
+ *  the live world has that the index never did; with neither, the frozen index alone, as before. */
+export function visiblePins(t, view, worldPosOf, { metaOf = null, extraIds = null } = {}) {
   const out = [];
-  for (const id of Object.keys((t && t.locations) || {})) {
-    const m = t.locations[id];
+  const ids = new Set(Object.keys((t && t.locations) || {}));
+  for (const id of extraIds || []) ids.add(id);
+  for (const id of ids) {
+    const m = typeof metaOf === "function" ? metaOf(id) : t?.locations?.[id];
+    if (!m) continue;
     const wp = worldPosOf ? worldPosOf(id) : null;
     if (!wp || !Number.isFinite(wp.longitude) || !Number.isFinite(wp.colatitude)) continue;
     // ⛔ MAP FRAME: lat = colatitude - 90 — the Crossing IS the south pole. The first form of this

@@ -25921,6 +25921,41 @@ await (async () => {
       && (src710.match(/placedAncestor\(locations, /g) || []).length >= 3 && !/guard\+\+ < 8\) loc = locations/.test(src710),
       JSON.stringify({ held710, given710, pp: pp710?.id }));
   }
+  /* ── ✅ Aevi's M2 (SNG-672, CCODE-711): one place-reader for the globe and the region map — the live record over the frozen index ── */
+  {
+    const WG711 = await import("../engine/worldglobe.js");
+    const MI711 = await import("../engine/mapicons.mjs");
+    const LM711 = await import("../engine/localmap.js");
+    const { loadContentHeadless: lch711 } = await import("./headless_content.mjs");
+    const C711 = await lch711();
+    const T711 = JSON.parse(readFileSync(join(root, "content/packs/core/world/terrain.json"), "utf8"));
+    const kinds711 = C711.locationKinds?.kinds;
+    const ids711 = Object.keys(T711.locations);
+    const frozenStale711 = ids711.filter((id) => (T711.locations[id].n || id) !== (C711.locations[id]?.name || id));
+    const liveStale711 = ids711.filter((id) => WG711.mapPlace(T711, C711.locations, id, { kinds: kinds711 })?.n !== (C711.locations[id]?.name || id));
+    // a place made in play, under Millbrook: no index row, no kind of its own
+    const live711 = { ...C711.locations, "gen-711-cellar": { id: "gen-711-cellar", name: "The Cellar", parentId: "millbrook", tier: "site", worldPos: { ...C711.locations.millbrook.worldPos } } };
+    const view711 = { yaw: 37, pitch: 12, r: 300, cx: 400, cy: 300 };
+    const at711 = () => ({ longitude: 10, colatitude: 80 });   // every pin on the near face, so the gate asks only who is a pin
+    const metaOf711 = (id) => WG711.mapPlace(T711, live711, id, { kinds: kinds711 });
+    const pinsLive711 = WG711.visiblePins(T711, view711, at711, { metaOf: metaOf711, extraIds: ["gen-711-cellar"] });
+    const pinsFrozen711 = WG711.visiblePins(T711, view711, at711);
+    const cellar711 = pinsLive711.find((p) => p.id === "gen-711-cellar");
+    const hm711 = (pins) => pins.find((p) => p.id === "the_hundred_markets")?.name;
+    // the region icon: a place made in play has a row, and a glyph — null is never the answer
+    const cellarMeta711 = metaOf711("gen-711-cellar");
+    const cellarGlyph711 = MI711.glyphFor({ ...cellarMeta711 }) || MI711.glyphFor({ k: LM711.placeKindOf("gen-711-cellar", { content: C711, loc: live711["gen-711-cellar"] }), t: cellarMeta711?.t }) || "town";
+    const app711 = readFileSync(join(root, "app.js"), "utf8");
+    check("711/M2: ⛔ AEVI — ONE PLACE-READER FOR EVERY MAP, THE LIVE RECORD WINS — the globe's names are the records' (the frozen index alone kept the names from before Erik's renames), a place made in play is a pin and has a region icon (it floated as a label over nothing), and the negative: the frozen index alone fails both; the globe's labels and the region map's icons read it, and a story rename reaches the globe through `mapView`",
+      frozenStale711.length >= 30 && liveStale711.length === 0
+      && hm711(pinsLive711) === C711.locations.the_hundred_markets?.name && hm711(pinsFrozen711) !== C711.locations.the_hundred_markets?.name
+      && !!cellar711 && cellar711.name === "The Cellar" && !pinsFrozen711.some((p) => p.id === "gen-711-cellar")
+      && !!cellarMeta711 && !!cellarGlyph711 && !MI711.glyphFor({ k: undefined })
+      && /visiblePins\(_terrain, view, worldPosOf, \{ metaOf: metaOf711, extraIds: extra711 \}\)/.test(app711)
+      && /const meta = mapPlace\(_terrain, locs692, m\.id/.test(app711)
+      && /mapView\(character, `place:\$\{p\.id\}`, \{ content: CONTENT, name: p\.name \|\| p\.id \}\)\.label/.test(app711),
+      `frozen stale ${frozenStale711.length}, live stale ${liveStale711.length} · Hundred Markets: live "${hm711(pinsLive711)}", frozen "${hm711(pinsFrozen711)}" · cellar pin ${!!cellar711}, glyph ${cellarGlyph711}`);
+  }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {
     const ST706 = await import("../engine/state.js");

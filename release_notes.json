@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.26.20",
+      "date": "2026-10-09",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The globe uses the new place names",
+          "summary": "The globe still showed 33 places under their old names, such as The Hundred Markets for Hundred Markets. It now shows each place's current name, including a name the story changes. A place that comes up in your story now gets its own pin on the globe and its own mark on the region map, instead of a name floating over empty ground."
+        }
+      ]
+    },
+    {
       "version": "2.26.19",
       "date": "2026-10-09",
       "entries": [

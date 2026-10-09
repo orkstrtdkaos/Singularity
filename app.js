@@ -57,7 +57,7 @@ import { brokenAt, giftMend } from "./engine/mending.js";   // ✅ SNG-679 Part 
 import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
   filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase, filmFrame, filmLandings } from "./engine/films.js";
 import { arcReachesRegion } from "./engine/arceffects.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
-import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, regionRoadPaths, capRoadRoutes, WORLD_CAP_DEG, roadKinds, roadRules as groundRoadRules, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST, fineWindowBox } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, mapPlace, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, regionRoadPaths, capRoadRoutes, WORLD_CAP_DEG, roadKinds, roadRules as groundRoadRules, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST, fineWindowBox } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
 import { groundHolders, resolvedPowers, stateStamp, powerRelation } from "./engine/realms.js";
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.19";
+const APP_VERSION = "2.26.20";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -17035,9 +17035,11 @@ function paintRegionMap(regionId) {
     if (pr692 && Number.isFinite(pr692.x)) drawStateMark(ctx, "trace", pr692.x, pr692.y, 6);
   }
   for (const m of marks416) {
-    const meta = _terrain.locations[m.id] || {};
+    // ✅ M2 (CCODE-711): the one place-reader, so a place made in play has a row and a kind (a minted place's label floated over nothing)
+    const meta = mapPlace(_terrain, locs692, m.id, { kinds: CONTENT.locationKinds?.kinds }) || {};
     // ⛑ L0: the region-scale kind wins over the stamped one — "Echo River Crossing" is a bridge at this scale
-    const g = glyphFor({ ...meta, k: m.regionKind || meta.k });
+    // ⛔ M2: and null is never the answer — a kind with no glyph falls to the place's generic kind, as every other card draws it
+    const g = glyphFor({ ...meta, k: m.regionKind || meta.k }) || glyphFor({ k: placeKindOf(m.id, { content: CONTENT, loc: m.l }), t: meta.t }) || "town";
     // ✅ ERIK's "?": the mark in place of the glyph for a place not heard of; it is in `marks416`, so it takes the tap
     if (!m.heard) drawGlyph(ctx, "unknown", m.p.x, m.p.y, 7, {});
     else if (g && m.view?.glyph !== false) {
@@ -18142,7 +18144,13 @@ function wireWorldGlobe() {
       ctx.restore();
     }
     // pins on top, near-last so they sit over the far side
-    pins = visiblePins(_terrain, view, worldPosOf);
+    /* ✅ M2 (CCODE-711): the one place-reader — each pin is the live record over the frozen index (33 names were the old ones), and a
+     * place this character knows that the index never had (made in play) is a pin too. Superseded and aliased twins stay hidden, as on
+     * the region map. */
+    const metaOf711 = (id) => mapPlace(_terrain, live687, id, { kinds: CONTENT.locationKinds?.kinds });
+    const extra711 = Object.keys(live687 || {}).filter((id) => !_terrain.locations?.[id] && Number.isFinite(Number(live687[id]?.worldPos?.colatitude))
+      && !live687[id].supersededBy && !(character.locationAliases || {})[id] && isPlaceKnown(character, id, CONTENT.locations));
+    pins = visiblePins(_terrain, view, worldPosOf, { metaOf: metaOf711, extraIds: extra711 });
     const here = character.currentLocationId;
     // ⚠️ one marker per PLACE, drawn by what the place IS — the shapes come from MARKER_STYLE so the
     // look lives in one table rather than smeared through a render loop.
@@ -18321,7 +18329,8 @@ function wireWorldGlobe() {
         const lim = SHOW[p.kind] ?? SHOW.settlement;
         if (glyphSpan > lim) continue;
         if (!inFrame3(p)) { qOffFrame++; continue; }   // its glyph is off-canvas; a clamped name would be a lie
-        const nm = String(p.name || p.id);
+        // ✅ M2 (CCODE-711): a name the story changed (`renamed`) shows on the globe as it does on the region map — through `mapView`
+        const nm = String(mapView(character, `place:${p.id}`, { content: CONTENT, name: p.name || p.id }).label || p.name || p.id);
         if (seatName.get(p.id) === nm) { qSkippedDup++; continue; }   // the region pass letters this very word here
         const w = wOf(nm, "place", {});
         const box = sp3.place(p.x, p.y - 13, w, 12,

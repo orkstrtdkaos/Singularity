@@ -632,6 +632,29 @@ export function contourStepFor(span) {
  *  A client that re-derives from the same numbers with the same expression cannot disagree with the
  *  bake: there is no seam to measure, rather than a small one to tolerate. The gate checks it anyway,
  *  because "cannot disagree" is a claim about code and code changes. */
+/** ✅ AEVI, W4 (WORKORDER_aevi_20261006_world_map_and_the_card): *"A thin line where `regionVoteAt` changes. The region under the
+ *  camera gets a faint fill or a stronger edge."* ⛔ CCODE-721 · THE VOTE ON A LAZY GRID. A vote is 118 voters — ~8µs — and per screen
+ *  pixel it took a paint from 0.25s to 3.7s (measured, above). A boundary is hundreds of kilometres wide, so the vote is taken once per
+ *  grid cell, at the cell's centre, the first time a paint needs the cell: `res` cells per degree — 1 for a world view (a 1° cell is
+ *  ~4px at 180°), 4 for a region (~7px at 26°). Region ids come back as small integers (−1 where the vote says nothing) so a paint
+ *  compares numbers. Returns `{ at(lon, lat, res), idOf(regionId) }`. */
+export function makeRegionGrid(t) {
+  const ids = new Map(), grids = new Map();
+  const idOf = (rid) => { if (rid == null) return -1; let n = ids.get(rid); if (n === undefined) { n = ids.size; ids.set(rid, n); } return n; };
+  const at = (lon, lat, res = 1) => {
+    const r = Math.max(1, Math.round(Number(res) || 1)), W = 360 * r, H = 180 * r;
+    let g = grids.get(r);
+    if (!g) { g = new Int16Array(W * H).fill(-2); grids.set(r, g); }
+    const L = ((Number(lon) + 180) % 360 + 360) % 360;
+    const i = Math.min(W - 1, Math.max(0, Math.floor(L * r))), j = Math.min(H - 1, Math.max(0, Math.floor((90 - Number(lat)) * r)));
+    const k = j * W + i;
+    let v = g[k];
+    if (v === -2) { v = idOf(regionVoteAt(t, -180 + (i + 0.5) / r, 90 - (j + 0.5) / r)); g[k] = v; }
+    return v;
+  };
+  return { at, idOf };
+}
+
 export function regionVoteAt(t, lon, lat) {
   const f = t && t.fields;
   if (!f || !f.voters) return null;

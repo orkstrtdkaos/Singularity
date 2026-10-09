@@ -26095,6 +26095,28 @@ await (async () => {
       && /\.place-card-handle \{[^}]*width: 72px; height: 24px;[^}]*touch-action: none;/.test(css720),
       JSON.stringify({ follow, up, nudge, down, fromFull }));
   }
+  /* ── ✅ AEVI W4 (SNG-677, CCODE-721): region edges on the globe, where the vote changes ── */
+  {
+    const WG721 = await import("../engine/worldglobe.js");
+    const t721 = WG721.decodeTerrain(JSON.parse(readFileSync(join(root, "content/packs/core/world/terrain.json"), "utf8")));
+    const grid721 = WG721.makeRegionGrid(t721);
+    // the grid is the vote, taken at each cell's centre — so the line is where the territory fill and the crumb say the ground changes
+    let agree = 0, n = 0, rnd = 7;
+    const next = () => (rnd = (rnd * 16807) % 2147483647) / 2147483647;
+    for (let k = 0; k < 300; k++) {
+      const res = k % 2 ? 1 : 4, lon = -180 + next() * 360, lat = -88 + next() * 176;
+      const i = Math.floor((((lon + 180) % 360 + 360) % 360) * res), j = Math.floor((90 - lat) * res);
+      const vote = WG721.regionVoteAt(t721, -180 + (i + 0.5) / res, 90 - (j + 0.5) / res);
+      n++; if (grid721.at(lon, lat, res) === grid721.idOf(vote)) agree++;
+    }
+    const ids721 = new Set(); for (let lon = -180; lon < 180; lon += 9) for (let lat = -80; lat <= 80; lat += 9) ids721.add(grid721.at(lon, lat, 1));
+    const app721 = readFileSync(join(root, "app.js"), "utf8");
+    check("721/W4: ⛔ AEVI — A THIN LINE WHERE `regionVoteAt` CHANGES, AND THE REGION UNDER THE CAMERA STRONGER — the globe reads the vote on a lazy grid (a vote per pixel took a paint from 0.25s to 3.7s), every cell the vote at its centre, 1° for the world and a quarter degree for a region; the many regions come back as distinct ids; the paint marks a sample whose neighbour is another region, at twice the weight on the region under the camera",
+      n === 300 && agree === 300 && ids721.size >= 20
+      && /_globeRegionGrid\.g\.at\(g\.lon, g\.lat, gridRes\)/.test(app721) && /const gridRes = span > 60 \? 1 : 4;/.test(app721)
+      && /\(rc === lookId \|\| rr === lookId \|\| rd === lookId\) \? 0\.62 : 0\.3/.test(app721),
+      `${agree}/${n} cells agree with the vote · ${ids721.size} regions seen at 9° steps`);
+  }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {
     const ST706 = await import("../engine/state.js");

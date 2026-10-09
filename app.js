@@ -57,7 +57,7 @@ import { brokenAt, giftMend } from "./engine/mending.js";   // ✅ SNG-679 Part 
 import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
   filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase, filmFrame, filmLandings } from "./engine/films.js";
 import { arcReachesRegion } from "./engine/arceffects.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
-import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, mapPlace, DEFAULT_VIEW, openingView, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, regionRoadPaths, capRoadRoutes, WORLD_CAP_DEG, roadKinds, roadRules as groundRoadRules, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST, fineWindowBox } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, mapPlace, DEFAULT_VIEW, openingView, makeRegionGrid, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, regionRoadPaths, capRoadRoutes, WORLD_CAP_DEG, roadKinds, roadRules as groundRoadRules, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST, fineWindowBox } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
 import { groundHolders, resolvedPowers, stateStamp, powerRelation } from "./engine/realms.js";
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.27.0";
+const APP_VERSION = "2.27.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -16192,6 +16192,7 @@ let _regionOff = null;
 // sets, which is the pile-up Aevi reported. There was no such thing as "the labels of this map".
 let _labelSpace = null;
 let _rasterOff = null;        // M1: the region raster's own CSS-frame surface, drawn through the transform
+let _globeRegionGrid = null;   // ✅ W4 (CCODE-721): the region vote on a lazy grid, per terrain asset
 let _globeRasterOff = null;   // …and the globe's, for the same reason: putImageData ignores a transform
 
 /** Re-show the painted map at the current zoom and pan. No repaint, no recomputation. */
@@ -18021,11 +18022,18 @@ function wireWorldGlobe() {
     // ⚠️ a regional view earns a finer contour interval — see contourStepFor: the rule lives in the
     // viewer so the map and any gate that checks it read the same one.
     const contourStep = contourStepFor(span);
+    /* ✅ W4 (CCODE-721): *"A thin line where `regionVoteAt` changes."* Each sample's region from the lazy vote grid (1° cells for the world,
+     * 0.25° once the view is regional), so the line is drawn where the territory fill and the crumb say the ground changes hands. */
+    if (!_globeRegionGrid || _globeRegionGrid.t !== _terrain) _globeRegionGrid = { t: _terrain, g: makeRegionGrid(_terrain) };
+    const gridRes = span > 60 ? 1 : 4;
+    const sw = Math.ceil(gw / step), sh = Math.ceil(gh / step);
+    const rids = new Int16Array(sw * sh).fill(-1);
     for (let y = 0; y < gh; y += step) {
       for (let x = 0; x < gw; x += step) {
         const g = unproject(x + 0.5, y + 0.5, view);
         let r = 4, gr = 4, b = 10;                                  // the void behind the world
         if (g) {
+          rids[(y / step) * sw + (x / step)] = _globeRegionGrid.g.at(g.lon, g.lat, gridRes);
           const c = colorAt(_terrain, g.lon, g.lat, { layer, band, bandFn: bandFactor, fine, contourStep });
           r = c[0]; gr = c[1]; b = c[2];
           // ⛔ SNG-409 §5 — A CONTESTED AREA LOOKS LIKE AN AREA, AND HAS NO CLEAN EDGE. Drawing it as a
@@ -18041,6 +18049,23 @@ function wireWorldGlobe() {
             const o = ((y + dy) * gw + (x + dx)) * 4;
             D[o] = r; D[o + 1] = gr; D[o + 2] = b; D[o + 3] = 255;
           }
+        }
+      }
+    }
+    /* ⛑ W4: the line, after the ground — a sample whose right or lower neighbour is another region is drawn toward a pale ink. ✅ *"The
+     * region under the camera gets … a stronger edge"*: its own boundary at twice the weight, so it is visibly the one you are about to
+     * enter. Thin by construction: one sample wide. */
+    {
+      const lookId = _globeLookAt ? _globeRegionGrid.g.idOf(_globeLookAt) : -9;
+      for (let sy = 0; sy < sh; sy++) for (let sx = 0; sx < sw; sx++) {
+        const rc = rids[sy * sw + sx];
+        if (rc < 0) continue;
+        const rr = sx + 1 < sw ? rids[sy * sw + sx + 1] : rc, rd = sy + 1 < sh ? rids[(sy + 1) * sw + sx] : rc;
+        if (!((rr >= 0 && rr !== rc) || (rd >= 0 && rd !== rc))) continue;
+        const a = (rc === lookId || rr === lookId || rd === lookId) ? 0.62 : 0.3;
+        for (let dy = 0; dy < step && sy * step + dy < gh; dy++) for (let dx = 0; dx < step && sx * step + dx < gw; dx++) {
+          const o = ((sy * step + dy) * gw + (sx * step + dx)) * 4;
+          D[o] = D[o] * (1 - a) + 236 * a; D[o + 1] = D[o + 1] * (1 - a) + 228 * a; D[o + 2] = D[o + 2] * (1 - a) + 200 * a;
         }
       }
     }

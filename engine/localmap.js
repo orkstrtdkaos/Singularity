@@ -852,6 +852,77 @@ function roadPath(bearing, frame, rnd, { through = null } = {}) {
   return pts;
 }
 
+/** The width a road is drawn at, in px — the model keeps a road clear of water by it, the painter strokes it. One number. */
+function roadWidthPx(frame) { return Math.max(2.2, Math.min(7, 5 * frame.pxPerMetre * 1.6 + 1.6)); }
+
+/** ⛔ CCODE-708 · A SITE'S `toward` IS `{ road, relation }`. The road code compared the whole object to a place id, so it never
+ *  matched: 27 sites are written as "on" their road and no road was ever pulled through one (7 of the 24 on a road out stood
+ *  10–19 px off it). An added site may still carry the bare id (SNG-679 S8's `{ toward: <placeId> }`), which means "on". */
+function towardRoadOf(s) { return s?.toward && typeof s.toward === "object" ? s.toward.road ?? null : s?.toward ?? null; }
+function towardRelationOf(s) { return s?.toward && typeof s.toward === "object" ? String(s.toward.relation || "on") : s?.toward ? "on" : null; }
+
+/** The nearest point of a polyline to (x, y): the point, its tangent, its left normal, and how far (x, y) stands off it along
+ *  that normal (signed — the bank it is on). */
+function onLine(x, y, P) {
+  let bd = Infinity, best = null;
+  for (let i = 0; i < P.length - 1; i++) {
+    const [ax, ay] = P[i], [bx, by] = P[i + 1];
+    const vx = bx - ax, vy = by - ay, L2 = vx * vx + vy * vy || 1;
+    const t = clamp(((x - ax) * vx + (y - ay) * vy) / L2, 0, 1);
+    const px = ax + vx * t, py = ay + vy * t, d = Math.hypot(x - px, y - py);
+    if (d < bd) { const L = Math.sqrt(L2); bd = d; best = { x: px, y: py, tx: vx / L, ty: vy / L }; }
+  }
+  if (!best) return null;
+  best.nx = -best.ty; best.ny = best.tx; best.s = (x - best.x) * best.nx + (y - best.y) * best.ny;
+  return best;
+}
+
+/** ✅ AEVI (NOTE_aevi_ccode_layouts_ready, L1's first drawing rule): *"A road that leaves along a river keeps to a bank. At Echo
+ *  River Crossing, all four roads run along the Echo's line, so straight bearings out of the centre would draw them on the water.
+ *  Offset a road to the bank its town is on until it clears the channel."*
+ *  ⚠️ MEASURED: seven roads ran on their own water — all four at the Crossing, three at Greywater, up to six of a road's points in
+ *  the channel. ⛑ The run is the stretch of the road inside the channel's band (half its width, half the road's, and a margin) while
+ *  it runs WITH the water (within 35° of it); a road that crosses is left to cross. The bank: the bank of the site the author put
+ *  on or near this road, when one stands off the water — the Carters' Queue is on the Crossing's west bridgehead, beside the road
+ *  to Millbrook, and the road keeps to it (the Crossing IS the bridge: its built ground is one blob east of the water, and the
+ *  town's bank sent the Millbrook road to the east bank, across the river from its own queue); else the bank the town stands
+ *  on; else the way the road already leans; else the bank most of the place's sites are on. Returns true when it moved the road. */
+const ALONG_COS = Math.cos(35 * R);
+function keepToBank(road, ch, { town, sites, clear }) {
+  const P = road.pts, half = ch.widthPx / 2;
+  const at = P.map(([x, y]) => onLine(x, y, ch.pts));
+  const along = (i) => {
+    const q = at[i]; if (!q || i < 1) return false;
+    const dx = P[i][0] - P[i - 1][0], dy = P[i][1] - P[i - 1][1], L = Math.hypot(dx, dy) || 1;
+    return Math.abs((dx * q.tx + dy * q.ty) / L) >= ALONG_COS;   // under 35° to the water; more, and it crosses here
+  };
+  let a = -1, b = -1;
+  for (let i = 1; i < P.length; i++) if (at[i] && Math.abs(at[i].s) < clear && along(i)) { if (a < 0) a = i; b = i; }
+  if (a < 0) return false;
+  /* ⛑ the run reaches out over the points that run with the water CLOSE BY (within two and a half bands): a road that leaves the
+   * bridge along the far bank and drifts into the water is one road — kept to one bank from where it leaves, not walked out along
+   * one bank and across mid-stream (the Crossing's road to Millbrook ran three points up the east edge and then crossed) */
+  const close = (i) => at[i] && Math.abs(at[i].s) < clear * 2.5 && along(i);
+  while (a > 1 && close(a - 1)) a--;
+  while (b < P.length - 1 && close(b + 1)) b++;
+  const sideOf = (x, y) => { const q = onLine(x, y, ch.pts); return q && Math.abs(q.s) >= half * 0.95 ? Math.sign(q.s) : 0; };
+  let side = 0;
+  for (const s of sites) {
+    if (towardRoadOf(s) !== road.to || towardRelationOf(s) === "away") continue;
+    side = sideOf(s.x, s.y);
+    if (side) break;
+  }
+  if (!side && town) side = sideOf(town.x, town.y);
+  if (!side) { let lean = 0; for (let i = a; i <= b; i++) lean += at[i].s; side = Math.abs(lean) > 0.5 ? Math.sign(lean) : 0; }
+  if (!side) { let n = 0; for (const s of sites) n += sideOf(s.x, s.y); side = n < 0 ? -1 : 1; }
+  for (let i = a; i <= b; i++) {
+    const q = at[i];
+    if (q.s * side >= clear) continue;
+    P[i] = [q.x + q.nx * side * clear, q.y + q.ny * side * clear];
+  }
+  return true;
+}
+
 /** Where a polyline leaves the frame, for the exit label. */
 function exitPoint(pts, w, h, inset = 6) {
   for (let i = 1; i < pts.length; i++) {
@@ -891,7 +962,7 @@ export function localModel(layout, frame, { placeName = "", placeId = "", nameOf
   const builtAt = single ? frame.toXY(0, 0) : built ? frame.toXY(built.bearing, built.fromMetres) : { x: frame.cx, y: frame.cy };
   // roads out, each through the site that names it — none below ground: a delve's ways out are its stairs
   const roads = ((Number(level) || 0) < 0 ? [] : (meas.roadsOut || [])).map((r, i) => {
-    const through = sites.find((s) => s.toward === r.to) || null;
+    const through = sites.find((s) => towardRoadOf(s) === r.to && towardRelationOf(s) === "on") || null;   // ⛑ CCODE-708: `toward` is `{ road, relation }`
     const pts = roadPath(r.bearing, frame, rngOf(seedOf(`road:${id}:${r.to || i}`)), { through });
     return { ...r, name: (typeof nameOf === "function" ? nameOf(r.to) : null) || r.name || r.to, pts, exit: exitPoint(pts, frame.w, frame.h) };
   });
@@ -957,6 +1028,28 @@ export function localModel(layout, frame, { placeName = "", placeId = "", nameOf
       const onBank = s.kind === "ford" ? 0 : water.channel.widthPx * 0.5;
       s.x = x + nx * side * onBank; s.y = y + ny * side * onBank; s.onWater = { i: best, tangent: [tx / L, ty / L], normal: [nx * side, ny * side] };
     }
+    /* ⛔ CCODE-708 · A SITE ON LAND IS NOT DRAWN IN THE RIVER. The channel meanders (up to about its own width either side of the
+     * line the author wrote), so a site the author put on a bank could stand in the water: the Crossing's Carters' Queue, on the
+     * west bridgehead 26 m clear of the authored channel, was drawn on a sandbar mid-stream. A land site in the drawn water stands
+     * on the bank it was WRITTEN on — its side of the authored line — just clear of the water. A site the author put within the
+     * authored channel (Greywater's platforms on their stilts) is in the water on purpose and stays. */
+    const ch = water.channel, halfW = ch.widthPx / 2, markClear = 6 * frame.k;
+    for (const s of sites) {
+      if (s.onWater || ["dock", "ford", "mill", "bridge", "harbour"].includes(s.kind) || s.basis === "river") continue;
+      const written = (s.x - ch.p0.x) * ch.nrm[0] + (s.y - ch.p0.y) * ch.nrm[1];
+      if (Math.abs(written) < halfW) continue;
+      const q = onLine(s.x, s.y, ch.pts);
+      if (!q || Math.abs(q.s) >= halfW + markClear) continue;   // dry, on whichever bank — left where it is
+      const side = Math.sign(written);
+      s.x = q.x + q.nx * side * (halfW + markClear); s.y = q.y + q.ny * side * (halfW + markClear); s.offWater = true;
+    }
+  }
+  // ✅ AEVI (L1 rule 1, CCODE-708): a road that leaves along a river keeps to a bank until it clears the channel — after the
+  // sites are on the water, so a road keeps to the bank its dock is on
+  for (const w of features) {
+    if (w.kind !== "water" || !w.channel?.pts?.length) continue;
+    const clear = w.channel.widthPx / 2 + roadWidthPx(frame) / 2 + 2 * frame.k;
+    for (const r of roads) if (keepToBank(r, w.channel, { town: builtAt, sites, clear })) r.exit = exitPoint(r.pts, frame.w, frame.h);
   }
   // lanes: a site beyond the built ground that no road passes gets a lane from the nearest road or the centre
   const lanes = [];
@@ -2002,7 +2095,7 @@ export function paintLocalMap(ctx, model, {
   if (G) for (const l of G.lines) paintGroundLine(ctx, l, model);
   // the ways
   ctx.save(); ctx.lineCap = "round"; ctx.lineJoin = "round";
-  const roadW = Math.max(2.2, Math.min(7, 5 * frame.pxPerMetre * 1.6 + 1.6));
+  const roadW = roadWidthPx(frame);
   for (const l of model.lanes) {
     ctx.strokeStyle = INK.laneEdge; ctx.lineWidth = roadW * 0.55; smoothPath(ctx, l.pts); ctx.stroke();
     ctx.strokeStyle = INK.lane; ctx.lineWidth = roadW * 0.3; smoothPath(ctx, l.pts); ctx.stroke();

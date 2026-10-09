@@ -25822,6 +25822,62 @@ await (async () => {
       && body704.includes("const act = globeClickAction(p, { framed: _framed, regionOf });") && body704.includes("openPlaceCard(") && body704.includes("enterRegion(act.regionId, act.selectId)")
       && !app704.includes("flyTo(wp.colatitude - 90, wp.longitude, isRegion ? 26 : 8);"));
   }
+  /* ── ✅ Aevi's L1 drawing rule 1 (CCODE-708): a road that leaves along a river keeps to a bank; a road passes through its site ── */
+  {
+    const LM708 = await import("../engine/localmap.js");
+    const { loadContentHeadless: lch708 } = await import("./headless_content.mjs");
+    const C708 = await lch708();
+    const near708 = (x, y, P) => { let bd = Infinity, bt = [1, 0], bs = 0; for (let i = 0; i < P.length - 1; i++) { const [ax, ay] = P[i], [qx, qy] = P[i + 1]; const vx = qx - ax, vy = qy - ay, L2 = vx * vx + vy * vy || 1; const t = Math.max(0, Math.min(1, ((x - ax) * vx + (y - ay) * vy) / L2)); const px = ax + vx * t, py = ay + vy * t, d = Math.hypot(x - px, y - py); if (d < bd) { bd = d; const L = Math.sqrt(L2); bt = [vx / L, vy / L]; bs = (x - px) * -bt[1] + (y - py) * bt[0]; } } return { d: bd, s: bs, t: bt }; };
+    const wetRoads = [], wetSites = [], offRoad = [];
+    let wetModels = 0, onSites = 0, erc = null;
+    for (const id of Object.keys(C708.locations)) {
+      let lay; try { lay = LM708.localLayoutFor(id, { content: C708 }); } catch { continue; }
+      if (!lay) continue;
+      const hasWater = (lay.extent || []).some((f) => f.kind === "water");
+      const hasOn = (lay.sites || []).some((x) => x.toward && (typeof x.toward !== "object" || (x.toward.relation || "on") === "on"));
+      if (!hasWater && !hasOn) continue;
+      const m = LM708.localModel(lay, LM708.localFrame(lay, { w: 800, h: 500 }), { placeId: id });
+      if (id === "echo_river_crossing") erc = m;
+      const roadW = Math.max(2.2, Math.min(7, 5 * m.frame.pxPerMetre * 1.6 + 1.6));
+      for (const w of m.features.filter((f) => f.kind === "water" && f.channel)) {
+        wetModels++;
+        const band = w.channel.widthPx / 2 + roadW / 2;
+        for (const r of m.roads) for (let i = 1; i < r.pts.length; i++) {
+          const [x, y] = r.pts[i]; if (x < 0 || y < 0 || x > m.frame.w || y > m.frame.h) continue;
+          const q = near708(x, y, w.channel.pts); if (q.d >= band) continue;
+          const [px, py] = r.pts[i - 1], L = Math.hypot(x - px, y - py) || 1;
+          if (Math.abs(((x - px) * q.t[0] + (y - py) * q.t[1]) / L) > Math.cos(35 * Math.PI / 180)) wetRoads.push(`${id} → ${r.to} point ${i}`);
+        }
+        for (const st of m.sites) {
+          if (["dock", "ford", "mill", "bridge", "harbour"].includes(st.kind) || st.basis === "river") continue;
+          const at0 = m.frame.toXY(st.localMap?.bearing, st.localMap?.metres);   // where the author wrote it, before the water moved
+          const written = (at0.x - w.channel.p0.x) * w.channel.nrm[0] + (at0.y - w.channel.p0.y) * w.channel.nrm[1];
+          if (Math.abs(written) >= w.channel.widthPx / 2 && near708(st.x, st.y, w.channel.pts).d < w.channel.widthPx / 2) wetSites.push(`${id}: ${st.id}`);
+        }
+      }
+      for (const st of m.sites) {
+        const road = st.toward && typeof st.toward === "object" ? st.toward.road : st.toward;
+        const rel = st.toward && typeof st.toward === "object" ? (st.toward.relation || "on") : "on";
+        if (!road || rel !== "on") continue;
+        const r = m.roads.find((x) => x.to === road); if (!r) continue;
+        onSites++;
+        const d = near708(st.x, st.y, r.pts).d;
+        if (d > 9 * m.frame.k) offRoad.push(`${id}: ${st.id} ${Math.round(d)}px off the road to ${road}`);
+      }
+    }
+    // the Crossing, as Aevi wrote it: the queue on the west bridgehead beside the road to Millbrook, the town east of the water
+    const wE = erc?.features.find((f) => f.kind === "water");
+    const sideE = (x, y) => Math.sign(near708(x, y, wE.channel.pts).s);
+    const queue = erc?.sites.find((x) => x.id === "erc_carters_queue");
+    const roadTo = (to) => erc?.roads.find((r) => r.to === to);
+    const millSide = roadTo("millbrook") ? sideE(...roadTo("millbrook").pts[4]) : 0, archSide = roadTo("archive_hollow") ? sideE(...roadTo("archive_hollow").pts[4]) : 0;
+    const lmSrc708 = readFileSync(join(root, "engine/localmap.js"), "utf8");
+    check("708/banks: ⛔ AEVI — A ROAD THAT LEAVES ALONG A RIVER KEEPS TO A BANK (layouts_ready, L1 rule 1) — over every place with water no road runs in its channel (a road that crosses is left to cross); the bank is the one the site it serves stands on, else the town's: at the Crossing the road to Millbrook keeps to the Carters' Queue's bank and the road to Archive Hollow to the town's; no site the author put on land is drawn in the water (the queue stood on a sandbar mid-stream); and every site written as `on` a road is on it — `toward` is `{ road, relation }` and the road code compared the whole object to a place id, so no road was ever pulled through one (7 of 24 stood 10–19 px off)",
+      wetModels >= 3 && wetRoads.length === 0 && wetSites.length === 0 && onSites >= 20 && offRoad.length === 0
+      && !!queue && millSide !== 0 && millSide === sideE(queue.x, queue.y) && archSide !== 0 && archSide === sideE(erc.built.x, erc.built.y) && millSide !== archSide
+      && /function roadWidthPx\(frame\)/.test(lmSrc708) && /const roadW = roadWidthPx\(frame\);/.test(lmSrc708) && /towardRoadOf\(s\) === r\.to && towardRelationOf\(s\) === "on"/.test(lmSrc708),
+      `${wetModels} with water · on the water: ${wetRoads.slice(0, 3).join(", ") || "none"} · land sites in it: ${wetSites.join(", ") || "none"} · ${onSites} on-sites, off: ${offRoad.slice(0, 3).join(", ") || "none"} · Millbrook road side ${millSide}, queue ${queue ? sideE(queue.x, queue.y) : "?"}, Archive road ${archSide}, town ${erc ? sideE(erc.built.x, erc.built.y) : "?"}`);
+  }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {
     const ST706 = await import("../engine/state.js");

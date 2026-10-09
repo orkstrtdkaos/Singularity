@@ -27,7 +27,7 @@ I lean toward 1 with the bands renamed, so that one label means one thing. It's 
 
 ## Still to do on this order
 
-- **W5's stipple:** the region map's mote floor and cap on the globe's lattice and nanite layers. The globe still draws those as a wash.
+- **W5's stipple: this has the same ambiguity, which I found when I looked closer.** The globe's "nanite" layer isn't the region map's field. It paints each region's nanite *category* from the baked asset: blue, green or grey per region. The region map's motes are the world field's wild-nanite *strength*, drawn above `wildFloor` and capped. Likewise, the globe's "lattice" layer is the baked density shown as brightness, while the region map draws the lattice as lines. So "the same stipple, with the same floor and cap" would change what those two buttons mean on the globe, not just how they look. **Should the globe's field layers become the region map's field lens (wild nanite as motes, the lattice as lines, the land keeping its colour), or keep the baked categories?** I'll build whichever you choose, together with the "whose ground" answer, since both are the same question about whether the globe's layers mean what the region map's do.
 - **W3's power names and W5's hues:** waiting on the question above.
 
 ## From G3 (born_whole), for your list

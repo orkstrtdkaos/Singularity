@@ -311,7 +311,9 @@ function finishLocation(rec, ctx) {
   const out = { ...rec };
 
   // ---- the address: a parent first, then the first connection that is actually somewhere ----
-  if (!out.parentId) {
+  // ⛑ CCODE-715: unless the caller says the place is NOT inside anywhere (`adoptParent: false`) — the door every minter goes through
+  // finishes a transit place too, and a road's destination ("the pass") is a day down the road, not a room of the place you left
+  if (!out.parentId && ctx.adoptParent !== false) {
     // ⛔ A PLACE MADE IN PLAY IS MADE WHERE THE PLAYER IS STANDING. ✅ AEVI's negative case: *"a response that
     // cannot be placed comes back as a STUB THAT IS STILL WHOLE, never a null — a thin-but-present record
     // beats a hole in the world."* A truncated answer has no connections to walk, and `hereId` is the one
@@ -322,6 +324,10 @@ function finishLocation(rec, ctx) {
     if (cand && cand !== out.id) out.parentId = cand;
   }
   const par = out.parentId ? locations[out.parentId] : null;
+  /* ⛑ CCODE-715 · WHAT A PLACE INHERITS, IT INHERITS FROM WHERE IT WAS MADE. Its parent when it has one; otherwise the first place its
+   * roads reach — a place made off a road shares its neighbour's disposition, danger, field and lore, where an empty spectrum would
+   * give it a vector of zeros and a danger of 1 wherever it stood. Its POSITION still comes only from a parent (or the walk below). */
+  const near = par || (Array.isArray(out.connections) ? out.connections.map((id) => locations[id]).find(Boolean) : null) || null;
   if (!out.regionId && !out.region) {
     const from = par || (Array.isArray(out.connections) ? out.connections.map((id) => locations[id]).find((l) => l?.regionId || l?.region) : null);
     if (from) out.regionId = from.regionId || from.region;
@@ -339,7 +345,7 @@ function finishLocation(rec, ctx) {
   }
 
   // ---- what it IS. The spectrum is the place's disposition; the vector is that spectrum, ordered ----
-  if (!out.spectrum || !Object.keys(out.spectrum).length) out.spectrum = par?.spectrum ? { ...par.spectrum } : {};
+  if (!out.spectrum || !Object.keys(out.spectrum).length) out.spectrum = near?.spectrum ? { ...near.spectrum } : {};
   if (!Array.isArray(out.axisVector) || !out.axisVector.length) {
     const v = axisVectorFrom(out.spectrum, ctx.axisOrder);
     if (v) {
@@ -368,22 +374,28 @@ function finishLocation(rec, ctx) {
       pi[v > 0 ? pos : neg] = Math.round(Math.abs(v) * 100) / 100;
     }
     if (Object.keys(pi).length) out.poleIntensity = pi;
-    else if (par?.poleIntensity && typeof par.poleIntensity === "object") out.poleIntensity = { ...par.poleIntensity };
+    else if (near?.poleIntensity && typeof near.poleIntensity === "object") out.poleIntensity = { ...near.poleIntensity };
   }
 
   // ---- the rest the engine knows, each inherited from the place it is being born beside ----
   // ⛑ A PLACE WITH A PARENT IS A SITE. That is what a parent means — somewhere inside somewhere else.
   if (!out.tier) out.tier = out.parentId ? "site" : "settlement";
   // ⛑ ABSENT, not "fails my idea of its type" — these two really are numbers, but the test is presence
-  if (out.dangerLevel == null) out.dangerLevel = Number.isFinite(Number(par?.dangerLevel)) ? par.dangerLevel : 1;
+  if (out.dangerLevel == null) out.dangerLevel = Number.isFinite(Number(near?.dangerLevel)) ? near.dangerLevel : 1;
   if (out.substrateDensity == null) {
-    out.substrateDensity = Number.isFinite(Number(par?.substrateDensity)) ? par.substrateDensity : 0.5;
+    out.substrateDensity = Number.isFinite(Number(near?.substrateDensity)) ? near.substrateDensity : 0.5;
   }
-  if (!out.people && par?.people) out.people = par.people;
+  if (!out.people && par?.people) out.people = par.people;   // a place's people are its PARENT's, never a neighbour's
+  // ✅ G1: *"role"* — what the place is FOR on a route: a made gate is a gate, a place made on the way (`transitional`) a waypoint.
+  // The two roles the 183 places carry; a place with neither is a settlement or a site by its tier, and says nothing more.
+  if (!out.role) {
+    if (out.waygate) out.role = "gate";
+    else if ((Array.isArray(out.tags) ? out.tags : []).includes("transitional")) out.role = "waypoint";
+  }
   // ⚠️ ONLY LORE THAT RESOLVES. A generated `loreRef` points at lore the generator imagined; carrying it
   // forward makes the place lore-BLIND, which is worse than referencing none.
   const loreIds = ctx.loreIds instanceof Set ? ctx.loreIds : null;
-  const inherited = [...(Array.isArray(out.loreRefs) ? out.loreRefs : []), ...(Array.isArray(par?.loreRefs) ? par.loreRefs : [])];
+  const inherited = [...(Array.isArray(out.loreRefs) ? out.loreRefs : []), ...(Array.isArray(near?.loreRefs) ? near.loreRefs : [])];
   out.loreRefs = loreIds ? [...new Set(inherited.filter((r) => loreIds.has(String(r))))] : [...new Set(inherited)];
   // ⛑ the generator writes encounterFlavor as a LIST of lines; a record holds one string
   if (Array.isArray(out.encounterFlavor)) out.encounterFlavor = out.encounterFlavor.join(" ");

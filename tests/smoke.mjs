@@ -14062,7 +14062,7 @@ await (async () => {
       check("329b: the ONLY write to generated.location lives inside the guard, not merely exists once — the guard is the engine's `commitPlace`, and app.js's door calls it",
         (appSrc329.match(/generated\.location\[[a-zA-Z]+\] = rec/g) || []).length === 0
         && (genSrc329.match(/generated\.location\[[a-zA-Z]+\] = rec/g) || []).length === 1
-        && /export function commitPlace\([\s\S]{0,900}?character\.generated\.location\[id\] = rec;/.test(genSrc329)
+        && /export function commitPlace\([\s\S]{0,2600}?character\.generated\.location\[id\] = rec;/.test(genSrc329)
         && /^function commitGeneratedLocation/.test(owner("return commitPlace(") || ""));
       // ⛔ AND THE GUARD MUST NOT CALL ITSELF. A self-recursive commit blows the stack the first time a
       // waygate is minted in play — a crash no headless test can reach, because app.js does not run here.

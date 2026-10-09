@@ -23,7 +23,7 @@ import { worldPosForGenerated } from "./worldmap.js";   // G0: the address walk 
 import { affiliationAt } from "./affiliation.js";   // SNG-185: the ONE affiliation impl · CCODE-413: the whole chain now lives there
 import { validate, missingRequired, defaultFor } from "./genschema.js";
 import { isLegalEmergent } from "./braids.js";   // SNG-197 §4: the ONE emergent-verb gate (no second impl to drift)
-import { checkBorn, describeBorn, finishBorn } from "./borncontract.js";  // SNG-250 §4: the ONE born-whole gate (the same fn content_ci runs over authored content)
+import { checkBorn, describeBorn, finishBorn } from "./borncontract.js";   // (and `commitPlace` finishes at the door with the same step)  // SNG-250 §4: the ONE born-whole gate (the same fn content_ci runs over authored content)
 import { drawTier, evidenceFor } from "./npcsheet.js";
 import { isMinorSubject } from "./art.js";   // SNG-556: the ONE minor floor - this file used to carry a second, differing copy   // ⛔ SPEC §2.1/§2.2 — rarity + evidence at the mint
 
@@ -53,9 +53,24 @@ const DEFAULT_SESSION_CAP = 6; // governor: mints per scene/session before we pr
  *  ✅ AEVI, M1 (CCODE-710): *"Rewrite §97 as behaviour: mint through every path the app has (transit, waygate, `generateRequest`)
  *  and assert each record comes back with a `worldPos`."* ⛑ So the door's body moved out of app.js into the engine, where the suite
  *  can open it: app.js's `commitGeneratedLocation` is this, with its warning. */
-export function commitPlace(character, locations, id, rec) {
+export function commitPlace(character, locations, id, rec, { content = null } = {}) {
   if (!id || !rec || isCoercedObjectName(id) || isCoercedObjectName(rec.name)) return null;
   ensureGenerated(character);
+  /* ✅ AEVI, G1 (WORKORDER_aevi_20261004_born_whole): *"One finishing step, and every minter goes through it … transit / waygate:
+   * worldPos yes; no axisVector, kind, tier, role, spectrum; empty prose; never contract-checked."* ⛔ CCODE-715 · the door finishes
+   * every place with the step `generate()` uses — the transit, the made gate, the resettled place and the GM's, alike. ⛑ It never
+   * ADOPTS a parent (a road's destination is not a room of where you stood; a minter that means "inside" says so, as the GM's path
+   * does), and it is idempotent: a place `generate()` already finished comes through unchanged. In place, so the caller's record is
+   * the one the world holds. */
+  {
+    const d = bornDeps(content);
+    const whole = finishBorn("location", { ...rec, id }, {
+      locations: { ...(character.generated?.location || {}), ...(locations || {}) }, axisOrder: d.axisOrder,
+      loreIds: content ? d.loreIds : null, spectrums: d.spectrums, adoptParent: false,
+      worldPosFor: (i, get) => worldPosForGenerated(i, get),
+    });
+    if (whole) Object.assign(rec, whole);
+  }
   if (!rec.worldPos) {
     const pos = worldPosForGenerated(id, (k) => (k === id ? rec : (locations?.[k] || character.generated?.location?.[k] || null)));
     if (pos) rec.worldPos = { colatitude: pos.colatitude, longitude: pos.longitude, depth: pos.depth };

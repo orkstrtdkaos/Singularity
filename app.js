@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.23";
+const APP_VERSION = "2.26.24";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14232,7 +14232,7 @@ function commitGeneratedLocation(id, rec) {
   // ⚠️ It is DERIVED from the place this one was made off, never invented, and stays absent when there is
   // nothing to derive from — an unplaced place is better than a place in the wrong world.
   // ⛑ CCODE-710: the door's body is the engine's (`commitPlace`), so the suite opens the door the app opens (M1)
-  return commitPlace(character, CONTENT.locations, id, rec);
+  return commitPlace(character, CONTENT.locations, id, rec, { content: CONTENT });   // ⛑ CCODE-715: finished at the door (G1)
 }
 
 function mintTransitLocation(moveRef) {

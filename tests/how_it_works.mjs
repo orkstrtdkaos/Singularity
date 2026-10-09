@@ -10367,7 +10367,8 @@ console.log("\n── §97 · a place found in play is somewhere, exactly a day 
   const transit97 = { id: "gen-97-pass", name: "The Pass", tags: ["transitional"], connections: ["millbrook"], _mintedAs: "transit" };
   const gate97 = { id: "gen-97-gate", name: "The Made Gate", waygate: true, connections: ["millbrook"] };
   const asked97 = { id: "gen-97-cellar", name: "The Cellar", parentId: "millbrook", connections: [] };
-  const doors97 = [transit97, gate97, asked97].map((r) => GEN97.commitPlace(ch97, live97, r.id, r));
+  // ⛑ CCODE-715: with the world the app hands its door (`{ content }`), so the door finishes as it does in play
+  const doors97 = [transit97, gate97, asked97].map((r) => GEN97.commitPlace(ch97, live97, r.id, r, { content: C97 }));
   check("§97: ⛔ EVERY MINT PATH'S PLACE COMES BACK SOMEWHERE — a transit, a made gate and a GM's place, each minted through the one door, each with a `worldPos`, on the save and live",
     doors97.every((id, i) => id === [transit97, gate97, asked97][i].id)
     && [transit97, gate97, asked97].every((r) => Number.isFinite(Number(r.worldPos?.colatitude)) && ch97.generated.location[r.id] === r && live97[r.id] === r),
@@ -10382,6 +10383,18 @@ console.log("\n── §97 · a place found in play is somewhere, exactly a day 
     site97?.derivedFrom === "home" && days(site97, fork97.home.worldPos) < 0.05 && room97?.derivedFrom === "home" && days(room97, fork97.home.worldPos) < 0.05
     && WM97.worldPosForGenerated("lost", { lost: { id: "lost", parentId: "gone", connections: ["home"] }, home: fork97.home })?.derivedFrom === "home",
     JSON.stringify({ site97, room97 }));
+  /* ✅ AEVI, G1 (CCODE-715): *"One finishing step, and every minter goes through it … transit / waygate: … no axisVector, kind, tier,
+   * role, spectrum … never contract-checked."* Each door's place, judged by the contract authored and generated places answer to. */
+  const { checkBorn: born97 } = await import("../engine/borncontract.js");
+  const verdicts97 = [transit97, gate97, asked97].map((r) => ({ id: r.id, v: born97(r, "location", C97.consumerContract) }));
+  check("§97: ⛔ G1 · EVERY MINTER'S PLACE IS WHOLE — the transit, the made gate and the GM's place each pass the location contract with nothing CRASH (the transit had no axisVector and was never checked); each has a disposition, and a role and tier as the authored ones do: a transit a top-level waypoint, a made gate a gate, the GM's place a site inside its parent",
+    verdicts97.every(({ v }) => !(v.missing || []).some((m) => (m.severity || m.sev) === "CRASH"))
+    && [transit97, gate97, asked97].every((r) => Array.isArray(r.axisVector) && r.axisVector.length >= 8 && r.spectrum && typeof r.spectrum === "object")
+    && transit97.role === "waypoint" && transit97.tier === "settlement" && !transit97.parentId
+    && gate97.role === "gate" && asked97.tier === "site" && asked97.parentId === "millbrook"
+    && JSON.stringify(transit97.spectrum) === JSON.stringify(C97.locations.millbrook.spectrum),
+    verdicts97.map(({ id, v }) => `${id}: ${v.verdict} ${(v.missing || []).map((m) => `${m.field}:${m.severity || m.sev}`).join(",")}`).join(" · ")
+      + ` · roles ${transit97.role}/${gate97.role}/${asked97.role} tiers ${transit97.tier}/${gate97.tier}/${asked97.tier}`);
   const refused97 = GEN97.commitPlace(ch97, live97, "gen-97-bad", { id: "gen-97-bad", name: "[object Object]", connections: ["millbrook"] });
   check("§97: …and the door still refuses a place with no real name — nothing written, on the save or live",
     refused97 === null && !ch97.generated.location["gen-97-bad"] && !live97["gen-97-bad"]);
@@ -10400,7 +10413,7 @@ console.log("\n── §97 · a place found in play is somewhere, exactly a day 
   });
   check("§97: ⛔ ONE DOOR, FOR REAL — every write of a place in app.js is the door's or a load's (no fourth path writes past it), each of the three mint paths calls the door, and the door is the engine's",
     writers97.length >= 1 && writers97.every((fn) => ["commitGeneratedLocation", "hydrateGeneratedIntoContent", "hydrateCanonIntoContent"].includes(fn))
-    && doorCalls97.every((d) => d.calls) && /return commitPlace\(character, CONTENT\.locations, id, rec\);/.test(app97),
+    && doorCalls97.every((d) => d.calls) && /return commitPlace\(character, CONTENT\.locations, id, rec, \{ content: CONTENT \}\);/.test(app97),
     `writers: ${writers97.join(", ")} · ${doorCalls97.map((d) => `${d.fn} ${d.calls ? "calls" : "DOES NOT call"} the door`).join(", ")}`);
 
   // ⚠️ AND A CREATION-PATH FIX ALONE LEAVES THE FOURTEEN NOWHERE FOREVER, because they were written before

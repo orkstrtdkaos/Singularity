@@ -8,7 +8,8 @@
 // CCODE-193 §2: module-private. Exported and imported by app.js, which never used it — the
 // "live code, needless public surface" third of the importedNeverCalled list.
 const TIME_MODES = ["story", "real"];
-import { geodesic, worldPosBetween } from "./worldmap.js";   // ✅ SNG-679 H5: a moving place walks its circuit on the great circle
+import { geodesic, worldPosBetween } from "./worldmap.js";
+import { placedAncestor } from "./placeclimb.js";   // ✅ M5 (CCODE-710): the one climb — territory reads it too   // ✅ SNG-679 H5: a moving place walks its circuit on the great circle
 
 export const DEFAULT_RATIO = 3; // real mode default: 1 real hour = 1 game day
  // registry:internal
@@ -105,9 +106,8 @@ export function seasonBandFor(place, cal = _calendar) {
 
 /** The nearest place with a position — a spot inside a town has the town's sky. Climbs `parentId`; null when none has one. */
 export function positionedPlace(locations, id, { worldDay = null } = {}) {
-  let loc = id ? locations?.[id] : null, guard = 0;
-  while (loc && !Number.isFinite(Number(loc.worldPos?.colatitude)) && loc.parentId && guard++ < 8) loc = locations?.[loc.parentId] || null;
-  if (!(loc && Number.isFinite(Number(loc.worldPos?.colatitude)))) return null;
+  const loc = placedAncestor(locations, id);
+  if (!loc) return null;
   // ✅ SNG-679 H5: *"`positionedPlace` answers the live position for these three, so maps, routing and `whereOf` agree."* ⛑ Only when
   // the caller says WHICH day — a caller with no day gets the authored point, as it always has, so nothing reads the wall clock here.
   // ⛑ CCODE-692: a record `liveLocations` already put where it is today (`circuitAt`) is not walked a second time — its circuit's

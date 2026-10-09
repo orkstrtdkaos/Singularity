@@ -21,7 +21,7 @@ import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } fr
 import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b: the author god-mode (dev-gated, separate surface)
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver, MODELS } from "./engine/claude.js";
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures, recordCombatRound, combatRounds } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
-import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
+import { unearnedDepth, generate, ensureGenerated, commitPlace, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
 import { checkBorn, describeBorn, contractedTypes } from "./engine/borncontract.js";
 import { drawAxis, resolvePick, readOfPick, championPick, drawBackgroundAxis, benchBout, benchAxis } from "./engine/coliseum.js"; // SNG-149: the Coliseum blind grid · SNG-669: the bench
 import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own critical, in its own words
@@ -71,7 +71,7 @@ import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph, drawStateMark } from "./engine/mapicons.mjs";
 import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, shotRefocus, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf, siteLevel, regionLook, isSpreading, spreadingSay, lookRand, placeKindOf } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
 import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
-import { walkingDays, milesFor, worldPosForGenerated, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, placeLabels } from "./engine/worldmap.js";
+import { walkingDays, milesFor, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
 import { sheetFor as personSheetFor, personRecordFor, battleSkillsFor, playerSheetFor } from "./engine/npcsheet.js";  // the person-keyed sheet, and SNG-571's player-facing one
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.18";
+const APP_VERSION = "2.26.19";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5829,7 +5829,10 @@ async function handleGenerateRequests(turn) {
         if (promotedFrom && !rec.parentId) { rec.parentId = promotedFrom.parentId; rec._promotedFromSubPlace = true; }
         if (!rec.parentId && hereNow()?.id) rec.parentId = hereNow().id; // born inside where we stand
       }
-      if (type === "location") CONTENT.locations[rec.id] = rec;
+      /* ✅ AEVI, M1 (CCODE-710): *"One door, for real. Route the `generateRequest` location branch through `commitGeneratedLocation`,
+       * so every mint derives a position at the write."* ⚠️ This branch wrote `CONTENT.locations` itself, past the door: no name guard,
+       * and no position unless the born-whole finisher had found one. A refused place is taken back out of the save it was minted to. */
+      if (type === "location") { if (!commitGeneratedLocation(rec.id, rec)) { delete character.generated?.location?.[rec.id]; continue; } }
       else if (type === "npc") CONTENT.npcs[rec.id] = rec;
       notes.push({ type, name: rec.name, id: rec.id });
       autoVerifyLeg("b9p1-generate", `minted a ${type}: ${rec.name}`);          // SNG-051 auto-verify
@@ -14212,7 +14215,6 @@ function commitGeneratedLocation(id, rec) {
     console.warn("[mint] REFUSED a location with no real name — nothing written to the save:", id, rec?.name);
     return null;
   }
-  ensureGenerated(character);
   // ⛔ AND A PLACE MADE IN PLAY MUST STILL BE SOMEWHERE. Fourteen of Silas's generated locations carried no
   // `worldPos` — including the Whistling Woman Post, the hold he was standing in — so `geodesic` returned
   // null for every one of them and nothing could be routed to or from a place the player actually was.
@@ -14220,13 +14222,8 @@ function commitGeneratedLocation(id, rec) {
   // mint paths when I thought there was one, and a future third is covered without anyone remembering this.
   // ⚠️ It is DERIVED from the place this one was made off, never invented, and stays absent when there is
   // nothing to derive from — an unplaced place is better than a place in the wrong world.
-  if (!rec.worldPos) {
-    const pos = worldPosForGenerated(id, (k) => (k === id ? rec : (CONTENT.locations[k] || character.generated?.location?.[k] || null)));
-    if (pos) rec.worldPos = { colatitude: pos.colatitude, longitude: pos.longitude, depth: pos.depth };
-  }
-  character.generated.location[id] = rec;   // persists on the save (hydrateGeneratedIntoContent revives it)
-  CONTENT.locations[id] = rec;              // live this session
-  return id;
+  // ⛑ CCODE-710: the door's body is the engine's (`commitPlace`), so the suite opens the door the app opens (M1)
+  return commitPlace(character, CONTENT.locations, id, rec);
 }
 
 function mintTransitLocation(moveRef) {

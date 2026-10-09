@@ -1,3 +1,4 @@
+import { placedAncestor } from "./placeclimb.js";   // ✅ M5 (CCODE-710): where a hold's place is, by the climb `positionedPlace` uses
 /* ⛔ WHOSE GROUND IS THIS — a power's reach evaluated everywhere, the way `engine/field.js` evaluates the substrate:
  * point-first, data in, no canvas anywhere in it. (AEVI B2, 2026-10-04, from her round-1 appendices A and B.)
  *
@@ -5,7 +6,7 @@
  * *whose ground is this camp on*; the news needs it; the tick will want it. A reader only a screen can call is a
  * reader the rest of the engine cannot use — this file has that failure written down by name in several places.
  *
- * ⚠️ IMPORTS NOTHING, deliberately, exactly as `field.js` does. The region reader needs a cost surface and a
+ * ⚠️ IMPORTS NOTHING, deliberately, exactly as `field.js` does — save `placeclimb.js`, which imports nothing either (M5, below). The region reader needs a cost surface and a
  * projection, and both are HANDED IN rather than imported: `worldglobe.js` carries terrain, `melee.js` and
  * `worldmap.js` hang off it, and pulling that graph into a pure evaluator to reach two functions is the wrong
  * trade. `worldtick` hands `divert` to `tickStore` for the same reason.
@@ -103,7 +104,7 @@ export function anchorsOf(p, locations = {}, { allows = null } = {}) {
   if (Array.isArray(p?.anchors)) {
     const made = [];
     for (const a of p.anchors) {
-      const l = locations[a?.at];
+      const l = a?.at ? placedAncestor(locations, a.at) : null;   // ⛑ M5: a hold at a fresh site stands where its parent stands
       const lat = a?.lat != null ? Number(a.lat) : (l?.worldPos ? Number(l.worldPos.colatitude) - 90 : null);
       const lonRaw = a?.lon != null ? Number(a.lon) : (l?.worldPos ? Number(l.worldPos.longitude) : null);
       if (!Number.isFinite(lat) || !Number.isFinite(lonRaw)) continue;
@@ -115,8 +116,10 @@ export function anchorsOf(p, locations = {}, { allows = null } = {}) {
     return made;
   }
   const out = [], seen = new Set();
+  /* ✅ AEVI, M5 (CCODE-710): *"`anchorsOf` uses the same `positionedPlace` climb as sharedholds, so territory and shared holds agree
+   * about a hold founded at a minted site."* ⚠️ It dropped a hold whose own place had no `worldPos`; sharedholds climbed `parentId`. */
   const add = (id, kind) => {
-    const l = locations[id];
+    const l = placedAncestor(locations, id);
     if (!l?.worldPos || seen.has(id + kind) || !standing(id)) return;
     seen.add(id + kind);
     const lon = Number(l.worldPos.longitude);

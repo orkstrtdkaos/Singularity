@@ -235,8 +235,11 @@ export function geodesic(a, b, { depthScale = DEPTH_RADII_PER_LEVEL,
  *  returns null for them and every distance, bearing and route is unreachable. ⚠️ `geodesic`'s null is the
  *  RIGHT answer to a missing position; this supplies the position instead of teaching it to guess.
  *
- *  ⚑ DERIVED FROM THE PARENT IT WAS MADE OFF, which is what `connections[0]` records — the same shape
- *  the retired layout minter used for the diagram, one dimension up. The chain is walked because a generated place
+ *  ⚑ DERIVED FROM THE PLACE IT WAS MADE OFF. ✅ AEVI, M1 (CCODE-710): *"In `worldPosForGenerated`, prefer `parentId` and fall back
+ *  to `connections[0]`. … A site's parent is where it IS; its first connection is only where a road goes."* So each hop goes up
+ *  `parentId` when the parent is known, and along `connections[0]` otherwise. ⛑ A place reached only through parents is INSIDE its
+ *  placed ancestor and stands at its coordinates — the born-whole rule (G0, `borncontract.finishLocation`): *"a room is at its
+ *  building's coordinates"*. A place reached along a road is a day off it, as below. The chain is walked because a generated place
  *  can hang off another generated place (the post off the gate clearing off the plateau edge).
  *
  *  ⚠️ THE OFFSET IS DETERMINISTIC, FROM THE ID. The same place lands in the same spot every time — a
@@ -257,15 +260,21 @@ export function worldPosForGenerated(id, lookup, { nearbyDays = 1, maxHops = 8 }
   // authored geography would drift a day every time a caller forgot to check first. `derivedFrom` is null
   // because nothing was derived: this position is the world's own.
   if (cur?.worldPos && Number.isFinite(Number(cur.worldPos.colatitude))) return { ...cur.worldPos, derivedFrom: null };
+  let byRoad = false;
   while (cur && hops++ < maxHops) {
     if (cur.worldPos && Number.isFinite(Number(cur.worldPos.colatitude))) break;
-    const parentId = (cur.connections || [])[0];
-    if (!parentId || seen.has(parentId)) return null;   // no parent, or a cycle
-    seen.add(parentId);
-    cur = get(parentId);
+    // ⛔ M1: the parent first — only a parent nothing knows falls back to the road
+    const up = cur.parentId && !seen.has(cur.parentId) && get(cur.parentId) ? cur.parentId : null;
+    const next = up || (cur.connections || [])[0];
+    if (!next || seen.has(next)) return null;   // no parent, or a cycle
+    if (!up) byRoad = true;
+    seen.add(next);
+    cur = get(next);
   }
   const base = cur?.worldPos;
   if (!base || !Number.isFinite(Number(base.colatitude))) return null;
+  // ⛑ inside, all the way up: at the placed ancestor's own point (a room is at its building's coordinates)
+  if (!byRoad) return { colatitude: Number(base.colatitude), longitude: Number(base.longitude), depth: Number(base.depth) || 0, derivedFrom: cur.id || null, inside: true };
   // a stable hash of the id → an angle and a sign, so the offset is reproducible and spread out
   let h = 2166136261;
   for (let i = 0; i < String(id).length; i++) { h ^= String(id).charCodeAt(i); h = Math.imul(h, 16777619); }

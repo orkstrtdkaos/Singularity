@@ -14056,9 +14056,14 @@ await (async () => {
         for (let k = at; k >= 0; k--) if (/^function /.test(lines329[k])) return lines329[k].trim();
         return null;
       };
-      check("329b: the ONLY write to generated.location lives inside the guard, not merely exists once",
-        (appSrc329.match(/generated\.location\[[a-zA-Z]+\] = rec/g) || []).length === 1
-        && /^function commitGeneratedLocation/.test(owner("generated.location[id] = rec") || ""));
+      // ⛑ CCODE-710 (M1): the guard's body moved to the engine (`commitPlace`, generate.js) so the suite opens the door the app opens —
+      // app.js writes no place to the save at all now, and its door is the engine's, with the warning
+      const genSrc329 = readFileSync(join(root, "engine/generate.js"), "utf8");
+      check("329b: the ONLY write to generated.location lives inside the guard, not merely exists once — the guard is the engine's `commitPlace`, and app.js's door calls it",
+        (appSrc329.match(/generated\.location\[[a-zA-Z]+\] = rec/g) || []).length === 0
+        && (genSrc329.match(/generated\.location\[[a-zA-Z]+\] = rec/g) || []).length === 1
+        && /export function commitPlace\([\s\S]{0,900}?character\.generated\.location\[id\] = rec;/.test(genSrc329)
+        && /^function commitGeneratedLocation/.test(owner("return commitPlace(") || ""));
       // ⛔ AND THE GUARD MUST NOT CALL ITSELF. A self-recursive commit blows the stack the first time a
       // waygate is minted in play — a crash no headless test can reach, because app.js does not run here.
       check("329b: the guard does not recurse into itself", (() => {
@@ -25899,6 +25904,22 @@ await (async () => {
       && !/Math\.cos\(from\[0\] \* R\)/.test(lmSrc709) && /bearingBetween\(from, to\)/.test(lmSrc709) && /degBetween\(from, to\) \* 111320/.test(lmSrc709)
       && (appSrc709.match(/layoutKids\(children\)/g) || []).length >= 2 && /children: layoutKids\(children\), roadsMiles/.test(appSrc709),
       `pole ${pole.map((p) => `${p.id} ${p.at}/${p.want}`).join(", ")} · anti ${anti.map((p) => `${p.at}/${p.want}`).join("")}`);
+  }
+  /* ── ✅ Aevi's M5 (SNG-672, CCODE-710): one answer to "where is this place" — territory climbs as the maps and shared holds do ── */
+  {
+    const INF710 = await import("../engine/influence.js");
+    const WT710 = await import("../engine/worldtime.js");
+    const locs710 = { home: { id: "home", worldPos: { colatitude: 40, longitude: 10, depth: 0 } }, site: { id: "site", parentId: "home" }, room: { id: "room", parentId: "site" }, loop: { id: "loop", parentId: "loop" } };
+    const held710 = INF710.anchorsOf({ id: "p", holds: [{ at: "room" }] }, locs710);
+    const given710 = INF710.anchorsOf({ id: "q", anchors: [{ at: "room", w: 1 }] }, locs710);
+    const pp710 = WT710.positionedPlace(locs710, "room");
+    const src710 = readFileSync(join(root, "engine/influence.js"), "utf8") + readFileSync(join(root, "engine/worldtime.js"), "utf8");
+    check("710/M5: ⛔ AEVI — ONE ANSWER TO \"WHERE IS THIS PLACE\" — a hold founded at a site with no position of its own anchors territory where its placed ancestor stands, the same point `positionedPlace` gives the maps and the shared holds (territory dropped it; the shared holds climbed `parentId`); a power that hands its own anchors climbs too; a parent loop ends; both readers call the one climb (`placeclimb.js`)",
+      held710.length === 1 && held710[0].lat === -50 && held710[0].lon === 10 && pp710?.id === "home"
+      && given710.length === 1 && given710[0].lat === -50 && given710[0].lon === 10
+      && INF710.anchorsOf({ id: "r", holds: [{ at: "loop" }] }, locs710).length === 0 && WT710.positionedPlace(locs710, "loop") === null
+      && (src710.match(/placedAncestor\(locations, /g) || []).length >= 3 && !/guard\+\+ < 8\) loc = locations/.test(src710),
+      JSON.stringify({ held710, given710, pp: pp710?.id }));
   }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {

@@ -16,7 +16,7 @@
 //  • the entity's authored-shape fields sit at top level (indistinguishable downstream);
 //    all generative metadata lives in a `_gen` sidecar.
 
-import { isDescriptiveNotName } from "./state.js";
+import { isDescriptiveNotName, isCoercedObjectName } from "./state.js";
 import { slugify } from "./quests.js";
 import { namesMatch, smartClamp } from "./namematch.js";
 import { worldPosForGenerated } from "./worldmap.js";   // G0: the address walk the finisher needs
@@ -46,6 +46,25 @@ const DEFAULT_SESSION_CAP = 6; // governor: mints per scene/session before we pr
 
 /** Ensure the per-save generated-content store exists. Lives on the character so it syncs
  *  and participates in cross-device load-latest (SNG-BATCH-7). */
+/** ⛔ THE ONE DOOR FOR A PLACE MADE IN PLAY (SNG-329b). Every mint path writes a place through here: it refuses a place with no real
+ *  name (nothing written — a coerced `[object Object]` persists, reloads, and feeds its seed back to the GM), derives a position from
+ *  the place it was made off when it has none (`worldPosForGenerated`: its parent first), and writes it to the save and to the live
+ *  world. Returns the id, or null when refused.
+ *  ✅ AEVI, M1 (CCODE-710): *"Rewrite §97 as behaviour: mint through every path the app has (transit, waygate, `generateRequest`)
+ *  and assert each record comes back with a `worldPos`."* ⛑ So the door's body moved out of app.js into the engine, where the suite
+ *  can open it: app.js's `commitGeneratedLocation` is this, with its warning. */
+export function commitPlace(character, locations, id, rec) {
+  if (!id || !rec || isCoercedObjectName(id) || isCoercedObjectName(rec.name)) return null;
+  ensureGenerated(character);
+  if (!rec.worldPos) {
+    const pos = worldPosForGenerated(id, (k) => (k === id ? rec : (locations?.[k] || character.generated?.location?.[k] || null)));
+    if (pos) rec.worldPos = { colatitude: pos.colatitude, longitude: pos.longitude, depth: pos.depth };
+  }
+  character.generated.location[id] = rec;   // persists on the save (hydrateGeneratedIntoContent revives it)
+  if (locations) locations[id] = rec;       // live this session
+  return id;
+}
+
 export function ensureGenerated(character) {
   if (!character.generated) character.generated = { schemaVersion: 1, npc: {}, location: {}, arc: {}, creature: {}, item: {} };
   for (const t of GEN_TYPES) if (!character.generated[t]) character.generated[t] = {};

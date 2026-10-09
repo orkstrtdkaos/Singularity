@@ -535,5 +535,10 @@
     "purpose": "SNG-679 Part R, R4 and R6: a broken thing near the character is a mending job on their job list (nearest first, at most three, the culprit's make-good first and unpaid); a job's success brings it up one rung through the one door, by the character, and pays the rung's share of the repair value in the place's own money; the place card lists every broken thing.",
     "playerVisibleSurface": "the Jobs tab (\"Restore the Water Wheels at Millbrook\", \"Make good the road to Echo River Crossing at Millbrook\"), the reward line when the team comes back, and the place card's \"Wanted at {place}: hands to mend the {thing}\" or \"The people of {place} are at work on the {thing}\"",
     "whatMakesItFire": "the world tick keeps the board (`postMendingJobs`) after the locals' pass; `applyJobEffects` applies a `mend` stake when a team comes back with a success; `placeCardHTML` reads `brokenAt`"
+  },
+  "placeclimb.js": {
+    "purpose": "CCODE-710 (SNG-672 M5): where a place is when it has no position of its own — the nearest placed ancestor up parentId — the one climb the maps (positionedPlace) and territory (anchorsOf) both read, so a hold founded at a fresh site stands in one place on every surface.",
+    "playerVisibleSurface": "Indirect: a hold founded at a place made in play counts toward the realm's territory on the globe and the region map, at the point the shared holds and the maps show it.",
+    "whatMakesItFire": "Every positionedPlace call (maps, routing, shared holds, the clock's place) and every anchorsOf call (territory, the realm lens) for a place with no worldPos of its own."
   }
 }

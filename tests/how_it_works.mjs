@@ -10355,11 +10355,53 @@ console.log("\n── §97 · a place found in play is somewhere, exactly a day 
   // already red at 2 and my addition raised the MAGNITUDE inside an already-red bucket while the COUNT of
   // failures held. ⚑ A green ratchet is not a green change, so the wire is asserted here too.
   const app97 = rd("app.js");
-  check("§97: ⛔ THE MINT PATH DERIVES A POSITION — at the one door every minted place goes through",
-    /function commitGeneratedLocation/.test(app97)
-    && /if \(!rec\.worldPos\) \{[\s\S]{0,400}?worldPosForGenerated\(/.test(app97));
-  check("§97: …and it is IMPORTED, not merely named — a call to a function nobody imported is a throw",
-    /import \{[^}]*worldPosForGenerated[^}]*\} from "\.\/engine\/worldmap\.js"/.test(app97));
+  /* ✅ AEVI, M1 (CCODE-710): *"Rewrite §97 as behaviour: mint through every path the app has (transit, waygate, `generateRequest`)
+   * and assert each record comes back with a `worldPos`. A future fourth path then fails the test instead of passing on the source
+   * text."* ⚠️ The two checks that stood here read the source of ONE door and passed while a second door (`generateRequest`) wrote
+   * `CONTENT.locations` itself. ⛑ The door's body is the engine's now (`commitPlace`), so each path's record is minted through it. */
+  const GEN97 = await import("../engine/generate.js");
+  const live97 = { ...C97.locations };
+  const ch97 = { id: "c97", generated: null };
+  const mb97 = C97.locations.millbrook.worldPos;
+  // the three shapes the app's three paths hand the door: a transit (a road from here), a made gate (its anchors), a GM's place (born here)
+  const transit97 = { id: "gen-97-pass", name: "The Pass", tags: ["transitional"], connections: ["millbrook"], _mintedAs: "transit" };
+  const gate97 = { id: "gen-97-gate", name: "The Made Gate", waygate: true, connections: ["millbrook"] };
+  const asked97 = { id: "gen-97-cellar", name: "The Cellar", parentId: "millbrook", connections: [] };
+  const doors97 = [transit97, gate97, asked97].map((r) => GEN97.commitPlace(ch97, live97, r.id, r));
+  check("§97: ⛔ EVERY MINT PATH'S PLACE COMES BACK SOMEWHERE — a transit, a made gate and a GM's place, each minted through the one door, each with a `worldPos`, on the save and live",
+    doors97.every((id, i) => id === [transit97, gate97, asked97][i].id)
+    && [transit97, gate97, asked97].every((r) => Number.isFinite(Number(r.worldPos?.colatitude)) && ch97.generated.location[r.id] === r && live97[r.id] === r),
+    [transit97, gate97, asked97].map((r) => `${r.id}: ${JSON.stringify(r.worldPos)}`).join(" · "));
+  check("§97: ⛔ …the GM's place (born inside where the player stands, `parentId`, no road) stands AT its parent — inside it, as born-whole puts a room at its building — while a place off a road is a day off",
+    days(asked97.worldPos, mb97) < 0.05 && Math.abs(days(transit97.worldPos, mb97) - 1) < 0.001,
+    `cellar ${days(asked97.worldPos, mb97)} d, pass ${days(transit97.worldPos, mb97)} d`);
+  // ✅ M1: *"prefer `parentId` and fall back to `connections[0]`"* — a site whose first road goes somewhere else is still where its parent is
+  const fork97 = { far: { id: "far", worldPos: at(120, 200) }, home: { id: "home", worldPos: at(40, 10) }, site: { id: "site", parentId: "home", connections: ["far"] }, room: { id: "room", parentId: "site" } };
+  const site97 = WM97.worldPosForGenerated("site", fork97), room97 = WM97.worldPosForGenerated("room", fork97);
+  check("§97: ⛔ THE PARENT FIRST — a site whose first connection is a road to somewhere else is placed where its parent IS, not a day down that road; a room in it climbs the same way",
+    site97?.derivedFrom === "home" && days(site97, fork97.home.worldPos) < 0.05 && room97?.derivedFrom === "home" && days(room97, fork97.home.worldPos) < 0.05
+    && WM97.worldPosForGenerated("lost", { lost: { id: "lost", parentId: "gone", connections: ["home"] }, home: fork97.home })?.derivedFrom === "home",
+    JSON.stringify({ site97, room97 }));
+  const refused97 = GEN97.commitPlace(ch97, live97, "gen-97-bad", { id: "gen-97-bad", name: "[object Object]", connections: ["millbrook"] });
+  check("§97: …and the door still refuses a place with no real name — nothing written, on the save or live",
+    refused97 === null && !ch97.generated.location["gen-97-bad"] && !live97["gen-97-bad"]);
+  /* ⛔ A FOURTH PATH FAILS HERE. Every statement in app.js that writes a place into the live world or the save stands in the door, or in
+   * one of the two loads that put back what the save or the shared canon already holds (each fills only an id the world lacks). */
+  const writers97 = [];
+  for (const mm of app97.matchAll(/(CONTENT\.locations|generated\.location)\[[^\]]+\]\s*=[^=]/g)) {
+    const before = app97.slice(0, mm.index);
+    const fn = [...before.matchAll(/^(?:async )?function (\w+)\(/gm)].pop()?.[1] || "?";
+    writers97.push(fn);
+  }
+  const doorCalls97 = ["mintTransitLocation", "mintWaygate", "handleGenerateRequests"].map((fn) => {
+    const i = app97.search(new RegExp(`^(?:async )?function ${fn}\\(`, "m"));
+    const body = i < 0 ? "" : app97.slice(i, i + 12000).split(/\n(?:async )?function \w+\(/)[0];
+    return { fn, calls: /commitGeneratedLocation\(/.test(body) };
+  });
+  check("§97: ⛔ ONE DOOR, FOR REAL — every write of a place in app.js is the door's or a load's (no fourth path writes past it), each of the three mint paths calls the door, and the door is the engine's",
+    writers97.length >= 1 && writers97.every((fn) => ["commitGeneratedLocation", "hydrateGeneratedIntoContent", "hydrateCanonIntoContent"].includes(fn))
+    && doorCalls97.every((d) => d.calls) && /return commitPlace\(character, CONTENT\.locations, id, rec\);/.test(app97),
+    `writers: ${writers97.join(", ")} · ${doorCalls97.map((d) => `${d.fn} ${d.calls ? "calls" : "DOES NOT call"} the door`).join(", ")}`);
 
   // ⚠️ AND A CREATION-PATH FIX ALONE LEAVES THE FOURTEEN NOWHERE FOREVER, because they were written before
   // it existed — including the hold Erik is standing in. The step is asserted by RUNNING it, not by reading
@@ -36074,9 +36116,13 @@ console.log("\n── §414 · whose ground is this ──");
   const C414 = await lch414();
 
   /* ---- 1 · ⛔ IT IS A WORLD FACT, NOT A LENS ---- */
-  check("§414: ⛔ THE READER IS PURE AND IMPORT-FREE — a reader only a screen can call is one the engine cannot use",
-    !/^\s*import /m.test(rd("engine/influence.js"))
-    && typeof INF.makeInfluence === "function" && typeof INF.territoryByGround === "function");
+  // ⛑ CCODE-710 (Aevi's M5): territory reads the one parent climb `positionedPlace` reads — from `placeclimb.js`, which imports
+  // nothing itself. Pure still means no graph: the reader's only import is a leaf, and the leaf has none.
+  const infImports414 = [...rd("engine/influence.js").matchAll(/^\s*import .* from "\.\/([\w.]+)";/gm)].map((m) => m[1]);
+  check("§414: ⛔ THE READER IS PURE AND IMPORT-FREE — a reader only a screen can call is one the engine cannot use (its one import, since M5, is the parent climb, a leaf that imports nothing)",
+    infImports414.length === 1 && infImports414[0] === "placeclimb.js" && !/^\s*import /m.test(rd("engine/placeclimb.js"))
+    && (rd("engine/influence.js").match(/^\s*import /gm) || []).length === 1
+    && typeof INF.makeInfluence === "function" && typeof INF.territoryByGround === "function", infImports414.join(", "));
   // ⚠️ THE NUMBERS ARE HERS, and the radius comment in her appendix was stale (1.4° / ~4° is the formula WITHOUT
   // its 1.2 base); her §5 prose had the right ones and these match the prose.
   check("§414: ⛔ …and the model is Aevi's: seat 1.0 · hold 0.8 · reach 0.55, floor 0.22, contested within 15%",

@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.14";
+const APP_VERSION = "2.26.15";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -18431,19 +18431,10 @@ function wireWorldGlobe() {
     onMove: (x, y, dx, dy) => { if (dragging) spinBy(dx, dy); },
     onUp: () => { if (dragging) { dragging = false; paint(false); } },
     onZoom: (factor) => zoomBy(factor),
-    // ⚠️ A TAP FRAMES A PLACE, exactly as a click does — the same `nearest` and the same `flyTo`, so a phone
-    // and a mouse agree about what tapping the world does.
-    // ⛑ My first cut called `pickAt`, which is the REGION map's picker and does not exist in this scope. The
-    // scope scan caught it before it ever ran: an undeclared read here would have thrown on the first tap.
-    onTap: (x, y) => {
-      const p = nearest(x, y);
-      if (!p) return;
-      const wp = CONTENT.locations?.[p.id]?.worldPos;
-      if (!wp) return;
-      const isRegion = p.kind === "region";
-      flyTo(wp.colatitude - 90, wp.longitude, isRegion ? 26 : 8);
-      if (readout) readout.textContent = `${p.name}${isRegion ? " — the region, framed" : ""} · tap again to go closer, or use the breadcrumb for the list`;
-    },
+    /* ⛔ CCODE-704 · A TAP DOES WHAT A CLICK DOES — W1 and W7 on a phone. ⚠️ MEASURED (triage of Aevi's world-map order): the tap
+     * only FLEW to a fixed span and never asked `globeClickAction`, and the ghost-click guard then swallowed the browser's own click —
+     * so on a phone a second tap never entered a region and a tap on a place never opened its card. Both now run the one handler. */
+    onTap: (x, y) => globeAct(x, y),
   });
   cv.onmousemove = (e) => {
     if (dragging) {
@@ -18517,8 +18508,10 @@ function wireWorldGlobe() {
   // ⛑ THE RULE IS `globeClickAction`'S; THIS IS ONLY THE HANDS. The handler finds the pin, performs what
   // the engine decided, and reports it — so a test can prove the navigation without a canvas.
   const regionOf = (id) => { const l = CONTENT.locations?.[id]; return l?.regionId || l?.region || null; };
-  cv.onclick = (e) => {
-    const p = nearest(e.offsetX, e.offsetY);
+  // ⛑ ONE HANDLER FOR A CLICK AND A TAP (CCODE-704): `x`, `y` in the canvas's CSS pixels — `offsetX` for a mouse, `bindGesture`'s
+  // local point for a finger, which are the same frame
+  function globeAct(x, y) {
+    const p = nearest(x, y);
     if (!p) return;
     const wp = CONTENT.locations?.[p.id]?.worldPos;
     if (!wp) return;
@@ -18543,7 +18536,8 @@ function wireWorldGlobe() {
     _framed = act.regionId;
     flyTo(wp.colatitude - 90, wp.longitude, act.span || REGION_FRAME_DEG);
     if (readout) readout.textContent = `${p.name} — framed · click again to enter, or use the breadcrumb for the list`;
-  };
+  }
+  cv.onclick = (e) => globeAct(e.offsetX, e.offsetY);
   // ⛑ THE WHEEL IS `bindGesture`'s NOW, and so is the pinch — both arrive at `zoomBy` above, which is the
   // body this handler used to hold, floor handoff and all. One rule, two ways of asking for it.
   for (const b of app.querySelectorAll("[data-globelayer]")) b.onclick = () => {

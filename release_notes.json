@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.26.15",
+      "date": "2026-10-09",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Tapping the world map works on a phone",
+          "summary": "On a phone, tapping a place on the world map now opens its card, and tapping a region twice takes you into it, just as clicking does on a computer. Before, a tap only moved the view."
+        }
+      ]
+    },
+    {
       "version": "2.26.14",
       "date": "2026-10-09",
       "entries": [

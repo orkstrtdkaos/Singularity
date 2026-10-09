@@ -25812,6 +25812,15 @@ await (async () => {
       && app702.includes("data-job-name=") && app702.includes("j.stakes.resettle.name = v; saveCharacter(character);"),
       JSON.stringify({ remake: remake702?.label, cost: remake702?.stakes?.crystal, resettle: resettle702?.label, founded: founded702 && [founded702.state, founded702.name], rlines702, slines702 }));
   }
+  /* ── ✅ W1/W7 on touch (CCODE-704): a tap on the globe does what a click does ── */
+  {
+    const app704 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");
+    const body704 = app704.slice(app704.indexOf("function globeAct(x, y) {"), app704.indexOf("cv.onclick = (e) => globeAct(e.offsetX, e.offsetY);"));
+    check("704/W1+W7: ⛔ A TAP ON THE GLOBE DOES WHAT A CLICK DOES — one handler for both (a tap had only flown the camera, and the ghost-click guard then swallowed the browser's click, so on a phone a region could never be entered and a place's card never opened): it asks `globeClickAction`, opens the card for a place, and enters a region on the second tap",
+      app704.includes("onTap: (x, y) => globeAct(x, y),") && app704.includes("cv.onclick = (e) => globeAct(e.offsetX, e.offsetY);")
+      && body704.includes("const act = globeClickAction(p, { framed: _framed, regionOf });") && body704.includes("openPlaceCard(") && body704.includes("enterRegion(act.regionId, act.selectId)")
+      && !app704.includes("flyTo(wp.colatitude - 90, wp.longitude, isRegion ? 26 : 8);"));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

@@ -23958,7 +23958,8 @@ await (async () => {
   const sp678 = ML678.labelSpace(), ex678 = ML678.labelSpace();
   const placed678 = LM.paintLocalMap(stub678(), mb.model, { reveal: true, space: sp678, exitSpace: ex678 });
   // ⛑ the exits CLAIM a copy of their box in the main space so names avoid them — compare against the names only
-  const exitHitsName = ex678.boxes.some((e) => sp678.boxes.filter((b) => b.kind !== "exit").some((b) => e.x0 < b.x1 && e.x1 > b.x0 && e.y0 < b.y1 && e.y1 > b.y0));
+  // ⛑ CCODE-697: the frame's furniture (compass, scale bar) is claimed in both spaces and is no one's name — compare roads' names with names
+  const exitHitsName = ex678.boxes.filter((e) => e.kind === "exit").some((e) => sp678.boxes.filter((b) => b.kind !== "exit" && b.kind !== "furniture").some((b) => e.x0 < b.x1 && e.x1 > b.x0 && e.y0 < b.y1 && e.y1 > b.y0));
   check("678/L1: no two names on the drawn map overlap — every label went through one space (D1/§0), and the exits' own band stays clear of the names",
     sp678.overlaps().length === 0 && !exitHitsName && placed678.labelled.length >= 6, `${sp678.boxes.length} boxes, ${sp678.overlaps().length} overlaps, exits over names: ${exitHitsName}`);
   // L2 · ground for every place
@@ -24893,7 +24894,10 @@ await (async () => {
       }
     }
     check("ground G7: ⛔ LABELS THAT OVERLAP MOVE — on every authored layout, painted as the film paints it, no name (a site's, the ground's, the place's own) is written across another site's MARK; a label goes above, the other side, a step lower, then beside; and the names drawn did not fall (measured before: 99 drawn, 11 of them across a neighbour's mark)",
-      covers677 === 0 && labelled677 >= 103 && droppedSaid677
+      // ⛑ CCODE-697 (Aevi, G8: "Greyhearth's name is written twice"): the built ground of eight places was labelled with the place's own
+      // name under its title — Greyhearth, Kindlerow, Figureworks, the Thinning, the Crossing, the Marchward, Grovehome, the Stillhold.
+      // Those labels are gone on purpose, so the floor is what remains; every other name still draws
+      covers677 === 0 && labelled677 >= 97 && droppedSaid677
       && /\[\[0, 0\], \[0, 22\], \[0, 35\], \[side7, 15\], \[-side7, 15\], \[side7, 28\], \[-side7, 28\]\]/.test(readFileSync(join(root, "engine/localmap.js"), "utf8")),
       `${covers677} covers (${coverAt677.slice(0, 3).join(" | ")}), ${labelled677} names drawn`);
     check("ground G6: ⛔ THE KIND'S FILLS STOP INVENTING FARMLAND — no place with a ground entry draws a generated field (a gate yard draws none at all), and the measured terrain stays: every generated river, rock and wood is still drawn",
@@ -25657,6 +25661,43 @@ await (async () => {
       && LMsrc696.includes('const FOOT_KINDS = new Set(["hall", "works", "store", "inn", "forge", "mill", "tower", "temple", "shrine", "gate", "market", "scales", "arena", "stair"]);')
       && LMsrc696.includes("if (model?.single && m.plan && FOOT_KINDS.has(m.k) && !m.footprint) {")
       && LG696.OWN_METRES.temple === 40 && LG696.OWN_METRES.shrine === 12 && LG696.ownMetresOf({ k: "temple", m: 70 }) === 70 && LG696.ownMetresOf({ k: "temple" }, { temple: { metres: 55 } }) === 55);
+  }
+  /* ── ✅ Aevi's smaller G8 findings (CCODE-697): the edge furniture, a name written twice, fields that overlap, Thinwater's street ── */
+  {
+    const LM697 = await import("../engine/localmap.js");
+    const LG697 = await import("../engine/localground.js");
+    const ML697 = await import("../engine/maplabel.js");
+    const { loadContentHeadless: lch697 } = await import("./headless_content.mjs");
+    const C697 = await lch697();
+    const stub697 = () => new Proxy({ globalAlpha: 1, lineWidth: 1 }, { get: (t, k) => k in t ? t[k] : (k === "measureText" ? (x) => ({ width: String(x).length * 5.6 })
+      : k === "createRadialGradient" || k === "createLinearGradient" || k === "createPattern" ? () => ({ addColorStop() {} }) : k === "getLineDash" ? () => [] : () => {}), set: (t, k, v) => { t[k] = v; return true; } });
+    const paint697 = (id, w, h) => { const l = LM697.localLayoutFor(id, { content: C697 }); const md = LM697.localModel(l, LM697.localFrame(l, { w, h }), { placeId: id, placeName: C697.locations[id]?.name || id, nameOf: (x) => C697.locations[x]?.name || x });
+      const names = []; const o = LM697.paintLocalMap(stub697(), md, { reveal: true, space: ML697.labelSpace(), inset: null, labelMinPx: 0, queue: (c, text, box) => { if (box) names.push(String(text)); } }); return { md, o, names }; };
+    const ids697 = Object.keys(C697.rules.localGround.places).filter((id) => C697.locations[id]);
+    const hit = (a, b) => a.x0 < b.x1 && a.x1 > b.x0 && a.y0 < b.y1 && a.y1 > b.y0;
+    const onFurniture697 = [], dropped697 = [], zero697 = [];
+    for (const id of ids697) for (const [w, h] of [[600, 400], [800, 500]]) {
+      const { md, o, names } = paint697(id, w, h);
+      for (const e of o.exits || []) for (const b of Object.values(o.furniture || {})) if (hit(e, b)) onFurniture697.push(`${id} ${w}: ${e.name}`);
+      const named = md.roads.filter((r) => r.name || r.to).length;
+      if ((o.exits || []).length < named) dropped697.push(`${id} ${w}: ${(o.exits || []).length}/${named}`);
+      for (const t of names) if (/^→ .* · 0 (mi|m)$/.test(t)) zero697.push(`${id}: ${t}`);
+    }
+    check("697/G8: ⛔ THE EDGE FURNITURE IS KEPT CLEAR — on every place with a ground entry, at 600×400 and 800×500, no road's name is written over the compass or the scale bar, and none is dropped for want of room (it slides along the edge); a road's length under a mile is said in metres, and a length nobody knows says nothing (it read \"0 mi\")",
+      onFurniture697.length === 0 && dropped697.length === 0 && zero697.length === 0,
+      `${onFurniture697.slice(0, 3).join(" | ")} · ${dropped697.slice(0, 3).join(" | ")} · ${zero697.slice(0, 3).join(" | ")}`);
+    const gh697 = paint697("greyhearth", 800, 500).names;
+    const mb697 = paint697("millbrook", 800, 500).md;
+    const farmed697 = mb697.features.filter((f) => ["field", "meadow", "garden", "orchard", "pasture"].includes(f.kind));
+    // two pieces overlap when their blobs (which wobble about a sixth past their radius) reach each other
+    let overlap697 = 0; for (let i = 0; i < farmed697.length; i++) for (let j = i + 1; j < farmed697.length; j++) { const a = farmed697[i], b = farmed697[j]; if ((a.rPx + b.rPx) * 1.17 > Math.hypot(a.x - b.x, a.y - b.y) + 1) overlap697++; }
+    const th697 = paint697("thinwater", 800, 500).md, line697 = th697.ground?.streamLine?.pts || th697.water?.channel?.pts || [];
+    const nearStream697 = (th697.houses || []).filter((x) => LG697.lineDist(x.x, x.y, line697) < 40).length;
+    const reach697 = Math.max(...(th697.houses || []).map((x) => Math.hypot(x.x - th697.built.x, x.y - th697.built.y)));
+    check("697/G8: ⛔ A NAME IS WRITTEN ONCE, FIELDS DO NOT LIE ON FIELDS, AND A STREET RUNS ALONG ITS STREAM — Greyhearth's built ground no longer says \"Greyhearth\" under its title; Millbrook's farmed ground is drawn so no two pieces overlap (the Open Fields and the Terraced Gardens); Thinwater's houses run along the stream it is built on, most of them beside it and further out than a knot would reach",
+      !gh697.some((t) => t === "Greyhearth") && gh697.some((t) => /Grey Hearth/.test(t)) && overlap697 === 0
+      && (th697.houses || []).length >= 12 && nearStream697 / (th697.houses || []).length >= 0.75 && reach697 > th697.built.r * 1.8,
+      JSON.stringify({ gh: gh697.slice(0, 6), overlap697, houses: (th697.houses || []).length, nearStream697, reach: Math.round(reach697), r: Math.round(th697.built.r) }));
   }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)

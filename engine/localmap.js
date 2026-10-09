@@ -661,14 +661,14 @@ export function groundHouses({ ground, frame, built, roads = [], lanes = [], sit
       tryPlace(x, y, turnToWay(x, y), { gap: L * (1.1 + rnd() * 0.8) });   // yards and gaps vary
     }
   };
-  const along = (pts, depth) => {
+  const along = (pts, depth, reach = 1.35) => {
     let acc = 0, next = 0;
     for (let i = 1; i < (pts || []).length && placed.length < want; i++) {
       const [a, b] = [pts[i - 1], pts[i]]; const l = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1;
       const tx = (b[0] - a[0]) / l, ty = (b[1] - a[1]) / l, nx = -ty, ny = tx;
       for (; next < acc + l; next += L * (1.2 + rnd() * 0.9)) {
         const t = next - acc, x = a[0] + tx * t, y = a[1] + ty * t;
-        if (Math.hypot(x - built.x, y - built.y) > R0 * 1.35) continue;
+        if (Math.hypot(x - built.x, y - built.y) > R0 * reach) continue;
         const side = rnd() < 0.5 ? 1 : -1, off = depth + Wd * (0.9 + rnd() * 0.5);
         tryPlace(x + nx * side * off, y + ny * side * off, Math.atan2(ty, tx) + (rnd() - 0.5) * 0.28, { gap: L * 1.05 });
         if (rnd() < 0.25) tryPlace(x + nx * side * (off + Wd * 2.2), y + ny * side * (off + Wd * 2.2), Math.atan2(ty, tx) + (rnd() - 0.5) * 0.5, { gap: L * 1.05 });   // a little depth behind
@@ -691,7 +691,9 @@ export function groundHouses({ ground, frame, built, roads = [], lanes = [], sit
       const stream = (ground.features || []).some((f) => ["stream", "river", "channel"].includes(f.k) && f.at === "across");
       const sLine = stream ? (streamLine?.pts ? streamLine : (water?.channel?.pts ? { pts: water.channel.pts, half: wHalf } : null)) : null;
       const line = sLine ? sLine.pts : (mainRoad ? mainRoad.pts : null);
-      if (line) along(line, sLine ? sLine.half : wayHalf);
+      /* ✅ AEVI (G8): *"Thinwater's houses are a round knot with the stream through it. Its entry says a street along the stream."*
+       * ⛑ A street runs ON along its line — further than a knot's radius — and two deep, before anything left over knots up */
+      if (line) { const d0 = sLine ? sLine.half : wayHalf; along(line, d0, 2.3); if (placed.length < want) along(line, d0 + Wd * 2.6, 2.3); }
       if (placed.length < want) cluster(0.6);
       break;
     }
@@ -899,13 +901,26 @@ export function localModel(layout, frame, { placeName = "", placeId = "", nameOf
    * cached on a save loses it too. An authored field (Millbrook's) is canon and stays. */
   // ⛑ G8: and a single place with no houses draws no generated built-up ground — that blob was sized for a town
   const extentDrawn = layout?.ground ? extentAtLevel.filter((f) => !(f.generated && f.kind === "field") && !(single && (layout.ground.dwellings === "none" || single.yard) && f.generated && f.kind === "built")) : extentAtLevel;
+  /* ✅ AEVI (G8): *"Millbrook's Open Fields sits on top of its Terraced Gardens. Two field areas shouldn't overlap."* ⛑ Two pieces of
+   * farmed ground that would overlap (their blobs wobble a sixth past their radius) are both drawn smaller, in proportion, until they
+   * only meet — never under 60% of the size they were given. */
+  const FARMED = new Set(["field", "meadow", "garden", "orchard", "pasture"]);
+  const keptApart = new Map();
+  {
+    const fl = extentDrawn.filter((f) => FARMED.has(f.kind)).map((f) => { const at = frame.toXY(f.bearing, f.fromMetres); return { f, x: at.x, y: at.y, r: (Number(f.radiusMetres) || 150) * frame.pxPerMetre, r0: (Number(f.radiusMetres) || 150) * frame.pxPerMetre }; });
+    for (let pass = 0; pass < 4; pass++) for (let i = 0; i < fl.length; i++) for (let j = i + 1; j < fl.length; j++) {
+      const a = fl[i], b = fl[j], want = Math.hypot(a.x - b.x, a.y - b.y) / 1.17;
+      if (a.r + b.r > want) { const k = want / (a.r + b.r); a.r = Math.max(a.r0 * 0.6, a.r * k); b.r = Math.max(b.r0 * 0.6, b.r * k); }
+    }
+    for (const o of fl) if (o.r < o.r0) keptApart.set(o.f, o.r);
+  }
   // the extent, each as what it is
   const features = extentDrawn.map((f) => {
     const frnd = rngOf(seedOf(`extent:${id}:${f.id}`));
     // ⛑ G8: a few-house single place's built ground is the size of its site, round its own centre
     const sized = single && f.kind === "built" && f.generated;
     const at = sized ? frame.toXY(0, 0) : frame.toXY(f.bearing, f.fromMetres);
-    const rPx = sized ? single.siteMetres * 0.9 * frame.pxPerMetre : (Number(f.radiusMetres) || 150) * frame.pxPerMetre;
+    const rPx = sized ? single.siteMetres * 0.9 * frame.pxPerMetre : keptApart.has(f) ? keptApart.get(f) : (Number(f.radiusMetres) || 150) * frame.pxPerMetre;
     const base = { ...f, x: at.x, y: at.y, rPx };
     if (f.kind === "water") return { ...base, channel: channel(f, frame, frnd) };
     const poly = blobPath(at.x, at.y, rPx, frnd, { wobble: f.kind === "built" ? 0.1 : 0.16 });
@@ -1640,6 +1655,8 @@ function paintYardGround(ctx, y, model) {
   ctx.restore();
 }
 const PLAN_KINDS = new Set(["stacks", "shed", "crane", "spoil", "yard"]);
+/** Whether a label says the place's own name (a leading article and case aside). */
+const sameName = (a, b) => { const n = (s) => String(s || "").toLowerCase().replace(/^the\s+/, "").replace(/[^a-z0-9]+/g, " ").trim(); return !!n(a) && n(a) === n(b); };
 const FOOT_KINDS = new Set(["hall", "works", "store", "inn", "forge", "mill", "tower", "temple", "shrine", "gate", "market", "scales", "arena", "stair"]);
 function drawPlanMark(ctx, m) {
   const L = Number(m.plan) || 12, k = m.k;
@@ -1904,17 +1921,52 @@ export function paintLocalMap(ctx, model, {
   // will be: a left-aligned label placed by its left edge and then clamped into the frame by its centre drew
   // half a label's width to the right of the box it had reserved (measured at 365 px: "→ Sunken Choir · 500 mi"
   // sat under "The Water Wheels" with both spaces reporting no collision).
+  /* ✅ AEVI (G8, the local maps seen): *"Edge labels collide. Vigil Shrine's two road pointers overlap at the top right, and the
+   * bottom-left one overlaps the scale bar. G7's test should include the compass, the scale bar and the edge pointers."* ⛑ The
+   * frame's furniture is CLAIMED in the exits' band and the main space before any exit is placed, so a road's name finds room
+   * beside them rather than across them; the boxes are said in `out.furniture` for the gate. */
+  out.furniture = {};
+  if (legend) {
+    const L0 = scaleLegend(frame);
+    ctx.save(); ctx.font = "600 10px ui-serif, Georgia, serif";
+    const lw = Math.max(L0.px, Number(ctx.measureText(legendShort ? spanWord(L0.metres) : L0.text)?.width) || 0);
+    ctx.restore();
+    out.furniture.scale = { x0: 10, x1: 14 + lw + 4, y0: h - 30, y1: h - 6 };
+  }
+  if (compass) {
+    ctx.save(); ctx.font = "italic 600 9px ui-serif, Georgia, serif";
+    const cw = Number(ctx.measureText("the Crossing")?.width) || 56;
+    ctx.restore();
+    out.furniture.compass = { x0: w - 22 - 7 - cw - 4, x1: w - 12, y0: 12, y1: 50 };
+  }
+  // ⛑ claimed with the margin an exit's own box carries, so a name placed beside them is clear of them, not touching
+  for (const b of Object.values(out.furniture)) { const pad = { x0: b.x0 - 6, x1: b.x1 + 6, y0: b.y0 - 2, y1: b.y1 + 2, kind: "furniture", rank: -9 }; exSp.claim({ ...pad }); sp.claim({ ...pad }); }
   if (exits) {
     for (const r of model.roads) {
       const name = r.name || r.to || "";
       if (!name) continue;
-      const miles = Number.isFinite(Number(r.mi)) ? ` · ${Math.round(Number(r.mi))} mi` : "";
+      // ⛑ under a mile a road's length is said in metres — "0 mi" said a gate yard's road was no road at all. ⚠️ AND AN UNKNOWN LENGTH
+      // SAYS NOTHING: a generated layout carries `mi: null`, and Number(null) is 0 — every such road read "0 mi"
+      const mi = r.mi == null || r.mi === "" ? NaN : Number(r.mi);
+      // ⛑ and a stored 0 is a length rounded away, not a road of no length: it says nothing rather than "0 m"
+      const miles = Number.isFinite(mi) && mi > 0 ? (mi < 1 ? ` · ${spanWord(mi * 1609.34)}` : ` · ${Math.round(mi)} mi`) : "";
       const text = `→ ${name}${miles}`;
       const ex = r.exit;
       const tw = (drawLabel(ctx, text, -9999, -9999, "exit", { max: 30 })?.w) || 0;
       const cx = clamp(ex.x, tw / 2 + 6, w - tw / 2 - 6);
       const ey = clamp(ex.y + (ex.y < h / 2 ? 14 : -8), 12, h - 4);
-      const box = exSp.place(cx, ey, tw, 12, { kind: "exit", clampTo: { w, h } });
+      // ⛑ CCODE-697: a road's name slides ALONG the frame's edge to find room (beside the compass, past the scale bar), then steps in —
+      // it is never simply dropped because its first spot was taken
+      const along = Math.abs(ey - h / 2) > Math.abs(cx - w / 2) * (h / w);   // on the top or bottom edge: slide sideways
+      // along the edge first, then a row in from it and along that row, then a second and a third — four roads leaving one corner
+      // under the scale bar (Kestrel's Roost) still each find a line
+      const slides = [];
+      for (const row of [0, 16, 32, 48]) {
+        const inward = along ? [0, ey < h / 2 ? row : -row] : [cx < w / 2 ? row * 2 : -row * 2, 0];
+        slides.push(inward);
+        for (let k = 1; k <= 16; k++) slides.push(along ? [inward[0] - k * 26, inward[1]] : [inward[0], inward[1] - k * 16], along ? [inward[0] + k * 26, inward[1]] : [inward[0], inward[1] + k * 16]);
+      }
+      const box = exSp.place(cx, ey, tw, 12, { kind: "exit", clampTo: { w, h }, offsets: slides });
       if (!box) continue;
       sp.claim({ x0: box.x0, x1: box.x1, y0: box.y0, y1: box.y1, kind: "exit", rank: -2 });
       q(ctx, text, box, "exit", { align: "center", max: 30 }, 0, exSp);
@@ -1969,6 +2021,7 @@ export function paintLocalMap(ctx, model, {
     if (inset && dC < labelMinPx) continue;
     const kind = s.location ? "landmark" : "landmarkUnder";
     const text = String(sv?.label || s.name || s.id);
+    if (sameName(text, model.placeName)) continue;   // ✅ AEVI (G8): "Greyhearth's name is written twice" — the title says it
     const tw = (drawLabel(ctx, text, -9999, -9999, kind, {})?.w) || 0;
     // ✅ G7: above; the other side of its mark; a step lower; then beside it, either side, and a step lower there — each
     // spot first tested against every OTHER mark (a label may sit on its own mark's ground, as it always has)
@@ -2003,6 +2056,7 @@ export function paintLocalMap(ctx, model, {
     // ✅ S5: run dry, the water's name is the world's trace words ("a dry bed")
     const fv = f.kind === "water" ? waterView(f) : null;
     const text = String(fv?.state === "destroyed" ? (fv.label || f.name) : f.name);
+    if (sameName(text, model.placeName)) continue;   // ✅ AEVI (G8): Greyhearth's built ground is named Greyhearth — the title says it
     const tw = (drawLabel(ctx, text, -9999, -9999, "landmarkUnder", {})?.w) || 0;
     // ✅ G7: the ground's own names keep off the marks too (Millbrook's "The Village" sat across the store)
     const halfF = tw / 2 + 2;

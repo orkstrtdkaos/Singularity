@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.26.10",
+      "date": "2026-10-09",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Tidier local maps",
+          "summary": "Road names at the map's edge no longer sit on the compass or the scale bar, and none goes missing for want of room. A short road says its length in metres instead of \"0 mi\". A town's name is written once, fields no longer lie on top of each other, and Thinwater's houses run along its stream as a street."
+        }
+      ]
+    },
+    {
       "version": "2.26.9",
       "date": "2026-10-09",
       "entries": [

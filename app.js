@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.9";
+const APP_VERSION = "2.26.10";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7925,7 +7925,8 @@ function filmLocalMap(placeId, loc, w, h) {
     c2.setTransform(dpr, 0, 0, dpr, 0, 0);
     const { children } = locationTierNodes(character, CONTENT, placeId);
     const nameOf = (pid) => CONTENT.locations?.[pid]?.name || pid;
-    const roadsMiles = (a, b) => { const la = CONTENT.locations?.[a], lb = CONTENT.locations?.[b]; const d = la && lb ? roadDays(CONTENT.locations, a, b, { content: CONTENT }) : null; return d == null ? null : milesFor(d, WORLD_SCALE); };   // ✅ J1: the road's own length
+    // ⛑ CCODE-697: unrounded, so a road under a mile can say its metres (milesFor rounds, and 0.3 mi came back as 0)
+    const roadsMiles = (a, b) => { const la = CONTENT.locations?.[a], lb = CONTENT.locations?.[b]; const d = la && lb ? roadDays(CONTENT.locations, a, b, { content: CONTENT }) : null; const per = Number(WORLD_SCALE?.milesPerWalkingDay); return d == null || !(per > 0) ? null : d * per; };   // ✅ J1: the road's own length
     const layout = localLayoutFor(placeId, { content: CONTENT, character: null, children, roadsMiles });
     const frame = localFrame(layout, { w, h, pad: Math.round(Math.min(w, h) * 0.1) });
     /* ✅ the 35 again (the Service Ways): A PLACE BELOW THE GROUND DRAWS AS ONE — its own level, not surface roads converging
@@ -18673,7 +18674,7 @@ function localLayoutHere(locationId) {
         // ✅ L5: a grown place's depth is its level, read down
         ...(Number(CONTENT.locations[c.id]?.worldPos?.depth) ? { level: -Math.round(Number(CONTENT.locations[c.id].worldPos.depth)) } : {}) }
     : c);
-  const roadsMiles = (a, b) => { const la = CONTENT.locations[a], lb = CONTENT.locations[b]; const d = la && lb ? roadDays(CONTENT.locations, a, b, { content: CONTENT }) : null; return d == null ? null : milesFor(d, WORLD_SCALE); };   // ✅ J1
+  const roadsMiles = (a, b) => { const la = CONTENT.locations[a], lb = CONTENT.locations[b]; const d = la && lb ? roadDays(CONTENT.locations, a, b, { content: CONTENT }) : null; const per = Number(WORLD_SCALE?.milesPerWalkingDay); return d == null || !(per > 0) ? null : d * per; };   // ⛑ CCODE-697: unrounded   // ✅ J1
   const layout = localLayoutFor(locationId, { content: CONTENT, character, children: kids, roadsMiles });
   return { host, children, layout };
 }

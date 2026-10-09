@@ -25367,10 +25367,12 @@ await (async () => {
     const ok687 = mv687("place:millbrook", near687);
     const L687 = MS687.liveLocations(ch687, C687.locations, { content: C687 });
     const lay687 = LM687.localLayoutFor("millbrook", { content: C687, character: ch687 });
-    check("S8: ⛔ A PLACE MOVED — it writes `pos`, capped at half a day (further is refused in words: a new place founded), never a place that moves by its own circuit; the character's live locations put it where it stands now and remember where it stood; its layout keeps its sites and takes the ground of its new point; content is never edited",
+    check("S8: ⛔ A PLACE MOVED — it writes `pos`, capped at half a day (further is refused in words: a new place founded), never a place that moves by its own circuit; the character's live locations put it where it stands now and remember where it stood; its layout keeps its sites and takes the ground of its new point, while the world's water stays where it is (CCODE-691); content is never edited",
       !far687.ok && /half a day is a new place founded/.test(far687.why) && !circ687.ok && /moves by its own circuit/.test(circ687.why) && ok687.ok
       && L687.millbrook.worldPos.colatitude === near687.colatitude && L687.millbrook.movedFrom.colatitude === mb687.colatitude && C687.locations.millbrook.worldPos.colatitude === mb687.colatitude
-      && lay687.sites.length === (C687.rules.localLayouts.millbrook.sites || []).length && !!lay687.movedFrom && !lay687.extent.some((f) => f.kind === "water"),
+      // ⛑ CCODE-691 (Aevi): the Echo does not move with Millbrook — it is held where the world has it, here some 17 km off the frame
+      && lay687.sites.length === (C687.rules.localLayouts.millbrook.sites || []).length && !!lay687.movedFrom
+      && lay687.extent.some((f) => f.kind === "water" && f.heldInWorld && f.fromMetres > 10000) && LM687.fitMetres(lay687) < 5000,   // …and the frame does not chase it
       `${far687.why} · ${circ687.why}`);
     const other687 = Object.keys(C687.locations).find((id) => id !== "millbrook" && C687.locations[id].worldPos && !(C687.locations.millbrook.connections || []).includes(id) && WM687.walkingDays(C687.locations.millbrook, C687.locations[id]) < 3);
     const road687 = MS687.applyMapChange(ch687, { key: MS687.roadKey("millbrook", other687), change: "added", by: "player-me" }, { content: C687, worldDay: 61 });
@@ -25473,6 +25475,34 @@ await (async () => {
       && LM689.basisFromName("Madegate", ["The Made Gate"]).kind === "gate" && LM689.basisFromName("Saltmarch", []).kind === null
       && Object.values(C689.locations).filter((l) => Array.isArray(l.aliases) && l.aliases.some((a) => LM689.basisFromName(a).kind) && !LM689.basisFromName(l.name, l.aliases).kind).length === 0,
       JSON.stringify({ there689, back689, person: person689.destId, recallIds689, wordsWend689 }));
+  }
+  /* ── ✅ Aevi's answer to S8 (CCODE-691): a moved place keeps the world's water where the world has it ── */
+  {
+    const MS691 = await import("../engine/mapstate.js");
+    const LM691 = await import("../engine/localmap.js");
+    const { loadContentHeadless: lch691 } = await import("./headless_content.mjs");
+    const C691 = await lch691();
+    const mb691 = { ...C691.locations.millbrook.worldPos };
+    const ch691 = { id: "player-me", currentLocationId: "millbrook", mapEvents: [], holdings: [] };
+    const echo0691 = LM691.localLayoutFor("millbrook", { content: C691, character: ch691 }).extent.find((f) => f.kind === "water" && !f.added);
+    MS691.applyMapChange(ch691, { key: "water:millbrook/leat", change: "added", by: "player-me", pos: { bearing: 0, fromMetres: 100, widthMetres: 6, flowBearing: 90 } }, { content: C691, worldDay: 50 });
+    const mv691 = MS691.applyMapChange(ch691, { key: "place:millbrook", change: "moved", by: "player-me", pos: { colatitude: mb691.colatitude + 0.002, longitude: mb691.longitude } }, { content: C691, worldDay: 60 });
+    MS691.applyMapChange(ch691, { key: "water:millbrook/leat2", change: "added", by: "player-me", pos: { bearing: 90, fromMetres: 50, widthMetres: 6, flowBearing: 0 } }, { content: C691, worldDay: 70 });
+    const w691 = LM691.localLayoutFor("millbrook", { content: C691, character: ch691 }).extent.filter((f) => f.kind === "water");
+    const echo691 = w691.find((f) => !f.added), leat691 = w691.find((f) => /:cut:leat$/.test(f.id)), leat2691 = w691.find((f) => /:cut:leat2$/.test(f.id));
+    // the world point of a feature: its frame's centre plus its offset, in metres east / up-map of the authored point
+    const up691 = 0.002 * 111320;
+    const pt691 = (f, north0) => ({ e: Math.sin(f.bearing * Math.PI / 180) * f.fromMetres, n: Math.cos(f.bearing * Math.PI / 180) * f.fromMetres + north0 });
+    const near691 = (a, b) => Math.hypot(a.e - b.e, a.n - b.n) < 5;   // a bearing kept to the whole degree is 2–3 m at this distance
+    const stranger691 = LM691.localLayoutFor("millbrook", { content: C691, character: { id: "player-x", currentLocationId: "millbrook", mapEvents: [], holdings: [] } }).extent.filter((f) => f.kind === "water");
+    check("691/S8: ⛔ A MOVED PLACE KEEPS THE WORLD'S WATER WHERE THE WORLD HAS IT — the Echo is drawn at its world point relative to the new centre (shifted by the opposite of the move, its flow unturned), a channel cut before the move holds still in the world with it, a channel cut after the move is where it was cut, the authored river is not doubled by a re-measured one, and a character who has not learned of the move draws the river where it always was",
+      mv691.ok && !!echo0691 && !!echo691 && echo691.heldInWorld === true && echo691.flowBearing === echo0691.flowBearing && echo691.widthMetres === echo0691.widthMetres
+      && near691(pt691(echo691, up691), pt691(echo0691, 0)) && !(echo691.bearing === echo0691.bearing && echo691.fromMetres === echo0691.fromMetres)
+      && !!leat691 && near691(pt691(leat691, up691), { e: 0, n: 100 })
+      && !!leat2691 && leat2691.bearing === 90 && leat2691.fromMetres === 50
+      && w691.filter((f) => !f.added).length === 1
+      && stranger691.length === 1 && stranger691[0].bearing === echo0691.bearing && stranger691[0].fromMetres === echo0691.fromMetres,
+      JSON.stringify(w691.map((f) => [f.id, f.bearing, f.fromMetres])));
   }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)

@@ -809,10 +809,12 @@ export function overlayAdded(layout, placeId, character, { content = null } = {}
     } else if (p.cls === "ground") {
       const at = pos.toward ? resolveToward(pos, layout) : { bearing: Number(pos.bearing), metres: Number(pos.fromMetres ?? pos.metres) };
       const kind = { planted: "field", drained: "field", cleared: "clearing" }[st.added.kind] || "field";
-      extent.push({ id: `${placeId}:added:${p.sub}`, name: st.name || st.added.name || null, kind, bearing: at.bearing, fromMetres: at.metres, radiusMetres: Number(pos.radiusMetres) || 90, added: true });
+      extent.push({ id: `${placeId}:added:${p.sub}`, name: st.name || st.added.name || null, kind, bearing: at.bearing, fromMetres: at.metres, radiusMetres: Number(pos.radiusMetres) || 90, added: true,
+        addedDay: Number.isFinite(Number(st.added.day)) ? Number(st.added.day) : null });   // ⛑ CCODE-691: the frame it was laid out in
     } else if (p.cls === "water") {
       extent.push({ id: `${placeId}:cut:${p.sub}`, name: st.name || st.added.name || null, kind: "water", bearing: Number(pos.bearing), fromMetres: Number(pos.fromMetres),
-        widthMetres: Number(pos.widthMetres), flowBearing: Number(pos.flowBearing), added: true, cut: true });
+        widthMetres: Number(pos.widthMetres), flowBearing: Number(pos.flowBearing), added: true, cut: true,
+        addedDay: Number.isFinite(Number(st.added.day)) ? Number(st.added.day) : null });   // ⛑ CCODE-691
     }
   }
   if (!sites.length && !extent.length && !turns.length) return layout;

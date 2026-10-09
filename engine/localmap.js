@@ -30,7 +30,7 @@ import { measureGradients, usableGradients, placeSite, roadsOut as roadBearings 
 import { glyphFor, drawGlyph, drawStateMark } from "./mapicons.mjs";
 import { drawLabel, labelSpace } from "./maplabel.js";
 import { placeGround, finishGround, inPoly } from "./localground.js";
-import { overlayAdded, liveLocations } from "./mapstate.js";   // ✅ SNG-679 S8: what has been added to a place joins its layout as an overlay
+import { overlayAdded, liveLocations, eventsFor, eventKnown } from "./mapstate.js";   // ✅ SNG-679 S8: what has been added to a place joins its layout as an overlay
 
 const R = Math.PI / 180;
 const norm180 = (d) => ((d + 540) % 360) - 180;
@@ -214,6 +214,9 @@ export function fitMetres(layout) {
     if (Number.isFinite(m)) fit = Math.max(fit, m * 1.08);
   }
   for (const f of layout?.extent || []) {
+    // ⛑ CCODE-691 (Aevi): water held where the world has it after a move does not pull the frame out to it — *"the river might end
+    // up at the edge of the frame, or off it, and that's the truth of the move"*
+    if (f?.heldInWorld) continue;
     const from = Number(f?.fromMetres) || 0;
     const half = Number(f?.kind === "water" ? (f.widthMetres || 0) / 2 : (f.radiusMetres || 0));
     fit = Math.max(fit, Math.max(0, from - half) * 1.05 + 60);
@@ -485,6 +488,41 @@ export function localLayoutFor(placeId, { content = null, character = null, chil
   return withGround(out, placeId, content, character);
 }
 
+/* ═════ CCODE-691 · S8 · A MOVED PLACE KEEPS THE WORLD'S WATER WHERE THE WORLD HAS IT ═════
+ * ✅ AEVI 2026-10-08: *"The Echo doesn't move with Millbrook. The authored river is a fact about the ground, so after a move, draw
+ * it at its world position relative to the new centre. Shift it by the opposite of the move, without shifting it with the place.
+ * After a half-day move the river might end up at the edge of the frame, or off it, and that's the truth of the move."*
+ * ⛔ EACH FEATURE FROM ITS OWN FRAME. The authored water was laid out from the authored point; a channel cut or a field cleared in
+ * play was laid out from where the place stood THE DAY IT WAS MADE. So the shift is from the place's position on that day (the last
+ * move the character knows of on or before it) to where it stands now — a channel cut after the move does not shift at all.
+ * ⛑ Recomputed from the events every time a layout is asked for, never cached: the same answer as projecting once at the move, and
+ * a character who has not learned of the move still draws the river where it always was (S7).
+ * ⚠️ A FIELD THE PLAYER CLEARED holds still in the world too — it is ground, not a building — where the authored ground the place
+ * brings with it is re-derived around the new centre, as S8 ruled. ⬜ A river TURNED after a move is shifted with the move as well;
+ * a turn records no day of its own, so its frame is not known. */
+function moveMetres(a, b) {
+  const la = Number(a?.colatitude) - 90, lb = Number(b?.colatitude) - 90;
+  const dLon = norm180(Number(b?.longitude) - Number(a?.longitude));   // ⛑ both conventions of longitude come out the same
+  if (![la, lb, dLon].every(Number.isFinite)) return null;
+  return { east: dLon * Math.cos(la * R) * 111320, north: (lb - la) * 111320 };
+}
+/** The feature held where it is in the world while its frame's centre moved by `d` (metres east, metres up-map). */
+function heldInWorld(f, d) {
+  if (!d || !Number.isFinite(Number(f?.bearing)) || Math.hypot(d.east, d.north) < 1) return f;   // made where it stands: nothing moved
+  const b = Number(f.bearing) * R, m = Number(f.fromMetres) || 0;
+  const e = Math.sin(b) * m - d.east, n = Math.cos(b) * m - d.north;
+  return { ...f, bearing: Math.round(norm180(Math.atan2(e, n) / R)), fromMetres: Math.round(Math.hypot(e, n)), heldInWorld: true };
+}
+/** Where the place stood on `day` (null = its authored point), by the moves this character knows of. */
+function placePosOn(character, placeId, authored, day) {
+  let at = authored;
+  if (day == null) return at;
+  const moves = eventsFor(character, `place:${placeId}`).filter((e) => e?.change === "moved" && e.pos && eventKnown(character, e))
+    .sort((x, y) => (Number(x.day) || 0) - (Number(y.day) || 0));
+  for (const m of moves) if ((Number(m.day) || 0) <= Number(day)) at = m.pos;
+  return at;
+}
+
 /** ✅ AEVI (the local ground, G1): *"`localLayoutFor` takes the place's entry."* Attached on the way OUT, never into the save's
  *  cache: the entry is content, and a cached copy of content is the thing that goes stale. A place with no entry (a place
  *  grown in play) keeps drawing the way it always has. */
@@ -499,7 +537,13 @@ function withGround(layout, placeId, content, character = null) {
     if (moved) {
       const kind = placeKindOf(placeId, { content, loc: moved });
       const gen = generateLayout(placeId, { loc: moved, kind, gradients: measureGradients(moved, { locations: live }), children: [], locations: live });
-      layout = { ...layout, extent: [...(layout.extent || []).filter((f) => f?.kind === "built"), ...(gen.extent || []).filter((f) => f?.kind !== "built")],
+      // ✅ CCODE-691 (Aevi): the world's water, and what the player laid on the ground, stay where they are in the world
+      const authoredPos = content.locations[placeId].worldPos;
+      const held = (layout.extent || []).filter((f) => f && f.kind !== "built" && (f.kind === "water" || f.added))
+        .map((f) => heldInWorld(f, moveMetres(placePosOn(character, placeId, authoredPos, f.added ? f.addedDay ?? null : null), moved.worldPos)));
+      const ownWater = held.some((f) => f.kind === "water" && !f.added);   // the authored river is the river; a re-measured one would be a second
+      layout = { ...layout, extent: [...(layout.extent || []).filter((f) => f?.kind === "built"), ...held,
+          ...(gen.extent || []).filter((f) => f?.kind !== "built" && !(ownWater && f?.kind === "water"))],
         _measured: { ...(layout._measured || {}), ...(gen._measured || {}) }, movedFrom: moved.movedFrom };
     }
   }

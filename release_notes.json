@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.26.5",
+      "date": "2026-10-09",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "A moved village keeps its river where the river is",
+          "summary": "When the story moves a village a little way, its river no longer vanishes from the local map. The river stays where it runs in the world, so it is drawn off to one side of the new centre, or off the edge if the village moved far enough. A channel you cut or a field you cleared before the move stays where you made it."
+        }
+      ]
+    },
+    {
       "version": "2.26.4",
       "date": "2026-10-09",
       "entries": [

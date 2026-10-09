@@ -40,14 +40,14 @@ derivations of the same count is the defect that put `certify_counts` at 125 aga
 |---|---|---|---|---|---|
 | as `generate('npc')` leaves it | notable | **5** | ✅ yes | ⛔ **0** | 1 |
 | a role that signals RANK (`Marshal of the Watch`) | heroic | **25** | ✅ yes | ⛔ **0** | 1 |
-| after `affiliationFor`, minted in Millbrook (region `valley`) | notable | **5** | ✅ yes | ⛔ **0** | 1 |
+| after `affiliationFor`, minted in Millbrook (region `valley`) | notable | **5** | ✅ yes | **6** | 6 |
 | after `affiliationFor`, minted in the Maw (region `the_descent`) | notable | **5** | ✅ yes | **5** | 6 |
 
-⛔ **DOOR 5 IS THE ONLY UNEVEN ONE, AND IT IS UNEVEN BY PLACE RATHER THAN BROKEN.** ⚠️ **I first reported it as simply BROKEN, and that was a claim about my harness:** this file drove stubEntity → enforceFloors and stopped, while the real mint path also runs affiliationFor (generate.js:453). ⛑ Driving a PARTIAL path and calling it the production path is the exact defect this file exists to catch — committed by the file itself.
+⛔ **DOOR 5 WAS UNEVEN BY PLACE, AND THIS FILE KEPT SAYING SO AFTER IT WAS NOT.** On 09-08 a person minted in Millbrook fielded nothing; Aevi's home map (09-08) and Erik's distance rung (09-09) closed that in play, while this file minted with a bare context and went on reporting it. ⚠️ And the GM's own mint had no tradition index (CCODE-716), so for a person the GM made the role and skills rungs were dead and the Maw read a neighbour's tradition. ⛑ Every door now affiliates against `affiliationWorld`, and so does this file.
 
-⚑ **`readDomains` WALKS FOUR RUNGS** — model-authored · the ROLE string naming a tradition · `skillsObserved` · the REGION’S home tradition. ⛑ The last rung is the safety net, and it does not cover the whole map: **21 of 56 regions** have a home tradition, so **82 of 183 locations** fall through it — including `valley`, which is where play STARTS, and `the_center`, which is the Crossing.
+⚑ **`readDomains` WALKS FOUR RUNGS** — model-authored · the ROLE string naming a tradition · `skillsObserved` · the REGION’S home tradition (Aevi's map, then the index). ⛑ **56 of 56 regions** have a home tradition; **0 of 183 locations** fall through to Erik's distance rung — the nearest home within the limit.
 
-➡️ **So a person minted in the Maw practises `abyssal` and fields a kit; the same person minted in Millbrook fields nothing.** ⚠️ Not a missing mechanism — a missing HOME TRADITION on the regions the player actually walks, which is content rather than code.
+➡️ **A person minted in the Maw practises `abyssal` (5 crafts); the same person minted in Millbrook practises `mason` (6 crafts).**
 
 ⚠️ **The generation schema still asks for none of abilities, domains, tradition** — so every kit a minted person gets is DERIVED by affiliationFor, never authored by the model. ⛔ And reconcileGeneratedNpcWithMeet copies domains only when the record already has them, which is true once affiliation has run and false before it — so the ORDER of those two steps is load-bearing.
 

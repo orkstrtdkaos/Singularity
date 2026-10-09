@@ -15,7 +15,7 @@ import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes
 import { gmTurn, refusalSignal, reNarrateRich, parseIntent, gmAsk, generateBio, suggestBuild, suggestNextCrafts, extractGambit, sanitizeScene, reconcileSceneIdentity, narrativeRegister, ratingRegister, bluntnessDirective, SALVAGEABLE_OPS, opsFromNarration, emptyClaim } from "./engine/gm.js";
 import { buildBattlePrompt, battleKey } from "./engine/battleprompt.js"; // SNG-400b: the battle image is a prompt BUILD, not a string join
 import { namesToAvoid, namesMatch } from "./engine/namematch.js"; // CCODE-166: the codebase already knew how to match a fuller name to a known one
-import { affiliationAt, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185 · CCODE-413: the whole chain, one implementation
+import { affiliationAt, buildPeopleVocab, affiliationWorld } from "./engine/affiliation.js"; // SNG-185 · CCODE-413: the whole chain, one implementation
 import { applyQuestUpdates, questsFor, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest, stageChoice, outcomeAvailability, chooseAtStage, questDeadlines, questDeadline } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
 import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b: the author god-mode (dev-gated, separate surface)
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.24";
+const APP_VERSION = "2.26.25";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5523,9 +5523,12 @@ function affiliateNpc(record) {
   // Ditch-Mother of Millbrook, was last seen at the Crossing and would have practised the Centre's craft instead of her own valley's.
   const at = record?.homeLocation || record?.firstMet?.locationId || record?.lastSeen?.locationId || character.currentLocationId;
   return affiliationAt(record, { location: CONTENT.locations?.[at] || character.generated?.location?.[at] || null,
-    traditionIndex: CONTENT.traditionIndex, peopleVocab: _peopleVocab, regions: CONTENT.regions || null,
-    homeMap: CONTENT.substrateModel?.regionHomeTradition || null, locations: CONTENT.locations || null,
-    withinDeg: CONTENT.regionRules?.nearestTraditionWithinDeg ?? null });
+    ...affiliationWorld(CONTENT, _peopleVocab) });   // ⛔ CCODE-716: the one world every door affiliates against
+}
+/** The people vocabulary, built once from the authored corpus (CCODE-716: the GM's mint reads it too). */
+function peopleVocabNow() {
+  if (!_peopleVocab) _peopleVocab = buildPeopleVocab({ npcs: CONTENT.npcs || {} });
+  return _peopleVocab;
 }
 
 /** SNG-166 §3: every save on this device, for the cross-character name guard. A per-character check
@@ -5803,6 +5806,9 @@ async function handleGenerateRequests(turn) {
       locations: CONTENT.locations || null,
       regions: CONTENT.regions || null, nearestTraditionWithinDeg: CONTENT.regionRules?.nearestTraditionWithinDeg ?? null,
       regionHomeMap: CONTENT.substrateModel?.regionHomeTradition || null,   // ⛑ Aevi's seventeen, authored 09-08 and unread until 09-09   // ⛔ Erik: the nearest tradition by distance, when the ground names none
+      // ⛔ CCODE-716: and the tradition index and the people vocabulary — the whole world the met person's door affiliates against.
+      // Without the index the role rung and the skills rung were dead for a person the GM made, and the Maw's own tradition unread.
+      affiliation: affiliationWorld(CONTENT, peopleVocabNow()),
       hingeIds: new Set(Object.values(CONTENT.greaterArcs?.arcs || CONTENT.greaterArcs || {}).flatMap(a => a?.hingeNpcs || [])),
       // SNG-166 §3: he keeps meeting Mara. Across 10 characters on this device, 5 given names
       // recur and Mara appears in FOUR saves — invisible to any per-character check.

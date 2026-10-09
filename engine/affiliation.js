@@ -191,6 +191,24 @@ export function affiliationAt(record, { location = null, regionId = null, tradit
 
 /** Build the people vocabulary from authored NPC `people` values plus any peoples_of_kind clusters.
  *  Lowercased, deduped. Extensible — a new authored people appears here automatically. */
+/** ⛔ CCODE-716 · THE WORLD A PERSON IS AFFILIATED AGAINST, BUILT ONCE FOR EVERY DOOR. `affiliationAt` takes the tradition index, the
+ *  people vocabulary, the regions, Aevi's home map, the places and Erik's distance rung — and the doors built that bag three times
+ *  by hand. ⚠️ MEASURED: the met person's door (app `affiliateNpc`) and reconcile's backfill passed all six; the GM's MINT passed four
+ *  and no tradition index, and without one `readDomains` returns nothing at all — so for a person the GM made, the role naming a
+ *  tradition ("a Blazeborn smith") and the skills observed were dead rungs, and a person made in the Maw (whose home is in the index,
+ *  not the map) practised the NEIGHBOUR's tradition, churnfolk, where the same person met there practised abyssal. One builder now;
+ *  every door spreads it. `peopleVocab` is passed in because the corpus build is the caller's to memoise. */
+export function affiliationWorld(content, peopleVocab = null) {
+  return {
+    traditionIndex: content?.traditionIndex || null,
+    peopleVocab: peopleVocab || null,
+    regions: content?.regions || null,
+    homeMap: content?.substrateModel?.regionHomeTradition || null,
+    locations: content?.locations || null,
+    withinDeg: content?.regionRules?.nearestTraditionWithinDeg ?? null,
+  };
+}
+
 export function buildPeopleVocab({ npcs = {}, peoplesOfKind = null } = {}) {
   const set = new Set();
   for (const n of Object.values(npcs)) if (n?.people) set.add(String(n.people).toLowerCase());

@@ -556,7 +556,7 @@ export async function generate(type, context = {}, deps = {}) {
   entity._gen.romanceEligible = !(type === "npc" && isMinorEntity(entity));
   // SNG-177: an NPC arrives affiliated. Without this the standing system cannot see the people a
   // player actually spends their time with — every bond in play is with a generated NPC.
-  if (type === "npc") Object.assign(entity, affiliationFor(entity, context, context.traditionIndex || null));
+  if (type === "npc") Object.assign(entity, affiliationFor(entity, context, context.affiliation?.traditionIndex || context.traditionIndex || null));
   // ⛔ SPEC_generation_reaches_every_tier §2.1 + §2.2 — THE RARITY DRAW, HERE BECAUSE THIS IS THE ONE PLACE
   // A PERSON IS MINTED. Everything before this commit was a mechanism with no consumer, which is the
   // shape this project keeps catching: authored → registered → loaded → READ, and the fourth door is
@@ -844,6 +844,12 @@ export function nominationsFor(character) {
 // a strict superset (it also reads the role string and skillsObserved), so generation gains those
 // too; nothing here regresses.
 export function affiliationFor(entity, context = {}, traditionIndex = null) {
+  // ✅ CCODE-716: a caller that hands the whole world (`context.affiliation`, from `affiliationWorld`) is read as it is — the GM's mint
+  // does now, so it affiliates against the same six things the meet path and the backfill do
+  if (context.affiliation && typeof context.affiliation === "object") {
+    return affiliationAt(entity, { location: context.location || null, regionId: context.regionId || null, ...context.affiliation,
+      traditionIndex: context.affiliation.traditionIndex || traditionIndex || null });
+  }
   // ⛔ CCODE-413 — THE CHAIN MOVED TO affiliation.js (`affiliationAt`), so the meet path and the backfill run THIS rather than the
   // shorter copies they kept. What it returns is exactly what it returned here: the four rungs of `affiliationOf` with the region's
   // home read through Aevi's map, then ERIK 2026-09-09's distance rung — "the Valley is just a region — so npcs minted there would need

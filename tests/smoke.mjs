@@ -25994,6 +25994,27 @@ await (async () => {
       && hi713 > lo713 * 0.75 && hi713 < lo713 * 1.25,
       `shelf share of the sea: ${(lo713 * 100).toFixed(2)}% at 720, ${(hi713 * 100).toFixed(2)}% at 1440`);
   }
+  /* ── ✅ door 5 (CCODE-716): every door a person enters by affiliates against one world ── */
+  {
+    const GEN716 = await import("../engine/generate.js");
+    const AF716 = await import("../engine/affiliation.js");
+    const { loadContentHeadless: lch716 } = await import("./headless_content.mjs");
+    const C716 = await lch716();
+    const world716 = AF716.affiliationWorld(C716, AF716.buildPeopleVocab({ npcs: C716.npcs || {} }));
+    const person716 = (role) => ({ id: "gen-716", name: "Test Person", role, spectrum: {}, fears: [] });
+    const asApp716 = (locId, role) => GEN716.affiliationFor(person716(role), { location: C716.locations[locId], affiliation: world716 })?.domains?.primary || null;
+    // the GM's mint before: four of the six, and no tradition index
+    const oldCtx716 = (locId) => ({ location: C716.locations[locId], locations: C716.locations, regions: C716.regions, regionHomeMap: C716.substrateModel?.regionHomeTradition, nearestTraditionWithinDeg: C716.regionRules?.nearestTraditionWithinDeg });
+    const asOld716 = (locId, role) => GEN716.affiliationFor(person716(role), oldCtx716(locId), null)?.domains?.primary || null;
+    const app716 = readFileSync(join(root, "app.js"), "utf8"), rec716 = readFileSync(join(root, "engine/reconcile.js"), "utf8");
+    const r716 = { maw: asApp716("the_maw", "a hired blade"), mill: asApp716("millbrook", "a hired blade"), smith: asApp716("millbrook", "a Blazeborn smith"),
+      oldMaw: asOld716("the_maw", "a hired blade"), oldSmith: asOld716("millbrook", "a Blazeborn smith") };
+    check("716/door 5: ⛔ EVERY DOOR A PERSON ENTERS BY AFFILIATES AGAINST ONE WORLD — the GM's mint had no tradition index, so a person it made in the Maw practised a neighbour's tradition and a role naming a tradition (\"a Blazeborn smith\") was read by nothing; with `affiliationWorld` the Maw's own (abyssal), the role's (blazeborn), Millbrook's (mason); the meet path, the backfill and the GM's mint all spread it",
+      r716.maw === "abyssal" && r716.smith === "blazeborn" && r716.mill === "mason" && r716.oldMaw !== "abyssal" && r716.oldSmith !== "blazeborn"
+      && /affiliation: affiliationWorld\(CONTENT, peopleVocabNow\(\)\)/.test(app716) && /\.\.\.affiliationWorld\(CONTENT, _peopleVocab\)/.test(app716)
+      && /const opts = affiliationWorld\(content, /.test(rec716),
+      JSON.stringify(r716));
+  }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {
     const ST706 = await import("../engine/state.js");

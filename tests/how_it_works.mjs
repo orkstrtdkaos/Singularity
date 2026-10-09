@@ -23633,7 +23633,9 @@ console.log("\n── §294 · everyone you know practises something — one aff
   const A294 = rd("app.js").replace(/\r\n/g, "\n");
   const meet = A294.slice(A294.indexOf("function affiliateNpc("), A294.indexOf("function affiliateNpc(") + 1600);
   check("§294: ⛔ the meet path runs `affiliationAt` with Aevi's map and the regions, finds a place the game GREW as well as an authored one, and reads home ground before where they were last seen",
-    /affiliationAt\(record,/.test(meet) && /substrateModel\?\.regionHomeTradition/.test(meet) && /generated\?\.location\?\.\[at\]/.test(meet)
+    // ⛑ CCODE-716: the map reaches the meet path through `affiliationWorld`, the one world every door spreads — followed there
+    /affiliationAt\(record,/.test(meet) && (/substrateModel\?\.regionHomeTradition/.test(meet) || (/\.\.\.affiliationWorld\(CONTENT, _peopleVocab\)/.test(meet)
+      && /export function affiliationWorld[\s\S]{0,1400}?homeMap: content\?\.substrateModel\?\.regionHomeTradition/.test(rd("engine/affiliation.js")))) && /generated\?\.location\?\.\[at\]/.test(meet)
     && meet.indexOf("firstMet") < meet.indexOf("lastSeen") && !/regionHomeTradition\(region, CONTENT\.traditionIndex\)/.test(A294));
 
   /* ---- 4 · ⛔ HOME GROUND FIRST, THROUGH THE RUNNER ---- */

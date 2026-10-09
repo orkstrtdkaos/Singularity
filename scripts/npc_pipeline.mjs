@@ -27,7 +27,7 @@ import { stubEntity, enforceFloors, affiliationFor } from "../engine/generate.js
 // makes. ⚠️ MY FIRST VERSION OF THIS FILE LEFT IT OUT and reported "the generated path fields no kit",
 // which was a claim about my harness, not about the engine. Driving a PARTIAL path and calling it the
 // production path is the same defect this file exists to catch.
-import { regionHomeTradition } from "../engine/affiliation.js";
+import { regionHomeTradition, affiliationWorld, buildPeopleVocab } from "../engine/affiliation.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DOC = join(root, "docs/NPC_PIPELINE.md");
@@ -47,7 +47,11 @@ const traditionIndex = C.traditionIndex || null;
 const realCrafts = (skills) => (skills || []).filter((s) => !String(s?.id || "").startsWith("_"));
 
 /* ── THE GENERATED PATH, DRIVEN. Nothing in the suite had ever put a minted person in front of a player. ── */
-const genCtx = { location: Object.values(C.locations || {})[0] || null, role: "a hired blade of the Watch", day: 10 };
+// ⛔ CCODE-716 · AS THE APP MINTS: in Millbrook, against `affiliationWorld` — the one world the GM's mint, the meet path and the backfill
+// all read. ⚠️ This file minted with a bare context (no home map, no distance rung, no regions) and so reported "Millbrook fields nothing"
+// for a month after Aevi's map and Erik's distance rung had closed it in play; the GM's mint, meanwhile, had no tradition index.
+const genCtx = { location: C.locations?.millbrook || Object.values(C.locations || {})[0] || null, role: "a hired blade of the Watch", day: 10,
+  affiliation: affiliationWorld(C, buildPeopleVocab({ npcs: C.npcs || {} })) };
 const genSchema = C.genSchemas?.npc || {};
 const stub = stubEntity("npc", genCtx, genSchema);
 // ⚠️ `enforceFloors` returns { entity, action }, NOT the record. Reading the wrapper as the record reports
@@ -60,8 +64,9 @@ const minted = floored?.entity || floored || stub;
 const affiliated = { ...minted, ...affiliationFor(minted, genCtx, traditionIndex) };
 // how much of the world can that last rung actually serve?
 const regionsSeen = new Set(Object.values(C.locations || {}).map((l) => l?.regionId || l?.region || null));
-const regionsWithHome = [...regionsSeen].filter((r) => r && regionHomeTradition(r, traditionIndex));
-const locsNoHome = Object.values(C.locations || {}).filter((l) => !regionHomeTradition(l?.regionId || l?.region || null, traditionIndex));
+const homeOf716 = (r) => regionHomeTradition(r, traditionIndex, C.regions || null, C.substrateModel?.regionHomeTradition || null);   // the map as well as the index
+const regionsWithHome = [...regionsSeen].filter((r) => r && homeOf716(r));
+const locsNoHome = Object.values(C.locations || {}).filter((l) => !homeOf716(l?.regionId || l?.region || null));
 const mawCtx = { ...genCtx, location: C.locations?.the_maw || genCtx.location };
 const inTheMaw = { ...minted, ...affiliationFor(minted, mawCtx, traditionIndex) };
 
@@ -122,11 +127,11 @@ for (const g of genCases) {
   out.push(`| ${g.label} | ${g.tier} | **${g.level}** | ${g.fightable ? "✅ yes" : "⛔ NO"} | ${g.crafts === 0 ? `⛔ **${g.crafts}**` : `**${g.crafts}**`} | ${g.rows} |`);
 }
 out.push("");
-out.push("⛔ **DOOR 5 IS THE ONLY UNEVEN ONE, AND IT IS UNEVEN BY PLACE RATHER THAN BROKEN.** ⚠️ **I first reported it as simply BROKEN, and that was a claim about my harness:** this file drove stubEntity → enforceFloors and stopped, while the real mint path also runs affiliationFor (generate.js:453). ⛑ Driving a PARTIAL path and calling it the production path is the exact defect this file exists to catch — committed by the file itself.");
+out.push(`⛔ **DOOR 5 WAS UNEVEN BY PLACE, AND THIS FILE KEPT SAYING SO AFTER IT WAS NOT.** On 09-08 a person minted in Millbrook fielded nothing; Aevi's home map (09-08) and Erik's distance rung (09-09) closed that in play, while this file minted with a bare context and went on reporting it. ⚠️ And the GM's own mint had no tradition index (CCODE-716), so for a person the GM made the role and skills rungs were dead and the Maw read a neighbour's tradition. ⛑ Every door now affiliates against \`affiliationWorld\`, and so does this file.`);
 out.push("");
-out.push(`⚑ **\`readDomains\` WALKS FOUR RUNGS** — model-authored · the ROLE string naming a tradition · \`skillsObserved\` · the REGION’S home tradition. ⛑ The last rung is the safety net, and it does not cover the whole map: **${regionsWithHome.length} of ${regionsSeen.size} regions** have a home tradition, so **${locsNoHome.length} of ${Object.keys(C.locations || {}).length} locations** fall through it — including \`valley\`, which is where play STARTS, and \`the_center\`, which is the Crossing.`);
+out.push(`⚑ **\`readDomains\` WALKS FOUR RUNGS** — model-authored · the ROLE string naming a tradition · \`skillsObserved\` · the REGION’S home tradition (Aevi's map, then the index). ⛑ **${regionsWithHome.length} of ${regionsSeen.size} regions** have a home tradition; **${locsNoHome.length} of ${Object.keys(C.locations || {}).length} locations** fall through to Erik's distance rung — the nearest home within the limit.`);
 out.push("");
-out.push(`➡️ **So a person minted in the Maw practises \`abyssal\` and fields a kit; the same person minted in Millbrook fields nothing.** ⚠️ Not a missing mechanism — a missing HOME TRADITION on the regions the player actually walks, which is content rather than code.`);
+out.push(`➡️ **A person minted in the Maw practises \`${inTheMaw.domains?.primary || "nothing"}\` (${genCases[3].crafts} crafts); the same person minted in Millbrook practises \`${affiliated.domains?.primary || "nothing"}\` (${genCases[2].crafts} crafts).**`);
 out.push("");
 out.push(`⚠️ **The generation schema still asks for none of ${KIT_INPUTS.join(", ")}** — so every kit a minted person gets is DERIVED by affiliationFor, never authored by the model. ⛔ And reconcileGeneratedNpcWithMeet copies domains only when the record already has them, which is true once affiliation has run and false before it — so the ORDER of those two steps is load-bearing.`);
 out.push("");

@@ -37,7 +37,7 @@ import { inferDomains } from "./traditions.js";
 import { fallbackPersonalArc, repairArcNameOn } from "./personalArc.js";
 import { seedStandingAtCreation } from "./standing.js";
 import { namesMatch, normName } from "./namematch.js";   // ⛑ CCODE-689 N3: the same rule that finds a place by name
-import { affiliationOf, regionHomeTradition, buildPeopleVocab, affiliationAt } from "./affiliation.js";   // CCODE-413: step 66 runs the whole chain
+import { affiliationOf, regionHomeTradition, buildPeopleVocab, affiliationAt, affiliationWorld } from "./affiliation.js";   // CCODE-413: step 66 runs the whole chain
 import { defaultSchoolsForDomains } from "./substrate.js"; // SNG-193b §3.2: seed a school per practised domain on old saves
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidTreeFor } from "./braids.js"; // SNG-196: mint the braids a character already earned · ✅ 2026-09-12: braidTreeFor for the template-rank repair
 import { findExistingNpc, prettifyNpcName, REGISTRY_CAP, collapseScenePresence, subjectFromCaption, subjectFromSeed, rekeyPerson } from "./npcs.js"; // SNG-199/205: registry + codex backfill
@@ -632,9 +632,7 @@ export const CHARACTER_STEPS = [
       const content = ctx?.content || {};
       const idx = content.traditionIndex;
       if (!idx?.byId) return {};
-      const opts = { traditionIndex: idx, peopleVocab: buildPeopleVocab({ npcs: content.npcs || {} }), regions: content.regions || null,
-        homeMap: content.substrateModel?.regionHomeTradition || null, locations: content.locations || null,
-        withinDeg: content.regionRules?.nearestTraditionWithinDeg ?? null };
+      const opts = affiliationWorld(content, buildPeopleVocab({ npcs: content.npcs || {} }));   // ⛔ CCODE-716: the one world
       const placeOf = (id) => (id && (content.locations?.[id] || c.generated?.location?.[id])) || null;
       const fill = (rec) => {
         if (!rec || typeof rec !== "object" || rec.domains) return;

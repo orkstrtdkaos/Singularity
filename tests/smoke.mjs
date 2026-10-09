@@ -24104,8 +24104,9 @@ await (async () => {
     /\.world-arcs-head \{ font-family: var\(--font\);/.test(css680) && /\.lore-title \{ font-family: var\(--font\);/.test(css680) && !/var\(--font-display/.test(css680));
   // Aevi's still-open item — the GM reads lore by the Library's skip rule
   const stateSrc680 = readFileSync(join(root, "engine/state.js"), "utf8");
-  check("680/ruling 3: `loreToProse` skips what the Library skips (`libSkipKey`) — build notes and secret fields never reach the GM as lore",
-    /import \{ libSkipKey \} from ".\/library\.js"/.test(stateSrc680) && /!LORE_SKIP\.has\(k\) && !libSkipKey\(k\)/.test(stateSrc680));
+  // ⛔ CCODE-706 · Aevi's lore-reader note superseded the Library's rule for the GM: the GM keeps gm*, hooks and secrets (706/lore drives it)
+  check("680/ruling 3 (as 706 has it): `loreToProse` skips what is ours (`gmSkipKey` — `_` and the build meta) — build notes never reach the GM as lore",
+    /import \{ gmSkipKey \} from ".\/library\.js"/.test(stateSrc680) && /!LORE_SKIP\.has\(k\) && !gmSkipKey\(k\)/.test(stateSrc680));
   {
     const ST = await import("../engine/state.js");
     const prose = ST.loreToProse(JSON.stringify({ name: "The Echo", _why: "BUILD NOTE: moved after SNG-427", about: "a river" }));
@@ -25820,6 +25821,31 @@ await (async () => {
       app704.includes("onTap: (x, y) => globeAct(x, y),") && app704.includes("cv.onclick = (e) => globeAct(e.offsetX, e.offsetY);")
       && body704.includes("const act = globeClickAction(p, { framed: _framed, regionOf });") && body704.includes("openPlaceCard(") && body704.includes("enterRegion(act.regionId, act.selectId)")
       && !app704.includes("flyTo(wp.colatitude - 90, wp.longitude, isRegion ? 26 : 8);"));
+  }
+  /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
+  {
+    const ST706 = await import("../engine/state.js");
+    const LB706 = await import("../engine/library.js");
+    const lore706 = [];
+    for (const pack of readdirSync(join(root, "content/packs"))) {
+      const mp = join(root, "content/packs", pack, "manifest.json");
+      if (!existsSync(mp)) continue;
+      const m = JSON.parse(readFileSync(mp, "utf8"));
+      for (const e of (m.provides?.lore || m.lore || [])) { const p = typeof e === "string" ? e : (e?.path || e?.file); if (p) lore706.push(join(root, "content/packs", pack, p)); }
+    }
+    const leaks706 = [];
+    for (const f of lore706) {
+      const prose = ST706.loreFileToProse(f, readFileSync(f, "utf8"));
+      const hits = [...new Set([...(prose.match(/\b(SNG|CCODE)-\d+/g) || []), ...(prose.match(/\b[\w-]+\.(json|mjs|md)\b/g) || []), ...(prose.match(/[⛔⚠⚑⛑⬜✅➡❌]/gu) || [])])];
+      if (hits.length) leaks706.push(`${f.split(/[\\/]/).slice(-1)[0]}: ${hits.slice(0, 4).join(", ")}`);
+    }
+    const probe706 = ST706.loreToProse(JSON.stringify({ id: "x", schemaVersion: 1, name: "The Thing", gmGenerationTie: "tie it to the mill", gm_note: "for the narrator", hook: "the miller lies", secret: "the wheel is hollow", _note: "build history", designNote: "ours", buildNeeds_summary: "ours", body: "⛔ plain words" }));
+    check("706/lore: ⛔ AEVI — THE GM READS WHAT IS THE GM'S AND NOTHING THAT IS OURS — every manifest lore file rendered through the GM's reader carries no ticket id, no file name and no authoring glyph; the reader skips what is under `_` and the build-meta keys, and KEEPS the gm* keys, the hooks and the secrets the Library hides from the player (it used the player's rule, so the narrator lost them too); a Markdown lore file loses its glyphs",
+      lore706.length >= 30 && leaks706.length === 0
+      && /tie it to the mill/.test(probe706) && /for the narrator/.test(probe706) && /the miller lies/.test(probe706) && /the wheel is hollow/.test(probe706)
+      && !/build history|ours/.test(probe706) && !/⛔/.test(probe706) && /plain words/.test(probe706)
+      && LB706.libSkipKey("gmGenerationTie") && LB706.libSkipKey("hook") && !LB706.gmSkipKey("gmGenerationTie") && !LB706.gmSkipKey("hook") && LB706.gmSkipKey("_note") && LB706.gmSkipKey("designNote"),
+      `${lore706.length} files · ${leaks706.slice(0, 4).join(" | ")} · ${probe706.slice(0, 160)}`);
   }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)

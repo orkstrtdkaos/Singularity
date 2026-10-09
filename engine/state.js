@@ -11,7 +11,8 @@ import { reconcileContent } from "./reconcile.js";
 import { applySubstrateField } from "./substrate.js";
 import { stampCraftSubAttributes } from "./progression.js";
 import { loadLegends } from "./legends.js";
-import { libSkipKey } from "./library.js";   // ✅ Aevi: the GM reads lore by the Library's own skip rule, so build notes are not lore
+import { gmSkipKey } from "./library.js";   // ✅ Aevi: the GM skips what is ours (`_`, build meta) and keeps what is its own (gm*, hooks, secrets)
+import { playerText, AUTHORING_GLYPHS } from "./namematch.js";   // ✅ and no authoring glyph reaches the narrator
 import { buildTraditionIndex } from "./traditions.js";
 import { bestiaryEncounters, frameExemplarEncounters } from "./random_encounters.js"; // SNG-229 §2b: synthesize monster encounters from the loaded bestiary
 
@@ -738,7 +739,7 @@ export async function loadContent() {
   { const raws = await loreP; loreProvides.forEach((path, i) => {
     const file = path.split("/").pop();
     const name = file.replace(/\.(md|json)$/, "");
-    lore[name] = file.endsWith(".json") ? loreToProse(raws[i]) : raws[i];
+    lore[name] = loreFileToProse(file, raws[i]);
   }); }
 
   // SNG-BATCH-10 Phase 3 / SNG-065: structured quests concatenate in MANIFEST order (allSettled
@@ -1027,7 +1028,7 @@ const humanize = k => k.replace(/_/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2");
 /** Render one JSON value as something a model reads as prose rather than as a data structure. */
 function loreValue(v, depth = 0) {
   if (v == null) return "";
-  if (typeof v !== "object") return String(v);
+  if (typeof v !== "object") return playerText(String(v));   // ⛑ CCODE-706: the authoring glyphs are ours, not the narrator's
   if (Array.isArray(v)) {
     return v.map(x => {
       const inner = loreValue(x, depth + 1);
@@ -1036,10 +1037,11 @@ function loreValue(v, depth = 0) {
   }
   // ✅ AEVI: *"`loreToProse` still skips only `schemaVersion`, `id` and `kind`. Please give it the Library's
   // `libSkipKey` rule, so the GM stops reading build notes as lore."* One rule for what a reader of lore may see.
-  const parts = Object.entries(v).filter(([k]) => !LORE_SKIP.has(k) && !libSkipKey(k) && v[k] != null && v[k] !== "");
+  // ⛔ CCODE-706: the GM's own rule (`gmSkipKey`) — never the player's, which hid every gm*, hook and secret from the narrator too
+  const parts = Object.entries(v).filter(([k]) => !LORE_SKIP.has(k) && !gmSkipKey(k) && v[k] != null && v[k] !== "");
   // A shallow object reads better inline; a deep one wants its own lines.
   const flat = parts.every(([, val]) => typeof val !== "object" || val === null);
-  if (flat && depth > 0) return parts.map(([k, val]) => `${humanize(k)}: ${val}`).join(" · ");
+  if (flat && depth > 0) return parts.map(([k, val]) => `${humanize(k)}: ${loreValue(val, depth + 1)}`).join(" · ");   // ⛑ CCODE-706: inline values lose their glyphs too
   return parts.map(([k, val]) => {
     const rendered = loreValue(val, depth + 1);
     return rendered.includes("\n") ? `${humanize(k).toUpperCase()}\n${rendered}` : `${humanize(k)}: ${rendered}`;
@@ -1049,7 +1051,13 @@ function loreValue(v, depth = 0) {
 /** JSON lore → prose for the prompt. Falls through to the raw text if it does not parse, because a
  *  lore file that reaches the model imperfectly is better than one that does not reach it at all. */
 export function loreToProse(raw) {
-  try { return loreValue(JSON.parse(raw)).trim(); } catch { return raw; }
+  // ⛑ CCODE-706: a lore file that is prose (Markdown) is passed as it is — but not its authoring glyphs (the Assay's ➡)
+  try { return loreValue(JSON.parse(raw)).trim(); } catch { return String(raw ?? "").replace(AUTHORING_GLYPHS, ""); }
+}
+/** ⛔ CCODE-706 · ONE DOOR FOR EVERY LORE FILE. The loader handed a `.md` lore file to the GM raw — past the reader entirely — so
+ *  the Assay's ➡ reached the narrator whatever `loreToProse` did. The loader and the gate both call this. */
+export function loreFileToProse(file, raw) {
+  return String(file).endsWith(".json") ? loreToProse(raw) : String(raw ?? "").replace(AUTHORING_GLYPHS, "");
 }
 
 /** The `reach_<region>` file for a location's region, if one exists. Exact match first, then a light

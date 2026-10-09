@@ -69,6 +69,12 @@ const LIB_SECRET_GM = /(^|[^a-zA-Z])gm(_|[A-Z])/;
 const LIB_SECRET_NAMED = /^(whatHealingMustDo|segments|fragments)$/;
 const LIB_SECRET = /(gmeyes|eyes.?only|secret|hidden|hook|mandate|internal|_pat|token|guidance)/i;
 export function libSkipKey(k) { return /^_/.test(k) || LIB_SKIP.test(k) || LIB_SECRET_GM.test(k) || LIB_SECRET_NAMED.test(k) || LIB_SECRET.test(k); }
+/** ⛔ CCODE-706 · THE GM'S RULE IS NOT THE PLAYER'S. ✅ AEVI (NOTE_aevi_ccode_lore_reader_skips): *"anything under `_` is for us, and
+ *  nothing else in a lore file is … Keep `gm*` keys for the GM. They are hidden from the player and meant for the narrator."*
+ *  ⚠️ MEASURED: the GM's lore reader used `libSkipKey` — the PLAYER's rule — so `gmGenerationTie`, `gm_note`, every `hook` and every
+ *  `secret` were stripped from the GM's prompt as well as the Library: the narrator lost exactly what was written for it. The GM skips
+ *  only what is ours: a leading underscore, and the build-meta keys (`LIB_SKIP`). */
+export function gmSkipKey(k) { return /^_/.test(k) || LIB_SKIP.test(k); }
 export function libPretty(k) { return String(k).replace(/[_-]+/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2").replace(/\b\w/g, c => c.toUpperCase()); }
 
 /** ✅ §184 (2026-09-12): THE GREAT CIRCLE'S PROSE — the peoples, their poles, what each civilization is, and the Valley's folk crafts.

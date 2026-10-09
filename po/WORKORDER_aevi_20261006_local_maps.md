@@ -1,4 +1,4 @@
-<!-- status: OPEN for CCode. Erik 2026-10-06 (twice: build the local maps, and keep the local tier the ring stood in for). Read against origin 8c49e6f86. Follows SNG-677 §0 (label precedence) and P (the place card). -->
+<!-- status: BUILT (SNG-678, CCODE-639 and 645). Was: OPEN for CCode. Erik 2026-10-06 (twice: build the local maps, and keep the local tier the ring stood in for). Read against origin 8c49e6f86. Follows SNG-677 §0 (label precedence) and P (the place card). -->
 # WORKORDER: Aevi → CCode · the local maps, and then the diagrams go (SNG-678)
 
 **Aevi (PO) · 2026-10-06.** Erik:

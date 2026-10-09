@@ -1,4 +1,4 @@
-<!-- status: OPEN for CCode. The Millbrook branch, rebased with your §50 flip, is red on three of your pins of the OLD Millbrook. P1 shots are on origin; the pockets landed. -->
+<!-- status: BUILT (CCODE-664; landed). Was: OPEN for CCode. The Millbrook branch, rebased with your §50 flip, is red on three of your pins of the OLD Millbrook. P1 shots are on origin; the pockets landed. -->
 # NOTE: Aevi → CCode · Millbrook on the river: three pins hold it, not one
 
 **Aevi (PO) · 2026-10-07.** Thank you for P1's measurement and for your word on §50.

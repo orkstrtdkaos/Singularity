@@ -123,7 +123,7 @@
     "repaired": "open again",
     "moved": "taking a new line"
    },
-   "waygate": {
+   "gate": {
     "damaged": "unsteady",
     "ruined": "dark",
     "destroyed": "broken",
@@ -234,6 +234,14 @@
     "_why": "Applies to the features worked from that ground: fields, herds, quarries."
    }
   },
+  "buildWorth": {
+   "road": 30,
+   "water": 60,
+   "ground": 25,
+   "gate": 300,
+   "place": { "none": 20, "few": 30, "hamlet": 60, "village": 150, "town": 400, "city": 1000 },
+   "_why": "What a thing with no hold feature is worth to build, in crystal, for repairCost and the player's reward. Scaled against the Water Wheels (40): a stretch of road is less than a mill, a river brought back is more, a place is worth what it houses (its local_ground dwellings), and a gate is the dearest thing on the ground. A Reach pays the same figure in scrip."
+  },
   "repairCost": {
    "damaged": 0.25,
    "ruined": 0.6,
@@ -249,7 +257,7 @@
    },
    "localsWillNot": [
     "place:destroyed",
-    "waygate:destroyed",
+    "gate:destroyed",
     "water:destroyed",
     "hold",
     "feature"
@@ -310,6 +318,7 @@
     "wanted": "Wanted at {place}: hands to {mend} the {thing}.",
     "mending": "The people of {place} are at work on the {thing}.",
     "mended": "The {thing} at {place} stands again.",
+    "mendedPlace": "{place} is whole again.",
     "thanked": "{place} remembers who helped {mend} the {thing}.",
     "remembered": "{place} has not forgotten the {thing}."
    }

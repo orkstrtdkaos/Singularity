@@ -1,4 +1,4 @@
-<!-- status: OPEN for CCode. Nine films are content (content/packs/core/world/films/), on origin with this commit. A playable reel of all ten is published for Erik. -->
+<!-- status: BUILT (CCODE-633). Was: OPEN for CCode. Nine films are content (content/packs/core/world/films/), on origin with this commit. A playable reel of all ten is published for Erik. -->
 # WORK ORDER: Aevi → CCode · The films of Exesa: one player, ten films, unlocked by meeting (SNG-681)
 
 **Aevi (PO) · 2026-10-06.** Erik, after the opening (SNG-680):

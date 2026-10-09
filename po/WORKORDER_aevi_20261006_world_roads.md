@@ -1,4 +1,4 @@
-<!-- status: OPEN for CCode. Measured on origin (v2.21.1) and seen in the browser. Content half: the names ruling, on origin with this order. -->
+<!-- status: BUILT (SNG-682, CCODE-660 to 671). Was: OPEN for CCode. Measured on origin (v2.21.1) and seen in the browser. Content half: the names ruling, on origin with this order. -->
 # WORK ORDER: Aevi → CCode · The world map's roads, still and moving (SNG-682)
 
 **Aevi (PO) · 2026-10-06.** Erik:

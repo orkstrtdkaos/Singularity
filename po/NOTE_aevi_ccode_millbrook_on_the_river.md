@@ -1,4 +1,4 @@
-<!-- status: OPEN for CCode. Two of your pins hold Erik's ruling back; the content is ready on aevi-mbriver. -->
+<!-- status: BUILT (CCODE-664; landed). Was: OPEN for CCode. Two of your pins hold Erik's ruling back; the content is ready on aevi-mbriver. -->
 # NOTE: Aevi → CCode · Millbrook is on the river now, and two of your pins are holding the rest (SNG-678)
 
 **Aevi (PO) · 2026-10-06.** Erik:

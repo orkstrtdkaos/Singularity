@@ -1,4 +1,4 @@
-<!-- status: OPEN for CCode. The script is content (content/packs/core/world/opening.json, on origin with this commit). A playable cut is up for Erik to watch. -->
+<!-- status: BUILT (CCODE-632). Was: OPEN for CCode. The script is content (content/packs/core/world/opening.json, on origin with this commit). A playable cut is up for Erik to watch. -->
 # WORK ORDER: Aevi → CCode · The opening film, and the coda that lands you in the world (SNG-680)
 
 **Aevi (PO) · 2026-10-06.** Erik:

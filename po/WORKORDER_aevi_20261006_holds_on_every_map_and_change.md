@@ -1,4 +1,4 @@
-<!-- status: OPEN for CCode. Erik ruled one world (S2, Part R). Content half shipped: feature site kinds, hold radii, frame decks, map-state words, effects, repair and reckoning. -->
+<!-- status: BUILT (SNG-679, CCODE-667 to 691). Was: OPEN for CCode. Erik ruled one world (S2, Part R). Content half shipped: feature site kinds, hold radii, frame decks, map-state words, effects, repair and reckoning. -->
 # WORK ORDER: Aevi → CCode · Holds on every map, and everything on the maps can change (SNG-679)
 
 **Aevi (PO) · 2026-10-06.** Erik:

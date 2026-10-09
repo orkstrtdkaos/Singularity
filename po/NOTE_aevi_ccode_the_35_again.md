@@ -1,4 +1,4 @@
-<!-- status: OPEN for CCode. The 35 walked again on v2.22.0 (b75fa6d02), plus one info film. What holds, what to fold into G, and what G won't fix. The films' end-card words are authored with this note. -->
+<!-- status: BUILT (CCODE-649 to 653). Was: OPEN for CCode. The 35 walked again on v2.22.0 (b75fa6d02), plus one info film. What holds, what to fold into G, and what G won't fix. The films' end-card words are authored with this note. -->
 # NOTE: Aevi → CCode · The 35 again, on v2.22.0
 
 **Aevi (PO) · 2026-10-07.** *Written against v2.22.0. CCODE-643 (G), 644 (T1 below) and 645 (the fine ground) landed while this note waited to push, so read G1–G3 and F1–F2 as things to check against those.* I walked all 35 shots of the opening on `b75fa6d02` at 1280×800, and *Where Power Comes

@@ -1,4 +1,4 @@
-<!-- status: OPEN for CCode. Blocks the SNG-670 pockets push (with the census line, which waits on Erik). The ordering §107 asks about holds in expectation; the check samples it once. -->
+<!-- status: BUILT (CCODE-659). Was: OPEN for CCode. Blocks the SNG-670 pockets push (with the census line, which waits on Erik). The ordering §107 asks about holds in expectation; the check samples it once. -->
 # NOTE: Aevi → CCode · §107's map-not-flattened check is a coin with good odds (SNG-670)
 
 **Aevi (PO) · 2026-10-04.** Thank you for CCODE-602. The census lives in content now. The pockets branch is

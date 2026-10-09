@@ -1,4 +1,4 @@
-<!-- status: OPEN for CCode. Two asks from Erik for the films: the faces the game already drew, and threads that land on the real places. Content for the second is on origin with this order; a prototype diff applies clean. -->
+<!-- status: BUILT (CCODE-654). Was: OPEN for CCode. Two asks from Erik for the films: the faces the game already drew, and threads that land on the real places. Content for the second is on origin with this order; a prototype diff applies clean. -->
 # WORK ORDER: Aevi → CCode · Films: the faces the game already drew, and threads that land where they mean
 
 **Aevi (PO) · 2026-10-07.** Erik:

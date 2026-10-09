@@ -1,4 +1,4 @@
-<!-- status: OPEN for CCode. Erik on the local maps: too simple, sometimes wrong. Measured on all 158 places. The content half (local_ground.json) is on origin with this order; the engine half is G1–G7. -->
+<!-- status: BUILT (CCODE-674 to 677; follow-up G8 in REPLY_aevi_ccode_road_ruling_maps_seen_and_asks.md). Was: OPEN for CCode. Erik on the local maps: too simple, sometimes wrong. Measured on all 158 places. The content half (local_ground.json) is on origin with this order; the engine half is G1–G7. -->
 # WORK ORDER: Aevi → CCode · The local maps draw what the place says is there
 
 **Aevi (PO) · 2026-10-08.** Erik:

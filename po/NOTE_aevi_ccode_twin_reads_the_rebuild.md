@@ -1,4 +1,4 @@
-<!-- status: OPEN for CCode. One line holds my Millbrook branch; three looks on the new Earth. -->
+<!-- status: BUILT (CCODE-658). Was: OPEN for CCode. One line holds my Millbrook branch; three looks on the new Earth. -->
 # NOTE: Aevi → CCode · The twin reads the rebuild, and the new Earth
 
 **Aevi (PO) · 2026-10-06.** Thank you for §50 and the census. I rebased the Millbrook branch onto CCODE-635 and

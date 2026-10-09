@@ -24904,8 +24904,9 @@ await (async () => {
     const t676 = WG676.decodeTerrain(JSON.parse(readFileSync(join(root, "content/packs/core/world/terrain.json"), "utf8")));
     const k676 = WG676.roadKinds(t676, C676.locations, new Map([["leviathan_road|the_blaze", [[4.25, 179.25], [0, 170], [-1, 180]]]]));
     const src676 = readFileSync(join(root, "engine/worldglobe.js"), "utf8");
-    check("W5/Leviathan: ⛔ the Leviathan Road's road to the Blaze is a SEA LANE even with a land route in hand — named with Aevi's reason, since the raster cannot say it — and a sea lane is drawn as the arc across the water, never bent along the land route",
-      k676.get("leviathan_road|the_blaze")?.kind === "sea" && WG676.SEA_ROAD_PLACES.includes("leviathan_road")
+    // ⛑ CCODE-693: the record says it now (`seaRoad: true`), and the engine's list of names is gone
+    check("W5/Leviathan: ⛔ the Leviathan Road's road to the Blaze is a SEA LANE even with a land route in hand — its record says `seaRoad`, since the raster cannot say it — and a sea lane is drawn as the arc across the water, never bent along the land route",
+      k676.get("leviathan_road|the_blaze")?.kind === "sea" && C676.locations.leviathan_road.seaRoad === true && WG676.SEA_ROAD_PLACES === undefined
       && /const pts = bend && kind !== "sea" \? bend\(a, b, id, other\) : null;/.test(src676)
       && [...k676.entries()].filter(([, v]) => v.kind === "sea").every(([key]) => key.includes("leviathan_road") || !k676.get(key).routed));
   }
@@ -25531,6 +25532,34 @@ await (async () => {
       && !/for \(const id of Object\.keys\(CONTENT\.locations\)\) \{\n\s+const l = CONTENT\.locations\[id\];\n\s+if \(!l\?\.worldPos \|\| \(l\.regionId/.test(region692)
       && app692.includes("const heldG = mapHolds(character, { sharedStore: sharedHolds, locations: live687 || CONTENT.locations,"),
       JSON.stringify({ twice: twice692?.worldPos, live: live692.the_long_span.worldPos, row: row692?.worldPos }));
+  }
+  /* ── ✅ Aevi's content answers, 2026-10-09 (CCODE-693): gate words, a place mended, what a thing is worth ── */
+  {
+    const MS693 = await import("../engine/mapstate.js");
+    const MD693 = await import("../engine/mending.js");
+    const { loadContentHeadless: lch693 } = await import("./headless_content.mjs");
+    const C693 = await lch693();
+    const mill693 = (C693.rules.localLayouts.millbrook.sites || []).find((x) => x.kind === "mill");
+    const v693 = (k, sk = null) => MD693.mendValue(k, { content: C693, regionId: "valley", siteKind: sk });
+    const ch693 = { id: "player-me", currentLocationId: "millbrook", mapEvents: [], holdings: [] };
+    MS693.applyMapChange(ch693, { key: "place:millbrook", change: "ruined", by: "player-other" }, { content: C693, worldDay: 10 });
+    const half693 = MD693.applyMend(ch693, { key: "place:millbrook" }, { content: C693, worldDay: 20 });
+    const whole693 = MD693.applyMend(ch693, { key: "place:millbrook" }, { content: C693, worldDay: 30 });
+    const tick693 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+    check("693/R: ⛔ WHAT A THING IS WORTH IS AEVI'S TABLE — `buildWorth`: a road 30, a river 60, ground 25, a gate 300 (it was priced as a hold's door), a place by its `dwellings` (Millbrook, a village, 150); a site is still the feature it is (the Wheels as a mill); a place grown in play with no `dwellings` stays unpriced",
+      v693("road:millbrook|the_fell_pell") === 30 && v693("water:millbrook/0") === 60 && v693("ground:millbrook/0") === 25 && v693("gate:the_crossing") === 300
+      && v693("place:millbrook") === 150 && C693.rules.localGround.places.millbrook.dwellings === "village"
+      && Number.isFinite(v693(`site:millbrook/${mill693.id}`, "mill")) && v693(`site:millbrook/${mill693.id}`, "mill") !== 30
+      && v693("place:gen-nowhere-grown") === null,
+      JSON.stringify({ road: v693("road:millbrook|the_fell_pell"), gate: v693("gate:the_crossing"), place: v693("place:millbrook") }));
+    check("693/R: ⛔ A PLACE MENDED HAS ITS OWN WORDS — `mendedPlace` (\"Millbrook is whole again.\") when it is whole, its own state words on the way (never \"the it at there\"), and the news of a place learned mended says so; the gate words are keyed `gate`, the class a gate's key carries, so they show, and `localsWillNot`'s `gate:destroyed` is read without an alias",
+      half693.ok && /^Millbrook is .+ now, no longer .+$/.test(half693.said) && !/the it at there/.test(half693.said)
+      && whole693.ok && whole693.said === "Millbrook is whole again."
+      && tick693.includes('if (!t && String(l.key).startsWith("place:") && words.mendedPlace) {')
+      && MS693.mapStateWord(C693, "gate", "ruined") === "dark"
+      && MS693.localsWillMend("gate:the_crossing", "destroyed", C693) === false && MS693.localsWillMend("gate:the_crossing", "ruined", C693) === true
+      && !readFileSync(join(root, "engine/mapstate.js"), "utf8").includes('c0 === "waygate"'),
+      `${half693.said} · ${whole693.said}`);
   }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)

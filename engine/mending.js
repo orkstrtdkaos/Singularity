@@ -14,7 +14,7 @@
 // door (`applyMapChange`, by the character). ⛑ PAID AS EACH RUNG IS DONE, through the job's own `crystal` stake and `earnAt`
 // (origin "reward", the place's own money — a Reach's scrip or crystal; no region pays in coin): the same total as "paid when it is
 // whole", and the share a player is owed when the locals finish first is exactly what they were already paid.
-import { parseMapKey, mapStateOf, rungOf, ladderOf, localsWillMend, mapThingOf, repairFraction, applyMapChange, localRepairAt, eventsFor, sortEvents } from "./mapstate.js";
+import { parseMapKey, mapStateOf, rungOf, ladderOf, localsWillMend, mapThingOf, repairFraction, applyMapChange, localRepairAt, eventsFor, sortEvents, mapStateWord } from "./mapstate.js";
 import { personIdFor } from "./fates.js";   // ✅ R3: a holder minted from the event that made the debt — the same person in every game
 import { mintedName } from "./names.js";
 import { priceHere } from "./money.js";
@@ -59,6 +59,22 @@ function heldKeys(character) {
 export function mendValue(key, { content = null, regionId = null, siteKind = null } = {}) {
   const p = parseMapKey(key);
   if (!p) return null;
+  /* ✅ AEVI 2026-10-09: *"What a road, a river or a place is worth: `mapStates.buildWorth`, in crystal, scaled against your Water
+   * Wheels' 40: road 30; water 60; ground 25; gate 300; a place by its `dwellings`: none 20, few 30, hamlet 60, village 150, town
+   * 400, city 1000. A Reach pays the same figure in scrip."* ⛔ A SITE IS STILL PRICED AS THE FEATURE IT IS (the Wheels are a mill);
+   * everything with no hold feature reads the table. ⚠️ This priced a waygate as a hold's door (40) and a road, a river and a place
+   * at nothing, so no job was ever posted for them and no damages were ever owed. A place grown in play has no `dwellings` entry
+   * and stays unpriced, rather than taking a size it was never given. */
+  const BW = content?.mapStates?.buildWorth || null;
+  if (!siteKind && BW && p.cls !== "site") {
+    if (p.cls === "place") {
+      const d = content?.rules?.localGround?.places?.[p.id]?.dwellings;
+      const v = d ? Number(BW.place?.[d]) : NaN;
+      return Number.isFinite(v) ? v : null;
+    }
+    const v = Number(BW[p.cls]);
+    if (Number.isFinite(v)) return v;
+  }
   const want = siteKind || ({ gate: "gate", ground: "field" }[p.cls] || null);
   if (!want) return null;
   const kinds = content?.rules?.economy?.holdFeatures?.kinds || {};
@@ -139,7 +155,8 @@ export function mendingJobsFor(character, { content = null } = {}) {
       id: `mend:${key}`.slice(0, 80),   // prose-cap-ok: an identifier
       label: smartClamp(label, 120), where, level,
       effort: Number(J.effortDays?.[state]) || 4,
-      needs: (J.needs?.[p.cls === "gate" ? "waygate" : p.cls] || J.needs?.default || [{ family: "RESTORE", weight: 2 }]).map((n) => ({ family: n.family, weight: n.weight })),
+      // ⛑ CCODE-693: the key's own class first; content still keys a gate's needs `waygate`, read until it is renamed
+      needs: (J.needs?.[p.cls] || (p.cls === "gate" ? J.needs?.waygate : null) || J.needs?.default || [{ family: "RESTORE", weight: 2 }]).map((n) => ({ family: n.family, weight: n.weight })),
       from: smartClamp(fill(J.from || "the people of {place}", { place: t.place }), 60),
       stakes: { mend: { key, from: state, culprit },
         ...(pay > 0 ? { crystal: Math.min(pay, 4 * level) } : {}),
@@ -176,17 +193,24 @@ export function applyMend(character, mend, { content = null, worldDay = null } =
   if (!character || !mend?.key) return { ok: false, said: null };
   const before = mapStateOf(character, mend.key, { content }).state;
   const site = siteOfKey(mend.key, { content, character });
+  // ✅ AEVI 2026-10-09: a place mended reads `mendedPlace` — "{place} is whole again." It has no "{thing} at {place}" form, and the
+  // fallback read "the it at there".
+  const placeId = String(mend.key).startsWith("place:") ? String(mend.key).slice(6) : null;
+  const placeName = placeId ? (content?.locations?.[placeId]?.name || placeId.replace(/^gen-/, "").replace(/[-_]+/g, " ")) : null;
   const t = mapThingOf(mend.key, content, { siteName: site?.name || null }) || { thing: "it", place: "there" };
   const r = applyMapChange(character, { key: mend.key, change: "repaired", by: character.id || "player",
     cause: mend.culprit ? "making good what they did" : "hands sent to mend it" }, { content, worldDay });
-  if (!r.ok) return { ok: false, said: `the ${t.thing} at ${t.place} was past this mending by the time they got there — ${r.why}` };
+  if (!r.ok) return { ok: false, said: `${placeName || `the ${t.thing} at ${t.place}`} was past this mending by the time they got there — ${r.why}` };
   character.mendWork = character.mendWork && typeof character.mendWork === "object" ? character.mendWork : {};
   const w = character.mendWork[mend.key] || { rungs: 0, culprit: !!mend.culprit };
   w.rungs += 1; w.lastDay = Math.floor(Number(worldDay) || 0);
   character.mendWork[mend.key] = w;
   const whole = rungOf(content, r.state) === 0;
   const W = wordsOf(content);
-  const said = whole && W.mended ? fill(W.mended, { thing: t.thing, place: t.place }) : `the ${t.thing} at ${t.place} is ${r.state} now, no longer ${before}`;
+  const stateWord = (s) => (placeId ? mapStateWord(content, "place", s, { name: placeName }) : null) || s;
+  const said = placeId
+    ? (whole && W.mendedPlace ? fill(W.mendedPlace, { place: placeName }) : `${placeName} is ${stateWord(r.state)} now, no longer ${stateWord(before)}`)
+    : (whole && W.mended ? fill(W.mended, { thing: t.thing, place: t.place }) : `the ${t.thing} at ${t.place} is ${r.state} now, no longer ${before}`);
   return { ok: true, state: r.state, whole, said };
 }
 

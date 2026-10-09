@@ -937,6 +937,11 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
         const st = knownStateOf(character, l.key, { content });
         if (!st || st.state !== ladderOf(content)[0]) return null;   // stands again only when it is whole again
         const t = mapThingOf(l.key, content);
+        // ✅ AEVI 2026-10-09: *"A place mended: `reckoning.words.mendedPlace` reads '{place} is whole again.'"*
+        if (!t && String(l.key).startsWith("place:") && words.mendedPlace) {
+          const pid = String(l.key).slice(6), nm = content?.locations?.[pid]?.name;
+          return nm ? { text: String(words.mendedPlace).replace("{place}", nm), section: "world" } : null;
+        }
         return t && words.mended ? { text: String(words.mended).replace("{thing}", t.thing).replace("{place}", t.place), section: "world" } : null;
       }).filter(Boolean).slice(0, 4);
     } catch { return []; }

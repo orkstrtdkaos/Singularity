@@ -592,9 +592,8 @@ export function repairFraction(content, state) {
  * ⚑ A REPAIR CLIMBS ONE RUNG, so a ruined bridge (45 days) is damaged after 33 and whole after 45: each rung is reached at
  * `localDays[from] − localDays[to]` days of work, and only the first step waits `localsBeginAfterDays` to begin. */
 function willNotMatch(entry, cls, state) {
-  const [c0, s] = String(entry || "").split(":");
-  // ⚠️ content says `waygate:destroyed`; the class a map key carries is `gate` — the same thing, two words
-  const c = c0 === "waygate" ? "gate" : c0;
+  // ✅ AEVI 2026-10-09: *"`localsWillNot` now says `gate:destroyed` … `willNotMatch`'s alias can go."* The entry's class is the key's.
+  const [c, s] = String(entry || "").split(":");
   return c === cls && (!s || s === state);
 }
 /** Whether the locals will mend this key in this state (`repair.localsWillNot`, and a hold's or a feature's is its keeper's). */

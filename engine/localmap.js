@@ -2136,6 +2136,15 @@ export function enlargementFor(model, { minPx = 150 } = {}) {
   return { x: far[0], y: far[1], w: size, h: size, focusMetres: radius, builtRadiusPx: model.built.r };
 }
 
+/** ✅ AEVI (G8, the film's labels): *"keep F1's 'no inset', but let the shot become the enlargement. When a village can't seat its
+ *  names, the film frames the enlargement's area as the whole shot, so there's no second map in the corner."* → the metres to
+ *  re-frame the whole shot at, or null when every name sat (or the built ground is big enough to need no enlargement). PURE. */
+export function shotRefocus(model, painted) {
+  if (!(painted?.labelsDropped || []).length) return null;
+  const enl = enlargementFor(model);
+  return enl && Number(enl.focusMetres) > 0 ? Number(enl.focusMetres) : null;
+}
+
 /** The inset drawn: a panel, the same model re-framed at `focusMetres`, with its own scale. */
 export function paintEnlargement(ctx, layout, panel, { placeName = "", placeId = "", space = null, queue = null, character = null, known = null, reveal = false, hereSite = null, level = 0 } = {}) {
   const frame = localFrame(layout, { w: panel.w, h: panel.h, focusMetres: panel.focusMetres, pad: 12 });

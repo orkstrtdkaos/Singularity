@@ -69,7 +69,7 @@ import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from 
 import { cityPlan, blockPath, blockRoofs, faubourgs, beltRoofs, leanOf } from "./engine/cityplan.js";
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph, drawStateMark } from "./engine/mapicons.mjs";
-import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf, siteLevel, regionLook, isSpreading, spreadingSay, lookRand, placeKindOf } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
+import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, shotRefocus, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf, siteLevel, regionLook, isSpreading, spreadingSay, lookRand, placeKindOf } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
 import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.10";
+const APP_VERSION = "2.26.11";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7938,7 +7938,15 @@ function filmLocalMap(placeId, loc, w, h) {
     const model = localModel(layout, frame, { placeName: loc?.name || placeId, placeId, nameOf, level });
     /* ✅ F1 (the 35 again): NO INSET IN A FILM — *"on screen for 6 s it reads as a second, smaller copy of the same map."* */
     const space = labelSpace();
-    paintLocalMap(c2, model, { space, reveal: true, inset: null, labelMinPx: 0 });
+    const painted = paintLocalMap(c2, model, { space, reveal: true, inset: null, labelMinPx: 0 });
+    // ✅ G8 (Aevi): a village that cannot seat its names in the shot is re-shot AS the enlargement — the whole frame, never an inset
+    const refocus = shotRefocus(model, painted);
+    if (refocus) {
+      c2.setTransform(1, 0, 0, 1, 0, 0); c2.clearRect(0, 0, cv.width, cv.height); c2.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const frame2 = localFrame(layout, { w, h, focusMetres: refocus, pad: Math.round(Math.min(w, h) * 0.1) });
+      const model2 = localModel(layout, frame2, { placeName: loc?.name || placeId, placeId, nameOf, level });
+      paintLocalMap(c2, model2, { space: labelSpace(), reveal: true, inset: null, labelMinPx: 0 });
+    }
     /* ✅ F1: NIGHT PAPER. *"White captions and the white name card over cream paper"* could not be read; in a film the
      * map is multiplied to about 55% and its edges vignette toward the film's black, so the words sit on dark ground. */
     c2.setTransform(dpr, 0, 0, dpr, 0, 0);

@@ -25699,6 +25699,26 @@ await (async () => {
       && (th697.houses || []).length >= 12 && nearStream697 / (th697.houses || []).length >= 0.75 && reach697 > th697.built.r * 1.8,
       JSON.stringify({ gh: gh697.slice(0, 6), overlap697, houses: (th697.houses || []).length, nearStream697, reach: Math.round(reach697), r: Math.round(th697.built.r) }));
   }
+  /* ── ✅ G8, the film's labels (CCODE-698): the shot becomes the enlargement ── */
+  {
+    const LM698 = await import("../engine/localmap.js");
+    const ML698 = await import("../engine/maplabel.js");
+    const { loadContentHeadless: lch698 } = await import("./headless_content.mjs");
+    const C698 = await lch698();
+    const stub698 = () => new Proxy({ globalAlpha: 1, lineWidth: 1 }, { get: (t, k) => k in t ? t[k] : (k === "measureText" ? (x) => ({ width: String(x).length * 5.6 })
+      : k === "createRadialGradient" || k === "createLinearGradient" || k === "createPattern" ? () => ({ addColorStop() {} }) : k === "getLineDash" ? () => [] : () => {}), set: (t, k, v) => { t[k] = v; return true; } });
+    const shot698 = (id, focus = null) => { const l = LM698.localLayoutFor(id, { content: C698 }); const f = LM698.localFrame(l, { w: 640, h: 360, pad: 36, ...(focus ? { focusMetres: focus } : {}) });
+      const md = LM698.localModel(l, f, { placeId: id, placeName: id }); return { md, o: LM698.paintLocalMap(stub698(), md, { space: ML698.labelSpace(), reveal: true, inset: null, labelMinPx: 0 }) }; };
+    const mb698 = shot698("millbrook"), re698 = LM698.shotRefocus(mb698.md, mb698.o), again698 = re698 ? shot698("millbrook", re698) : null;
+    const cr698 = shot698("the_crossing");
+    const app698 = readFileSync(join(root, "app.js"), "utf8");
+    check("698/G8: ⛔ AEVI — THE FILM'S SHOT BECOMES THE ENLARGEMENT — a village that cannot seat its names in a film shot (Millbrook drops names at 640×360) is re-shot with the enlargement's area as the WHOLE frame, where every name sits; never an inset; a place whose built ground is big enough needs no enlargement and keeps its shot",
+      mb698.o.labelsDropped.length > 0 && re698 > 0 && again698.o.labelsDropped.length === 0
+      && LM698.shotRefocus(cr698.md, cr698.o) === null
+      && app698.includes("const refocus = shotRefocus(model, painted);") && app698.includes("const frame2 = localFrame(layout, { w, h, focusMetres: refocus, pad: Math.round(Math.min(w, h) * 0.1) });")
+      && /F1 \(the 35 again\): NO INSET IN A FILM/.test(app698) && app698.includes("paintLocalMap(c2, model2, { space: labelSpace(), reveal: true, inset: null, labelMinPx: 0 });"),
+      JSON.stringify({ dropped: mb698.o.labelsDropped.length, re698, after: again698?.o.labelsDropped.length }));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

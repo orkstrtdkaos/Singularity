@@ -166,6 +166,24 @@ export function mendingJobsFor(character, { content = null } = {}) {
   return found.sort((a, b) => (Number(b.culprit) - Number(a.culprit)) || (a.near - b.near)).slice(0, max).map((x) => x.spec);
 }
 
+/* ✅ SNG-679 Part R · R4 — THE GIFT. ✅ AEVI: *"The player can mark it as a gift before sending. The stakes then carry no crystal, the
+ * card reads `jobs.giftLine`, the standing is still earned, and the share is gifted."* ⛑ The pay is set aside on the job, so marking it
+ * a gift and taking that back before the team goes is the same job either way. A culprit's making-good is not a gift — it is owed.
+ * → `{ ok, gift, line }` or `{ ok: false, why }`. Mutates the job on the board. */
+export function giftMend(character, jobId, on = true, { content = null } = {}) {
+  const job = (character?.jobs?.board || []).find((j) => j && j.id === jobId);
+  const md = job?.stakes?.mend;
+  if (!md) return { ok: false, why: "that is not a mending job on your board" };
+  if (md.culprit) return { ok: false, why: "making good what you did is owed, not given" };
+  if (on) {
+    if (!md.gift) { md.payWas = Math.max(0, Math.round(Number(job.stakes.crystal) || 0)); md.gift = true; delete job.stakes.crystal; }
+  } else if (md.gift) {
+    if (md.payWas > 0) job.stakes.crystal = md.payWas;
+    delete md.gift; delete md.payWas;
+  }
+  const line = md.gift ? String(content?.mapStates?.jobs?.giftLine || "") || null : null;
+  return { ok: true, gift: !!md.gift, line };
+}
 /** Put them on the board: a mend whose thing is no longer broken (or no longer near) comes off; a new one goes on; one already
  *  there for the same rung stays as it is. Mutates `character.jobs`. → `{ posted, dropped }` */
 export function postMendingJobs(character, { content = null, day = null } = {}) {

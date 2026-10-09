@@ -25748,6 +25748,40 @@ await (async () => {
       && vocab700.length >= 10 && vocab700.every((e) => lm700.includes(`fx.has("${e}")`)),
       `${bad700.slice(0, 4).join(" | ")} · blocky ${blockyOk700} · ghost ${ghost700} · vocab ${vocab700.join(",")}`);
   }
+  /* ── ✅ SNG-679 Part R · R4, the gift (CCODE-701) ── */
+  {
+    const MS701 = await import("../engine/mapstate.js");
+    const MD701 = await import("../engine/mending.js");
+    const JB701 = await import("../engine/jobs.js");
+    const JS701 = await import("../engine/jobstate.js");
+    const { loadContentHeadless: lch701 } = await import("./headless_content.mjs");
+    const C701 = await lch701();
+    const wheels701 = (C701.rules.localLayouts.millbrook.sites || []).find((x) => x.kind === "mill");
+    const key701 = `site:millbrook/${wheels701.id}`, road701 = MS701.roadKey("millbrook", "echo_river_crossing");
+    const ch701 = { id: "player-me", name: "Me", currentLocationId: "millbrook", holdings: [], mapEvents: [], purse: {} };
+    MS701.applyMapChange(ch701, { key: key701, change: "damaged", by: "player-other", seen: "named" }, { content: C701, worldDay: 100 });   // the last rung: the one that earns standing
+    MS701.applyMapChange(ch701, { key: road701, change: "damaged", by: "player-me" }, { content: C701, worldDay: 100 });
+    MD701.postMendingJobs(ch701, { content: C701, day: 5 });
+    const job701 = ch701.jobs.board.find((j) => j.stakes?.mend?.key === key701), own701 = ch701.jobs.board.find((j) => j.stakes?.mend?.key === road701);
+    const pay701 = job701.stakes.crystal;
+    const on701 = MD701.giftMend(ch701, job701.id, true, { content: C701 });
+    const kept701 = JSON.parse(JSON.stringify(ch701.jobs));   // a save round trip keeps the gift
+    const off701 = MD701.giftMend(ch701, job701.id, false, { content: C701 });
+    const back701 = job701.stakes.crystal;
+    MD701.giftMend(ch701, job701.id, true, { content: C701 });
+    const culprit701 = MD701.giftMend(ch701, own701.id, true, { content: C701 });
+    const purse0 = JSON.stringify(ch701.purse || {});
+    const fx701 = JB701.jobEffects(job701, "success", C701.rules);
+    JB701.applyJobEffects(ch701, { team: ["player"], job: job701, names: {} }, fx701, { content: C701 });
+    const app701 = readFileSync(join(root, "app.js"), "utf8");
+    check("Part R · R4: ⛔ THE GIFT — a mending job can be done for nothing before the team goes: its stakes carry no crystal and the card reads `jobs.giftLine` (\"Done as a gift. Nothing asked.\"), the standing is still earned and the rung still climbs, the pay is kept aside so the gift can be taken back, it survives a save; and the culprit's making-good is never a gift, it is owed",
+      pay701 > 0 && on701.ok && on701.gift && on701.line === "Done as a gift. Nothing asked." && kept701.board.find((j) => j.id === job701.id).stakes.mend.gift === true
+      && off701.ok && !off701.gift && back701 === pay701 && !culprit701.ok
+      && !fx701.crystal && (fx701.standing || 0) > 0 && JSON.stringify(ch701.purse || {}) === purse0 && MS701.mapStateOf(ch701, key701, { content: C701 }).state === "whole"
+      && JS701 && app701.includes("data-job-gift=") && app701.includes("const r = giftMend(character, giftBtn.dataset.jobGift, giftBtn.dataset.on === \"1\", { content: CONTENT });")
+      && app701.includes("data-job-giftline"),
+      JSON.stringify({ pay701, on701, back701, culprit: culprit701.why, crystal: fx701.crystal, standing: fx701.standing }));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

@@ -52,7 +52,7 @@ import { openingFrame, placeCardBox } from "./engine/worldmap.js";
 import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange, mapView, roadKey, knownStateOf, liveLocations } from "./engine/mapstate.js";
 // ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
 import { mapHolds, holdMarker, ensureHoldSite, placeHoldSite, holdSiteOf, holdView } from "./engine/mapholds.js";
-import { brokenAt } from "./engine/mending.js";   // ✅ SNG-679 Part R · R4: what is broken at a place, on its card
+import { brokenAt, giftMend } from "./engine/mending.js";   // ✅ SNG-679 Part R · R4: what is broken at a place, on its card
 // ⛔ SNG-680: the film is DATA. Not one of its words is written in this file.
 import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
   filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase, filmFrame, filmLandings } from "./engine/films.js";
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.12";
+const APP_VERSION = "2.26.13";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -24396,7 +24396,10 @@ function renderJobsTab(selId = null) {
       <div class="job-team">${pool.map(rowFor).join("") || `<p class="hint">Nobody you lead can act on this yet.</p>`}</div>
       <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:6px">
         <button class="opt" data-job-suggest="1">Suggest one</button><button class="opt" data-job-suggest="2">Suggest two</button><button class="opt" data-job-suggest="3">Suggest three</button>
-        <button class="opt" data-job-clear>Clear</button><button class="opt" data-job-drop="${esc(job.id)}" title="Take it off the board">Turn it down</button></div>
+        <button class="opt" data-job-clear>Clear</button><button class="opt" data-job-drop="${esc(job.id)}" title="Take it off the board">Turn it down</button>
+        ${/* ✅ SNG-679 Part R · R4: the gift — before the team goes, the work can be given; the card then says so in Aevi's words */""}
+        ${job.stakes?.mend && !job.stakes.mend.culprit ? `<button class="opt" data-job-gift="${esc(job.id)}" data-on="${job.stakes.mend.gift ? "0" : "1"}" title="${job.stakes.mend.gift ? "Ask for the pay after all" : "Do the work for nothing"}">${job.stakes.mend.gift ? "Ask for the pay" : "Do it as a gift"}</button>` : ""}</div>
+      ${job.stakes?.mend?.gift ? `<div class="hint" data-job-giftline>${esc(CONTENT.mapStates?.jobs?.giftLine || "")}</div>` : ""}
       ${planHtml}</div>`;
   }
 
@@ -24480,6 +24483,12 @@ function renderJobsTab(selId = null) {
   };
   const clear = document.querySelector("[data-job-clear]");
   if (clear) clear.onclick = () => { _jobsUi.pick[job.id] = []; renderJobsTab(); };
+  const giftBtn = document.querySelector("[data-job-gift]");
+  if (giftBtn) giftBtn.onclick = () => {
+    const r = giftMend(character, giftBtn.dataset.jobGift, giftBtn.dataset.on === "1", { content: CONTENT });
+    if (!r.ok) { alert(r.why); return; }
+    saveCharacter(character); renderJobsTab();
+  };
   const drop = document.querySelector("[data-job-drop]");
   if (drop) drop.onclick = () => {
     // ⛔ CCODE-452: a raise taken off the board puts its materials back

@@ -13,6 +13,11 @@
     "level"
   ],
   "properties": {
+    "reckonings": {
+      "type": "object",
+      "description": "SNG-679 Part R · R3 (CCODE-682, `mending.js`): the reckoning for each thing this character broke that the locals spent on, keyed by the thing's map key — the damage it is about, its state (owed, asking, sent, found, settled, forgiven), the day it began, how it was seen, and what has been paid. The damages debt itself lives in `worldState.debts`.",
+      "additionalProperties": { "type": "object" }
+    },
     "localLayouts": { "type": "object", "description": "SNG-678 L1 (CCODE-639): the generated local layouts, one per place id, cached on the save so a grown place's local map draws the same on a reload (localLayoutFor: authored canon → this cache → generated). Declared 2026-10-07 when Loki's play wrote the first one." },
     "caravans": { "type": "array", "description": "SNG-654 lever A (CCODE-542): the standing trade runs and loads in transit, written by engine/caravan.js. Declared by Aevi 2026-09-28 when a live save first carried it." },
     "schemaVersion": {

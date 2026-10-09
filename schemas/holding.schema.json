@@ -218,6 +218,11 @@
           "minimum": 0,
           "maximum": 999,
           "description": "How many of them are still to be made."
+        },
+        "said": {
+          "type": "string",
+          "enum": ["no-maker", "short"],
+          "description": "Why the order is stalled, once said (`armory.js tickArmory`): no forge or smithy standing, or the store short of material — so the stall is told once, not every pass."
         }
       },
       "description": "A standing order at this hold's armory (CCODE-445, `armory.js`): the makers work it a pass at a time out of the store's raw material until `left` reaches zero."

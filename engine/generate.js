@@ -82,6 +82,38 @@ export function commitPlace(character, locations, id, rec, { content = null } = 
   return id;
 }
 
+/** ✅ AEVI, G2 (WORKORDER_aevi_20261004_born_whole): *"Pass examples for every type. `pickExamples` covers npc and location; give
+ *  creature and arc theirs."* ⛔ CCODE-718 · the picker moved out of app.js so the gate drives the one the app uses. Arcs had theirs
+ *  (the greater arcs); a creature got none — now up to three from the bestiary's roster, those whose habitat names the region first.
+ *  The examples are the model's picture of a WHOLE record of the type; the numbers stay the engine's (G2: never ask for a level). */
+export function pickExamples(type, location, content) {
+  if (type === "npc") {
+    const all = Object.values(content?.npcs || {}).filter((n) => n.spectrum && !n._gen);
+    const here = all.filter((n) => n.homeLocation === location?.id);
+    return (here.length ? here : all).slice(0, 3);
+  }
+  if (type === "location") {
+    const all = Object.values(content?.locations || {}).filter((l) => l.poleIntensity && !l._gen);
+    const near = all.filter((l) => (location?.connections || []).includes(l.id));
+    return (near.length ? near : all).slice(0, 3);
+  }
+  if (type === "arc") {
+    return (Array.isArray(content?.greaterArcs) ? content.greaterArcs : []).slice(0, 2).map((a) => ({
+      id: a.id, name: a.name, scale: a.scale, pressure: a.pressure, tendency: a.tendency,
+      hingeNpcs: a.hingeNpcs, ifIgnored: a.ifIgnored, ifEngaged: a.ifEngaged,
+    }));
+  }
+  if (type === "creature") {
+    const roster = Array.isArray(content?.bestiary?.roster) ? content.bestiary.roster : [];
+    const region = String(location?.regionId || location?.region || "");
+    const near = region ? roster.filter((c) => JSON.stringify(c?.habitat || "").includes(region)) : [];
+    return (near.length ? near : roster).slice(0, 3).map((c) => ({
+      id: c.id, name: c.name, tier: c.tier, class: c.class, look: c.look, danger: c.danger, pressures: c.pressures, habitat: c.habitat,
+    }));
+  }
+  return [];
+}
+
 /** ⛔ CCODE-714 · WHAT THE BORN-WHOLE FINISHER NEEDS FROM THE WORLD, built in ONE place for every caller: the contract, the atlas's
  *  axis order (a place's `axisVector`), the lore that resolves (a place inherits only real `loreRefs`) and the spectrums' pole names
  *  (`poleIntensity`). ⚠️ The app built its own deps with the contract alone, and §423 handed the axis order in by hand — so the test

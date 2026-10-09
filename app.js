@@ -21,7 +21,7 @@ import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } fr
 import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b: the author god-mode (dev-gated, separate surface)
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver, MODELS } from "./engine/claude.js";
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures, recordCombatRound, combatRounds } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
-import { unearnedDepth, generate, ensureGenerated, commitPlace, bornDeps, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
+import { unearnedDepth, generate, ensureGenerated, commitPlace, bornDeps, pickExamples as pickExamplesFor, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
 import { checkBorn, describeBorn, contractedTypes } from "./engine/borncontract.js";
 import { drawAxis, resolvePick, readOfPick, championPick, drawBackgroundAxis, benchBout, benchAxis } from "./engine/coliseum.js"; // SNG-149: the Coliseum blind grid · SNG-669: the bench
 import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own critical, in its own words
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.25";
+const APP_VERSION = "2.26.26";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5651,25 +5651,8 @@ ${JSON.stringify({ name: rec.name, role: rec.role, homeLocation: rec.homeLocatio
 
 /** Few-shot taste for generation: a few AUTHORED records of the type, disposition-near the
  *  place when we can tell — the generator matches their quality + voice, staying in-grain. */
-function pickExamples(type, location) {
-  if (type === "npc") {
-    const all = Object.values(CONTENT.npcs || {}).filter(n => n.spectrum && !n._gen);
-    const here = all.filter(n => n.homeLocation === location?.id);
-    return (here.length ? here : all).slice(0, 3);
-  }
-  if (type === "location") {
-    const all = Object.values(CONTENT.locations || {}).filter(l => l.poleIntensity && !l._gen);
-    const near = all.filter(l => (location?.connections || []).includes(l.id));
-    return (near.length ? near : all).slice(0, 3);
-  }
-  if (type === "arc") {
-    return (CONTENT.greaterArcs || []).slice(0, 2).map(a => ({
-      id: a.id, name: a.name, scale: a.scale, pressure: a.pressure, tendency: a.tendency,
-      hingeNpcs: a.hingeNpcs, ifIgnored: a.ifIgnored, ifEngaged: a.ifEngaged
-    }));
-  }
-  return [];
-}
+/** ⛔ CCODE-718: the engine's picker (G2 — every type has examples now, the creature too) */
+function pickExamples(type, location) { return pickExamplesFor(type, location, CONTENT); }
 
 /** SNG-250 §4 (CCODE-55): the born-whole contract + its vocabularies, as generate() deps.
  *

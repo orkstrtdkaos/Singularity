@@ -26015,6 +26015,48 @@ await (async () => {
       && /const opts = affiliationWorld\(content, /.test(rec716),
       JSON.stringify(r716));
   }
+  /* ── ✅ AEVI, born_whole G3 (CCODE-718): generated content passes the gates authored content passes — every type, every answer ── */
+  {
+    const GEN718 = await import("../engine/generate.js");
+    const AF718 = await import("../engine/affiliation.js");
+    const BC718 = await import("../engine/borncontract.js");
+    const { loadContentHeadless: lch718 } = await import("./headless_content.mjs");
+    const C718 = await lch718();
+    const loc718 = C718.locations.millbrook;
+    const types718 = Object.keys(C718.genSchemas || {});
+    // the context handleGenerateRequests builds, and the deps genContractDeps hands — nothing fed in that the app does not feed
+    const ctx718 = (character, t) => ({ location: loc718, character, day: 10, substrate: C718.substrate, genBudget: 3,
+      npcStanding: C718.rules?.npcStanding || null, locations: C718.locations, regions: C718.regions || null,
+      nearestTraditionWithinDeg: C718.regionRules?.nearestTraditionWithinDeg ?? null, regionHomeMap: C718.substrateModel?.regionHomeTradition || null,
+      affiliation: AF718.affiliationWorld(C718, AF718.buildPeopleVocab({ npcs: C718.npcs || {} })),
+      hingeIds: new Set(), avoidNames: [], examples: GEN718.pickExamples(t, loc718, C718), hint: `a ${t}`,
+      known: { authored: t === "npc" ? C718.npcs : t === "location" ? C718.locations : {} } });
+    const full718 = {
+      npc: { name: "Hesk Marrow", role: "a hired blade of the Watch", description: "A lean woman with a scar along her jaw.", appearance: "Lean, scarred, a grey coat.", sex: "female", gender: "woman", age: 34, spectrum: { chaos_order: 0.3 }, fears: ["fire"], wants: ["a quiet post"] },
+      location: { name: "Test Hollow", descriptionSeed: "A hollow below the ridge where the road bends.", appearance: "Low stone, a wet path.", tags: ["settlement"], connections: ["millbrook"], spectrum: { dark_light: -0.2 } },
+      arc: { name: "The Long Drought", summary: "The wells are failing across the valley.", stages: [{ stage: 1, publicFace: "Wells run low." }] },
+      creature: { name: "Mire Crawler", look: "A low, many-legged thing of the marsh.", danger: "It drags the unwary under.", tier: "riffraff", class: "beast", pressures: ["WARD"] },
+    };
+    const answers718 = { full: (t) => ({ ...(full718[t] || { name: "Something" }) }), truncated: (t) => ({ name: full718[t]?.name || "Something" }),
+      degraded: () => ({ name: 42, spectrum: "lots", connections: "everywhere", stages: "many", tier: "colossal" }), failed: () => null };
+    const rows718 = [], bad718 = [];
+    for (const t of types718) for (const [shape, mk] of Object.entries(answers718)) {
+      const ch = { id: "c-718", currentLocationId: "millbrook", generated: null, npcRegistry: {} };
+      let out = null, rej = null;
+      try { out = await GEN718.generate(t, ctx718(ch, t), { schema: C718.genSchemas[t], callJSON: async () => mk(t), onContractReject: (ty, e, b) => { rej = b; }, ...GEN718.bornDeps(C718) }); }
+      catch (e) { bad718.push(`${t}/${shape} threw ${e.message}`); continue; }
+      if (!out) { bad718.push(`${t}/${shape} null${rej ? " — " + (rej.missing || []).map((m) => m.field).join(",") : ""}`); continue; }
+      const v = BC718.checkBorn(out, t, C718.consumerContract);
+      const crash = (v.missing || []).filter((m) => (m.severity || m.sev) === "CRASH").map((m) => m.field);
+      if (crash.length) bad718.push(`${t}/${shape} CRASH ${crash.join(",")}`);
+      rows718.push(`${t}/${shape}:${v.verdict}`);
+    }
+    const examples718 = Object.fromEntries(types718.map((t) => [t, GEN718.pickExamples(t, loc718, C718).length]));
+    check("718/G3: ⛔ AEVI — GENERATED CONTENT PASSES THE GATES AUTHORED CONTENT PASSES — every generatable type, minted the app's way (its context, its deps, its examples) from a full answer, a truncated one, a degraded one and a failed call, comes back a record (\"a thin-but-present record beats a hole in the world\") with nothing the contract calls CRASH, and a full place comes back clean; and every type has examples now (G2: the creature had none)",
+      types718.length >= 4 && rows718.length === types718.length * 4 && bad718.length === 0 && rows718.includes("location/full:clean")
+      && types718.every((t) => examples718[t] >= 1) && /pickExamplesFor\(type, location, CONTENT\)/.test(readFileSync(join(root, "app.js"), "utf8")),
+      `${bad718.join(" · ") || "none bad"} · ${rows718.join(" ")} · examples ${JSON.stringify(examples718)}`);
+  }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {
     const ST706 = await import("../engine/state.js");

@@ -132,7 +132,10 @@ export function mendingJobsFor(character, { content = null } = {}) {
     const rec = mapStateOf(character, key, { content });
     const state = String(rec.state || "whole");
     const rung = rungOf(content, state);
-    if (rung === 0 || !localsWillMend(key, state, content)) continue;
+    if (rung === 0) continue;
+    // ✅ AEVI (R6): *"What the locals won't do: `remake` for a broken gate, at the cost of making one, and `resettle` for a razed place."*
+    const willNot = !localsWillMend(key, state, content);
+    if (willNot && !((p.cls === "gate" || p.cls === "place") && state === "destroyed")) continue;
     const places = keyPlaces(key).filter((id) => L[id]);
     if (!places.length) continue;
     let near = Infinity;
@@ -140,6 +143,7 @@ export function mendingJobsFor(character, { content = null } = {}) {
     if (!(near <= within)) continue;
     const site = siteOfKey(key, { content, character });
     const where = places.find((id) => anchors.includes(id)) || places[0];
+    if (willNot) { const sp = remakeSpecFor(key, p, state, where, content, near); if (sp) found.push(sp); continue; }
     const t = mapThingOf(key, content, { siteName: site?.name || null, from: where });
     if (!t) continue;
     const culprit = !!character?.id && culpritOf(rec) === character.id;
@@ -164,6 +168,55 @@ export function mendingJobsFor(character, { content = null } = {}) {
     } });
   }
   return found.sort((a, b) => (Number(b.culprit) - Number(a.culprit)) || (a.near - b.near)).slice(0, max).map((x) => x.spec);
+}
+
+/* ═════ PART R · WHAT THE LOCALS WON'T DO ═════
+ * ✅ AEVI (R6): *"What the locals won't do: `remake` for a broken gate, at the cost of making one, and `resettle` for a razed place. A
+ * successful resettle founds the place through SNG-672 M1 at the trace's position, with the old name offered back."*
+ * ⛑ Both are jobs on the board like a mending, posted where the locals' own pass leaves a thing destroyed: the gate made again
+ * (`jobs.labels.remake`) and the place resettled (`jobs.labels.resettle`). ⚠️ "At the cost of making one" is the thing's worth
+ * (`buildWorth`), and a job's cost is held to three times its level — so a remake costs what the destroyed rung's level allows
+ * (66 crystal of a gate's 300). That is said, not hidden: raising the level would also make the job harder.
+ * ⛑ A success is S0's own form for both — `added` on the destroyed key — so the place founded again IS the place, at its trace. */
+function remakeSpecFor(key, p, state, where, content, near) {
+  const J = content?.mapStates?.jobs || {}, L = content?.locations || {};
+  const steps = content?.mapStates?.repair?.playerReward?.standingSteps || {};
+  const level = 4 + 6 * rungOf(content, state);
+  const worth = mendValue(key, { content, regionId: L[where]?.regionId || null });
+  const cost = Math.max(0, Math.min(3 * level, Math.round(Number(worth) || 0)));
+  const name = L[p.id]?.name || String(p.id).replace(/^gen-/, "").replace(/[-_]+/g, " ");
+  const base = { where, level, effort: Number(J.effortDays?.[state]) || 6, from: smartClamp(fill(J.from || "the people of {place}", { place: name }), 60) };
+  if (p.cls === "gate") return { near, culprit: false, spec: { ...base, id: `remake:${key}`.slice(0, 80),   // prose-cap-ok: an identifier
+    label: smartClamp(fill(J.labels?.remake || "Make the gate at {place} again", { place: name }), 120),
+    needs: (J.needs?.gate || J.needs?.waygate || J.needs?.default || [{ family: "RESTORE", weight: 2 }]).map((n) => ({ family: n.family, weight: n.weight })),
+    stakes: { remake: { key }, ...(cost ? { crystal: -cost } : {}), standing: Math.min(2, Number(steps[state]) || 2) } } };
+  return { near, culprit: false, spec: { ...base, id: `resettle:${key}`.slice(0, 80),   // prose-cap-ok: an identifier
+    label: smartClamp(fill(J.labels?.resettle || "Resettle {name}", { name }), 120),
+    needs: (J.needs?.resettle || J.needs?.default || [{ family: "RESTORE", weight: 2 }]).map((n) => ({ family: n.family, weight: n.weight })),
+    stakes: { resettle: { key, placeId: p.id, name }, ...(cost ? { crystal: -cost } : {}), standing: Math.min(2, Number(steps[state]) || 2) } } };
+}
+/** ⛔ A GATE MADE AGAIN, A PLACE FOUNDED AGAIN — THROUGH THE ONE DOOR'S OWN FORM FOR IT. S0's table already says it: a destroyed
+ *  gate *"cannot be repaired — it has to be made again"* (`repairFromDestroyed: false`), and a razed place *"can be founded again"*
+ *  (`addBack`, *"the founding of a place"*). Both are the change `added` on the destroyed key, by the character: the same record comes
+ *  back whole and "newly founded" — at the trace's position because it is the same place, its roads and its people still its own.
+ *  ✅ AEVI: *"with the old name offered back"* — the card offers it; a name the player changed rides on the change as the place's
+ *  new name (the old one stays in its history, "once called"). → `{ ok, said }`. Mutates. */
+export function applyRemake(character, rm, { content = null, worldDay = null } = {}) {
+  if (!character || !rm?.key) return { ok: false, said: null };
+  const p = parseMapKey(rm.key), name = content?.locations?.[p?.id]?.name || p?.id || "the place";
+  const r = applyMapChange(character, { key: rm.key, change: "added", by: character.id || "player", cause: "made again" }, { content, worldDay });
+  return { ok: r.ok, said: r.ok ? `the gate at ${name} stands again — made again by your hands` : `the gate at ${name} could not be made again — ${r.why}` };
+}
+export function applyResettle(character, rs, { content = null, worldDay = null } = {}) {
+  if (!character || !rs?.key) return { ok: false, said: null };
+  const old = content?.locations?.[rs.placeId] || null;
+  const oldName = old?.name || String(rs.placeId || "").replace(/^gen-/, "").replace(/[-_]+/g, " ");
+  const name = [...String(rs.name || "")].filter((ch) => ch.charCodeAt(0) >= 32 && ch !== "<" && ch !== ">").join("").replace(/\s+/g, " ").trim().slice(0, 60) || oldName;
+  const r = applyMapChange(character, { key: rs.key, change: "added", by: character.id || "player", cause: "resettled" }, { content, worldDay });
+  // a name the player gave it is its own change — `renamed` — so the old one stays in its history ("once called")
+  if (r.ok && name !== oldName) applyMapChange(character, { key: rs.key, change: "renamed", by: character.id || "player", cause: "resettled", name }, { content, worldDay });
+  if (r.ok && old) character.knownPlaces = [...new Set([...(character.knownPlaces || []), old.id])];
+  return { ok: r.ok, said: r.ok ? `${name} is settled again, where ${oldName} stood` : `${oldName} could not be resettled — ${r.why}` };
 }
 
 /* ✅ SNG-679 Part R · R4 — THE GIFT. ✅ AEVI: *"The player can mark it as a gift before sending. The stakes then carry no crystal, the
@@ -192,9 +245,9 @@ export function postMendingJobs(character, { content = null, day = null } = {}) 
   const want = new Map(specs.map((s) => [s.id, s]));
   let dropped = 0;
   for (const j of [...B]) {
-    if (!String(j?.id || "").startsWith("mend:")) continue;
+    if (!/^(mend|remake|resettle):/.test(String(j?.id || ""))) continue;   // ⛑ the board's own mending, remaking and resettling
     const s = want.get(j.id);
-    if (!s || s.stakes.mend.from !== j.stakes?.mend?.from) { dropJob(character, j.id); dropped++; }
+    if (!s || (s.stakes.mend && s.stakes.mend.from !== j.stakes?.mend?.from)) { dropJob(character, j.id); dropped++; }
   }
   const posted = [];
   for (const s of specs) {

@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.26.13";
+const APP_VERSION = "2.26.14";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -24400,6 +24400,8 @@ function renderJobsTab(selId = null) {
         ${/* ✅ SNG-679 Part R · R4: the gift — before the team goes, the work can be given; the card then says so in Aevi's words */""}
         ${job.stakes?.mend && !job.stakes.mend.culprit ? `<button class="opt" data-job-gift="${esc(job.id)}" data-on="${job.stakes.mend.gift ? "0" : "1"}" title="${job.stakes.mend.gift ? "Ask for the pay after all" : "Do the work for nothing"}">${job.stakes.mend.gift ? "Ask for the pay" : "Do it as a gift"}</button>` : ""}</div>
       ${job.stakes?.mend?.gift ? `<div class="hint" data-job-giftline>${esc(CONTENT.mapStates?.jobs?.giftLine || "")}</div>` : ""}
+      ${/* ✅ SNG-679 Part R: a resettle founds the place again — *"with the old name offered back"*: the name is the card's to change */""}
+      ${job.stakes?.resettle ? `<label class="codex-f" style="display:flex;gap:6px;align-items:center"><strong>Its name</strong> <input data-job-name="${esc(job.id)}" maxlength="60" value="${esc(job.stakes.resettle.name || "")}" aria-label="The name the resettled place takes"></label>` : ""}
       ${planHtml}</div>`;
   }
 
@@ -24483,6 +24485,12 @@ function renderJobsTab(selId = null) {
   };
   const clear = document.querySelector("[data-job-clear]");
   if (clear) clear.onclick = () => { _jobsUi.pick[job.id] = []; renderJobsTab(); };
+  const nameIn = document.querySelector("[data-job-name]");
+  if (nameIn) nameIn.onchange = () => {
+    const j = (character.jobs?.board || []).find(x => x && x.id === nameIn.dataset.jobName);
+    const v = [...String(nameIn.value || "")].filter((ch) => ch.charCodeAt(0) >= 32 && ch !== "<" && ch !== ">").join("").replace(/\s+/g, " ").trim().slice(0, 60);
+    if (j?.stakes?.resettle && v) { j.stakes.resettle.name = v; saveCharacter(character); }
+  };
   const giftBtn = document.querySelector("[data-job-gift]");
   if (giftBtn) giftBtn.onclick = () => {
     const r = giftMend(character, giftBtn.dataset.jobGift, giftBtn.dataset.on === "1", { content: CONTENT });

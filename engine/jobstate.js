@@ -100,6 +100,11 @@ export function normalizeJob(spec = {}, { day = null } = {}) {
   if (md && text(md.key, 120)) stakes.mend = { key: text(md.key, 120), from: text(md.from, 20) || null, culprit: md.culprit === true,
     // ✅ R4's gift: done for nothing — and the pay it would have had, kept so the gift can be taken back before the team goes
     ...(md.gift === true && md.culprit !== true ? { gift: true, payWas: clampInt(md.payWas, 0, 9999, 0) } : {}) };
+  // ✅ SNG-679 Part R: what the locals won't do — a gate made again, a razed place resettled (its name as the card offers it)
+  const rmk = s.remake && typeof s.remake === "object" ? s.remake : null;
+  if (rmk && text(rmk.key, 120)) stakes.remake = { key: text(rmk.key, 120) };
+  const rst = s.resettle && typeof s.resettle === "object" ? s.resettle : null;
+  if (rst && text(rst.key, 120) && text(rst.placeId, 80)) stakes.resettle = { key: text(rst.key, 120), placeId: text(rst.placeId, 80), name: text(rst.name, 60) || null };
   // ✅ SNG-679 Part R · R7: a hunt or an investigation — the thing, the breaking it is about, which of the two
   const hn = s.hunt && typeof s.hunt === "object" ? s.hunt : null;
   if (hn && text(hn.key, 120)) stakes.hunt = { key: text(hn.key, 120), damageId: text(hn.damageId, 80) || null, kind: hn.kind === "investigate" ? "investigate" : "hunt" };

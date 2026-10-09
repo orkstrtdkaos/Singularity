@@ -25782,6 +25782,36 @@ await (async () => {
       && app701.includes("data-job-giftline"),
       JSON.stringify({ pay701, on701, back701, culprit: culprit701.why, crystal: fx701.crystal, standing: fx701.standing }));
   }
+  /* ── ✅ SNG-679 Part R: what the locals won't do — remake a gate, resettle a razed place (CCODE-702) ── */
+  {
+    const MS702 = await import("../engine/mapstate.js");
+    const MD702 = await import("../engine/mending.js");
+    const JB702 = await import("../engine/jobs.js");
+    const { loadContentHeadless: lch702 } = await import("./headless_content.mjs");
+    const C702 = await lch702();
+    const gateKey702 = "gate:gen-waygate", placeKey702 = "place:echo_river_crossing";
+    const ch702 = { id: "player-me", name: "Me", currentLocationId: "millbrook", holdings: [], mapEvents: [], purse: {}, knownPlaces: [] };
+    MS702.applyMapChange(ch702, { key: gateKey702, change: "destroyed", by: "player-other", seen: "named" }, { content: C702, worldDay: 100 });
+    MS702.applyMapChange(ch702, { key: placeKey702, change: "destroyed", by: "player-other", seen: "named" }, { content: C702, worldDay: 100 });
+    MD702.postMendingJobs(ch702, { content: C702, day: 5 });
+    const remake702 = ch702.jobs.board.find((j) => j.stakes?.remake), resettle702 = ch702.jobs.board.find((j) => j.stakes?.resettle);
+    const gateName702 = C702.locations["gen-waygate"].name, oldName702 = C702.locations.echo_river_crossing.name;
+    // the card offers the old name back; the player may change it
+    resettle702.stakes.resettle.name = "New Crossing";
+    const rlines702 = JB702.applyJobEffects(ch702, { team: ["player"], job: remake702, names: {} }, JB702.jobEffects(remake702, "success", C702.rules), { content: C702 });
+    const slines702 = JB702.applyJobEffects(ch702, { team: ["player"], job: resettle702, names: {} }, JB702.jobEffects(resettle702, "success", C702.rules), { content: C702 });
+    const founded702 = MS702.mapStateOf(ch702, placeKey702, { content: C702 });
+    const app702 = readFileSync(join(root, "app.js"), "utf8");
+    check("Part R: ⛔ WHAT THE LOCALS WON'T DO IS A JOB — a destroyed gate is posted to \"Make the gate at {place} again\", at the cost of making one (as far as a job's level allows), and a success makes it whole through the one door by the character; a razed place is posted to \"Resettle {name}\" with the old name offered back on the card, and a success founds it AGAIN — S0's own form, `added` on the razed key, so it is the same place at its trace, its roads and people its own — under the name the card holds (a changed name is its new name), known to the founder; nothing new is minted",
+      !!remake702 && remake702.label === `Make the gate at ${gateName702} again` && remake702.stakes.crystal < 0
+      && !!resettle702 && resettle702.label === `Resettle ${oldName702}`
+      && MS702.mapStateOf(ch702, gateKey702, { content: C702 }).state === "whole" && rlines702.some((l) => /stands again/.test(l))
+      && founded702.state === "whole" && !!founded702.added && founded702.name === "New Crossing" && founded702.by === "player-me"
+      && ch702.knownPlaces.includes("echo_river_crossing") && !Object.keys(ch702.generated?.location || {}).length
+      && slines702.some((l) => /settled again/.test(l))
+      && app702.includes("data-job-name=") && app702.includes("j.stakes.resettle.name = v; saveCharacter(character);"),
+      JSON.stringify({ remake: remake702?.label, cost: remake702?.stakes?.crystal, resettle: resettle702?.label, founded: founded702 && [founded702.state, founded702.name], rlines702, slines702 }));
+  }
   check("678/rulings: ⛔ ERIK — a place the character has not heard of is a \"?\" on the ground and on its card, still a mark and still tappable, and a journey can be planned to ANY place",
     /name: heard416 \? labelText\(view416\.label, "place", 24\) : ""/.test(paintR) && /const heard416 = isPlaceKnown\(character, id, CONTENT\.locations\);/.test(paintR)
     && /if \(!m\.heard\) drawGlyph\(ctx, "unknown", m\.p\.x, m\.p\.y, 7, \{\}\);/.test(paintR)

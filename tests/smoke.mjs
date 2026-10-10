@@ -26117,6 +26117,29 @@ await (async () => {
       && /\(rc === lookId \|\| rr === lookId \|\| rd === lookId\) \? 0\.62 : 0\.3/.test(app721),
       `${agree}/${n} cells agree with the vote · ${ids721.size} regions seen at 9° steps`);
   }
+  /* ── ✅ AEVI B0 (CCODE-724) — ERIK, in play: "I don't see a clear way to add people to my band" ── */
+  {
+    const ML724 = await import("../engine/melee.js");
+    const holds724 = [{ id: "h1", name: "Threshold Post" }, { id: "h2", name: "Stillwater's Trouble" }, { id: "h3", name: "The Fell Pell" }, { id: "h4", name: "Whistling Woman Post" }, { id: "h5", name: "Madegate" }];
+    const pile = (n, from, extra = {}) => ({ n, from, quality: 1, does: ["HARM"], ...extra });
+    const five724 = [pile(3, "h1"), pile(10, "h2"), pile(6, "h3"), pile(4, "h4"), pile(3, "h5"), { npcId: "pell", n: 1, does: ["HARM"] }];
+    const line724 = ML724.handsLine(five724, { holdings: holds724 });
+    const one724 = ML724.handsLine([pile(7, "h2")], { holdings: holds724 });
+    const split724 = ML724.handsLine([pile(7, "h2"), pile(3, "h2", { quality: 2 })], { holdings: holds724 });
+    const archers724 = ML724.handsLine([pile(4, "h1", { kind: "archers" }), pile(6, "h2", { kind: "archers", does: ["HARM", "MARTIAL"] })], { holdings: holds724 });
+    const app724 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");
+    const card724 = app724.slice(app724.indexOf("units.filter(u => !u.inLegion).length ? units.filter(u => !u.inLegion).map(u => `<div style=\"margin-top:10px\">"));
+    const at724 = (needle) => card724.indexOf(needle);
+    check("724/B0: ⛔ ERIK, in play — \"I DON'T SEE A CLEAR WAY TO ADD PEOPLE TO MY BAND\" — the band's own actions are the first thing under its name (they sat under every pile of hands, about 2,400 px down a 2,600 px page), in Aevi's order: ask, raise, call, mission, captain; and the hands fold into one line — how many, from how many holds, their quality and what they are good at, named people not counted — that opens to the same per-pile tools and remembers being open",
+      line724 === "26 hands from five holds · quality 1 · harm" && one724 === "7 hands from Stillwater's Trouble · quality 1 · harm"
+      && split724 === "10 hands from Stillwater's Trouble · quality 1–2 · harm · two groups" && archers724 === "10 archers from two holds · quality 1 · harm"
+      && ML724.handsLine([{ npcId: "pell", n: 1 }]) === ""
+      && at724("data-band-recruit") > 0 && at724("data-band-recruit") < at724("${standing405(u)}") && at724("data-band-recruit") < at724("const rowsFor = (id) =>")
+      && at724("data-band-recruit") < at724("data-band-muster") && at724("data-band-muster") < at724("data-unit-call=") && at724("data-unit-call=") < at724("data-band-mission") && at724("data-band-mission") < at724("Change captain…")
+      && /<details class="band-hands" data-band-hands="\$\{esc\(id\)\}"\$\{_bandHandsOpen\.has\(String\(id\)\) \? " open" : ""\}>/.test(app724)
+      && /details\[data-band-hands\]"\)\) d\.ontoggle = /.test(app724),
+      JSON.stringify({ line724, one724, split724, archers724 }));
+  }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {
     const ST706 = await import("../engine/state.js");

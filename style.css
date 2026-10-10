@@ -2578,3 +2578,10 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
   .op-mv { display: none; }
   .op-ctl { right: 8px; bottom: 6px; }
 }
+
+/* ═════ B0 (CCODE-724) · A BAND'S HANDS, ON ONE LINE ═════
+   ✅ AEVI: "Fold the hands into one line … the per-pile tools open from that line." The line is the summary of a
+   <details>; the piles keep every tool they had, inside it. */
+.band-hands { margin: 6px 0; border-left: 2px solid var(--line); padding-left: 8px; }
+.band-hands > summary { cursor: pointer; padding: 4px 0; list-style-position: inside; }
+.band-hands > summary:focus-visible { outline: 2px solid var(--accent, #e8c14a); outline-offset: 2px; }

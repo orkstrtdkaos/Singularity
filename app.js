@@ -194,7 +194,7 @@ import { championsFor, resolveChampion, creditChampion, championLine, sendingIsG
 // ⛔ CCODE-404 (Erik) — `addContingent` and `musteredFrom` are new; `unitComposition` and `bandGaps` had NO caller outside the tests.
 // ⛔ CCODE-405 (Erik's legion ruling): formed of bands that keep their identity, placed and postured once CALLED, and free until then.
 // ⚠️ ONE LINE ON PURPOSE — `import_integrity` reads an import statement per line, and a comment inside the braces hides what follows it.
-import { commandSlots, bringForward, lineSplit, canRaiseBand, bandReady, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent, splitContingent, combineContingents, combineCost, unitLabel, kitSummary, bandDialsOf, onMissionWith, MELEE_TIERS } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+import { commandSlots, bringForward, lineSplit, canRaiseBand, bandReady, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent, splitContingent, combineContingents, combineCost, unitLabel, handsLine, kitSummary, bandDialsOf, onMissionWith, MELEE_TIERS } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.27.1";
+const APP_VERSION = "2.27.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -25018,6 +25018,7 @@ function renderLegionTab() {
   };
 }
 
+const _bandHandsOpen = new Set();   // ✅ B0 (CCODE-724): which bands' hands are unfolded, kept across the tab's re-renders
 function renderBandsTab() {
   const ladder = CONTENT.rules.subAttributeLadder;
   const day = absoluteWorldDay();
@@ -25169,6 +25170,24 @@ function renderBandsTab() {
         ${units.filter(x => !x.inLegion).length === 1 && !u.isLegion
           ? `<div class="hint">${esc(unitLine(u))}</div>`
           : `<div><strong>${esc(u.name)}</strong>${u.isLegion ? ` <span class="news-near-chip">legion</span>` : ""} <span class="hint">— ${esc(unitLine(u))}</span></div>`}
+        ${/* ✅ AEVI, B0 (CCODE-724) — THE BAND'S OWN ACTIONS, AT THE TOP OF ITS CARD. ⛔ ERIK, in play: *"I don't see a clear way to add
+              people to my band."* The doors worked — "Ask someone to join…" offered 29 people — and sat under every pile of hands,
+              about 2,400 px down a 2,600 px page. They are the first thing under the band's name now. */""}
+        <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px"${!u.isLegion && !raise404.ready ? ` data-band-waiting="1" title="${esc(raise404.why)}"` : ""}>
+          ${u.isLegion ? `<span class="hint">People join its BANDS, not the legion — that is what keeping their identity means.</span>` : `
+          <button class="opt" data-band-recruit="${esc(u.id)}" title="Ask someone you know to stand in it — a far lower bar than travelling with you">Ask someone to join…</button>
+          <button class="opt" data-band-muster="${esc(u.id)}" title="Raise hands at a place you hold, up to what it can feed">Raise hands at a hold…</button>`}
+          ${u.called
+            ? `${UNIT_POSTURES.filter(p => p !== u.posture).map(p => `<button class="opt" data-unit-posture="${esc(u.id)}" data-posture="${esc(p)}">${p === "dispersed" ? "Disperse to forage" : "Make camp"}</button>`).join("")}
+               <button class="opt" data-unit-stand-down="${esc(u.id)}" title="They go home. What was paid is paid.">Stand them down</button>`
+            : `<button class="opt" data-unit-call="${esc(u.id)}"${u.head ? "" : " disabled"} title="${esc(u.head ? `Gather them where you stand — ${costOf405(u).total} ${upkeepCur405}` : "Nobody stands in it yet")}">Call them together…</button>`}
+          ${/* ⛑ B0: in Aevi's order — ask, raise, call, then the mission, then the captain */""}
+          ${u.isLegion ? "" : (() => { const b453 = (character.bands || []).find(x => x && x.id === u.id); return b453?.mission   // ⛔ CCODE-453: a band on a mission
+            ? `<span class="hint">away on a mission: ${esc(b453.mission.said || b453.mission.kind)}</span> <button class="opt" data-band-recall="${esc(u.id)}" title="Call them home — the charge ends where it stands">Recall them</button>`
+            : `<button class="opt" data-band-mission="${esc(u.id)}" title="They go as a band on one of the seven errands — whoever walks with you, keeps a post or carries a charge of their own stays">Send on a mission…</button>`; })()}
+          ${u.isLegion ? `<button class="opt" data-legion-disband="${esc(u.id)}" title="The bands return to standing on their own, exactly as they were">Take the legion apart</button>` : ""}
+          ${u.isLegion ? "" : `<button class="opt" data-unit-lead="${esc(u.id)}" title="Who leads it — a captain is worth a step of quality to every head under them, by their level">${u.leader ? "Change captain…" : "Appoint a captain…"}</button>`}
+        </div>
         ${!u.isLegion && !raise404.ready ? `<div class="codex-f hint band-waiting">○ <strong>Named, and not yet answering.</strong> ${esc(raise404.why)}. They stand in your record and keep their name; they cannot be called, sent or set to a posture until they answer.</div>` : ""}
         ${standing405(u)}
         ${(() => { // ⛔ CCODE-431: who of this band is OUT ON A JOB — they are not in it until they are back, and the band reads smaller for it
@@ -25183,11 +25202,11 @@ function renderBandsTab() {
           // explain itself is the thing this project keeps finding.
           const role = u.isLegion ? "commander" : "captain";
           const nm = (id) => (id === "player" ? character.name : (character.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || id));
-          if (!u.leader) return `<div class="codex-f hint">No ${role}. <button class="opt" data-unit-lead="${esc(u.id)}">Appoint one…</button></div>`;
+          if (!u.leader) return `<div class="codex-f hint">No ${role}.${u.isLegion ? ` <button class="opt" data-unit-lead="${esc(u.id)}">Appoint one…</button>` : ""}</div>`;
           return `<div class="codex-f hint"><strong>${esc(nm(u.leader.id))}</strong> ${role === "commander" ? "commands" : "captains"} it
             ${u.leaderBonus > 0 ? `— level ${u.leader.level}, worth <strong>+${u.leaderBonus}</strong> to every head under them`
               : `— level ${u.leader.level}, not yet enough to be worth a step`}
-            <button class="opt" data-unit-lead="${esc(u.id)}">Change…</button></div>`;
+            ${u.isLegion ? `<button class="opt" data-unit-lead="${esc(u.id)}">Change…</button>` : ""}</div>`;
         })()}
         ${u.isLegion ? `<div class="codex-f hint">Formed from ${u.parts.map(p => `<strong>${esc(p.name)}</strong> <span class="hint">(${esc(p.condition)})</span>`).join(", ")} — they keep their own people, their own losses and their own condition.</div>` : ""}
         ${unitFacts(u)}
@@ -25197,26 +25216,24 @@ function renderBandsTab() {
           // the top-level list (so a legion of two bands would not read as three commands) had made every person in them render
           // NOWHERE — Pell's row simply vanished. ⚠️ Nesting is also what "they keep their identity" should look like: each band
           // named, with its own condition, and its own people under it.
-          const rowsFor = (id) => [...here.filter(r => r.unitId === id), ...pool.filter(r => r.unitId === id)].map(rowFor).join("");
+          /* ✅ AEVI, B0 (CCODE-724): *"Fold the hands into one line … The per-pile tools (Outfit, Split, Combine) open from that line. Named
+           * people stay listed as they are."* ⛑ A <details>: the piles and every tool they had are inside it, unchanged, and it remembers
+           * being open across the re-render each tool causes (`_bandHandsOpen`). */
+          const rowsFor = (id) => {
+            const mine = [...here.filter(r => r.unitId === id), ...pool.filter(r => r.unitId === id)];
+            const people = mine.filter(r => r.kind !== "hands"), hands = mine.filter(r => r.kind === "hands");
+            const cgs = (character.bands || []).find(b => b && b.id === id)?.contingents || [];
+            const line = hands.length ? handsLine(hands.map(r => cgs[r.contingentIndex]).filter(Boolean), { holdings: character.holdings || [], locations: CONTENT.locations || {} }) : "";
+            return people.map(rowFor).join("") + (hands.length
+              ? `<details class="band-hands" data-band-hands="${esc(id)}"${_bandHandsOpen.has(String(id)) ? " open" : ""}><summary><strong>${esc(line || `${hands.reduce((a, r) => a + r.n, 0)} hands`)}</strong> <span class="hint">— outfit, split or combine them</span></summary>${hands.map(rowFor).join("")}</details>`
+              : "");
+          };
           if (!u.isLegion) return rowsFor(u.id) || `<div class="hint">nobody stands in it</div>`;
           return u.parts.map(p => `<div style="margin:6px 0 6px 10px;border-left:2px solid var(--line,rgba(255,255,255,0.12));padding-left:8px">
             <div class="hint"><strong>${esc(p.name)}</strong> — ${esc(p.condition)}</div>
             ${rowsFor(p.id) || `<div class="hint">nobody stands in it</div>`}</div>`).join("")
             || `<div class="hint">no bands stand in it</div>`;
         })()}
-        <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px"${!u.isLegion && !raise404.ready ? ` data-band-waiting="1" title="${esc(raise404.why)}"` : ""}>
-          ${u.isLegion ? `<span class="hint">People join its BANDS, not the legion — that is what keeping their identity means.</span>` : `
-          <button class="opt" data-band-recruit="${esc(u.id)}" title="Ask someone you know to stand in it — a far lower bar than travelling with you">Ask someone to join…</button>
-          ${(() => { const b453 = (character.bands || []).find(x => x && x.id === u.id); return b453?.mission   // ⛔ CCODE-453: a band on a mission
-            ? `<span class="hint">away on a mission: ${esc(b453.mission.said || b453.mission.kind)}</span> <button class="opt" data-band-recall="${esc(u.id)}" title="Call them home — the charge ends where it stands">Recall them</button>`
-            : `<button class="opt" data-band-mission="${esc(u.id)}" title="They go as a band on one of the seven errands — whoever walks with you, keeps a post or carries a charge of their own stays">Send on a mission…</button>`; })()}
-          <button class="opt" data-band-muster="${esc(u.id)}" title="Raise hands at a place you hold, up to what it can feed">Raise hands at a hold…</button>`}
-          ${u.called
-            ? `${UNIT_POSTURES.filter(p => p !== u.posture).map(p => `<button class="opt" data-unit-posture="${esc(u.id)}" data-posture="${esc(p)}">${p === "dispersed" ? "Disperse to forage" : "Make camp"}</button>`).join("")}
-               <button class="opt" data-unit-stand-down="${esc(u.id)}" title="They go home. What was paid is paid.">Stand them down</button>`
-            : `<button class="opt" data-unit-call="${esc(u.id)}"${u.head ? "" : " disabled"} title="${esc(u.head ? `Gather them where you stand — ${costOf405(u).total} ${upkeepCur405}` : "Nobody stands in it yet")}">Call them together…</button>`}
-          ${u.isLegion ? `<button class="opt" data-legion-disband="${esc(u.id)}" title="The bands return to standing on their own, exactly as they were">Take the legion apart</button>` : ""}
-        </div>
         ${u.travelers.map(t => `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap"><strong style="min-width:130px">${esc(t.name)}</strong><span class="hint">another traveler, who chose to join${t.via ? ` — word came through ${esc(t.via)}` : ""}</span></div>`).join("")}
         ${sentInvitations(sharedInvites, character).filter(i => i.bandId === u.id && i.answer !== "accepted").map(i => `<div class="codex-f hint">Word sent to ${esc(i.toName)} through ${esc(i.carrierName)} — ${i.answer === "declined" ? "the answer came back: not now" : "no answer yet"}</div>`).join("")}
         ${syncEnabled() ? `<div class="opt-row" style="margin-top:6px"><button class="opt" data-band-invite="${esc(u.id)}" title="Send word to another player's character through someone in this band">Invite a fellow traveler…</button></div>` : ""}
@@ -25245,6 +25262,7 @@ function renderBandsTab() {
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
   wireCharacterTabs();
+  for (const d of app.querySelectorAll("details[data-band-hands]")) d.ontoggle = () => { const k = String(d.dataset.bandHands); if (d.open) _bandHandsOpen.add(k); else _bandHandsOpen.delete(k); };
   // ⛔ THE REFUSAL IS SAID, NEVER SWALLOWED. `recruit` returns a bare null over the cap, and the holds screen shipped exactly that
   // silence a week ago — Erik found it in an hour. The gate speaks first and the writer acts second.
   for (const b of app.querySelectorAll("[data-band-bring]")) b.onclick = () => {

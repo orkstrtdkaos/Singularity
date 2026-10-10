@@ -885,6 +885,34 @@ export function unitLabel(cg, { locations = null, holdings = null, nameOf = null
   return bits.join(" · ");
 }
 
+/** ✅ AEVI, B0 (2026-10-09, from Erik in play: *"I don't see a clear way to add people to my band"*): *"Fold the hands into one line.
+ *  For example, '26 hands from five holds · quality 1 · harm'. The per-pile tools (Outfit, Split, Combine) open from that line."*
+ *  ⛔ CCODE-724 · MEASURED: each pile of hands drew a row of six controls, so with five piles the band's own buttons began about
+ *  2,400 px down a 2,600 px page. ⛑ What the piles ARE, summed: how many, what they are called when every pile is called the same
+ *  thing, how many holds they were raised at (the hold's name when it is one), their quality (a range when they differ) and what
+ *  they are good at. Named people are not hands and are not counted. PURE. */
+const COUNT_WORDS = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+export function handsLine(contingents, { locations = null, holdings = null } = {}) {
+  const piles = (Array.isArray(contingents) ? contingents : []).filter((c) => c && !c.npcId && num(c.n, 0) > 0);
+  if (!piles.length) return "";
+  const n = piles.reduce((a, c) => a + num(c.n, 0), 0);
+  const kinds = [...new Set(piles.map((c) => (c.kind ? String(c.kind) : "")))];
+  const noun = kinds.length === 1 && kinds[0] ? kinds[0] : (n === 1 ? "hand" : "hands");
+  const bits = [`${n} ${noun}`];
+  const froms = [...new Set(piles.map((c) => c.from).filter(Boolean))];
+  if (froms.length === 1) {
+    const where = (holdings || []).find((h) => h && h.id === froms[0])?.name || locations?.[froms[0]]?.name || null;
+    if (where) bits[0] += ` from ${where}`;
+  } else if (froms.length > 1) bits[0] += ` from ${COUNT_WORDS[froms.length] || froms.length} holds`;
+  const qs = piles.map((c) => num(c.quality, 0)).filter((q) => q > 0);
+  if (qs.length) { const lo = Math.min(...qs), hi = Math.max(...qs); bits.push(lo === hi ? `quality ${lo}` : `quality ${lo}–${hi}`); }
+  const does = [...new Set(piles.flatMap((c) => (Array.isArray(c.does) ? c.does : [])).filter((x) => String(x) !== "MARTIAL").map((x) => String(x).toLowerCase()))];
+  if (does.length) bits.push(does.join(", "));
+  // ⛑ how many groups, only when it says something the holds did not: two piles from one hold (a split) are "two groups"
+  if (piles.length > Math.max(1, froms.length)) bits.push(`${COUNT_WORDS[piles.length] || piles.length} groups`);
+  return bits.join(" · ");
+}
+
 /** ⛔ SPLIT A LEVY — peel `take` heads off into a row of their own, so they can be sent somewhere else.
  *
  *  ⚠️ IT NAMES NOBODY. The new row carries the same quality, the same verbs, the same ward and the place they were

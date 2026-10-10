@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.27.4";
+const APP_VERSION = "2.27.5";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -17660,6 +17660,8 @@ async function loadTerrain() {
   return _terrain;
 }
 
+/** ✅ I (CCODE-727): what the globe calls a pin — its name once the character has heard of it, the card's own words until then. */
+function globeNameOf(p) { return isPlaceKnown(character, p?.id, CONTENT.locations) ? (p?.name || p?.id) : "Somewhere you have not heard of"; }
 function wireWorldGlobe() {
   const cv = document.getElementById("world-globe");
   if (!cv) return;
@@ -18367,6 +18369,10 @@ function wireWorldGlobe() {
         const lim = SHOW[p.kind] ?? SHOW.settlement;
         if (glyphSpan > lim) continue;
         if (!inFrame3(p)) { qOffFrame++; continue; }   // its glyph is off-canvas; a clamped name would be a lie
+        /* ✅ AEVI, I (2026-10-09 — M6 on the globe): *"yes, follow ruling 3. An unheard-of authored place keeps its mark on the globe and
+         * loses its name, as on the region map."* ⛔ CCODE-727: the globe lettered every authored place, heard of or not. The mark
+         * above is untouched; only the name waits until the character has heard it (`isPlaceKnown`, the region map's own test). */
+        if (!isPlaceKnown(character, p.id, CONTENT.locations)) continue;
         // ✅ M2 (CCODE-711): a name the story changed (`renamed`) shows on the globe as it does on the region map — through `mapView`
         const nm = String(mapView(character, `place:${p.id}`, { content: CONTENT, name: p.name || p.id }).label || p.name || p.id);
         if (seatName.get(p.id) === nm) { qSkippedDup++; continue; }   // the region pass letters this very word here
@@ -18500,7 +18506,7 @@ function wireWorldGlobe() {
       // what the GROUND says rather than what the parent link claims.
       const zoneNow = _areas && _areas.disputed_zone;
       const inZone = zoneNow && _zoneMembers && _zoneMembers.includes(p.id);
-      readout.textContent = `${p.name}${p.waygate ? " ◈ waygate" : ""}${s ? ` — ${s.biome || "unmapped"}, ${s.type === 0 ? "water" : "elev " + s.elevation}` : ""}${inZone ? ` · in ${zoneNow.name}` : ""}`;
+      readout.textContent = `${globeNameOf(p)}${p.waygate ? " ◈ waygate" : ""}${s ? ` — ${s.biome || "unmapped"}, ${s.type === 0 ? "water" : "elev " + s.elevation}` : ""}${inZone ? ` · in ${zoneNow.name}` : ""}`;
     } else readout.textContent = "Drag to spin · scroll to zoom · click a place to enter its region.";
   };
   // ⛔ A CLICK FLIES THE CAMERA; IT DOES NOT LEAVE THE MAP. Erik: "clicking a dot right now jumps you to
@@ -18570,16 +18576,17 @@ function wireWorldGlobe() {
       const rid = act.regionId;
       openPlaceCard({ canvas: cv, id: act.selectId, glyph: { x: p.x * (cv.getBoundingClientRect().width / GW()), y: p.y * (cv.getBoundingClientRect().height / HGLOBE()) },
         extra: rid ? { label: "◱ Show on region map", onClick: () => { closePlaceCard(); enterRegion(rid, act.selectId); } } : null });
-      if (readout) readout.textContent = `${p.name} · Esc or ✕ closes`;
+      if (readout) readout.textContent = `${globeNameOf(p)} · Esc or ✕ closes`;
       return;
     }
     if (act.action === "enter") {
-      if (readout) readout.textContent = `Entering ${p.name}…`;
+      // ⛑ I (CCODE-727): what is entered is the REGION, and every character knows the regions — its name, not the pin's
+      if (readout) readout.textContent = `Entering ${(CONTENT.regions || []).find((r) => r.regionId === act.regionId)?.name || globeNameOf(p)}…`;
       if (enterRegion(act.regionId, act.selectId)) return;
     }
     _framed = act.regionId;
     flyTo(wp.colatitude - 90, wp.longitude, act.span || REGION_FRAME_DEG);
-    if (readout) readout.textContent = `${p.name} — framed · click again to enter, or use the breadcrumb for the list`;
+    if (readout) readout.textContent = `${globeNameOf(p)} — framed · click again to enter, or use the breadcrumb for the list`;
   }
   cv.onclick = (e) => globeAct(e.offsetX, e.offsetY);
   // ⛑ THE WHEEL IS `bindGesture`'s NOW, and so is the pinch — both arrive at `zoomBy` above, which is the

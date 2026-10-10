@@ -26232,6 +26232,23 @@ await (async () => {
       && broken726?.wanted === `Wanted at ${nm726}: hands to mend it.`,
       JSON.stringify({ remake: remake726?.stakes?.crystal, level: remake726?.level, resettle: resettle726?.stakes?.crystal, plain: plain726?.job?.stakes?.crystal, placeJob: placeJob726?.label, deed: placeJob726?.stakes?.deed, wanted: broken726?.wanted }));
   }
+  /* ── ✅ AEVI I (CCODE-727): M6 on the globe — an unheard-of place keeps its mark and loses its name ── */
+  {
+    const WM727 = await import("../engine/worldmap.js");
+    const { loadContentHeadless: lch727 } = await import("./headless_content.mjs");
+    const C727 = await lch727();
+    const app727 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");
+    const loop727 = app727.slice(app727.indexOf("// ── 2 · the other places, by what the zoom allows ──"), app727.indexOf("// ── 2b · OTHER players' holds"));
+    const fresh727 = { id: "c727", currentLocationId: "millbrook", knownPlaces: [], placeMemory: {} };
+    const far727 = Object.keys(C727.locations).find((id) => id !== "millbrook" && !(C727.locations.millbrook.connections || []).includes(id));
+    check("727/I: ⛔ AEVI — M6 ON THE GLOBE (\"follow ruling 3: an unheard-of authored place keeps its mark on the globe and loses its name, as on the region map\" — the globe lettered every authored place) — the place-name pass asks the region map's own test before it queues a name, after the mark is drawn and before the label space is spent; the readouts say the card's words for a place not heard of, and entering names the region; a fresh character knows where they stand and its neighbours and nowhere far",
+      loop727.length > 200 && /if \(!isPlaceKnown\(character, p\.id, CONTENT\.locations\)\) continue;/.test(loop727)
+      && loop727.indexOf("isPlaceKnown(character, p.id") < loop727.indexOf("sp3.place(")
+      && /function globeNameOf\(p\) \{ return isPlaceKnown\(character, p\?\.id, CONTENT\.locations\) \? \(p\?\.name \|\| p\?\.id\) : "Somewhere you have not heard of"; \}/.test(app727)
+      && (app727.match(/\$\{globeNameOf\(p\)\}/g) || []).length >= 3 && !/readout\.textContent = `\$\{p\.name\}/.test(app727)
+      && WM727.isPlaceKnown(fresh727, "millbrook", C727.locations) && !!far727 && !WM727.isPlaceKnown(fresh727, far727, C727.locations),
+      `loop ${loop727.length} chars · far place ${far727}`);
+  }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {
     const ST706 = await import("../engine/state.js");

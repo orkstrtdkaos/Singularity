@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.27.9";
+const APP_VERSION = "2.27.10";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6990,7 +6990,7 @@ async function maybeTick() {
   // keeps the last good copy — a GM that knew who Silas was a minute ago must not forget him on a flaky network.
   try {
     // ⛔ CCODE-383: this character's holdings go up as the road knows them, and everyone's come back
-    try { const hs = await syncHolds({ character, content: CONTENT }); if (hs.synced && hs.store) sharedHolds = hs.store; } catch (err) { console.warn("[holds] tick skipped:", err?.message); }
+    try { const hs = await syncHolds({ character, content: CONTENT, routes: _worldRoutes?.byPair || null }); if (hs.synced && hs.store) sharedHolds = hs.store; } catch (err) { console.warn("[holds] tick skipped:", err?.message); }
     // ⛔ CCODE-730 · SNG-679 S2: ONE WORLD — what this game saw change on the map goes up, and what every other game saw comes down.
     // The store was read by every map reader and written by nothing. What arrived is learned on the next tick (S7), at a walk.
     try { const ms = await syncMap({ character, content: CONTENT }); if (ms.arrived || ms.published) { saveCharacter(character); console.log(`[map] ${ms.published} change(s) sent, ${ms.arrived} arrived (${ms.changed.length} thing(s))`); } } catch (err) { console.warn("[map] tick skipped:", err?.message); }

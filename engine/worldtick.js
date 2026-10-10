@@ -872,7 +872,14 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // ✅ Q5-B (SPEC_debts_and_reception): a debt is held by a PERSON and escalation is THEIR decision — the same cadence as
   // `unavenged`, one pass, its own news. ✅ R37: and growth WRITES — what the story showed a person doing becomes a craft
   // on their record at r1, and the world says so.
-  const debtsPass = advanceDebts(character, { npcs: content?.npcs || {}, cfg: content?.rules?.economy?.debts || null, day: currentDay });
+  /* ⛔ CCODE-732 — A DEBT ESCALATES ON THE CLOCK IT WAS STAMPED WITH. Every writer of a debt stamps it in WORLD days — the GM's
+   * `debtOps` (`applyDebtOps(…, { day: absoluteWorldDay() })`), a hold given up (`releaseHolding`), R3's damages and the hold
+   * debt (both from the shared events' own days) — and this, the only caller that advances them, passed the CHARACTER's day.
+   * ⚠️ MEASURED 2026-10-10: the world stands at day 102 and Silas at day 19. A debt recorded today could not move until his own
+   * clock read 132; "they have not forgotten what you owe" was 113 days of play away, and R3's *"this holder always acts"* acted
+   * on nobody. Two clocks in one field (SNG-191 said why they are different units: so that nobody does this arithmetic).
+   * ⚑ `escalateAfterDays` is therefore world days — 30 of them is 30 real days at the world's present rate. Erik rules the number. */
+  const debtsPass = advanceDebts(character, { npcs: content?.npcs || {}, cfg: content?.rules?.economy?.debts || null, day: (() => { try { return absoluteWorldDay(); } catch { return currentDay; } })() });
   // ⛔ SNG-634 C4 — THE POWERS TAKE A VERB. One each, rotated by the day so the pass is reproducible, and
   // every consequence lands on `character.powerState` rather than on the shared record: the Gralloch grows
   // in YOUR world because YOUR Tollmen went on paying it. ⚠️ A broken power takes no verb at all.
@@ -1539,7 +1546,7 @@ export async function syncMap({ character, content, fetchJSON = fetchRepoJSON, p
 /** ⛔ CCODE-383 — PUBLISH THIS CHARACTER'S HOLDINGS AS THE ROAD KNOWS THEM, AND READ EVERYONE'S. Erik: "if there is a hold nearby PCs
  *  should hear about what it is and who's running it. they can and should interact with it." The owner's set is replaced whole and
  *  written only when it changed; the store comes back for the GM row and the play screen. Best-effort, never throws. */
-export async function syncHolds({ character, content } = {}) {
+export async function syncHolds({ character, content, routes = null } = {}) {
   let shared = false;
   try { shared = syncEnabled(); } catch { shared = false; }
   if (!shared || !character?.id) return { synced: false, store: null };
@@ -1552,7 +1559,14 @@ export async function syncHolds({ character, content } = {}) {
     // ✅ CCODE-731: the card prices a repair, so it is built with the catalogue of features and the rungs' shares
     const cfg731 = content?.rules?.economy?.holdStore ? { ...content.rules.economy.holdStore, features: content.rules.economy.holdFeatures || null } : null;
     const cards = holdCardsOf(character, { locations: content?.locations || {}, nameOf, economy: content?.rules?.economy || null, cfg: cfg731,
-      repairCost: content?.mapStates?.repairCost || null });
+      repairCost: content?.mapStates?.repairCost || null,
+      /* ⛔ CCODE-732 — SNG-679 H4 WAS BUILT INTO THE CARD AND NEVER ASKED FOR. ✅ Aevi: *"`holdCard` publishes
+       * `whereaboutsOf(h).worldPos` when she is under way … so other players see her on the water and not at her port."* The card
+       * takes a `worldDay`; this, its only live caller, passed none — and with no day a voyage is read at the day it began, so a
+       * hull under way went out AT THE PORT SHE LEFT for the whole crossing. The gate handed `holdCard` a day itself, so it was
+       * green. The day is the world's (a whole number: the card moves once a world day, so a crossing is a push a day, not one a
+       * tick), and the routed roads ride through so her card and her owner's map put her at the same point. */
+      worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), routes });
     const hadAny = Object.values(remote?.holds || {}).some(c => c?.ownerId === character.id);
     if ((cards.length || hadAny) && holdCardsChanged(remote, character.id, cards)) {
       let merged = null;

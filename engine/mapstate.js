@@ -575,7 +575,10 @@ export function roadLeg(character, aId, bId, baseDays, { content = null, carts =
 /** A waygate's own state: whether it still folds, and what a damaged one costs. */
 export function gateLeg(character, placeId, { content = null } = {}) {
   const st = mapStateOf(character, `gate:${placeId}`, { content })?.state;
-  const ge = stateEffect(content, "waygate", st);
+  // ✅ AEVI 2026-10-09: *"One more place still says `waygate`: `mapStates.effects.waygate`, which `gateLeg` reads by that name. I
+  // left it, because renaming it would break your reader. Rename both together whenever you're in there."* The class is `gate`
+  // everywhere else, so that is read first and the old key second — the content can be renamed on its own, any time (CCODE-732).
+  const ge = stateEffect(content, content?.mapStates?.effects?.gate ? "gate" : "waygate", st);
   if (!ge) return { open: true, extraDays: 0, remake: false };
   return { open: ge.open !== false, extraDays: Number(ge.extraDays) || 0, remake: !!ge.remake };
 }

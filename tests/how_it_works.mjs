@@ -21445,7 +21445,7 @@ console.log("\n── §268 · a hold nearby is known ──");
     /key: "holdsNearDetail"/.test(REG268) && /holdsNearForGM\(env\.app\?\.holdsStore\?\.\(\) \|\| null/.test(REG268)
     && /if \(holdsNearDetail\) world\.push\(`## HOLDS NEAR HERE/.test(GM268) && /never seize it, replace its keeper or speak for its owner, and the WORLD never harms it/.test(GM268));   // CCODE-731: the one exception is the character's own hand (§427)
   check("§268: the tick syncs holds, the GM's env can reach them, and the play screen says the line",
-    /const hs = await syncHolds\(\{ character, content: CONTENT \}\)/.test(A268) && /holdsStore: \(\) => sharedHolds/.test(A268)
+    /const hs = await syncHolds\(\{ character, content: CONTENT, routes: _worldRoutes\?\.byPair \|\| null \}\)/.test(A268) && /holdsStore: \(\) => sharedHolds/.test(A268)
     && /<div class="hold-near">\$\{near383\.map\(n => `<span class="hn-what">⌂ \$\{esc\(holdNearLine\(n\)\)\}<\/span>`\)\.join\(""\)\}<\/div>/.test(A268));
 }
 
@@ -37856,7 +37856,8 @@ console.log("\n── §426 · one world — what one game changes on the map, e
   const A426 = rd("app.js").replace(/\r\n/g, "\n"), W426src = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
   check("§426: ⛔ the app's tick runs it beside the hold cards, and saves what arrived",
     /const ms = await syncMap\(\{ character, content: CONTENT \}\); if \(ms\.arrived \|\| ms\.published\) \{ saveCharacter\(character\);/.test(A426)
-    && A426.indexOf("await syncMap({ character, content: CONTENT })") > A426.indexOf("await syncHolds({ character, content: CONTENT })")
+    && A426.indexOf("await syncHolds({ character, content: CONTENT, routes:") > 0
+    && A426.indexOf("await syncMap({ character, content: CONTENT })") > A426.indexOf("await syncHolds({ character, content: CONTENT, routes:")
     && /await push\(MAP_STORE_PATH, \(r\) => \(merged = mergeMapEvents\(r, character\.mapEvents \|\| \[\]\)\.store\)/.test(W426src));
 }
 
@@ -38077,6 +38078,81 @@ console.log("\n── §427 · the hold debt — a blow at another player's hold
     && /if \(!res\.duplicate\) said\(mapChangeLine\(CONTENT, /.test(A) && !/said\(word\);/.test(A.slice(A.indexOf('applyStep("mapOps"'), A.indexOf('applyStep("holdTrades"'))));
   check("§427: the GM's contract says how the character is named, and the rule for another player's hold says the one exception",
     /"by": "\\"pc\\" when THIS CHARACTER did it/.test(G) && /the WORLD never harms it/.test(G) && /The one exception is this character's own hand/.test(G));
+}
+
+/* ═════ §428 — TWO THINGS THE LIVE PATH NEVER DID: A DEBT ESCALATES, AND A HULL UNDER WAY IS WHERE SHE IS (CCODE-732) ═════ */
+// ⛔ BOTH WERE GREEN. §69 advanced a debt by handing `advanceDebts` a day in the same unit it had stamped; 679/H4 handed
+// `holdCard` a `worldDay`. Neither asked what the LIVE caller passes — and the tick passed the character's day to debts stamped
+// in world days, and the sync passed the card no day at all. So this drives `runWorldTick` and `syncHolds` themselves.
+console.log("\n── §428 · the live path — a debt escalates on the clock it was stamped with; a hull under way is published on the water ──");
+{
+  const WT = await import("../engine/worldtick.js");
+  const HO = await import("../engine/holdings.js");
+  const SH = await import("../engine/sharedholds.js");
+  const { absoluteWorldDay: awd428 } = await import("../engine/worldtime.js");
+  const { fakeRemote: fr428 } = await import("./lib/fake_remote.mjs");
+  const { loadContentHeadless: lch428 } = await import("./headless_content.mjs");
+  const C = await lch428();
+  const wd = awd428();
+
+  // ── 1 · the debt clock ──
+  const after = Number(C.rules.economy.debts.escalateAfterDays);
+  const pc = (stampedDaysAgo) => {
+    const ch = { id: "pc428", name: "Tester", clock: { day: 5 }, holdings: [], company: [], npcRegistry: {}, deeds: [],
+      worldState: { lastTickDay: 5, news: [], unseenNews: [], spectrumDrift: {} } };
+    HO.applyDebtOps(ch, [{ op: "record", holderId: "the_kestrel", amount: 10, currency: "crystal", reason: "the pass toll" }], { day: wd - stampedDaysAgo });   // as app.js stamps it
+    return ch;
+  };
+  const due = pc(after + 1), fresh = pc(1);
+  const tick = { content: C, currentDay: 5, advanceAssignments: async () => ({ advancements: [] }), rng: () => 0.99 };
+  const out = await WT.runWorldTick({ character: due, ...tick });
+  await WT.runWorldTick({ character: fresh, ...tick });
+  check("§428: ⛔ A DEBT ESCALATES ON THE CLOCK IT WAS STAMPED WITH — recorded on the world's day (as every writer does), it moves when the WORLD has gone the dial's days on, whatever the character's own day reads",
+    wd > 5 + after && due.worldState.debts.the_kestrel.escalation === 1 && due.worldState.debts.the_kestrel.lastMovedDay === wd
+    && (out.news || []).some((n) => /has not forgotten what you owe/.test(n.text || "")), JSON.stringify(due.worldState.debts.the_kestrel));
+  check("§428: …and one recorded yesterday has not moved — the fix is the unit, not a looser dial", fresh.worldState.debts.the_kestrel.escalation === 0);
+  check("§428: ⛑ the measurement that found it — handed the character's day, the same debt does not move until that clock passes the world's (it stood at 19 against 102)",
+    HO.advanceDebts(pc(after + 1), { npcs: C.npcs, cfg: C.rules.economy.debts, day: 5 }).moved === 0);
+
+  // ── 2 · a hull under way, through the sync ──
+  const from = "keelmouth", to = "firstsight";
+  const sailor = { id: "char-sail428", name: "Loki", currentLocationId: from, mapEvents: [], worldState: {},
+    holdings: [{ id: "h-hull428", name: "The Long Gull", locationId: from, condition: "holding", garrison: [],
+      carriage: { moves: "crewed", needsCrew: 0, voyage: { from, to, days: 8, startedDay: wd - 4, arriveDay: wd + 4 } } }] };
+  const remote = fr428();
+  const restore = remote.install();
+  try {
+    const s = await WT.syncHolds({ character: sailor, content: C });
+    const card = Object.values(s.store?.holds || {})[0];
+    const port = C.locations[from]?.worldPos;
+    check("§428: ⛔ A HULL UNDER WAY IS PUBLISHED ON THE WATER, THROUGH THE SYNC ITSELF — half way across on the fourth day of eight, and not at the port she left (H4 was built into the card and its one live caller passed it no day)",
+      !!C.locations[from] && !!C.locations[to] && card?.atSea === true && card.from === from && card.to === to && Math.abs(card.fraction - 0.5) < 0.01
+      && Math.abs(Number(card.worldPos.colatitude) - Number(port.colatitude)) + Math.abs(Number(card.worldPos.longitude) - Number(port.longitude)) > 0.5,
+      JSON.stringify({ atSea: card?.atSea, fraction: card?.fraction, pos: card?.worldPos, port }));
+    const puts = remote.state.puts;
+    await WT.syncHolds({ character: sailor, content: C });
+    check("§428: …and it costs a push a world day, not one a tick: the same day is the same card", remote.state.puts === puts);
+    check("§428: …a hold at sea is not something a scene at her port can strike (§427's list is of what stands here)", SH.holdsAt(s.store, from, { selfId: "x" }).length === 0);
+  } finally { restore(); }
+
+  // ── 3 · the gate's effects, under the class's own name ──
+  {
+    const MS = await import("../engine/mapstate.js");
+    const { waygate, ...rest } = C.mapStates.effects;
+    const renamed = { ...C, mapStates: { ...C.mapStates, effects: { ...rest, gate: waygate } } };
+    const g = { id: "g428", mapEvents: [] };
+    const gk = Object.keys(C.locations).find((id) => C.locations[id]?.waygate || C.locations[id]?.role === "gate");
+    MS.applyMapChange(g, { key: `gate:${gk}`, change: "ruined", by: "the world" }, { content: C, worldDay: 3 });
+    check("§428: ✅ Aevi's last `waygate` — `gateLeg` reads `effects.gate` first and the old key second, so the content can be renamed on its own and a ruined gate answers the same either way",
+      !!waygate && !!gk && JSON.stringify(MS.gateLeg(g, gk, { content: C })) === JSON.stringify(MS.gateLeg(g, gk, { content: renamed }))
+      && JSON.stringify(MS.gateLeg(g, gk, { content: C })) !== JSON.stringify({ open: true, extraDays: 0, remake: false }), JSON.stringify(MS.gateLeg(g, gk, { content: renamed })));
+  }
+
+  const WTs = rd("engine/worldtick.js").replace(/\r\n/g, "\n"), A = rd("app.js").replace(/\r\n/g, "\n");
+  check("§428: the tick advances debts on the world's day, the sync hands the card the world's day and the routed roads, and the app passes the roads it already has",
+    /advanceDebts\(character, \{ npcs: content\?\.npcs \|\| \{\}, cfg: content\?\.rules\?\.economy\?\.debts \|\| null, day: \(\(\) => \{ try \{ return absoluteWorldDay\(\); \}/.test(WTs)
+    && /worldDay: \(\(\) => \{ try \{ return absoluteWorldDay\(\); \} catch \{ return null; \} \}\)\(\), routes \}\);/.test(WTs)
+    && /const hs = await syncHolds\(\{ character, content: CONTENT, routes: _worldRoutes\?\.byPair \|\| null \}\)/.test(A));
 }
 
 /* ══════════ REPORT ══════════ */

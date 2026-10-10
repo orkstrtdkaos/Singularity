@@ -18,7 +18,8 @@ export const JOB_FAMILIES = ["HARM", "PROTECT", "RESTORE", "KNOW", "SHAPE", "MOV
 // level-70 character's work was priced as a level-60's, with no error and nothing on the screen to say so.
 // ⛑ 100 is the ladder's own top (`legends.DEFAULT_RUNGS`: mythic is 85–100), and `npcsheet` calls it "a door,
 // not a ceiling" — past it is the Veil, not a bigger number.
-export const JOB_LIMITS = { board: 12, back: 12, needs: 4, items: 3, levelMax: 100 };
+// ⛑ CCODE-726: `remakeCost` — the most a remake or a resettle may cost, the dearest thing `buildWorth` prices (a city, 1000)
+export const JOB_LIMITS = { board: 12, back: 12, needs: 4, items: 3, levelMax: 100, remakeCost: 1000 };
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 const clampInt = (v, lo, hi, d = lo) => Math.max(lo, Math.min(hi, Math.round(num(v, d))));
@@ -77,7 +78,12 @@ export function normalizeJob(spec = {}, { day = null } = {}) {
   if (!needs.length) return { ok: false, why: "a job needs to say what it takes — harm, protect, mend, know, shape, move, sustain or sway" };
   const s = spec.stakes && typeof spec.stakes === "object" ? spec.stakes : {};
   const stakes = {};
-  const crystal = clampInt(s.crystal, -3 * level, 4 * level, 0);
+  /* ✅ AEVI, D (2026-10-09): *"A gate costs what a gate is worth. For a remake (and a resettle), the job's pay reads `buildWorth` × the
+   * rung's `repairCost`, not three times its level. The level keeps setting how hard it is. Making a gate is the dearest work on the
+   * ground, and 66 of its 300 undersells it."* ⛔ So the three-times-level floor on what a job may COST is lifted for these two kinds
+   * alone — to `JOB_LIMITS.remakeCost` — and stays for everything else. */
+  const makesAgain = (s.remake && typeof s.remake === "object" && s.remake.key) || (s.resettle && typeof s.resettle === "object" && s.resettle.key);
+  const crystal = clampInt(s.crystal, makesAgain ? -JOB_LIMITS.remakeCost : -3 * level, 4 * level, 0);
   if (crystal) stakes.crystal = crystal;
   const xp = clampInt(s.xp, 0, 3 * level, 0);
   if (xp) stakes.xp = xp;

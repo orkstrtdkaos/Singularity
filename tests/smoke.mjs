@@ -25808,7 +25808,7 @@ await (async () => {
     const slines702 = JB702.applyJobEffects(ch702, { team: ["player"], job: resettle702, names: {} }, JB702.jobEffects(resettle702, "success", C702.rules), { content: C702 });
     const founded702 = MS702.mapStateOf(ch702, placeKey702, { content: C702 });
     const app702 = readFileSync(join(root, "app.js"), "utf8");
-    check("Part R: ⛔ WHAT THE LOCALS WON'T DO IS A JOB — a destroyed gate is posted to \"Make the gate at {place} again\", at the cost of making one (as far as a job's level allows), and a success makes it whole through the one door by the character; a razed place is posted to \"Resettle {name}\" with the old name offered back on the card, and a success founds it AGAIN — S0's own form, `added` on the razed key, so it is the same place at its trace, its roads and people its own — under the name the card holds (a changed name is its new name), known to the founder; nothing new is minted",
+    check("Part R: ⛔ WHAT THE LOCALS WON'T DO IS A JOB — a destroyed gate is posted to \"Make the gate at {place} again\", at the cost of making one (its worth — 726/D holds the figure), and a success makes it whole through the one door by the character; a razed place is posted to \"Resettle {name}\" with the old name offered back on the card, and a success founds it AGAIN — S0's own form, `added` on the razed key, so it is the same place at its trace, its roads and people its own — under the name the card holds (a changed name is its new name), known to the founder; nothing new is minted",
       !!remake702 && remake702.label === `Make the gate at ${gateName702} again` && remake702.stakes.crystal < 0
       && !!resettle702 && resettle702.label === `Resettle ${oldName702}`
       && MS702.mapStateOf(ch702, gateKey702, { content: C702 }).state === "whole" && rlines702.some((l) => /stands again/.test(l))
@@ -26201,6 +26201,36 @@ await (async () => {
       && pass.descriptionSeed === "A pass on the road out of Millbrook." && pass._seedDerived === true && owed725.includes("descriptionSeed")
       && /!\(f === "descriptionSeed" && rec\._seedDerived\)\) continue;/.test(app725g) && /if \(f === "descriptionSeed"\) delete rec\._seedDerived;/.test(app725g),
       JSON.stringify({ hesk: hesk?.personality, sela: sela?.personality, shrine: shrine?.descriptionSeed, pass: pass.descriptionSeed, owed725 }));
+  }
+  /* ── ✅ AEVI D and B (CCODE-726): a remake or a resettle costs what the thing is worth; a place has its own job words ── */
+  {
+    const MS726 = await import("../engine/mapstate.js");
+    const MD726 = await import("../engine/mending.js");
+    const JB726 = await import("../engine/jobs.js");
+    const JS726 = await import("../engine/jobstate.js");
+    const { loadContentHeadless: lch726 } = await import("./headless_content.mjs");
+    const C726 = await lch726();
+    const BW726 = C726.mapStates.buildWorth;
+    const ch726 = { id: "player-me", name: "Me", currentLocationId: "millbrook", holdings: [], mapEvents: [], purse: {}, knownPlaces: [] };
+    MS726.applyMapChange(ch726, { key: "gate:gen-waygate", change: "destroyed", by: "player-other", seen: "named" }, { content: C726, worldDay: 100 });
+    MS726.applyMapChange(ch726, { key: "place:echo_river_crossing", change: "destroyed", by: "player-other", seen: "named" }, { content: C726, worldDay: 100 });
+    MD726.postMendingJobs(ch726, { content: C726, day: 5 });
+    const remake726 = ch726.jobs.board.find((j) => j.stakes?.remake), resettle726 = ch726.jobs.board.find((j) => j.stakes?.resettle);
+    // an ordinary job that asks to cost more than three times its level is still held to it
+    const plain726 = JS726.normalizeJob({ label: "Carry the ledgers", where: "millbrook", level: 22, needs: [{ family: "MOVE", weight: 1 }], stakes: { crystal: -500 } }, { day: 5 });
+    // a battered PLACE, in its own words
+    const ch726b = { id: "player-me", name: "Me", currentLocationId: "millbrook", holdings: [], mapEvents: [], purse: {}, knownPlaces: [] };
+    MS726.applyMapChange(ch726b, { key: "place:millbrook", change: "damaged", by: "player-other", seen: "named" }, { content: C726, worldDay: 100 });
+    const placeJob726 = MD726.mendingJobsFor(ch726b, { content: C726 }).find((j) => j.stakes?.mend?.key === "place:millbrook");
+    const broken726 = MD726.brokenAt(ch726b, "millbrook", { content: C726 }).find((b) => b.key === "place:millbrook");
+    const nm726 = C726.locations.millbrook.name;
+    check("726/D+B: ⛔ AEVI — A GATE COSTS WHAT A GATE IS WORTH (a remake cost 66 of its 300, the most its level allowed): a destroyed gate is made again for its whole `buildWorth`, a razed place resettled for what its dwellings are worth, paid when the team leaves, and the level still sets how hard it is; an ordinary job is still held to three times its level; and A BATTERED PLACE IS A JOB IN ITS OWN WORDS — \"Mend Millbrook\", \"hands to mend it\", \"who helped mend it\"",
+      remake726?.stakes?.crystal === -BW726.gate && JB726.jobCost(remake726) === 300 && remake726.level === 22
+      && resettle726?.stakes?.crystal === -BW726.place.few
+      && plain726?.job?.stakes?.crystal === -66
+      && placeJob726?.label === `Mend ${nm726}` && /who helped mend it\.$/.test(placeJob726?.stakes?.deed || "")
+      && broken726?.wanted === `Wanted at ${nm726}: hands to mend it.`,
+      JSON.stringify({ remake: remake726?.stakes?.crystal, level: remake726?.level, resettle: resettle726?.stakes?.crystal, plain: plain726?.job?.stakes?.crystal, placeJob: placeJob726?.label, deed: placeJob726?.stakes?.deed, wanted: broken726?.wanted }));
   }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {

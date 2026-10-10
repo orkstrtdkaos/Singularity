@@ -104,12 +104,18 @@ export function brokenAt(character, placeId, { content = null, worldDay = null }
     const rec = mapStateOf(character, key, { content });
     const state = String(rec.state || "whole");
     if (rungOf(content, state) === 0) continue;
-    const t = mapThingOf(key, content, { siteName: siteOfKey(key, { content, character })?.name || null, from: placeId });
+    // ⛑ CCODE-726: a PLACE has no "the {thing} at {place}" form (`mapThingOf` answers null, and other readers lean on that) — it is
+    // named here, and only where the place's own words exist (`wantedPlace`)
+    const t = mapThingOf(key, content, { siteName: siteOfKey(key, { content, character })?.name || null, from: placeId })
+      || (p.cls === "place" && W.wantedPlace ? { place: placeNameOf(content, p.id), thing: null } : null);
     if (!t) continue;
     const rep = worldDay != null ? localRepairAt(rec, key, worldDay, content) : null;
     out.push({ key, state, thing: t.thing, place: t.place,
-      wanted: W.wanted ? fill(W.wanted, { place: t.place, mend: (W.mend || {})[state] || "mend", thing: t.thing }) : null,
-      mending: rep?.mending && W.mending ? fill(W.mending, { place: t.place, thing: t.thing }) : null,
+      // ✅ AEVI, B (CCODE-726): a battered PLACE is wanted in its own words — "hands to mend it", not "the village at Millbrook"
+      wanted: (p.cls === "place" && W.wantedPlace) ? fill(W.wantedPlace, { place: t.place, mend: (W.mend || {})[state] || "mend" })
+        : W.wanted ? fill(W.wanted, { place: t.place, mend: (W.mend || {})[state] || "mend", thing: t.thing }) : null,
+      // ⛑ a place has no "at work on the {thing}" form yet (asked of Aevi) — its wanted line stands while the locals work
+      mending: rep?.mending && W.mending && t.thing ? fill(W.mending, { place: t.place, thing: t.thing }) : null,
       localsWill: localsWillMend(key, state, content) });
   }
   return out;
@@ -120,6 +126,7 @@ export function brokenAt(character, placeId, { content = null, worldDay = null }
  *  everything — Aevi's *"ship with learned = everything"*. The CULPRIT is offered the chance to make good, once and first; their
  *  work earns nothing (it counts against what they owe, R3). ⚠️ What the locals will not mend — a gate to be made again, a razed
  *  place to resettle — goes through their own doors and is not offered here yet. Returns job specs for `postJob`. Pure. */
+const placeNameOf = (content, id) => content?.locations?.[id]?.name || String(id || "").replace(/^gen-/, "").replace(/[-_]+/g, " ");
 export function mendingJobsFor(character, { content = null } = {}) {
   const J = jobsOf(content), W = wordsOf(content), L = content?.locations || {};
   const within = Number(J.withinDays ?? 2), max = Number(J.onBoardMax ?? 3);
@@ -144,12 +151,16 @@ export function mendingJobsFor(character, { content = null } = {}) {
     const site = siteOfKey(key, { content, character });
     const where = places.find((id) => anchors.includes(id)) || places[0];
     if (willNot) { const sp = remakeSpecFor(key, p, state, where, content, near); if (sp) found.push(sp); continue; }
-    const t = mapThingOf(key, content, { siteName: site?.name || null, from: where });
+    const t = mapThingOf(key, content, { siteName: site?.name || null, from: where })
+      || (p.cls === "place" && J.labels?.mendPlace ? { place: placeNameOf(content, p.id), thing: null } : null);   // ✅ B: a battered place can be a job
     if (!t) continue;
     const culprit = !!character?.id && culpritOf(rec) === character.id;
+    if (culprit && p.cls === "place") continue;   // "Make good the {thing} at {place}" has no place form — the culprit's make-good waits on its words
     if (culprit && character?.mendDeclined?.[key]) continue;   // the make-good is offered once; declined, it is gone
     const mend = (W.mend || {})[state] || "mend";
     const label = culprit ? fill(J.labels?.makeGood || "Make good the {thing} at {place}", { thing: t.thing, place: t.place })
+      // ✅ AEVI, B: *"`labels.mendPlace` '{Mend} {place}' … A battered place can be a job now."*
+      : (p.cls === "place" && J.labels?.mendPlace) ? fill(J.labels.mendPlace, { Mend: cap(mend), mend, place: t.place })
       : fill(J.labels?.mend || "{Mend} the {thing} at {place}", { Mend: cap(mend), mend, thing: t.thing, place: t.place });
     const value = mendValue(key, { content, regionId: L[where]?.regionId || null, siteKind: site?.kind || null });
     const level = 4 + 6 * rung;
@@ -164,7 +175,7 @@ export function mendingJobsFor(character, { content = null } = {}) {
       from: smartClamp(fill(J.from || "the people of {place}", { place: t.place }), 60),
       stakes: { mend: { key, from: state, culprit },
         ...(pay > 0 ? { crystal: Math.min(pay, 4 * level) } : {}),
-        ...(!culprit && last ? { standing: Math.min(2, Number(steps[state]) || 1), deed: smartClamp(fill(W.thanked || "", { place: t.place, mend, thing: t.thing }), 120) } : {}) },
+        ...(!culprit && last ? { standing: Math.min(2, Number(steps[state]) || 1), deed: smartClamp(fill((p.cls === "place" && W.thankedPlace) || W.thanked || "", { place: t.place, mend, thing: t.thing }), 120) } : {}) },
     } });
   }
   return found.sort((a, b) => (Number(b.culprit) - Number(a.culprit)) || (a.near - b.near)).slice(0, max).map((x) => x.spec);
@@ -174,16 +185,16 @@ export function mendingJobsFor(character, { content = null } = {}) {
  * ✅ AEVI (R6): *"What the locals won't do: `remake` for a broken gate, at the cost of making one, and `resettle` for a razed place. A
  * successful resettle founds the place through SNG-672 M1 at the trace's position, with the old name offered back."*
  * ⛑ Both are jobs on the board like a mending, posted where the locals' own pass leaves a thing destroyed: the gate made again
- * (`jobs.labels.remake`) and the place resettled (`jobs.labels.resettle`). ⚠️ "At the cost of making one" is the thing's worth
- * (`buildWorth`), and a job's cost is held to three times its level — so a remake costs what the destroyed rung's level allows
- * (66 crystal of a gate's 300). That is said, not hidden: raising the level would also make the job harder.
+ * (`jobs.labels.remake`) and the place resettled (`jobs.labels.resettle`). ✅ AEVI, D (CCODE-726): *"A gate costs what a gate is
+ * worth … `buildWorth` × the rung's `repairCost`, not three times its level. The level keeps setting how hard it is."* A destroyed
+ * thing is a full rebuild (`repairFraction` 1), so a gate made again costs its 300 — it cost 66, the most its level allowed.
  * ⛑ A success is S0's own form for both — `added` on the destroyed key — so the place founded again IS the place, at its trace. */
 function remakeSpecFor(key, p, state, where, content, near) {
   const J = content?.mapStates?.jobs || {}, L = content?.locations || {};
   const steps = content?.mapStates?.repair?.playerReward?.standingSteps || {};
   const level = 4 + 6 * rungOf(content, state);
   const worth = mendValue(key, { content, regionId: L[where]?.regionId || null });
-  const cost = Math.max(0, Math.min(3 * level, Math.round(Number(worth) || 0)));
+  const cost = Math.max(0, Math.round((Number(worth) || 0) * repairFraction(content, state)));   // ✅ D: what it is worth, by its rung
   const name = L[p.id]?.name || String(p.id).replace(/^gen-/, "").replace(/[-_]+/g, " ");
   const base = { where, level, effort: Number(J.effortDays?.[state]) || 6, from: smartClamp(fill(J.from || "the people of {place}", { place: name }), 60) };
   if (p.cls === "gate") return { near, culprit: false, spec: { ...base, id: `remake:${key}`.slice(0, 80),   // prose-cap-ok: an identifier

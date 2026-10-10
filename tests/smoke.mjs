@@ -26290,6 +26290,44 @@ await (async () => {
       && (app728.match(/\.\.\.mintWorld\(CONTENT, peopleVocabNow\(\)\)/g) || []).length >= 3 && /examples: pickExamples\("arc", CONTENT\.locations\[character\.currentLocationId\] \|\| \{\}\)/.test(app728) && !/CONTENT\.genArc/.test(app728.replace(/^\s*\/\/.*$/gm, "")),
       JSON.stringify({ parent: fromParent?.hingeNpcs, dead: parentDead?.hingeNpcs, region: fromRegion?.hingeNpcs, regionTier: regionPerson?.tier, minted: minted?.hingeNpcs, person: mintedPerson && [mintedPerson.name, mintedPerson.domains?.primary] }));
   }
+  /* ── ✅ AEVI H (CCODE-729): the globe's "whose ground" is the powers' territory; the source bands have their own button ── */
+  {
+    const INF729 = await import("../engine/influence.js");
+    const RL729 = await import("../engine/realms.js");
+    const { loadContentHeadless: lch729 } = await import("./headless_content.mjs");
+    const C729 = await lch729();
+    const ch729 = { id: "c729", currentLocationId: "millbrook", holdings: [], bands: [] };
+    const holders729 = RL729.groundHolders(ch729, C729, C729.locations, { ...(C729.rules?.economy?.holdStore || {}), features: C729.rules?.economy?.holdFeatures });
+    const inf729 = INF729.makeInfluence(holders729, C729.locations);
+    const grid729 = INF729.makeInfluenceGrid(inf729.at);
+    const out729 = new Int16Array(3);
+    let agree = 0, n = 0, held = 0, contested = 0, rnd = 11;
+    const next = () => (rnd = (rnd * 16807) % 2147483647) / 2147483647;
+    const owners729 = new Set();
+    for (let k = 0; k < 400; k++) {
+      const res = k % 2 ? 1 : 4, lon = -180 + next() * 360, lat = -88 + next() * 100;   // the inhabited hemisphere, mostly
+      const i = Math.floor((((lon + 180) % 360 + 360) % 360) * res), j = Math.floor((90 - lat) * res);
+      const a = inf729.at(90 - (j + 0.5) / res, -180 + (i + 0.5) / res);
+      grid729.sample(lon, lat, res, out729);
+      const want = a.owner == null ? -1 : grid729.ids.indexOf(a.owner);
+      n++; if (out729[0] === want && (out729[1] >= 0) === !!a.contested && Math.abs(out729[2] - Math.round(Math.min(1, a.strength) * 255)) <= 1) agree++;
+      if (out729[0] >= 0) { held++; owners729.add(out729[0]); }
+      if (out729[1] >= 0) contested++;
+    }
+    // Millbrook's own ground is somebody's — the reader a place's "held by" line asks
+    const mb729 = C729.locations.millbrook.worldPos;
+    grid729.sample(mb729.longitude, mb729.colatitude - 90, 4, out729);
+    const app729 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");
+    check("729/H: ⛔ AEVI — THE GLOBE'S \"WHOSE GROUND\" IS THE POWERS' TERRITORY, AS ON THE REGION MAP, SO ONE LABEL MEANS ONE THING (it painted the field's source bands) — the crow-flies reader the GM and a place's \"held by\" line ask, on a lazy grid: every cell is the reader at its centre — owner, contested rival, strength; many powers hold ground and Millbrook's is somebody's; the bands have their own button, \"where the field comes from\", with the source selector; the frame assigns the hues (W5/M5), and a power is lettered in its hue only when its ground can carry the name (W3)",
+      n === 400 && agree === 400 && held > 20 && owners729.size >= 5 && out729[0] >= 0
+      && /\["ground", "whose ground"\], \["source", "where the field comes from"\]\]/.test(app729)
+      && /const baseLayer = layer === "source" \? "ground" : layer === "ground" \? "topo" : layer;/.test(app729)
+      && /if \(layer === "source"\) paint\(false\);/.test(app729) && !/if \(layer === "ground"\) paint\(false\);/.test(app729)
+      && /_globeOwnerGrid = \{ key: gr\.key, grid: makeInfluenceGrid\(gr\.at\) \};/.test(app729)
+      && /if \(!c\) c = POWER_HUES\.find\(\(h\) => !taken\.has\(h\)\) \|\| powerColour\(p \|\| terr729\.grid\.ids\[o\]\);/.test(app729)
+      && /if \(T3\.px2 < wName \* \(size \+ 4\) \* 0\.75\) continue;/.test(app729) && /queueLabel\(ctx, T3\.name, box, "power", sOpt\)/.test(app729),
+      `${agree}/${n} cells agree · ${held} held, ${contested} contested, ${owners729.size} powers · Millbrook owner index ${out729[0]} (${grid729.ids[out729[0]]})`);
+  }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {
     const ST706 = await import("../engine/state.js");

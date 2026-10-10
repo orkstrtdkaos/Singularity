@@ -67,7 +67,7 @@ import { housesAt } from "./engine/powers.js";
 import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from "./engine/lenses.js";
 // ⛔ ✅ ERIK: *"Can we make it look like a big city with these places laid out?"*
 import { cityPlan, blockPath, blockRoofs, faubourgs, beltRoofs, leanOf } from "./engine/cityplan.js";
-import { makeInfluence } from "./engine/influence.js";
+import { makeInfluence, makeInfluenceGrid } from "./engine/influence.js";
 import { glyphFor, drawGlyph, drawStateMark } from "./engine/mapicons.mjs";
 import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, shotRefocus, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf, siteLevel, regionLook, isSpreading, spreadingSay, lookRand, placeKindOf } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
 import { bakeEarthRGB, earthCityLights, EARTH_BAKE } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.27.6";
+const APP_VERSION = "2.27.7";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14867,6 +14867,7 @@ let _regionPick = null;      // { regionId, marks:[{id,name,x,y}], clusters:[{x,
  * ⛔ And "you are here" stays its OWN mark: the gold ring and its name are drawn from
  * `character.currentLocationId` in the pin pass, untouched by the camera. */
 let _globeLookAt = null;     // regionId under the camera centre, or null before the first globe paint
+let _globeTerrLabels = [];   // ✅ W3 (CCODE-729): the powers on screen this paint, for the label pass — empty unless "whose ground" is on
 // ⛑ THE ONE Esc LISTENER FOR THE GLOBE, kept so each re-render REPLACES it (the region map's `_regionEsc`
 // exists for the same reason, and for the same bug: a stacked listener holding a canvas that is gone).
 let _globeEsc = null;
@@ -16194,6 +16195,7 @@ let _regionOff = null;
 let _labelSpace = null;
 let _rasterOff = null;        // M1: the region raster's own CSS-frame surface, drawn through the transform
 let _globeRegionGrid = null;   // ✅ W4 (CCODE-721): the region vote on a lazy grid, per terrain asset
+let _globeOwnerGrid = null;    // ✅ H (CCODE-729): whose ground, on a lazy grid, per state of the world (`groundReader`'s key)
 let _globeRasterOff = null;   // …and the globe's, for the same reason: putImageData ignores a transform
 
 /** Re-show the painted map at the current zoom and pan. No repaint, no recomputation. */
@@ -17612,9 +17614,11 @@ function renderMapWorld() {
            and makes the attributes a pure resolution choice — the same arrangement #region-map already had. -->
       <canvas id="world-globe" width="${700 * dprOf()}" height="${540 * dprOf()}" style="width:100%;max-width:700px;height:auto;display:block" aria-label="The world. Drag to spin, scroll to zoom, click a place to enter its region."></canvas>
       <div class="globe-ctl">
-        ${[["topo", "topographic"], ["biome", "land"], ["lattice", "⛰ lattice"], ["nanite", "✵ nanite"], ["ground", "whose ground"]]
+        ${/* ✅ AEVI, H (CCODE-729): *"The globe's 'whose ground' becomes the powers' territory, as on the region map, so one label means
+             one thing. The source bands move to their own button, named for what they show, such as 'where the field comes from'."* */""}
+        ${[["topo", "topographic"], ["biome", "land"], ["lattice", "⛰ lattice"], ["nanite", "✵ nanite"], ["ground", "whose ground"], ["source", "where the field comes from"]]
           .map(([k, label]) => `<button class="opt globe-layer${k === "topo" ? " selected" : ""}" data-globelayer="${k}">${esc(label)}</button>`).join("")}
-        <select id="globe-source" class="globe-source" title="Whose ground — read from the LIVE band table, so the map agrees with what a craft actually rolls">
+        <select id="globe-source" class="globe-source" title="Where the field comes from — which source, read from the LIVE band table, so the map agrees with what a craft actually rolls">
           ${["precursor", "wild", "metaphysical", "veil", "nanite", "body"].map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("")}
         </select>
       </div>
@@ -18031,13 +18035,26 @@ function wireWorldGlobe() {
     const gridRes = span > 60 ? 1 : 4;
     const sw = Math.ceil(gw / step), sh = Math.ceil(gh / step);
     const rids = new Int16Array(sw * sh).fill(-1);
+    /* ✅ H (CCODE-729): WHOSE GROUND, ON THE GLOBE — the crow-flies reader (`groundReader`, the one a place's "held by" line asks), on a
+     * lazy grid keyed to the state of the world, so a hold taken or a power broken repaints. The land keeps its own colour underneath. */
+    let terr729 = null;
+    if (layer === "ground") {
+      const gr = groundReader();
+      if (gr?.at) {
+        if (!_globeOwnerGrid || _globeOwnerGrid.key !== gr.key) _globeOwnerGrid = { key: gr.key, grid: makeInfluenceGrid(gr.at) };
+        terr729 = { grid: _globeOwnerGrid.grid, holders: gr.holders, own: new Int16Array(sw * sh).fill(-1), riv: new Int16Array(sw * sh).fill(-1), str: new Uint8Array(sw * sh), out: new Int16Array(3) };
+      }
+    }
+    // ⛑ the engine's name for the band painter is `ground`; the app's button for it is `source`. Whose ground paints over the land.
+    const baseLayer = layer === "source" ? "ground" : layer === "ground" ? "topo" : layer;
     for (let y = 0; y < gh; y += step) {
       for (let x = 0; x < gw; x += step) {
         const g = unproject(x + 0.5, y + 0.5, view);
         let r = 4, gr = 4, b = 10;                                  // the void behind the world
         if (g) {
           rids[(y / step) * sw + (x / step)] = _globeRegionGrid.g.at(g.lon, g.lat, gridRes);
-          const c = colorAt(_terrain, g.lon, g.lat, { layer, band, bandFn: bandFactor, fine, contourStep });
+          const c = colorAt(_terrain, g.lon, g.lat, { layer: baseLayer, band, bandFn: bandFactor, fine, contourStep });
+          if (terr729) { const si = (y / step) * sw + (x / step); terr729.grid.sample(g.lon, g.lat, gridRes, terr729.out); terr729.own[si] = terr729.out[0]; terr729.riv[si] = terr729.out[1]; terr729.str[si] = terr729.out[2]; }
           r = c[0]; gr = c[1]; b = c[2];
           // ⛔ SNG-409 §5 — A CONTESTED AREA LOOKS LIKE AN AREA, AND HAS NO CLEAN EDGE. Drawing it as a
           // per-pixel tint rather than an outline is what satisfies "the fiction says shimmer-vortices
@@ -18054,6 +18071,47 @@ function wireWorldGlobe() {
           }
         }
       }
+    }
+    /* ✅ H + W5 (CCODE-729): *"M5's power hues on 'whose ground'."* ⛑ M5's rule, on the globe: THE FRAME ASSIGNS — the powers on screen
+     * take distinct hues in order of ground held, an authored colour winning outright. The fill is the owner's colour fading to the
+     * reach's edge; contested ground is striped in both colours; a border is the colour's own core, where the owner changes. */
+    _globeTerrLabels = [];
+    if (terr729) {
+      const cnt = new Map(), sx0 = new Map(), sy0 = new Map();
+      for (let sy = 0; sy < sh; sy++) for (let sx = 0; sx < sw; sx++) {
+        const o = terr729.own[sy * sw + sx];
+        if (o < 0) continue;
+        cnt.set(o, (cnt.get(o) || 0) + 1); sx0.set(o, (sx0.get(o) || 0) + sx); sy0.set(o, (sy0.get(o) || 0) + sy);
+      }
+      const holderOf = (o) => terr729.holders.find((h) => h.id === terr729.grid.ids[o]) || null;
+      const order = [...cnt.keys()].sort((a, b) => cnt.get(b) - cnt.get(a));
+      const taken = new Set(), rgbOf = new Map(), hexOf = new Map();
+      const hueFor = (o) => {
+        if (rgbOf.has(o)) return rgbOf.get(o);
+        const p = holderOf(o);
+        let c = p?.colour ? String(p.colour) : null;
+        if (!c) c = POWER_HUES.find((h) => !taken.has(h)) || powerColour(p || terr729.grid.ids[o]);
+        taken.add(c); hexOf.set(o, c); rgbOf.set(o, _hexRGB(c));
+        return rgbOf.get(o);
+      };
+      for (const o of order) hueFor(o);
+      for (let sy = 0; sy < sh; sy++) for (let sx = 0; sx < sw; sx++) {
+        const si = sy * sw + sx, o = terr729.own[si];
+        if (o < 0) continue;
+        const rv = terr729.riv[si];
+        const c = rv >= 0 && (((sx + sy) >> 1) & 1) ? hueFor(rv) : hueFor(o);
+        const edge = (sx + 1 < sw && terr729.own[si + 1] !== o) || (sy + 1 < sh && terr729.own[si + sw] !== o) || (sx > 0 && terr729.own[si - 1] === -1) || (sy > 0 && terr729.own[si - sw] === -1);
+        const a = edge ? 0.85 : 0.14 + 0.4 * (terr729.str[si] / 255), k = edge ? 0.7 : 1;
+        for (let dy = 0; dy < step && sy * step + dy < gh; dy++) for (let dx = 0; dx < step && sx * step + dx < gw; dx++) {
+          const p4 = ((sy * step + dy) * gw + (sx * step + dx)) * 4;
+          D[p4] = D[p4] * (1 - a) + c[0] * k * a; D[p4 + 1] = D[p4 + 1] * (1 - a) + c[1] * k * a; D[p4 + 2] = D[p4 + 2] * (1 - a) + c[2] * k * a;
+        }
+      }
+      // ✅ W3: *"With 'whose ground' on, power names in their hue, the same style as the region map."* — at the middle of its ground
+      const fx = GW() / gw, fy = HGLOBE() / gh;
+      _globeTerrLabels = order.map((o) => { const p = holderOf(o); const n = cnt.get(o);
+        return p ? { id: p.id, name: String(p.name || p.id), yours: !!p.yours, colour: hexOf.get(o), area: n, total: sw * sh, px2: n * (step * fx) * (step * fy),
+          x: ((sx0.get(o) / n) * step + step / 2) * fx, y: ((sy0.get(o) / n) * step + step / 2) * fy } : null; }).filter(Boolean);
     }
     /* ⛑ W4: the line, after the ground — a sample whose right or lower neighbour is another region is drawn toward a pale ink. ✅ *"The
      * region under the camera gets … a stronger edge"*: its own boundary at twice the weight, so it is visibly the one you are about to
@@ -18289,7 +18347,7 @@ function wireWorldGlobe() {
         const pid = (_terrain.seats[rid] || [])[2];
         if (pid) seatName.set(pid, String((CONTENT.regions || []).find((r) => r.regionId === rid)?.name || rid.replace(/_/g, " ")));
       }
-      let qRegion = 0, qPlace = 0, qSkippedDup = 0, qOffFrame = 0;
+      let qRegion = 0, qPlace = 0, qSkippedDup = 0, qOffFrame = 0, qPower = 0;
       /* ═════ A NAME MUST HAVE ITS MARK UNDER IT ═════
        * ⛔ `project` RETURNS A POINT FOR THE WHOLE NEAR HEMISPHERE, whatever the zoom: it refuses only what
        * is behind the limb (z <= 0). So at any span narrower than the full globe, a place or a hold well away
@@ -18359,6 +18417,23 @@ function wireWorldGlobe() {
 
       // ── 1b · YOUR holds, above every place but the one you stand in ──
       for (const row of heldG.rows) if (row.own !== false) reserveHold(row);
+
+      // ── 1c · ✅ W3 (CCODE-729): with "whose ground" on, the powers, lettered across their own ground in their own hue ──
+      // biggest ground first, dropped rather than shrunk — the fill and the border still say whose it is
+      for (const T3 of _globeTerrLabels) {
+        if (!inFrame3(T3)) continue;
+        const size = powerSize(T3.area, T3.total || 1);
+        const sOpt = { colour: T3.colour, size };
+        const wName = wOf(T3.name, "power", sOpt);
+        // ⛔ A NAME IS LETTERED ACROSS ITS OWN GROUND, SO THE GROUND MUST BE ABOUT AS BIG AS THE NAME. ⚠️ Seen on the first paint: at world
+        // view 28 powers were lettered, each name several times the size of the few-degree ground it named, over one another and off
+        // the limb. Dropped, never shrunk (Aevi's rule for every label) — the fill and the border still say whose the ground is.
+        if (T3.px2 < wName * (size + 4) * 0.75) continue;
+        const box = sp3.place(T3.x, T3.y, wName, Math.round(size) + 4,
+          { kind: "power", clampTo: { w: W3, h: H3 }, offsets: [[0, 0], [0, -(size + 16)], [0, size + 16], [-wName / 2 - 12, 0], [wName / 2 + 12, 0]] });
+        if (!box) continue;
+        ctx.textAlign = "center"; queueLabel(ctx, T3.name, box, "power", sOpt); qPower++;
+      }
 
       // ── 2 · the other places, by what the zoom allows ──
       for (const p of pins) {
@@ -18594,7 +18669,7 @@ function wireWorldGlobe() {
     paint(false);
   };
   const sel = document.getElementById("globe-source");
-  if (sel) sel.onchange = () => { source = sel.value; if (layer === "ground") paint(false); };
+  if (sel) sel.onchange = () => { source = sel.value; if (layer === "source") paint(false); };   // ⛑ H: the bands' own button
 
   ctx.setTransform(dprOf(), 0, 0, dprOf(), 0, 0);
   ctx.fillStyle = "#0a0a12"; ctx.fillRect(0, 0, GW(), GH());

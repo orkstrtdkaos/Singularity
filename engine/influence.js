@@ -200,6 +200,34 @@ export function makeInfluence(powers = [], locations = {}, { curve = REACH, allo
   return { powers: P, at };
 }
 
+/** ✅ AEVI, H (2026-10-09): *"The globe's 'whose ground' becomes the powers' territory, as on the region map, so one label means one
+ *  thing … The coarser world-scale solve is worth it."* ⛔ CCODE-729 · THE CROW-FLIES READER ON A LAZY GRID. `makeInfluence().at` is the
+ *  globe's reader already (above) and nothing on the globe asked it; per screen sample it is every power's every anchor, so it is asked
+ *  once per grid cell, at the cell's centre, the first time a paint needs the cell — `res` cells a degree, as the region grid is.
+ *  `sample(lon, lat, res, out)` writes `out[0]` the owner's index (−1: nobody's), `out[1]` the rival's when the ground is contested
+ *  (−1 otherwise), `out[2]` the claim's strength 0..255; `ids[i]` is the power an index names. No object per sample. */
+export function makeInfluenceGrid(at) {
+  const ids = [], idx = new Map(), grids = new Map();
+  const idOf = (id) => { if (id == null) return -1; let n = idx.get(id); if (n === undefined) { n = ids.length; ids.push(id); idx.set(id, n); } return n; };
+  const sample = (lon, lat, res, out) => {
+    const r = Math.max(1, Math.round(Number(res) || 1)), W = 360 * r, H = 180 * r;
+    let g = grids.get(r);
+    if (!g) { g = { own: new Int16Array(W * H).fill(-2), riv: new Int16Array(W * H).fill(-1), str: new Uint8Array(W * H) }; grids.set(r, g); }
+    const L = ((Number(lon) + 180) % 360 + 360) % 360;
+    const i = Math.min(W - 1, Math.max(0, Math.floor(L * r))), j = Math.min(H - 1, Math.max(0, Math.floor((90 - Number(lat)) * r)));
+    const k = j * W + i;
+    if (g.own[k] === -2) {
+      const a = (typeof at === "function" ? at(90 - (j + 0.5) / r, -180 + (i + 0.5) / r) : null) || {};
+      g.own[k] = idOf(a.owner);
+      g.riv[k] = a.contested ? idOf(a.rival) : -1;
+      g.str[k] = Math.round(Math.max(0, Math.min(1, Number(a.strength) || 0)) * 255);
+    }
+    out[0] = g.own[k]; out[1] = g.riv[k]; out[2] = g.str[k];
+    return out;
+  };
+  return { sample, ids };
+}
+
 /* ══════════════ the region reader ══════════════ */
 
 /** a tiny binary heap — the grid is thousands of cells and a linear scan is the difference between 170ms and minutes */

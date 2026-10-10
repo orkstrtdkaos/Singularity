@@ -38,7 +38,7 @@ import { rosterForGM } from "./fellowship.js";   // SNG-541: the GM is told the 
 import { armorySaid, armoryTable } from "./armory.js";   // CCODE-445: a hold's armory, and what its forge is making
 import { workSaid } from "./holdwork.js";   // CCODE-450: who is at standing work there
 import { bearingsToKnown } from "./worldmap.js";   // SNG-386 §4.3: which way the road runs
-import { mapOpsForGM } from "./mapstate.js";   // SNG-679 S3: what stands here and can change, with the world's state words
+import { mapOpsForGM, foreignHoldState } from "./mapstate.js";   // SNG-679 S3: what stands here and can change, with the world's state words
 import { localLayoutFor } from "./localmap.js";
 import { holdingsForGM, debtsForGM } from "./holdings.js";
 import { reckoningsForGM } from "./mending.js";   // ✅ SNG-679 Part R · R3: the one sent about damage has come
@@ -89,7 +89,7 @@ import { livingWorldForGM } from "./generate.js";
 import { standingForGM } from "./standing.js"; // BATCH-12 §3
 import { renderNamesDeep } from "./names.js"; // SNG-182
 import { worldCount, worldCountLabel, positionedPlace, absoluteWorldDay } from "./worldtime.js";
-import { holdsNearForGM } from "./sharedholds.js";
+import { holdsNearForGM, holdsAt } from "./sharedholds.js";
 import { nemesisForGM } from "./nemesis.js";   // ⛔ SNG-648: who the antagonist IS — `pacing.js` never had one to point at   // CCODE-383: a hold nearby is known
 import { powersHoldingForGM, housesForGM } from "./powers.js";
 import { benchForGM } from "./coliseum.js";
@@ -126,7 +126,9 @@ export const GM_CONTEXT = [
   { key: "mapHere", builder: "mapstate.mapOpsForGM (SNG-679 S3)", carries: ["what stands here and can change: the place, its sites, ground and water, the roads out, the holds — keyed, with their state"],
     reachedBy: "standing anywhere with a place record", spec: "SNG-679 S3", views: ALL,
     build: (env) => { let layout = null; try { layout = localLayoutFor(env.location?.id, { content: env.CONTENT, character: env.character }); } catch { layout = null; }
-      return mapOpsForGM(env.character, env.CONTENT, { hereId: env.location?.id, layout }); } },
+      // ✅ CCODE-731: another traveler's hold standing here is listed too — the one thing of theirs this character can change
+      return mapOpsForGM(env.character, env.CONTENT, { hereId: env.location?.id, layout,
+        holdsHere: holdsAt(env.app?.holdsStore?.() || null, env.location?.id, { selfId: env.character?.id || null }) }); } },
   { key: "groundDetail", builder: "places.groundForGM (R28)", carries: ["the authored ground of this place — what stands where"],
     reachedBy: "standing in one of the 18 places with an authored local layout", spec: "§9 / R28", views: ALL,
     build: (env) => groundForGM(env.location?.id, env.rules?.localLayouts) },
@@ -793,7 +795,8 @@ export const GM_CONTEXT = [
     reachedBy: "always (empty unless another traveler's hold stands within two walking days)", spec: "CCODE-383", views: ["turn", "ask"],
     build: (env) => holdsNearForGM(env.app?.holdsStore?.() || null, { selfId: env.character?.id || null,
       here: positionedPlace(env.CONTENT?.locations || {}, env.location?.id || env.character?.currentLocationId, { worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() }),   // H5
-      pending: env.app?.tradesPending?.() || [] }) },   // CCODE-388: what is already bought and not yet filled
+      pending: env.app?.tradesPending?.() || [],   // CCODE-388: what is already bought and not yet filled
+      stateOf: (card) => foreignHoldState(env.character, card, env.CONTENT) }) },   // CCODE-731: its fabric, as this game holds it
   { key: "travelersDetail", builder: "travelers.travelersForGM (SNG-595)", carries: ["another player's character the words named", "their public deeds, every ledger month", "who in this story was part of theirs"],
     reachedBy: "always (empty unless the words, or the last two beats, name another traveler)", spec: "SNG-595", views: ["turn", "ask"],
     build: (env) => travelersForGM(

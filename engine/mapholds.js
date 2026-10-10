@@ -22,7 +22,7 @@
 import { whereaboutsOf } from "./carriage.js";
 import { caravansOf, positionOnRoad } from "./caravan.js";
 import { positionedPlace } from "./worldtime.js";
-import { mapStateOf } from "./mapstate.js";
+import { mapStateOf, foreignHoldState } from "./mapstate.js";
 import { roomOf } from "./holdings.js";
 import { roadsOut as bearingsTo } from "./localdetail.mjs";   // ✅ H6: a moving hold's bow faces where she is going, in the local map's own bearings   // ✅ H6: a hold's rung is the larger of the one it was named and the one its features fit
 
@@ -110,7 +110,9 @@ export function mapHolds(character, { sharedStore = null, locations = {}, worldD
       key: `hold:${card.id}`, kind: "hold", id: card.id, name: card.name || card.id,
       ownerId: card.ownerId || null, ownerName: card.ownerName || null, own: false,
       rung: card.rung || null, frame: card.frame || null, condition: card.condition || null,
-      state: card.state || "whole",
+      // ✅ CCODE-731: what the card says, worsened by any blow its owner's game has not taken in yet — so the one who struck
+      // it does not see it standing whole until its owner next plays
+      state: foreignHoldState(character, card, content),
       atSea: !!card.atSea, onRoad: false, worldPos: posOf(card.worldPos),
       placeId: card.locationId || null,
       from: card.from || null, to: card.to || null, fraction: card.fraction ?? null,

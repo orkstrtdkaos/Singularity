@@ -24664,7 +24664,7 @@ await (async () => {
     check("679/S4: ⛔ `holdingOps` gains damage, ruin, destroy, repair and move — on the hold or on one feature with `featureId` — in the schema, the doctrine and the app's dispatch, every one through `applyMapChange` with the hold and its features as the door's records, the world's word said",
       /\|damage\|ruin\|destroy\|repair\|move", "featureId":/.test(gm4) && /"holdingOps" — ⛔ A HOLD CAN BE HURT AND MENDED \(SNG-679 S4\)/.test(gm4)
       && /else if \(\["damage", "ruin", "destroy", "repair", "move"\]\.includes\(kind\)\) \{/.test(app4) && /const key = feat \? `feature:\$\{h\.id\}\/\$\{feat\.id \|\| feat\.kind\}` : `hold:\$\{h\.id\}`;/.test(app4)
-      && /const r = applyMapChange\(character, \{ key, change, by: op\.by \|\| "the world"/.test(app4) && /said\(r\.ok \? \(mapStateWord\(CONTENT, feat \? "feature" : "hold", r\.state/.test(app4));
+      && /const r = applyMapChange\(character, \{ key, change, by: op\.by \|\| "the world"/.test(app4) && /said\(r\.ok \? mapChangeLine\(CONTENT, feat \? "feature" : "hold", r\.state/.test(app4));   // CCODE-731: the thing AND the word (it said the bare word)
   }
   /* ── ✅ SNG-679 S5 (CCODE-672): every tier draws state ── */
   {

@@ -612,7 +612,10 @@ export function debtsForGM(character, { nameOf = null } = {}) {
   if (!rows.length) return null;
   const word = (e) => e >= 2 ? "REFUSED there — no trade, hire or shelter" : e === 1 ? "spoken of — received colder there" : "owed, and remembered";
   return rows.map(([key, d]) => {
-    const who = d.heldBy ? (nameOf ? nameOf(d.heldBy) : d.heldBy) : "nobody in particular (the place was walked away from)";
+    // ✅ CCODE-731: a hold's damages are owed to its OWNER — through its keeper when it has one, and to the owner alone when it has not
+    const who = d.heldBy ? `${nameOf ? nameOf(d.heldBy) : d.heldBy}${d.owedTo?.name ? ` (for ${d.owedTo.name})` : ""}`
+      : d.owedTo ? `${d.owedTo.name || "another traveler"} — another player; nobody comes for it [debtOps holderId "${key}"]`
+      : "nobody in particular (the place was walked away from)";
     // ✅ SNG-679 R3: the one sent about it has ARRIVED — the reckoning is a scene
     if (d.mapKey && character?.reckonings?.[d.mapKey]?.state === "found") return `- ⚑ ${who} HAS COME about ${d.reason}: ${d.amount} ${d.currency} owed for it — see RECKONING.`;
     const what = Number.isFinite(d.amount) && d.amount !== null ? `${d.amount} ${d.currency}` : d.kind;
@@ -640,6 +643,19 @@ export function applyDebtOps(character, ops = [], { day = null, regionId = null,
         if (!paid.ok) { out.push({ op: kind, ok: false, key, why: paid.why }); continue; }
       }
       settleDebt(character, key, { how: "paid", day });
+      /* ⛔ CCODE-731 — DAMAGES PAID FOR ANOTHER PLAYER'S HOLD ARE THAT PLAYER'S. The keeper collects for the owner, and the owner
+       * is in another game — so the payment goes out by the road the trades already travel (`tradeOutbox` → `world/trades`), as an
+       * order of kind `damages` the owner's game takes in on its next tick (`holdtrade.settleOrders`). ⚠️ Without this the culprit
+       * paid, the debt cleared, and the money went nowhere: the owner's news had said "they owe you 128 crystal" and nothing ever
+       * said it was paid, or paid it. The id is the reckoning's, so one debt is one payment however often it is retried. */
+      if (d.owedTo?.playerId && Number.isFinite(d.amount) && d.amount > 0) {
+        const rk731 = d.mapKey ? character?.reckonings?.[d.mapKey] : null;
+        character.tradeOutbox = [...(Array.isArray(character.tradeOutbox) ? character.tradeOutbox : []), {
+          id: `damages|${d.owedTo.playerId}|${character.id}|${d.mapKey || key}|${rk731?.damageId || d.sinceDay || 0}`, kind: "damages", status: "paid",
+          ownerId: d.owedTo.playerId, ownerName: d.owedTo.name || null, holdId: d.owedTo.holdId || null, holdName: d.owedTo.holdName || null,
+          buyerId: character.id, buyerName: character.name || null, amount: d.amount, currency: d.currency, regionId: d.regionId || null,
+          value: Number(d.valueOwed) || null, collectedBy: d.heldBy || null, worldDay: day }];
+      }
       // ✅ SNG-679 R3: the damages paid are paid — the reckoning is over, and the locals' spending up to now is settled
       if (d.mapKey && character?.reckonings?.[d.mapKey]) { const rk = character.reckonings[d.mapKey]; rk.paidValue = (Number(rk.paidValue) || 0) + (Number(d.valueOwed) || 0); rk.state = "settled"; }
       out.push({ op: kind, ok: true, key, paid: Number.isFinite(d.amount) ? d.amount : 0 });
@@ -649,6 +665,8 @@ export function applyDebtOps(character, ops = [], { day = null, regionId = null,
       const d = character?.worldState?.debts?.[key];
       const rk = d?.mapKey ? character?.reckonings?.[d.mapKey] : null;
       if (!d || !rk) { out.push({ op: kind, ok: false, key, why: "no reckoning stands with them" }); continue; }
+      // ✅ CCODE-731 / R5: *"Another player can't mend your hold uninvited"* — so a hold's damages are paid, never worked off
+      if (kind === "work" && rk.hold) { out.push({ op: kind, ok: false, key, why: "another traveler's hold is mended by its own keeper — this is paid, not worked off" }); continue; }
       if (kind === "refuse") { d.escalation = 2; d.lastMovedDay = day; d.history = [...(d.history || []), { day, note: "refused to make it good" }].slice(-12); rk.state = "refused"; }
       else if (kind === "flee") { rk.state = "asking"; rk.since = Number.isFinite(Number(day)) ? Number(day) : rk.since; }
       else { rk.state = "working"; if (character.mendDeclined) delete character.mendDeclined[d.mapKey]; }
@@ -2332,6 +2350,19 @@ export function holdRepairCost(holding, feature, state, { cfg = null, repairCost
   const short = Object.entries(goods).filter(([g, q]) => (Number(holding?.store?.[g]) || 0) < q)
     .map(([g, q]) => `${q - (Number(holding?.store?.[g]) || 0)} more ${g.replace(/_/g, " ")}`);
   return { goods, short };
+}
+/** ✅ AEVI, the hold debt (2026-10-09): *"The owner's game knows the features and store, so it writes `repairValue` per state onto the
+ *  card when it publishes, priced the R5 way."* What it costs this hold's keeper to bring it from `state` back to whole: every rung's
+ *  R5 goods (`holdRepairCost`, the one price a keeper actually pays), priced as a store is where the hold stands. ⚠️ Null when
+ *  nothing prices it — a hold with no features — and never 0, so a reader can tell "costs nothing" from "unpriced". Pure. */
+export function holdRepairWorth(holding, state, { cfg = null, repairCost = null, economy = null, regionId = null } = {}) {
+  const ladder = ["whole", "damaged", "ruined", "destroyed"];
+  const i = ladder.indexOf(String(state || "whole"));
+  if (i <= 0) return null;
+  const goods = {};
+  for (let r = i; r >= 1; r--) for (const [g, q] of Object.entries(holdRepairCost(holding, null, ladder[r], { cfg, repairCost }).goods)) goods[g] = (goods[g] || 0) + q;
+  const w = worthOfGoods(goods, { economy, regionId, cfg });
+  return w != null && w > 0 ? w : null;
 }
 export function featureDef(kind, cfg) { const k = featureKinds(cfg)[String(kind || "")]; return k ? { kind: String(kind), ...k } : null; }
 /** ⛔ A BUILD IN PROGRESS IS NOT A FEATURE YET — every reader (defence, watch, yields, hands, aura, service) sees only what

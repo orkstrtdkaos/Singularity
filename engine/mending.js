@@ -48,9 +48,12 @@ export function culpritOf(record) {
   const hit = (record?.history || []).filter((h) => h && ["damaged", "ruined", "destroyed"].includes(h.change)).pop();
   return hit?.by ?? null;
 }
-/** Every world key this save holds an event for. */
+/** Every world key this save holds an event for. ⛔ THE WORLD'S ONLY (CCODE-731): a hit on another player's hold travels as an
+ *  event too, and a hold is not the locals' to mend, to post a job for or to hunt over (R5: *"No locals and no job board are
+ *  involved"*) — its reckoning is its keeper's, below (`holdDebtPass`). */
 function heldKeys(character) {
-  return [...new Set([...(character?.mapEvents || []).map((e) => e?.key), ...Object.keys(character?.worldMapStore?.keys || {})].filter(Boolean))];
+  return [...new Set([...(character?.mapEvents || []).map((e) => e?.key), ...Object.keys(character?.worldMapStore?.keys || {})].filter(Boolean))]
+    .filter((k) => { const p = parseMapKey(k); return !!p && !p.row.onRecord; });
 }
 
 /** ⛔ WHAT A BROKEN THING IS WORTH — R3/R4's *"`repairCost` × the thing's build value"*. A world thing has no build of its own; the
@@ -376,6 +379,22 @@ export function damagesHolder(key, damage, { content = null, character = null } 
   const name = character?.npcRegistry?.[id]?.name || plain || `one of the people of ${loc?.name || "the place"}`;
   return { id, name, minted: true, communityId: loc?.communityId || null, placeId };
 }
+/** ⛔ R3's LADDER, FOR WHOEVER IS OWED: `asking` once it begins, `sent` when someone sets out (after `searchBeginsAfterDays[seen]`,
+ *  at the latest `jobs.hunt.localsSendAfterDays`), `found` when they arrive (`findWithinDays[seen]` + the walk to where the culprit
+ *  is). ONE ladder — a broken mill's locals and a struck hold's keeper climb the same rungs (✅ Aevi: *"The steward goes after the
+ *  culprit through R3's ladder: yes."*). Mutates `rk`; pushes its lines onto `news`. */
+function climbSearch(rk, { R, Jh, W, wd, seen, holder, character, L, vals, news }) {
+  if (rk.state === "owed") { rk.state = "asking"; if (W.asking) news.push(fill(W.asking, vals)); }
+  const sendAfter = Math.min(Number(R.searchBeginsAfterDays?.[seen] ?? 7), Number(Jh.localsSendAfterDays ?? 7));
+  if (rk.state === "asking" && wd >= rk.since + sendAfter) {
+    const target = character.currentLocationId && L[character.currentLocationId] ? character.currentLocationId : null;
+    const walk = target && holder.placeId && L[holder.placeId] ? (target === holder.placeId ? 0 : walkingDays(L[holder.placeId], L[target])) : 0;
+    rk.state = "sent"; rk.sentDay = Math.floor(wd); rk.seeker = holder.id; rk.seekerName = holder.name;
+    rk.arriveDay = rk.sentDay + Math.ceil((Number(R.findWithinDays?.[seen]) || 6) + (Number.isFinite(walk) ? walk : 0));
+    if (W.sent) news.push(fill(W.sent, vals));
+  }
+  if (rk.state === "sent" && wd >= rk.arriveDay) { rk.state = "found"; rk.foundDay = Math.floor(wd); if (W.found) news.push(fill(W.found, vals)); }
+}
 export function ensureReckonings(character) {
   if (!character) return {};
   if (!character.reckonings || typeof character.reckonings !== "object") character.reckonings = {};
@@ -424,16 +443,7 @@ export function reckoningPass(character, { content = null, worldDay = null } = {
       alwaysActs: true, sinceDay: prev?.sinceDay ?? rk.since, lastMovedDay: prev?.lastMovedDay ?? rk.since, escalation: prev?.escalation || 0,
       history: prev?.history || [{ day: rk.since, note: `owed: damages — the ${t.thing} at ${t.place}` }] };
     const vals = { name: holder.name, place: t.place, did, thing: t.thing };
-    if (rk.state === "owed") { rk.state = "asking"; if (W.asking) news.push(fill(W.asking, vals)); }
-    const sendAfter = Math.min(Number(R.searchBeginsAfterDays?.[s.seen] ?? 7), Number(Jh.localsSendAfterDays ?? 7));
-    if (rk.state === "asking" && wd >= rk.since + sendAfter) {
-      const target = character.currentLocationId && L[character.currentLocationId] ? character.currentLocationId : null;
-      const walk = target && holder.placeId && L[holder.placeId] ? (target === holder.placeId ? 0 : walkingDays(L[holder.placeId], L[target])) : 0;
-      rk.state = "sent"; rk.sentDay = Math.floor(wd); rk.seeker = holder.id; rk.seekerName = holder.name;
-      rk.arriveDay = rk.sentDay + Math.ceil((Number(R.findWithinDays?.[s.seen]) || 6) + (Number.isFinite(walk) ? walk : 0));
-      if (W.sent) news.push(fill(W.sent, vals));
-    }
-    if (rk.state === "sent" && wd >= rk.arriveDay) { rk.state = "found"; rk.foundDay = Math.floor(wd); if (W.found) news.push(fill(W.found, vals)); }
+    climbSearch(rk, { R, Jh, W, wd, seen: s.seen, holder, character, L, vals, news });
     // ✅ R7: a player took the hunt and found them — the holder comes with what the hunter learned, whatever the search had reached
     if (s.hunted && ["owed", "asking", "sent"].includes(rk.state)) { rk.state = "found"; rk.foundDay = Math.floor(wd); rk.huntedBy = s.hunted.by; if (W.found) news.push(fill(W.found, vals)); }
   }
@@ -446,12 +456,162 @@ export function reckoningsForGM(character, { content = null } = {}) {
   for (const d of Object.values(debts)) {
     if (!d?.mapKey || RK[d.mapKey]?.state !== "found") continue;
     const who = character?.npcRegistry?.[d.heldBy]?.name || content?.npcs?.[d.heldBy]?.name || d.heldBy;
+    // ✅ CCODE-731 / R5: a hold is mended by its own keeper, so there is no working this one off — it is paid, refused, fought or fled
+    if (RK[d.mapKey]?.hold) {
+      out.push(`⚑ RECKONING — ${who} (${d.heldBy}), who keeps ${d.owedTo?.holdName || "the hold"} for ${d.owedTo?.name || "another traveler"}, has come about ${d.reason}: `
+        + `they want what mending it costs, ${d.amount} ${d.currency}. PLAY IT AS A SCENE; the choice is the character's: pay (debtOps "settle" — it goes to ${d.owedTo?.name || "the hold's owner"}), `
+        + `refuse (debtOps "refuse" — word goes round and they are refused there), fight (an ordinary fight), or flee (debtOps "flee" — the search starts again from where they went). `
+        + `⛔ There is no working it off: another traveler's hold is mended by its own keeper.`);
+      continue;
+    }
     out.push(`⚑ RECKONING — ${who} (${d.heldBy}) has come about ${d.reason}: they want what their people spent on it, ${d.amount} ${d.currency}. `
       + `PLAY IT AS A SCENE; the choice is the character's: pay (debtOps "settle"), work it off (debtOps "work" — they mend it themselves and what that is worth comes off), `
       + `refuse (debtOps "refuse" — word goes round and they are refused there), fight (an ordinary fight; their standing there falls with it), `
       + `or flee (debtOps "flee" — the search starts again from where they went).`);
   }
   return out;
+}
+
+/* ═════ CCODE-731 · THE HOLD DEBT — WHAT IS OWED FOR STRIKING ANOTHER PLAYER'S HOLD ═════
+ * ✅ AEVI (2026-10-09), my four questions answered: *"1. The hit is a shared event at `hold:<id>`, folded by the owner's game: yes.
+ * 2. The amount: the card publishes it. … A card without one falls back to your rung price. It's one number, and it doesn't expose
+ * the store. 3. The steward goes after the culprit through R3's ladder: yes. 4. No steward: yes, that is 'what they do about it is
+ * theirs'. The owner's news says who did it and what they owe, and nothing escalates on its own. The owner can send their own band
+ * after the culprit, and that's the point of having one."*
+ * ⛔ TWO GAMES, ONE EVENT, ONE NUMBER. The blow is written in the culprit's game (`applyMapChange`, the foreign branch) and travels
+ * with the world's store; the OWNER's game takes it onto the hold's record (`holdHitsPass`) and the CULPRIT's game raises the debt
+ * (`holdDebtPass`). Neither holds the other's save, so both price it from what the event carries (`holdHitOwed`) — the owner's
+ * news and the culprit's debt say the same figure by construction, not by agreement.
+ * ⛑ R5 stands on both sides: nobody mends another's hold uninvited, so there is no working this debt off and no job board for it. */
+const HOLD_WORDS = {   // ⚠️ plain engine words — Aevi's to author under `mapStates.reckoning.words` (same keys), which win when present
+  holdHitNamed: "{name} {did} {hold}.",
+  holdHitDescribed: "Someone {did} {hold}, and was seen doing it.",
+  holdHitUnseen: "{hold} was {did}, and nobody saw who did it.",
+  holdOwedKeeper: "They owe you {price} for it, and {keeper} will go after them.",
+  holdOwedYours: "They owe you {price} for it. What you do about it is yours.",
+  holdOwing: "You owe {owner} {price} for {hold}, which you {did}.",
+};
+const holdWord = (W, k) => W?.[k] || HOLD_WORDS[k];
+
+/** ⛔ WHAT ONE BLOW IS OWED FOR: the cost of mending the hold from the state the blow left it in, less the cost from the state it
+ *  found it in — so a culprit owes for what THEY did, not for damage that was already there. Read from the event alone: the card's
+ *  `repairValue` as it stood (`hold.value`); a card that priced nothing falls back to the rung's worth (`buildWorth.place`, the
+ *  rungs it names) × the state's `repairCost`, and past that to the plain rung price a job pays by. Pure. */
+export function holdHitOwed(e, content) {
+  const l = ladderOf(content);
+  const was = rungOf(content, e?.hold?.was || l[0]);
+  const after = Math.max(was, rungOf(content, e?.change));
+  if (!e?.hold || after <= was) return 0;
+  const pub = e.hold.value && typeof e.hold.value === "object" && Object.keys(e.hold.value).length ? e.hold.value : null;
+  const bw = Number(content?.mapStates?.buildWorth?.place?.[e.hold.rung]);
+  const v = (i) => (i <= 0 ? 0 : pub ? (Number(pub[l[i]]) || 0) : Number.isFinite(bw) ? bw * repairFraction(content, l[i]) : 4 + 6 * i);
+  return Math.max(0, Math.round(v(after) - v(was)));
+}
+
+/** ⛔ THE OWNER'S GAME TAKES THE BLOW. Every shared hit at one of this character's holds that the hold has not taken in is applied to
+ *  its record through the one door, in the fold's own order, and remembered (`hitsFolded` — the card publishes it, so no game draws
+ *  the blow twice). The news says who did it and what they owe; with a keeper, that the keeper will go after them; with none, that
+ *  it is the owner's to pursue. Mutates the save. → `{ news, folded: [{ holdId, id, was, state, owed }] }` */
+export function holdHitsPass(character, { content = null, worldDay = null } = {}) {
+  const news = [], folded = [];
+  if (!character?.id) return { news, folded };
+  const W = wordsOf(content), L = content?.locations || {};
+  for (const h of (Array.isArray(character.holdings) ? character.holdings : [])) {
+    if (!h?.id) continue;
+    const key = `hold:${h.id}`;
+    const took = h.hitsFolded && typeof h.hitsFolded === "object" ? h.hitsFolded : {};
+    const hits = sortEvents(eventsFor(character, key).filter((e) => e && DAMAGE.has(String(e.change)) && e.hold?.owner === character.id
+      && e.by !== character.id && !took[e.id]), content);
+    for (const e of hits) {
+      const r = applyMapChange(character, { key, change: e.change, by: e.by, seen: e.seen, cause: e.cause, beat: e.beat, day: e.day },
+        { content, worldDay: e.day, recordOf: () => h });
+      h.hitsFolded = { ...(h.hitsFolded || {}), [e.id]: Math.floor(Number(e.day) || 0) };   // taken in, whatever the door answered
+      if (!r.ok) continue;
+      const owed = holdHitOwed(e, content);
+      folded.push({ holdId: h.id, id: e.id, was: r.was, state: r.state, owed });
+      if (r.state === r.was && owed <= 0) continue;   // a blow that changed nothing is not news
+      const did = (W.did || {})[e.change] || e.change;
+      const keeper = h.steward ? (character.npcRegistry?.[h.steward]?.name || content?.npcs?.[h.steward]?.name || null) : null;
+      const vals = { name: e.byName || "another traveler", did, hold: h.name || h.id, keeper: keeper || "",
+        price: priceHere(owed, L[h.locationId]?.regionId || null, content?.rules?.economy || null).label };
+      const first = e.seen === "named" ? "holdHitNamed" : e.seen === "described" ? "holdHitDescribed" : "holdHitUnseen";
+      const line = [fill(holdWord(W, first), vals)];
+      // unseen is not traced (R3): the hold is mended and remembered, and nobody owes until someone finds out
+      if (owed > 0 && (e.seen === "named" || e.seen === "described")) line.push(fill(holdWord(W, keeper ? "holdOwedKeeper" : "holdOwedYours"), vals));
+      news.push(cap(line.join(" ")));
+    }
+  }
+  if (folded.length) character.worldRevision = (Number(character.worldRevision) || 0) + 1;
+  return { news, folded };
+}
+
+/** ⛔ THE CULPRIT'S GAME RAISES THE DEBT. For each hold of another player's this character struck (named or described): what is owed
+ *  — every such blow's `holdHitOwed`, less what was paid — is a `damages` debt. WITH A KEEPER it is held by the keeper, who always
+ *  acts and climbs R3's ladder from the hold (`asking`, `sent`, `found`). WITH NONE it is owed to the owner and nothing escalates:
+ *  one line of news, a debt on the list, and the rest is theirs to do. A blow struck after a reckoning was settled or forgiven
+ *  opens a new one for that blow alone. Mutates the save. → `{ news }` */
+export function holdDebtPass(character, { content = null, worldDay = null } = {}) {
+  const news = [];
+  if (!character?.id || worldDay == null || !Number.isFinite(Number(worldDay))) return { news };
+  const R = content?.mapStates?.reckoning || {}, Jh = jobsOf(content).hunt || {}, W = R.words || {};
+  const L = content?.locations || {};
+  const RK = ensureReckonings(character);
+  const debts = (() => { if (!character.worldState || typeof character.worldState !== "object") character.worldState = {};
+    if (!character.worldState.debts || typeof character.worldState.debts !== "object") character.worldState.debts = {}; return character.worldState.debts; })();
+  const wd = Number(worldDay);
+  const byKey = new Map();
+  for (const e of (character.mapEvents || [])) {
+    if (!e?.hold?.owner || e.hold.owner === character.id || e.by !== character.id || !DAMAGE.has(String(e.change))) continue;
+    if (parseMapKey(e.key)?.cls !== "hold") continue;
+    if (!byKey.has(e.key)) byKey.set(e.key, []);
+    byKey.get(e.key).push(e);
+  }
+  for (const [key, all] of byKey) {
+    let rk = RK[key] || null;
+    let cleared = new Set(rk?.cleared || []);
+    if (rk && (rk.state === "settled" || rk.state === "forgiven")) {
+      cleared = new Set([...cleared, ...(rk.hitIds || [])]);
+      rk = null;   // that reckoning is over; only a blow struck since opens another
+    }
+    const live = sortEvents(all, content).filter((e) => !cleared.has(e.id) && (e.seen === "named" || e.seen === "described"));
+    if (!live.length) continue;
+    const seen = live.some((e) => e.seen === "named") ? "named" : "described";
+    const last = live[live.length - 1], hold = last.hold;
+    if (!rk) rk = RK[key] = { damageId: last.id, since: Math.floor(Number(live[0].day) || 0), seen, state: "owed", paidValue: 0, hold: true,
+      ...(cleared.size ? { cleared: [...cleared] } : {}) };
+    rk.hitIds = live.map((e) => e.id); rk.damageId = last.id; rk.seen = seen;
+    const owed = Math.max(0, live.reduce((a, e) => a + holdHitOwed(e, content), 0) - (Number(rk.paidValue) || 0));
+    const placeId = hold.placeId && L[hold.placeId] ? hold.placeId : null;
+    const keeperId = hold.keeperId || null;
+    const debtKey = keeperId || `player:${hold.owner}`;
+    if (owed <= 0) { if (debts[debtKey]?.mapKey === key) delete debts[debtKey]; continue; }
+    const holdName = hold.name || "the hold";
+    const keeperName = keeperId ? (character.npcRegistry?.[keeperId]?.name || content?.npcs?.[keeperId]?.name || hold.keeperName || `the keeper of ${holdName}`) : null;
+    if (keeperId && !content?.npcs?.[keeperId]) {
+      // the keeper is a person of the OWNER's world: this one meets them as who they are, where they keep
+      character.npcRegistry = character.npcRegistry && typeof character.npcRegistry === "object" ? character.npcRegistry : {};
+      if (!character.npcRegistry[keeperId]) character.npcRegistry[keeperId] = { id: keeperId, name: keeperName, status: "active",
+        locationId: placeId, role: `keeper of ${holdName}${hold.ownerName ? ` for ${hold.ownerName}` : ""}`, mintedFor: "damages" };
+    }
+    const did = (W.did || {})[last.change] || last.change;
+    const price = priceHere(owed, L[placeId]?.regionId || null, content?.rules?.economy || null);
+    const prev = debts[debtKey]?.mapKey === key ? debts[debtKey] : null;
+    debts[debtKey] = { kind: R.debtKind || "damages", amount: price.amount, currency: price.currency, ...(price.currency === "scrip" ? { regionId: price.regionId } : {}),
+      valueOwed: owed, reason: `${holdName}, ${did}`, heldBy: keeperId, mapKey: key,
+      // ✅ Aevi 3 + 4: a keeper always acts; with no keeper *"nothing escalates on its own"* (`advanceDebts` leaves a debt nobody holds)
+      alwaysActs: !!keeperId, owedTo: { playerId: hold.owner, name: hold.ownerName || null, holdId: parseMapKey(key).id, holdName },
+      sinceDay: prev?.sinceDay ?? rk.since, lastMovedDay: prev?.lastMovedDay ?? rk.since, escalation: prev?.escalation || 0,
+      history: prev?.history || [{ day: rk.since, note: `owed: damages — ${holdName}, ${did}` }] };
+    if (!keeperId) {
+      if (!rk.told) { rk.told = true; news.push(cap(fill(holdWord(W, "holdOwing"), { owner: hold.ownerName || "another traveler", price: price.label, hold: holdName, did }))); }
+      continue;
+    }
+    // ⚑ the world's own lines, as R3 says them: "People from {place} are asking after whoever {did} the {thing}." A hold's name
+    // will not always take "the" (Stillwater's Trouble), so the hold is the place and the thing is plainly "hold".
+    const vals = { name: keeperName, place: holdName, did, thing: "hold" };
+    climbSearch(rk, { R, Jh, W, wd, seen, holder: { id: keeperId, name: keeperName, placeId }, character, L, vals, news });
+  }
+  return { news };
 }
 
 /* ═════ PART R · R7: THE HUNT IS A LOCAL JOB TOO ═════

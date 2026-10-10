@@ -102,6 +102,18 @@ export function settleOrders(owner, orders = [], { worldDay = null, economy = nu
     if (done) { if (o.status === "paid") moved.push({ ...o, ...done }); continue; }   // settled here before; the world has not heard yet
     if (o.status !== "paid") continue;
     const h = (owner.holdings || []).find(x => x && x.id === o.holdId);
+    // ✅ CCODE-731: DAMAGES, PAID. Another player's character broke this hold and has paid what the mending costs — to the keeper,
+    // or to the owner outright. It arrives here exactly as it was paid, in the money it was paid in, once.
+    if (o.kind === "damages") {
+      // ⛔ §316: in the money it was PAID in — the order names it, and an order that names none pays nothing rather than a guess
+      const got = o.currency ? credit(owner, o.currency, Number(o.amount) || 0, { origin: "paid", regionId: o.regionId || null }) : { ok: false };
+      const result = { status: "settled", settledWorldDay: worldDay };
+      owner.tradeSettled[o.id] = result;
+      moved.push({ ...o, ...result });
+      if (got.ok) news.push({ text: `${o.buyerName || "Another traveler"} has paid ${moneyLabel(Number(o.amount) || 0, o.currency, o.regionId || null)} for what they did to ${o.holdName || h?.name || "your hold"}.`,
+        worldDay, tier: "event", section: "yours", locationId: h?.locationId || null });
+      continue;
+    }
     const have = Math.floor(Number(h?.store?.[o.goods]) || 0);
     const filled = Math.min(have, Number(o.units) || 0);
     let earned = null;

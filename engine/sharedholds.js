@@ -20,6 +20,7 @@ import { walkingDays } from "./worldmap.js";
 import { whereOf } from "./travelers.js";
 import { smartClamp } from "./namematch.js";
 import { tradeOffer, goodsNamesOf, tradeLine } from "./holdtrade.js";   // CCODE-388: what an opened hold trades
+import { holdRepairWorth, roomOf } from "./holdings.js";   // CCODE-731: what a repair costs, priced R5's way · the rung it has grown into
 
 export const HOLDS_PATH = "world/holds/valley.json";
 /** How near a hold must be to be known from where a character stands, in walking days. */
@@ -34,7 +35,7 @@ export const HOLD_NEAR_DAYS = 2;
 const OUTWARD_FEATURES = new Set(["wall", "gate", "tower", "keep", "yard", "dock", "mill", "circle", "outcrop", "burial"]);
 
 export function holdCard(character, h, { locations = {}, nameOf = null, economy = null, cfg = null,
-                                         worldDay = null, routes = null } = {}) {
+                                         worldDay = null, routes = null, repairCost = null } = {}) {
   if (!character?.id || !h?.id) return null;
   const loc = h.locationId ? (locations?.[h.locationId] || null) : null;
   /* ═════ SNG-679 H4 · WHERE SHE IS, NOT WHERE SHE LEFT ═════
@@ -67,7 +68,11 @@ export function holdCard(character, h, { locations = {}, nameOf = null, economy 
      * can have a burned wall."* ⛑ And the card stays *"what a visitor could know"* — the rung, the frame and
      * a burned wall are all things you can see from the road; the store and the crew's names are not, and
      * they are still absent. */
-    rung: h.rung || null, frame: h.frame || null,
+    /* ⛔ CCODE-731 — THE RUNG IT HAS GROWN INTO, NOT THE ONE IT WAS LAST PROMOTED TO. `mapholds.rungNow` says why for the owner's
+     * own map: *"A hold never promoted stores none, and drew as the smallest thing on the map."* The card kept publishing the
+     * stored field, so every one of Silas's five holds went out with no rung at all — Stillwater's Trouble, a keep of nineteen
+     * features, was the smallest mark on another player's map. One reader (`roomOf`), as the owner's map uses. */
+    rung: (() => { try { return (cfg ? roomOf(h, cfg)?.rung : null) || h.rung || null; } catch { return h.rung || null; } })(), frame: h.frame || null,
     state: h.state || "whole",
     // ✅ SNG-679 H7: *"`holdCard` adds `site` alone, not the hold's feature layout. A visitor sees the hold, not its rooms."*
     ...(h.site && Number.isFinite(Number(h.site.bearing)) && Number.isFinite(Number(h.site.fromMetres))
@@ -82,6 +87,19 @@ export function holdCard(character, h, { locations = {}, nameOf = null, economy 
       .map((f) => ({ name: f?.name || f?.kind || null, siteKind: f?.siteKind || null, state: f?.state || "whole" }))
       .filter((f) => f.name).slice(0, 5),
     has: (h.features || []).map(f => f?.name || f?.kind).filter(Boolean).slice(0, 5),
+    /* ✅ AEVI, the hold debt (CCODE-731): *"The amount: the card publishes it. The owner's game knows the features and store, so it
+     * writes `repairValue` per state onto the card when it publishes, priced the R5 way. The culprit's game reads that. … It's one
+     * number, and it doesn't expose the store."* What bringing this hold back from each state would cost its keeper. Absent when
+     * nothing prices it (no features), and the reader then falls back to its own price.
+     * ⛑ `hits` — the shared events at this hold its owner's game has already taken in. A reader worsens `state` by every hit at
+     * the key that is NOT listed (`foreignHoldState`), so a hold struck an hour ago is not drawn whole until its owner next plays,
+     * and one struck and since mended is not drawn broken for ever. */
+    ...(() => {
+      const regionId = loc?.regionId || loc?.region || null, rv = {};
+      for (const s of ["damaged", "ruined", "destroyed"]) { const w = holdRepairWorth(h, s, { cfg, repairCost, economy, regionId }); if (w) rv[s] = w; }
+      const hits = Object.keys(h.hitsFolded && typeof h.hitsFolded === "object" ? h.hitsFolded : {}).slice(-200);
+      return { ...(Object.keys(rv).length ? { repairValue: rv } : {}), ...(hits.length ? { hits } : {}) };
+    })(),
     guardedBy: (h.garrison || []).map(nm).filter(Boolean).slice(0, 3),
     // ⛔ CCODE-388: only a hold its owner OPENED to trade says what it sells — its goods, how many, and the price at its own Reach
     ...(() => { const t = tradeOffer(h, { economy, cfg, regionId: loc?.regionId || loc?.region || null, goodsNames: goodsNamesOf(economy) }); return t ? { trades: t } : {}; })(),
@@ -122,6 +140,13 @@ export function holdsNear(store, { selfId = null, here = null, maxDays = HOLD_NE
   return out.sort((a, b) => a.days - b.days || String(a.card.key).localeCompare(String(b.card.key))).slice(0, max);
 }
 
+/** ✅ CCODE-731: another traveler's holds standing AT a place — what a scene there can see, and so what it can change. Pure. */
+export function holdsAt(store, placeId, { selfId = null } = {}) {
+  if (!store?.holds || !placeId) return [];
+  return Object.values(store.holds).filter((c) => c && c.id && c.locationId === placeId && !c.atSea && !(selfId && c.ownerId === selfId))
+    .sort((a, b) => String(a.key).localeCompare(String(b.key)));
+}
+
 const distanceWords = (days) => days <= 0.3 ? "here" : days <= 0.7 ? "half a day off" : days <= 1.3 ? "a day off" : `${Math.round(days)} days off`;
 
 /** One hold in a sentence a player reads: "The Fell Pell — Silas Weir's forge in Millbrook (here), run by Pell Ran Marsh". Pure. */
@@ -139,7 +164,10 @@ export function holdsNearForGM(store, opts = {}) {
   if (!near.length) return null;
   return near.map(n => {
     const c = n.card;
-    const bits = [c.condition || null, (c.has || []).length ? `has ${c.has.join(", ")}` : null,
+    // ✅ CCODE-731: FORTUNE AND FABRIC BOTH — the card has carried `state` since Part S and this line never said it, so a GM was told
+    // a burned-out hold "thrives". `stateOf` is the reader's own view (the card, worsened by a blow its owner has not taken in).
+    const fabric = String((typeof opts.stateOf === "function" ? opts.stateOf(c) : c.state) || "whole");
+    const bits = [fabric !== "whole" ? fabric.toUpperCase() : null, c.condition || null, (c.has || []).length ? `has ${c.has.join(", ")}` : null,
       (c.guardedBy || []).length ? `guarded by ${c.guardedBy.join(", ")}` : null,
       c.trades ? tradeLine(c, opts.pending || []) : null].filter(Boolean).join("; ");
     return `- ${holdNearLine(n)}${bits ? `; ${bits}` : ""}.`;

@@ -49,7 +49,7 @@ import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnab
 import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
 import { openingFrame, placeCardBox, sheetAfterDrag } from "./engine/worldmap.js";
 // ⛔ SNG-679 S2: ONE READER for what state anything on a map is in, and the word a player reads for it.
-import { mapStateOf, mapStateWord, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange, mapView, roadKey, knownStateOf, liveLocations } from "./engine/mapstate.js";
+import { mapStateOf, mapStateWord, mapChangeLine, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange, mapView, roadKey, knownStateOf, liveLocations } from "./engine/mapstate.js";
 // ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
 import { mapHolds, holdMarker, ensureHoldSite, placeHoldSite, holdSiteOf, holdView } from "./engine/mapholds.js";
 import { brokenAt, giftMend } from "./engine/mending.js";   // ✅ SNG-679 Part R · R4: what is broken at a place, on its card
@@ -126,7 +126,7 @@ import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
 import { initWorldState, newsLogOf, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncSharedFates, syncHolds, syncMap, syncTrades, syncTravelers, syncInvitations, sendInvitation, answerInvitation, resolvePlayerStrike, strikeSceneSetup, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
 import { noteWorldMovedOnShown } from "./engine/worldevents.js";
-import { holdsNear, holdNearLine } from "./engine/sharedholds.js";   // CCODE-383: a hold nearby is known
+import { holdsNear, holdNearLine, holdsAt } from "./engine/sharedholds.js";   // CCODE-383: a hold nearby is known · CCODE-731: and one standing here can be struck
 import { buyFromHold } from "./engine/holdtrade.js";   // CCODE-388: trading with another player's hold
 import { scopeLegacyMintedIds } from "./engine/fates.js";   // CCODE-384: the people the world makes are shared
 import { planJourney, seaWayWords, journeyLine, chosenWay, chooseWay, journeyArrivalPrompt, provisionsCarried, logJourneyOn, refreshJourneyOn, dropJourneyOn, completeJourneyOn, journeyCraftsOf } from "./engine/journeyplan.js";   // CCODE-387: a journey is agreed, readied, then walked
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.27.8";
+const APP_VERSION = "2.27.9";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -11794,7 +11794,8 @@ function applyTurn(turn, resolution, playerWords = null) {
               { content: CONTENT, worldDay: absoluteWorldDay(), recordOf: (cls, hid, sub) => cls === "feature" ? ((h.features || []).find(f => f && String(f.id || f.kind) === String(sub)) || null) : h });
             // R5: the goods leave the store only when the mending took
             if (r.ok && cost683) { h.store = h.store && typeof h.store === "object" ? h.store : {}; for (const [g, n] of Object.entries(cost683.goods)) h.store[g] = (Number(h.store[g]) || 0) - n; }
-            said(r.ok ? (mapStateWord(CONTENT, feat ? "feature" : "hold", r.state, { name: feat ? `${h.name}'s ${feat.name || feat.kind}` : h.name }) || `${h.name} is ${r.state}.`) : `${h.name} stays as it is — ${r.why}`);
+            // ✅ CCODE-731: the thing and its state, as the map step says it (this too said the bare word: "(out of use)")
+            said(r.ok ? mapChangeLine(CONTENT, feat ? "feature" : "hold", r.state, feat ? `${h.name}'s ${feat.name || feat.kind}` : h.name) : `${h.name} stays as it is — ${r.why}`);
           }
         }
       }
@@ -11855,7 +11856,8 @@ function applyTurn(turn, resolution, playerWords = null) {
     if (!ops.length) return;
     const said = (line) => { character._stepAsides = [...(character._stepAsides || []), line].slice(-4); };   // the same aside the hold ops use
     let layout = null; try { layout = localLayoutFor(location?.id, { content: CONTENT, character }); } catch { layout = null; }
-    const visible = visibleMapKeys(character, CONTENT, { hereId: location?.id, layout });
+    // ✅ CCODE-731: another traveler's hold standing here is in view too — the same list the GM was shown (`mapHere`)
+    const visible = visibleMapKeys(character, CONTENT, { hereId: location?.id, layout, holdsHere: holdsAt(sharedHolds, location?.id, { selfId: character.id }) });
     const recordOf = (cls, id, sub) => {
       if (cls === "hold") return (character.holdings || []).find((h) => h && h.id === id) || null;
       if (cls === "feature") { const h = (character.holdings || []).find((x) => x && x.id === id); return (h?.features || []).find((f) => f && f.id === sub) || null; }
@@ -11871,8 +11873,8 @@ function applyTurn(turn, resolution, playerWords = null) {
         continue;
       }
       const seenKey = visible.find((k) => k.key === res.key);
-      const word = mapStateWord(CONTENT, seenKey?.cls || parseMapKey(res.key)?.cls, res.state, { name: seenKey?.label || res.key }) || `${seenKey?.label || res.key} is ${res.state}`;
-      if (!res.duplicate) said(word);
+      // ✅ CCODE-731: the thing AND its state — the aside said the bare word ("wrecked"), with nothing saying what was
+      if (!res.duplicate) said(mapChangeLine(CONTENT, seenKey?.cls || parseMapKey(res.key)?.cls, res.state, seenKey?.label || res.key));
     }
   });
   applyStep("holdTrades", () => {

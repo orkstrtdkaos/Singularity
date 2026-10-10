@@ -329,6 +329,31 @@ export function adoptMapStore(character, store, { content = null } = {}) {
   return { changed, arrived };
 }
 
+/* ═════ CCODE-731 · ANOTHER PLAYER'S HOLD CAN BE STRUCK, AND ITS OWNER'S GAME HEARS ═════
+ * ✅ AEVI, the hold debt (2026-10-09), answering my four: *"1. The hit is a shared event at `hold:<id>`, folded by the owner's game:
+ * yes. 2. The amount: the card publishes it … 3. The steward goes after the culprit through R3's ladder: yes. 4. No steward: yes,
+ * that is 'what they do about it is theirs'."*
+ * ⛔ UNTIL NOW NOTHING COULD DAMAGE ANOTHER PLAYER'S HOLD: its state lives on its owner's record, and the door refuses a hold that
+ * is not on this save. So the hit is written as a WORLD event (it travels with CCODE-730's store) carrying what the card said of
+ * the hold when it was struck — whose it is, who keeps it, what a repair costs — and the owner's game applies it to the record
+ * through this same door (`mending.holdHitsPass`). ⛑ R5 stands: *"Another player can't mend your hold uninvited."* Only the three
+ * rungs of damage cross; a repair, a move or a rename of someone else's hold is refused. */
+const HOLD_HIT = new Set(["damaged", "ruined", "destroyed"]);
+/** The state of another player's hold AS THIS GAME HOLDS IT: what its card says, worsened by every hit at its key the card does
+ *  not list as taken in (`card.hits`). Pure. */
+export function foreignHoldState(character, card, content) {
+  const l = ladderOf(content);
+  let i = rungOf(content, card?.state || l[0]);
+  if (!card?.id) return l[i];
+  const taken = new Set(Array.isArray(card.hits) ? card.hits : []);
+  for (const e of eventsFor(character, `hold:${card.id}`)) {
+    if (!e || !HOLD_HIT.has(String(e.change)) || taken.has(e.id)) continue;
+    if (e.hold?.owner && card.ownerId && e.hold.owner !== card.ownerId) continue;   // a different owner's hold that shares the id
+    i = Math.max(i, rungOf(content, e.change));
+  }
+  return l[i];
+}
+
 /* ═════ S1 · THE DOOR ═════
  * ✅ AEVI: *"`applyMapChange(character, change, ctx)` is the only writer … Every channel calls it: the GM's
  * new `mapOps`, the hold channels that already exist, raids, and the world tick. That is SNG-672 M1's 'one
@@ -345,7 +370,14 @@ export function applyMapChange(character, change, ctx = {}) {
   const parsed = parseMapKey(change?.key);
   const onRecord = parsed?.row?.onRecord === true;
   const rec = onRecord && typeof recordOf === "function" ? recordOf(parsed.cls, parsed.id, parsed.sub) : null;
-  const before = onRecord
+  // ✅ CCODE-731: a hold that is NOT on this save and whose card the caller holds is another player's
+  const card = onRecord && !rec && parsed.cls === "hold" && ctx.foreignHold && ctx.foreignHold.id === parsed.id
+    && ctx.foreignHold.ownerId && ctx.foreignHold.ownerId !== character.id ? ctx.foreignHold : null;
+  if (card && !HOLD_HIT.has(String(change?.change || ""))) {
+    return { ok: false, why: `${card.name || "that hold"} is ${card.ownerName || "another traveler"}'s — only its own keeper mends, moves or renames it` };
+  }
+  const before = card ? { state: foreignHoldState(character, card, content) }
+    : onRecord
     ? { state: String(rec?.[parsed.row.recordField] || ladderOf(content)[0]) }
     : (mapStateOf(character, change?.key, { content }) || null);
 
@@ -358,6 +390,25 @@ export function applyMapChange(character, change, ctx = {}) {
     by: change.by ?? null, cause: change.cause ?? null, beat: change.beat ?? null, seen: change.seen ?? null,
     ...(change.name ? { name: change.name } : {}), ...(change.pos ? { pos: change.pos } : {}),
     ...(change.kind ? { kind: change.kind } : {}) };
+
+  if (card) {
+    // ⛔ THE HIT TRAVELS, AND SAYS WHAT ITS READERS CANNOT LOOK UP. The owner's game needs to know it is theirs and who did it; the
+    // culprit's reckoning needs who keeps the hold and what the repair costs — and neither game holds the other's save. So the
+    // event carries the card's answers as they stood when the blow landed (`hold`), and the one who struck it by name (`byName`).
+    const l = ladderOf(content);
+    const value = {};
+    for (const s of l.slice(1)) { const v = Number(card.repairValue?.[s]); if (Number.isFinite(v) && v > 0) value[s] = v; }
+    const hit = { ...ev, ...(change.byName ? { byName: smartClamp(String(change.byName), 60) } : {}),
+      hold: { owner: card.ownerId, ownerName: card.ownerName || null, name: card.name || card.id, placeId: card.locationId || null,
+        keeperId: card.keeperId || null, keeperName: card.keeperName || null, rung: card.rung || null, was: before.state,
+        ...(Object.keys(value).length ? { value } : {}) } };
+    character.mapEvents = Array.isArray(character.mapEvents) ? character.mapEvents : [];
+    const already = eventsFor(character, change.key).some((e) => e.id === hit.id);
+    if (!already) character.mapEvents.push(hit);
+    character.worldRevision = (Number(character.worldRevision) || 0) + 1;
+    return { ok: true, key: change.key, event: hit, state: l[Math.max(rungOf(content, before.state), rungOf(content, change.change))],
+      was: before.state, onRecord: false, foreign: true, duplicate: already, revision: character.worldRevision };
+  }
 
   if (onRecord) {
     // ⛔ A HOLD IS ITS OWNER'S. ✅ Aevi: *"Holds, features and caravans keep their state on their own records
@@ -467,6 +518,17 @@ export function mapStateWord(content, cls, state, { name = "", old = "", from = 
   return String(w).replace(/\{name\}/g, name).replace(/\{old\}/g, old).replace(/\{from\}/g, from);
 }
 
+/** ⛔ WHAT THE PLAYER IS TOLD CHANGED — THE THING, AND ITS STATE (CCODE-731). `mapStates.words` are states said OF a thing
+ *  ("wrecked", "blocked", "in ruins"): the GM's block prints them after the thing's name, and the turn's aside printed the word
+ *  alone — a player read *(wrecked)* or *(blocked)* under a beat, with nothing saying what was. Seen in the browser while checking
+ *  the hold debt's own line. One sentence, the name first. Pure. */
+export function mapChangeLine(content, cls, state, label) {
+  const name = String(label || "").trim() || "it";
+  const said = name.charAt(0).toUpperCase() + name.slice(1);
+  const w = mapStateWord(content, cls, state, { name });
+  return w ? `${said}: ${w}.` : `${said} is ${state}.`;
+}
+
 /* ═════ SNG-679 S6 · A STATE THAT ONLY SHOWS IS A PICTURE, NOT A RULE ═════
  * ✅ ERIK: *"Every single thing that exists needs to be able to be added, damaged, ruined, moved, etc by the
  * game."* ✅ AEVI (S6): *"State changes play, not just pictures. The numbers are in `mapStates.effects` and
@@ -564,7 +626,7 @@ export function featureScale(character, { hold = null, feature = null, content =
 
 /** every key the scene can see from `hereId`, with its label and its folded state — ONE list the prompt prints and the
  *  door checks, so the GM is refused exactly what it was never shown. PURE given `layout` (the place's local layout). */
-export function visibleMapKeys(character, content, { hereId = null, layout = null } = {}) {
+export function visibleMapKeys(character, content, { hereId = null, layout = null, holdsHere = null } = {}) {
   const locs = content?.locations || {};
   const here = hereId || character?.currentLocationId || null;
   const loc = here ? locs[here] : null;
@@ -586,16 +648,39 @@ export function visibleMapKeys(character, content, { hereId = null, layout = nul
     push(`hold:${h.id}`, h.name || h.id, "hold", () => h);
     for (const f of (h.features || [])) if (f?.id) push(`feature:${h.id}/${f.id}`, `${h.name || h.id}'s ${f.name || f.kind || f.id}`, "feature", () => f);
   }
+  // ✅ CCODE-731: another traveler's hold that stands HERE is something the scene can see, and so something the character can strike
+  for (const c of (Array.isArray(holdsHere) ? holdsHere : [])) {
+    if (!c?.id || !c.ownerId || c.ownerId === character?.id || c.locationId !== here || c.atSea) continue;
+    if (out.some((k) => k.key === `hold:${c.id}`)) continue;   // one of this character's own holds has the id: theirs is the one named
+    out.push({ key: `hold:${c.id}`, label: c.name || c.id, cls: "hold", state: foreignHoldState(character, c, content), foreign: true, card: c });
+  }
   return out;
 }
 
+/** ⛔ WHO DID IT, WHEN IT WAS THIS CHARACTER (CCODE-731). The GM's `by` was offered three values — "npcId, a power's id, or 'the
+ *  world'" — and none of them is the player's character, while R3's reckoning asks `culprit === character.id`. ⚠️ MEASURED: a road
+ *  ruined by "pc", by "player" and by the character's own name each made NO debt and no search; only the save's internal id did,
+ *  which no prompt tells the GM. So "the locals come after whoever did", which the prompt promises, could not happen to the one
+ *  person it was written about. ⛑ The GM says `"pc"`; the name, the id and the plain words for the player all resolve here. */
+const PC_WORDS = new Set(["pc", "the pc", "player", "the player", "character", "the character", "player character", "you", "self", "party", "the party"]);
+export function byOfOp(character, raw) {
+  const s = raw != null ? String(raw).trim() : "";
+  if (!s) return null;
+  const low = s.toLowerCase();
+  const name = String(character?.name || "").trim().toLowerCase();
+  if (PC_WORDS.has(low) || (character?.id && s === character.id) || (name && low === name)) return character?.id || "player";
+  return s;
+}
+
 /** the prompt block: what stands here and can change, each with the world's word for its state */
-export function mapOpsForGM(character, content, { hereId = null, layout = null } = {}) {
-  const keys = visibleMapKeys(character, content, { hereId, layout });
+export function mapOpsForGM(character, content, { hereId = null, layout = null, holdsHere = null } = {}) {
+  const keys = visibleMapKeys(character, content, { hereId, layout, holdsHere });
   if (!keys.length) return "";
   const line = (k) => {
     const w = k.state && k.state !== ladderOf(content)[0] ? ` — ${mapStateWord(content, k.cls, k.state, { name: k.label }) || k.state}` : "";
-    return `- ${k.key} · ${k.label}${w}`;
+    // ✅ CCODE-731: whose it is, and the one way it changes from here
+    const theirs = k.foreign ? ` · ${k.card?.ownerName ? `${k.card.ownerName}'s` : "another traveler's"} — ⛔ the world never harms it; ONLY if THIS CHARACTER breaks it themselves: damaged/ruined/destroyed with "by": "pc"` : "";
+    return `- ${k.key} · ${k.label}${w}${theirs}`;
   };
   return `## WHAT STANDS HERE AND CAN CHANGE (mapOps keys — use them EXACTLY; a thing not listed cannot be changed from here)
 ${keys.map(line).join("\n")}`;
@@ -612,12 +697,18 @@ export function applyMapOp(character, op, { content = null, worldDay = null, her
   // ⛑ S8: a thing ADDED has a new key by its nature — it is allowed when the place it is added to is in view
   const addingHere = change === "added" && (() => { const p = parseMapKey(key); return !!p && p.sub != null && seen.some((k) => k.key === `place:${p.id}`); })();
   if (!addingHere && !seen.some((k) => k.key === key)) return { ok: false, why: `"${key}" is not something the scene can see — the keys it can are listed in the prompt` };
-  const by = o.by != null && String(o.by).trim() ? String(o.by).trim() : "the world";
+  const by = byOfOp(character, o.by) || "the world";
+  const mine = !!character?.id && by === character.id;
   const seenHow = ["named", "described", "unseen"].includes(String(o.seen || "")) ? String(o.seen) : (by === "the world" ? "unseen" : "described");
+  // ✅ CCODE-731: another traveler's hold is struck by THIS character or by nobody — the world's storms and a GM's raid are its
+  // owner's game's to roll, never this one's (the prompt's own rule: "never seize it, ruin it … or speak for its owner")
+  const theirs = seen.find((k) => k.key === key && k.foreign) || null;
+  if (theirs && !mine) return { ok: false, why: `${theirs.label} is ${theirs.card?.ownerName || "another traveler"}'s — only what this character does to it themselves is recorded here ("by": "pc")` };
   return applyMapChange(character, {
     key, change, by, seen: seenHow, cause: o.cause ? smartClamp(String(o.cause), 120) : null, beat: beat ?? o.beat ?? null, day: worldDay,
     ...(o.name ? { name: smartClamp(String(o.name), 80) } : {}), ...(o.pos ? { pos: o.pos } : {}), ...(o.kind ? { kind: String(o.kind) } : {}),
-  }, { content, worldDay, recordOf, exists, regionId });
+    ...(theirs ? { byName: character.name || null } : {}),
+  }, { content, worldDay, recordOf, exists, regionId, ...(theirs ? { foreignHold: theirs.card } : {}) });
 }
 
 export function repairFraction(content, state) {

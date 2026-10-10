@@ -16,6 +16,27 @@
   "next": [],
   "releases": [
     {
+      "version": "2.27.9",
+      "date": "2026-10-10",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Damage another player's hold and you owe for it",
+          "summary": "Your character can now damage another player's hold when they are standing at it. The damage is real in that player's game. Their news says who did it and what the mending costs. If the hold has a keeper, the keeper comes looking for your character and asks for that amount. If it has none, the debt stands and it is up to the owner to pursue it. When your character pays, the money reaches the hold's owner. Nobody but its own keeper can mend a hold."
+        },
+        {
+          "kind": "fix",
+          "title": "Locals now come after your character for what they break",
+          "summary": "When your character broke something on the map (a bridge, a mill, a road), the locals were meant to mend it and then come after whoever did it. That never happened for a player's own character, because the game had no way to record that they were the one who did it. It does now."
+        },
+        {
+          "kind": "fix",
+          "title": "Other players' holds show their true size",
+          "summary": "A hold that had grown but was never formally promoted appeared to other players as the smallest kind of hold. It now appears as what it has become."
+        }
+      ]
+    },
+    {
       "version": "2.27.8",
       "date": "2026-10-10",
       "entries": [

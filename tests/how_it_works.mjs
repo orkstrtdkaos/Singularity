@@ -21443,7 +21443,7 @@ console.log("\n── §268 · a hold nearby is known ──");
   const REG268 = rd("engine/gm_registry.js").replace(/\r\n/g, "\n"), GM268 = rd("engine/gm.js").replace(/\r\n/g, "\n"), A268 = rd("app.js").replace(/\r\n/g, "\n");
   check("§268: ⛔ the GM row reads the shared store where the character stands, and gm.js tells it the hold is another player's — never to seize, ruin or speak for",
     /key: "holdsNearDetail"/.test(REG268) && /holdsNearForGM\(env\.app\?\.holdsStore\?\.\(\) \|\| null/.test(REG268)
-    && /if \(holdsNearDetail\) world\.push\(`## HOLDS NEAR HERE/.test(GM268) && /never seize it, ruin it, replace its keeper or speak for its owner/.test(GM268));
+    && /if \(holdsNearDetail\) world\.push\(`## HOLDS NEAR HERE/.test(GM268) && /never seize it, replace its keeper or speak for its owner, and the WORLD never harms it/.test(GM268));   // CCODE-731: the one exception is the character's own hand (§427)
   check("§268: the tick syncs holds, the GM's env can reach them, and the play screen says the line",
     /const hs = await syncHolds\(\{ character, content: CONTENT \}\)/.test(A268) && /holdsStore: \(\) => sharedHolds/.test(A268)
     && /<div class="hold-near">\$\{near383\.map\(n => `<span class="hn-what">⌂ \$\{esc\(holdNearLine\(n\)\)\}<\/span>`\)\.join\(""\)\}<\/div>/.test(A268));
@@ -37858,6 +37858,225 @@ console.log("\n── §426 · one world — what one game changes on the map, e
     /const ms = await syncMap\(\{ character, content: CONTENT \}\); if \(ms\.arrived \|\| ms\.published\) \{ saveCharacter\(character\);/.test(A426)
     && A426.indexOf("await syncMap({ character, content: CONTENT })") > A426.indexOf("await syncHolds({ character, content: CONTENT })")
     && /await push\(MAP_STORE_PATH, \(r\) => \(merged = mergeMapEvents\(r, character\.mapEvents \|\| \[\]\)\.store\)/.test(W426src));
+}
+
+/* ═════ §427 — THE HOLD DEBT: STRIKE ANOTHER PLAYER'S HOLD AND ITS KEEPER COMES FOR YOU (SNG-679 Part R, CCODE-731) ═════ */
+// ✅ AEVI (2026-10-09), my four questions answered: *"1. The hit is a shared event at `hold:<id>`, folded by the owner's game: yes.
+// 2. The amount: the card publishes it. The owner's game knows the features and store, so it writes `repairValue` per state onto
+// the card when it publishes, priced the R5 way. The culprit's game reads that. A card without one falls back to your rung price.
+// It's one number, and it doesn't expose the store. 3. The steward goes after the culprit through R3's ladder: yes. 4. No steward:
+// yes, that is 'what they do about it is theirs'. The owner's news says who did it and what they owe, and nothing escalates on its
+// own. The owner can send their own band after the culprit, and that's the point of having one."*
+// ⛔ TWO GAMES, AND NEITHER HOLDS THE OTHER'S SAVE — so this drives both through the real sync functions against the fake remote,
+// as §426 does: the owner publishes a card, the culprit strikes, the blow travels, the owner's record takes it, the culprit owes,
+// the culprit pays, and the money arrives. A test of either side alone would have handed it the other side's answer.
+console.log("\n── §427 · the hold debt — a blow at another player's hold is real in their game, and it is owed for ──");
+{
+  const MS = await import("../engine/mapstate.js");
+  const MD = await import("../engine/mending.js");
+  const WT = await import("../engine/worldtick.js");
+  const SH = await import("../engine/sharedholds.js");
+  const HO = await import("../engine/holdings.js");
+  const MH = await import("../engine/mapholds.js");
+  const { fakeRemote: fr427 } = await import("./lib/fake_remote.mjs");
+  const { loadContentHeadless: lch427 } = await import("./headless_content.mjs");
+  const C = await lch427();
+  const ec = C.rules.economy, cfg = { ...ec.holdStore, features: ec.holdFeatures };
+  const yard = (id, name, steward) => ({ id, name, kind: "post", locationId: "millbrook", steward, condition: "holding", store: { cut_stone: 3 },
+    features: [{ id: "f1", kind: "mine", name: "the mine", count: 1 }, { id: "f2", kind: "wall", name: "the wall", count: 1 }, { id: "f3", kind: "quarters", name: "quarters", count: 1 }] });
+  const owner = { id: "char-own427", name: "Maren Voss", currentLocationId: "the_blaze", holdings: [yard("voss-yard", "Voss Yard", "pell")], mapEvents: [], worldState: { lastTickDay: 1 } };
+  const culprit = { id: "char-cul427", name: "Bryn Aske", currentLocationId: "millbrook", holdings: [], mapEvents: [], worldState: { lastTickDay: 1 }, purse: { crystal: 900 } };
+  const key = "hold:voss-yard";
+
+  // ── the card: what a repair costs, and the rung the hold has grown into ──
+  const worth = (s) => HO.holdRepairWorth(owner.holdings[0], s, { cfg, repairCost: C.mapStates.repairCost, economy: ec, regionId: C.locations.millbrook.regionId });
+  const card0 = SH.holdCard(owner, owner.holdings[0], { locations: C.locations, economy: ec, cfg, repairCost: C.mapStates.repairCost, nameOf: (id) => C.npcs[id]?.name || null });
+  check("§427: ⛔ THE CARD PUBLISHES WHAT A REPAIR COSTS — per state, priced R5's way (the goods `holdRepairCost` asks of the keeper), and dearer the worse it is",
+    card0.repairValue && card0.repairValue.damaged === worth("damaged") && card0.repairValue.ruined === worth("ruined") && card0.repairValue.destroyed === worth("destroyed")
+    && card0.repairValue.damaged > 0 && card0.repairValue.damaged < card0.repairValue.ruined && card0.repairValue.ruined < card0.repairValue.destroyed, JSON.stringify(card0.repairValue));
+  check("§427: …one number a state, and the store is still nobody's business — and a hold with nothing built prices nothing rather than 0",
+    !("store" in card0) && !JSON.stringify(card0).includes("cut_stone")
+    && !("repairValue" in SH.holdCard(owner, { id: "bare", name: "Bare Post", locationId: "millbrook" }, { locations: C.locations, economy: ec, cfg, repairCost: C.mapStates.repairCost })));
+  check("§427: ⛔ the card's rung is the one the hold has GROWN INTO (it stored none and went out with none: a keep was the smallest mark on another player's map)",
+    owner.holdings[0].rung === undefined && card0.rung === HO.roomOf(owner.holdings[0], cfg).rung && !!card0.rung, String(card0.rung));
+
+  const remote = fr427();
+  const restore = remote.install();
+  try {
+    await WT.syncHolds({ character: owner, content: C });
+    const store0 = (await WT.syncHolds({ character: culprit, content: C })).store;
+    const here = SH.holdsAt(store0, "millbrook", { selfId: culprit.id });
+    const visible = MS.visibleMapKeys(culprit, C, { hereId: "millbrook", holdsHere: here });
+    const row = visible.find((k) => k.key === key);
+    check("§427: ⛔ THE SYNCED CARD CARRIES IT, and a hold of another traveler's standing HERE is something the scene can see",
+      Object.values(store0.holds)[0].repairValue.ruined === card0.repairValue.ruined && here.length === 1 && row?.foreign === true && row.state === "whole"
+      && !MS.visibleMapKeys(culprit, C, { hereId: "the_blaze", holdsHere: here }).some((k) => k.foreign)
+      && !SH.holdsAt(store0, "millbrook", { selfId: owner.id }).length);
+    const gmLine = MS.mapOpsForGM(culprit, C, { hereId: "millbrook", holdsHere: here }).split("\n").find((l) => l.includes(key)) || "";
+    check("§427: …and the GM is shown it as theirs, with the one way it changes from here", /Maren Voss's/.test(gmLine) && /"by": "pc"/.test(gmLine) && /the world never harms it/.test(gmLine), gmLine);
+
+    const op = (o) => MS.applyMapOp(culprit, o, { content: C, worldDay: 40, hereId: "millbrook", visible });
+    const world = op({ op: "ruined", key, cause: "a storm" }), raid = op({ op: "ruined", key, by: "the_kestrel", seen: "named" });
+    const mend = op({ op: "repaired", key, by: "pc" }), ren = op({ op: "renamed", key, by: "pc", name: "Bryn's Yard" });
+    check("§427: ⛔ THE WORLD NEVER HARMS ANOTHER PLAYER'S HOLD — a storm and an NPC's raid are both refused, in words",
+      world.ok === false && /only what this character does/.test(world.why) && raid.ok === false && !(culprit.mapEvents || []).length);
+    check("§427: ⛔ R5 STANDS — nobody mends, moves or renames another's hold: *\"Another player can't mend your hold uninvited\"*",
+      mend.ok === false && /only its own keeper/.test(mend.why) && ren.ok === false);
+    check("§427: …and a hold whose card this game does not hold is still refused outright",
+      MS.applyMapChange(culprit, { key: "hold:nowhere", change: "ruined", by: culprit.id }, { content: C, worldDay: 40 }).ok === false);
+
+    const hit = op({ op: "ruined", key, by: "pc", seen: "named", cause: "fired in the night" });
+    check("§427: ⛔ THE BLOW — struck by this character (the GM's \"pc\"), written as a WORLD event that says whose hold it is, who keeps it, how it stood and what mending costs",
+      hit.ok && hit.foreign && hit.state === "ruined" && hit.was === "whole" && hit.event.by === culprit.id && hit.event.byName === "Bryn Aske"
+      && hit.event.hold.owner === owner.id && hit.event.hold.keeperId === "pell" && hit.event.hold.was === "whole" && hit.event.hold.value.ruined === card0.repairValue.ruined
+      && culprit.mapEvents.length === 1 && !("mapState" in culprit && culprit.mapState?.[key]), JSON.stringify(hit.event));
+    const owed = MD.holdHitOwed(hit.event, C);
+    check("§427: ✅ THE AMOUNT IS THE CARD'S — what mending it from the state the blow left costs, read from the event both games will hold",
+      owed === card0.repairValue.ruined && owed > 0, String(owed));
+    check("§427: …and the one who struck it does not see it standing whole until its owner next plays — the card still says whole, the map says ruined",
+      Object.values(store0.holds)[0].state === "whole" && MH.mapHolds(culprit, { sharedStore: store0, locations: C.locations, content: C }).rows.find((r) => r.key === key)?.state === "ruined");
+
+    // ── it travels, and the owner's game takes it ──
+    const sent = await WT.syncMap({ character: culprit, content: C });
+    const got = await WT.syncMap({ character: owner, content: C });
+    const fold = MD.holdHitsPass(owner, { content: C, worldDay: 41 });
+    const h = owner.holdings[0];
+    check("§427: ⛔ ONE WORLD — the blow goes up from the culprit's game and comes down in the owner's, and THE OWNER'S RECORD TAKES IT through the one door (the same derived event, once)",
+      sent.published === 1 && got.arrived === 1 && fold.folded.length === 1 && h.state === "ruined" && (h.stateEvents || []).length === 1 && h.stateEvents[0].id === hit.event.id
+      && h.hitsFolded?.[hit.event.id] === 40, JSON.stringify({ sent: sent.published, got: got.arrived, state: h.state }));
+    check("§427: ✅ *\"THE OWNER'S NEWS SAYS WHO DID IT AND WHAT THEY OWE\"* — and, with a keeper, that the keeper will go after them",
+      fold.news.length === 1 && fold.news[0].includes("Bryn Aske") && fold.news[0].includes("Voss Yard") && fold.news[0].includes(`${owed} crystal`) && fold.news[0].includes("Pell Ran Marsh will go after them"), fold.news[0]);
+    check("§427: …a blow is taken once however often the tick runs, and the hold's own effects are the ruined ones (S6)",
+      MD.holdHitsPass(owner, { content: C, worldDay: 42 }).folded.length === 0 && h.state === "ruined");
+    const store1 = (await WT.syncHolds({ character: owner, content: C })).store;
+    const card1 = Object.values(store1.holds)[0];
+    check("§427: the owner's card goes out ruined, listing the blow as taken in", card1.state === "ruined" && (card1.hits || []).includes(hit.event.id));
+
+    // ── the culprit owes, and the keeper climbs R3's ladder ──
+    const R3 = C.mapStates.reckoning;
+    const days = {};
+    for (let d = 41; d <= 60; d++) { const r = MD.holdDebtPass(culprit, { content: C, worldDay: d }); for (const n of r.news) days[culprit.reckonings[key].state] = { d, n }; }
+    const debt = culprit.worldState.debts.pell;
+    check("§427: ⛔ THE CULPRIT'S GAME RAISES THE DEBT — `damages`, the card's figure, held by the hold's KEEPER, who always acts, and owed to the owner",
+      debt && debt.kind === (R3.debtKind || "damages") && debt.valueOwed === owed && debt.heldBy === "pell" && debt.alwaysActs === true
+      && debt.owedTo.playerId === owner.id && debt.owedTo.holdName === "Voss Yard" && debt.mapKey === key, JSON.stringify(debt));
+    check("§427: ✅ *\"THE STEWARD GOES AFTER THE CULPRIT THROUGH R3's LADDER\"* — asking at once, sent after `searchBeginsAfterDays.named`, found `findWithinDays.named` later, in the world's own lines",
+      days.asking?.d === 41 && days.sent?.d === 40 + R3.searchBeginsAfterDays.named && days.found?.d === days.sent.d + R3.findWithinDays.named
+      && days.sent.n.includes("Pell Ran Marsh") && days.sent.n.includes("Voss Yard") && days.found.n.includes("Pell Ran Marsh"), JSON.stringify(days));
+    const gm = MD.reckoningsForGM(culprit, { content: C });
+    check("§427: the reckoning is a scene the GM is handed — pay, refuse, fight or flee, and NO working it off (R5)",
+      gm.length === 1 && /keeps Voss Yard for Maren Voss/.test(gm[0]) && /debtOps "settle"/.test(gm[0]) && /no working it off/.test(gm[0]) && !/debtOps "work"/.test(gm[0]), gm[0]);
+    const work = HO.applyDebtOps(culprit, [{ op: "work", holderId: "pell" }], { day: 50 });
+    check("§427: …and `work` on a hold's damages is refused, in words", work[0].ok === false && /paid, not worked off/.test(work[0].why) && culprit.reckonings[key].state === "found");
+    check("§427: ⛔ THE LOCALS' PASSES NEVER TOUCH A HOLD — no locals mend it, no hunt is posted for it, no mending job, and R3's own pass leaves the keeper's debt alone",
+      MS.localsMendPass(culprit, { content: C, worldDay: 300 }).length === 0 && MD.huntJobsFor(owner, { content: C }).length === 0
+      && MD.mendingJobsFor(owner, { content: C }).every((j) => j.key !== key) && MD.reckoningPass(culprit, { content: C, worldDay: 300 }).news.length === 0
+      && culprit.worldState.debts.pell?.valueOwed === owed);
+
+    // ── paid, and the money arrives ──
+    const crystal0 = culprit.purse.crystal;
+    const paid = HO.applyDebtOps(culprit, [{ op: "settle", holderId: "pell" }], { day: 51, economy: ec });
+    const order = (culprit.tradeOutbox || [])[0];
+    check("§427: ⛔ PAID — the culprit's purse pays the keeper, the reckoning is over, and the payment goes out for the OWNER (kind `damages`)",
+      paid[0].ok && culprit.purse.crystal === crystal0 - owed && culprit.reckonings[key].state === "settled" && !culprit.worldState.debts.pell
+      && order?.kind === "damages" && order.ownerId === owner.id && order.amount === owed && order.status === "paid", JSON.stringify(order));
+    await WT.syncTrades({ character: culprit, economy: ec });
+    const before = Number(owner.purse?.crystal) || 0;
+    const took = await WT.syncTrades({ character: owner, economy: ec });
+    const again = await WT.syncTrades({ character: owner, economy: ec });
+    check("§427: ⛔ …AND IT ARRIVES IN THE OWNER'S GAME — exactly what was paid, said in their news, once (the debt cleared and the money went nowhere before this)",
+      owner.purse.crystal === before + owed && took.news.length === 1 && took.news[0].text.includes("Bryn Aske") && took.news[0].text.includes(`${owed} crystal`)
+      && again.news.length === 0 && owner.purse.crystal === before + owed && Object.values(again.store.orders)[0].status === "settled", JSON.stringify(took.news));
+    check("§427: a reckoning settled stays settled — the same blow is never owed for twice",
+      MD.holdDebtPass(culprit, { content: C, worldDay: 90 }).news.length === 0 && !Object.keys(culprit.worldState.debts).length);
+
+    // ── the owner mends it; nobody goes on drawing it broken ──
+    MS.applyMapChange(owner, { key, change: "repaired", by: owner.id }, { content: C, worldDay: 60, recordOf: () => h });
+    MS.applyMapChange(owner, { key, change: "repaired", by: owner.id }, { content: C, worldDay: 61, recordOf: () => h });
+    await WT.syncHolds({ character: owner, content: C });
+    const store2 = (await WT.syncHolds({ character: culprit, content: C })).store;
+    check("§427: ⛑ mended by its keeper, it is drawn whole in the culprit's game too — a blow the card lists as taken in is not laid on it again",
+      h.state === "whole" && MH.mapHolds(culprit, { sharedStore: store2, locations: C.locations, content: C }).rows.find((r) => r.key === key)?.state === "whole");
+
+    // ── a second blow after the first was settled is a new reckoning, for that blow alone ──
+    const vis2 = MS.visibleMapKeys(culprit, C, { hereId: "millbrook", holdsHere: SH.holdsAt(store2, "millbrook", { selfId: culprit.id }) });
+    const hit2 = MS.applyMapOp(culprit, { op: "damaged", key, by: "Bryn Aske", seen: "named" }, { content: C, worldDay: 70, hereId: "millbrook", visible: vis2 });
+    MD.holdDebtPass(culprit, { content: C, worldDay: 71 });
+    check("§427: a blow struck after the first was paid is owed for alone (and the character's own NAME is them, as \"pc\" is)",
+      hit2.ok && hit2.event.by === culprit.id && culprit.worldState.debts.pell?.valueOwed === card0.repairValue.damaged && culprit.reckonings[key].state === "asking"
+      && culprit.reckonings[key].cleared.includes(hit.event.id));
+
+    // ── no keeper: owed to the owner, and nothing escalates on its own ──
+    const owner2 = { id: "char-own427b", name: "Tam Orrin", currentLocationId: "the_blaze", holdings: [yard("orrin-yard", "Orrin Yard", null)], mapEvents: [], worldState: { lastTickDay: 1 } };
+    const culprit2 = { id: "char-cul427b", name: "Bryn Aske", currentLocationId: "millbrook", holdings: [], mapEvents: [], worldState: { lastTickDay: 1 }, purse: { crystal: 400 } };
+    await WT.syncHolds({ character: owner2, content: C });
+    const store3 = (await WT.syncHolds({ character: culprit2, content: C })).store;
+    const vis3 = MS.visibleMapKeys(culprit2, C, { hereId: "millbrook", holdsHere: SH.holdsAt(store3, "millbrook", { selfId: culprit2.id }) });
+    const hit3 = MS.applyMapOp(culprit2, { op: "damaged", key: "hold:orrin-yard", by: "pc", seen: "described" }, { content: C, worldDay: 40, hereId: "millbrook", visible: vis3 });
+    const told = [41, 60, 200, 400].map((d) => MD.holdDebtPass(culprit2, { content: C, worldDay: d }).news.length);
+    const d3 = culprit2.worldState.debts[`player:${owner2.id}`];
+    check("§427: ✅ *\"NO STEWARD … NOTHING ESCALATES ON ITS OWN\"* — the debt is owed to the owner, nobody holds it, the culprit is told once, and four hundred days change nothing",
+      hit3.ok && d3 && d3.heldBy === null && d3.alwaysActs === false && d3.owedTo.playerId === owner2.id && d3.valueOwed === card0.repairValue.damaged
+      && told.join() === "1,0,0,0" && culprit2.reckonings["hold:orrin-yard"].state === "owed"
+      && HO.advanceDebts(culprit2, { npcs: C.npcs, cfg: ec.debts, day: 900 }).moved === 0 && d3.escalation === 0, JSON.stringify({ told, d3 }));
+    check("§427: …the GM's debts block names the owner and the key it is settled by", /Tam Orrin — another player; nobody comes for it \[debtOps holderId "player:char-own427b"\]/.test(HO.debtsForGM(culprit2, { nameOf: (id) => id }) || ""));
+    await WT.syncMap({ character: culprit2, content: C }); await WT.syncMap({ character: owner2, content: C });
+    const news3 = MD.holdHitsPass(owner2, { content: C, worldDay: 41 }).news;
+    check("§427: ✅ *\"THAT IS 'WHAT THEY DO ABOUT IT IS THEIRS'\"* — the owner is told what was done and what is owed; a culprit only DESCRIBED is not named",
+      news3.length === 1 && /What you do about it is yours/.test(news3[0]) && news3[0].includes(`${card0.repairValue.damaged} crystal`) && !news3[0].includes("Bryn Aske"), news3[0]);
+    const paid3 = HO.applyDebtOps(culprit2, [{ op: "settle", holderId: `player:${owner2.id}` }], { day: 42, economy: ec });
+    check("§427: …a debt nobody comes for can still be paid, and that too goes to the owner",
+      paid3[0].ok === true && paid3[0].paid === card0.repairValue.damaged && culprit2.purse.crystal === 400 - card0.repairValue.damaged
+      && (culprit2.tradeOutbox || []).length === 1 && culprit2.tradeOutbox[0].ownerId === owner2.id && culprit2.tradeOutbox[0].collectedBy === null
+      && culprit2.reckonings["hold:orrin-yard"].state === "settled", JSON.stringify(paid3));
+
+    // unseen: taken onto the record, said, and nobody owes (R3: unseen is not traced)
+    const owner4 = { id: "char-own427c", name: "Ilse Marn", currentLocationId: "the_blaze", holdings: [yard("marn-yard", "Marn Yard", "pell")], mapEvents: [], worldState: {} };
+    const culprit4 = { id: "char-cul427c", name: "Bryn Aske", currentLocationId: "millbrook", holdings: [], mapEvents: [], worldState: {} };
+    await WT.syncHolds({ character: owner4, content: C });
+    const store4 = (await WT.syncHolds({ character: culprit4, content: C })).store;
+    const vis4 = MS.visibleMapKeys(culprit4, C, { hereId: "millbrook", holdsHere: SH.holdsAt(store4, "millbrook", { selfId: culprit4.id }) });
+    MS.applyMapOp(culprit4, { op: "damaged", key: "hold:marn-yard", by: "pc", seen: "unseen" }, { content: C, worldDay: 40, hereId: "millbrook", visible: vis4 });
+    await WT.syncMap({ character: culprit4, content: C }); await WT.syncMap({ character: owner4, content: C });
+    const news4 = MD.holdHitsPass(owner4, { content: C, worldDay: 41 }).news;
+    check("§427: an UNSEEN blow is real and is said, and nobody owes for it — R3 does not trace what nobody saw",
+      owner4.holdings[0].state === "damaged" && news4.length === 1 && /nobody saw who did it/.test(news4[0]) && !/owe/.test(news4[0])
+      && MD.holdDebtPass(culprit4, { content: C, worldDay: 300 }).news.length === 0 && !Object.keys(culprit4.worldState.debts || {}).length, news4[0]);
+  } finally { restore(); }
+
+  // ── the price when the card says none: the rung's worth, then the plain rung price ──
+  const ev = (hold, change) => ({ change, hold: { owner: "x", was: "whole", ...hold } });
+  const BW = C.mapStates.buildWorth.place, RC = C.mapStates.repairCost;
+  check("§427: ✅ *\"A CARD WITHOUT ONE FALLS BACK TO YOUR RUNG PRICE\"* — the rung's worth × the state's share where `buildWorth` names the rung, else the plain price a job pays by",
+    MD.holdHitOwed(ev({ rung: "village" }, "ruined"), C) === Math.round(BW.village * RC.ruined) && MD.holdHitOwed(ev({ rung: "village" }, "destroyed"), C) === BW.village
+    && MD.holdHitOwed(ev({ rung: "keep" }, "damaged"), C) === 10 && MD.holdHitOwed(ev({}, "destroyed"), C) === 22);
+  check("§427: …and a culprit owes for what THEY did: a hold already damaged and then ruined is owed for the difference, and a blow that worsens nothing for nothing",
+    MD.holdHitOwed(ev({ was: "damaged", value: { damaged: 50, ruined: 120, destroyed: 200 } }, "ruined"), C) === 70
+    && MD.holdHitOwed(ev({ was: "ruined", value: { damaged: 50, ruined: 120, destroyed: 200 } }, "damaged"), C) === 0);
+
+  // ── ⚠️ FOUND ON THE WAY: R3's reckoning could not be reached from play at all ──
+  const road = MS.roadKey("millbrook", "echo_river_crossing");
+  const madeDebt = (by) => { const c = { id: "char-r3427", name: "Silas Weir", currentLocationId: "millbrook", holdings: [], mapEvents: [], worldState: {} };
+    MS.applyMapOp(c, { op: "ruined", key: road, by, seen: "named", cause: "fired" }, { content: C, worldDay: 40, hereId: "millbrook" });
+    MS.applyMapChange(c, { key: road, change: "repaired", by: "locals" }, { content: C, worldDay: 80 });
+    MD.reckoningPass(c, { content: C, worldDay: 81 }); return Object.keys(c.worldState.debts || {}).length; };
+  check("§427: ⛔ R3 REACHES THE ONE IT WAS WRITTEN ABOUT — a road the character ruined (\"pc\", \"player\", their own name) is owed for; the GM's `by` offered three values and none was them, so the locals came after nobody",
+    madeDebt("pc") === 1 && madeDebt("player") === 1 && madeDebt("Silas Weir") === 1 && madeDebt("char-r3427") === 1
+    && madeDebt("the world") === 0 && madeDebt("the_kestrel") === 0 && madeDebt(undefined) === 0);
+  check("§427: …and an NPC whose id is somebody's first name is still that NPC", MS.byOfOp({ id: "c1", name: "Pell Harrow" }, "pell") === "pell" && MS.byOfOp({ id: "c1", name: "Pell Harrow" }, "Pell Harrow") === "c1");
+
+  const A = rd("app.js").replace(/\r\n/g, "\n"), WTs = rd("engine/worldtick.js").replace(/\r\n/g, "\n"), G = rd("engine/gm.js").replace(/\r\n/g, "\n"), RG = rd("engine/gm_registry.js").replace(/\r\n/g, "\n");
+  check("§427: ⛔ the tick runs both sides, the app's map step and the GM's block are handed the SAME cards, and the card is built with the feature catalogue",
+    /holdHitsPass\(character, \{ content, worldDay: absoluteWorldDay\(\) \}\)/.test(WTs) && /holdDebtPass\(character, \{ content, worldDay: absoluteWorldDay\(\) \}\)/.test(WTs)
+    && /holdsHere: holdsAt\(sharedHolds, location\?\.id, \{ selfId: character\.id \}\)/.test(A)
+    && /holdsHere: holdsAt\(env\.app\?\.holdsStore\?\.\(\) \|\| null, env\.location\?\.id, \{ selfId: env\.character\?\.id \|\| null \}\)/.test(RG)
+    && /cfg: cfg731,\s+repairCost: content\?\.mapStates\?\.repairCost \|\| null/.test(WTs));
+  check("§427: ⛔ THE ASIDE NAMES THE THING — a player read \"(wrecked)\" or \"(blocked)\" under a beat with nothing saying what was; it is the name, then the world's word for its state",
+    MS.mapChangeLine(C, "hold", "ruined", "Voss Yard") === "Voss Yard: wrecked." && MS.mapChangeLine(C, "road", "ruined", "the road to Echo River Crossing") === "The road to Echo River Crossing: blocked."
+    && MS.mapChangeLine(C, "site", "whole", "the Water Wheels") === "The Water Wheels is whole."
+    && /if \(!res\.duplicate\) said\(mapChangeLine\(CONTENT, /.test(A) && !/said\(word\);/.test(A.slice(A.indexOf('applyStep("mapOps"'), A.indexOf('applyStep("holdTrades"'))));
+  check("§427: the GM's contract says how the character is named, and the rule for another player's hold says the one exception",
+    /"by": "\\"pc\\" when THIS CHARACTER did it/.test(G) && /the WORLD never harms it/.test(G) && /The one exception is this character's own hand/.test(G));
 }
 
 /* ══════════ REPORT ══════════ */

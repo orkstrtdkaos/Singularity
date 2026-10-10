@@ -61,7 +61,7 @@ import { TRADES_PATH, settleOrders, refundOrders, mergeOrders } from "./holdtrad
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval, rollRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
 import { localsMendPass, mapThingOf, learnMapEvents, knownStateOf, ladderOf, MAP_STORE_PATH, unpublishedMapEvents, mergeMapEvents, adoptMapStore } from "./mapstate.js";   // ✅ SNG-679 Part R · R2 · S7: what the character learns
-import { postMendingJobs, reckoningPass, postHuntJobs } from "./mending.js";   // ✅ SNG-679 Part R · R6: mending is a job on the job list · R3: the reckoning
+import { postMendingJobs, reckoningPass, postHuntJobs, holdHitsPass, holdDebtPass } from "./mending.js";   // ✅ SNG-679 Part R · R6: mending is a job on the job list · R3: the reckoning
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
 import { rollErrands, workCraftsOf, workDayChance, workHeads, bandMissionOutcome } from "./jobs.js";   // ⛔ CCODE-428: …by the job's own dice · CCODE-450: standing work
@@ -953,7 +953,12 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // ✅ SNG-679 Part R · R3 — and if this character broke it, the people who mended it go after them: the damages owed, recomputed;
   // `asking`, then `sent`, then `found` — the last is a scene the GM plays (see the debts block)
   const reckon682 = (() => { try { return reckoningPass(character, { content, worldDay: absoluteWorldDay() }).news; } catch { return []; } })();
-  const extraNews = [...mendNews680, ...reckon682.map(t => ({ text: t, section: "yours" })), ...debtsPass.news.map(t => ({ text: t, section: "yours" })), ...grown.slice(0, 3), ...woke.slice(0, 3), ...powersPass.slice(0, 2), ...noticedPass.slice(0, 2)];   // ⛑ a power NOTICING you is always worth a line — it is about you
+  // ✅ CCODE-731 — the hold debt, both sides, each in the game it belongs to: a blow another player's character struck at one of
+  // THIS character's holds is taken onto the hold's record (and said, with what they owe); and for a blow this character struck at
+  // someone else's, the damages are owed — to its keeper, who comes after them up R3's ladder, or to its owner alone
+  const holdHits731 = (() => { try { return holdHitsPass(character, { content, worldDay: absoluteWorldDay() }).news; } catch { return []; } })();
+  const holdDebt731 = (() => { try { return holdDebtPass(character, { content, worldDay: absoluteWorldDay() }).news; } catch { return []; } })();
+  const extraNews = [...mendNews680, ...holdHits731.map(t => ({ text: t, section: "yours" })), ...holdDebt731.map(t => ({ text: t, section: "yours" })), ...reckon682.map(t => ({ text: t, section: "yours" })), ...debtsPass.news.map(t => ({ text: t, section: "yours" })), ...grown.slice(0, 3), ...woke.slice(0, 3), ...powersPass.slice(0, 2), ...noticedPass.slice(0, 2)];   // ⛑ a power NOTICING you is always worth a line — it is about you
 
   // ⚠️ SNG-368: the RETURN is stamped too, on BOTH paths. The early return handed back raw entries
   // while the normal path handed back stamped ones, so a caller reading `.news[0].section` got a section on
@@ -1544,7 +1549,10 @@ export async function syncHolds({ character, content } = {}) {
     store = remote;
     const reg = character.npcRegistry || {};
     const nameOf = (id) => reg[id]?.name || content?.npcs?.[id]?.name || null;
-    const cards = holdCardsOf(character, { locations: content?.locations || {}, nameOf, economy: content?.rules?.economy || null, cfg: content?.rules?.economy?.holdStore || null });
+    // ✅ CCODE-731: the card prices a repair, so it is built with the catalogue of features and the rungs' shares
+    const cfg731 = content?.rules?.economy?.holdStore ? { ...content.rules.economy.holdStore, features: content.rules.economy.holdFeatures || null } : null;
+    const cards = holdCardsOf(character, { locations: content?.locations || {}, nameOf, economy: content?.rules?.economy || null, cfg: cfg731,
+      repairCost: content?.mapStates?.repairCost || null });
     const hadAny = Object.values(remote?.holds || {}).some(c => c?.ownerId === character.id);
     if ((cards.length || hadAny) && holdCardsChanged(remote, character.id, cards)) {
       let merged = null;

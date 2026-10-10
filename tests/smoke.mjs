@@ -26140,6 +26140,68 @@ await (async () => {
       && /details\[data-band-hands\]"\)\) d\.ontoggle = /.test(app724),
       JSON.stringify({ line724, one724, split724, archers724 }));
   }
+  /* ── ✅ AEVI F (CCODE-725): after each turn, everyone in the registry practises something, whatever door they came in by ── */
+  {
+    const NP725 = await import("../engine/npcs.js");
+    const AF725 = await import("../engine/affiliation.js");
+    const { loadContentHeadless: lch725 } = await import("./headless_content.mjs");
+    const C725 = await lch725();
+    const world725 = AF725.affiliationWorld(C725, AF725.buildPeopleVocab({ npcs: C725.npcs || {} }));
+    const ch725 = { id: "c725", currentLocationId: "millbrook", npcRegistry: {
+      grael: { id: "grael", name: "Grael", questState: "fallen" },                                   // a quest effect's stub: nothing but a name
+      "gen-smith": { id: "gen-smith", name: "Tam", role: "a Blazeborn smith", firstMet: { locationId: "millbrook" } },   // a company join
+      keeper_ilma: { id: "keeper_ilma", name: "Ilma" },                                             // an authored person's stub
+      already: { id: "already", name: "Hesk", domains: { primary: "numinous" }, domainsSource: "generated" },
+    } };
+    // the app's `affiliateNpc`, as it builds it: home ground first, then where the story put them, then here
+    const affiliate725 = (rec) => AF725.affiliationAt(rec, { location: C725.locations[rec?.homeLocation || rec?.firstMet?.locationId || rec?.lastSeen?.locationId || ch725.currentLocationId] || null, ...world725 });
+    const filled725 = NP725.affiliateRegistry(ch725, affiliate725, { authored: C725.npcs });
+    const again725 = NP725.affiliateRegistry(ch725, affiliate725, { authored: C725.npcs });
+    const R725 = ch725.npcRegistry, app725 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");
+    check("725/F: ⛔ AEVI — THE SWEEP AFTER EACH TURN (\"it covers every door, including ones nobody has written yet\") — a person a quest effect wrote with nothing but a name takes the tradition of the ground the story is on, a joiner whose role names a tradition takes that one, a person whose content record carries domains is left alone (the registry entry is laid OVER it, so a derived one would hide the written one), an affiliated person is not touched, and a second sweep changes nothing; the app runs it as the turn's last step before the save",
+      filled725.length === 2 && R725.grael.domains?.primary === "mason" && R725["gen-smith"].domains?.primary === "blazeborn"
+      && !R725.keeper_ilma.domains && !!C725.npcs.keeper_ilma?.domains && R725.already.domains.primary === "numinous" && again725.length === 0
+      && app725.indexOf('applyStep("affiliateSweep", () => affiliateRegistry(character, affiliateNpc, { authored: CONTENT.npcs || null }));') > 0
+      && app725.indexOf('applyStep("affiliateSweep"') < app725.indexOf("saveCharacter(character); if (!_fireTestDry) saveProfile(profile);")
+      && app725.indexOf('applyStep("affiliateSweep"') > app725.indexOf('applyStep("questDeadlines"'),
+      JSON.stringify({ filled725, grael: R725.grael.domains, smith: R725["gen-smith"].domains, again: again725.length }));
+  }
+  /* ── ✅ AEVI G (CCODE-725): a person's dials derived, their prose asked for, and no place without a sentence ── */
+  {
+    const GEN725 = await import("../engine/generate.js");
+    const AF725g = await import("../engine/affiliation.js");
+    const BC725 = await import("../engine/borncontract.js");
+    const { loadContentHeadless: lch725g } = await import("./headless_content.mjs");
+    const C725g = await lch725g();
+    const aff725 = AF725g.affiliationWorld(C725g, AF725g.buildPeopleVocab({ npcs: C725g.npcs || {} }));
+    const mint725 = (t, locId, raw) => GEN725.generate(t, { location: C725g.locations[locId], character: { id: "c725g", currentLocationId: locId, generated: null }, day: 10,
+      affiliation: aff725, npcStanding: C725g.rules?.npcStanding, locations: C725g.locations, regions: C725g.regions, hint: `a ${t}`,
+      known: { authored: t === "npc" ? C725g.npcs : C725g.locations } }, { schema: C725g.genSchemas[t], callJSON: async () => raw, ...GEN725.bornDeps(C725g) });
+    const hesk = await mint725("npc", "millbrook", { name: "Hesk Marrow", role: "a hired blade of the Watch", spectrum: { chaos_order: 0.3 }, fears: ["fire"] });
+    const hesk2 = await mint725("npc", "millbrook", { name: "Hesk Marrow", role: "a hired blade of the Watch", spectrum: { chaos_order: 0.3 }, fears: ["fire"] });
+    const sela = await mint725("npc", "kindlerow", { name: "Sela Dunn", role: "a Blazeborn smith", spectrum: { violence_peace: -0.6, falsehood_truth: 0.7 }, fears: ["cold iron"] });
+    const given = await mint725("npc", "millbrook", { name: "Odd Tam", role: "a carter", spectrum: {}, fears: ["debt"], personality: { warmth: -0.5, trust: 0.1, candor: 0.2, patience: 0.9 } });
+    const dialsOk = (p) => p && ["warmth", "trust", "candor", "patience"].every((k) => Number.isFinite(p[k]) && p[k] >= -1 && p[k] <= 1);
+    const shrine = await mint725("location", "kindlerow", { name: "The Ash Shrine" });
+    const full = await mint725("location", "millbrook", { name: "Test Hollow", descriptionSeed: "A hollow below the ridge where nobody hurries.", connections: ["millbrook"] });
+    const pass = { id: "gen-725-pass", name: "The Pass", descriptionSeed: "", tags: ["transitional"], connections: ["millbrook"] };
+    GEN725.commitPlace({ id: "c725p", currentLocationId: "millbrook", generated: null }, { ...C725g.locations }, pass.id, pass, { content: C725g });
+    const owed725 = GEN725.unearnedDepth({ ...pass, _gen: { tier: "established", type: "location" } }, "location");
+    const npcPrompt = GEN725.buildGeneratePrompt("npc", { location: C725g.locations.millbrook }, { schema: C725g.genSchemas.npc, examples: [] });
+    const locPrompt = GEN725.buildGeneratePrompt("location", { location: C725g.locations.millbrook }, { schema: C725g.genSchemas.location, examples: [] });
+    const asked = (pr, f) => new RegExp(`- "${f}":`).test(pr.system || "");
+    const app725g = readFileSync(join(root, "app.js"), "utf8");
+    check("725/G: ⛔ AEVI — A PERSON'S FOUR DIALS ARE DERIVED WHEN THE MODEL GIVES NONE (from their own vector and their tradition, the same person always the same four, in −1..1, and a personality the model wrote is kept); THE PROSE IS ASKED FOR (disposition, appearance, wants, knowledge — a person was asked for none of it — and never a number); AND NO PLACE SHIPS WITHOUT A SENTENCE (plain, from what it is and where: \"A shrine in Kindlerow.\", \"A pass on the road out of Millbrook.\"), marked so the place still owes its own and the enrichment may replace it; a place that has its own keeps it",
+      dialsOk(hesk?.personality) && JSON.stringify(hesk.personality) === JSON.stringify(hesk2.personality) && dialsOk(sela?.personality)
+      && sela.personality.candor > hesk.personality.candor && sela.personality.patience < hesk.personality.patience
+      && given?.personality?.warmth === -0.5 && given.personality.patience === 0.9
+      && ["disposition", "appearance", "wants", "knowledge"].every((f) => asked(npcPrompt, f)) && !asked(locPrompt, "disposition")
+      && shrine?.descriptionSeed === "A shrine in Kindlerow." && shrine._seedDerived === true
+      && full?.descriptionSeed === "A hollow below the ridge where nobody hurries." && !full._seedDerived
+      && pass.descriptionSeed === "A pass on the road out of Millbrook." && pass._seedDerived === true && owed725.includes("descriptionSeed")
+      && /!\(f === "descriptionSeed" && rec\._seedDerived\)\) continue;/.test(app725g) && /if \(f === "descriptionSeed"\) delete rec\._seedDerived;/.test(app725g),
+      JSON.stringify({ hesk: hesk?.personality, sela: sela?.personality, shrine: shrine?.descriptionSeed, pass: pass.descriptionSeed, owed725 }));
+  }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {
     const ST706 = await import("../engine/state.js");

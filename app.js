@@ -119,7 +119,7 @@ import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dr
 import { sendCaravan, caravansOf, storeExits, setRoute, clearRoute, hireCompany, routeCompany, standingCrewFor , heldForRuns , allocatePass, setRunUnits, removeRun, addRun, runLoadTarget, routeValue } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
 import { wholeNameFor, learnWholeName } from "./engine/names.js";   // ⛔ SNG-643 §5 (C17): a whole name is shown only when this character may see it
-import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, sexUnsaid, SEX_VALUES, sexFromGender, sexGenderAgree, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
+import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, affiliateRegistry, findExistingNpc, genderUnsaid, sexUnsaid, SEX_VALUES, sexFromGender, sexGenderAgree, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent, lastEnteredSubPlace } from "./engine/places.js";
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.27.2";
+const APP_VERSION = "2.27.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5602,13 +5602,15 @@ async function enrichPlaceDepth(rec) {
     for (const f of owed) {
       const v = raw[f];
       if (typeof v !== "string" || !v.trim()) continue;
-      if (String(rec[f] || "").trim()) continue;         // additive only
+      // additive only — save the floor sentence the finisher wrote (`_seedDerived`, CCODE-725), which the place's own replaces
+      if (String(rec[f] || "").trim() && !(f === "descriptionSeed" && rec._seedDerived)) continue;
       rec[f] = smartClamp(playerText(v.trim()), 600);    // the register is enforced, not merely asked for
+      if (f === "descriptionSeed") delete rec._seedDerived;
       filled++;
     }
     if (filled) {
       const gen = generatedRecords(character, "location").find(x => x && x.id === rec.id);
-      if (gen && gen !== rec) for (const f of owed) if (rec[f] && !gen[f]) gen[f] = rec[f];
+      if (gen && gen !== rec) for (const f of owed) if (rec[f] && (!gen[f] || (f === "descriptionSeed" && gen._seedDerived))) { gen[f] = rec[f]; if (f === "descriptionSeed") delete gen._seedDerived; }
       saveCharacter(character);
       console.log(`[generation] ${rec.name} earned ${filled} field(s): ${owed.filter(f => rec[f]).join(", ")}`);
     }
@@ -12815,6 +12817,8 @@ function applyTurn(turn, resolution, playerWords = null) {
     turn._engineClosedScene = sceneBeats;
   }
   character.activeScene = turn.sceneEnded ? null : { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: turn, sceneState, beats: sceneBeats, subPlace: sceneSubPlace };
+  // ✅ AEVI F (CCODE-725): everyone the turn brought in, by whatever door, practises something before the save
+  applyStep("affiliateSweep", () => affiliateRegistry(character, affiliateNpc, { authored: CONTENT.npcs || null }));
   saveCharacter(character); if (!_fireTestDry) saveProfile(profile);
 
   // shared-world consequences (best-effort, never blocks play) — ⛔ CCODE-427: never a fire test's (its `backupSaves` pushed the COPY)

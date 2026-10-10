@@ -663,7 +663,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `powerSystem` | 434 | `root`×432 `tree`×2 | ✅ READ | `art.js`, `backfill.js`, `braids.js` |
 | `id` | 432 | `root`×432 | ✅ READ | `affiliation.js`, `affinities.js`, `arceffects.js` |
 | `tier` | 432 | `root`×432 | ✅ READ | `backfill.js`, `battle_turn.js`, `borncontract.js` |
-| `axes` | 432 | `root`×432 | ✅ READ | `affinities.js`, `armory.js`, `craftmechanics.js` |
+| `axes` | 432 | `root`×432 | ✅ READ | `affinities.js`, `armory.js`, `borncontract.js` |
 | `attribute` | 432 | `root`×432 | ✅ READ | `affinities.js`, `battle_turn.js`, `braids.js` |
 | `narrationHints` | 432 | `root`×432 | ✅ READ | `battleprompt.js`, `braids.js`, `companions.js` |
 | `description` | 432 | `root`×432 | ✅ READ | `affiliation.js`, `art.js`, `authormode.js` |

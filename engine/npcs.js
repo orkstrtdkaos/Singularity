@@ -1989,3 +1989,26 @@ export function whoCouldBeHere(character, { locationId = null, day = null, scene
   // both nearby and recently seen.
   return rows.sort((a, b) => (b.why.length - a.why.length) || (Math.abs(b.bond) - Math.abs(a.bond))).slice(0, Math.max(1, max));
 }
+
+/** ✅ AEVI, F (2026-10-09, born_whole G1): *"The sweep after each turn that affiliates any registry entry without domains: yes. It
+ *  covers every door, including ones nobody has written yet."* ⛔ CCODE-725 · MEASURED: only the `meet` op affiliated a person as they
+ *  entered the registry. A company join, a quest-giver stub, a quest effect and the mending holder wrote bare entries, and reconcile's
+ *  backfill runs once per save — so Grael, written by a quest effect on Silas's save, practised nothing and would have until the next
+ *  backfill. ⛑ The same step `meet` runs (it only fills what is missing, and a person nothing can be derived for stays as they are and
+ *  is asked again next turn). ⚠️ A PERSON WHOSE CONTENT RECORD CARRIES DOMAINS IS SKIPPED (`authored` is CONTENT.npcs — the authored
+ *  people and the ones the world grew): `personRecordFor` lays the registry entry OVER that record, the entry winning, so a derived
+ *  domain on the stub would stand in front of the one written for them. Returns the ids it filled. */
+export function affiliateRegistry(character, affiliate, { authored = null } = {}) {
+  const filled = [];
+  if (typeof affiliate !== "function") return filled;
+  for (const [id, n] of Object.entries(character?.npcRegistry || {})) {
+    if (!n || typeof n !== "object" || n.domains) continue;
+    if (authored?.[id]?.domains) continue;   // their content record's domains reach the read through `personRecordFor`'s merge
+    try {
+      const a = affiliate(n) || {};
+      if (a.domains && !n.domains) { n.domains = a.domains; n.domainsSource = a.domainsSource; filled.push(id); }
+      if (a.people && !n.people) { n.people = a.people; n.peopleSource = a.peopleSource; }
+    } catch { /* enrichment never breaks a turn (SNG-231 §2) */ }
+  }
+  return filled;
+}

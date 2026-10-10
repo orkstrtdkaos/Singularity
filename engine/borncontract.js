@@ -302,7 +302,81 @@ export function axisVectorFrom(spectrum, axisOrder) {
 export function finishBorn(type, record, ctx = {}) {
   if (!record || typeof record !== "object") return record;
   if (type === "location") return finishLocation(record, ctx);
+  if (type === "npc") return finishPerson(record, ctx);
   return record;
+}
+
+/* ═════ CCODE-725 · A PERSON'S FOUR DIALS, DERIVED WHEN THE MODEL GIVES NONE ═════
+ * ✅ AEVI, G (2026-10-09): *"`personality` (the four dials): derive it from the person's own vector and tradition, deterministically,
+ * when the model gives none … The derived personality is the fallback when the answer is truncated."* ⚠️ MEASURED by G3: a fully
+ * written person came back "thin" — `personality: DEGRADED`, read by the GM's NPC block, "absent = agreeable furniture".
+ * ⛑ THE VECTOR is the person's spectrum; where it is silent on an axis, their tradition's disposition speaks for it at half and a
+ * quarter weight (primary, secondary pole). Each dial leans on the axes that mean it — warmth on feeling, peace, life and light;
+ * trust on truth, order and the angelic; candour on truth and the concrete; patience on order, peace, time and reason — from a
+ * middling 0.4, with a small sway by the person's own id so two people of one tradition are not one temper. Dials in −1..1 (the
+ * schema's range), to the nearest 0.05. The same person always derives the same four. */
+const DIAL_AXES = {
+  warmth:   [["emotional_logical", -0.3], ["violence_peace", 0.25], ["death_life", 0.2], ["dark_light", 0.15], ["demonic_angelic", 0.1]],
+  trust:    [["falsehood_truth", 0.35], ["chaos_order", 0.3], ["demonic_angelic", 0.2], ["dark_light", 0.15]],
+  candor:   [["falsehood_truth", 0.6], ["concrete_abstract", -0.25], ["body_mind", -0.15]],
+  patience: [["chaos_order", 0.3], ["violence_peace", 0.3], ["space_time", 0.2], ["emotional_logical", 0.2]],
+};
+export function personalityFrom(spectrum, { tradition = null, spectrums = null, id = "" } = {}) {
+  const v = {};
+  for (const [axis, val] of Object.entries(spectrum && typeof spectrum === "object" ? spectrum : {})) if (Number.isFinite(Number(val))) v[axis] = Number(val);
+  // the tradition's disposition, on the axes the person's own vector is silent about
+  const poleAxis = (pole) => {
+    for (const a of spectrums?.spectrums || []) { if (a.negPole === pole) return [a.id, -1]; if (a.posPole === pole) return [a.id, 1]; }
+    return null;
+  };
+  for (const [slot, w] of [["primary", 0.5], ["secondary", 0.25]]) {
+    const pa = tradition?.disposition?.[slot] ? poleAxis(String(tradition.disposition[slot])) : null;
+    if (pa && v[pa[0]] === undefined) v[pa[0]] = pa[1] * w;
+  }
+  let h = 2166136261;
+  for (let i = 0; i < String(id).length; i++) { h ^= String(id).charCodeAt(i); h = Math.imul(h, 16777619); }
+  const out = {};
+  let k = 0;
+  for (const [dial, axes] of Object.entries(DIAL_AXES)) {
+    let s = 0;
+    for (const [axis, w] of axes) s += (v[axis] || 0) * w;
+    const sway = id ? ((((h >>> (k * 7)) & 0x3f) / 63) - 0.5) * 0.2 : 0;   // ±0.1, the person's own
+    out[dial] = Math.round(Math.max(-1, Math.min(1, 0.4 + s * 0.6 + sway)) * 20) / 20;
+    k++;
+  }
+  return out;
+}
+
+function finishPerson(rec, ctx) {
+  // ⛑ only on the LAST pass (`generate()` finishes twice: before repair, and once the affiliation has named their tradition) — a
+  // field the record carries is never overwritten, so deriving on the first pass would have spoken before the tradition could
+  if (ctx.last === false) return rec;
+  const has = rec.personality && typeof rec.personality === "object" && Object.keys(rec.personality).length;
+  if (has) return rec;
+  const tid = typeof rec.domains?.primary === "string" ? rec.domains.primary : Array.isArray(rec.domains?.primary) ? rec.domains.primary[0] : null;
+  const tradition = tid ? (ctx.traditionIndex?.byId?.[tid] || null) : null;
+  return { ...rec, personality: personalityFrom(rec.spectrum, { tradition, spectrums: ctx.spectrums || null, id: rec.id || rec.name || "" }) };
+}
+
+/** ✅ AEVI, G: *"A truncated place's empty `descriptionSeed`: the finisher writes a plain sentence from its kind, region and parent,
+ *  such as 'A shrine on the road out of Kindlerow.' No place ships without one."* ⛑ What it is, by its own record — its kind, a made
+ *  gate, the kind its name says, else its role or tier — and where: inside its parent, else on the road out of the first place its
+ *  roads reach, else in its region. Plain and true, and marked (`_seedDerived`) because it is a floor and not the place's character:
+ *  SNG-582 retired a boilerplate sentence for exactly that reason, and a place the player comes back to still earns its own
+ *  (`unearnedDepth` counts a derived one as owed, and the enrichment may replace it). */
+const NAME_KIND = /\b(shrine|temple|chapel|mill|ford|bridge|inn|hall|tower|keep|market|yard|camp|well|cistern|dock|landing|quarry|mine|grove|orchard|farm|ruin|cave|gate|pass|crossing|post|stair|archive|forge|smithy|store|shop)\b/i;
+export function placeSentence(rec, { locations = {}, regionName = null } = {}) {
+  const nameKind = String(rec?.name || "").match(NAME_KIND)?.[1]?.toLowerCase() || null;
+  const noun = rec?.kind ? String(rec.kind).replace(/_/g, " ")
+    : rec?.waygate || rec?.role === "gate" ? "waygate"
+    : nameKind ? nameKind
+    : rec?.role === "waypoint" ? "stopping place"
+    : rec?.tier === "site" ? "place" : "settlement";
+  const par = rec?.parentId ? locations[rec.parentId] : null;
+  const road = !par && Array.isArray(rec?.connections) ? rec.connections.map((id) => locations[id]).find((l) => l?.name) : null;
+  const region = !par && !road && rec?.regionId ? (typeof regionName === "function" ? regionName(rec.regionId) : null) : null;
+  const where = par?.name ? ` in ${par.name}` : road?.name ? ` on the road out of ${road.name}` : region ? ` in ${region}` : "";
+  return `${/^[aeiou]/i.test(noun) ? "An" : "A"} ${noun}${where}.`;
 }
 
 function finishLocation(rec, ctx) {
@@ -399,6 +473,11 @@ function finishLocation(rec, ctx) {
   out.loreRefs = loreIds ? [...new Set(inherited.filter((r) => loreIds.has(String(r))))] : [...new Set(inherited)];
   // ⛑ the generator writes encounterFlavor as a LIST of lines; a record holds one string
   if (Array.isArray(out.encounterFlavor)) out.encounterFlavor = out.encounterFlavor.join(" ");
+  // ✅ AEVI, G (CCODE-725): no place ships without a sentence — on the last pass, once its address is known
+  if (ctx.last !== false && !String(out.descriptionSeed || "").trim()) {
+    out.descriptionSeed = placeSentence(out, { locations, regionName: ctx.regionName || null });
+    out._seedDerived = true;
+  }
   if (!out.map) out.map = par?.map ? { ...par.map } : { x: 0, y: 0 };
 
   // ✅ AEVI: *"Connections are reciprocal. The neighbour gets the road too."* ⚠️ A ONE-WAY DOOR is how a

@@ -2094,7 +2094,9 @@ console.log("\n── §171 · the repair note measures the state ──");
   // it is on the list because the list is every family app.js applies, and a family nobody listed is the thing this catches.
   // ⚠️ CCODE-388 adds `holdTrades` on the same terms: a sale is made in a turn, never from a question (`ASK_FORBIDDEN`).
   check("§171: …and the fingerprint covers what the op families write — every family app.js applies is one this gate knows",
-    fams171.length >= 16 && fams171.every(f => ["bandOps", "codexUpdates", "deathOps", "debtOps", "encounterOps", "exchangeOps", "factUpdates", "holdingOps", "mapOps", "newEncounter", "npcUpdates", "partyOps", "placeUpdates", "projectOps", "questUpdates", "questDeadlines", "refusalSignal", "relationshipDeltas", "strikeOps", "holdTrades"].includes(f)), fams171.join(","));
+    fams171.length >= 16 && fams171.every(f => ["bandOps", "codexUpdates", "deathOps", "debtOps", "encounterOps", "exchangeOps", "factUpdates", "holdingOps", "mapOps", "newEncounter", "npcUpdates", "partyOps", "placeUpdates", "projectOps", "questUpdates", "questDeadlines", "refusalSignal", "relationshipDeltas", "strikeOps", "holdTrades",
+      // ⚠️ CCODE-725 adds `affiliateSweep` (Aevi's F): the turn's last step, which writes `domains`/`people` onto registry entries that have none
+      "affiliateSweep"].includes(f)), fams171.join(","));
 }
 
 /* ══════════ §172 — A BEAT'S BOOKKEEPING THAT DID NOT LAND IS RESTATED, NOT LOST (Erik 2026-09-12: "make sure I don't lose anything") ══════════ */
@@ -22349,7 +22351,8 @@ console.log("\n── §279 · the generators author to the standard ──");
     /else if \(rec\._gen\?\.needsDepth && type === "location"\) enrichPlaceDepth\(rec\);/.test(A279)
     && /async function enrichPlaceDepth\(rec\) \{/.test(A279)
     && /const owed = unearnedDepth\(rec, "location"\);/.test(A279)
-    && /if \(String\(rec\[f\] \|\| ""\)\.trim\(\)\) continue;/.test(A279)
+    // ⛑ CCODE-725: additive still — save the finisher's floor sentence (`_seedDerived`), which the place's own replaces
+    && /if \(String\(rec\[f\] \|\| ""\)\.trim\(\) && !\(f === "descriptionSeed" && rec\._seedDerived\)\) continue;/.test(A279)
     && /rec\[f\] = smartClamp\(playerText\(v\.trim\(\)\), 600\);/.test(A279)
     && /if \(!owed\.length \|\| !getApiKey\(\)\) \{ if \(rec\._gen\) delete rec\._gen\.needsDepth; return; \}/.test(A279));
   // ⛑ AND THE SCHEMA SAYS WHAT EACH FIELD IS FOR, because the generator reads the schema's own words back
@@ -24502,6 +24505,8 @@ console.log("\n── §306 · the fire tests, sealed — every door applyTurn c
     _devReportTimer: "the dev report reads the LIVE character", _devReportInFlight: "the dev report", _devReportLastAt: "the dev report",
     _reportingLegs: "autoVerifyLeg returns first while a fire test runs",
     CONTENT: "mintTransitLocation returns first while a fire test runs",
+    // ⛑ CCODE-725: the turn's affiliate sweep calls `affiliateNpc` directly now (it reached the turn only as a callback before)
+    _peopleVocab: "a memo of the people vocabulary, built from CONTENT.npcs alone — nothing of the character is in it",
   };
   const reached306 = Object.keys(reach306?.written || {});
   const open306 = reached306.filter(n => !keys306.includes(n) && !(n in ELSEWHERE306));

@@ -66,7 +66,7 @@ export function commitPlace(character, locations, id, rec, { content = null } = 
     const d = bornDeps(content);
     const whole = finishBorn("location", { ...rec, id }, {
       locations: { ...(character.generated?.location || {}), ...(locations || {}) }, axisOrder: d.axisOrder,
-      loreIds: content ? d.loreIds : null, spectrums: d.spectrums, adoptParent: false,
+      loreIds: content ? d.loreIds : null, spectrums: d.spectrums, adoptParent: false, regionName: d.regionName,
       worldPosFor: (i, get) => worldPosForGenerated(i, get),
     });
     if (whole) Object.assign(rec, whole);
@@ -124,6 +124,9 @@ export function bornDeps(content) {
     axisOrder: Array.isArray(content?.axisOrder) && content.axisOrder.length ? content.axisOrder : null,
     loreIds: new Set(Object.keys(content?.lore || {})),
     spectrums: content?.spectrums || null,
+    // ✅ G (CCODE-725): a person's tradition (their derived dials) and a region's name (a place's plain sentence)
+    traditionIndex: content?.traditionIndex || null,
+    regionName: (rid) => { const rs = content?.regions; const r = (Array.isArray(rs) ? rs : Object.values(rs || {})).find((x) => (x?.regionId || x?.id) === rid); return r?.name || null; },
   };
 }
 
@@ -544,9 +547,12 @@ export async function generate(type, context = {}, deps = {}) {
     // ⛑ where the scene is: the last resort for a place that arrived with nothing to anchor to
     hereId: context.hereId || context.character?.currentLocationId || null,
     spectrums: context.spectrums || deps.spectrums || null,   // pole names, when content has them
+    traditionIndex: context.affiliation?.traditionIndex || deps.traditionIndex || null,
+    regionName: deps.regionName || null,
     worldPosFor: (id, get) => worldPosForGenerated(id, get),
   };
-  const repairedOut = repairEntity(type, finishBorn(type, raw, ctxBorn), context, schema);
+  // ⛑ CCODE-725: `last: false` — the fields that wait for the whole record (a person's dials, a place's floor sentence) are the final pass's
+  const repairedOut = repairEntity(type, finishBorn(type, raw, { ...ctxBorn, last: false }), context, schema);
   // THE FLOORS — absolute, rating-independent, at the birth-validator (before anything persists)
   const floored = enforceFloors(repairedOut.entity, type, context, schema);
   const entity = floored.entity;
@@ -762,6 +768,8 @@ export const TIER_SCHEMA_BY_TYPE = {
     nominated: ["appearance", "descriptionSeed", "encounterFlavor", "questSeeds"],
   },
 };
+/** ⛑ CCODE-725: a place's floor sentence (`_seedDerived`, written by the born-whole finisher) is not its character — still owed. */
+const DERIVED_MARK = { descriptionSeed: "_seedDerived" };
 
 /** Which fields this entity has EARNED but does not yet carry. Empty when it is as deep as its
  *  standing warrants — which is the common case, and why this is cheap to ask on every turn. */
@@ -771,6 +779,7 @@ export function unearnedDepth(entity, type = null) {
   const owed = (kind && TIER_SCHEMA_BY_TYPE[kind]?.[tier]) || TIER_SCHEMA[tier] || [];
   return owed.filter(f => {
     const v = entity[f];
+    if (DERIVED_MARK[f] && entity[DERIVED_MARK[f]]) return true;
     return v == null || v === "" || (Array.isArray(v) && !v.length) || (typeof v === "object" && !Array.isArray(v) && !Object.keys(v).length);
   });
 }
@@ -924,7 +933,22 @@ ALSO REQUIRED, AND EACH ONE GATES SOMETHING THE ENGINE WILL NOT GUESS:`
     + `
 - "age": their age in years, a number. ADULT IS 18. Give a grown person a grown person's age, and never write an adult in teenage terms.`
     + `
-- "gender" and "pronouns": how they present and how narration addresses them. Separate from sex, and they gate nothing.`;
+- "gender" and "pronouns": how they present and how narration addresses them. Separate from sex, and they gate nothing.`
+    /* ✅ AEVI, G/G2 (CCODE-725): *"`disposition` (one line of prose): ask the model for it with the rest of G2's prose, since prose is
+     * the model's job."* ⚠️ The prompt asked a person for six required fields and the three gates above — none of the prose the GM's
+     * NPC block reads. ⛑ Asked, not validated (the list above explains why `required` is not widened), and NEVER a number: the engine
+     * derives level, tier, kit and the four personality dials. The adults-only fields are not asked here. */
+    + `
+
+ALSO ASKED — THE PROSE ONLY YOU CAN WRITE. Never invent a level, a tier, a stat or a craft: the engine works those out.`
+    + `
+- "appearance": what they LOOK like, and only that — build, face, dress, what they carry. Concrete nouns first.`
+    + `
+- "disposition": ONE line — how they carry themselves and how they meet a stranger. ("Guarded, precise, dry. Trusts slowly; once given, wholly.")`
+    + `
+- "wants": the active desire that makes them move, in one sentence.`
+    + `
+- "knowledge": up to three things they know that a player could learn, each a short sentence, as an array.`;
   const dispo = describeDisposition(loc);
   const roleLine = context.role ? `\nUNIVERSAL ROLE: ${context.role}${context.roleMethod ? ` — method here: ${context.roleMethod}` : ""}` : "";
   const seedLine = loc.seedFiction ? `\nMANIFEST DOMAIN — this place runs on: ${loc.seedFiction}${loc.nativeLogic ? ` (native law: ${loc.nativeLogic})` : ""}` : "";

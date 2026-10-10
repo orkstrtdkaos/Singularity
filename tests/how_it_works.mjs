@@ -37789,6 +37789,77 @@ console.log("\n── §425 · one place, two position stores, one answer ──
   // until a ruling that may never come. When he rules, the bearing gate goes in beside this one.
 }
 
+/* ═════ §426 — ONE WORLD: THE MAP'S CHANGES TRAVEL (SNG-679 S2's transport, CCODE-730) ═════ */
+// ⛔ ERIK, asked whether the world's state is per save or shared: *"It's one world."* The fold, the learning pass, the reckoning and
+// the locals' mending were all built on a shared store of map events — and NOTHING SENT ONE. Found while building the hold debt on
+// top of it: `character.worldMapStore` had readers in three modules and no writer anywhere, so a bridge burned in one game stayed
+// whole in every other. ⚠️ No suite could see it: every test of the fold handed it a store. This one drives two games through the
+// real sync functions against the fake remote, the way §268 drives the hold cards.
+console.log("\n── §426 · one world — what one game changes on the map, every game holds ──");
+{
+  const MS426 = await import("../engine/mapstate.js");
+  const W426 = await import("../engine/worldtick.js");
+  const { fakeRemote: fr426 } = await import("./lib/fake_remote.mjs");
+  const { loadContentHeadless: lch426 } = await import("./headless_content.mjs");
+  const C426 = await lch426();
+  const key = MS426.roadKey("millbrook", "echo_river_crossing");
+  const A = { id: "char-a426", name: "Ansel", currentLocationId: "millbrook", holdings: [], mapEvents: [] };
+  const B = { id: "char-b426", name: "Bryn", currentLocationId: "the_blaze", holdings: [], mapEvents: [] };
+  const burned = MS426.applyMapChange(A, { key, change: "ruined", by: A.id, seen: "named", cause: "a fire" }, { content: C426, worldDay: 40 });
+  const off = await W426.syncMap({ character: A, content: C426 });
+  check("§426: with no shared world there is nothing to send and nothing breaks", burned.ok && off.synced === false && off.published === 0);
+
+  const remote = fr426();
+  const restore = remote.install();
+  try {
+    const a1 = await W426.syncMap({ character: A, content: C426 });
+    const stored = remote.read(MS426.MAP_STORE_PATH);
+    check("§426: ⛔ THE GAME THAT SAW IT SENDS IT — one change, written to the shared store under its key",
+      a1.synced && a1.published === 1 && (stored?.keys?.[key]?.events || []).length === 1 && stored.keys[key].events[0].by === A.id, JSON.stringify(a1));
+    const puts = remote.state.puts;
+    const a2 = await W426.syncMap({ character: A, content: C426 });
+    check("§426: …and a tick with nothing new writes nothing, and keeps none of its own events twice",
+      remote.state.puts === puts && a2.published === 0 && !Object.keys(A.worldMapStore?.keys || {}).length);
+
+    const rev0 = Number(B.worldRevision) || 0;
+    const b1 = await W426.syncMap({ character: B, content: C426 });
+    check("§426: ⛔ …AND EVERY OTHER GAME HOLDS IT — the road is ruined in a game that never saw it burn (the truth: a journey on it pays), and every cached map read is told",
+      b1.arrived === 1 && b1.changed.join() === key && MS426.mapStateOf(B, key, { content: C426 }).state === "ruined" && (Number(B.worldRevision) || 0) === rev0 + 1,
+      JSON.stringify({ b1, state: MS426.mapStateOf(B, key, { content: C426 }).state }));
+    check("§426: ⛑ …but what the character KNOWS is S7's — far away it is still drawn whole, and standing at it they learn",
+      MS426.knownStateOf(B, key, { content: C426 }).state === "whole"
+      && (() => { B.currentLocationId = "millbrook"; const l = MS426.learnMapEvents(B, { content: C426, worldDay: 41 }); return l.length === 1 && l[0].how === "there" && MS426.knownStateOf(B, key, { content: C426 }).state === "ruined"; })());
+
+    // the other game mends a rung; the first game holds that too
+    const mended = MS426.applyMapChange(B, { key, change: "repaired", by: B.id, cause: "hands sent to mend it" }, { content: C426, worldDay: 44 });
+    await W426.syncMap({ character: B, content: C426 });
+    const a3 = await W426.syncMap({ character: A, content: C426 });
+    check("§426: a mending in the second game reaches the first — two games, either order, one state",
+      mended.ok && a3.arrived === 1 && MS426.mapStateOf(A, key, { content: C426 }).state === MS426.mapStateOf(B, key, { content: C426 }).state
+      && MS426.mapStateOf(A, key, { content: C426 }).state === "damaged");
+
+    // the same change recorded by two games is one event (the locals' work is written by every game's tick)
+    const k2 = "gate:gen-waygate";
+    for (const ch of [A, B]) MS426.applyMapChange(ch, { key: k2, change: "damaged", by: "the world", cause: "a storm" }, { content: C426, worldDay: 50 });
+    await W426.syncMap({ character: A, content: C426 });
+    await W426.syncMap({ character: B, content: C426 });
+    check("§426: ⛔ the same change recorded by both games is ONE event in the world",
+      (remote.read(MS426.MAP_STORE_PATH)?.keys?.[k2]?.events || []).length === 1);
+
+    // a key this build does not know is carried by the store and drawn by nobody here
+    const odd = { schemaVersion: 1, regionId: "valley", keys: { ...remote.read(MS426.MAP_STORE_PATH).keys, "zeppelin:one": { events: [{ id: "x1", key: "zeppelin:one", change: "damaged", day: 1, by: "someone" }] } } };
+    const adopted = MS426.adoptMapStore({ id: "char-c426", mapEvents: [] }, odd, { content: C426 });
+    check("§426: a class this build has no row for is not taken in — a class drawn without a row fails, it does not default",
+      !adopted.changed.includes("zeppelin:one") && adopted.changed.includes(key));
+  } finally { restore(); }
+
+  const A426 = rd("app.js").replace(/\r\n/g, "\n"), W426src = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
+  check("§426: ⛔ the app's tick runs it beside the hold cards, and saves what arrived",
+    /const ms = await syncMap\(\{ character, content: CONTENT \}\); if \(ms\.arrived \|\| ms\.published\) \{ saveCharacter\(character\);/.test(A426)
+    && A426.indexOf("await syncMap({ character, content: CONTENT })") > A426.indexOf("await syncHolds({ character, content: CONTENT })")
+    && /await push\(MAP_STORE_PATH, \(r\) => \(merged = mergeMapEvents\(r, character\.mapEvents \|\| \[\]\)\.store\)/.test(W426src));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

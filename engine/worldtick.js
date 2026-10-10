@@ -60,7 +60,7 @@ import { HOLDS_PATH, holdCardsOf, holdCardsChanged, mergeHoldCards } from "./sha
 import { TRADES_PATH, settleOrders, refundOrders, mergeOrders } from "./holdtrade.js";   // CCODE-388: trading with another player's hold
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval, rollRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
-import { localsMendPass, mapThingOf, learnMapEvents, knownStateOf, ladderOf } from "./mapstate.js";   // ✅ SNG-679 Part R · R2 · S7: what the character learns
+import { localsMendPass, mapThingOf, learnMapEvents, knownStateOf, ladderOf, MAP_STORE_PATH, unpublishedMapEvents, mergeMapEvents, adoptMapStore } from "./mapstate.js";   // ✅ SNG-679 Part R · R2 · S7: what the character learns
 import { postMendingJobs, reckoningPass, postHuntJobs } from "./mending.js";   // ✅ SNG-679 Part R · R6: mending is a job on the job list · R3: the reckoning
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
@@ -1498,6 +1498,35 @@ export async function syncTravelers({ character, profile = null, now = new Date(
   try { ledger = await fetchLedgerAll({ now, closed: closedLedgerMonths }); }
   catch (err) { console.warn("[travelers] ledger read skipped:", err?.message); }
   return { synced: true, index, ledger };
+}
+
+// ---------- CCODE-730: one world — the map's changes go up, and everyone's come down ----------
+
+/** ⛔ CCODE-730 — SNG-679 S2's TRANSPORT. This game's map events (what the character did, what the GM's lines changed, what the
+ *  locals mended on its tick) go up to the shared store when it lacks any of them, and the whole store is taken in
+ *  (`adoptMapStore`). Append-only by derived id, so two games recording one change hold one event, and a tick with nothing new
+ *  writes nothing. What the character KNOWS of what arrived is the learning pass's (S7), on the next tick. Best-effort, never throws.
+ *  `fetchJSON`/`push`/`enabled` are injectable, as `pushCharacterGuarded`'s are. */
+export async function syncMap({ character, content, fetchJSON = fetchRepoJSON, push = pushMergedFile, enabled = syncEnabled } = {}) {
+  let shared = false;
+  try { shared = enabled(); } catch { shared = false; }
+  if (!shared || !character?.id) return { synced: false, store: null, changed: [], arrived: 0, published: 0 };
+  let store = null, changed = [], arrived = 0, published = 0;
+  try {
+    const remote = await fetchJSON(MAP_STORE_PATH);
+    store = remote && typeof remote === "object" && remote.keys ? remote : { schemaVersion: 1, regionId: "valley", keys: {} };
+    const mine = unpublishedMapEvents(store, character.mapEvents || []);
+    if (mine.length) {
+      let merged = null;
+      await push(MAP_STORE_PATH, (r) => (merged = mergeMapEvents(r, character.mapEvents || []).store), `map: what ${character.name || character.id}'s world saw change`);
+      store = merged || mergeMapEvents(store, character.mapEvents || []).store;
+      published = mine.length;
+    }
+    ({ changed, arrived } = adoptMapStore(character, store, { content }));
+  } catch (err) {
+    console.warn("[map] sync skipped:", err?.message);
+  }
+  return { synced: true, store, changed, arrived, published };
 }
 
 // ---------- CCODE-383: a hold nearby is known ----------

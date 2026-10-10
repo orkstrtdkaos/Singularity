@@ -284,6 +284,51 @@ export function mergeMapEvents(store, events = [], { regionId = "valley" } = {})
   return { store: next, changed };
 }
 
+/* ═════ CCODE-730 · S2's TRANSPORT — ONE WORLD, AND THE STORE ACTUALLY TRAVELS ═════
+ * ✅ ERIK, asked whether the world's state is per save or shared: *"It's one world."* ✅ AEVI (S2): *"One world. A change made in one
+ * game is a change in every game, folded the way shared fates are."*
+ * ⛔ MEASURED 2026-10-10, while building the hold debt on top of it: THE STORE WAS READ BY EVERYTHING AND WRITTEN BY NOTHING.
+ * `eventsFor`, `learnMapEvents`, `knownStateOf`, the reckoning and the locals' mending all read `character.worldMapStore` — and no
+ * sync step ever published a game's `mapEvents` or brought another's in. `mergeMapEvents` (above: "for the publish and the news")
+ * had one caller, the door itself. A bridge burned in one game stayed whole in every other, and S7's "word of a ruin travels at a
+ * walk" had nothing to carry. The four doors again: authored → folded → READ, and never LOADED.
+ * ⛑ The shape the hold cards already travel in: one shared file, merged append-only by derived id (`mergeMapEvents`), published
+ * only when this game holds an event the store lacks, adopted whole. A save keeps the world's events it did not write itself
+ * (its own are already in `mapEvents`); `eventsFor` reads both. Only the world's classes travel — a hold's state rides its card. */
+export const MAP_STORE_PATH = "world/map/valley.json";
+
+/** Which of this game's events the store does not hold yet (by derived id). Pure. */
+export function unpublishedMapEvents(store, events = []) {
+  const held = new Set();
+  for (const row of Object.values(store?.keys || {})) for (const e of row?.events || []) if (e?.id) held.add(e.id);
+  return (Array.isArray(events) ? events : []).filter((e) => e && e.id && e.key && !held.has(e.id));
+}
+
+/** ⛔ THE WORLD'S STORE, TAKEN IN. Every event the store holds that this game did not write is kept on the save
+ *  (`worldMapStore`), and the world revision moves so every cached map read knows (the state itself is folded from the events when
+ *  asked — `mapStateOf`). What the character KNOWS is untouched — that is `learnMapEvents`' (S7). → `{ changed: [keys], arrived }` */
+export function adoptMapStore(character, store, { content = null } = {}) {
+  if (!character || !store || typeof store !== "object") return { changed: [], arrived: 0 };
+  const mine = new Set((character.mapEvents || []).map((e) => e?.id).filter(Boolean));
+  const had = new Set();
+  for (const row of Object.values(character.worldMapStore?.keys || {})) for (const e of row?.events || []) if (e?.id) had.add(e.id);
+  const keys = {}, changed = [];
+  let arrived = 0;
+  for (const [key, row] of Object.entries(store.keys || {})) {
+    if (!parseMapKey(key)) continue;                         // a key this build does not know is not drawn by it
+    const theirs = (Array.isArray(row?.events) ? row.events : []).filter((e) => e && e.id && e.key === key && !mine.has(e.id));
+    if (!theirs.length) continue;
+    keys[key] = { events: theirs };
+    const fresh = theirs.filter((e) => !had.has(e.id)).length;
+    if (fresh) { arrived += fresh; changed.push(key); }
+  }
+  character.worldMapStore = { schemaVersion: 1, regionId: store.regionId || "valley", keys };
+  // ⛑ THE FOLDED CACHE IS THE DOOR'S ALONE TO WRITE (S1, gate G2) — and nothing needs it here: `mapStateOf` folds from the events
+  // every time it is asked, so what arrived is already the answer. Only the revision moves, so cached map reads know.
+  if (changed.length) character.worldRevision = (Number(character.worldRevision) || 0) + 1;
+  return { changed, arrived };
+}
+
 /* ═════ S1 · THE DOOR ═════
  * ✅ AEVI: *"`applyMapChange(character, change, ctx)` is the only writer … Every channel calls it: the GM's
  * new `mapOps`, the hold channels that already exist, raids, and the world tick. That is SNG-672 M1's 'one

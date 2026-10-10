@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.27.8",
+      "date": "2026-10-10",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "One world: map changes reach every game",
+          "summary": "When something on the map changes in one player's game (a road ruined, a gate broken, a place mended), that change now reaches every other player's game. Until now it never left the game it happened in. Your character still only learns of a change by being there, through one of their holds, or as word of it travels."
+        }
+      ]
+    },
+    {
       "version": "2.27.7",
       "date": "2026-10-10",
       "entries": [

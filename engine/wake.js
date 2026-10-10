@@ -148,7 +148,9 @@ export function wakeGenerationContext(wake, content = {}) {
     // a context that already said something.
     wake: { source: wake.source, pressure: wake.pressure, connectsTo: wake.connectsTo, scale: wake.scale,
       dir: wake.dir ?? null, parentName: arc?.name || null, parentPressure: arc?.pressure || null,
-      parentRegions: Array.isArray(arc?.crossesRegions) ? arc.crossesRegions : null },
+      parentRegions: Array.isArray(arc?.crossesRegions) ? arc.crossesRegions : null,
+      // ✅ CCODE-728 (Aevi G): who the parent turned on — the first people an aftermath can turn on in its turn
+      parentHinges: Array.isArray(arc?.hingeNpcs) ? arc.hingeNpcs.slice(0, 6) : null },
     parentWakeDepth: (wake.depth ?? 0) + 1,
   };
 }

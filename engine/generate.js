@@ -20,7 +20,7 @@ import { isDescriptiveNotName, isCoercedObjectName } from "./state.js";
 import { slugify } from "./quests.js";
 import { namesMatch, smartClamp } from "./namematch.js";
 import { worldPosForGenerated } from "./worldmap.js";   // G0: the address walk the finisher needs
-import { affiliationAt } from "./affiliation.js";   // SNG-185: the ONE affiliation impl · CCODE-413: the whole chain now lives there
+import { affiliationAt, affiliationWorld } from "./affiliation.js";   // SNG-185: the ONE affiliation impl · CCODE-413: the whole chain now lives there
 import { validate, missingRequired, defaultFor } from "./genschema.js";
 import { isLegalEmergent } from "./braids.js";   // SNG-197 §4: the ONE emergent-verb gate (no second impl to drift)
 import { checkBorn, describeBorn, finishBorn } from "./borncontract.js";   // (and `commitPlace` finishes at the door with the same step)  // SNG-250 §4: the ONE born-whole gate (the same fn content_ci runs over authored content)
@@ -114,6 +114,63 @@ export function pickExamples(type, location, content) {
   return [];
 }
 
+/** ⛔ CCODE-728 · THE WORLD EVERY MINT IS MADE AGAINST, BUILT ONCE. The GM's request, the dev seed and the wake's arc each built their
+ *  own context: the first two retyped six lines apiece, and the wake's carried none of them — so a person minted from an arc's birth
+ *  (its hinge, below) would have had no standing table, no affiliation, no regions. One builder; every caller spreads it. */
+export function mintWorld(content, peopleVocab = null) {
+  const arcs = Array.isArray(content?.greaterArcs) ? content.greaterArcs : Object.values(content?.greaterArcs?.arcs || content?.greaterArcs || {});
+  return {
+    npcStanding: content?.rules?.npcStanding || null,
+    locations: content?.locations || null,
+    regions: content?.regions || null,
+    nearestTraditionWithinDeg: content?.regionRules?.nearestTraditionWithinDeg ?? null,
+    regionHomeMap: content?.substrateModel?.regionHomeTradition || null,
+    affiliation: affiliationWorld(content, peopleVocab),
+    hingeIds: new Set(arcs.flatMap((a) => a?.hingeNpcs || [])),
+    validRegions: new Set(Object.keys(content?.substrateModel?.substrateDensity || {}).concat((content?.regions || []).map((r) => r.regionId || r.id).filter(Boolean))),
+    npcs: content?.npcs || null,
+  };
+}
+
+/* ═════ CCODE-728 · AN ARC IS BORN WITH SOMEONE IT TURNS ON ═════
+ * ✅ AEVI, G1/G (2026-10-09): *"An arc: at least one hinge person, generated whole by the same step if nobody fits."* / *"An arc's
+ * hinge person: yes, build it next. When nobody fits, mint one whole through the same door."* ⚠️ MEASURED by G3: every generated arc
+ * came back "thin" — `hingeNpcs: DEGRADED`, "who the arc turns on; absent = an arc with no handles" — because the stub wrote `[]`
+ * and nothing ever filled it.
+ * ⛑ WHO FITS, in order, and never the dead or the departed:
+ *   1. the people the PARENT arc turned on (an aftermath turns on the people it happened to);
+ *   2. a person of standing in the arc's own region — authored, grown or met — whose rung is nearest what the arc's scale asks
+ *      (a local matter a leader, a regional one a hero, the world's a legend); the same arc always picks the same person;
+ *   3. nobody: one is minted, whole, by `generate("npc")` — this same function — against the same world. */
+const HINGE_RUNG = { local: 12, regional: 25, world: 60, cosmic: 85 };
+export function hingeCandidatesFor(arc, context = {}) {
+  const npcs = context.npcs || {}, reg = context.character?.npcRegistry || {}, grown = context.character?.generated?.npc || {};
+  const L = context.locations || {};
+  const person = (id) => reg[id] || grown[id] || npcs[id] || null;
+  const gone = (id) => { const s = reg[id]?.status || person(id)?.status; return s === "dead" || s === "departed"; };
+  const parent = (context.wake?.parentHinges || []).filter((id) => person(id) && !gone(id));
+  if (parent.length) return { ids: parent.slice(0, 2), why: "parent" };
+  const regions = new Set([...(Array.isArray(arc?.regions) ? arc.regions : []), context.location?.regionId || context.location?.region].filter(Boolean));
+  if (!regions.size) return { ids: [], why: "none" };
+  const floor = context.npcStanding?.tierFloor || {};
+  const want = HINGE_RUNG[arc?.scale] ?? HINGE_RUNG.local;
+  const homeOf = (p) => p?.homeLocation || p?.firstMet?.locationId || p?.lastSeen?.locationId || null;
+  const all = new Map();
+  for (const src of [npcs, grown, reg]) for (const [id, p] of Object.entries(src || {})) if (p && typeof p === "object") all.set(id, { ...(all.get(id) || {}), ...p, id });
+  let h0 = 2166136261;
+  for (let i = 0; i < String(arc?.id || arc?.name || "").length; i++) { h0 ^= String(arc.id || arc.name).charCodeAt(i); h0 = Math.imul(h0, 16777619); }
+  const tie = (id) => { let h = h0; for (let i = 0; i < id.length; i++) { h ^= id.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
+  const fit = [...all.values()].filter((p) => {
+    if (gone(p.id) || p.notAnOpponent === "crowd") return false;
+    const rung = Number(floor[p.tier]);
+    if (!(rung >= Number(floor.notable ?? 5))) return false;
+    const home = L[homeOf(p)];
+    return !!home && regions.has(home.regionId || home.region);
+  }).map((p) => ({ id: p.id, d: Math.abs(Number(floor[p.tier]) - want), t: tie(p.id) }))
+    .sort((a, b) => (a.d - b.d) || (a.t - b.t));
+  return fit.length ? { ids: [fit[0].id], why: "region" } : { ids: [], why: "none" };
+}
+
 /** ⛔ CCODE-714 · WHAT THE BORN-WHOLE FINISHER NEEDS FROM THE WORLD, built in ONE place for every caller: the contract, the atlas's
  *  axis order (a place's `axisVector`), the lore that resolves (a place inherits only real `loreRefs`) and the spectrums' pole names
  *  (`poleIntensity`). ⚠️ The app built its own deps with the contract alone, and §423 handed the axis order in by hand — so the test
@@ -127,6 +184,8 @@ export function bornDeps(content) {
     // ✅ G (CCODE-725): a person's tradition (their derived dials) and a region's name (a place's plain sentence)
     traditionIndex: content?.traditionIndex || null,
     regionName: (rid) => { const rs = content?.regions; const r = (Array.isArray(rs) ? rs : Object.values(rs || {})).find((x) => (x?.regionId || x?.id) === rid); return r?.name || null; },
+    // ✅ CCODE-728: every type's schema, so a mint that needs another (an arc's hinge person) finds it
+    schemas: content?.genSchemas || null,
   };
 }
 
@@ -660,6 +719,22 @@ export async function generate(type, context = {}, deps = {}) {
   // ⛑ AND AGAIN AFTER THE FLOORS, because `enforceFloors` may rewrite the record and the gate below must
   // judge what the world will actually receive. Idempotent: every branch fills only what is absent.
   const whole = finishBorn(type, entity, ctxBorn) || entity;
+  // ✅ AEVI, G (CCODE-728): an arc is born with someone it turns on — one who fits, else one minted whole through this same door
+  if (type === "arc" && !(Array.isArray(whole.hingeNpcs) && whole.hingeNpcs.length)) {
+    const fit = hingeCandidatesFor(whole, context);
+    if (fit.ids.length) { whole.hingeNpcs = fit.ids; whole._gen.hinge = fit.why; }
+    else {
+      let made = null;
+      try {
+        made = await generate("npc", { ...context, wake: null, arcPressure: null, parentWakeDepth: undefined, genBudget: 1,
+          hint: `the person "${whole.name}" turns on — someone of this place with a stake in it`,
+          examples: pickExamples("npc", context.location, { npcs: context.npcs || {} }),
+          known: { authored: context.npcs || {}, generated: context.character?.generated?.npc || {} } },
+          { ...deps, schema: deps.schemas?.npc || {}, onContractReject: null });
+      } catch { made = null; }
+      if (made?.id) { whole.hingeNpcs = [made.id]; whole._gen.hinge = "minted"; }
+    }
+  }
   const born = checkBorn(whole, type, deps.contract || context.contract || null, { vocabs: deps.vocabs || context.vocabs || {} });
   if (born.gated && born.verdict === "reject") {
     try { deps.onContractReject?.(type, whole, born); } catch { /* telemetry is a convenience */ }

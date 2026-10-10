@@ -21,7 +21,7 @@ import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } fr
 import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b: the author god-mode (dev-gated, separate surface)
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver, MODELS } from "./engine/claude.js";
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures, recordCombatRound, combatRounds } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
-import { unearnedDepth, generate, ensureGenerated, commitPlace, bornDeps, pickExamples as pickExamplesFor, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
+import { unearnedDepth, generate, ensureGenerated, commitPlace, bornDeps, mintWorld, pickExamples as pickExamplesFor, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
 import { checkBorn, describeBorn, contractedTypes } from "./engine/borncontract.js";
 import { drawAxis, resolvePick, readOfPick, championPick, drawBackgroundAxis, benchBout, benchAxis } from "./engine/coliseum.js"; // SNG-149: the Coliseum blind grid · SNG-669: the bench
 import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own critical, in its own words
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.27.5";
+const APP_VERSION = "2.27.6";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3352,10 +3352,7 @@ async function seedGrownEntity() {
   const rec = await generate("npc", {
     character, location: loc, day: readClock(character.clock).day, rating: ratingCeilingNow(),
     known: { authored: CONTENT.npcs, generated: character.generated?.npc || {} }, genBudget: 5,
-    npcStanding: CONTENT.rules?.npcStanding || null, locations: CONTENT.locations || null,
-    regions: CONTENT.regions || null, nearestTraditionWithinDeg: CONTENT.regionRules?.nearestTraditionWithinDeg ?? null,
-    regionHomeMap: CONTENT.substrateModel?.regionHomeTradition || null,
-    hingeIds: new Set(Object.values(CONTENT.greaterArcs?.arcs || CONTENT.greaterArcs || {}).flatMap(a => a?.hingeNpcs || []))
+    ...mintWorld(CONTENT, peopleVocabNow()),   // ⛔ CCODE-728: the one world every mint is made against
   }, { callJSON: fake(), schema: CONTENT.genSchemas?.npc || {}, applyCodexUpdates, codexCtx: { locationId: loc.id }, ...genContractDeps() });
   if (rec?._gen) {
     recordAttention(rec, "keep", readClock(character.clock).day); // → established, so it's clearly grown
@@ -5787,20 +5784,15 @@ async function handleGenerateRequests(turn) {
       // passes is a dial nobody reads. `npcStanding` carries tierFloor + tierRarity; `locations` and
       // `hingeIds` are the two evidence sources a person can have AT BIRTH (the place they are minted in,
       // and an arc that already names them). Renown and deeds are earned later, never born with.
-      npcStanding: CONTENT.rules?.npcStanding || null,
-      locations: CONTENT.locations || null,
-      regions: CONTENT.regions || null, nearestTraditionWithinDeg: CONTENT.regionRules?.nearestTraditionWithinDeg ?? null,
-      regionHomeMap: CONTENT.substrateModel?.regionHomeTradition || null,   // ⛑ Aevi's seventeen, authored 09-08 and unread until 09-09   // ⛔ Erik: the nearest tradition by distance, when the ground names none
-      // ⛔ CCODE-716: and the tradition index and the people vocabulary — the whole world the met person's door affiliates against.
-      // Without the index the role rung and the skills rung were dead for a person the GM made, and the Maw's own tradition unread.
-      affiliation: affiliationWorld(CONTENT, peopleVocabNow()),
-      hingeIds: new Set(Object.values(CONTENT.greaterArcs?.arcs || CONTENT.greaterArcs || {}).flatMap(a => a?.hingeNpcs || [])),
+      // ⛔ CCODE-728 · THE ONE WORLD EVERY MINT IS MADE AGAINST (`mintWorld`): the standing table, the places and regions, Aevi's home map
+      // (her seventeen, authored 09-08) and Erik's distance rung, the affiliation world (CCODE-716: the tradition index and the people
+      // vocabulary — without the index the role and skills rungs were dead for a person the GM made), and the hinge people.
+      ...mintWorld(CONTENT, peopleVocabNow()),
       // SNG-166 §3: he keeps meeting Mara. Across 10 characters on this device, 5 given names
       // recur and Mara appears in FOUR saves — invisible to any per-character check.
       avoidNames: namesToAvoid(allCharactersOnDevice(), 24),
       namingAesthetic: namingAestheticHere(),
-      validRegions: new Set(Object.keys(CONTENT.substrateModel?.substrateDensity || {}).concat((CONTENT.regions || []).map(r => r.regionId || r.id).filter(Boolean)))   // SNG-166 §1
-    };
+    };   // (`validRegions`, SNG-166 §1, rides in `mintWorld`)
     // SNG-035/046-L3: born-WITH-image is now IN the generate path (deps.imageFor) so the record
     // arrives with its picture regardless of caller — the app just injects the art builder.
     const imageFor = (entity, t) => imagesEnabled() ? ensureImage(entity, t, { ratingLevel: viewerRatingLevel() }) : null;
@@ -6962,10 +6954,15 @@ async function maybeTick() {
     await runWakeGeneration({ character, content: CONTENT, worldDay: absoluteWorldDay(),
       generateFn: async (wakeCtx) => generate("arc", {
         ...wakeCtx, character, location: CONTENT.locations[character.currentLocationId] || {},
-        examples: CONTENT.genArc || [], rating: ratingCeiling(profile), genBudget: 1
+        // ⛔ CCODE-728: `CONTENT.genArc` was never anything — the wake's arcs were minted with no examples (Aevi's G2). The picker's
+        // (the greater arcs); and the world a mint is made against, so the arc's hinge person is minted whole when nobody fits.
+        ...mintWorld(CONTENT, peopleVocabNow()),
+        examples: pickExamples("arc", CONTENT.locations[character.currentLocationId] || {}), rating: ratingCeiling(profile), genBudget: 1
       }, { callJSON: callClaudeJSON, schema: CONTENT.genSchemas?.arc || {}, applyCodexUpdates, codexCtx: { locationId: character.currentLocationId }, ...genContractDeps() })
     });
   } catch (e) { console.warn("[wake-gen] skipped:", e?.message); }
+  // ⛑ CCODE-728: a hinge person the arc's birth minted is live this session, as a person the GM asked for is
+  for (const rec of generatedRecords(character, "npc")) if (rec?.id && !CONTENT.npcs[rec.id]) CONTENT.npcs[rec.id] = rec;
   await syncSharedWorld({ character, content: CONTENT }); // one valley for everyone (no-op without sync)
   // ⛔ CCODE-381: the valley's legends as the WORLD has them, before this world moves them — a legend buried elsewhere is buried here
   await syncSharedFates({ character, content: CONTENT, publish: false });

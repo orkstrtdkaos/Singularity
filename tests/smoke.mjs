@@ -26011,7 +26011,9 @@ await (async () => {
       oldMaw: asOld716("the_maw", "a hired blade"), oldSmith: asOld716("millbrook", "a Blazeborn smith") };
     check("716/door 5: ⛔ EVERY DOOR A PERSON ENTERS BY AFFILIATES AGAINST ONE WORLD — the GM's mint had no tradition index, so a person it made in the Maw practised a neighbour's tradition and a role naming a tradition (\"a Blazeborn smith\") was read by nothing; with `affiliationWorld` the Maw's own (abyssal), the role's (blazeborn), Millbrook's (mason); the meet path, the backfill and the GM's mint all spread it",
       r716.maw === "abyssal" && r716.smith === "blazeborn" && r716.mill === "mason" && r716.oldMaw !== "abyssal" && r716.oldSmith !== "blazeborn"
-      && /affiliation: affiliationWorld\(CONTENT, peopleVocabNow\(\)\)/.test(app716) && /\.\.\.affiliationWorld\(CONTENT, _peopleVocab\)/.test(app716)
+      // ⛑ CCODE-728: the GM's mint takes it inside `mintWorld`, the one world every mint is made against — followed there
+      && /\.\.\.mintWorld\(CONTENT, peopleVocabNow\(\)\)/.test(app716) && !!GEN716.mintWorld(C716, world716.peopleVocab).affiliation?.traditionIndex
+      && /\.\.\.affiliationWorld\(CONTENT, _peopleVocab\)/.test(app716)
       && /const opts = affiliationWorld\(content, /.test(rec716),
       JSON.stringify(r716));
   }
@@ -26248,6 +26250,45 @@ await (async () => {
       && (app727.match(/\$\{globeNameOf\(p\)\}/g) || []).length >= 3 && !/readout\.textContent = `\$\{p\.name\}/.test(app727)
       && WM727.isPlaceKnown(fresh727, "millbrook", C727.locations) && !!far727 && !WM727.isPlaceKnown(fresh727, far727, C727.locations),
       `loop ${loop727.length} chars · far place ${far727}`);
+  }
+  /* ── ✅ AEVI G (CCODE-728): an arc is born with someone it turns on ── */
+  {
+    const GEN728 = await import("../engine/generate.js");
+    const AF728 = await import("../engine/affiliation.js");
+    const WK728 = await import("../engine/wake.js");
+    const { loadContentHeadless: lch728 } = await import("./headless_content.mjs");
+    const C728 = await lch728();
+    const world728 = GEN728.mintWorld(C728, AF728.buildPeopleVocab({ npcs: C728.npcs || {} }));
+    // the model, as the two prompts would be answered: an arc when asked for an arc, a person when asked for a person
+    const model728 = async (msgs, o) => (/Author ONE new npc/.test(o?.system || "")
+      ? { name: "Orla Venn", role: "a ditch-warden with a stake in the water", spectrum: { chaos_order: 0.4 }, fears: ["the dry year"] }
+      : { name: "The Long Drought", scale: "local", pressure: "rising", tendency: "the wells fail one by one", crossesRegions: ["the valley"], ifIgnored: "the fields go", ifEngaged: "the water is shared" });
+    const arcOf = (ctx) => GEN728.generate("arc", { character: { id: "c728", currentLocationId: "millbrook", generated: null, npcRegistry: {} }, location: C728.locations.millbrook,
+      day: 10, hint: "a new thread", genBudget: 1, examples: GEN728.pickExamples("arc", C728.locations.millbrook, C728), ...world728, ...ctx },
+      { schema: C728.genSchemas.arc, callJSON: model728, ...GEN728.bornDeps(C728) });
+    const parentArc = C728.greaterArcs.find((a) => (a.hingeNpcs || []).some((id) => C728.npcs[id]));
+    const wakeCtx728 = WK728.wakeGenerationContext({ source: { arcId: parentArc.id }, pressure: "the aftermath", connectsTo: [], scale: "regional", dir: 1 }, C728);
+    const livingParent = (parentArc.hingeNpcs || []).filter((id) => C728.npcs[id]);
+    const fromParent = await arcOf({ wake: wakeCtx728.wake });
+    const deadCh = { id: "c728d", currentLocationId: "millbrook", generated: null, npcRegistry: Object.fromEntries(livingParent.map((id) => [id, { id, status: "dead" }])) };
+    const parentDead = await arcOf({ wake: wakeCtx728.wake, character: deadCh });
+    const fromRegion = await arcOf({});
+    const fromRegion2 = await arcOf({});
+    const emptyCh = { id: "c728e", currentLocationId: "millbrook", generated: null, npcRegistry: {} };
+    const minted = await arcOf({ npcs: {}, character: emptyCh });
+    const mintedPerson = minted?.hingeNpcs?.[0] ? emptyCh.generated?.npc?.[minted.hingeNpcs[0]] : null;
+    const regionPerson = C728.npcs[fromRegion?.hingeNpcs?.[0]] || null;
+    const app728 = readFileSync(join(root, "app.js"), "utf8");
+    check("728/G: ⛔ AEVI — AN ARC IS BORN WITH SOMEONE IT TURNS ON (\"at least one hinge person … when nobody fits, mint one whole through the same door\" — every generated arc had none): an aftermath turns on the people its parent turned on; with none, on a person of standing from its own region (the same arc always the same person); the dead are passed over; and with nobody at all a person is minted whole — a tradition, the four dials — on the save, through generate() itself; the wake's arcs are minted against the one world and with the picker's examples",
+      Array.isArray(wakeCtx728.wake.parentHinges) && fromParent?.hingeNpcs?.length >= 1 && fromParent.hingeNpcs.every((id) => livingParent.includes(id)) && fromParent._gen.hinge === "parent"
+      && parentDead?.hingeNpcs?.length === 1 && !livingParent.includes(parentDead.hingeNpcs[0])
+      && fromRegion?.hingeNpcs?.length === 1 && !!regionPerson && fromRegion._gen.hinge === "region"
+      && (C728.locations[regionPerson.homeLocation]?.regionId || C728.locations[regionPerson.homeLocation]?.region) === (C728.locations.millbrook.regionId || C728.locations.millbrook.region)
+      && fromRegion2.hingeNpcs[0] === fromRegion.hingeNpcs[0]
+      && minted?._gen?.hinge === "minted" && !!mintedPerson && mintedPerson.name === "Orla Venn" && !!mintedPerson.domains?.primary
+      && ["warmth", "trust", "candor", "patience"].every((k) => Number.isFinite(mintedPerson.personality?.[k]))
+      && (app728.match(/\.\.\.mintWorld\(CONTENT, peopleVocabNow\(\)\)/g) || []).length >= 3 && /examples: pickExamples\("arc", CONTENT\.locations\[character\.currentLocationId\] \|\| \{\}\)/.test(app728) && !/CONTENT\.genArc/.test(app728.replace(/^\s*\/\/.*$/gm, "")),
+      JSON.stringify({ parent: fromParent?.hingeNpcs, dead: parentDead?.hingeNpcs, region: fromRegion?.hingeNpcs, regionTier: regionPerson?.tier, minted: minted?.hingeNpcs, person: mintedPerson && [mintedPerson.name, mintedPerson.domains?.primary] }));
   }
   /* ── ✅ Aevi's lore-reader note (CCODE-706): the GM reads what is the GM's, and nothing that is ours ── */
   {

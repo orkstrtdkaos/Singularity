@@ -21443,7 +21443,7 @@ console.log("\n── §268 · a hold nearby is known ──");
   const REG268 = rd("engine/gm_registry.js").replace(/\r\n/g, "\n"), GM268 = rd("engine/gm.js").replace(/\r\n/g, "\n"), A268 = rd("app.js").replace(/\r\n/g, "\n");
   check("§268: ⛔ the GM row reads the shared store where the character stands, and gm.js tells it the hold is another player's — never to seize, ruin or speak for",
     /key: "holdsNearDetail"/.test(REG268) && /holdsNearForGM\(env\.app\?\.holdsStore\?\.\(\) \|\| null/.test(REG268)
-    && /if \(holdsNearDetail\) world\.push\(`## HOLDS NEAR HERE/.test(GM268) && /never seize it, replace its keeper or speak for its owner, and the WORLD never harms it/.test(GM268));   // CCODE-731: the one exception is the character's own hand (§427)
+    && /if \(holdsNearDetail\) world\.push\(`## HOLDS NEAR HERE/.test(GM268) && /Never seize it, replace its keeper or speak for its owner\. The world never harms it/.test(GM268));   // CCODE-731: the one exception is the character's own hand (§427) · CCODE-735: Aevi's wording
   check("§268: the tick syncs holds, the GM's env can reach them, and the play screen says the line",
     /const hs = await syncHolds\(\{ character, content: CONTENT, routes: _worldRoutes\?\.byPair \|\| null \}\)/.test(A268) && /holdsStore: \(\) => sharedHolds/.test(A268)
     && /<div class="hold-near">\$\{near383\.map\(n => `<span class="hn-what">⌂ \$\{esc\(holdNearLine\(n\)\)\}<\/span>`\)\.join\(""\)\}<\/div>/.test(A268));
@@ -37945,8 +37945,14 @@ console.log("\n── §427 · the hold debt — a blow at another player's hold
     check("§427: ⛔ ONE WORLD — the blow goes up from the culprit's game and comes down in the owner's, and THE OWNER'S RECORD TAKES IT through the one door (the same derived event, once)",
       sent.published === 1 && got.arrived === 1 && fold.folded.length === 1 && h.state === "ruined" && (h.stateEvents || []).length === 1 && h.stateEvents[0].id === hit.event.id
       && h.hitsFolded?.[hit.event.id] === 40, JSON.stringify({ sent: sent.published, got: got.arrived, state: h.state }));
-    check("§427: ✅ *\"THE OWNER'S NEWS SAYS WHO DID IT AND WHAT THEY OWE\"* — and, with a keeper, that the keeper will go after them",
-      fold.news.length === 1 && fold.news[0].includes("Bryn Aske") && fold.news[0].includes("Voss Yard") && fold.news[0].includes(`${owed} crystal`) && fold.news[0].includes("Pell Ran Marsh will go after them"), fold.news[0]);
+    // ✅ Aevi N1 (2026-10-16): the lines are hers and in content, so this reads them there and fills them — not my plain ones
+    const RW = C.mapStates.reckoning.words, fillW = (k, v) => Object.entries(v).reduce((s, [a, b]) => s.split(`{${a}}`).join(String(b)), RW[k]);
+    const capW = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+    const did427 = RW.did.ruined;
+    check("§427: ✅ *\"THE OWNER'S NEWS SAYS WHO DID IT AND WHAT THEY OWE\"* — and, with a keeper, that the keeper means to see it paid — in the content's own words",
+      !!RW.holdHitNamed && !!RW.holdOwedKeeper && fold.news.length === 1
+      && fold.news[0] === capW(`${fillW("holdHitNamed", { name: "Bryn Aske", hold: "Voss Yard", did: did427 })} ${fillW("holdOwedKeeper", { price: `${owed} crystal`, keeper: "Pell Ran Marsh", hold: "Voss Yard" })}`)
+      && fold.news[0].includes("Bryn Aske") && fold.news[0].includes(`${owed} crystal`) && fold.news[0].includes("Pell Ran Marsh"), fold.news[0]);
     check("§427: …a blow is taken once however often the tick runs, and the hold's own effects are the ruined ones (S6)",
       MD.holdHitsPass(owner, { content: C, worldDay: 42 }).folded.length === 0 && h.state === "ruined");
     const store1 = (await WT.syncHolds({ character: owner, content: C })).store;
@@ -37963,7 +37969,11 @@ console.log("\n── §427 · the hold debt — a blow at another player's hold
       && debt.owedTo.playerId === owner.id && debt.owedTo.holdName === "Voss Yard" && debt.mapKey === key, JSON.stringify(debt));
     check("§427: ✅ *\"THE STEWARD GOES AFTER THE CULPRIT THROUGH R3's LADDER\"* — asking at once, sent after `searchBeginsAfterDays.named`, found `findWithinDays.named` later, in the world's own lines",
       days.asking?.d === 41 && days.sent?.d === 40 + R3.searchBeginsAfterDays.named && days.found?.d === days.sent.d + R3.findWithinDays.named
-      && days.sent.n.includes("Pell Ran Marsh") && days.sent.n.includes("Voss Yard") && days.found.n.includes("Pell Ran Marsh"), JSON.stringify(days));
+      && days.sent.n.includes("Pell Ran Marsh") && days.sent.n.includes("Voss Yard") && days.found.n.includes("Pell Ran Marsh")
+      // ✅ Aevi 2026-10-16: the hold forms, read before R3's place lines
+      && days.asking.n === capW(fillW("holdAsking", { keeper: "Pell Ran Marsh", did: RW.did.ruined, hold: "Voss Yard" }))
+      && days.sent.n === capW(fillW("holdSent", { name: "Pell Ran Marsh", hold: "Voss Yard", did: RW.did.ruined }))
+      && days.found.n === capW(fillW("holdFound", { name: "Pell Ran Marsh", hold: "Voss Yard" })), JSON.stringify(days));
     const gm = MD.reckoningsForGM(culprit, { content: C });
     check("§427: the reckoning is a scene the GM is handed — pay, refuse, fight or flee, and NO working it off (R5)",
       gm.length === 1 && /keeps Voss Yard for Maren Voss/.test(gm[0]) && /debtOps "settle"/.test(gm[0]) && /no working it off/.test(gm[0]) && !/debtOps "work"/.test(gm[0]), gm[0]);
@@ -38024,7 +38034,8 @@ console.log("\n── §427 · the hold debt — a blow at another player's hold
     await WT.syncMap({ character: culprit2, content: C }); await WT.syncMap({ character: owner2, content: C });
     const news3 = MD.holdHitsPass(owner2, { content: C, worldDay: 41 }).news;
     check("§427: ✅ *\"THAT IS 'WHAT THEY DO ABOUT IT IS THEIRS'\"* — the owner is told what was done and what is owed; a culprit only DESCRIBED is not named",
-      news3.length === 1 && /What you do about it is yours/.test(news3[0]) && news3[0].includes(`${card0.repairValue.damaged} crystal`) && !news3[0].includes("Bryn Aske"), news3[0]);
+      news3.length === 1 && news3[0] === capW(`${fillW("holdHitDescribed", { hold: "Orrin Yard", did: RW.did.damaged })} ${fillW("holdOwedYours", { price: `${card0.repairValue.damaged} crystal`, hold: "Orrin Yard" })}`)
+      && /what you do about it is yours/i.test(news3[0]) && news3[0].includes(`${card0.repairValue.damaged} crystal`) && !news3[0].includes("Bryn Aske"), news3[0]);
     const paid3 = HO.applyDebtOps(culprit2, [{ op: "settle", holderId: `player:${owner2.id}` }], { day: 42, economy: ec });
     check("§427: …a debt nobody comes for can still be paid, and that too goes to the owner",
       paid3[0].ok === true && paid3[0].paid === card0.repairValue.damaged && culprit2.purse.crystal === 400 - card0.repairValue.damaged
@@ -38041,19 +38052,34 @@ console.log("\n── §427 · the hold debt — a blow at another player's hold
     await WT.syncMap({ character: culprit4, content: C }); await WT.syncMap({ character: owner4, content: C });
     const news4 = MD.holdHitsPass(owner4, { content: C, worldDay: 41 }).news;
     check("§427: an UNSEEN blow is real and is said, and nobody owes for it — R3 does not trace what nobody saw",
-      owner4.holdings[0].state === "damaged" && news4.length === 1 && /nobody saw who did it/.test(news4[0]) && !/owe/.test(news4[0])
+      owner4.holdings[0].state === "damaged" && news4.length === 1 && news4[0] === capW(fillW("holdHitUnseen", { hold: "Marn Yard", did: RW.did.damaged })) && /nobody saw who did it/i.test(news4[0]) && !/owe/.test(news4[0])
       && MD.holdDebtPass(culprit4, { content: C, worldDay: 300 }).news.length === 0 && !Object.keys(culprit4.worldState.debts || {}).length, news4[0]);
   } finally { restore(); }
 
   // ── the price when the card says none: the rung's worth, then the plain rung price ──
   const ev = (hold, change) => ({ change, hold: { owner: "x", was: "whole", ...hold } });
   const BW = C.mapStates.buildWorth.place, RC = C.mapStates.repairCost;
-  check("§427: ✅ *\"A CARD WITHOUT ONE FALLS BACK TO YOUR RUNG PRICE\"* — the rung's worth × the state's share where `buildWorth` names the rung, else the plain price a job pays by",
-    MD.holdHitOwed(ev({ rung: "village" }, "ruined"), C) === Math.round(BW.village * RC.ruined) && MD.holdHitOwed(ev({ rung: "village" }, "destroyed"), C) === BW.village
-    && MD.holdHitOwed(ev({ rung: "keep" }, "damaged"), C) === 10 && MD.holdHitOwed(ev({}, "destroyed"), C) === 22);
+  const BH = C.mapStates.buildWorth.hold || {};
+  check("§427: ✅ *\"A CARD WITHOUT ONE FALLS BACK TO YOUR RUNG PRICE\"* — `buildWorth.hold` names all eight rungs (Aevi 2026-10-16), × the state's share; a hold with no rung at all pays the plain price a job pays by",
+    ["post", "steading", "hamlet", "village", "town", "keep", "fortress", "stronghold"].every((r) => Number.isFinite(Number(BH[r])))
+    && MD.holdHitOwed(ev({ rung: "keep" }, "damaged"), C) === Math.round(BH.keep * RC.damaged) && MD.holdHitOwed(ev({ rung: "village" }, "destroyed"), C) === BH.village
+    && MD.holdHitOwed(ev({ rung: "post" }, "ruined"), C) === Math.round(BH.post * RC.ruined) && MD.holdHitOwed(ev({}, "destroyed"), C) === 22
+    && BH.village !== undefined && BW.village !== undefined);
   check("§427: …and a culprit owes for what THEY did: a hold already damaged and then ruined is owed for the difference, and a blow that worsens nothing for nothing",
     MD.holdHitOwed(ev({ was: "damaged", value: { damaged: 50, ruined: 120, destroyed: 200 } }, "ruined"), C) === 70
     && MD.holdHitOwed(ev({ was: "ruined", value: { damaged: 50, ruined: 120, destroyed: 200 } }, "damaged"), C) === 0);
+
+  // ── ✅ Aevi 2026-10-16: a battered PLACE in its own words — the culprit's make-good, and its locals at work ──
+  {
+    const pc = { id: "char-p427", name: "Bryn Aske", currentLocationId: "millbrook", holdings: [], mapEvents: [], worldState: {} };
+    MS.applyMapChange(pc, { key: "place:millbrook", change: "damaged", by: pc.id, seen: "named", cause: "fired" }, { content: C, worldDay: 40 });
+    const theirs = MD.mendingJobsFor(pc, { content: C }).map((j) => j.label);
+    const card = MD.brokenAt({ id: "char-q427", mapEvents: [...pc.mapEvents] }, "millbrook", { content: C, worldDay: 60 });
+    const JL = C.mapStates.jobs.labels;
+    check("§427: ✅ a battered PLACE can be made good by whoever broke it (`makeGoodPlace`), and its locals are seen at work on it (`mendingPlace`)",
+      !!JL.makeGoodPlace && theirs.length === 1 && theirs[0] === JL.makeGoodPlace.split("{place}").join("Millbrook")
+      && card.length === 1 && card[0].mending === C.mapStates.reckoning.words.mendingPlace.split("{place}").join("Millbrook"), JSON.stringify({ theirs, card }));
+  }
 
   // ── ⚠️ FOUND ON THE WAY: R3's reckoning could not be reached from play at all ──
   const road = MS.roadKey("millbrook", "echo_river_crossing");
@@ -38077,7 +38103,7 @@ console.log("\n── §427 · the hold debt — a blow at another player's hold
     && MS.mapChangeLine(C, "site", "whole", "the Water Wheels") === "The Water Wheels is whole."
     && /if \(!res\.duplicate\) said\(mapChangeLine\(CONTENT, /.test(A) && !/said\(word\);/.test(A.slice(A.indexOf('applyStep("mapOps"'), A.indexOf('applyStep("holdTrades"'))));
   check("§427: the GM's contract says how the character is named, and the rule for another player's hold says the one exception",
-    /"by": "\\"pc\\" when THIS CHARACTER did it/.test(G) && /the WORLD never harms it/.test(G) && /The one exception is this character's own hand/.test(G));
+    /"by": "\\"pc\\" when THIS CHARACTER did it/.test(G) && /The world never harms it: no raid, fire, storm or person of yours touches it/.test(G) && /The one exception is this character's own hand/.test(G));
 }
 
 /* ═════ §428 — TWO THINGS THE LIVE PATH NEVER DID: A DEBT ESCALATES, AND A HULL UNDER WAY IS WHERE SHE IS (CCODE-732) ═════ */
@@ -38180,7 +38206,7 @@ console.log("\n── §429 · a place's pole words agree with its own spectrum 
       if (Number.isFinite(s) && s !== 0 && (Math.sign(s) !== P.sign || Number(v) < 0)) wrong.push(`${l.id}: ${P.axis} ${s}, pole "${p}" ${v}`);
     }
   }
-  const BASELINE = 25;   // ⚑ lower it as they are fixed; never raise it
+  const BASELINE = 0;   // ✅ Aevi 2026-10-16: all 25 fixed — "Please set `BASELINE` to 0 so it can't come back." Never raise it
   check(`§429: ⛔ RATCHET — pole words on the wrong side of their own spectrum, or written as a negative weight: ${wrong.length} (may only go DOWN from ${BASELINE})`,
     wrong.length <= BASELINE, wrong.slice(0, 30).join(" · "));
   check("§429: …and the line the model is given says each pole's own weight — it said \"strong\" for any positive number, so 0.16 and 0.9 read the same",

@@ -8316,7 +8316,8 @@ await (async () => {
 
       // the authored numbers exist at all — a reader over an empty table passes by having nothing to read
       check("679/S6: ⛔ the effects are AUTHORED, for every class the inventory names — a multiplier the engine invents is a rule nobody ruled",
-        ["feature", "road", "waygate", "place", "water", "ground"].every((k) => E[k] && typeof E[k] === "object")
+        // ✅ Aevi N2 (2026-10-16): the gate's effects may be keyed by the class's own name — `gateLeg` reads `gate` first (CCODE-732)
+        ["feature", "road", "place", "water", "ground"].every((k) => E[k] && typeof E[k] === "object") && [E.gate, E.waygate].some((g) => g && typeof g === "object")
         && Number.isFinite(Number(E.road?.damaged?.daysMult)) && E.road?.ruined?.carts === false
         && E.place?.ruined?.services === false && E.place?.destroyed?.roadEnd === false,
         `${Object.keys(E).filter((k) => !k.startsWith("_")).join(", ")}`);

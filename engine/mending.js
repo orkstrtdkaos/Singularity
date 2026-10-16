@@ -117,8 +117,10 @@ export function brokenAt(character, placeId, { content = null, worldDay = null }
       // ✅ AEVI, B (CCODE-726): a battered PLACE is wanted in its own words — "hands to mend it", not "the village at Millbrook"
       wanted: (p.cls === "place" && W.wantedPlace) ? fill(W.wantedPlace, { place: t.place, mend: (W.mend || {})[state] || "mend" })
         : W.wanted ? fill(W.wanted, { place: t.place, mend: (W.mend || {})[state] || "mend", thing: t.thing }) : null,
-      // ⛑ a place has no "at work on the {thing}" form yet (asked of Aevi) — its wanted line stands while the locals work
-      mending: rep?.mending && W.mending && t.thing ? fill(W.mending, { place: t.place, thing: t.thing }) : null,
+      // ✅ AEVI 2026-10-16: `mendingPlace` — "The people of {place} are at work putting it right." A place's locals are seen at work too
+      mending: !rep?.mending ? null
+        : (p.cls === "place" && W.mendingPlace) ? fill(W.mendingPlace, { place: t.place })
+        : (W.mending && t.thing) ? fill(W.mending, { place: t.place, thing: t.thing }) : null,
       localsWill: localsWillMend(key, state, content) });
   }
   return out;
@@ -158,10 +160,12 @@ export function mendingJobsFor(character, { content = null } = {}) {
       || (p.cls === "place" && J.labels?.mendPlace ? { place: placeNameOf(content, p.id), thing: null } : null);   // ✅ B: a battered place can be a job
     if (!t) continue;
     const culprit = !!character?.id && culpritOf(rec) === character.id;
-    if (culprit && p.cls === "place") continue;   // "Make good the {thing} at {place}" has no place form — the culprit's make-good waits on its words
+    // ✅ AEVI 2026-10-16: `jobs.labels.makeGoodPlace` "Make good what you did to {place}" — a culprit can be offered a battered place too
+    if (culprit && p.cls === "place" && !J.labels?.makeGoodPlace) continue;
     if (culprit && character?.mendDeclined?.[key]) continue;   // the make-good is offered once; declined, it is gone
     const mend = (W.mend || {})[state] || "mend";
-    const label = culprit ? fill(J.labels?.makeGood || "Make good the {thing} at {place}", { thing: t.thing, place: t.place })
+    const label = culprit ? ((p.cls === "place" && J.labels?.makeGoodPlace) ? fill(J.labels.makeGoodPlace, { place: t.place })
+        : fill(J.labels?.makeGood || "Make good the {thing} at {place}", { thing: t.thing, place: t.place }))
       // ✅ AEVI, B: *"`labels.mendPlace` '{Mend} {place}' … A battered place can be a job now."*
       : (p.cls === "place" && J.labels?.mendPlace) ? fill(J.labels.mendPlace, { Mend: cap(mend), mend, place: t.place })
       : fill(J.labels?.mend || "{Mend} the {thing} at {place}", { Mend: cap(mend), mend, thing: t.thing, place: t.place });
@@ -495,15 +499,18 @@ const holdWord = (W, k) => W?.[k] || HOLD_WORDS[k];
 
 /** ⛔ WHAT ONE BLOW IS OWED FOR: the cost of mending the hold from the state the blow left it in, less the cost from the state it
  *  found it in — so a culprit owes for what THEY did, not for damage that was already there. Read from the event alone: the card's
- *  `repairValue` as it stood (`hold.value`); a card that priced nothing falls back to the rung's worth (`buildWorth.place`, the
- *  rungs it names) × the state's `repairCost`, and past that to the plain rung price a job pays by. Pure. */
+ *  `repairValue` as it stood (`hold.value`); a card that priced nothing falls back to the rung's worth (`buildWorth.hold`, all eight
+ *  rungs) × the state's `repairCost`, and past that to the plain rung price a job pays by. Pure. */
 export function holdHitOwed(e, content) {
   const l = ladderOf(content);
   const was = rungOf(content, e?.hold?.was || l[0]);
   const after = Math.max(was, rungOf(content, e?.change));
   if (!e?.hold || after <= was) return 0;
   const pub = e.hold.value && typeof e.hold.value === "object" && Object.keys(e.hold.value).length ? e.hold.value : null;
-  const bw = Number(content?.mapStates?.buildWorth?.place?.[e.hold.rung]);
+  // ✅ AEVI 2026-10-16: `buildWorth.hold` — "so the fallback has a figure for all eight rungs" (Erik may still move it); the
+  // settlements' table behind it, then the plain rung price
+  const BW = content?.mapStates?.buildWorth || {};
+  const bw = Number(BW.hold?.[e.hold.rung] ?? BW.place?.[e.hold.rung]);
   const v = (i) => (i <= 0 ? 0 : pub ? (Number(pub[l[i]]) || 0) : Number.isFinite(bw) ? bw * repairFraction(content, l[i]) : 4 + 6 * i);
   return Math.max(0, Math.round(v(after) - v(was)));
 }
@@ -606,10 +613,13 @@ export function holdDebtPass(character, { content = null, worldDay = null } = {}
       if (!rk.told) { rk.told = true; news.push(cap(fill(holdWord(W, "holdOwing"), { owner: hold.ownerName || "another traveler", price: price.label, hold: holdName, did }))); }
       continue;
     }
-    // ⚑ the world's own lines, as R3 says them: "People from {place} are asking after whoever {did} the {thing}." A hold's name
-    // will not always take "the" (Stillwater's Trouble), so the hold is the place and the thing is plainly "hold".
-    const vals = { name: keeperName, place: holdName, did, thing: "hold" };
-    climbSearch(rk, { R, Jh, W, wd, seen, holder: { id: keeperId, name: keeperName, placeId }, character, L, vals, news });
+    // ✅ AEVI 2026-10-16, the hold forms, read before R3's place lines: "{keeper} is asking up and down the roads after whoever {did}
+    // {hold}." / "{name} has left {hold} to find whoever {did} it." / "{name} has come from {hold} about what was done to it." —
+    // *"`{keeper}` and `{name}` are the same person here. The keeper asks, and then goes themselves."* R3's own lines stand behind
+    // them, with the hold as the place and plainly "hold" as the thing.
+    const vals = { name: keeperName, keeper: keeperName, hold: holdName, place: holdName, did, thing: "hold" };
+    const Wh = { asking: W.holdAsking || W.asking, sent: W.holdSent || W.sent, found: W.holdFound || W.found };
+    climbSearch(rk, { R, Jh, W: Wh, wd, seen, holder: { id: keeperId, name: keeperName, placeId }, character, L, vals, news });
   }
   return { news };
 }

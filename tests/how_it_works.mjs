@@ -38271,6 +38271,105 @@ console.log("\n── §430 · a person's four dials — one scale, a guard, the
   check("§430: …and the block is handed the people (their dials live on the record, not the registry entry)", /npcRegistryForGM\(env\.character, \{ people: env\.CONTENT\?\.npcs \|\| null,/.test(RG));
 }
 
+/* ═════ §431 — THE OWNER'S LEDGER: WHO OWES FOR THE HOLD, AND WHERE THE SEARCH STANDS (CCODE-737) ═════ */
+// ✅ AEVI, Q1 (2026-10-16): *"Should the hold's panel list who owes for it? Yes. Show each open debt on the hold: who it is, or 'someone
+// seen' / 'nobody seen'; how much, and what they did; where the keeper's search stands: asking, sent, found. A paid or forgiven debt
+// leaves the panel and stays in the hold's history."* ⛔ The search lives in the CULPRIT's game, so this drives two games.
+console.log("\n── §431 · the owner's ledger — who owes for the hold, what they did, and where the keeper's search stands ──");
+{
+  const MS = await import("../engine/mapstate.js");
+  const MD = await import("../engine/mending.js");
+  const WT = await import("../engine/worldtick.js");
+  const SH = await import("../engine/sharedholds.js");
+  const HO = await import("../engine/holdings.js");
+  const DG = await import("../engine/damages.js");
+  const { fakeRemote: fr431 } = await import("./lib/fake_remote.mjs");
+  const { loadContentHeadless: lch431 } = await import("./headless_content.mjs");
+  const C = await lch431();
+  const ec = C.rules.economy;
+  const yard = (id, name, steward) => ({ id, name, kind: "post", locationId: "millbrook", steward, condition: "holding", store: {},
+    features: [{ id: "f1", kind: "mine", name: "the mine", count: 1 }, { id: "f2", kind: "wall", name: "the wall", count: 1 }] });
+  const owner = { id: "char-own431", name: "Maren Voss", currentLocationId: "the_blaze", holdings: [yard("voss-431", "Voss Yard", "pell"), yard("bare-431", "Bare Yard", null)], mapEvents: [], worldState: {} };
+  const bryn = { id: "char-cul431", name: "Bryn Aske", currentLocationId: "millbrook", holdings: [], mapEvents: [], worldState: {}, purse: { crystal: 900 } };
+  const cass = { id: "char-cas431", name: "Cass Orrin", currentLocationId: "millbrook", holdings: [], mapEvents: [], worldState: {}, purse: { crystal: 900 } };
+  const remote = fr431();
+  const restore = remote.install();
+  try {
+    await WT.syncHolds({ character: owner, content: C });
+    const strike = async (who, key, change, seen, day) => {
+      const store = (await WT.syncHolds({ character: who, content: C })).store;
+      const vis = MS.visibleMapKeys(who, C, { hereId: "millbrook", holdsHere: SH.holdsAt(store, "millbrook", { selfId: who.id }) });
+      const r = MS.applyMapOp(who, { op: change, key, by: "pc", seen }, { content: C, worldDay: day, hereId: "millbrook", visible: vis });
+      await WT.syncMap({ character: who, content: C });
+      return r;
+    };
+    const h = owner.holdings[0];
+    const hit = await strike(bryn, "hold:voss-431", "ruined", "named", 40);
+    const hitC = await strike(cass, "hold:voss-431", "damaged", "described", 41);
+    const hitU = await strike(cass, "hold:bare-431", "damaged", "unseen", 41);
+    await WT.syncMap({ character: owner, content: C });
+    MD.holdHitsPass(owner, { content: C, worldDay: 42 });
+    const ledger = async (day) => {
+      for (const who of [bryn, cass]) { MD.holdDebtPass(who, { content: C, worldDay: day }); await WT.syncTrades({ character: who, economy: ec }); }
+      const tr = await WT.syncTrades({ character: owner, economy: ec });
+      return { rows: MD.owedForHold(owner, h, { orders: Object.values(tr.store?.orders || {}), content: C }), bare: MD.owedForHold(owner, owner.holdings[1], { orders: Object.values(tr.store?.orders || {}), content: C }), store: tr.store };
+    };
+    const d42 = await ledger(41);   // the day after the first blow: both searches have begun, neither has set out
+    const bRow = d42.rows.find((r) => r.culpritId === bryn.id), cRow = d42.rows.find((r) => r.culpritId === cass.id);
+    check("§431: ⛔ THE HOLD KEEPS EACH BLOW IT TOOK IN, and its panel lists one row per culprit — the named by name, the only-seen as \"someone seen\", and an unseen blow as \"nobody seen\"",
+      hit.ok && hitC.ok && hitU.ok && (h.blows || []).length === 2 && d42.rows.length === 2
+      && bRow?.who === "Bryn Aske" && bRow.seen === "named" && cRow?.who === "someone seen" && cRow.seen === "described"
+      && d42.bare.length === 1 && d42.bare[0].who === "nobody seen" && d42.bare[0].search === null, JSON.stringify({ rows: d42.rows, bare: d42.bare }));
+    check("§431: …how much, and what they did — the culprit's figure (`holdHitOwed`), in the hold's own money, and the world's word for it",
+      bRow.owed === MD.holdHitOwed(hit.event, C) && bRow.price === `${bRow.owed} crystal` && bRow.did === C.mapStates.reckoning.words.did.ruined
+      && cRow.owed === MD.holdHitOwed(hitC.event, C));
+    check("§431: ⛔ WHERE THE KEEPER'S SEARCH STANDS — published by the culprit's game, read by the owner's: asking at once",
+      bRow.search === "asking" && cRow.search === "asking", JSON.stringify([bRow.search, cRow.search]));
+    const sentDay = 40 + C.mapStates.reckoning.searchBeginsAfterDays.named;
+    const dSent = await ledger(sentDay);
+    const dFound = await ledger(sentDay + C.mapStates.reckoning.findWithinDays.named + 1);
+    const cassSent = 41 + C.mapStates.reckoning.searchBeginsAfterDays.described;
+    check("§431: …then sent, then found, as the culprit's game moves it — each on its own clock (seen by name, two days; only seen, seven)",
+      dSent.rows.find((r) => r.culpritId === bryn.id)?.search === "sent" && dSent.rows.find((r) => r.culpritId === cass.id)?.search === "asking"
+      && dFound.rows.find((r) => r.culpritId === bryn.id)?.search === "found"
+      && dFound.rows.find((r) => r.culpritId === cass.id)?.search === (sentDay + C.mapStates.reckoning.findWithinDays.named + 1 >= cassSent ? "sent" : "asking"),
+      JSON.stringify([dSent.rows.map((r) => [r.who, r.search]), dFound.rows.map((r) => [r.who, r.search])]));
+    const puts = remote.state.puts;
+    MD.holdDebtPass(bryn, { content: C, worldDay: sentDay + 8 }); await WT.syncTrades({ character: bryn, economy: ec });
+    check("§431: …a tick that moves nothing writes nothing", remote.state.puts === puts);
+
+    // ── paid: the row leaves and the history keeps it ──
+    HO.applyDebtOps(bryn, [{ op: "settle", holderId: "pell" }], { day: 52, economy: ec });
+    await WT.syncTrades({ character: bryn, economy: ec });
+    const before = Number(owner.purse?.crystal) || 0;
+    const dPaid = await ledger(53);
+    const rec = Object.values(dPaid.store.orders).find((o) => o.kind === "damages" && o.buyerId === bryn.id);
+    check("§431: ⛔ PAID — the row leaves the panel, the hold's history says who paid what, the money arrived once, and it is ONE record that moved (search → paid → settled)",
+      !dPaid.rows.some((r) => r.culpritId === bryn.id) && (h.history || []).some((e) => /Bryn Aske paid \d+ crystal for what they did to it/.test(e.note))
+      && owner.purse.crystal === before + bRow.owed && rec?.status === "settled"
+      && Object.values(dPaid.store.orders).filter((o) => o.kind === "damages" && o.buyerId === bryn.id).length === 1, JSON.stringify(rec));
+    // ── forgiven: the same ──
+    HO.applyDebtOps(cass, [{ op: "forgive", holderId: "pell", why: "pulled the keeper's child from the river" }], { day: 54 });
+    await WT.syncTrades({ character: cass, economy: ec });
+    const dForgiven = await ledger(55);
+    check("§431: ⛔ FORGIVEN — the row leaves, the history keeps it, and no money moves",
+      dForgiven.rows.length === 0 && (h.history || []).some((e) => /what the one who was seen owed for it was let go/.test(e.note))
+      && owner.purse.crystal === before + bRow.owed, JSON.stringify(dForgiven.rows));
+    check("§431: …and the unseen blow on the other hold is still listed — nobody owes for it, and nothing ended it",
+      dForgiven.bare.length === 1 && dForgiven.bare[0].who === "nobody seen");
+  } finally { restore(); }
+
+  // ── the merge: one record, moving on ──
+  const base = { id: "x", kind: "damages" };
+  check("§431: the record's own merge — an end over a payment over a search, else the later revision (a flight sends the search back to asking, later and lower)",
+    DG.newerDamages({ ...base, status: "sent", rev: 3 }, { ...base, status: "asking", rev: 4 }).status === "asking"
+    && DG.newerDamages({ ...base, status: "paid", rev: 5 }, { ...base, status: "found", rev: 9 }).status === "paid"
+    && DG.newerDamages({ ...base, status: "settled", rev: 5 }, { ...base, status: "paid", rev: 6 }).status === "settled");
+  const A = rd("app.js").replace(/\r\n/g, "\n");
+  check("§431: the panel is the hold's Attack & Defense tab, reading the same records the sync settles",
+    /pane\("defence", `\s*\$\{\(\(\) => \{[\s\S]{0,400}owedForHold\(character, h, \{ orders: Object\.values\(sharedTrades\?\.orders \|\| \{\}\), content: CONTENT \}\)/.test(A));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

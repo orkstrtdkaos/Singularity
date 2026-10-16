@@ -18,6 +18,7 @@ import { unitWorth } from "./holdings.js";
 import { credit, INDIVISIBLE } from "./purse.js";   // a refund returns the money it was paid in
 import { payAt, earnAt, saidPaid, saidEarned, moneyLabel } from "./money.js";   // ⛔ CCODE-437: a hold sells in its own place's money
 import { addItem, removeItem } from "./inventory.js";
+import { newerDamages } from "./damages.js";   // CCODE-737: a reckoning's record moves by its own rule, not the trades' stages
 
 export const TRADES_PATH = "world/trades/valley.json";
 /** A keeper sells this many of a thing at a time — no more than a stack a traveler can carry away in one hand-over. */
@@ -86,6 +87,8 @@ export function mergeOrders(remote, orders = [], { regionId = "valley" } = {}) {
   for (const o of orders || []) {
     if (!o?.id) continue;
     const cur = next.orders[o.id];
+    // ✅ CCODE-737: a damages record is the reckoning's — an end over a payment over a search, else the later revision
+    if (o.kind === "damages" || cur?.kind === "damages") { const keep = newerDamages(cur, o); if (keep === o) next.orders[o.id] = { ...(cur || {}), ...o }; continue; }
     if (!cur || (STAGE[o.status] ?? -1) > (STAGE[cur.status] ?? -1)) next.orders[o.id] = { ...(cur || {}), ...o };
   }
   return next;

@@ -34,7 +34,8 @@ import { walkingDays } from "./worldmap.js";
 import { workMods } from "./holdwork.js";   // ⛔ CCODE-450: standing work — who joins the watch, the yields and the upkeep while it is done
 import { chargedWith } from "./assignments.js";   // ✅ Aevi item 8: whoever is CHARGED with a hold's growth is a hand on that job
 import { postJob } from "./jobstate.js";   // ⛔ CCODE-452: a raise is a job on the board     // …within gateWithinDays of it
-import { featureScale, applyMapChange } from "./mapstate.js";   // ⛔ SNG-679 S6: a damaged feature gives less, and a hold caps its features
+import { featureScale, applyMapChange } from "./mapstate.js";
+import { damagesRecord, queueDamages } from "./damages.js";   // CCODE-737: one shared record per hold debt   // ⛔ SNG-679 S6: a damaged feature gives less, and a hold caps its features
 
 export const HOLDING_KINDS = ["post", "enterprise"];
 /** ⚠️ WHICH SIDE AN UNKNOWN WORD FALLS ON. A holding that PRODUCES is an enterprise; everything else holds
@@ -649,12 +650,12 @@ export function applyDebtOps(character, ops = [], { day = null, regionId = null,
        * paid, the debt cleared, and the money went nowhere: the owner's news had said "they owe you 128 crystal" and nothing ever
        * said it was paid, or paid it. The id is the reckoning's, so one debt is one payment however often it is retried. */
       if (d.owedTo?.playerId && Number.isFinite(d.amount) && d.amount > 0) {
+        // ⛑ CCODE-737: the reckoning's own record, moved on to `paid` — the same id its search was published under (`rk.ref`)
         const rk731 = d.mapKey ? character?.reckonings?.[d.mapKey] : null;
-        character.tradeOutbox = [...(Array.isArray(character.tradeOutbox) ? character.tradeOutbox : []), {
-          id: `damages|${d.owedTo.playerId}|${character.id}|${d.mapKey || key}|${rk731?.damageId || d.sinceDay || 0}`, kind: "damages", status: "paid",
-          ownerId: d.owedTo.playerId, ownerName: d.owedTo.name || null, holdId: d.owedTo.holdId || null, holdName: d.owedTo.holdName || null,
-          buyerId: character.id, buyerName: character.name || null, amount: d.amount, currency: d.currency, regionId: d.regionId || null,
-          value: Number(d.valueOwed) || null, collectedBy: d.heldBy || null, worldDay: day }];
+        if (rk731) rk731.rev = (Number(rk731.rev) || 0) + 1;
+        queueDamages(character, damagesRecord({ owedTo: d.owedTo, culprit: character, key: d.mapKey || key, ref: rk731?.ref || rk731?.damageId || d.sinceDay || 0,
+          status: "paid", rev: rk731?.rev || 1, amount: d.amount, currency: d.currency, regionId: d.regionId || null, value: d.valueOwed,
+          hitIds: rk731?.hitIds || [], seen: rk731?.seen || null, collectedBy: d.heldBy || null, worldDay: day }));
       }
       // ✅ SNG-679 R3: the damages paid are paid — the reckoning is over, and the locals' spending up to now is settled
       if (d.mapKey && character?.reckonings?.[d.mapKey]) { const rk = character.reckonings[d.mapKey]; rk.paidValue = (Number(rk.paidValue) || 0) + (Number(d.valueOwed) || 0); rk.state = "settled"; }
@@ -674,6 +675,14 @@ export function applyDebtOps(character, ops = [], { day = null, regionId = null,
     } else if (kind === "forgive") {
       const r = settleDebt(character, key, { how: "deed", day, why: op.why || op.reason || null });
       if (r?.mapKey && character?.reckonings?.[r.mapKey]) character.reckonings[r.mapKey].state = "forgiven";   // ✅ SNG-679 R3: a deed that outweighs it ends the reckoning
+      // ✅ CCODE-737 / Aevi Q1: *"A paid or forgiven debt leaves the panel"* — so the owner's game is told this one ended
+      if (r?.owedTo?.playerId && r.mapKey) {
+        const rk = character.reckonings?.[r.mapKey] || null;
+        if (rk) rk.rev = (Number(rk.rev) || 0) + 1;
+        queueDamages(character, damagesRecord({ owedTo: r.owedTo, culprit: character, key: r.mapKey, ref: rk?.ref || rk?.damageId || r.sinceDay || 0,
+          status: "forgiven", rev: rk?.rev || 1, amount: r.amount ?? null, currency: r.currency || null, regionId: r.regionId || null, value: r.valueOwed,
+          hitIds: rk?.hitIds || [], seen: rk?.seen || null, collectedBy: r.heldBy || null, worldDay: day }));
+      }
       out.push({ op: kind, ok: !!r, key, ...(r ? {} : { why: "no such debt" }) });
     }
   }

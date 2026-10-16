@@ -17,7 +17,8 @@
 import { parseMapKey, mapStateOf, rungOf, ladderOf, localsWillMend, mapThingOf, repairFraction, applyMapChange, localRepairAt, eventsFor, sortEvents, mapStateWord } from "./mapstate.js";
 import { personIdFor } from "./fates.js";   // ✅ R3: a holder minted from the event that made the debt — the same person in every game
 import { mintedName } from "./names.js";
-import { priceHere } from "./money.js";
+import { priceHere, moneyLabel } from "./money.js";
+import { damagesRecord, queueDamages, DAMAGES_TERMINAL } from "./damages.js";   // CCODE-737: the reckoning, shared, for the owner's ledger
 import { worthOfGoods } from "./holdings.js";
 import { walkingDays } from "./worldmap.js";
 import { postJob, dropJob, ensureJobs } from "./jobstate.js";
@@ -536,6 +537,9 @@ export function holdHitsPass(character, { content = null, worldDay = null } = {}
       if (!r.ok) continue;
       const owed = holdHitOwed(e, content);
       folded.push({ holdId: h.id, id: e.id, was: r.was, state: r.state, owed });
+      // ✅ CCODE-737 / Aevi Q1: the owner's ledger — each blow, who (as far as anyone saw), what it did and what mending it costs
+      h.blows = [...(Array.isArray(h.blows) ? h.blows : []), { id: e.id, day: Math.floor(Number(e.day) || 0), change: e.change, by: e.by || null,
+        byName: e.byName || null, seen: e.seen || "unseen", owed }].slice(-40);
       if (r.state === r.was && owed <= 0) continue;   // a blow that changed nothing is not news
       const did = (W.did || {})[e.change] || e.change;
       const keeper = h.steward ? (character.npcRegistry?.[h.steward]?.name || content?.npcs?.[h.steward]?.name || null) : null;
@@ -584,7 +588,7 @@ export function holdDebtPass(character, { content = null, worldDay = null } = {}
     if (!live.length) continue;
     const seen = live.some((e) => e.seen === "named") ? "named" : "described";
     const last = live[live.length - 1], hold = last.hold;
-    if (!rk) rk = RK[key] = { damageId: last.id, since: Math.floor(Number(live[0].day) || 0), seen, state: "owed", paidValue: 0, hold: true,
+    if (!rk) rk = RK[key] = { damageId: last.id, ref: live[0].id, since: Math.floor(Number(live[0].day) || 0), seen, state: "owed", paidValue: 0, hold: true,
       ...(cleared.size ? { cleared: [...cleared] } : {}) };
     rk.hitIds = live.map((e) => e.id); rk.damageId = last.id; rk.seen = seen;
     const owed = Math.max(0, live.reduce((a, e) => a + holdHitOwed(e, content), 0) - (Number(rk.paidValue) || 0));
@@ -609,8 +613,20 @@ export function holdDebtPass(character, { content = null, worldDay = null } = {}
       alwaysActs: !!keeperId, owedTo: { playerId: hold.owner, name: hold.ownerName || null, holdId: parseMapKey(key).id, holdName },
       sinceDay: prev?.sinceDay ?? rk.since, lastMovedDay: prev?.lastMovedDay ?? rk.since, escalation: prev?.escalation || 0,
       history: prev?.history || [{ day: rk.since, note: `owed: damages — ${holdName}, ${did}` }] };
+    // ✅ CCODE-737 / Aevi Q1: where this reckoning stands goes to the owner's game — *"where the keeper's search stands: asking, sent,
+    // found"* — whenever it moves (and only then: a tick that changes nothing writes nothing)
+    const publish = () => {
+      if (rk.published && rk.published.status === rk.state && rk.published.amount === price.amount) return;
+      rk.ref = rk.ref || live[0].id;
+      rk.rev = (Number(rk.rev) || 0) + 1;
+      queueDamages(character, damagesRecord({ owedTo: debts[debtKey].owedTo, culprit: character, key, ref: rk.ref, status: rk.state, rev: rk.rev,
+        amount: price.amount, currency: price.currency, regionId: price.currency === "scrip" ? price.regionId : null, value: owed, hitIds: rk.hitIds,
+        seen, collectedBy: keeperId, worldDay: Math.floor(wd) }));
+      rk.published = { status: rk.state, amount: price.amount };
+    };
     if (!keeperId) {
       if (!rk.told) { rk.told = true; news.push(cap(fill(holdWord(W, "holdOwing"), { owner: hold.ownerName || "another traveler", price: price.label, hold: holdName, did }))); }
+      publish();
       continue;
     }
     // ✅ AEVI 2026-10-16, the hold forms, read before R3's place lines: "{keeper} is asking up and down the roads after whoever {did}
@@ -620,8 +636,68 @@ export function holdDebtPass(character, { content = null, worldDay = null } = {}
     const vals = { name: keeperName, keeper: keeperName, hold: holdName, place: holdName, did, thing: "hold" };
     const Wh = { asking: W.holdAsking || W.asking, sent: W.holdSent || W.sent, found: W.holdFound || W.found };
     climbSearch(rk, { R, Jh, W: Wh, wd, seen, holder: { id: keeperId, name: keeperName, placeId }, character, L, vals, news });
+    publish();
   }
   return { news };
+}
+
+/** ⛔ THE OWNER'S GAME CLOSES WHAT ENDED. A reckoning paid or forgiven in the culprit's game leaves the hold's panel and stays in its
+ *  history (✅ Aevi Q1), once. Reads the shared records; mutates the owner's holds. → the lines it wrote. */
+export function closeDamages(owner, orders = [], { worldDay = null } = {}) {
+  const out = [];
+  if (!owner?.id) return out;
+  owner.damagesClosed = owner.damagesClosed && typeof owner.damagesClosed === "object" ? owner.damagesClosed : {};
+  for (const o of orders || []) {
+    if (!o || o.kind !== "damages" || o.ownerId !== owner.id) continue;
+    if (!(o.status === "paid" || DAMAGES_TERMINAL.has(o.status)) || owner.damagesClosed[o.id]) continue;
+    const h = (owner.holdings || []).find((x) => x && x.id === o.holdId);
+    if (!h) continue;
+    const ids = new Set(Array.isArray(o.hitIds) ? o.hitIds : []);
+    const how = o.status === "forgiven" ? "forgiven" : "paid";
+    for (const b of (h.blows || [])) if (!b.closed && (ids.has(b.id) || (!ids.size && b.by === o.buyerId))) b.closed = how;
+    const who = o.seen === "named" ? (o.buyerName || "another traveler") : "the one who was seen";
+    const note = how === "paid"
+      ? `${who} paid ${moneyLabel(Number(o.amount) || 0, o.currency || "crystal", o.regionId || null)} for what they did to it`
+      : `what ${who} owed for it was let go`;
+    h.history = [...(h.history || []), { at: worldDay != null ? Math.floor(Number(worldDay)) * 24 : null, from: h.condition, to: h.condition, note }].slice(-12);
+    owner.damagesClosed[o.id] = how;
+    out.push(note);
+  }
+  return out;
+}
+
+/** ⛔ THE OWNER'S LEDGER for one hold — ✅ Aevi Q1: *"who it is, or 'someone seen' / 'nobody seen'; how much, and what they did; where the
+ *  keeper's search stands: asking, sent, found."* The blows the hold took in and has not seen ended, one row per culprit (a culprit
+ *  only seen is still one person), one per unseen blow; the search from the culprit's own published reckoning. Pure. */
+export function owedForHold(owner, h, { orders = [], content = null } = {}) {
+  if (!owner?.id || !h?.id) return [];
+  const W = wordsOf(content), L = content?.locations || {};
+  const open = (Array.isArray(h.blows) ? h.blows : []).filter((b) => b && !b.closed);
+  if (!open.length) return [];
+  const live = (orders || []).filter((o) => o && o.kind === "damages" && o.ownerId === owner.id && o.holdId === h.id && o.status !== "paid" && !DAMAGES_TERMINAL.has(o.status));
+  const priceOf = (v) => priceHere(v, L[h.locationId]?.regionId || null, content?.rules?.economy || null).label;
+  const worst = (bs) => { const l = ladderOf(content); return l[Math.max(...bs.map((b) => rungOf(content, b.change)))]; };
+  const rows = [], unseen = [];
+  const byCulprit = new Map();
+  for (const b of open) {
+    if (b.seen === "unseen" || !b.by) { unseen.push({ who: "nobody seen", seen: "unseen", culpritId: null, blows: [b] }); continue; }
+    if (!byCulprit.has(b.by)) byCulprit.set(b.by, []);
+    byCulprit.get(b.by).push(b);
+  }
+  // those who owe first, the named before the only-seen; the blows nobody saw after them
+  for (const [by, bs] of byCulprit) {
+    const named = bs.some((b) => b.seen === "named");
+    rows.push({ who: named ? (bs.find((b) => b.byName)?.byName || "another traveler") : "someone seen", seen: named ? "named" : "described", culpritId: by, blows: bs });
+  }
+  rows.sort((a, b) => (a.seen === "named" ? 0 : 1) - (b.seen === "named" ? 0 : 1));
+  rows.push(...unseen);
+  return rows.map((r) => {
+    const owed = r.blows.reduce((a, b) => a + (Number(b.owed) || 0), 0);
+    const rec = r.culpritId ? live.filter((o) => o.buyerId === r.culpritId).sort((a, b) => (Number(b.rev) || 0) - (Number(a.rev) || 0))[0] || null : null;
+    const change = worst(r.blows);
+    return { who: r.who, seen: r.seen, culpritId: r.culpritId, owed, price: priceOf(owed), change, did: (W.did || {})[change] || change,
+      search: r.seen === "unseen" ? null : (rec?.status || null), blows: r.blows.map((b) => b.id), since: Math.min(...r.blows.map((b) => b.day)) };
+  });
 }
 
 /* ═════ PART R · R7: THE HUNT IS A LOCAL JOB TOO ═════

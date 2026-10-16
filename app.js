@@ -52,7 +52,7 @@ import { openingFrame, placeCardBox, sheetAfterDrag } from "./engine/worldmap.js
 import { mapStateOf, mapStateWord, mapChangeLine, placeAllows, visibleMapKeys, applyMapOp, parseMapKey, applyMapChange, mapView, roadKey, knownStateOf, liveLocations } from "./engine/mapstate.js";
 // ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
 import { mapHolds, holdMarker, ensureHoldSite, placeHoldSite, holdSiteOf, holdView } from "./engine/mapholds.js";
-import { brokenAt, giftMend } from "./engine/mending.js";   // ✅ SNG-679 Part R · R4: what is broken at a place, on its card
+import { brokenAt, giftMend, owedForHold } from "./engine/mending.js";   // ✅ SNG-679 Part R · R4: what is broken at a place, on its card
 // ⛔ SNG-680: the film is DATA. Not one of its words is written in this file.
 import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
   filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase, filmFrame, filmLandings } from "./engine/films.js";
@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.27.13";
+const APP_VERSION = "2.27.14";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -22393,6 +22393,21 @@ function renderHoldingsTab(manageId = null, tab = null) {
           </div>`)}
 
         ${pane("defence", `
+          ${(() => {
+            // ✅ CCODE-737 · Aevi Q1: *"Show each open debt on the hold … It's the owner's ledger, and it's what a player looks at
+            // before sending a band."* Who, what they did and what it costs, and where the keeper's search stands.
+            let rows = [];
+            try { rows = owedForHold(character, h, { orders: Object.values(sharedTrades?.orders || {}), content: CONTENT }); } catch { rows = []; }
+            if (!rows.length) return "";
+            const keeper = h.steward ? nameOf(h.steward) : null;
+            const searchSaid = (r) => r.seen === "unseen" ? "nobody to go after" : !keeper ? "nobody keeps it, so nobody has gone after them"
+              : r.search === "sent" ? `${esc(keeper)} has gone after them` : r.search === "found" ? `${esc(keeper)} has found them`
+              : r.search === "refused" ? "they refused to pay" : r.search ? `${esc(keeper)} is asking after them`
+              : "no word yet of the search";   // ⚠️ the culprit's game has not published its reckoning yet: say so, never guess it
+            return `<div class="hs-watch" data-hold-owed="${esc(h.id)}"><span class="hs-lbl">Owed for it</span>
+              ${rows.map((r) => `<div class="pp-must"><strong>${esc(r.who)}</strong> · ${esc(r.did)} it · ${r.seen === "unseen" ? `${esc(r.price)} to mend` : `owes ${esc(r.price)}`}</div>
+                <div class="hint">${searchSaid(r)}</div>`).join("")}</div>`;
+          })()}
           ${B.watch || ""}
           ${B.risk || ""}
           ${B.defence || ""}

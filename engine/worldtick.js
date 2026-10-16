@@ -61,7 +61,7 @@ import { TRADES_PATH, settleOrders, refundOrders, mergeOrders } from "./holdtrad
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval, rollRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
 import { localsMendPass, mapThingOf, learnMapEvents, knownStateOf, ladderOf, MAP_STORE_PATH, unpublishedMapEvents, mergeMapEvents, adoptMapStore } from "./mapstate.js";   // ✅ SNG-679 Part R · R2 · S7: what the character learns
-import { postMendingJobs, reckoningPass, postHuntJobs, holdHitsPass, holdDebtPass } from "./mending.js";   // ✅ SNG-679 Part R · R6: mending is a job on the job list · R3: the reckoning
+import { postMendingJobs, reckoningPass, postHuntJobs, holdHitsPass, holdDebtPass, closeDamages } from "./mending.js";   // ✅ SNG-679 Part R · R6: mending is a job on the job list · R3: the reckoning
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
 import { rollErrands, workCraftsOf, workDayChance, workHeads, bandMissionOutcome } from "./jobs.js";   // ⛔ CCODE-428: …by the job's own dice · CCODE-450: standing work
@@ -1596,6 +1596,7 @@ export async function syncTrades({ character, now = Date.now(), economy = null }
     const all = Object.values(remote?.orders || {});
     const settled = settleOrders(character, all, { worldDay, economy });   // CCODE-437: the owner is paid in the hold's own money
     const refunded = refundOrders(character, all, { worldDay });
+    try { closeDamages(character, [...all, ...settled.moved], { worldDay }); } catch { /* a ledger is never a reason a sync fails */ }   // ✅ CCODE-737
     news.push(...settled.news, ...refunded.news);
     const outbox = Array.isArray(character.tradeOutbox) ? character.tradeOutbox : [];
     const toPublish = [...outbox, ...settled.moved, ...refunded.moved];

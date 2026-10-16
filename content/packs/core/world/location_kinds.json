@@ -239,6 +239,7 @@
    "water": 60,
    "ground": 25,
    "gate": 300,
+   "hold": { "post": 30, "steading": 60, "hamlet": 90, "village": 150, "town": 300, "keep": 500, "fortress": 900, "stronghold": 1500 },
    "place": { "none": 20, "few": 30, "hamlet": 60, "village": 150, "town": 400, "city": 1000 },
    "_why": "What a thing with no hold feature is worth to build, in crystal, for repairCost and the player's reward. Scaled against the Water Wheels (40): a stretch of road is less than a mill, a river brought back is more, a place is worth what it houses (its local_ground dwellings), and a gate is the dearest thing on the ground. A Reach pays the same figure in scrip."
   },
@@ -322,6 +323,10 @@
     "mendedPlace": "{place} is whole again.",
     "thanked": "{place} remembers who helped {mend} the {thing}.",
     "thankedPlace": "{place} remembers who helped {mend} it.",
+    "holdAsking": "{keeper} is asking up and down the roads after whoever {did} {hold}.",
+    "holdSent": "{name} has left {hold} to find whoever {did} it.",
+    "holdFound": "{name} has come from {hold} about what was done to it.",
+    "mendingPlace": "The people of {place} are at work putting it right.",
     "remembered": "{place} has not forgotten the {thing}."
    }
   },
@@ -425,6 +430,7 @@
     "mend": "{Mend} the {thing} at {place}",
     "mendPlace": "{Mend} {place}",
     "makeGood": "Make good the {thing} at {place}",
+    "makeGoodPlace": "Make good what you did to {place}",
     "remake": "Make the gate at {place} again",
     "resettle": "Resettle {name}",
     "hunt": "Find whoever {did} the {thing} at {place}",

@@ -26184,7 +26184,8 @@ await (async () => {
     const hesk2 = await mint725("npc", "millbrook", { name: "Hesk Marrow", role: "a hired blade of the Watch", spectrum: { chaos_order: 0.3 }, fears: ["fire"] });
     const sela = await mint725("npc", "kindlerow", { name: "Sela Dunn", role: "a Blazeborn smith", spectrum: { violence_peace: -0.6, falsehood_truth: 0.7 }, fears: ["cold iron"] });
     const given = await mint725("npc", "millbrook", { name: "Odd Tam", role: "a carter", spectrum: {}, fears: ["debt"], personality: { warmth: -0.5, trust: 0.1, candor: 0.2, patience: 0.9 } });
-    const dialsOk = (p) => p && ["warmth", "trust", "candor", "patience"].every((k) => Number.isFinite(p[k]) && p[k] >= -1 && p[k] <= 1);
+    // ✅ CCODE-736 / Aevi Q5: the dials are 0..1 with 0.5 the middle (they were −1..1)
+    const dialsOk = (p) => p && ["warmth", "trust", "candor", "patience"].every((k) => Number.isFinite(p[k]) && p[k] >= 0 && p[k] <= 1);
     const shrine = await mint725("location", "kindlerow", { name: "The Ash Shrine" });
     const full = await mint725("location", "millbrook", { name: "Test Hollow", descriptionSeed: "A hollow below the ridge where nobody hurries.", connections: ["millbrook"] });
     const pass = { id: "gen-725-pass", name: "The Pass", descriptionSeed: "", tags: ["transitional"], connections: ["millbrook"] };

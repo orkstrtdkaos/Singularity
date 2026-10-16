@@ -313,8 +313,12 @@ export function finishBorn(type, record, ctx = {}) {
  * ⛑ THE VECTOR is the person's spectrum; where it is silent on an axis, their tradition's disposition speaks for it at half and a
  * quarter weight (primary, secondary pole). Each dial leans on the axes that mean it — warmth on feeling, peace, life and light;
  * trust on truth, order and the angelic; candour on truth and the concrete; patience on order, peace, time and reason — from a
- * middling 0.4, with a small sway by the person's own id so two people of one tradition are not one temper. Dials in −1..1 (the
- * schema's range), to the nearest 0.05. The same person always derives the same four. */
+ * middle, with a small sway by the person's own id so two people of one tradition are not one temper. The same person always derives
+ * the same four, to the nearest 0.05.
+ * ✅ AEVI, Q5 (2026-10-16): *"0 to 1, with 0.5 as the middle … The derived dials should land on it too: (x + 1) / 2 from your −1..1."*
+ * ⚠️ NOT THE STRAIGHT MAP, AND WHY: these were never centred on 0. They started from "a middling 0.4" on a −1..1 range, so
+ * (x + 1) / 2 would have put every derived person at 0.7 — warmer and more trusting than anyone authored. They are re-centred on her
+ * middle instead: 0.5 + half the lean (the same lean, on a range half as wide), clamped to 0..1. */
 const DIAL_AXES = {
   warmth:   [["emotional_logical", -0.3], ["violence_peace", 0.25], ["death_life", 0.2], ["dark_light", 0.15], ["demonic_angelic", 0.1]],
   trust:    [["falsehood_truth", 0.35], ["chaos_order", 0.3], ["demonic_angelic", 0.2], ["dark_light", 0.15]],
@@ -340,8 +344,8 @@ export function personalityFrom(spectrum, { tradition = null, spectrums = null, 
   for (const [dial, axes] of Object.entries(DIAL_AXES)) {
     let s = 0;
     for (const [axis, w] of axes) s += (v[axis] || 0) * w;
-    const sway = id ? ((((h >>> (k * 7)) & 0x3f) / 63) - 0.5) * 0.2 : 0;   // ±0.1, the person's own
-    out[dial] = Math.round(Math.max(-1, Math.min(1, 0.4 + s * 0.6 + sway)) * 20) / 20;
+    const sway = id ? ((((h >>> (k * 7)) & 0x3f) / 63) - 0.5) * 0.1 : 0;   // ±0.05, the person's own
+    out[dial] = Math.round(Math.max(0, Math.min(1, 0.5 + s * 0.5 + sway)) * 20) / 20;
     k++;
   }
   return out;

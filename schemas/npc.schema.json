@@ -37,7 +37,7 @@
   },
   "personality": {
    "type": "object",
-   "description": "affect dials, each roughly -1..1",
+   "description": "affect dials, each 0..1 with 0.5 the middle (Aevi 2026-10-16: one scale for every person, authored, written or derived)",
    "properties": {
     "warmth": {
      "type": "number"

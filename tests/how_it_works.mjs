@@ -38217,6 +38217,60 @@ console.log("\n── §429 · a place's pole words agree with its own spectrum 
     && /name: "player's guide · where you begin/.test(rd("scripts/certify_counts.mjs")));
 }
 
+/* ═════ §430 — ONE SCALE FOR A PERSON'S FOUR DIALS, AND THE GM IS TOLD THEM (CCODE-736) ═════ */
+// ✅ AEVI, Q5 (2026-10-16): *"0 to 1, with 0.5 as the middle. I've put the 44 records that were on 0–10 onto it … The derived dials
+// should land on it too … Keep a load-time guard that brings anything above 1 down by 10 and warns, so it can't come back."*
+// ⛔ AND NOTHING READ THEM: 149 authored people and every minted one carry the dials, and the GM's people block never sent them.
+console.log("\n── §430 · a person's four dials — one scale, a guard, the saves brought over, and the GM told ──");
+{
+  const BC = await import("../engine/borncontract.js");
+  const RC = await import("../engine/reconcile.js");
+  const NP = await import("../engine/npcs.js");
+  const { loadContentHeadless: lch430 } = await import("./headless_content.mjs");
+  const C = await lch430();
+
+  // ── the derived dials sit on her scale, around her middle ──
+  const ids = Object.keys(C.npcs).slice(0, 150);
+  const d = ids.flatMap((id) => Object.values(BC.personalityFrom(C.npcs[id].spectrum || {}, { spectrums: C.spectrums, id })));
+  const mean = d.reduce((a, b) => a + b, 0) / d.length;
+  check("§430: ⛔ THE DERIVED DIALS ARE ON 0..1 AROUND 0.5 — re-centred, not mapped: they started from 0.4 on −1..1, and (x + 1) / 2 would have made every derived person 0.7",
+    d.every((v) => v >= 0 && v <= 1) && Math.abs(mean - 0.5) < 0.08 && Math.min(...d) < 0.4 && Math.max(...d) > 0.6, `mean ${mean.toFixed(3)}, ${Math.min(...d)}..${Math.max(...d)}`);
+  check("§430: …the same person still derives the same four, and a lean still leans (more truth, more candour)",
+    JSON.stringify(BC.personalityFrom({ falsehood_truth: 0.6 }, { spectrums: C.spectrums, id: "x" })) === JSON.stringify(BC.personalityFrom({ falsehood_truth: 0.6 }, { spectrums: C.spectrums, id: "x" }))
+    && BC.personalityFrom({ falsehood_truth: 0.8 }, { spectrums: C.spectrums }).candor > BC.personalityFrom({ falsehood_truth: -0.8 }, { spectrums: C.spectrums }).candor);
+
+  // ── the load guard ──
+  const tenScale = { id: "t430", personality: { warmth: 7, trust: 4, candor: 0.6, patience: 10 } };
+  const negScale = { id: "n430", personality: { warmth: 0.3, trust: -0.2, candor: 0.4, patience: 0.5 } };
+  const g1 = RC.reconcile(tenScale, "npc"), g2 = RC.reconcile(negScale, "npc");
+  check("§430: ✅ THE GUARD — a dial above 1 is the 0–10 scale, brought down by 10 and WARNED; a dial below 0 is the −1..1 scale, warned and never guessed at",
+    tenScale.personality.warmth === 0.7 && tenScale.personality.patience === 1 && tenScale.personality.candor === 0.6 && g1.warnings.length === 1 && /0–10 scale/.test(g1.warnings[0])
+    && negScale.personality.trust === -0.2 && g2.warnings.length === 1 && /−1\.\.1 scale/.test(g2.warnings[0]), JSON.stringify({ g1: g1.warnings, g2: g2.warnings }));
+  const allDials = Object.values(C.npcs).flatMap((n) => Object.values(n.personality || {}).filter((v) => typeof v === "number"));
+  const offScale = Object.values(C.npcs).filter((n) => Object.values(n.personality || {}).some((v) => typeof v === "number" && v < 0)).length;
+  check(`§430: ⛔ RATCHET — authored people whose dials are still on −1..1: ${offScale} (may only go DOWN from 13); and nothing at load is above 1`,
+    offScale <= 13 && allDials.every((v) => v <= 1), String(offScale));
+
+  // ── the saves: every grown person was written on −1..1 ──
+  const step = RC.CHARACTER_STEPS.find((s) => s.id === "dials-on-one-scale");
+  const save = { generated: { npc: { a: { personality: { warmth: -0.4, trust: 0.9, candor: 0, patience: 0.4 } }, b: { name: "no dials" } } } };
+  const r = step?.apply(save, {});
+  check("§430: ⛔ THE SAVES — a grown person's dials (written against a schema that said −1..1) come over by (x + 1) / 2, once, as the newest step",
+    !!step && step.version === Math.max(...RC.CHARACTER_STEPS.map((s) => s.version)) && JSON.stringify(save.generated.npc.a.personality) === JSON.stringify({ warmth: 0.3, trust: 0.95, candor: 0.5, patience: 0.7 })
+    && /1 grown person/.test(r?.notes?.[0] || ""), JSON.stringify(save.generated.npc.a.personality));
+
+  // ── the GM is told ──
+  check("§430: ⛔ THE GM IS TOLD — a person in the scene gets their temper in words, only the dials that are not middling, and a record off the scale says nothing",
+    NP.temperOf({ warmth: 0.9, trust: 0.2, candor: 0.5, patience: 0.7 }) === "warm, slow to trust, patient" && NP.temperOf({ warmth: 0.5, trust: 0.5, candor: 0.5, patience: 0.5 }) === ""
+    && NP.temperOf({ warmth: 0.3, trust: -0.1, candor: 0.4, patience: 0.5 }) === "" && NP.temperOf({ candor: 0.1 }, { words: { candor: ["closed", "open"] } }) === "closed");
+  const pc = { id: "pc430", name: "Tester", currentLocationId: "millbrook",
+    npcRegistry: { pell: { id: "pell", name: "Pell Ran Marsh", status: "active", locationId: "millbrook", relationship: 0, history: [], knownFacts: [], skillsObserved: [] } } };
+  const block = NP.npcRegistryForGM(pc, { locationId: "millbrook", sceneNpcNames: ["Pell Ran Marsh"], people: { pell: { personality: { warmth: 0.9, trust: 0.1, candor: 0.5, patience: 0.5 } } }, rules: C.rules }) || "";
+  check("§430: …in the people block itself, for someone present", /TEMPER: warm, slow to trust\./.test(block), block.slice(0, 300));
+  const RG = rd("engine/gm_registry.js");
+  check("§430: …and the block is handed the people (their dials live on the record, not the registry entry)", /npcRegistryForGM\(env\.character, \{ people: env\.CONTENT\?\.npcs \|\| null,/.test(RG));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

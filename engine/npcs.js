@@ -1134,7 +1134,35 @@ function renownLine(n, ctx = {}) {
   return ` ✦ RENOWN — people here know this person's record (${r.band}, ${r.deeds} deed${r.deeds === 1 ? "" : "s"}).${forWhat}${notable} Treat that reputation as something the room already carries; do not re-introduce them as a stranger.`;
 }
 
-export function npcRegistryForGM(character, { locationId = null, sceneNpcNames = [], interiority = null, communityId = null, rules = null } = {}) {
+/* ═════ CCODE-736 · THE FOUR DIALS REACH THE GM ═════
+ * ⛔ NOTHING READ THEM. 149 authored people carry warmth, trust, candour and patience, and every person the model mints gets them
+ * (written, or derived — CCODE-725 was built on the belief that "the GM's NPC block" read them). Measured 2026-10-16: no engine
+ * reader outside generation touches `personality`; this block sends a person's description, history, facts and drives, never their
+ * temper. ⛑ Said as words, for the people IN the scene only (the block is the GM context's largest), and only the dials that are
+ * not middling: a person at 0.5 on everything is unremarkable, which is itself the right thing to say by saying nothing.
+ * ⚠️ Plain engine words; `rules.npcStanding.dialWords` (the same shape) is Aevi's to author, and wins. */
+const DIAL_WORDS = {
+  warmth: ["cold", "warm"], trust: ["slow to trust", "quick to trust"],
+  candor: ["guarded", "blunt"], patience: ["quick-tempered", "patient"],
+};
+export function temperOf(personality, { words = null, low = 0.35, high = 0.65 } = {}) {
+  const p = personality && typeof personality === "object" ? personality : null;
+  if (!p) return "";
+  const W = words && typeof words === "object" ? words : DIAL_WORDS;
+  // ⚠️ A RECORD WITH ANY DIAL OFF 0..1 IS ON ANOTHER SCALE, SO NONE OF ITS DIALS CAN BE READ ON THIS ONE: the Kestrel's warmth 0.3 is
+  // warm-ish on −1..1 and cold on 0..1. It says nothing until it is brought over — the load guard has already said why.
+  if (Object.values(p).some((v) => typeof v === "number" && (v < 0 || v > 1))) return "";
+  const out = [];
+  for (const dial of ["warmth", "trust", "candor", "patience"]) {
+    const v = Number(p[dial]);
+    if (!Number.isFinite(v)) continue;
+    const pair = W[dial] || DIAL_WORDS[dial];
+    if (v <= low) out.push(pair[0]); else if (v >= high) out.push(pair[1]);
+  }
+  return out.join(", ");
+}
+
+export function npcRegistryForGM(character, { locationId = null, sceneNpcNames = [], interiority = null, communityId = null, rules = null, people = null } = {}) {
   const ctx = { communityId, rules };
   const reg = character.npcRegistry || {};
   // ⛔ CCODE-220 — THE KEY IS THE ID, SO AN ENTRY MISSING ONE BORROWS IT HERE. `driveOf` reads `n.id`, so
@@ -1175,6 +1203,8 @@ export function npcRegistryForGM(character, { locationId = null, sceneNpcNames =
     const hist = n.history.slice(wide ? -4 : -2).map(h => smartClamp(h, wide ? 240 : 160));
     const facts = n.knownFacts.slice(wide ? -6 : -3).map(f => smartClamp(f, 160));
     const d = driveOf(n);
+    // ✅ CCODE-736: their temper, from the four dials, for someone in the scene
+    const temper = wide ? temperOf(people?.[n.id]?.personality || n.personality || null, { words: rules?.npcStanding?.dialWords || null }) : "";
     let driveLine = "";
     if (d) {
       anyDriven = true;
@@ -1197,6 +1227,7 @@ export function npcRegistryForGM(character, { locationId = null, sceneNpcNames =
           ].filter(Boolean).join("; ")}.` : "") +
       (n.bondType && n.bondType !== "platonic" ? ` BOND: ${relationshipLabel(n)} — established fact; honor the KIND of this relationship.` : "") +
       (desc ? ` ${desc}` : "") +
+      (temper ? ` TEMPER: ${temper}.` : "") +
       (note ? ` CURRENT SITUATION: ${note}.` : "") +
       (n.skillsObserved.length ? ` Skills seen: ${n.skillsObserved.join(", ")}.` : "") +
       (facts.length ? ` What they know/have experienced: ${facts.join("; ")}.` : "") +

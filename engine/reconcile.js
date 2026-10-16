@@ -3359,6 +3359,26 @@ export const CHARACTER_STEPS = [
       return { said: `You were recorded as standing somewhere your own map does not have — a place grown on another character's world. You are at ${name(to)}.` };
     }
   },
+  {
+    version: 97, id: "dials-on-one-scale", playerFacing: false,   // ⚠️ the array is not sorted: 96 was the top when this was written (§378)
+    // ✅ AEVI, Q5 (2026-10-16): the four dials are 0..1 with 0.5 the middle. ⛔ EVERY PERSON A SAVE GREW BEFORE THIS WAS WRITTEN ON
+    // −1..1: the schema the model wrote against said "each roughly −1..1", and the derived dials were clamped to it. Measured on the
+    // saves: Silas's 19 grown people with dials run −0.40..0.90, Brynjar's −0.50..0.85. Brought over once, (x + 1) / 2 — the map her
+    // ruling names — so a grown person's temper means on the new scale what it meant on the old one.
+    apply: (c) => {
+      let moved = 0;
+      for (const rec of Object.values(c?.generated?.npc || {})) {
+        const p = rec?.personality;
+        if (!p || typeof p !== "object") continue;
+        for (const [k, v] of Object.entries(p)) {
+          if (typeof v !== "number" || !Number.isFinite(v)) continue;
+          p[k] = Math.round(Math.max(0, Math.min(1, (v + 1) / 2)) * 100) / 100;
+        }
+        moved++;
+      }
+      return moved ? { notes: [`dials-on-one-scale: ${moved} grown person(s) brought onto 0..1`] } : {};
+    }
+  },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];
@@ -3406,6 +3426,26 @@ export const CONTENT_STEPS = {
         if (!known) return {};
         const dangling = (loc.connections || []).filter(id => !known.has(id));
         return dangling.length ? { warnings: [`${loc.id}: connections reference unloaded locations: ${dangling.join(", ")}`] } : {};
+      }
+    }
+  ],
+  npc: [
+    {
+      version: 1, id: "dials-on-one-scale", playerFacing: false,
+      // ✅ AEVI, Q5 (2026-10-16): *"0 to 1, with 0.5 as the middle … Keep a load-time guard that brings anything above 1 down by 10 and
+      // warns, so it can't come back."* ⚠️ And a NEGATIVE dial is from the −1..1 scale, which cannot be told from 0..1 by its positive
+      // values — so it is WARNED, never guessed at (13 authored people carried one when this was written: hers to judge).
+      apply: (npc) => {
+        const p = npc?.personality;
+        if (!p || typeof p !== "object") return {};
+        const big = Object.entries(p).filter(([, v]) => typeof v === "number" && v > 1);
+        for (const [k, v] of big) p[k] = Math.round((v / 10) * 100) / 100;
+        const neg = Object.entries(p).filter(([, v]) => typeof v === "number" && v < 0).map(([k]) => k);
+        const warnings = [
+          ...(big.length ? [`${npc.id}: personality ${big.map(([k, v]) => `${k} ${v}`).join(", ")} is on the 0–10 scale — brought down by 10`] : []),
+          ...(neg.length ? [`${npc.id}: personality ${neg.join(", ")} below 0 — that is the −1..1 scale, and the dials are 0..1 (0.5 the middle)`] : []),
+        ];
+        return warnings.length ? { warnings } : {};
       }
     }
   ]
@@ -3458,6 +3498,17 @@ export function reconcileContent(content) {
     summary.applied += r.applied.length;
     summary.notes.push(...r.notes);
     summary.warnings.push(...r.warnings);
+  }
+  // ✅ CCODE-736: and the people — the dials' guard. ⚠️ A PLAIN PASS, NOT `reconcile()`: that stamps `reconcileVersion` on the record,
+  // and an authored figure is also validated as a `legend`, whose schema is closed (§378). The guard is idempotent, so it needs no stamp.
+  for (const npc of Object.values(content.npcs || {})) {
+    if (!npc || typeof npc !== "object") continue;
+    for (const step of CONTENT_STEPS.npc) {
+      let r = {};
+      try { r = step.apply(npc, ctx) || {}; } catch (err) { summary.warnings.push(`${step.id}: ${err.message}`); continue; }
+      if (r.notes) summary.notes.push(...r.notes);
+      if (r.warnings) summary.warnings.push(...r.warnings);
+    }
   }
   if (summary.notes.length) console.log(`[reconcile] content: ${summary.notes.length} derivations`, summary.notes);
   if (summary.warnings.length) console.warn(`[reconcile] content warnings:`, summary.warnings);

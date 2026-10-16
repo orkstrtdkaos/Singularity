@@ -223,7 +223,7 @@ export const GM_CONTEXT = [
     build: (env) => env.time.label },
   { key: "npcRegistryDetail", builder: "npcs.npcRegistryForGM", carries: ["known people", "bonds", "gender/pronouns"],
     reachedBy: "always", spec: "§13", views: ALL,
-    build: (env) => npcRegistryForGM(env.character, { locationId: env.character.currentLocationId, sceneNpcNames: (env.sceneState?.npcsPresent || []).map(n => n.name), interiority: env.CONTENT?.npcInteriority, communityId: env.location?.communityId ?? null, rules: env.CONTENT?.rules }) }, // SNG-233 §2b: drives fold into the NPC block
+    build: (env) => npcRegistryForGM(env.character, { people: env.CONTENT?.npcs || null, locationId: env.character.currentLocationId, sceneNpcNames: (env.sceneState?.npcsPresent || []).map(n => n.name), interiority: env.CONTENT?.npcInteriority, communityId: env.location?.communityId ?? null, rules: env.CONTENT?.rules }) }, // SNG-233 §2b: drives fold into the NPC block
   // ✅ ERIK 2026-09-12 ("I can't find the Radiant guy who helped finish the Made Gate... the GM doesn't recall him at all"): Bryn Callowell
   // was minted on d14 (twice) and never entered KNOWN PEOPLE — a minted person is registered only by a `meet`, and the GM saw minted people
   // only at their home place. 14 of Silas's 21 minted people sat in that limbo. This row shows every one of them, everywhere, with the id

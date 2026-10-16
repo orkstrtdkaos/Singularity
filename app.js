@@ -209,7 +209,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.28.0";
+const APP_VERSION = "2.28.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2969,6 +2969,143 @@ function worldField() {
     _field = makeField(data);
   } catch (err) { console.warn("[field] could not build the field:", err); _field = null; }
   return _field;
+}
+
+/* ⛔ CCODE-739 · THE FIELD LENS, ONE FOR BOTH MAPS. ✅ AEVI, Q4 (2026-10-16): *"What should the globe's stipple show? The world field,
+ * as the region map's motes do. One layer should mean one thing on both maps. The baked category and density are how it's stored, and
+ * nothing a player should have to know."* ⛑ So the region map's lens (B4 / M4: veins as LINES, wild nanite as a sparse capped scatter,
+ * ordered nanite gathered on a hex lattice where somebody tends it) is lifted out VERBATIM and both maps call it, each with its own
+ * projection. ⚠️ A second lens on the globe would have been the convergence defect `map_convergence_check` exists to end.
+ * @param toWorld  (x, y) → { lat, lon } in this canvas's CSS pixels, or null off the map (the globe's far side)
+ * @param toScreen (lon, lat) → { x, y }; NaN when it is not on the map
+ * @param disc     { cx, cy, r } when the map is a disc (a polar region, the globe), for the saturated-register tint */
+function drawFieldLens(ctx, { F, W, H, kinds, cacheKey, toWorld, toScreen, onMap, dry, disc = null, locs = null } = {}) {
+  if (!F || !kinds || !kinds.size) return;
+  const GW = 110, GH = 110;
+    const lensKey = cacheKey;
+    let lens = _fieldTex.get(lensKey);
+    if (!lens) {
+      const grids = {};
+      for (const k of kinds) grids[k] = new Float32Array(GW * GH);
+      for (let j = 0; j < GH; j++) for (let i = 0; i < GW; i++) {
+        const w2 = toWorld(((i + 0.5) / GW) * W, ((j + 0.5) / GH) * H);
+        for (const k of kinds) grids[k][j * GW + i] = w2 ? F.strengthAt(k, w2.lat, w2.lon) : 0;   // off the globe's disc: no field
+      }
+      lens = { grids, GW, GH };
+      _fieldTex.set(lensKey, lens);
+      // ⛑ CCODE-739: the globe keys a lens per settled view, so the cache is bounded — the oldest goes first
+      while (_fieldTex.size > 24) _fieldTex.delete(_fieldTex.keys().next().value);
+    }
+    const gx = (p) => (p[0] + 0.5) / lens.GW * W, gy = (p) => (p[1] + 0.5) / lens.GH * H;
+    // bilinear read of a grid at SCREEN pixels, for the two scatterers
+    const readAt = (grid) => (x, y) => {
+      const fx = Math.max(0, Math.min(lens.GW - 1, (x / W) * lens.GW - 0.5));
+      const fy = Math.max(0, Math.min(lens.GH - 1, (y / H) * lens.GH - 0.5));
+      const x0 = Math.floor(fx), y0 = Math.floor(fy);
+      const x1 = Math.min(lens.GW - 1, x0 + 1), y1 = Math.min(lens.GH - 1, y0 + 1);
+      const tx = fx - x0, ty = fy - y0;
+      const a = grid[y0 * lens.GW + x0], b = grid[y0 * lens.GW + x1];
+      const c2 = grid[y1 * lens.GW + x0], d2 = grid[y1 * lens.GW + x1];
+      return (a * (1 - tx) + b * tx) * (1 - ty) + (c2 * (1 - tx) + d2 * tx) * ty;
+    };
+
+    ctx.save();
+    ctx.lineJoin = "round"; ctx.lineCap = "round";
+
+    // ⛔ LINES, for the two registers that run in veins: solid at the membership line, dashed above it.
+    // ⛑ MEMBERSHIP is field.js's one literal — the same 0.55 the probe and the coverage share use, so the
+    // line on the map is the same line the card means when it says a craft is "in" this ground.
+    const LINE = { precursor: "rgba(116,176,255,0.95)", veil: "rgba(255,110,110,0.92)" };
+    const TINT = { precursor: "rgba(116,176,255,0.13)", veil: "rgba(255,110,110,0.13)" };
+    for (const k of ["precursor", "veil"]) {
+      if (!kinds.has(k) || !lens.grids[k]) continue;
+      // ⛔ A CONTOUR HAS NOTHING TO DRAW WHEN THE WHOLE FRAME IS INSIDE IT, and that is not the same as
+      // nothing being here. MEASURED at the Crossing: the crystal lattice reads above the membership line
+      // across **100% of the frame**, and above 0.8 across 100% too — so the line treatment drew NOTHING at
+      // the most lattice-saturated place in the world, under a chip that said "✓ crystal lattice 100%".
+      // ⚠️ AN EMPTY LAYER IS A CLAIM, and the claim it made was the opposite of the truth. A faint tint says
+      // "all of this" where a line would have said "the edge is here".
+      // ⛑ It costs nothing where a register has a real boundary: the valley's lattice is 51% above the line,
+      // so no tint is drawn there at all. The threshold and the colour are a visual choice and Aevi's to
+      // restyle; what is not optional is that saturation reads as something.
+      const share = (() => { const g = lens.grids[k]; let n = 0; for (let i = 0; i < g.length; i++) if (g[i] > MEMBERSHIP) n++; return n / g.length; })();
+      if (share > 0.9) {
+        ctx.save();
+        ctx.fillStyle = TINT[k];
+        if (disc) { ctx.beginPath(); ctx.arc(disc.cx, disc.cy, disc.r, 0, Math.PI * 2); ctx.fill(); }
+        else ctx.fillRect(0, 0, W, H);
+        ctx.restore();
+      }
+      for (const [level, dash, wdt, alpha] of [[MEMBERSHIP, null, 1.6, 0.95], [0.8, [5, 4], 1.2, 0.8]]) {
+        const lines = isoLines(lens.grids[k], lens.GW, lens.GH, level);
+        if (!lines.length) continue;
+        ctx.setLineDash(dash || []);
+        ctx.globalAlpha = alpha * FIELD_LOOK.washMult;   // ✅ M4: *"wash opacity halved"* — the land keeps its colour
+        // a dark casing under the colour, so a vein reads on bright upland AND on near-black water
+        for (const pass of [["rgba(10,12,18,0.5)", wdt + 1.8], [LINE[k], wdt]]) {
+          ctx.strokeStyle = pass[0]; ctx.lineWidth = pass[1];
+          for (const L of lines) {
+            ctx.beginPath(); ctx.moveTo(gx(L[0]), gy(L[0]));
+            for (let i = 1; i < L.length; i++) ctx.lineTo(gx(L[i]), gy(L[i]));
+            ctx.stroke();
+          }
+        }
+      }
+    }
+    ctx.setLineDash([]); ctx.globalAlpha = 1;
+
+    // ⛔ A SCATTER, for the wild register. Density IS the value; no single dot is a reading.
+    if (kinds.has("wild") && lens.grids.wild) {
+      const v = readAt(lens.grids.wild);
+      // ⛔ M4 (SNG-675) — ✅ AEVI: *"hundreds of green motes over the whole frame … in the mock the motes are
+      // SPARSE, drawn only where wild nanite runs high, and capped. The land keeps its colour."*
+      // ⚠️ MEASURED: at the valley's wild nanite of ~0.27 this put **2,692 dots** on a 977×513 frame — a
+      // texture over the whole map rather than a claim about anywhere. Density IS the value, which is right,
+      // and a field that is weakly everywhere is the COMMON case, so proportionality alone fills the frame.
+      // ⛑ BOTH DIALS, AND THE PROPORTIONALITY IS KEPT: the floor says where the wild is worth marking at
+      // all, the cap bounds the frame, and between them density still follows the value.
+      const dots = stipple(W, H, (x, y) => v(x, y) * 0.9, { cell: 7, seed: 11,
+        floor: FIELD_LOOK.wildFloor, cap: FIELD_LOOK.wildCap,
+        keepAt: (x, y) => onMap(x, y) && dry(x, y) });   // ⛑ land only: the wild does not scatter on water
+      ctx.fillStyle = "rgba(104,226,138,0.85)";
+      for (const d of dots) { ctx.beginPath(); ctx.arc(d.x, d.y, 1.15, 0, Math.PI * 2); ctx.fill(); }
+    }
+
+    // ⛔ THE SAME DOTS, ARRANGED — the ordered register on a hex lattice, gathered where somebody tends it.
+    // ⚠️ THE LATTICE IS THE WHOLE STATEMENT: wild and ordered are one substance in two states, and side by
+    // side a scatter against a lattice says that in a way two tints never could.
+    if (kinds.has("nanite") && lens.grids.nanite) {
+      const tended = [];
+      for (const id of Object.keys(locs || {})) {
+        const l = locs[id];   // ✅ CCODE-692: a moved settlement's lattice is tended where it stands
+        if (!l?.worldPos) continue;
+        const tier = String(l.tier || "");
+        if (tier !== "settlement" && tier !== "region") continue;
+        const p = toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90);
+        if (!Number.isFinite(p.x)) continue;
+        tended.push({ x: p.x, y: p.y, r: tier === "region" ? 150 : 95 });
+      }
+      // ✅ AEVI: *"settlements, and wells at 1.4× reach"* — a well is tended harder than a town is
+      for (const s of loadSources(CONTENT)) {
+        if (!(Number(s.strength) > 0)) continue;                  // a sink gathers nothing
+        const sp = toScreen(s.lon, s.lat);
+        if (Number.isFinite(sp.x)) tended.push({ x: sp.x, y: sp.y, r: 95 * 1.4 });
+      }
+      const near = nearness(tended);
+      const v = readAt(lens.grids.nanite);
+      const dots = hexGather(W, H, v, near, { pitch: 9, seed: 5, keepAt: (x, y) => onMap(x, y) && dry(x, y) });
+      ctx.fillStyle = "rgba(255,214,96,0.9)";
+      for (const d of dots) { ctx.beginPath(); ctx.arc(d.x, d.y, 1.25, 0, Math.PI * 2); ctx.fill(); }
+    }
+
+    // ⛑ B7's register is broad and overlaps everything by design, so it stays a soft wash rather than a mark
+    if (kinds.has("metaphysical") && lens.grids.metaphysical) {
+      const v = readAt(lens.grids.metaphysical);
+      const dots = stipple(W, H, (x, y) => Math.max(0, v(x, y) - 0.2) * 1.4, { cell: 11, seed: 23, keepAt: onMap });
+      ctx.fillStyle = "rgba(198,124,255,0.32)";
+      for (const d of dots) { ctx.beginPath(); ctx.arc(d.x, d.y, 4.2, 0, Math.PI * 2); ctx.fill(); }
+    }
+    ctx.restore();
 }
 
 /** ⛔ WHAT THE MAP IS SHOWING OF THE FIELD — Erik: "i want to be able to see the power sources and turn the
@@ -16540,132 +16677,13 @@ function paintRegionMap(regionId) {
   // — a field that re-scattered each frame would read as a world that keeps changing.
   if (fieldCtl.on && fieldCtl.kinds.size && worldField() && !city) {
     try {
-      const F = worldField();
-      const GW = 110, GH = 110;
-      const lensKey = `${ext.polar ? `p${ext.poleRadiusDeg}` : `${ext.la0},${ext.lo0},${ext.la1},${ext.lo1}`}|${W}x${H}|${[...fieldCtl.kinds].sort().join(",")}`;
-      let lens = _fieldTex.get(lensKey);
-      if (!lens) {
-        const grids = {};
-        for (const k of fieldCtl.kinds) grids[k] = new Float32Array(GW * GH);
-        for (let j = 0; j < GH; j++) for (let i = 0; i < GW; i++) {
-          const w2 = base.toWorld(((i + 0.5) / GW) * W, ((j + 0.5) / GH) * H, W, H);
-          for (const k of fieldCtl.kinds) grids[k][j * GW + i] = F.strengthAt(k, w2.lat, w2.lon);
-        }
-        lens = { grids, GW, GH };
-        _fieldTex.set(lensKey, lens);
-      }
-      const gx = (p) => (p[0] + 0.5) / lens.GW * W, gy = (p) => (p[1] + 0.5) / lens.GH * H;
-      // bilinear read of a grid at SCREEN pixels, for the two scatterers
-      const readAt = (grid) => (x, y) => {
-        const fx = Math.max(0, Math.min(lens.GW - 1, (x / W) * lens.GW - 0.5));
-        const fy = Math.max(0, Math.min(lens.GH - 1, (y / H) * lens.GH - 0.5));
-        const x0 = Math.floor(fx), y0 = Math.floor(fy);
-        const x1 = Math.min(lens.GW - 1, x0 + 1), y1 = Math.min(lens.GH - 1, y0 + 1);
-        const tx = fx - x0, ty = fy - y0;
-        const a = grid[y0 * lens.GW + x0], b = grid[y0 * lens.GW + x1];
-        const c2 = grid[y1 * lens.GW + x0], d2 = grid[y1 * lens.GW + x1];
-        return (a * (1 - tx) + b * tx) * (1 - ty) + (c2 * (1 - tx) + d2 * tx) * ty;
-      };
-      const onMap = (x, y) => (!base.polar || base.insideDisc(x, y, W, H));
-      const dry = (x, y) => { const w2 = base.toWorld(x, y, W, H); return base.sample(w2.lon, w2.lat).type !== 0; };
-
-      ctx.save();
-      ctx.lineJoin = "round"; ctx.lineCap = "round";
-
-      // ⛔ LINES, for the two registers that run in veins: solid at the membership line, dashed above it.
-      // ⛑ MEMBERSHIP is field.js's one literal — the same 0.55 the probe and the coverage share use, so the
-      // line on the map is the same line the card means when it says a craft is "in" this ground.
-      const LINE = { precursor: "rgba(116,176,255,0.95)", veil: "rgba(255,110,110,0.92)" };
-      const TINT = { precursor: "rgba(116,176,255,0.13)", veil: "rgba(255,110,110,0.13)" };
-      for (const k of ["precursor", "veil"]) {
-        if (!fieldCtl.kinds.has(k) || !lens.grids[k]) continue;
-        // ⛔ A CONTOUR HAS NOTHING TO DRAW WHEN THE WHOLE FRAME IS INSIDE IT, and that is not the same as
-        // nothing being here. MEASURED at the Crossing: the crystal lattice reads above the membership line
-        // across **100% of the frame**, and above 0.8 across 100% too — so the line treatment drew NOTHING at
-        // the most lattice-saturated place in the world, under a chip that said "✓ crystal lattice 100%".
-        // ⚠️ AN EMPTY LAYER IS A CLAIM, and the claim it made was the opposite of the truth. A faint tint says
-        // "all of this" where a line would have said "the edge is here".
-        // ⛑ It costs nothing where a register has a real boundary: the valley's lattice is 51% above the line,
-        // so no tint is drawn there at all. The threshold and the colour are a visual choice and Aevi's to
-        // restyle; what is not optional is that saturation reads as something.
-        const share = (() => { const g = lens.grids[k]; let n = 0; for (let i = 0; i < g.length; i++) if (g[i] > MEMBERSHIP) n++; return n / g.length; })();
-        if (share > 0.9) {
-          ctx.save();
-          ctx.fillStyle = TINT[k];
-          if (base.polar) { ctx.beginPath(); ctx.arc(W / 2, H / 2, Math.min(W, H) / 2, 0, Math.PI * 2); ctx.fill(); }
-          else ctx.fillRect(0, 0, W, H);
-          ctx.restore();
-        }
-        for (const [level, dash, wdt, alpha] of [[MEMBERSHIP, null, 1.6, 0.95], [0.8, [5, 4], 1.2, 0.8]]) {
-          const lines = isoLines(lens.grids[k], lens.GW, lens.GH, level);
-          if (!lines.length) continue;
-          ctx.setLineDash(dash || []);
-          ctx.globalAlpha = alpha * FIELD_LOOK.washMult;   // ✅ M4: *"wash opacity halved"* — the land keeps its colour
-          // a dark casing under the colour, so a vein reads on bright upland AND on near-black water
-          for (const pass of [["rgba(10,12,18,0.5)", wdt + 1.8], [LINE[k], wdt]]) {
-            ctx.strokeStyle = pass[0]; ctx.lineWidth = pass[1];
-            for (const L of lines) {
-              ctx.beginPath(); ctx.moveTo(gx(L[0]), gy(L[0]));
-              for (let i = 1; i < L.length; i++) ctx.lineTo(gx(L[i]), gy(L[i]));
-              ctx.stroke();
-            }
-          }
-        }
-      }
-      ctx.setLineDash([]); ctx.globalAlpha = 1;
-
-      // ⛔ A SCATTER, for the wild register. Density IS the value; no single dot is a reading.
-      if (fieldCtl.kinds.has("wild") && lens.grids.wild) {
-        const v = readAt(lens.grids.wild);
-        // ⛔ M4 (SNG-675) — ✅ AEVI: *"hundreds of green motes over the whole frame … in the mock the motes are
-        // SPARSE, drawn only where wild nanite runs high, and capped. The land keeps its colour."*
-        // ⚠️ MEASURED: at the valley's wild nanite of ~0.27 this put **2,692 dots** on a 977×513 frame — a
-        // texture over the whole map rather than a claim about anywhere. Density IS the value, which is right,
-        // and a field that is weakly everywhere is the COMMON case, so proportionality alone fills the frame.
-        // ⛑ BOTH DIALS, AND THE PROPORTIONALITY IS KEPT: the floor says where the wild is worth marking at
-        // all, the cap bounds the frame, and between them density still follows the value.
-        const dots = stipple(W, H, (x, y) => v(x, y) * 0.9, { cell: 7, seed: 11,
-          floor: FIELD_LOOK.wildFloor, cap: FIELD_LOOK.wildCap,
-          keepAt: (x, y) => onMap(x, y) && dry(x, y) });   // ⛑ land only: the wild does not scatter on water
-        ctx.fillStyle = "rgba(104,226,138,0.85)";
-        for (const d of dots) { ctx.beginPath(); ctx.arc(d.x, d.y, 1.15, 0, Math.PI * 2); ctx.fill(); }
-      }
-
-      // ⛔ THE SAME DOTS, ARRANGED — the ordered register on a hex lattice, gathered where somebody tends it.
-      // ⚠️ THE LATTICE IS THE WHOLE STATEMENT: wild and ordered are one substance in two states, and side by
-      // side a scatter against a lattice says that in a way two tints never could.
-      if (fieldCtl.kinds.has("nanite") && lens.grids.nanite) {
-        const tended = [];
-        for (const id of Object.keys(locs692 || {})) {
-          const l = locs692[id];   // ✅ CCODE-692: a moved settlement's lattice is tended where it stands
-          if (!l?.worldPos) continue;
-          const tier = String(l.tier || "");
-          if (tier !== "settlement" && tier !== "region") continue;
-          const p = base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
-          if (!Number.isFinite(p.x)) continue;
-          tended.push({ x: p.x, y: p.y, r: tier === "region" ? 150 : 95 });
-        }
-        // ✅ AEVI: *"settlements, and wells at 1.4× reach"* — a well is tended harder than a town is
-        for (const s of loadSources(CONTENT)) {
-          if (!(Number(s.strength) > 0)) continue;                  // a sink gathers nothing
-          const sp = base.toScreen(s.lon, s.lat, W, H);
-          if (Number.isFinite(sp.x)) tended.push({ x: sp.x, y: sp.y, r: 95 * 1.4 });
-        }
-        const near = nearness(tended);
-        const v = readAt(lens.grids.nanite);
-        const dots = hexGather(W, H, v, near, { pitch: 9, seed: 5, keepAt: (x, y) => onMap(x, y) && dry(x, y) });
-        ctx.fillStyle = "rgba(255,214,96,0.9)";
-        for (const d of dots) { ctx.beginPath(); ctx.arc(d.x, d.y, 1.25, 0, Math.PI * 2); ctx.fill(); }
-      }
-
-      // ⛑ B7's register is broad and overlaps everything by design, so it stays a soft wash rather than a mark
-      if (fieldCtl.kinds.has("metaphysical") && lens.grids.metaphysical) {
-        const v = readAt(lens.grids.metaphysical);
-        const dots = stipple(W, H, (x, y) => Math.max(0, v(x, y) - 0.2) * 1.4, { cell: 11, seed: 23, keepAt: onMap });
-        ctx.fillStyle = "rgba(198,124,255,0.32)";
-        for (const d of dots) { ctx.beginPath(); ctx.arc(d.x, d.y, 4.2, 0, Math.PI * 2); ctx.fill(); }
-      }
-      ctx.restore();
+      // ✅ CCODE-739: the lens is one function now, and the globe draws it too
+      drawFieldLens(ctx, { F: worldField(), W, H, kinds: fieldCtl.kinds,
+        cacheKey: `${ext.polar ? `p${ext.poleRadiusDeg}` : `${ext.la0},${ext.lo0},${ext.la1},${ext.lo1}`}|${W}x${H}|${[...fieldCtl.kinds].sort().join(",")}`,
+        toWorld: (x, y) => base.toWorld(x, y, W, H), toScreen: (lon, lat) => base.toScreen(lon, lat, W, H),
+        onMap: (x, y) => (!base.polar || base.insideDisc(x, y, W, H)),
+        dry: (x, y) => { const w2 = base.toWorld(x, y, W, H); return base.sample(w2.lon, w2.lat).type !== 0; },
+        disc: base.polar ? { cx: W / 2, cy: H / 2, r: Math.min(W, H) / 2 } : null, locs: locs692 });
     } catch (err) { console.warn("[region-map] the field layer did not draw — the ground still did:", err); }
   }
 
@@ -18051,7 +18069,9 @@ function wireWorldGlobe() {
       }
     }
     // ⛑ the engine's name for the band painter is `ground`; the app's button for it is `source`. Whose ground paints over the land.
-    const baseLayer = layer === "source" ? "ground" : layer === "ground" ? "topo" : layer;
+    // ✅ CCODE-739 · Aevi Q4: the nanite and lattice layers are the world FIELD drawn over the land (`drawFieldLens`, after the raster),
+    // not the baked per-region category and density — so under them the land keeps its own colour
+    const baseLayer = layer === "source" ? "ground" : layer === "ground" ? "topo" : (layer === "nanite" || layer === "lattice") ? "biome" : layer;
     for (let y = 0; y < gh; y += step) {
       for (let x = 0; x < gw; x += step) {
         const g = unproject(x + 0.5, y + 0.5, view);
@@ -18143,6 +18163,25 @@ function wireWorldGlobe() {
     _globeRasterOff.getContext("2d").putImageData(img, 0, 0);
     ctx.imageSmoothingEnabled = true;
     ctx.drawImage(_globeRasterOff, 0, 0, gw, gh, 0, 0, GW(), GH());
+    /* ✅ CCODE-739 · AEVI Q4: *"The world field, as the region map's motes do. One layer should mean one thing on both maps."* The same
+     * lens, the globe's projection: nanite is the wild scatter and the tended lattice; lattice is the crystal veins. ⛑ Not while the
+     * globe is moving — the lens samples the field (≈8µs a point) on a 110² grid, so it is drawn when the view settles and cached
+     * by view; a dragging frame shows the land alone. */
+    if (!coarse && (layer === "nanite" || layer === "lattice")) {
+      try {
+        const F = worldField();
+        if (F) {
+          const kinds = new Set(layer === "nanite" ? ["wild", "nanite"] : ["precursor"]);
+          drawFieldLens(ctx, { F, W: GW(), H: GH(), kinds,
+            cacheKey: `globe|${[...kinds].sort().join(",")}|${Math.round((view.yaw || 0) * 4)}|${Math.round((view.pitch || 0) * 4)}|${Math.round(view.r || 0)}|${Math.round(view.cx || 0)},${Math.round(view.cy || 0)}|${GW()}x${GH()}`,
+            toWorld: (x, y) => unproject(x, y, view),
+            toScreen: (lon, lat) => { const q = project(lon, lat, view); return q ? { x: q.x, y: q.y } : { x: NaN, y: NaN }; },
+            onMap: (x, y) => !!unproject(x, y, view),
+            dry: (x, y) => { const g = unproject(x, y, view); if (!g) return false; const sm = sampleAt(_terrain, g.lon, g.lat); return !!sm && (sm.type & 3) !== 0; },
+            disc: { cx: view.cx || 0, cy: view.cy || 0, r: view.r || 1 }, locs: live687 || CONTENT.locations });
+        }
+      } catch (err) { console.warn("[globe] the field did not draw — the land still did:", err); }
+    }
     // ⛔ THE WATER I BUILT AND NEVER DREW. 113 rivers, 17 lakes and 38 marshes have shipped in the asset
     // since SNG-391 — traced, gated, re-anchored by polar signature across SNG-393/394 — and no reader
     // existed. As vectors they stay clean at any zoom where the raster is a staircase.

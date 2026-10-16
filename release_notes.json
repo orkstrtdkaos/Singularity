@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.28.1",
+      "date": "2026-10-16",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "The world map's nanite and lattice views match the region map",
+          "summary": "On the world map, the nanite view now shows the scattered wild nanite and the tended places the way the region map does, and the lattice view shows the crystal lattice's lines. The land keeps its own colours underneath. They used to tint whole regions by a category nobody needed to know."
+        }
+      ]
+    },
+    {
       "version": "2.28.0",
       "date": "2026-10-16",
       "entries": [

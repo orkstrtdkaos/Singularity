@@ -7571,11 +7571,13 @@ await (async () => {
     const paint386 = body386("paintRegionMap"), map386 = body386("renderMap(selectedId"), panel386 = body386("fieldPanel(");
     check("386: the two fields are source KINDS on the ground — each its own toggle, evaluated at every painted point, never a per-place blob",
       /data-fieldkind=/.test(panel386) && /fieldCtl\.kinds\.has\(k\) \? " selected" : ""/.test(panel386)
-      && /for \(const k of fieldCtl\.kinds\) grids\[k\]\[j \* GW \+ i\] = F\.strengthAt\(k, w2\.lat, w2\.lon\);/.test(paint386)
+      // ✅ CCODE-739: the lens is lifted into `drawFieldLens` (the globe draws it too); the region painter hands it `fieldCtl.kinds`
+      && /for \(const k of kinds\) grids\[k\]\[j \* GW \+ i\] = w2 \? F\.strengthAt\(k, w2\.lat, w2\.lon\) : 0;/.test(body386("drawFieldLens("))
+      && /drawFieldLens\(ctx, \{ F: worldField\(\), W, H, kinds: fieldCtl\.kinds,/.test(paint386)
       && !/fieldBlobs|fieldAlpha|\bmapField\b/.test(app386));
     check("386: …and each kind keeps its own colour — the lattice and the veil are two lines in two hues, the wild register a scatter, the ordered one a hex lattice — never one hue for 'power'",
-      (() => { const m = paint386.match(/const LINE = \{ precursor: "([^"]+)", veil: "([^"]+)" \}/); return !!m && m[1] !== m[2]; })()
-      && /fieldCtl\.kinds\.has\("wild"\) && lens\.grids\.wild/.test(paint386) && /fieldCtl\.kinds\.has\("nanite"\) && lens\.grids\.nanite/.test(paint386));
+      (() => { const m = body386("drawFieldLens(").match(/const LINE = \{ precursor: "([^"]+)", veil: "([^"]+)" \}/); return !!m && m[1] !== m[2]; })()
+      && /kinds\.has\("wild"\) && lens\.grids\.wild/.test(body386("drawFieldLens(")) && /kinds\.has\("nanite"\) && lens\.grids\.nanite/.test(body386("drawFieldLens(")));
     check("386: the caption says what is asserted — the field is evaluated at every point, and a source turned off re-renders it",
       /The field over it is EVALUATED at every point, not washed between the places — a source turned off re-renders it/.test(map386)
       && !/interpolation, not a claim about reach/.test(map386));
@@ -26323,7 +26325,7 @@ await (async () => {
     check("729/H: ⛔ AEVI — THE GLOBE'S \"WHOSE GROUND\" IS THE POWERS' TERRITORY, AS ON THE REGION MAP, SO ONE LABEL MEANS ONE THING (it painted the field's source bands) — the crow-flies reader the GM and a place's \"held by\" line ask, on a lazy grid: every cell is the reader at its centre — owner, contested rival, strength; many powers hold ground and Millbrook's is somebody's; the bands have their own button, \"where the field comes from\", with the source selector; the frame assigns the hues (W5/M5), and a power is lettered in its hue only when its ground can carry the name (W3)",
       n === 400 && agree === 400 && held > 20 && owners729.size >= 5 && out729[0] >= 0
       && /\["ground", "whose ground"\], \["source", "where the field comes from"\]\]/.test(app729)
-      && /const baseLayer = layer === "source" \? "ground" : layer === "ground" \? "topo" : layer;/.test(app729)
+      && /const baseLayer = layer === "source" \? "ground" : layer === "ground" \? "topo" : \(layer === "nanite" \|\| layer === "lattice"\) \? "biome" : layer;/.test(app729)   // CCODE-739: the field layers keep the land
       && /if \(layer === "source"\) paint\(false\);/.test(app729) && !/if \(layer === "ground"\) paint\(false\);/.test(app729)
       && /_globeOwnerGrid = \{ key: gr\.key, grid: makeInfluenceGrid\(gr\.at\) \};/.test(app729)
       && /if \(!c\) c = POWER_HUES\.find\(\(h\) => !taken\.has\(h\)\) \|\| powerColour\(p \|\| terr729\.grid\.ids\[o\]\);/.test(app729)

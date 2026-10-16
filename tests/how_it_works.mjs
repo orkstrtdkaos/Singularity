@@ -38444,6 +38444,34 @@ console.log("\n── §432 · an unseen blow at a hold, traced by its owner ─
   check("§432: the job's success goes through the same door every hunt does (jobs.js → applyHunt)", /const r = applyHunt\(character, fx\.hunt, \{ content, worldDay: wd \}\);/.test(J));
 }
 
+/* ═════ §433 — THE GLOBE'S STIPPLE IS THE WORLD FIELD, DRAWN BY THE REGION MAP'S OWN LENS (CCODE-739) ═════ */
+// ✅ AEVI, Q4 (2026-10-16): *"What should the globe's stipple show? The world field, as the region map's motes do. One layer should mean
+// one thing on both maps. The baked category and density are how it's stored, and nothing a player should have to know."*
+// ⚠️ NO SUITE RENDERS A PANE, so the drawing itself was measured in the browser (draw calls, CCODE-739's message): the globe's nanite
+// layer drew 420 wild motes (the cap) and 20 tended dots, its lattice layer 8 vein strokes, topographic none of them; and the region
+// map drew 420 / 12 / 259 / 3 before the lens was lifted out and exactly the same after. What a suite CAN hold is the shape: one lens,
+// two callers, and the baked category gone from the globe's two field layers.
+console.log("\n── §433 · the globe's nanite and lattice layers are the world field, through the region map's own lens ──");
+{
+  const A = rd("app.js").replace(/\r\n/g, "\n");
+  const fn = A.slice(A.indexOf("function drawFieldLens("), A.indexOf("/** ⛔ WHAT THE MAP IS SHOWING OF THE FIELD — Erik:"));
+  check("§433: ⛔ ONE LENS — the field is sampled into a lens in exactly one function, and both maps call it",
+    A.split("function drawFieldLens(").length === 2 && A.split("_fieldTex.set(").length === 2 && fn.includes("_fieldTex.set(")
+    && A.split("drawFieldLens(ctx, {").length === 4);   // its own signature, and the two maps' calls
+  check("§433: …the lens takes its projection, so neither map's local leaks into it (it was the region map's `base` and `fieldCtl`)",
+    fn.length > 2000 && !/\bbase\./.test(fn) && !/fieldCtl/.test(fn) && !/\bext\./.test(fn) && /F\.strengthAt\(k, w2\.lat, w2\.lon\) : 0/.test(fn));
+  const globe = A.slice(A.indexOf("ctx.drawImage(_globeRasterOff, 0, 0, gw, gh, 0, 0, GW(), GH());"), A.indexOf("const hasOldRoads ="));
+  check("§433: ⛔ THE GLOBE — nanite is the wild scatter and the tended lattice, lattice is the crystal veins, drawn when the view settles, through the globe's own projection",
+    /if \(!coarse && \(layer === "nanite" \|\| layer === "lattice"\)\)/.test(globe) && /layer === "nanite" \? \["wild", "nanite"\] : \["precursor"\]/.test(globe)
+    && /toWorld: \(x, y\) => unproject\(x, y, view\)/.test(globe) && /drawFieldLens\(ctx, \{ F, W: GW\(\), H: GH\(\), kinds,/.test(globe));
+  check("§433: …and under them the land keeps its colour — the baked per-region category and density are no longer what those two layers paint",
+    /\(layer === "nanite" \|\| layer === "lattice"\) \? "biome" : layer;/.test(A));
+  check("§433: the region map's call is the lens it always drew, with its own projection and the same cache key",
+    /drawFieldLens\(ctx, \{ F: worldField\(\), W, H, kinds: fieldCtl\.kinds,/.test(A) && /toWorld: \(x, y\) => base\.toWorld\(x, y, W, H\)/.test(A)
+    && /cacheKey: `\$\{ext\.polar \? `p\$\{ext\.poleRadiusDeg\}`/.test(A));
+  check("§433: the lens cache is bounded (the globe keys one per settled view)", /while \(_fieldTex\.size > 24\) _fieldTex\.delete\(_fieldTex\.keys\(\)\.next\(\)\.value\);/.test(fn));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

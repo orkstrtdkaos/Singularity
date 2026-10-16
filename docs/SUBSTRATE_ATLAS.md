@@ -84,7 +84,7 @@ measurement.**
 | Plainstead Foothill | 0.50 | 0.55 | `body` · `wild` |
 | The Feeling Coast | 0.48 | 0.55 | `body` · `wild` |
 | The Told Ground | 0.46 | 0.20 | `body` · `wild` |
-| the_echo_vale | 0.46 | 0.50 | `body` · `wild` |
+| The Echo Vale | 0.46 | 0.50 | `body` · `wild` |
 | The Outrun Coast | 0.45 | 0.45 | `body` · `wild` |
 | Greenmarch Foothill | 0.45 | 0.50 | `body` · `wild` |
 | The Long Horizon | 0.44 | 0.35 | `body` · `wild` |

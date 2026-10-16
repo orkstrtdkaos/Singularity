@@ -571,9 +571,17 @@ export function holdDebtPass(character, { content = null, worldDay = null } = {}
     if (!character.worldState.debts || typeof character.worldState.debts !== "object") character.worldState.debts = {}; return character.worldState.debts; })();
   const wd = Number(worldDay);
   const byKey = new Map();
-  for (const e of (character.mapEvents || [])) {
-    if (!e?.hold?.owner || e.hold.owner === character.id || e.by !== character.id || !DAMAGE.has(String(e.change))) continue;
-    if (parseMapKey(e.key)?.cls !== "hold") continue;
+  for (const e0 of (character.mapEvents || [])) {
+    if (!e0?.hold?.owner || e0.hold.owner === character.id || e0.by !== character.id || !DAMAGE.has(String(e0.change))) continue;
+    if (parseMapKey(e0.key)?.cls !== "hold") continue;
+    // ✅ CCODE-738 · Aevi Q3: *"A success turns the blow from unseen into named. The debt then starts as if the culprit had been seen,
+    // at what was owed then."* The owner's reveal arrives with the world's store; the blow is owed for as it was struck, and the
+    // search starts from the day it was learned.
+    let e = e0;
+    if (e0.seen === "unseen") {
+      const rv = eventsFor(character, e0.key).find((x) => x && x.change === "revealed" && x.of === e0.id && x.hold?.owner === e0.hold.owner);
+      if (rv) e = { ...e0, seen: "named", day: Math.max(Number(e0.day) || 0, Number(rv.day) || 0), revealedDay: rv.day };
+    }
     if (!byKey.has(e.key)) byKey.set(e.key, []);
     byKey.get(e.key).push(e);
   }
@@ -743,9 +751,35 @@ export function huntJobsFor(character, { content = null, max = 2 } = {}) {
   }
   return found.sort((a, b) => a.near - b.near).slice(0, max).map((x) => x.spec);
 }
+/** ✅ CCODE-738 · AEVI Q3: *"R7's investigation becomes a job on the owner's own board, at the hold: 'Learn who {did} {hold}'. It costs
+ *  effort, not pay, because it's their own ground. … A keeper can take the job as a hold's job, and a band can be sent on it. The
+ *  locals still never trace a hold's blow. That stays the owner's."* One per blow nobody saw that the hold has not seen ended; no pay.
+ *  → job specs, nearest blow first. Pure. */
+export function holdInvestigationsFor(character, { content = null, max = 2 } = {}) {
+  const J = jobsOf(content), W = wordsOf(content);
+  const out = [];
+  for (const h of (Array.isArray(character?.holdings) ? character.holdings : [])) {
+    for (const b of (Array.isArray(h?.blows) ? h.blows : [])) {
+      if (!b || b.closed || b.seen !== "unseen") continue;
+      const did = (W.did || {})[b.change] || b.change;
+      const label = fill(J.labels?.investigateHold || "Learn who {did} {hold}", { did, hold: h.name || h.id });
+      const level = 6 + 6 * rungOf(content, b.change);
+      out.push({ day: Number(b.day) || 0, spec: {
+        id: `hunt:hold:${h.id}/${b.id}`.slice(0, 80),   // prose-cap-ok: an identifier
+        label: smartClamp(label, 120), where: h.locationId || null, level,
+        effort: Number(J.hunt?.investigateEffortDays) || 5,
+        needs: (J.needs?.investigate || [{ family: "KNOW", weight: 2 }]).map((n) => ({ family: n.family, weight: n.weight })),
+        from: smartClamp(h.name || "your hold", 60),
+        stakes: { hunt: { key: `hold:${h.id}`, damageId: b.id, kind: "investigate" } },   // ⛔ no crystal: their own ground
+      } });
+    }
+  }
+  return out.sort((a, b) => b.day - a.day).slice(0, max).map((x) => x.spec);
+}
+
 /** Put the hunts on the board beside the mends (their own cap), and take off any whose thing is found or whole. Mutates. */
 export function postHuntJobs(character, { content = null, day = null } = {}) {
-  const specs = huntJobsFor(character, { content });
+  const specs = [...huntJobsFor(character, { content }), ...holdInvestigationsFor(character, { content })];   // ✅ CCODE-738: the owner's own
   const B = ensureJobs(character).board;
   const want = new Map(specs.map((s) => [s.id, s]));
   for (const j of [...B]) if (String(j?.id || "").startsWith("hunt:") && (!want.has(j.id) || want.get(j.id).stakes.hunt.kind !== j.stakes?.hunt?.kind)) dropJob(character, j.id);
@@ -756,6 +790,15 @@ export function postHuntJobs(character, { content = null, day = null } = {}) {
 /** ⛔ A HUNT OR AN INVESTIGATION DONE — the one shared change that carries it to every game. Mutates. → `{ ok, said }` */
 export function applyHunt(character, hunt, { content = null, worldDay = null } = {}) {
   if (!character || !hunt?.key) return { ok: false, said: null };
+  // ✅ CCODE-738 · Aevi Q3: a blow at one's own hold, learned — the reveal travels to the culprit's game, and the ledger names them
+  if (parseMapKey(hunt.key)?.cls === "hold") {
+    const h = (character.holdings || []).find((x) => x && `hold:${x.id}` === hunt.key) || null;
+    const r = h ? applyMapChange(character, { key: hunt.key, change: "revealed", by: character.id, of: hunt.damageId, cause: "investigated" },
+      { content, worldDay, recordOf: () => h }) : { ok: false, why: "that hold is not yours any more" };
+    if (!r.ok) return { ok: false, said: `what was learned about ${h?.name || "the hold"} came to nothing — ${r.why}` };
+    const W = wordsOf(content);
+    return { ok: true, said: `whoever ${(W.did || {})[r.revealed.change] || r.revealed.change} ${h.name || "the hold"} is known now: ${r.revealed.byName || "another traveler"}` };
+  }
   const s = localsSpentOn(character, hunt.key, { content });
   const site = siteOfKey(hunt.key, { content, character });
   const t = mapThingOf(hunt.key, content, { siteName: site?.name || null }) || { thing: "it", place: "there" };

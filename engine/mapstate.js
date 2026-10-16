@@ -373,6 +373,25 @@ export function applyMapChange(character, change, ctx = {}) {
   // ✅ CCODE-731: a hold that is NOT on this save and whose card the caller holds is another player's
   const card = onRecord && !rec && parsed.cls === "hold" && ctx.foreignHold && ctx.foreignHold.id === parsed.id
     && ctx.foreignHold.ownerId && ctx.foreignHold.ownerId !== character.id ? ctx.foreignHold : null;
+  /* ✅ CCODE-738 · AEVI Q3: *"Can an unseen blow on a hold ever be traced? Yes, by its owner … A success turns the blow from unseen into
+   * named. The debt then starts as if the culprit had been seen, at what was owed then."* ⛔ A REVEAL IS NOT THE HOLD'S STATE — it is
+   * knowledge about a blow another game wrote — so it is written as a WORLD event (it travels with the store, and the culprit's game
+   * reads it), naming the blow it reveals (`of`). The record's own state is untouched. Only the owner reveals, only a blow the hold
+   * took in, only one nobody saw. */
+  if (onRecord && rec && parsed.cls === "hold" && change?.change === "revealed") {
+    const blow = (Array.isArray(rec.blows) ? rec.blows : []).find((b) => b && b.id === change.of) || null;
+    if (!blow) return { ok: false, why: "there is no such blow on this hold to learn about" };
+    if (blow.seen !== "unseen") return { ok: false, why: "whoever did that was already seen" };
+    if (blow.closed) return { ok: false, why: "that is over and done with" };
+    const day = Math.floor(Number(worldDay ?? change?.day ?? 0));
+    const ev = { id: eventIdFor({ key: change.key, change: `revealed#${blow.id}`, worldDay: day, by: change.by }), key: change.key, change: "revealed",
+      day, by: change.by ?? character.id, seen: "named", cause: change.cause ?? "investigated", of: blow.id, hold: { owner: character.id } };
+    character.mapEvents = Array.isArray(character.mapEvents) ? character.mapEvents : [];
+    if (!character.mapEvents.some((e) => e?.id === ev.id)) character.mapEvents.push(ev);
+    blow.seen = "named"; blow.revealedDay = day;
+    character.worldRevision = (Number(character.worldRevision) || 0) + 1;
+    return { ok: true, key: change.key, event: ev, revealed: blow, onRecord: false };
+  }
   if (card && !HOLD_HIT.has(String(change?.change || ""))) {
     return { ok: false, why: `${card.name || "that hold"} is ${card.ownerName || "another traveler"}'s — only its own keeper mends, moves or renames it` };
   }

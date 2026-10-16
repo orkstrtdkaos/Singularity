@@ -38370,6 +38370,80 @@ console.log("\n── §431 · the owner's ledger — who owes for the hold, wha
     /pane\("defence", `\s*\$\{\(\(\) => \{[\s\S]{0,400}owedForHold\(character, h, \{ orders: Object\.values\(sharedTrades\?\.orders \|\| \{\}\), content: CONTENT \}\)/.test(A));
 }
 
+/* ═════ §432 — AN UNSEEN BLOW AT A HOLD IS TRACED BY ITS OWNER (CCODE-738) ═════ */
+// ✅ AEVI, Q3 (2026-10-16): *"Can an unseen blow on a hold ever be traced? Yes, by its owner. R7's investigation becomes a job on the
+// owner's own board, at the hold: 'Learn who {did} {hold}'. It costs effort, not pay, because it's their own ground. A success turns the
+// blow from unseen into named. The debt then starts as if the culprit had been seen, at what was owed then. A keeper can take the job
+// as a hold's job, and a band can be sent on it. The locals still never trace a hold's blow. That stays the owner's."*
+console.log("\n── §432 · an unseen blow at a hold, traced by its owner ──");
+{
+  const MS = await import("../engine/mapstate.js");
+  const MD = await import("../engine/mending.js");
+  const WT = await import("../engine/worldtick.js");
+  const SH = await import("../engine/sharedholds.js");
+  const JS = await import("../engine/jobstate.js");
+  const { fakeRemote: fr432 } = await import("./lib/fake_remote.mjs");
+  const { loadContentHeadless: lch432 } = await import("./headless_content.mjs");
+  const C = await lch432();
+  const owner = { id: "char-own432", name: "Ilse Marn", currentLocationId: "millbrook", mapEvents: [], worldState: {},
+    holdings: [{ id: "marn-432", name: "Marn Yard", kind: "post", locationId: "millbrook", steward: "pell", condition: "holding", store: {},
+      features: [{ id: "f1", kind: "mine", name: "the mine", count: 1 }, { id: "f2", kind: "wall", name: "the wall", count: 1 }] }] };
+  const culprit = { id: "char-cul432", name: "Bryn Aske", currentLocationId: "millbrook", holdings: [], mapEvents: [], worldState: {} };
+  const remote = fr432();
+  const restore = remote.install();
+  try {
+    await WT.syncHolds({ character: owner, content: C });
+    const store = (await WT.syncHolds({ character: culprit, content: C })).store;
+    const vis = MS.visibleMapKeys(culprit, C, { hereId: "millbrook", holdsHere: SH.holdsAt(store, "millbrook", { selfId: culprit.id }) });
+    const hit = MS.applyMapOp(culprit, { op: "ruined", key: "hold:marn-432", by: "pc", seen: "unseen", cause: "fired in the night" }, { content: C, worldDay: 40, hereId: "millbrook", visible: vis });
+    await WT.syncMap({ character: culprit, content: C }); await WT.syncMap({ character: owner, content: C });
+    MD.holdHitsPass(owner, { content: C, worldDay: 41 });
+    const h = owner.holdings[0];
+    check("§432: (an unseen blow: real on the record, owed by nobody, and the culprit's game raises no debt)",
+      hit.ok && h.state === "ruined" && h.blows?.[0]?.seen === "unseen" && MD.holdDebtPass(culprit, { content: C, worldDay: 60 }).news.length === 0
+      && !Object.keys(culprit.worldState.debts || {}).length);
+
+    // ── the job, on the owner's own board ──
+    const specs = MD.holdInvestigationsFor(owner, { content: C });
+    MD.postHuntJobs(owner, { content: C, day: 5 });
+    const board = JS.ensureJobs(owner).board.filter((j) => String(j?.id || "").startsWith("hunt:hold:"));
+    const label = C.mapStates.jobs.labels.investigateHold.split("{did}").join(C.mapStates.reckoning.words.did.ruined).split("{hold}").join("Marn Yard");
+    check("§432: ⛔ THE OWNER'S BOARD CARRIES IT — \"Learn who {did} {hold}\" in her words, at the hold, and it pays NOTHING (their own ground)",
+      specs.length === 1 && board.length === 1 && board[0].label === label && board[0].where === "millbrook"
+      && !(board[0].stakes?.crystal > 0) && board[0].stakes?.hunt?.kind === "investigate" && board[0].stakes.hunt.key === "hold:marn-432" && board[0].stakes.hunt.damageId === hit.event.id,
+      JSON.stringify(board[0]));
+    check("§432: …and the locals still never trace a hold's blow: the culprit's own board, and anyone else's, carries no hunt for it",
+      MD.huntJobsFor(owner, { content: C }).length === 0 && MD.holdInvestigationsFor(culprit, { content: C }).length === 0);
+
+    // ── a success: the job's own stake, through the job's own door ──
+    const done = MD.applyHunt(owner, board[0].stakes.hunt, { content: C, worldDay: 50 });
+    check("§432: ⛔ A SUCCESS TURNS THE BLOW FROM UNSEEN INTO NAMED — the ledger names them, and the reveal is a WORLD event (it travels; the record's state is untouched)",
+      done.ok && /Bryn Aske/.test(done.said) && h.blows[0].seen === "named" && h.blows[0].revealedDay === 50 && h.state === "ruined"
+      && owner.mapEvents.some((e) => e.change === "revealed" && e.of === hit.event.id && e.key === "hold:marn-432")
+      && MD.owedForHold(owner, h, { orders: [], content: C })[0]?.who === "Bryn Aske", JSON.stringify(done));
+    MD.postHuntJobs(owner, { content: C, day: 6 });
+    check("§432: …and the job comes off the board once the blow is named", !JS.ensureJobs(owner).board.some((j) => String(j?.id || "").startsWith("hunt:hold:")));
+    check("§432: …a second success, or one on a blow somebody saw, is refused in words",
+      MD.applyHunt(owner, board[0].stakes.hunt, { content: C, worldDay: 51 }).ok === false);
+
+    // ── the culprit's game: the debt starts as if seen, at what was owed then ──
+    await WT.syncMap({ character: owner, content: C }); await WT.syncMap({ character: culprit, content: C });
+    const n = MD.holdDebtPass(culprit, { content: C, worldDay: 50 }).news;
+    const debt = culprit.worldState.debts?.pell;
+    check("§432: ⛔ *\"THE DEBT THEN STARTS AS IF THE CULPRIT HAD BEEN SEEN, AT WHAT WAS OWED THEN\"* — owed for the blow as struck, the search counted from the day it was learned",
+      !!debt && debt.valueOwed === MD.holdHitOwed(hit.event, C) && culprit.reckonings["hold:marn-432"].seen === "named"
+      && culprit.reckonings["hold:marn-432"].since === 50 && n.length === 1, JSON.stringify({ debt, rk: culprit.reckonings["hold:marn-432"], n }));
+    const sentAt = 50 + C.mapStates.reckoning.searchBeginsAfterDays.named;
+    MD.holdDebtPass(culprit, { content: C, worldDay: sentAt - 1 });
+    const before = culprit.reckonings["hold:marn-432"].state;
+    MD.holdDebtPass(culprit, { content: C, worldDay: sentAt });
+    check("§432: …so the keeper sets out two days after the naming, not two days after the blow",
+      before === "asking" && culprit.reckonings["hold:marn-432"].state === "sent");
+  } finally { restore(); }
+  const J = rd("engine/jobs.js");
+  check("§432: the job's success goes through the same door every hunt does (jobs.js → applyHunt)", /const r = applyHunt\(character, fx\.hunt, \{ content, worldDay: wd \}\);/.test(J));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

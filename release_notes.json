@@ -16,6 +16,22 @@
   "next": [],
   "releases": [
     {
+      "version": "2.27.11",
+      "date": "2026-10-16",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The player's guide counts the world right",
+          "summary": "The guide's section on where you begin said the world had a hundred and forty places across thirty-eight regions. It has more of both now, and the sentence is now kept up to date automatically."
+        },
+        {
+          "kind": "internal",
+          "title": "Places describe their character to the storyteller more precisely",
+          "summary": "When the game asks the storyteller to invent someone at a place, it now says how strongly the place leans each way, instead of calling every lean strong."
+        }
+      ]
+    },
+    {
       "version": "2.27.10",
       "date": "2026-10-10",
       "entries": [

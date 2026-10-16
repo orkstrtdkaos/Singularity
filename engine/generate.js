@@ -1072,7 +1072,11 @@ export function describeDisposition(loc = {}) { // registry:internal
  // registry:internal
   const pi = loc.poleIntensity || {};
   const poles = Object.entries(pi).filter(([, v]) => Math.abs(v) > 0.15).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 4);
-  if (poles.length) return poles.map(([p, v]) => `${p} (${v > 0 ? "strong" : "leaning"})`).join(", ");
+  // ⚠️ CCODE-734: this said "strong" for ANY positive weight and "leaning" for a negative one. The engine's own rule (reconcile's and
+  // borncontract's derivation) writes every weight as a magnitude under the pole the sign names, so every pole read "strong" — 0.16
+  // as much as 0.9 — and "leaning" only ever appeared on an entry written the other way (a signed weight under the wrong pole). The
+  // weight itself says how strongly; nothing here invents a threshold.
+  if (poles.length) return poles.map(([p, v]) => `${p} ${(Math.round(Math.abs(Number(v)) * 100) / 100).toFixed(2)}`).join(", ");
   const sp = loc.spectrum || {};
   const ax = Object.entries(sp).filter(([, v]) => Math.abs(v) > 0.2).slice(0, 4);
   return ax.map(([a, v]) => `${a} ${v > 0 ? "+" : ""}${v}`).join(", ");

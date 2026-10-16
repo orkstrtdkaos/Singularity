@@ -38155,6 +38155,42 @@ console.log("\n── §428 · the live path — a debt escalates on the clock i
     && /const hs = await syncHolds\(\{ character, content: CONTENT, routes: _worldRoutes\?\.byPair \|\| null \}\)/.test(A));
 }
 
+/* ═════ §429 — A PLACE'S POLES ARE ON THE SIDE ITS SPECTRUM SAYS (CCODE-734) ═════ */
+// ✅ AEVI (2026-10-07): *"The pole a `space_time` value names is inconsistent. `space_time` +0.3 is written as pole time on the Churn
+// Edge and Spindrift, which matches the first-negative, second-positive rule every other axis follows. On Longshore and the Mountain
+// Pass the same positive value is written as space. One of the two readings is wrong."*
+// ⛔ MEASURED 2026-10-16 against `spectrums.json` (negPole is the − side) and the engine's own derivation (reconcile, borncontract):
+// 25 pole words on 23 places sit on the wrong side of their own spectrum, on six axes, not only `space_time` — and nine of them are
+// a SIGNED weight under the positive pole ("spiritual −0.6" on the Made Gate, which leans mechanical). The spectrum is what the field,
+// the traditions and the encounters read; the pole words reach the model, in the disposition line of everything minted there.
+// ⚑ WHICH READING IS RIGHT IS AEVI'S (it is the place's story), so this is a RATCHET: it may only go down, and each fix lowers it.
+console.log("\n── §429 · a place's pole words agree with its own spectrum ──");
+{
+  const { loadContentHeadless: lch429 } = await import("./headless_content.mjs");
+  const G429 = await import("../engine/generate.js");
+  const C = await lch429();
+  const axes = C.spectrums?.spectrums || JSON.parse(rd("content/packs/core/spectrums.json")).spectrums;
+  const pole = {};
+  for (const a of axes) { pole[a.negPole] = { axis: a.id, sign: -1 }; pole[a.posPole] = { axis: a.id, sign: 1 }; }
+  const wrong = [];
+  for (const l of Object.values(C.locations)) {
+    for (const [p, v] of Object.entries(l.poleIntensity || {})) {
+      const P = pole[p], s = P ? Number(l.spectrum?.[P.axis]) : NaN;
+      if (!P) { wrong.push(`${l.id}: "${p}" is no axis's pole`); continue; }
+      if (Number.isFinite(s) && s !== 0 && (Math.sign(s) !== P.sign || Number(v) < 0)) wrong.push(`${l.id}: ${P.axis} ${s}, pole "${p}" ${v}`);
+    }
+  }
+  const BASELINE = 25;   // ⚑ lower it as they are fixed; never raise it
+  check(`§429: ⛔ RATCHET — pole words on the wrong side of their own spectrum, or written as a negative weight: ${wrong.length} (may only go DOWN from ${BASELINE})`,
+    wrong.length <= BASELINE, wrong.slice(0, 30).join(" · "));
+  check("§429: …and the line the model is given says each pole's own weight — it said \"strong\" for any positive number, so 0.16 and 0.9 read the same",
+    G429.describeDisposition({ poleIntensity: { time: 0.4, space: 0.16, order: 0.9 } }) === "order 0.90, time 0.40, space 0.16"
+    && G429.describeDisposition({ poleIntensity: { body: 0.1 } }) === "");
+  check("§429: the guide's \"where you begin\" sentence is stamped from the places (it said a hundred and forty across thirty-eight)",
+    /Exesa has [a-z -]+ authored places across [a-z -]+ regions/.test(rd("docs/PLAYERS_GUIDE.md")) && /regionsStood:/.test(rd("scripts/certify_counts.mjs"))
+    && /name: "player's guide · where you begin/.test(rd("scripts/certify_counts.mjs")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

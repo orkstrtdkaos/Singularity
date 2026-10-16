@@ -122,12 +122,33 @@ const counts = {
   // sitting in the document whose own §5 is about exactly that. It has gone stale three times today.
   gainAxesNodes: records.reduce((n, a) => n + (a.tree || []).length, 0),
   gainAxesValues: records.reduce((n, a) => n + (a.tree || []).reduce((m, t) => m + (t.gainAxes || []).length, 0), 0),
+  // ⛔ CCODE-734 — THE REGIONS THE PLACES STAND IN, from the places themselves. Aevi (2026-10-07): *"`PLAYERS_GUIDE.md:495` still
+  // says 'a hundred and forty authored places'. It isn't gated."* It said thirty-eight regions too, and the places stand in 56.
+  // ⚠️ NOT `regions.json`'s 55: the Echo Vale (SNG-387) is a region eight places stand in and has no record there, and the sentence
+  // is about where you can begin, which is where the places are.
+  regionsStood: new Set(Object.values(CONTENT.locations || {}).map((l) => l?.regionId || l?.region).filter(Boolean)).size,
 };
+/** A count as the guide's prose says it: "a hundred and eighty-three", "fifty-six". Below a thousand, which is all it needs. */
+function inWords(n) {
+  const ones = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen",
+    "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+  const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+  const under100 = (x) => (x < 20 ? ones[x] : tens[Math.floor(x / 10)] + (x % 10 ? `-${ones[x % 10]}` : ""));
+  if (!Number.isInteger(n) || n < 0 || n > 999) throw new Error(`inWords: ${n} is outside what the guide says in words`);
+  if (n < 100) return under100(n);
+  const h = Math.floor(n / 100), rest = n % 100;
+  return `${h === 1 ? "a" : ones[h]} hundred${rest ? ` and ${under100(rest)}` : ""}`;
+}
 const version = (rd("app.js").match(/APP_VERSION\s*=\s*"([^"]+)"/) || [])[1] || "?";
 const today = new Date().toISOString().slice(0, 10);
 
 /* ── the claims, each naming its file and the pattern that finds it ─────────────────────────── */
 const CLAIMS = [
+  // ⛔ CCODE-734: the guide's own sentence, in its own words — the same count as its "N places" line, so the two cannot disagree
+  { file: "docs/PLAYERS_GUIDE.md", name: "player's guide · where you begin (places, regions, in words)",
+    re: /Exesa has [a-z -]+ authored places across [a-z -]+ regions/,
+    to: () => `Exesa has ${inWords(counts.places)} authored places across ${inWords(counts.regionsStood)} regions` },
+
   { file: "SYSTEM_SPEC.md", name: "spec header · abilities + traditions",
     re: /\d+ abilities \/ \d+ traditions \(\+\d+ folk\)/,
     to: () => `${counts.authored} abilities / ${counts.traditions} traditions (+${counts.folk} folk)` },

@@ -866,22 +866,6 @@
     "news": [
       {
         "day": 4,
-        "worldDay": 73,
-        "text": "This reaches your area — The buried water readings are now in Silas Weir's hands—proof that pole-pull is the true cause of the crisis. The convene vote is three days away. Calvar can present; the method of retrieval will be c (near gen-whistling-woman-post)",
-        "tier": "event",
-        "section": "elsewhere",
-        "impactsLocal": true
-      },
-      {
-        "day": 4,
-        "worldDay": 74,
-        "text": "This reaches your area — The universal shrine at the Made Gate stands complete—proof that balance can be held by refusing to mark it as belonging to any single tradition (near gen-whistling-woman-post)",
-        "tier": "event",
-        "section": "elsewhere",
-        "impactsLocal": true
-      },
-      {
-        "day": 4,
         "worldDay": 74,
         "text": "This reaches your area — The Made Gate shrine now carries a Named Exclusion threshold—set by Silas Weir and Maren Ossitide together, marking the cardinal approach points. The shrine forecloses those who come with intent to cl (near gen-whistling-woman-post)",
         "tier": "event",
@@ -1049,10 +1033,39 @@
         "section": "elsewhere",
         "impactsLocal": true,
         "locationId": "gen-the-made-gate"
+      },
+      {
+        "day": 4,
+        "worldDay": 112,
+        "text": "Morvane of the Harvest Hand has finished what they started — and found Neth, Who Has Buried More Than She Has Known standing where they meant to arrive. Neither of them is going anywhere.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 4,
+        "worldDay": 112,
+        "text": "The Hollow Court has lost people it will not get back — 30 of them, to The Seraphic Orders's crusade.",
+        "tier": "event",
+        "section": "world"
       }
     ],
-    "unseenNews": [],
-    "lastSharedReadAt": "2026-10-20T15:23:30.214Z",
+    "unseenNews": [
+      {
+        "day": 4,
+        "worldDay": 112,
+        "text": "Morvane of the Harvest Hand has finished what they started — and found Neth, Who Has Buried More Than She Has Known standing where they meant to arrive. Neither of them is going anywhere.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 4,
+        "worldDay": 112,
+        "text": "The Hollow Court has lost people it will not get back — 30 of them, to The Seraphic Orders's crusade.",
+        "tier": "event",
+        "section": "world"
+      }
+    ],
+    "lastSharedReadAt": "2026-10-20T15:25:29.996Z",
     "lastTickWorldDay": 112,
     "lastCanonWorldDay": 112,
     "lastGenCount": 2703,
@@ -6844,8 +6857,17 @@
         "actor": "char-mrum8y4d"
       }
     },
-    "seatPress": {},
-    "seatsSaid": [],
+    "seatPress": {
+      "Life / Death": {
+        "by": "morvane_the_harvest",
+        "target": "neth_the_stayed",
+        "since": 112,
+        "why": "Neth, Who Has Buried More Than She Has Known is still in the way"
+      }
+    },
+    "seatsSaid": [
+      "Life / Death|morvane_the_harvest|presses"
+    ],
     "debts": {}
   },
   "domains": {
@@ -8965,8 +8987,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1792509832271,
-  "rev": 316,
+  "updatedAt": 1792509929077,
+  "rev": 317,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9983,7 +10005,7 @@
       },
       "lastVerb": "quest",
       "lastVerbDay": 4,
-      "wins": 1,
+      "wins": 2,
       "winHow": "quest"
     },
     "power_glass_assembly": {
@@ -10011,11 +10033,11 @@
         "how": "renown",
         "day": null
       },
-      "losses": 0,
+      "losses": 1,
       "lastVerb": "tax",
       "lastVerbDay": 4,
-      "lossFrom": null,
-      "lossHow": null,
+      "lossFrom": "power_the_ceaseless",
+      "lossHow": "feud",
       "lost": {
         "0": 30
       },
@@ -10036,9 +10058,9 @@
       },
       "lastVerb": "patrol",
       "lastVerbDay": 4,
-      "losses": 0,
-      "lossFrom": null,
-      "lossHow": null,
+      "losses": 1,
+      "lossFrom": "power_harvest_hand",
+      "lossHow": "feud",
       "lost": {
         "0": 32
       },
@@ -10067,9 +10089,13 @@
       },
       "lastVerb": "inform",
       "lastVerbDay": 4,
-      "lossFrom": "power_seraphic_orders",
-      "lossHow": "crusade",
-      "losses": 1
+      "lossFrom": null,
+      "lossHow": null,
+      "losses": 0,
+      "lost": {
+        "0": 30
+      },
+      "shrankDay": 4
     },
     "power_seraphic_orders": {
       "known": {
@@ -10086,9 +10112,9 @@
       },
       "lastVerb": "feud",
       "lastVerbDay": 4,
-      "losses": 0,
-      "lossFrom": null,
-      "lossHow": null,
+      "losses": 1,
+      "lossFrom": "power_grovehome_moot",
+      "lossHow": "feud",
       "lost": {
         "0": 8
       },
@@ -10105,7 +10131,7 @@
     "power_keelmouth_slip": {
       "lastVerb": "recruit",
       "lastVerbDay": 4,
-      "wins": 1,
+      "wins": 2,
       "winHow": "recruit"
     },
     "power_firstsight_barony": {
@@ -10127,9 +10153,9 @@
     "power_the_ceaseless": {
       "lastVerb": "feud",
       "lastVerbDay": 4,
-      "losses": 0,
-      "lossFrom": null,
-      "lossHow": null,
+      "losses": 1,
+      "lossFrom": "power_scaffold_court",
+      "lossHow": "feud",
       "lost": {
         "0": 22
       },
@@ -10143,9 +10169,9 @@
     "power_harvest_hand": {
       "lastVerb": "feud",
       "lastVerbDay": 4,
-      "losses": 0,
-      "lossFrom": null,
-      "lossHow": null,
+      "losses": 1,
+      "lossFrom": "power_cairnhold_wardens",
+      "lossHow": "feud",
       "lost": {
         "0": 12
       },
@@ -10167,7 +10193,7 @@
     "power_wayhouse_compact": {
       "lastVerb": "quest",
       "lastVerbDay": 4,
-      "wins": 1,
+      "wins": 2,
       "winHow": "quest"
     },
     "power_bedrock_assize": {
@@ -10177,13 +10203,13 @@
     "power_hand_of_the_open_figure": {
       "lastVerb": "quest",
       "lastVerbDay": 4,
-      "wins": 1,
+      "wins": 2,
       "winHow": "quest"
     },
     "power_the_bloodless_hold": {
       "lastVerb": "recruit",
       "lastVerbDay": 4,
-      "wins": 1,
+      "wins": 2,
       "winHow": "recruit"
     },
     "power_keepers_of_the_told_ground": {
@@ -10209,13 +10235,13 @@
     "power_the_ones_called": {
       "lastVerb": "recruit",
       "lastVerbDay": 4,
-      "wins": 1,
+      "wins": 2,
       "winHow": "recruit"
     },
     "power_table_of_kept_terms": {
       "lastVerb": "quest",
       "lastVerbDay": 4,
-      "wins": 1,
+      "wins": 2,
       "winHow": "quest"
     },
     "power_anvilhall": {
@@ -10281,7 +10307,7 @@
     "power_sunfold": {
       "lastVerb": "recruit",
       "lastVerbDay": 4,
-      "wins": 1,
+      "wins": 2,
       "winHow": "recruit"
     },
     "power_hanging_weather": {
